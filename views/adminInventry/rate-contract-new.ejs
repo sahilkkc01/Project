@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>LifeLinker</title>
+    <%-include('../header');-%>
+        <!-- main content start -->
+        <div class="main-content">
+
+            <div class="row content-top-gap2">
+                <div class="col-lg-12">
+                    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+                        <a class="navbar-brand text-center mr-5" href="#">
+                            <span class="dash-icon"><i class="fas fa-tachometer-alt"></i></span>
+                            Dashboard
+                        </a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav">
+                                <li class="nav-item active text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="far fa-user"></i></span>
+                                        Master
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-exchange-alt"></i></span>
+                                        Transaction
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-hand-holding-medical"></i></span>
+                                        Patient 360
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-receipt"></i></span>
+                                        Outside Reciept
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-file-invoice"></i></span>
+                                        Outpatient Department
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-chart-line"></i></span>
+                                        Analytics
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="far fa-clock"></i></span>
+                                        Waiting List
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-wrench"></i></span>
+                                        Adminstration
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-spinner"></i></span>
+                                        Additional
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+            <!-- content -->
+            <div class="container-fluid">
+
+                <div class="chart">
+                    <div class="row">
+
+                        <!-- <div class="col-lg-12 pl-lg-0 mt-2 ml-2">
+                            <h4 class="primary">Company</h4>
+                        </div> -->
+                        <div class="col-lg-12 pl-lg-2 mt-3 chart-grid">
+                            <form>
+                                <div class="card card_border">
+                                    <div>
+                                        <!--Past your code here starts-->
+
+                                        <!-- <div class="mb-3 mt-3 ml-3">
+                                            <h6 class="primary">Company Other Details</h6>
+                                        </div> -->
+                                        <div class="card">
+                                            <div class="col-xl-12 p-heading ">
+                                                <h6 class="p-text">RATE CONTRACT</h6>
+                                            </div>
+
+
+                                            <div class="form-row pl-lg-3 pr-lg-3 mt-2">
+                                                <div class="col-lg-3 col-md-4 col-sm-12 mb-1">
+                                                    <div class="form-group">
+                                                        <label
+                                                            class="input__label">Code</label>
+                                                            <input name="description" type="text" class="form-control input-style" placeholder="">
+                                                        </div>
+                                                </div>
+                                                <div class="col-lg-3 col-md-4 col-sm-12 mb-1">
+                                                    <div class="form-group"><label
+                                                        class="input__label">Description</label>
+                                                        <input name="description" type="text" class="form-control input-style" placeholder=""> 
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3 col-md-4 col-sm-12 mb-1">
+                                                    <div class="form-group"><label
+                                                        class="input__label">Contract Start Date</label>
+                                                        <input name="description" type="date" class="form-control input-style" placeholder="">
+                                                        </div>
+                                                </div>
+                                                <div class="col-lg-3 col-md-4 col-sm-12 mb-1">
+                                                    <div class="form-group"><label
+                                                            class="input__label">Contract End Date</label>
+                                                            <input name="description" type="date" class="form-control input-style" placeholder="">
+                                                        </div>
+                                                </div>
+                                                <div class="col-lg-3 col-md-4 col-sm-12 mb-3">
+                                                    <div class="form-group"><label
+                                                        class="input__label">Contract Date</label>
+                                                        <input name="description" type="date" class="form-control input-style" placeholder="">
+                                                        </div>
+                                                </div>
+                                                <div class="col-lg-3 col-md-4 col-sm-12 mb-3">
+                                                    <div class="form-group"><label
+                                                        class="input__label">Supplier</label>
+                                                        <select name="report_generated_by"
+                                                        class="form-control input-style">
+                                                        <option>Select</option>
+                                                        </select>
+                                                        </div>
+                                                </div>
+                                                <div class="col-lg-3 col-md-4 col-sm-12 mb-3">
+                                                    <div class="form-group"><label
+                                                        class="input__label">Clinic Representative</label>
+                                                        <select name="report_generated_by"
+                                                        class="form-control input-style">
+                                                        <option>Select</option>
+                                                        </select>
+                                                        </div>
+                                                </div>
+
+
+                                               
+                                                
+                                            </div>
+
+                                        </div>
+                                        <!--Past your code here ends-->
+                                    </div>
+                                </div>
+                        </div>
+                        <!--section2-->
+
+                        <div class="mt-1 col-lg-12 pl-lg-2 pr-lg-3">
+                            <div class="card card_border">
+                                <div class="mb-3">
+                                    <div class="form-group">
+                                        <div class="col-xl-12 p-heading">
+                                            <h6 class="p-text">CONTRACT LIST</h6>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-row">
+                                    <div class="col-12 mb-3  pl-lg-4 pr-lg-4">
+
+                                            <div class="slidx">
+
+                                                <table class="table2">
+                                                    <thead>
+                                                        <tr>
+                                                            <th contenteditable="true">Item Code</th>
+                                                            <th contenteditable="true">Item Name</th>
+                                                            <th contenteditable="true">Manufactured By</th>
+                                                            <th contenteditable="true">Purchase Quantity</th>
+                                                            <th contenteditable="true">Transaction UOM</th>
+                                                            <th contenteditable="true">Purchase Cost Price</th>
+                                                            <th contenteditable="true">Cost Amount</th>
+                                                            <th contenteditable="true">M.R.P</th>
+                                                            <th contenteditable="true">Amount</th>
+                                                            <th contenteditable="true">Discount %</th>
+                                                            <th contenteditable="true">Discount Amounty</th>
+                                                            <th contenteditable="true">Net Amount</th>
+                                                            <th contenteditable="true">HSN Code</th>
+                                                            <th contenteditable="true">Remarks</th>
+                                                            <th contenteditable="true">Delete</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td contenteditable="true"></td>
+                                                            <td contenteditable="true"></td>
+                                                            <td contenteditable="true"></td>
+                                                            <td contenteditable="true"></td>
+                                                            <td contenteditable="true"></td>
+                                                            <td contenteditable="true"></td>
+                                                            <td contenteditable="true"></td>
+                                                            <td contenteditable="true"></td>
+                                                            <td contenteditable="true"></td>
+                                                            <td contenteditable="true"></td>
+                                                            <td contenteditable="true"></td>
+                                                            <td contenteditable="true"></td>
+                                                            <td contenteditable="true"></td>
+                                                            <td contenteditable="true"></td>
+                                                            <td contenteditable="true"><i class="fas fa-trash-can" style="color: red;"></i></td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td contenteditable="true"></td>
+                                                            <td contenteditable="true"></td>
+                                                            <td contenteditable="true"></td>
+                                                            <td contenteditable="true"></td>
+                                                            <td contenteditable="true"></td>
+                                                            <td contenteditable="true"></td>
+                                                            <td contenteditable="true"></td>
+                                                            <td contenteditable="true"></td>
+                                                            <td contenteditable="true"></td>
+                                                            <td contenteditable="true"></td>
+                                                            <td contenteditable="true"></td>
+                                                            <td contenteditable="true"></td>
+                                                            <td contenteditable="true"></td>
+                                                            <td contenteditable="true"></td>
+                                                            <td contenteditable="true"><i class="fas fa-trash-can" style="color: red;"></i></td>
+                                                        </tr>
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        
+                                    </div>
+                                </div>
+
+
+                                
+
+                                <div class="form-row pl-lg-4 pr-lg-3">
+                                    <!-- <div class="col-lg-3 col-md-4 col-sm-12 "> -->
+                                        <div class="form-group"><button type="button" class="btn btn-style mt-3 btn-secondary btn-style btn-change"><strong><i class="fa-solid fa-plus"></i> Add Items</strong></button></div>
+                                
+                                                    <!-- </div> -->
+                                        <div class="form-check-label ml-4">
+                                            <div class="radio"><label class="form-check-label mt-3"><input class="form-check-input mt-1" type="checkbox"> Freeze</label></div>
+                                        </div>
+                                
+                                
+                                </div>
+
+                                
+
+
+
+
+                                <div class="form-row pl-lg-3 pr-lg-3 mt-2">
+                                    <div class="col-lg-6 col-md-6 col-sm-12 mb-1">
+                                        <div class="form-group">
+                                            <label class="input__label">Remark</label>
+                                            <input name="description" type="text" class="form-control input-style" placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12 mb-1">
+                                        <div class="form-group"><label class="input__label">Net Amount</label>
+                                            <input name="description" type="text" class="form-control input-style" placeholder="">
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-group mt-1 mb-3 text-right">
+
+                        <button type="button" class="btn-success btn-style btn mt-3 mr-2"><strong><i
+                                    class="fa-regular fa-pen-to-square"></i> Modify</strong></button>
+
+                        <button type="button" class="btn-secondary btn-style btn mt-3 mr-2"><strong><i
+                                    class="fa-solid fa-plus"></i> New</strong></button>
+
+                        <button type="button" class="btn-danger btn-style btn mt-3 mr-2"><strong><i
+                                    class="fas fa-times"></i> Cancel</strong></button>
+
+                        <button type="button" class="btn-primary btn-style btn mt-3"><strong><i class="far fa-save"></i>
+                                Save</strong></button>
+                    </div>
+
+                    </form>
+
+                </div>
+                <!--footer section start-->
+                <%-include('../footer');-%>
+                <script type="module">
+                    import { validateForm } from '../javascripts/validation.js';
+                    import { myAjax } from '../javascripts/myAjax.js';
+                
+                    $(document).ready(function() {
+                        console.log("Document is ready");
+                
+                        // Handle final submit button click
+                        $('#tax').on('submit', function(event) {
+                            event.preventDefault();
+                            submitForms(event);
+                        });
+                
+                        // Function to submit forms
+                        const submitForms = (event) => {
+                            event.preventDefault();
+                
+                            const taxFormDetails = validateForm('#tax');
+                            const { isValid: isTaxFormValid, errorMessage: taxFormError, formData: taxFormData } = taxFormDetails;
+                
+                            // Handle checkbox values (assuming similar checkboxes exist in the form)
+                        
+                            console.log(taxFormData);
+                
+                            const errorDivId = '#errordiv1';
+                
+                            if (isTaxFormValid) {
+                                const url = '/adminInv/TaxSubmit';
+                                const loadingDiv = '#loadingDiv';
+                                myAjax(taxFormData, errorDivId, url, loadingDiv);
+                            } else {
+                                alert(taxFormError);
+                                $(errorDivId).removeClass('alert-success').addClass('alert-danger').text(taxFormError).show();
+                            }
+                        };
+
+                        // Function to reset forms
+                        const resetForms = () => {
+                            $('#tax')[0].reset();
+                            // Hide error messages
+                            $('#errordiv1').hide();
+                        };
+                        // Attach reset function to cancel button
+                        // $('#submitCancel').on('click', function() {
+                        //     resetForms();
+                        // });
+                        // Function to fetch and display data
+                        function fetchData() {
+                                        $.ajax({
+                                            url: '/adminInv/get-All-Item',
+                                            type: 'GET',
+                                            success: function (data) {
+                                                console.log(data);
+                                                data.reverse();
+                                                let tableRows = '';
+                                                data.forEach(function (item) {
+                                                    console.log(item);
+                                                    tableRows += `
+                                                        <tr>
+                                                            <td><a type="button" class="btn btn-primary btn-style btn-change" onClick=updatePageCurrMaster(${item.id}) href='/adminInv/10'>View</a></td>
+                                                            <td>${item.item_code}</td>
+                                                            <td>${item.item_name}</td>
+                                                            <td>${item.manufactured_by}</td>
+                                                            <td>${item.description}</td>
+                                                            <td>${item.item_price}</td>
+                                                            <td><input class="form-check-input mt-0" type="checkbox" id='${item.id}' onClick=ChangeStatusStore(${item.id}) ${item.status ? 'checked' : ''}></td>
+                                                            <td>${item.cost_center_code}</td>
+                                                            <td>${item.is_quarantine_store ? 'Yes' : 'No'}</td >
+                                                            </tr >
+                                                        `;
+                                                });
+                                                $('#store-table').html(tableRows);
+                                                pagi_search('#searchBox', '#storeTable', '#paginationControls');
+                                            },
+                                            error: function (xhr, status, error) {
+                                                console.error('Error fetching classification details:', error);
+                                            }
+                                        });
+                                    }
+                                    fetchData();
+                    });
+                </script>
+                

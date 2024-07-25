@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>LifeLinker</title>
+
+ <%- include('../header'); -%>
+  <!-- //header-ends -->
+  <!-- main content start -->
+<div class="main-content">
+
+<div class="row content-top-gap2">
+ <div class="col-lg-12">
+   	<nav class="navbar navbar-expand-lg navbar-light bg-white">
+	<a class="navbar-brand text-center mr-5" href="#">
+	<span class="dash-icon"><i class="fas fa-tachometer-alt"></i></span>
+	Dashboard
+	</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+	<span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="navbarNav">
+	<ul class="navbar-nav">
+	  <li class="nav-item active text-center mr-5">
+		<a class="nav-link" href="#">
+		<span class="dash-icon"><i class="far fa-user"></i></span>
+	    Master
+		</a>
+	  </li>
+	  <li class="nav-item text-center mr-5">
+		<a class="nav-link" href="#">
+		<span class="dash-icon"><i class="fas fa-exchange-alt"></i></span>
+	    Transaction
+		</a>
+	  </li>
+	  <li class="nav-item text-center mr-5">
+		<a class="nav-link" href="#">
+		<span class="dash-icon"><i class="fas fa-hand-holding-medical"></i></span>
+	    Patient 360
+		</a>
+	  </li>
+	  <li class="nav-item text-center mr-5">
+		<a class="nav-link" href="#">
+		<span class="dash-icon"><i class="fas fa-receipt"></i></span>
+	    Outside Reciept
+		</a>
+	  </li>
+	  <li class="nav-item text-center mr-5">
+		<a class="nav-link" href="#">
+		<span class="dash-icon"><i class="fas fa-file-invoice"></i></span>
+	    Outpatient Department
+		</a>
+	  </li>
+	  <li class="nav-item text-center mr-5">
+		<a class="nav-link" href="#">
+		<span class="dash-icon"><i class="fas fa-chart-line"></i></span>
+	    Analytics
+		</a>
+	  </li>
+	  <li class="nav-item text-center mr-5">
+		<a class="nav-link" href="#">
+		<span class="dash-icon"><i class="far fa-clock"></i></span>
+	    Waiting List
+		</a>
+	  </li>
+	  <li class="nav-item text-center mr-5">
+		<a class="nav-link" href="#">
+		<span class="dash-icon"><i class="fas fa-wrench"></i></span>
+	    Adminstration
+		</a>
+	  </li>
+	  <li class="nav-item text-center">
+		<a class="nav-link" href="#">
+		<span class="dash-icon"><i class="fas fa-spinner"></i></span>
+	    Additional
+		</a>
+	  </li>
+
+	</ul>
+	</div>
+	</nav>
+  </div>
+ </div>
+  <!-- content -->
+  <div class="container-fluid">
+
+    <!--nav aria-label="breadcrumb">
+      <ol class="breadcrumb my-breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+      </ol>
+    </nav>
+    <div class="welcome-msg pt-3 pb-4">
+      <h1>Hi <span class="text-primary">John</span>, Welcome back</h1>
+      <p>Very detailed & featured admin.</p>
+    </div-->
+
+    <!-- charts -->    
+	<div class="chart">
+      <div class="row">
+        <div class="col-lg-12 mt-2"><h4 class="primary">Service Rate - Doctor Category Wise</h4></div>			
+		<div class="col-lg-12 pl-lg-2 chart-grid mt-2">
+        <!--part 1-->
+		  <div class="card card_border">
+            <div class="">
+			<div class="col-xl-12 pr-xl-2 p-heading">
+			 <h6 class="p-text">LIST OF SERVICES</h6>
+			</div> 
+			 <div class="col-xl-12 pr-xl-2 mb-4">
+			 <form action="#" method="post" class="mt-2">
+				<div class="row">
+					
+			<div class="col-xl-6 pr-xl-2">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1" class="input__label">Doctor Category/ Service Name/ Class Name</label>
+                            <input type="text" class="form-control input-style" id="exampleInputEmail1"
+                                aria-describedby="emailHelp" placeholder="">
+                        </div>
+					</div>
+			</div>
+
+            <div class="col-xl-12 mt-3">
+			<div class="row">
+
+		<table class="table2">
+		<tr>
+		<th>Service Name</th>
+		<th>Class Name</th>
+		<th>Service Rate</th>
+		</tr>
+		<tr>
+		<td>anc</td>
+		<td>anc</td>
+		<td>anc</td>
+		</tr>
+		<tr>
+		<td>anc</td>
+		<td>anc</td>
+		<td>anc</td>
+		</tr>
+		
+		</table>
+		
+			</form>
+            </div>
+			
+			</div>
+          </div>
+		  <!--part 1 ended-->
+		  
+        </div>
+      </div>
+    </div>
+	<div class="text-right col-lg-12">
+	
+	<button type="submit" class="btn btn-primary btn-style mt-2 mr-2"><strong>New</strong></button>
+	<button type="submit" class="btn btn-primary btn-style mt-2 mr-2"><strong><i class="far fa-save"></i> Save</strong></button>
+	<button type="submit" class="btn btn-primary btn-style mt-2 mr-2"><strong>Modify</strong></button>
+	<button type="submit" class="btn btn-danger btn-style mt-2 mr-3"><strong><i class="fas fa-times"></i> Cancel</strong></button>
+	
+	</div>
+    <!-- //charts -->
+<%- include('../footer'); -%>

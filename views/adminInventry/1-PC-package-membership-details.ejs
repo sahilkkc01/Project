@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <title>LifeLinker</title>
+
+    <%-include('../header')-%>
+    <!-- //header-ends -->
+    <!-- main content start -->
+    <div class="main-content">
+      <div class="row content-top-gap2">
+        <div class="col-lg-12">
+          <nav class="navbar navbar-expand-lg navbar-light bg-white">
+            <a class="navbar-brand text-center mr-5" href="#">
+              <span class="dash-icon"
+                ><i class="fas fa-tachometer-alt"></i
+              ></span>
+              Dashboard
+            </a>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarNav"
+              aria-controls="navbarNav"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item active text-center mr-5">
+                  <a class="nav-link" href="#">
+                    <span class="dash-icon"><i class="far fa-user"></i></span>
+                    Master
+                  </a>
+                </li>
+                <li class="nav-item text-center mr-5">
+                  <a class="nav-link" href="#">
+                    <span class="dash-icon"
+                      ><i class="fas fa-exchange-alt"></i
+                    ></span>
+                    Transaction
+                  </a>
+                </li>
+                <li class="nav-item text-center mr-5">
+                  <a class="nav-link" href="#">
+                    <span class="dash-icon"
+                      ><i class="fas fa-hand-holding-medical"></i
+                    ></span>
+                    Patient 360
+                  </a>
+                </li>
+                <li class="nav-item text-center mr-5">
+                  <a class="nav-link" href="#">
+                    <span class="dash-icon"
+                      ><i class="fas fa-receipt"></i
+                    ></span>
+                    Outside Reciept
+                  </a>
+                </li>
+                <li class="nav-item text-center mr-5">
+                  <a class="nav-link" href="#">
+                    <span class="dash-icon"
+                      ><i class="fas fa-file-invoice"></i
+                    ></span>
+                    Outpatient Department
+                  </a>
+                </li>
+                <li class="nav-item text-center mr-5">
+                  <a class="nav-link" href="#">
+                    <span class="dash-icon"
+                      ><i class="fas fa-chart-line"></i
+                    ></span>
+                    Analytics
+                  </a>
+                </li>
+                <li class="nav-item text-center mr-5">
+                  <a class="nav-link" href="#">
+                    <span class="dash-icon"><i class="far fa-clock"></i></span>
+                    Waiting List
+                  </a>
+                </li>
+                <li class="nav-item text-center mr-5">
+                  <a class="nav-link" href="#">
+                    <span class="dash-icon"><i class="fas fa-wrench"></i></span>
+                    Adminstration
+                  </a>
+                </li>
+                <li class="nav-item text-center">
+                  <a class="nav-link" href="#">
+                    <span class="dash-icon"
+                      ><i class="fas fa-spinner"></i
+                    ></span>
+                    Additional
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+      <!-- content -->
+      <div class="container-fluid">
+        <div class="chart mt-3">
+          <form id="packageMembership" method="post">
+            <div class="row">
+              <div class="col-lg-12 pl-lg-2 chart-grid">
+                <div id="errordiv1"></div>
+
+                <div class="card card_border">
+                  <div>
+                    <div class="card">
+                      <div class="col-xl-12 p-heading">
+                        <h6 class="p-text">Package Membership Details</h6>
+                      </div>
+
+                      <div class="card-body pl-lg-3 pr-lg-3">
+                        <div class="pl-lg-0 pr-lg-0 mb-2">
+                          <h6 class="primary">Add New Package</h6>
+                        </div>
+
+                        <div class="form-row">
+                          <div class="col-3 mb-3">
+                            <div class="form-group">
+                              <label class="input__label">Package Code</label>
+                              <input
+                                id="packageCode"
+                                name="packageCode"
+                                type="text"
+                                class="form-control input-style"
+                                placeholder="855"
+                                data-validation="required"
+                                data-error-message="Package Code is required"
+                              />
+                            </div>
+                          </div>
+                          <div class="col-3 mb-3">
+                            <div class="form-group">
+                              <label class="input__label">Specialization</label>
+                              <select
+                                id="specialization"
+                                name="specialization"
+                                class="form-control input-style"
+                                data-validation="required"
+                                data-error-message="Specialization is required"
+                              >
+                                <option value="">Select</option>
+                                <option value="Reproductive Medicine">
+                                  Reproductive Medicine
+                                </option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="col-3 mb-3">
+                            <div class="form-group">
+                              <label class="input__label"
+                                >Short Description</label
+                              >
+                              <input
+                                id="shortDescription"
+                                name="shortDescription"
+                                type="text"
+                                class="form-control input-style"
+                                placeholder="Additional Medicine Package 1"
+                                data-validation="required"
+                                data-error-message="Short Description is required"
+                              />
+                            </div>
+                          </div>
+                          <div class="col-3 mb-3">
+                            <div class="form-group">
+                              <label class="input__label">Package Name</label>
+                              <input
+                                id="packageName"
+                                name="packageName"
+                                type="text"
+                                class="form-control input-style"
+                                placeholder="Additional Medicine Package 1"
+                                data-validation="required"
+                                data-error-message="Package Name is required"
+                              />
+                            </div>
+                          </div>
+                          <div class="col-3 mb-3">
+                            <div class="form-group">
+                              <label class="input__label">Package Rate</label>
+                              <input
+                                id="packageRate"
+                                name="packageRate"
+                                type="number"
+                                class="form-control input-style"
+                                placeholder="20000"
+                                data-validation="required"
+                                data-error-message="Package Rate is required"
+                                min="0"
+                              />
+                            </div>
+                          </div>
+                          <div class="col-3 mb-3">
+                            <div class="form-group">
+                              <label class="input__label"
+                                >Sub Specialization</label
+                              >
+                              <select
+                                id="subSpecialization"
+                                name="subSpecialization"
+                                class="form-control input-style"
+                                data-validation="required"
+                                data-error-message="Sub Specialization is required"
+                              >
+                                <option value="">Select</option>
+                                <option value="Reproductive Medicine">
+                                  Reproductive Medicine
+                                </option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="col-3 mb-3">
+                            <div class="form-group">
+                              <label class="input__label"
+                                >Long Description</label
+                              >
+                              <input
+                                id="longDescription"
+                                name="longDescription"
+                                type="text"
+                                class="form-control input-style"
+                                placeholder="Additional Medicine Package 1"
+                                data-validation="required"
+                                data-error-message="Long Description is required"
+                              />
+                            </div>
+                          </div>
+                          <div class="col-3 mb-3">
+                            <div class="form-group">
+                              <label class="input__label"
+                                >Package Effective Date</label
+                              >
+                              <input
+                                id="packageEffectiveDate"
+                                name="packageEffectiveDate"
+                                type="date"
+                                class="form-control input-style"
+                                data-validation="required"
+                                value="<%= currentDate %>"
+                                data-error-message="Package Effective Date is required"
+                              />
+                            </div>
+                          </div>
+                          <div class="col-3">
+                            <div class="form-group">
+                              <label class="input__label"
+                                >Package Expiry Date</label
+                              >
+                              <input
+                                id="packageExpiryDate"
+                                name="packageExpiryDate"
+                                type="date"
+                                class="form-control input-style"
+                                data-validation="required"
+                                value="<%= currentDate %>"
+                                min="<%= currentDate %>"
+                                data-error-message="Package Expiry Date is required"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="mt-1 col-lg-6 pl-lg-2">
+                <div class="card card_border">
+                  <div class="mb-3">
+                    <div class="form-group">
+                      <div class="col-xl-12 p-heading">
+                        <h6 class="p-text">Package Rules</h6>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="col-12 mb-3 pl-lg-3 pr-lg-3">
+                      <div class="form-row">
+                        <div class="col-3 mb-2">
+                          <div class="form-check-label">
+                            <div class="radio my-4">
+                              <label class="form-check-label">
+                                <input
+                                  id="serviceTax"
+                                  name="serviceTax"
+                                  class="form-check-input"
+                                  type="checkbox"
+                                />
+                                Service Tax
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-3 mb-2">
+                          <div class="form-group">
+                            <label class="input__label">%</label>
+                            <input
+                              id="service_tax_percentage"
+                              name="service_tax_percentage"
+                              type="text"
+                              class="form-control input-style percentage"
+                              placeholder="0.00"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-3 mb-2">
+                          <div class="form-group">
+                            <label class="input__label">Amount</label>
+                            <input
+                              id="service_tax_amount"
+                              name="service_tax_amount"
+                              type="text"
+                              class="form-control input-style rate"
+                              placeholder="0.00"
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="form-row">
+                        <div class="col-3 mb-2">
+                          <div class="form-check-label">
+                            <div class="radio my-4">
+                              <label class="form-check-label">
+                                <input
+                                  id="staffDiscount"
+                                  name="staffDiscount"
+                                  class="form-check-input"
+                                  type="checkbox"
+                                />
+                                Staff Discount
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-3 mb-2">
+                          <div class="form-group">
+                            <label class="input__label">%</label>
+                            <input
+                              id="staff_discount_percentage"
+                              name="staff_discount_percentage"
+                              type="text"
+                              class="form-control input-style percentage"
+                              placeholder="0.00"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-3 mb-2">
+                          <div class="form-group">
+                            <label class="input__label">Amount</label>
+                            <input
+                              id="staff_discount_amount"
+                              name="staff_discount_amount"
+                              type="text"
+                              class="form-control input-style rate"
+                              placeholder="0.00"
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="form-row">
+                        <div class="col-3 mb-1">
+                          <div class="form-check-label">
+                            <div class="radio my-4">
+                              <label class="form-check-label">
+                                <input
+                                  id="staffParentDiscount"
+                                  name="staffParentDiscount"
+                                  class="form-check-input"
+                                  type="checkbox"
+                                />
+                                Staff Parent Discount
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-3 mb-1">
+                          <div class="form-group">
+                            <label class="input__label">%</label>
+                            <input
+                              id="staff_parent_discount_percentage"
+                              name="staff_parent_discount_percentage"
+                              type="text"
+                              class="form-control input-style percentage"
+                              placeholder="0.00"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-3 mb-1">
+                          <div class="form-group">
+                            <label class="input__label">Amount</label>
+                            <input
+                              id="staff_parent_discount_amount"
+                              name="staff_parent_discount_amount"
+                              type="text"
+                              class="form-control input-style rate"
+                              placeholder="0.00"
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="form-row">
+                        <div class="col-3 mb-2">
+                          <div class="form-check-label">
+                            <div class="radio my-4">
+                              <label class="form-check-label">
+                                <input
+                                  id="concession_checkbox"
+                                  name="concession_checkbox"
+                                  class="form-check-input"
+                                  type="checkbox"
+                                />
+                                Concession
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-3 mb-2">
+                          <div class="form-group">
+                            <label class="input__label">%</label>
+                            <input
+                              id="concession_percentage"
+                              name="concession_percentage"
+                              type="text"
+                              class="form-control input-style percentage"
+                              placeholder="0.00"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-3 mb-2">
+                          <div class="form-group">
+                            <label class="input__label">Amount</label>
+                            <input
+                              id="concession_amount"
+                              name="concession_amount"
+                              type="text"
+                              class="form-control input-style rate"
+                              placeholder="0.00"
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="form-row">
+                        <div class="col-3 mb-2">
+                          <div class="form-check-label">
+                            <div class="radio my-4">
+                              <label class="form-check-label">
+                                <input
+                                  id="outsource_test_checkbox"
+                                  name="outsource_test_checkbox"
+                                  class="form-check-input"
+                                  type="checkbox"
+                                />
+                                Outsource Test
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-3 mb-2">
+                          <div class="form-group">
+                            <label class="input__label">%</label>
+                            <input
+                              id="outsource_test_percentage"
+                              name="outsource_test_percentage"
+                              type="text"
+                              class="form-control input-style percentage"
+                              placeholder="0.00"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-3 mb-2">
+                          <div class="form-group">
+                            <label class="input__label">Amount</label>
+                            <input
+                              id="outsource_test_amount"
+                              name="outsource_test_amount"
+                              type="text"
+                              class="form-control input-style rate"
+                              placeholder="0.00"
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="form-row">
+                        <div class="col-3 mb-2">
+                          <div class="form-check-label">
+                            <div class="radio my-4">
+                              <label class="form-check-label">
+                                <input
+                                  id="consultant_rate_checkbox"
+                                  name="consultant_rate_checkbox"
+                                  class="form-check-input"
+                                  type="checkbox"
+                                />
+                                Consultant Rate
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-3 mb-2">
+                          <div class="form-group">
+                            <label class="input__label">%</label>
+                            <input
+                              id="consultant_rate_percentage"
+                              name="consultant_rate_percentage"
+                              type="number"
+                              class="form-control input-style percentage"
+                              placeholder="0.00"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-3 mb-2">
+                          <div class="form-group">
+                            <label class="input__label">Amount</label>
+                            <input
+                              id="consultant_rate_amount"
+                              name="consultant_rate_amount"
+                              type="number"
+                              class="form-control input-style rate"
+                              placeholder="0.00"
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="form-row">
+                        <div class="col-3 mb-2">
+                          <div class="form-check-label">
+                            <div class="radio my-4">
+                              <label class="form-check-label">
+                                <input
+                                  id="hospital_rate_checkbox"
+                                  name="hospital_rate_checkbox"
+                                  class="form-check-input"
+                                  type="checkbox"
+                                />
+                                Hospital Rate
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-3 mb-2">
+                          <div class="form-group">
+                            <label class="input__label">%</label>
+                            <input
+                              id="hospital_rate_percentage"
+                              name="hospital_rate_percentage"
+                              type="text"
+                              class="form-control input-style percentage"
+                              placeholder="0.00"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-3 mb-2">
+                          <div class="form-group">
+                            <label class="input__label">Amount</label>
+                            <input
+                              id="hospital_rate_amount"
+                              name="hospital_rate_amount"
+                              type="text"
+                              class="form-control input-style rate"
+                              placeholder="0.00"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-1 col-lg-6">
+                <div class="card card_border">
+                  <div class="mb-3">
+                    <div class="form-group">
+                      <div class="col-xl-12 p-heading">
+                        <h6 class="p-text">Family Member Relations</h6>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="col-12 pl-lg-3 pr-lg-3">
+                      <!-- <div class="slidx">
+                                            <table class="table2">
+                                                <thead>
+                                                    <tr>
+                        
+                                                        <th contenteditable="true">Tariff</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                        
+                                                        <td contenteditable="true">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                        
+                                                        <td contenteditable="true">
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div> -->
+
+                      <div class="form-row">
+                        <div class="col-2 mb-1">
+                          <div class="form-check-label">
+                            <div class="radio my-4">
+                              <label class="form-check-label"
+                                ><input
+                                  name="family"
+                                  id="family"
+                                  class="form-check-input"
+                                  type="checkbox"
+                                />
+                                Family</label
+                              >
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-3 mb-1">
+                          <div class="form-group">
+                            <label class="input__label">Count</label
+                            ><input
+                              name="count"
+                              id="count"
+                              data-validation="required"
+                              type="text"
+                              class="form-control input-style"
+                              data-error-message="Count is required"
+                              placeholder=""
+                              
+                            />
+                          </div>
+                        </div>
+                        <div class="col-5 mb-1">
+                          <!-- <div class="form-group">
+                            <label class="input__label"
+                              >Applicable Member Relations</label
+                            ><select
+                              name="applicableMemberRelations"
+                              id="applicableMemberRelations"
+                              data-validation="required"
+                              data-error-message="Applicable
+                                                        Member Relations is required"
+                              class="form-control input-style"
+                            >
+                              <option value="">Select</option>
+                              <option value="f">F</option>
+                            </select>
+                          </div> -->
+                          <div id="dynamicFields"></div>
+                        </div>
+                       
+                        <!-- <div class="col-2 mb-1">
+                          <div class="form-group">
+                            <button
+                              type="button"
+                              class="btn btn-style mt-4 btn-primary btn-style btn-change"
+                            >
+                              <strong>
+                                <i class="fa-solid fa-plus"></i> Add</strong
+                              >
+                            </button>
+                          </div>
+                        </div> -->
+                        <!-- </div>
+                        
+                                        <div class="form-row"> -->
+                        <div class="col-3">
+                          <div class="form-check-label">
+                            <div class="radio my-4">
+                              <label class="form-check-label"
+                                ><input
+                                  name="selectAll"
+                                  id="selectAll"
+                                  class="form-check-input"
+                                  type="checkbox"
+                                />
+                                Select All</label
+                              >
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="form-group mb-3">
+                        <div class="col-12 pr-xl-1 pl-xl-1">
+                          <div class="slidx">
+                            <table class="table2">
+                              <thead>
+                                <tr>
+                                  <th
+                                    contenteditable="true"
+                                    class="text-left pl-3"
+                                  >
+                                    Applicable Member Relations
+                                  </th>
+                                  <th contenteditable="true" width="10%"></th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td
+                                    contenteditable="true"
+                                    class="text-left pl-3"
+                                  >
+                                    Self
+                                  </td>
+                                  <td contenteditable="true">
+                                    <i
+                                      class="fas fa-trash-can"
+                                      style="color: red"
+                                    ></i>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group mt-1 mb-3 text-right">
+              <button
+                type="button"
+                class="btn-secondary btn-style btn mt-3 mr-2"
+              >
+                <strong> Assign Consent</strong>
+              </button>
+
+              <button
+                type="button"
+                class="btn-secondary btn-style btn mt-3 mr-2"
+              >
+                <strong>Assign Tariff</strong>
+              </button>
+
+              <button type="button" class="btn-primary btn-style btn mt-3 mr-2">
+                <strong> Package Defination</strong>
+              </button>
+
+              <button type="button" class="btn-success btn-style btn mt-3 mr-2">
+                <strong
+                  ><i class="fa-regular fa-pen-to-square"></i> Modify</strong
+                >
+              </button>
+
+              <button
+                type="button"
+                class="btn-secondary btn-style btn mt-3 mr-2" disabled
+              >
+                <strong><i class="fa-solid fa-plus" ></i> New</strong>
+              </button>
+
+              <a
+                type="button"
+                class="btn-danger btn-style btn mt-3 mr-2"
+                id="submitCancel" href="/adminInv/19"
+              >
+                <strong><i class="fas fa-times"></i> Cancel</strong>
+            </a>
+
+              <button type="submit" class="btn-primary btn-style btn mt-3">
+                <strong><i class="far fa-save"></i> Save</strong>
+              </button>
+            </div>
+          </form>
+          <div id="loadingDiv"></div>
+        </div>
+        <!--footer section start-->
+        <%-include('../footer')-%>
+
+
+
+
+        <script type="module">
+            import { validateForm } from "../javascripts/validation.js";
+            import { myAjax } from "../javascripts/myAjax.js";
+          
+            $(document).ready(function () {
+              console.log("Document is ready");
+              var packageRate = parseFloat($("#packageRate").val());
+          
+              // Function to update percentage based on rate
+              const updatePercentage = (rate, baseRate) => {
+                if (!isNaN(rate) && !isNaN(baseRate) && baseRate > 0) {
+                  return (rate / baseRate) * 100;
+                }
+                return "";
+              };
+          
+              // Function to update rate based on percentage
+              const updateRate = (percentage, baseRate) => {
+                if (!isNaN(percentage) && !isNaN(baseRate) && baseRate > 0) {
+                  return (percentage / 100) * baseRate;
+                }
+                return "";
+              };
+          
+              // Common function to handle input events
+              const handleInputEvent = (percentageSelector, rateSelector) => {
+                $(percentageSelector).on("input", function () {
+                  var percentage = parseFloat($(this).val());
+                  var rate = updateRate(percentage, packageRate);
+                  if (rate !== "") {
+                    $(rateSelector).val(rate.toFixed(2));
+                  } else {
+                    $(rateSelector).val("");
+                  }
+                });
+          
+                $(rateSelector).on("input", function () {
+                  var rate = parseFloat($(this).val());
+                  var percentage = updatePercentage(rate, packageRate);
+                  if (percentage !== "") {
+                    $(percentageSelector).val(percentage.toFixed(2));
+                  } else {
+                    $(percentageSelector).val("");
+                  }
+                });
+              };
+          
+              // List of form elements to handle
+              const formElements = [
+                {
+                  checkbox: "#serviceTax",
+                  percentage: "#service_tax_percentage",
+                  rate: "#service_tax_amount",
+                },
+                {
+                  checkbox: "#staffDiscount",
+                  percentage: "#staff_discount_percentage",
+                  rate: "#staff_discount_amount",
+                },
+                {
+                  checkbox: "#staffParentDiscount",
+                  percentage: "#staff_parent_discount_percentage",
+                  rate: "#staff_parent_discount_amount",
+                },
+                {
+                  checkbox: "#concession_checkbox",
+                  percentage: "#concession_percentage",
+                  rate: "#concession_amount",
+                },
+                {
+                  checkbox: "#outsource_test_checkbox",
+                  percentage: "#outsource_test_percentage",
+                  rate: "#outsource_test_amount",
+                },
+                {
+                  checkbox: "#consultant_rate_checkbox",
+                  percentage: "#consultant_rate_percentage",
+                  rate: "#consultant_rate_amount",
+                },
+                {
+                  checkbox: "#hospital_rate_checkbox",
+                  percentage: "#hospital_rate_percentage",
+                  rate: "#hospital_rate_amount",
+                },
+              ];
+          
+              // Attach input event handlers to each form element
+              formElements.forEach((element) => {
+                handleInputEvent(element.percentage, element.rate);
+              });
+          
+              // Handle packageRate input event
+              $("#packageRate").on("input", function () {
+                var value = parseFloat($(this).val());
+                if (value < 0) {
+                  $(this).val(0);
+                  alert("Package Rate cannot be negative");
+                } else {
+                  packageRate = value;
+                  // Update rates and percentages based on new packageRate
+                  formElements.forEach((element) => {
+                    var percentage = parseFloat($(element.percentage).val());
+                    if (!isNaN(percentage)) {
+                      var rate = updateRate(percentage, packageRate);
+                      $(element.rate).val(rate.toFixed(2));
+                    }
+          
+                    var rate = parseFloat($(element.rate).val());
+                    if (!isNaN(rate)) {
+                      var percentage = updatePercentage(rate, packageRate);
+                      $(element.percentage).val(percentage.toFixed(2));
+                    }
+                  });
+                }
+              });
+              
+              $("#family, #selectAll").on("change", function () {
+                if ($(this).is(":checked")) {
+                  if ($(this).attr("id") === "family") {
+                    $("#selectAll").prop("checked", false);
+                    $("#count").prop("disabled", false);
+                  } else {
+                    $("#family").prop("checked", false);
+                    $("#count").prop("disabled", true);
+                    
+                  }
+                }
+              });
+          
+              $("#count").on("input", function () {
+                var count = parseInt($(this).val());
+                var dynamicFields = $("#dynamicFields");
+                dynamicFields.empty();
+          
+                if (!isNaN(count) && count > 0) {
+                  for (var i = 0; i < count; i++) {
+                    var newField = `
+                          <div class="form-group">
+                              <label class="input__label">Applicable Member Relations</label>
+                              <select name="applicableMemberRelations${i}" id="applicableMemberRelations${i}" class="form-control input-style" data-validation="required" data-error-message="Relations is required">
+                                  <option value="">Select</option>
+                                  <option value="Father">Father</option>
+                                  <option value="Mother">Mother</option>
+                                  <option value="Brother">Brother</option>
+                                  <option value="Sister">Sister</option>
+                                  <option value="Uncle">Uncle</option>
+                                  <option value="Aunt">Aunt</option>
+                              </select>
+                          </div>
+                      `;
+                    dynamicFields.append(newField);
+                  }
+                }
+              });
+          
+              // Handle final submit button click
+              $("#packageMembership").on("submit", function (event) {
+                event.preventDefault();
+                submitForms();
+              });
+          
+              // Function to submit forms
+              const submitForms = () => {
+                event.preventDefault();
+          
+                const suppCategoryFormDetails = validateForm("#packageMembership");
+                const {
+                  isValid: isSuppCategoryFormValid,
+                  errorMessage: suppCategoryFormError,
+                  formData: suppCategoryFormData,
+                } = suppCategoryFormDetails;
+                console.log(suppCategoryFormData);
+          
+                const errorDivId = "#errordiv1";
+          
+                // Add checkboxes conditions
+                formElements.forEach((element) => {
+                  if (!$(element.checkbox).is(":checked")) {
+                    suppCategoryFormData[element.percentage] = null;
+                    suppCategoryFormData[element.rate] = null;
+                  }
+                });
+          
+                var count = parseInt($("#count").val());
+                var concatenatedValues = "";
+          
+                if (!isNaN(count) && count > 0) {
+                  for (var i = 0; i < count; i++) {
+                    var value = $(`#applicableMemberRelations${i}`).val();
+                    if (value) {
+                      concatenatedValues += value + ",";
+                    }
+                  }
+                  concatenatedValues = concatenatedValues.slice(0, -1); // Remove trailing comma
+                }
+          
+                console.log("Concatenated Values:", concatenatedValues);
+                suppCategoryFormData["applicableMemberRelations"] = concatenatedValues;
+          
+                if (isSuppCategoryFormValid) {
+                  const url = "/adminInv/PackageMembershipSubmit";
+                  const loadingDiv = "#loadingDiv";
+                  myAjax(suppCategoryFormData, errorDivId, url, loadingDiv);
+                } else {
+                  alert(suppCategoryFormError);
+                  $(errorDivId)
+                    .removeClass("alert-success")
+                    .addClass("alert-danger")
+                    .text(suppCategoryFormError)
+                    .show();
+                }
+              };
+          
+              // Function to reset forms
+              const resetForms = () => {
+                $("#packageMembership")[0].reset();
+                // Hide error messages
+                $("#errordiv1").hide();
+              };
+          
+              // Attach reset function to cancel button
+              $("#submitCancel").on("click", function () {
+                resetForms();
+              });
+            });
+          </script>
+          <script>
+
+          </script>

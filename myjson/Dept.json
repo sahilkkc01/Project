@@ -1,0 +1,74 @@
+[
+    {
+      "id": 1,
+      "clinic_id": "0",
+      "dept_code": "QWERTY",
+      "dept_desc": "ABC"
+    },
+    {
+      "id": 2,
+      "clinic_id": "0",
+      "dept_code": "1",
+      "dept_desc": "Reproductive Medicine"
+    },
+    {
+      "id": 3,
+      "clinic_id": "0",
+      "dept_code": "2",
+      "dept_desc": "Fetomaternal Medicine"
+    },
+    {
+      "id": 4,
+      "clinic_id": "0",
+      "dept_code": "3",
+      "dept_desc": "Endoscopy"
+    },
+    {
+      "id": 5,
+      "clinic_id": "0",
+      "dept_code": "4",
+      "dept_desc": "Paediatrics"
+    },
+    {
+      "id": 6,
+      "clinic_id": "0",
+      "dept_code": "5",
+      "dept_desc": "Andrology"
+    },
+    {
+      "id": 7,
+      "clinic_id": "0",
+      "dept_code": "6",
+      "dept_desc": "Gynaec Imaging"
+    },
+    {
+      "id": 8,
+      "clinic_id": "0",
+      "dept_code": "7",
+      "dept_desc": "Other Specialities"
+    },
+    {
+      "id": 9,
+      "clinic_id": "0",
+      "dept_code": "8",
+      "dept_desc": "Antenatal"
+    },
+    {
+      "id": 24,
+      "clinic_id": "0",
+      "dept_code": "CODE",
+      "dept_desc": "SUB SPEC"
+    },
+    {
+      "id": 25,
+      "clinic_id": "0",
+      "dept_code": "CODE99",
+      "dept_desc": "DESC"
+    },
+    {
+      "id": 26,
+      "clinic_id": "0",
+      "dept_code": "CODE9999",
+      "dept_desc": "DESCSDS"
+    }
+  ]

@@ -1,0 +1,1518 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>LifeLinker</title>
+
+  <%- include('../header'); -%>
+    <!-- main content start -->
+    <div class="main-content">
+
+      <div class="row content-top-gap2">
+        <div class="col-lg-12">
+          <nav class="navbar navbar-expand-lg navbar-light bg-white">
+            <a class="navbar-brand text-center mr-5" href="#">
+              <span class="dash-icon"><i class="fas fa-tachometer-alt"></i></span>
+              Dashboard
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item active text-center mr-5">
+                  <a class="nav-link" href="#">
+                    <span class="dash-icon"><i class="far fa-user"></i></span>
+                    Master
+                  </a>
+                </li>
+                <li class="nav-item text-center mr-5">
+                  <a class="nav-link" href="#">
+                    <span class="dash-icon"><i class="fas fa-exchange-alt"></i></span>
+                    Transaction
+                  </a>
+                </li>
+                <li class="nav-item text-center mr-5">
+                  <a class="nav-link" href="#">
+                    <span class="dash-icon"><i class="fas fa-hand-holding-medical"></i></span>
+                    Patient 360
+                  </a>
+                </li>
+                <li class="nav-item text-center mr-5">
+                  <a class="nav-link" href="#">
+                    <span class="dash-icon"><i class="fas fa-receipt"></i></span>
+                    Outside Reciept
+                  </a>
+                </li>
+                <li class="nav-item text-center mr-5">
+                  <a class="nav-link" href="#">
+                    <span class="dash-icon"><i class="fas fa-file-invoice"></i></span>
+                    Outpatient Department
+                  </a>
+                </li>
+                <li class="nav-item text-center mr-5">
+                  <a class="nav-link" href="#">
+                    <span class="dash-icon"><i class="fas fa-chart-line"></i></span>
+                    Analytics
+                  </a>
+                </li>
+                <li class="nav-item text-center mr-5">
+                  <a class="nav-link" href="#">
+                    <span class="dash-icon"><i class="far fa-clock"></i></span>
+                    Waiting List
+                  </a>
+                </li>
+                <li class="nav-item text-center mr-5">
+                  <a class="nav-link" href="#">
+                    <span class="dash-icon"><i class="fas fa-wrench"></i></span>
+                    Adminstration
+                  </a>
+                </li>
+                <li class="nav-item text-center">
+                  <a class="nav-link" href="#">
+                    <span class="dash-icon"><i class="fas fa-spinner"></i></span>
+                    Additional
+                  </a>
+                </li>
+
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+      <!-- content -->
+      <div class="container-fluid">
+
+        <div class="chart">
+          <div class="row">
+
+            <div class="col-lg-12 pl-lg-0 mt-2 ml-2">
+              <h4 class="primary">Item</h4>
+            </div>
+            <div class="col-lg-12 pl-lg-2 chart-grid">
+              <form>
+                <div class="card card_border">
+                  <div class="">
+                    <!--Past your code here starts-->
+
+                    <div class="card">
+
+                      <!-- <div class="card-body"> -->
+
+                      <div class="form-row pl-lg-3 pr-lg-3 mt-2 mb-3">
+                        <div class="col-5 mb-2">
+                          <div class="form-group"><label class="input__label">Item Name</label><input name="description"
+                              type="text" id="searchBox" class="form-control input-style" placeholder=""></div>
+                        </div>
+                        <div class="col-5 mb-2">
+                          <div class="form-group"><label class="input__label">Item Code</label><input name="description"
+                              type="text" class="form-control input-style" placeholder=""></div>
+                        </div>
+                        <div class="col-2 mb-2">
+                          <div class="form-group"><button type="button"
+                              class="btn btn-style mt-4 btn-primary btn-style btn-change"><strong><i
+                                  class="fas fa-search"></i>
+                                Search</strong></button></div>
+                        </div>
+                      </div>
+
+                      <div class="form-row pl-lg-3 pr-lg-3 mt-1 mb-1">
+                        <div class="col-12">
+                          <div class="form-group">
+                            <div class="pl-xl-0">
+                              <h6 class="primary">LIST OF ITEM DETAILS</h6>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="form-row pl-lg-3 pr-lg-3 mt-2 mb-3">
+                        <div class="col-12">
+                          <div class="form-group">
+                            <div class="col col-12 pr-xl-0 pl-xl-0">
+                              <div class="slidx">
+
+                                <table class="table2" id="tableid">
+                                  <thead>
+                                    <tr>
+                                      <th contenteditable="true">View</th>
+                                      <th contenteditable="true">Item Code</th>
+                                      <th contenteditable="true">Item Name</th>
+                                      <th contenteditable="true">Molecule Name</th>
+                                      <th contenteditable="true">Item Group</th>
+                                      <th contenteditable="true">Item Category</th>
+                                      <th contenteditable="true">Manufactured By</th>
+                                      <th contenteditable="true">Purchase UOM</th>
+                                      <th contenteditable="true">Discount On Sale</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody id="item-body">
+
+                                  </tbody>
+                                </table>
+                                <div id="paginationControls"></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- </div> -->
+                    </div>
+
+                    <!--Past your code here ends-->
+                  </div>
+                </div>
+                <div class="form-group mt-1 mb-3 text-right">
+
+                  <button type="button" id="location" disabled class="btn-primary btn-style btn mt-3 mr-2"
+                    data-bs-toggle="modal" data-bs-target="#itemDetailsModal"><strong>Location</strong></button>
+                  <button type="button" disabled data-bs-toggle="modal" id="conversion"
+                    data-bs-target="#uomConversionModal"
+                    class="btn-primary btn-style btn mt-3 mr-2"><strong>Conversion</strong></button>
+                  <button type="button" disabled data-bs-toggle="modal" id="applySupplier"
+                    data-bs-target="#itemSupplierModal" class="btn-secondary btn-style btn mt-3 mr-2"><strong>Apply
+                      Supplier</strong></button>
+                  <button type="button" disabled data-bs-toggle="modal" id="storeAndTax"
+                    data-bs-target="#itemStoreModal" class="btn-secondary btn-style btn mt-3 mr-2"><strong>Apply
+                      Store and Tax</strong></button>
+
+                  <button type="button" disabled id="otherDetails" data-bs-toggle="modal"
+                    data-bs-target="#itemDetailsModalOtherDetails"
+                    class="btn-success btn-style btn mt-3 mr-2"><strong>Other
+                      Details</strong></button>
+
+                  <button type="button" onclick="window.location.href='/adminInv/21'"
+                    class="btn-secondary btn-style btn mt-3 mr-2"><strong><i class="fa-solid fa-plus"></i>
+                      New</strong></button>
+
+                  <button type="button" onclick="deselectSelectedRow()"
+                    class="btn-danger btn-style btn mt-3 mr-2"><strong><i class="fas fa-times"></i>
+                      Cancel</strong></button>
+
+                  <button type="button" class="btn-primary btn-style btn mt-3"><strong><i class="far fa-save"></i>
+                      Save</strong></button>
+
+                </div>
+              </form>
+            </div>
+
+            <!-- The Supplier Modal -->
+            <div class="modal fade" id="itemSupplierModal" tabindex="-1" aria-labelledby="itemSupplierModalLabel"
+              aria-hidden="true">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <!-- Modal Header -->
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="itemSupplierModalLabel"></h5>
+                    <button type="button" data-bs-dismiss="modal" aria-label="Close"><i
+                        class="fa-solid fa-xmark"></i></button>
+                  </div>
+
+                  <!-- Modal Body -->
+                  <form id="itemSupplierForm">
+                    <div class="modal-body">
+                      <div class="chart">
+                        <div class="row">
+                          <div class="col-lg-12 pl-lg-0 mt-2 ml-2">
+                            <h4 class="primary">Item Supplier</h4>
+                          </div>
+                          <div class="col-lg-12 pl-lg-2 chart-grid">
+
+                            <div class="card card_border">
+                              <div class="">
+                                <div class="card">
+                                  <div class="col-xl-12 p-heading">
+                                    <h6 class="p-text" id="itemNameSupp"></h6>
+                                  </div>
+
+                                  <div class="pl-xl-3 mt-2">
+                                    <h6 class="primary">Apply Supplier</h6>
+                                  </div>
+
+                                  <div class="form-row pl-lg-3 pr-lg-3 mt-2 mb-3">
+                                    <div class="col-12">
+                                      <div class="form-group">
+                                        <div class="col col-12 pr-xl-0 pl-xl-0">
+                                          <div class="slidx">
+
+                                            <div id="errordiv5"></div>
+                                            <input type="hidden" name="itemCode" id="item_code_location">
+                                            <table class="table2">
+                                              <thead>
+                                                <tr>
+                                                  <th>Select</th>
+                                                  <th>Supplier Description</th>
+                                                </tr>
+                                              </thead>
+                                              <tbody id="suppTblBody">
+                                                <!-- Dynamically populated rows will go here -->
+                                              </tbody>
+                                            </table>
+
+
+
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-group mt-1 mb-3 text-right">
+                              <button type="button" class="btn-danger btn-style btn mt-3 mr-2"
+                                onclick="clearErrorDiv5()" data-bs-dismiss="modal"><strong><i class="fas fa-times"></i>
+                                  Close</strong></button>
+                              <button type="submit" class="btn-primary btn-style btn mt-3"><strong><i
+                                    class="far fa-save"></i> Save</strong></button>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+
+            <!-- The store Modal -->
+            <!-- Modal Structure -->
+            <div class="modal fade" id="itemStoreModal" tabindex="-1" aria-labelledby="itemStoreModalLabel"
+              aria-hidden="true">
+              <div class="modal-dialog modal-xl"> <!-- Larger modal for more content -->
+                <div class="modal-content">
+                  <!-- Modal Header -->
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="itemStoreModalLabel">Item Store</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i
+                        class="fa-solid fa-xmark"></i></button>
+                  </div>
+
+                  <!-- Modal Body -->
+                  <div class="modal-body">
+                    <div class="chart">
+                      <div class="row">
+                        <div class="col-lg-12 pl-lg-0 mt-2 ml-2">
+                          <h4 class="primary" id="itemNameStoreTax"></h4>
+                        </div>
+                        <div class="col-lg-12 pl-lg-2 chart-grid">
+                          <form>
+                            <div class="card card_border">
+                              <div class="card">
+                                <div class="col-xl-12 p-heading">
+                                  <h6 class="p-text" id="itemNameStore"></h6>
+                                </div>
+                                <div class="form-row pl-lg-2">
+                                  <div class="col-lg-11 col-md-9 col-sm-9 mb-2">
+                                    <div class="form-group">
+                                      <label class="input__label">Clinic</label>
+                                      <select name="clinic" id="clinic" class="form-control input-style">
+                                        <option value="">Select</option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                  <div class="col-lg-1 col-md-3 col-sm-3 mb-2">
+                                    <button type="button" id="searchButton"
+                                      class="btn btn-style mt-4 btn-primary btn-style btn-change">
+                                      <strong><i class="fas fa-search"></i> Search</strong>
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+
+                        <!-- Store Section -->
+                        <div class="mt-1 col-lg-6 pl-lg-2">
+                          <div class="card card_border">
+                            <div class="mb-1">
+                              <div class="form-group">
+                                <div class="col-xl-12 p-heading">
+                                  <h6 class="p-text">STORE</h6>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="form-row">
+                              <div class="col-12 mb-3 pl-lg-3 pr-lg-3">
+                                <div class="slidex">
+                                  <div class="pl-4"><input class="mt-1" type="checkbox" id="selectAll">
+                                    <label class="form-check-label mb-2" for="selectAll"> Select all</label>
+                                  </div>
+                                  <form id="ItemStoreMinMaxForm">
+                                    <div id="errordiv6"></div>
+                                    <table class="table2">
+                                      <thead>
+                                        <tr>
+                                          <th width="15%">Select</th>
+                                          <th>Store Name</th>
+                                          <th width="50%">Minimum</th>
+                                          <th width="10%">Maximum</th>
+                                          <th width="10%">ReOrder</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody id="StoreTaxTblBody">
+
+                                        <!-- Additional rows -->
+                                      </tbody>
+                                    </table>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="form-group mt-1 mb-3 text-right">
+                            <button type="submit" class="btn-success btn-style btn mt-3"><strong><i
+                                  class="fa-regular fa-pen-to-square"></i> Modify Store</strong></button>
+                          </div>
+                          </form>
+                        </div>
+
+                        <!-- Tax Section -->
+                        <div class="mt-1 col-lg-6">
+                          <div class="card card_border">
+                            <div class="form-row">
+                              <div class="col-12 mb-3 mt-3 pl-lg-3 pr-lg-3">
+                                <div class="slidex">
+                                  <table class="table2" class="slidex">
+                                    <thead>
+                                      <tr>
+                                        <th>View</th>
+                                        <th>TaxName</th>
+                                        <th>Applicable For</th>
+                                        <th>Applicable On</th>
+                                        <th>Percentage</th>
+                                        <th>Tax Type</th>
+                                        <th>Delete</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody id="storeTaxTblBody">
+
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+
+                            </div>
+                            <div class="mb-1">
+                              <div class="form-group">
+                                <div class="col-xl-12 p-heading">
+                                  <h6 class="p-text">ADD TAX</h6>
+                                </div>
+                              </div>
+                            </div>
+                            <form id="itemStoreTax">
+                              <div id="errordiv4"></div>
+                              <input type="hidden" name="itemCode" id="item_code_store_tax">
+                              <div class="form-row pl-lg-3 pr-lg-3">
+                                <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                  <div class="form-group"><label class="input__label">Store</label><select name="store"
+                                      id="store_tax" required class="form-control input-style">
+                                      <option value="">Select</option>
+                                      <option value="0">0</option>
+                                             
+                                    </select></div>
+                                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                  <div class="form-group"><label class="input__label">Tax</label><select name="tax"
+                                      id="tax" required class="form-control input-style">
+                                      <option value="">Select</option>
+                                             
+                                    </select></div>
+                                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                  <div class="form-group"><label class="input__label">Applicable For</label><select
+                                      name="applicable_for" required class="form-control input-style">
+                                      <option value="">Select</option>
+                                      <option value="Purchase Rate">Purchase Rate</option>
+                                      <option value="Sale Rate">Sale Rate</option>
+                                             
+                                    </select></div>
+                                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                  <div class="form-group"><label class="input__label">Applicable On</label><select
+                                      name="applicable_on" required class="form-control input-style">
+                                      <option value="">Select</option>
+                                      <option value="Purchase Rate">Purchase Rate</option>
+                                      <option value="Sale Rate">Sale Rate</option>
+                                      <option value="MRP">MRP</option>
+                                             
+                                    </select></div>
+                                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                  <div class="form-group"><label class="input__label">Percentage</label><select
+                                      name="percentage" required class="form-control input-style">
+                                      <option value="">Select</option>
+                                      <option value="2.2">2.2%</option>
+                                      <option value="5">5%</option>
+                                      <option value="6">6%</option>
+                                      <option value="9">9%</option>
+                                      <option value="12">12%</option>
+                                      <option value="14">14%</option>
+                                      <option value="18">18%</option>
+                                      <option value="28">28%</option>
+                                             
+                                    </select></div>
+                                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                  <div class="form-group ml-4 mt-4">
+                                    <input class="form-check-input my-2" type="radio" name="taxType" id="inclusive"
+                                      value="Inclusive">
+                                    <label class="form-check-label" for="inclusive">Inclusive</label>
+                                  </div>
+                                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                  <div class="form-group ml-4 mt-4">
+                                    <input class="form-check-input my-2" type="radio" name="taxType" id="exclusive"
+                                      value="Exclusive">
+                                    <label class="form-check-label" for="exclusive">Exclusive</label>
+                                  </div>
+                                </div>
+
+
+
+
+                              </div>
+                          </div>
+                        </div>
+
+
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Modal Footer -->
+                  <div class="modal-footer">
+                    <button type="submit" class="btn-secondary btn-style btn"><strong><i class="fa-solid fa-plus"></i>
+                        Add Tax</strong></button>
+                    <button type="button" class="btn-danger btn-style btn" data-bs-dismiss="modal"><strong><i
+                          class="fas fa-times"></i> Close</strong></button>
+                  </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+
+            <!-- Location modal -->
+
+            <div class="modal fade" id="itemDetailsModal" tabindex="-1" aria-labelledby="itemDetailsModalLabel"
+              aria-hidden="true">
+              <div class="modal-dialog modal-lg"> <!-- Use modal-xl for a wider modal -->
+                <div class="modal-content">
+                  <!-- Modal Header -->
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="itemDetailsModalLabel">Item Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i
+                        class="fa-solid fa-xmark"></i></button>
+                  </div>
+
+                  <!-- Modal Body -->
+                  <div class="modal-body">
+                    <div class="chart">
+                      <div class="row">
+                        <div class="col-lg-12 pl-lg-0 mt-2 ml-2">
+                          <h4 class="primary" id="itemName"></h4>
+                        </div>
+                        <div class="col-lg-12 pl-lg-2 chart-grid">
+                          <form>
+
+                            <div class="card card_border">
+                              <div class="card">
+                                <div class="col-xl-12 p-heading">
+                                  <h6 class="p-text">STORE WISE LOCATION DETAILS LIST</h6>
+                                </div>
+                                <div class="form-row pl-lg-3 pr-lg-3 mt-3 mb-3">
+                                  <div class="col-12">
+                                    <div class="form-group">
+                                      <div class="col col-12 pr-xl-0 pl-xl-0">
+                                        <div class="slidx">
+                                          <table class="table2">
+                                            <thead>
+                                              <tr>
+                                                <th contenteditable="true">Modify</th>
+                                                <th contenteditable="true">Store Name</th>
+                                                <th contenteditable="true">Rack</th>
+                                                <th contenteditable="true">Shelf</th>
+                                                <th contenteditable="true">Bin</th>
+                                                <th contenteditable="true"></th>
+                                              </tr>
+                                            </thead>
+                                            <tbody id="locationTblBody">
+
+                                            </tbody>
+                                          </table>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+
+                        <div class="mt-1 col-lg-12 pl-lg-2 pr-lg-3">
+                          <div class="card card_border">
+                            <div class="mb-1">
+                              <div class="form-group">
+                                <div class="col-xl-12 p-heading">
+                                  <h6 class="p-text">STORE AND LOCATION SELECTION</h6>
+                                </div>
+                              </div>
+                            </div>
+
+                            <form id="itemLocationForm">
+                              <div id="errordiv1"></div>
+                              <input type="hidden" id="itemCode" name="itemCode">
+                              <div class="form-row pl-lg-3 pr-lg-3">
+                                <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+                                  <div class="form-group">
+                                    <label class="input__label">Store</label>
+                                    <select name="store" class="form-control input-style" id="store">
+                                      <option>Select</option>
+                                      <!-- Additional options -->
+                                    </select>
+                                  </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+                                  <div class="form-group">
+                                    <label class="input__label">Rack</label>
+                                    <select name="rack" class="form-control input-style" id="rack">
+                                      <option>Select</option>
+                                      <!-- Additional options -->
+                                    </select>
+                                  </div>
+                                </div>
+                                <!-- Additional select rows for Shelf and Bin -->
+                              </div>
+
+                              <div class="form-row pl-lg-3 pr-lg-3">
+                                <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+                                  <div class="form-group">
+                                    <label class="input__label">Shelf</label>
+                                    <select name="shelf" class="form-control input-style" id="shelf">
+                                      <option>Select</option>
+                                      <!-- Additional options -->
+                                    </select>
+                                  </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+                                  <div class="form-group">
+                                    <label class="input__label">Bin</label>
+                                    <select name="bin" class="form-control input-style" id="bin">
+                                      <option>Select</option>
+                                      <!-- Additional options -->
+                                    </select>
+                                  </div>
+                                </div>
+                              </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Modal Footer -->
+                  <div class="modal-footer">
+                    <button type="submit" class="btn-primary btn-style btn"><strong><i class="far fa-save"></i>
+                        Save</strong></button>
+                    <button type="button" class="btn-danger btn-style btn" data-bs-dismiss="modal"><strong><i
+                          class="fas fa-times"></i> Close</strong></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </form>
+            <!-- Conversions -->
+            <div class="modal fade" id="uomConversionModal" tabindex="-1" aria-labelledby="uomConversionModalLabel"
+              aria-hidden="true">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <!-- Modal Header -->
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="uomConversionModalLabel">UOM Conversions</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i
+                        class="fa-solid fa-xmark"></i></button>
+                  </div>
+
+                  <!-- Modal Body -->
+                  <div class="modal-body">
+                    <div class="chart">
+                      <div class="row">
+                        <div class="col-lg-12 pl-lg-0 mt-2 ml-2">
+                          <h4 class="primary">Conversions</h4>
+                        </div>
+                        <div class="col-lg-12 pl-lg-2 chart-grid">
+                          <form>
+                            <div class="card card_border">
+                              <div class="col-xl-12 p-heading">
+                                <h6 class="p-text" id="itemNameConv"></h6>
+                              </div>
+
+                              <div class="mb-1 mt-3 ml-3">
+                                <h6 class="primary">Selected UOM</h6>
+                              </div>
+                              <div class="form-row pl-lg-3 pr-lg-3">
+                                <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+                                  <div class="form-group">
+                                    <label class="input__label">Purchase UOM</label>
+                                    <select name="purchase_uom" disabled id="purchase_uom"
+                                      class="form-control input-style">
+                                      <option>Select</option>
+                                      <!-- Additional options -->
+                                    </select>
+                                  </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 mb-2">
+                                  <div class="form-group">
+                                    <label class="input__label">Sale UOM</label>
+                                    <select name="sale_uom" disabled id="sale_uom" class="form-control input-style">
+                                      <option>Select</option>
+                                      <!-- Additional options -->
+                                    </select>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="form-row pl-lg-3 pr-lg-3">
+                                <div class="col-lg-6 col-md-6 col-sm-12 mb-2">
+                                  <div class="form-group">
+                                    <label class="input__label">Stock UOM</label>
+                                    <select name="stock_uom" disabled class="form-control input-style" id="stock_uom">
+                                      <option>Select</option>
+                                      <!-- Additional options -->
+                                    </select>
+                                  </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 mb-2">
+                                  <div class="form-group">
+                                    <label class="input__label">Base UOM</label>
+                                    <select name="base_uom" disabled id="base_uom" class="form-control input-style">
+                                      <option>Select</option>
+                                      <!-- Additional options -->
+                                    </select>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+
+                        <div class="mt-1 col-lg-12 pl-lg-2 pr-lg-3">
+                          <div class="card card_border">
+                            <div class="mb-3">
+                              <div class="form-group">
+                                <div class="col-xl-12 p-heading">
+                                  <h6 class="p-text">LIST OF CONVERSIONS</h6>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-row">
+                              <div class="col-lg-12 col-md-12 col-sm-12 mb-3 pl-lg-4 pr-lg-4">
+                                <div class="slidx">
+                                  <table class="table2">
+                                    <thead>
+                                      <tr>
+                                        <th width="20%">From UOM</th>
+                                        <th>To UOM</th>
+                                        <th>Conversion Factor</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody id="convTblBodu">
+
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="mt-4 col-lg-12 pl-lg-2 pr-lg-3">
+                          <div class="card card_border">
+                            <div class="form-group">
+                              <div class="col-xl-12 p-heading">
+                                <h6 class="p-text">ADD UOM</h6>
+                              </div>
+                            </div>
+                            <form id="itemConvForm">
+                              <div id="errordiv2"></div>
+                              <input type="hidden" name="itemCode" id="item_code_conv">
+                              <div class="form-row pl-lg-3 pr-lg-3 mb-3">
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                  <div class="form-group">
+                                    <label class="input__label">From UOM</label>
+                                    <select name="from_uom" id="from_uom" class="form-control input-style">
+                                      <option>Select</option>
+                                      <!-- Additional options -->
+                                    </select>
+                                  </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                  <div class="form-group">
+                                    <label class="input__label">To UOM</label>
+                                    <select name="to_uom" id="to_uom" class="form-control input-style">
+                                      <option>Select</option>
+
+
+                                    </select>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="form-row pl-lg-3 pr-lg-3 mb-3">
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                  <div class="form-group">
+                                    <label class="input__label">Conversion Factor</label>
+                                    <input name="conversion_factor" type="number" class="form-control input-style"
+                                      placeholder="">
+                                  </div>
+                                </div>
+                              </div>
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Modal Footer -->
+                  <div class="modal-footer">
+                    <button type="submit" class="btn-primary btn-style btn"><strong><i class="far fa-save"></i>
+                        Save</strong></button>
+                    <button type="button" class="btn-danger btn-style btn" data-bs-dismiss="modal"><strong><i
+                          class="fas fa-times"></i> Close</strong></button>
+                  </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+            <!-- Other Details Model -->
+            <!-- Modal -->
+            <div class="modal fade" id="itemDetailsModalOtherDetails" tabindex="-1"
+              aria-labelledby="itemDetailsModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-md"> <!-- Use modal-xl for a wider modal -->
+                <div class="modal-content">
+                  <!-- Modal Header -->
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="itemDetailsModalLabel">Item Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i
+                        class="fa-solid fa-xmark"></i></button>
+                  </div>
+
+                  <!-- Modal Body -->
+                  <form id="itemOtherDetails">
+                    <div id="errordiv3"></div>
+                    <input type="hidden" name="itemCode" id="item_code_othr">
+                    <div class="modal-body">
+                      <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 mb-3">
+                          <div class="form-group">
+                            <label class="input__label">Item Name</label>
+                            <h6 class="p-text" id="itemNameOther"></h6>
+                          </div>
+                          <div class="form-group">
+                            <label class="input__label">Contra Indication</label>
+                            <textarea name="contra_indication" id="contra_indication" required
+                              class="form-control input-style" placeholder=""></textarea>
+                          </div>
+                          <div class="form-group">
+                            <label class="input__label">Side Effects</label>
+                            <textarea name="side_effects" id="side_effects" required class="form-control input-style"
+                              placeholder=""></textarea>
+                          </div>
+                          <div class="form-group">
+                            <label class="input__label">Help URL</label>
+                            <input name="help_url" id="help_url" type="text" required class="form-control input-style"
+                              placeholder="">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Modal Footer -->
+                    <div class="modal-footer">
+                      <button type="submit" class="btn-primary btn-style btn"><strong><i class="far fa-save"></i>
+                          Save</strong></button>
+                      <button type="button" class="btn-danger btn-style btn" data-bs-dismiss="modal"
+                        onclick="clearErrorDiv3()"><strong><i class="fas fa-times"></i> Close</strong></button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+
+
+            <script>
+              function clearErrorDiv5() {
+                $('#errordiv5').removeClass('alert-success alert-danger').text('');
+              }
+
+            </script>
+            <!--footer section start-->
+            <%- include('../footer'); -%>
+              <script type="module">
+                import { pagi_search } from '../javascripts/pagi_search.js'
+                import { myAjax } from '../javascripts/myAjax.js';
+                $(document).ready(function () {
+
+                  function loadRack(a) {
+                    fetch('/adminInv/get-rack-details')
+                      .then(response => response.json())
+                      .then(data => {
+
+                        console.log(data)
+                        const dropdown = document.getElementById(a);
+                        data.forEach(item => {
+                          const option = document.createElement('option');
+                          option.value = item.rank_desc;
+                          option.textContent = item.rank_desc;
+                          dropdown.appendChild(option);
+
+                        });
+                      })
+                      .catch(error => console.error('Error fetching states:', error));
+                  }
+                  loadRack('rack');
+                  function loadShelf(a) {
+                    fetch('/adminInv/get-shelf-details')
+                      .then(response => response.json())
+                      .then(data => {
+
+                        console.log(data)
+                        const dropdown = document.getElementById(a);
+                        data.forEach(item => {
+                          const option = document.createElement('option');
+                          option.value = item.shelf_desc;
+                          option.textContent = item.shelf_desc;
+                          dropdown.appendChild(option);
+
+                        });
+                      })
+                      .catch(error => console.error('Error fetching states:', error));
+                  }
+                  loadShelf('shelf');
+                  function loadBin(a) {
+                    fetch('/adminInv/get-bin-details')
+                      .then(response => response.json())
+                      .then(data => {
+
+                        console.log(data)
+                        const dropdown = document.getElementById(a);
+                        data.forEach(item => {
+                          const option = document.createElement('option');
+                          option.value = item.bin_desc;
+                          option.textContent = item.bin_desc;
+                          dropdown.appendChild(option);
+
+                        });
+                      })
+                      .catch(error => console.error('Error fetching states:', error));
+                  }
+                  loadBin('bin');
+                  function loadClinic(a) {
+                    fetch('/adminInv/get-clinic-details')
+                      .then(response => response.json())
+                      .then(data => {
+
+                        console.log(data)
+                        const dropdown = document.getElementById(a);
+                        data.forEach(item => {
+                          const option = document.createElement('option');
+                          option.value = item.clinic_desc;
+                          option.textContent = item.clinic_desc;
+                          dropdown.appendChild(option);
+
+                        });
+                      })
+                      .catch(error => console.error('Error fetching states:', error));
+                  }
+                  loadClinic('clinic');
+
+                  function loadStore(a) {
+                    fetch('/adminInv/get-store-details')
+                      .then(response => response.json())
+                      .then(data => {
+
+                        console.log(data)
+                        const dropdown = document.getElementById(a);
+                        data.forEach(item => {
+                          const option = document.createElement('option');
+                          option.value = item.description;
+                          option.textContent = item.description;
+                          dropdown.appendChild(option);
+
+                        });
+                      })
+                      .catch(error => console.error('Error fetching states:', error));
+                  }
+                  loadStore('store');
+                  // loadStore('store_tax');
+                  function loadUOM(a) {
+                    fetch('/adminInv/get-UOM-details')
+                      .then(response => response.json())
+                      .then(data => {
+
+                        console.log(data)
+                        const dropdown = document.getElementById(a);
+                        data.forEach(item => {
+                          const option = document.createElement('option');
+                          option.value = item.description;
+                          option.textContent = item.description;
+                          dropdown.appendChild(option);
+
+                        });
+                      })
+                      .catch(error => console.error('Error fetching states:', error));
+                  }
+                  loadUOM('purchase_uom');
+                  loadUOM('stock_uom');
+                  loadUOM('base_uom');
+                  loadUOM('sale_uom');
+                  loadUOM('from_uom');
+                  loadUOM('to_uom');
+
+
+                  function loadtTax(a) {
+                    fetch('/adminInv/get-tax-details')
+                      .then(response => response.json())
+                      .then(data => {
+
+                        console.log(data)
+                        const dropdown = document.getElementById(a);
+                        data.forEach(item => {
+                          const option = document.createElement('option');
+                          option.value = item.tax_desc;
+                          option.textContent = item.tax_desc;
+                          dropdown.appendChild(option);
+
+                        });
+                      })
+                      .catch(error => console.error('Error fetching states:', error));
+                  }
+                  loadtTax('tax');
+
+
+
+                  // Function to fetch and display data
+                  function fetchData() {
+                    $.ajax({
+                      url: '/admininv/get-item-details',
+                      type: 'GET',
+                      success: function (data) {
+                        let tableRows = '';
+                        data.reverse();
+                        data.forEach(function (item) {
+                          tableRows += `
+                                    <tr data-item-id="${item.id}">
+                  <td><button type="button" id="view_btn" class="btn btn-primary btn-style btn-change">View</button></td>
+                  <td>${item.item_code}</td>
+                  <td>${item.item_name}</td>
+                  <td>${item.molecule_name}</td>
+                  <td>${item.item_group}</td>
+                  <td>${item.item_category}</td>
+                  <td>${item.manufactured_by}</td>
+                  <td>${item.purchase_uom}</td>
+                  <td>${item.discount_on_sale}</td>
+                  <td style="display:none;">
+                            
+                            <input type="hidden" name="base_uom" value="${item.base_uom}">
+                            <input type="hidden" name="selling_uom" value="${item.selling_uom}">
+                            <input type="hidden" name="stocking_uom" value="${item.stocking_uom}">
+                        </td>
+                </tr>
+                                  `;
+                        });
+                        $('#item-body').on('click', '#view_btn', function () {
+
+                          const clus_id = $(this).closest('tr').data('item-id')
+                          const route = '21'
+                          const module = 'adminInv'
+                          ViewBtn(route, clus_id, module)
+
+                        });
+
+                        $('#item-body').html(tableRows);
+                        pagi_search('#searchBox', '#tableid', '#paginationControls')
+                      },
+                      error: function (xhr, status, error) {
+                        console.error('Error fetching classification details:', error);
+                      }
+                    });
+                  }
+
+                  // Fetch data on page load
+                  fetchData();
+                });
+                $(document).ready(function () {
+
+                  document.getElementById('searchButton').addEventListener('click', function () {
+                    // Get the selected clinic name
+                    const clinic = document.getElementById('clinic').value;
+
+                    // Check if a clinic is selected
+                    if (clinic) {
+                      // Make an AJAX request to fetch stores based on the selected clinic
+                      fetchStoresByClinic(clinic);
+                    } else {
+                      alert('Please select a clinic.');
+                    }
+                  });
+
+                  function fetchStoresByClinic(clinic) {
+                    axios.post('/adminInv/get-store-by-clinic', { clinic: clinic })
+                      .then(response => {
+                        let tableRows = '';
+                        let storeDetailsPromises = response.data.map(item => {
+                          // Fetch additional details for each item using item.id
+                          return axios.post('/adminInv/route-to-fetch-details', { store_id: item.id })
+                            .then(detailsResponse => {
+                              let details = detailsResponse.data;
+                              return {
+                                id: item.id,
+                                code: item.code,
+                                description: item.description,
+                                isSelected: details.isSelected,
+                                min: details.min,
+                                max: details.max,
+                                reorder: details.reorder
+                              };
+                            })
+                            .catch(() => {
+                              // If an error occurs (e.g., no data found), return default values
+                              return {
+                                id: item.id,
+                                code: item.code,
+                                description: item.description,
+                                isSelected: false,
+                                min: '',
+                                max: '',
+                                reorder: ''
+                              };
+                            });
+                        });
+
+                        // Wait for all the promises to resolve
+                        Promise.all(storeDetailsPromises)
+                          .then(allDetails => {
+                            allDetails.forEach(detail => {
+                              tableRows += `
+                            <tr data-item-id="${detail.id}">
+                                <td><input class="mt-1" type="checkbox" name="isSelected" ${detail.isSelected ? 'checked' : ''}></td>
+                                <input type="hidden" name="store_id" value="${detail.id}">
+                                <input type="hidden" name="store_name" value="${detail.description}">
+                                <td contenteditable="true">${detail.description}</td>
+                                <td><input type="number" name="min" value="${detail.min}"></td>
+                                <td><input type="number" name="max" value="${detail.max}"></td>
+                                <td><input type="number" name="reorder" value="${detail.reorder}"></td>
+                            </tr>
+                        `;
+                            });
+                            document.getElementById('StoreTaxTblBody').innerHTML = tableRows;
+                          })
+                          .catch(error => {
+                            console.error('Error fetching additional details:', error);
+                          });
+                      })
+                      .catch(error => {
+                        console.error('Error fetching stores:', error);
+                      });
+                  }
+
+
+                  function fetchAndRenderItems(selectedRowCode) {
+                    axios.post('/adminInv/get-Location-list', { code: selectedRowCode })
+                      .then(response => {
+                        console.log(response.data);
+
+                        let tableRows = '';
+                        response.data.forEach(function (item) {
+                          console.log(item);
+                          tableRows += `
+                        <tr>
+                            <td><a type="button" class="btn btn-primary btn-style btn-change">Modify</a></td>
+                            <td>${item.store}</td>
+                            <td>${item.rack}</td>
+                            <td>${item.shelf}</td>
+                            <td>${item.bin}</td>
+                            <td><button type="button" class="btn btn-danger" onClick="deleteItem('${item.id}', '${selectedRowCode}')">Delete</button></td>
+                          
+                            </tr>
+
+                    `;
+                        });
+                        document.getElementById('locationTblBody').innerHTML = tableRows;
+                      })
+                      .catch(error => {
+                        console.error('Error fetching details:', error);
+                      });
+                  }
+
+                  function fetchAndRenderItemsConv(selectedRowCode) {
+                    axios.post('/adminInv/get-conv-list', { code: selectedRowCode })
+                      .then(response => {
+                        console.log(response.data);
+
+                        let tableRows = '';
+                        response.data.forEach(function (item) {
+                          console.log(item);
+                          tableRows += `
+                        <tr>
+                            
+                            <td>${item.from_uom}</td>
+                            <td>${item.to_uom}</td>
+                            <td>${item.conversion_factor}</td>
+                           
+                           
+                            </tr>
+
+                    `;
+                        });
+                        document.getElementById('convTblBodu').innerHTML = tableRows;
+                      })
+                      .catch(error => {
+                        console.error('Error fetching details:', error);
+                      });
+                  }
+
+
+                  function fetchAndRenderItemsSupplier(selectedRowCode) {
+                    // Fetch all suppliers and the current suppliers for the item
+                    axios.all([
+                      axios.get('/adminInv/get-supplier-list'),
+                      axios.post('/adminInv/get-item-suppliers', { itemCode: selectedRowCode })
+                    ]).then(axios.spread((suppliersResponse, itemSuppliersResponse) => {
+                      const allSuppliers = suppliersResponse.data;
+                      const currentSuppliers = itemSuppliersResponse.data;
+
+                      // Create a set of current supplier codes for quick lookup
+                      const currentSupplierCodes = new Set(currentSuppliers.map(supplier => supplier.supplierCode));
+
+                      let tableRows = '';
+                      allSuppliers.forEach(function (item) {
+                        const isChecked = currentSupplierCodes.has(item.code) ? 'checked' : '';
+                        tableRows += `
+                <tr>
+                    <td><input type="checkbox" name="suppliers" value="${item.code}" ${isChecked}></td>
+                    <td>${item.description}</td>
+                </tr>
+            `;
+                      });
+
+                      document.getElementById('suppTblBody').innerHTML = tableRows;
+                      document.getElementById('itemCode').value = selectedRowCode; // Set the item code in a hidden field
+                    })).catch(error => {
+                      console.error('Error fetching details:', error);
+                    });
+                  }
+
+                  $(document).ready(function () {
+                    $('#itemSupplierForm').on('submit', function (event) {
+                      event.preventDefault(); // Prevent the default form submission
+
+                      // Get the item code
+                      const itemCode = $('#itemCode').val();
+
+                      // Get selected suppliers
+                      const selectedSuppliers = [];
+                      $('input[name="suppliers"]:checked').each(function () {
+                        selectedSuppliers.push($(this).val());
+                      });
+
+                      // Create the data object to send to the server
+                      const data = {
+                        itemCode: itemCode,
+                        suppliers: selectedSuppliers
+                      };
+
+                      // Send data to the server
+                      axios.post('/adminInv/save-item-suppliers', data)
+                        .then(response => {
+                          console.log('Response from server:', response.data);
+                          $('#errordiv5').removeClass('alert-danger').addClass('alert-success').text(response.data.msg).show();
+                        })
+                        .catch(error => {
+                          console.log(error);
+                          const errorMessage = error.response?.data?.msg || 'An error occurred';
+                          $('#errordiv5').removeClass('alert-success').addClass('alert-danger').text(errorMessage).show();
+                          console.error('Error:', error);
+                        });
+                    });
+
+                  });
+                  function openItemDetailsModal(itemCode) {
+                    const url = '/adminInv/getItemOtherDetails'; // Replace with your actual endpoint
+                    axios.post(url, { itemCode: itemCode })
+                      .then(response => {
+                        // Populate form fields with the fetched data
+                        const data = response.data;
+                        $('#item_code_othr').val(data.itemCode);
+                        $('#itemNameOther').text(data.itemName);
+                        $('#contra_indication').val(data.contra_indication);
+                        $('#side_effects').val(data.side_effects);
+                        $('#help_url').val(data.help_url);
+                        // Show the modal
+                        // $('#itemDetailsModalOtherDetails').modal('show');
+                      })
+                      .catch(error => {
+                        console.error('Error fetching item details:', error);
+                      });
+                  };
+
+
+                  function fetchAndRenderStoreTaxItems(selectedRowCode) {
+                    axios.post('/adminInv/get-store-tax-list', { code: selectedRowCode })
+                      .then(response => {
+                        console.log(response.data);
+
+                        let tableRows = '';
+                        response.data.forEach(function (item) {
+                          console.log(item);
+                          tableRows += `
+                    <tr>
+                        <td>${item.store}</td>
+                        <td>${item.tax}</td>
+                        <td>${item.applicable_for}</td>
+                        <td>${item.applicable_on}</td>
+                        <td>${item.percentage}</td>
+                        <td>${item.taxType}</td>
+                        <td><button type="button" class="btn btn-danger" onClick="deleteItemStoreTax('${item.id}', '${selectedRowCode}')">Delete</button></td>
+                    </tr>
+                `;
+                        });
+                        document.getElementById('storeTaxTblBody').innerHTML = tableRows;
+                      })
+                      .catch(error => {
+                        console.error('Error fetching store tax items:', error);
+                      });
+                  }
+                  $('#item-body').on('click', 'tr', function () {
+                    // Remove 'locked' class from all rows
+                    $('#item-body tr').removeClass('locked');
+
+                    // Enable buttons
+                    $('#location').removeAttr('disabled');
+                    $('#conversion').removeAttr('disabled');
+                    $('#applySupplier').removeAttr('disabled');
+                    $('#storeAndTax').removeAttr('disabled');
+                    $('#otherDetails').removeAttr('disabled');
+
+                    // Add 'locked' class to the clicked row
+                    $(this).addClass('locked');
+
+                    // Get the text from the clicked row
+                    const selectedRowText = $(this).find('td').eq(2).text();
+                    const selectedRowCode = $(this).find('td').eq(1).text();
+                    $('#itemName').text(selectedRowText);
+                    $('#itemNameConv').text(selectedRowText);
+                    $('#item_code_location').val(selectedRowCode);
+                    $('#item_code_conv').val(selectedRowCode);
+                    $('#item_code_othr').val(selectedRowCode);
+                    $('#item_code_store_tax').val(selectedRowCode);
+                    $('#itemNameOther').text(selectedRowText);
+                    $('#itemNameStoreTax').text(selectedRowText);
+                    $('#itemNameSupp').text(selectedRowText);
+
+
+                    const purchaseUom = $(this).find('td').eq(7).text();;
+                    const saleUom = $(this).find('input[name="selling_uom"]').val();
+                    const stockUom = $(this).find('input[name="stocking_uom"]').val();
+                    const baseUom = $(this).find('input[name="base_uom"]').val();
+
+                    // Set the values in the appropriate elements
+                    $('#purchase_uom').val(purchaseUom);
+                    $('#sale_uom').val(saleUom);
+                    $('#stock_uom').val(stockUom);
+                    $('#base_uom').val(baseUom);
+
+
+                    // Fetch and render items for the selected row code
+                    fetchAndRenderItems(selectedRowCode);
+                    fetchAndRenderItemsConv(selectedRowCode);
+                    fetchAndRenderItemsSupplier(selectedRowCode);
+                    fetchAndRenderStoreTaxItems(selectedRowCode);
+                    openItemDetailsModal(selectedRowCode);
+                    // alert(selectedRowCode)
+                  });
+                  window.deselectSelectedRow = function () {
+                    $('#item-body tr').removeClass('locked');
+                  };
+
+                  $(document).ready(function () {
+                    // Handle form submission
+                    $('#itemOtherDetails').on('submit', function (event) {
+                      event.preventDefault(); // Prevent the default form submission
+                      const formData = $(this).serialize(); // Serialize the form data
+                      console.log('formdata', formData);
+                      const url = '/adminInv/itemOtherDtlsSave'; // Replace with your actual endpoint
+
+                      axios.post(url, formData)
+                        .then(response => {
+                          // Handle success
+                          console.log('Response from server:', response.data);
+                          $('#errordiv3').removeClass('alert-danger').addClass('alert-success').text(response.data.msg).show();
+                        })
+                        .catch(error => {
+                          // Handle error
+                          console.log(error);
+                          const errorMessage = error.response?.data?.msg || 'An error occurred';
+                          $('#errordiv3').removeClass('alert-success').addClass('alert-danger').text(errorMessage).show();
+                          console.error('Error:', error);
+                        });
+                    });
+
+                    // Function to populate the form with existing data
+
+                    // Function to clear error message when close button is clicked
+                    window.clearErrorDiv3 = function () {
+                      $('#errordiv3').removeClass('alert-success alert-danger').text('');
+                    };
+                  });
+
+
+
+                  $('#itemLocationForm').on('submit', function (event) {
+                    event.preventDefault();
+                    const formData = $(this).serialize();
+                    const url = '/adminInv/itemLocationSave';
+
+                    axios.post(url, formData)
+                      .then(response => {
+                        console.log('Response from server:', response.data);
+                        $('#errordiv1').removeClass('alert-danger').addClass('alert-success').text(response.data.msg).show();
+                        const selectedRowCode = $('#itemCode').val();
+                        fetchAndRenderItems(selectedRowCode);
+                      })
+                      .catch(error => {
+                        console.log(error)
+                        const errorMessage = error.response?.data?.msg
+                        $('#errordiv1').removeClass('alert-success').addClass('alert-danger').text(errorMessage).show();
+                        console.error('Error:', error);
+                      });
+                  });
+                  $('#itemConvForm').on('submit', function (event) {
+                    event.preventDefault();
+                    const formData = $(this).serialize();
+                    const url = '/adminInv/itemConvSave';
+
+                    axios.post(url, formData)
+                      .then(response => {
+                        console.log('Response from server:', response.data);
+                        $('#errordiv2').removeClass('alert-danger').addClass('alert-success').text(response.data.msg).show();
+                        // Refresh the item list after adding new data
+                        const selectedRowCode = $('#itemCode').val();
+                        fetchAndRenderItemsConv(selectedRowCode);
+                      })
+                      .catch(error => {
+                        console.error('Error:', error);
+                        const errorMessage = error.response?.data?.msg
+                        $('#errordiv2').removeClass('alert-success').addClass('alert-danger').text(errorMessage).show();
+                      });
+                  });
+                  $('#itemStoreTax').on('submit', function (event) {
+                    event.preventDefault(); // Prevent the default form submission
+                    const formData = $(this).serialize(); // Serialize the form data
+                    console.log('formdatatax', formData)
+                    const url = '/adminInv/itemStoreTaxSave'; // Replace with your actual endpoint
+
+                    axios.post(url, formData)
+                      .then(response => {
+                        // Handle success
+                        console.log('Response from server:', response.data);
+                        $('#errordiv4').removeClass('alert-danger').addClass('alert-success').text(response.data.msg).show();
+                        const selectedRowCode = $('#itemCode').val();
+                        fetchAndRenderStoreTaxItems(selectedRowCode);
+                      })
+                      .catch(error => {
+                        // Handle error
+                        console.log(error);
+                        const errorMessage = error.response?.data?.msg || 'An error occurred';
+                        $('#errordiv4').removeClass('alert-success').addClass('alert-danger').text(errorMessage).show();
+                        console.error('Error:', error);
+                      });
+                  });
+
+                  $('#ItemStoreMinMaxForm').on('submit', function (event) {
+                    event.preventDefault(); // Prevent the default form submission
+
+                    const formData = [];
+
+                    $('#StoreTaxTblBody tr').each(function () {
+                      const row = $(this);
+                      const isSelected = row.find('input[type="checkbox"]').is(':checked');
+
+                      // Only collect data for selected rows
+                      if (isSelected) {
+                        const itemData = {
+                          itemCode: $('#itemCode').val(), // Assuming itemCode is available somewhere in the form
+                          store_id: row.find('input[name="store_id"]').val(),
+                          store_name: row.find('input[name="store_name"]').val(),
+                          min: row.find('input[name="min"]').val(),
+                          max: row.find('input[name="max"]').val(),
+                          reorder: row.find('input[name="reorder"]').val(),
+                          isSelected: isSelected
+                        };
+                        formData.push(itemData);
+                      }
+                    });
+
+                    // Check if formData is empty
+                    if (formData.length === 0) {
+                      // Display a popup alert
+                      alert("Please select at least one row to save.");
+                      return; // Stop the process
+                    }
+
+                    console.log('formdata', formData);
+                    const url = '/adminInv/itemStoreMinMaxSave'; // Replace with your actual endpoint
+
+                    axios.post(url, { data: formData })
+                      .then(response => {
+                        // Handle success
+                        console.log('Response from server:', response.data);
+                        $('#errordiv6').removeClass('alert-danger').addClass('alert-success').text(response.data.msg).show();
+                        const selectedRowCode = $('#itemCode').val();
+                        fetchAndRenderStoreTaxItems(selectedRowCode);
+                      })
+                      .catch(error => {
+                        // Handle error
+                        console.log(error);
+                        const errorMessage = error.response?.data?.msg || 'An error occurred';
+                        $('#errordiv6').removeClass('alert-success').addClass('alert-danger').text(errorMessage).show();
+                        console.error('Error:', error);
+                      });
+                  });
+
+                  window.deleteItem = function (itemId, selectedRowCode) {
+                    axios.post('/adminInv/delete-item-location', { id: itemId })
+                      .then(response => {
+                        console.log('Item deleted:', response.data);
+                        // Refresh the item list after deleting an item
+                        fetchAndRenderItems(selectedRowCode);
+                      })
+                      .catch(error => {
+                        console.error('Error deleting item:', error);
+                      });
+                  };
+                  window.deleteItemStoreTax = function (itemId, selectedRowCode) {
+                    axios.post('/adminInv/delete-item-store-tax', { id: itemId })
+                      .then(response => {
+                        console.log('Item deleted:', response.data);
+                        // Refresh the item list after deleting an item
+                        fetchAndRenderStoreTaxItems(selectedRowCode);
+                      })
+                      .catch(error => {
+                        console.error('Error deleting item:', error);
+                      });
+                  };
+                });
+
+              </script>

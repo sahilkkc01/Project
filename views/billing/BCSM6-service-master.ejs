@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>LifeLinker</title>
+   <%- include('../header'); -%>
+        <!-- main content start -->
+        <div class="main-content">
+
+            <div class="row content-top-gap2">
+                <div class="col-lg-12">
+                    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+                        <a class="navbar-brand text-center mr-5" href="#">
+                            <span class="dash-icon"><i class="fas fa-tachometer-alt"></i></span>
+                            Dashboard
+                        </a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav">
+                                <li class="nav-item active text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="far fa-user"></i></span>
+                                        Master
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-exchange-alt"></i></span>
+                                        Transaction
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-hand-holding-medical"></i></span>
+                                        Patient 360
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-receipt"></i></span>
+                                        Outside Reciept
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-file-invoice"></i></span>
+                                        Outpatient Department
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-chart-line"></i></span>
+                                        Analytics
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="far fa-clock"></i></span>
+                                        Waiting List
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-wrench"></i></span>
+                                        Adminstration
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-spinner"></i></span>
+                                        Additional
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+            <!-- content -->
+            <div class="container-fluid">
+
+                <div class="chart">
+                    <div class="row">
+
+                        <div class="col-lg-12 pl-lg-0 mt-2 ml-2">
+                            <h4 class="primary">Service Master</h4>
+                        </div>
+                        <div class="col-lg-12 pl-lg-2 chart-grid">
+                            <form id="ser-master">
+
+                                <div class="card card_border">
+                                    <div class="">
+                                        <!--Past your code here starts-->
+                                        <div id="errordiv1"></div>
+                                        <div class="card">
+                                            <div class="col-xl-12 p-heading">
+                                                <h6 class="p-text">LIST OF SERVICES</h6>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="pl-xl-0">
+                                                    <h6 class="primary"></h6>
+                                                </div>
+                                                <div class="form-row">
+                                                    <!-- <div class="col-2 mb-3">
+                                                        <div class="form-group"><label class="input__label">Service
+                                                                code</label><input name="service_code" type="text"
+                                                                class="form-control input-style" placeholder=""></div>
+                                                    </div> -->
+                                                    <div class="col-3 mb-3">
+                                                        <div class="form-group"><label class="input__label">service
+                                                                name/Service Code/Specialization</label><input name="service_name" type="text" id="searchBox"
+                                                                class="form-control input-style" placeholder=""></div>
+                                                    </div>
+                                                    <!-- <div class="col-3 mb-3">
+                                                        <div class="form-group"><label
+                                                                class="input__label">specialization</label>
+
+                                                            <select name="specialization"
+                                                                class="form-control input-style">
+                                                                <option value="">Select</option>
+                                                                <option value="1">1</option>
+                                                                <option value="2">2</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-4 mb-3">
+                                                        <div class="row">
+                                                            <div class="col-9 mb-3">
+                                                                <div class="form-group"><label
+                                                                        class="input__label">sub-specialization</label>
+                                                                    <select name="sub-specialization"
+                                                                        class="form-control input-style">sub-specialization
+                                                                        <option value="">Select</option>
+                                                                        <option value="1">1</option>
+                                                                        <option value="2">2</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-3 mb-3 pl-xl-0 mt-4">
+                                                                <button type="button"
+                                                                    class="btn btn-style btn-primary btn-style btn-change mb-3"
+                                                                    ><strong><i class="fas fa-search"></i>
+                                                                        Search</strong></button>
+                                                            </div>
+                                                        </div>
+                                                    </div> -->
+                                                </div>
+                                                <div class="form-row"></div>
+                                                <div class="form-row">
+                                                    <div class="col-12">
+                                                        <div class="form-group">
+                                                            <div class="col col-12 pr-xl-0 pl-xl-0">
+                                                                <div class="slidx">
+                                                                    <table class="table2" id="serMstTable">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th contenteditable="true">&nbsp;</th>
+                                                                                <th contenteditable="true">Code</th>
+                                                                                <th contenteditable="true">Service Name
+                                                                                </th>
+                                                                                <th contenteditable="true">
+                                                                                    Specialization</th>
+                                                                                <th contenteditable="true">
+                                                                                    Sub-Specialization</th>
+                                                                                <th contenteditable="true">Rate</th>
+                                                                                <th contenteditable="true">Status</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody id="serMst">
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                                <div id="paginationControls"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-row"></div>
+                                            </div>
+
+                                            <div id="loadingIndicator"></div>
+                                        </div>
+                                        <!--Past your code here ends-->
+                                    </div>
+                                </div>
+                                <div class="form-group mt-1 mb-3 text-right">
+                                   
+
+
+                                    <button type="button" class="btn-success btn-style btn mt-3 mr-2" disabled><strong><i
+                                                class="fa-regular fa-pen-to-square"></i> Modify</strong></button>
+
+                                                <button type="button" class="btn-secondary btn-style btn mt-3 mr-2" onclick="window.location.href='/billing/5';">
+                                                    <strong><i class="fa-solid fa-plus"></i> New</strong>
+                                                </button>
+
+                                    <button type="button" class="btn-danger btn-style btn mt-3 mr-2" disabled><strong><i
+                                                class="fas fa-times"></i> Cancel</strong></button>
+
+                                    <button type="submit" class="btn-primary btn-style btn mt-3" disabled><strong><i
+                                                class="far fa-save"></i> Save</strong></button>
+                                </div>
+                            </form>
+                        </div>
+                        <!--footer section start-->
+                       <%- include('../footer'); -%>
+                    <!-- Correct path and load order for scripts -->
+<script src="../javascripts/statusUpdate.js"></script>
+<script src="../javascripts/pageUpdate.js"></script>
+<script>
+    
+    function ChangeStatus2(id) {
+        console.log(id+"status"+status);
+        let url = '/billing/update_services'
+        updateStatus(id, url)
+    }
+    function updatePageAdvAgent2(id) {
+        console.log(id+"you");
+        alert(1);
+        let url = '/billing/update-ser-master'
+        updatePage(id, url)
+    }
+</script>
+<script type="module">
+    import { pagi_search } from '../javascripts/pagi_search.js';
+    $(document).ready(function () {
+        console.log("Document is ready");
+        fetchData();
+    });
+
+    function fetchData() {
+        $.ajax({
+            url: '/billing/get-service',
+            type: 'GET',
+            success: function (data) {
+                console.log(data);
+                data.reverse();
+                let tableRows = '';
+                data.forEach(function (item) {
+                    console.log(item);
+                    tableRows += `
+                        <tr>
+                            <td><a type="button" class="btn btn-primary btn-style btn-change"  onClick=updatePageAdvAgent2(${item.id}) href='/billing/5' >View</a></td>
+                            <td>${item.serviceCode}</td>
+                            <td>${item.serviceName}</td>
+                            <td>${item.specialization}</td>
+                            <td>${item.subSpecialization}</td>
+                            <td>${item.baseServiceRate}</td>
+                            <td><input class="form-check-input mt-0" type="checkbox" id='${item.id}' 
+    onClick="ChangeStatus2(${item.id}, this.checked)" ${item.status ? 'checked' : ''}>
+</td>
+                        </tr>
+                        `;
+                });
+                $('#serMst').html(tableRows);
+                pagi_search('#searchBox', '#serMstTable', '#paginationControls');
+            },
+            error: function (xhr, status, error) {
+                console.error('Error fetching classification details:', error);
+            }
+        });
+    }
+</script>

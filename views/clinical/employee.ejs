@@ -1,0 +1,613 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>LifeLinker</title>
+    <!-- <style>
+        video, canvas {
+            display: block;
+            margin: 10px auto;
+        }
+        #video {
+            display: none;
+        } -->
+    </style>
+
+    <%- include('../header') -%>
+
+            <!-- notification menu start -->
+            <div class="menu-right">
+                <div class="navbar user-panel-top">
+                    <div class="search-box">
+                        <form action="#search-results.html" method="get">
+                            <input class="search-input" placeholder="Search Here..." type="search" id="search">
+                            <button class="search-submit" value=""><span class="fa fa-search"></span></button>
+                        </form>
+                    </div>
+                    <div class="user-dropdown-details d-flex">
+                        <div class="profile_details_left">
+                            <ul class="nofitications-dropdown">
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i
+                                            class="fa fa-bell-o"></i><span class="badge blue">3</span></a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <div class="notification_header">
+                                                <h3>You have 3 new notifications</h3>
+                                            </div>
+                                        </li>
+                                        <li><a href="#" class="grid">
+                                                <div class="user_img"></div>
+                                                <div class="notification_desc">
+                                                    <p>Johnson purchased template</p>
+                                                    <span>Just Now</span>
+                                                </div>
+                                            </a></li>
+                                        <li class="odd"><a href="#" class="grid">
+                                                <div class="user_img"></div>
+                                                <div class="notification_desc">
+                                                    <p>New customer registered </p>
+                                                    <span>1 hour ago</span>
+                                                </div>
+                                            </a></li>
+                                        <li><a href="#" class="grid">
+                                                <div class="user_img"></div>
+                                                <div class="notification_desc">
+                                                    <p>Lorem ipsum dolor sit amet </p>
+                                                    <span>2 hours ago</span>
+                                                </div>
+                                            </a></li>
+                                        <li>
+                                            <div class="notification_bottom">
+                                                <a href="#all" class="bg-primary">See all notifications</a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="profile_details">
+                            <ul>
+                                <li class="dropdown profile_details_drop">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="dropdownMenu3"
+                                        aria-haspopup="true" aria-expanded="false">
+                                        <div class="profile_img">
+                                            <img src="assets/images/profileimg.jpg" class="rounded-circle" alt="" />
+                                            <div class="user-active">
+                                                <span></span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <ul class="dropdown-menu drp-mnu" aria-labelledby="dropdownMenu3">
+                                        <li class="user-info">
+                                            <h5 class="user-name">John Deo</h5>
+                                            <span class="status ml-2">Available</span>
+                                        </li>
+                                        <li> <a href="#"><i class="lnr lnr-user"></i>My Profile</a> </li>
+                                        <li> <a href="#"><i class="lnr lnr-users"></i>1k Followers</a> </li>
+                                        <li> <a href="#"><i class="lnr lnr-cog"></i>Setting</a> </li>
+                                        <li> <a href="#"><i class="lnr lnr-heart"></i>100 Likes</a> </li>
+                                        <li class="logout"> <a href="#sign-up.html"><i class="fa fa-power-off"></i>
+                                                Logout</a> </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--notification menu end -->
+
+        </div>
+        <!-- //header-ends -->
+        <!-- main content start -->
+        <div class="main-content">
+
+            <div class="row content-top-gap2">
+                <div class="col-lg-12">
+                    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+                        <a class="navbar-brand text-center mr-5" href="#">
+                            <span class="dash-icon"><i class="fas fa-tachometer-alt"></i></span>
+                            Dashboard
+                        </a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav">
+                                <li class="nav-item active text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="far fa-user"></i></span>
+                                        Master
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-exchange-alt"></i></span>
+                                        Transaction
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-hand-holding-medical"></i></span>
+                                        Patient 360
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-receipt"></i></span>
+                                        Outside Reciept
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-file-invoice"></i></span>
+                                        Outpatient Department
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-chart-line"></i></span>
+                                        Analytics
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="far fa-clock"></i></span>
+                                        Waiting List
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-wrench"></i></span>
+                                        Adminstration
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-spinner"></i></span>
+                                        Additional
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+            <!-- content -->
+            <div class="container-fluid">
+
+                <div class="chart">
+                    <div class="row">
+
+                        <div class="col-lg-12 pl-lg-0 mt-2 ml-2">
+                            <h4 class="primary">Employee</h4>
+                        </div>
+                        <div class="col-lg-12 pl-lg-2 chart-grid">
+
+                            <div id="errordiv1"></div>
+                            <form id="emp-form">
+                                <input type="hidden" id="query" value="0" name="query">
+                                <input type="hidden" id="itemid" name="itemid">
+                                
+                                <div class="card card_border">
+                                    <div>
+                                        <div class="card">
+                                            <div>
+                                                <h6 class="primary pl-lg-2 mt-2">New Employee Details</h6>
+                                            </div>
+                                            <div class="form-row col-12 mb-1 pl-lg-2 pr-lg-1">
+                                                <div class="col-3 mb-1">
+                                                    <div class="form-group">
+                                                        <label class="input__label" for="emp_first_name">First Name</label>
+                                                        <input id="emp_first_name" name="emp_first_name" type="text" class="form-control input-style" placeholder="" data-validation="required" data-error-message="First Name is required.">
+                                                    </div>
+                                                </div>
+                            
+                                                <div class="col-3 mb-1">
+                                                    <div class="form-group">
+                                                        <label class="input__label" for="emp_middle_name">Middle Name</label>
+                                                        <input id="emp_middle_name" name="emp_middle_name" type="text" class="form-control input-style" placeholder="" data-validation>
+                                                    </div>
+                                                </div>
+                            
+                                                <div class="col-3 mb-1">
+                                                    <div class="form-group">
+                                                        <label class="input__label" for="emp_last_name">Last Name</label>
+                                                        <input id="emp_last_name" name="emp_last_name" type="text" class="form-control input-style" placeholder="" data-validation="required" data-error-message="Last Name is required.">
+                                                    </div>
+                                                </div>
+                            
+                                                <div class="col-3 mb-1">
+                                                    <div class="form-group">
+                                                        <label class="input__label" for="emp_dob">Date Of Birth</label>
+                                                        <input id="emp_dob" name="emp_dob" type="date" class="form-control input-style" placeholder="" data-validation="required" data-error-message="Date Of Birth is required.">
+                                                    </div>
+                                                </div>
+                            
+                                                <div class="col-3 mb-1">
+                                                    <div class="form-group">
+                                                        <label class="input__label" for="emp_gender">Gender</label>
+                                                        <select id="emp_gender" name="emp_gender" class="form-control input-style" data-validation="required" data-error-message="Gender is required.">
+                                                            <option value="">Select</option>
+                                                            <option value="male">Male</option>
+                                                            <option value="female">Female</option>
+                                                            <option value="other">Other</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                            
+                                                <div class="col-3 mb-1">
+                                                    <div class="form-group">
+                                                        <label class="input__label" for="emp_desig">Designation</label>
+                                                        <select id="emp_desig" name="emp_desig" class="form-control input-style" data-validation="required" data-error-message="Designation is required.">
+                                                            <option value="">Select</option>
+                                                            <option value="abc">Abc</option>
+                                                            <!-- Add options here -->
+                                                        </select>
+                                                    </div>
+                                                </div>
+                            
+                                                <div class="col-3 mb-1">
+                                                    <div class="form-group">
+                                                        <label class="input__label" for="emp_clinic">Clinic</label>
+                                                        <select id="emp_clinic" name="emp_clinic" class="form-control input-style" data-validation="required" data-error-message="Clinic is required.">
+                                                            <option value="">Select</option>
+                                                            <option value="xyz">xyz</option>
+                                                            <!-- Add options here -->
+                                                        </select>
+                                                    </div>
+                                                </div>
+                            
+                                                <div class="col-3 mb-1">
+                                                    <div class="form-group">
+                                                        <label class="input__label" for="emp_date_of_join">Date Of Joining</label>
+                                                        <input id="emp_date_of_join" name="emp_date_of_join" type="date" class="form-control input-style" placeholder="" data-validation="required" data-error-message="Date Of Joining is required.">
+                                                    </div>
+                                                </div>
+                                        <!--Past your code here ends-->
+                                    </div>
+                                </div>
+                        </div>
+
+
+                        <!-- section 2 -->
+                        <div class="mt-1 col-lg-12 pl-lg-2">
+                            <div class="card card_border">
+                                <div class="mb-2">
+                                    <div class="form-group">
+                                        <div class="col-xl-12 p-heading">
+                                            <!-- Nav Tabs are here once have a look--->
+                                            <h6 class="p-text">Personal Information</h6>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-row">
+                                    <div class="col-12 mb-2  pl-lg-3 pr-lg-3">
+
+<div class="form-row col-12 mb-1 pl-lg-2 pr-lg-1">
+    <!-- Marital Status -->
+    <div class="col-3 mb-1">
+        <div class="form-group">
+            <label class="input__label" for="emp_marital_status">Marital Status</label>
+            <select id="emp_marital_status" name="emp_marital_status" class="form-control input-style" data-validation="required" data-error-message="Marital Status is required.">
+                <option value="">Select</option>
+                <option value="Married">Married</option>
+                <option value="Unmarried">Unmarried</option>
+                <!-- Add options here -->
+            </select>
+        </div>
+    </div>
+
+    <!-- Employee Number -->
+    <div class="col-3 mb-1">
+        <div class="form-group">
+            <label class="input__label" for="emp_number">Employee Number</label>
+            <input id="emp_number" name="emp_number" type="text" class="form-control input-style" placeholder="" data-validation="required" data-error-message="Employee Number is required.">
+        </div>
+    </div>
+
+    <!-- PF Number -->
+    <div class="col-3 mb-1">
+        <div class="form-group">
+            <label class="input__label" for="emp_pf_number">PF Number</label>
+            <input id="emp_pf_number" name="emp_pf_number" type="text" class="form-control input-style" placeholder="" data-validation="required" data-error-message="PF Number is required.">
+        </div>
+    </div>
+
+    <!-- PAN Number -->
+    <div class="col-3 mb-1">
+        <div class="form-group">
+            <label class="input__label" for="emp_pan_number">PAN Number</label>
+            <input id="emp_pan_number" name="emp_pan_number" type="text" class="form-control input-style" placeholder="" data-validation="required" data-error-message="PAN Number is required.">
+        </div>
+    </div>
+
+    <!-- Email ID -->
+    <div class="col-3 mt-1">
+        <div class="form-group">
+            <label class="input__label" for="emp_email_id">Email ID</label>
+            <input id="emp_email_id" name="emp_email_id" type="email" class="form-control input-style" placeholder="" data-validation="required" data-error-message="Email ID is required.">
+        </div>
+    </div>
+
+    <!-- Access Card Number -->
+    <div class="col-3 mt-1">
+        <div class="form-group">
+            <label class="input__label" for="emp_access_card_number">Access Card Number</label>
+            <input id="emp_access_card_number" name="emp_access_card_number" type="text" class="form-control input-style" placeholder="" data-validation="required" data-error-message="Access Card Number is required.">
+        </div>
+    </div>
+
+    <!-- Experience -->
+    <div class="col-3 mt-1">
+        <div class="form-group">
+            <label class="input__label" for="emp_exp">Experience</label>
+            <textarea id="emp_exp" name="emp_exp" class="form-control input-style" placeholder="" data-validation="required" data-error-message="Experience is required."></textarea>
+        </div>
+    </div>
+
+    <!-- Education -->
+    <div class="col-3 mt-1">
+        <div class="form-group">
+            <label class="input__label" for="emp_edu">Education</label>
+            <textarea id="emp_edu" name="emp_edu" class="form-control input-style" placeholder="" data-validation="required" data-error-message="Education is required."></textarea>
+        </div>
+    </div>
+
+    <!-- Image -->
+    <div class="col-3 mt-1">
+        <div class="form-group">
+            <label class="input__label" for="emp_image">Image</label>
+            <img id="displayimg" alt="" src="../images/myuploads/<%=a.emp_image  %>" style="max-width: 350px; max-height: 150px;">
+            <input id="emp_image" name="emp_image" type="file" class="form-control input-style" style="display: none;" accept="image/*" data-validation="required" data-error-message="please upload Image">
+            <!-- <button id="startCamera">Open Camera</button>
+            <video id="video" width="640" height="480" autoplay></video>
+            <button id="capture" style="display: none;">Capture</button>
+            <canvas id="canvas" width="640" height="480"></canvas> -->
+        <!-- <div id="image-preview" class="mt-2"></div> -->
+        </div>
+    </div>
+
+
+    <!-- Browse Button -->
+    <div class="col-3 mt-1">
+        <div class="form-group">
+            <button type="button" id="img-btn" onclick="document.getElementById('emp_image').click();" class="btn-primary btn-style btn mt-4 btn-change"><strong>Browse</strong></button>
+        </div>
+    </div>
+
+    <!-- Is Discharge Approve Checkbox -->
+    <div class="col-12 mt-1">
+        <div class="form-check-label">
+            <label class="input__label"></label>
+            <div class="radio my-4">
+                <label class="form-check-label">
+                    <input class="form-check-input" type="checkbox" id="emp_is_discharge_approve" name="emp_is_discharge_approve"> Is Discharge Approve
+                </label>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+ 
+
+                    
+                    <div class="form-group mb-3 mt-3 text-right">
+
+                        <button type="button" onclick="updateQuery()" id="mod-btn" class="btn-success btn-style btn mr-2"><strong><i
+                                    class="fa-regular fa-pen-to-square"></i> Modify</strong></button>
+
+                 
+
+
+
+                        <button type="submit" id="sub-btn" class="btn-primary btn-style btn"><strong><i class="far fa-save"></i>
+                                Save</strong></button>
+                                <button type="button"  onclick="window.location.href = '/clinic/41';" class="btn-danger btn-style btn ml-2 mr-2"><strong><i
+                                    class="fas fa-times"></i> Cancel</strong></button>
+                               
+                    </div>
+
+                    </form>
+
+                </div>
+                <!--footer section start-->
+               <%- include('../footer') -%>
+               <!-- <script>
+                // Get elements
+                const startCameraButton = document.getElementById('startCamera');
+                const video = document.getElementById('video');
+                const captureButton = document.getElementById('capture');
+                const canvas = document.getElementById('canvas');
+                const context = canvas.getContext('2d');
+        
+                // Request access to the camera when the button is clicked
+                startCameraButton.addEventListener('click', () => {
+                    navigator.mediaDevices.getUserMedia({ video: true })
+                        .then((stream) => {
+                            // Display the camera feed in the video element
+                            video.srcObject = stream;
+                            video.style.display = 'block';
+                            captureButton.style.display = 'block';
+                            startCameraButton.style.display = 'none';
+                        })
+                        .catch((err) => {
+                            console.error('Error accessing the camera: ', err);
+                        });
+                });
+        
+                // Capture the image when the button is clicked
+                captureButton.addEventListener('click', () => {
+                    // Draw the current video frame to the canvas
+                    context.drawImage(video, 0, 0, canvas.width, canvas.height);
+                });
+            </script> -->
+               <script>
+
+document.getElementById('emp_image').addEventListener('change', function(event) {
+                  const file = event.target.files[0];
+                  if (file) {
+                      const reader = new FileReader();
+                      reader.onload = function(e) {
+                          document.getElementById('displayimg').src = e.target.result;
+                      }
+                      reader.readAsDataURL(file);
+                  }
+              });
+
+
+                  function updateQuery(){
+document.getElementById('query').value=1;
+$('#mod-btn').prop('disabled', true);   
+$('input[data-validation],select[data-validation],textarea[data-validation]').prop('disabled', false);
+$('#emp_code').prop('disabled', true);
+document.getElementById('sub-btn').disabled = false;
+}
+if('<%= a.id %>'!==''){
+    $('input[data-validation],select[data-validation],textarea[data-validation]').prop('disabled', true);
+document.getElementById('sub-btn').disabled = true;
+document.getElementById('mod-btn').disabled = false;
+
+}else{
+
+document.getElementById('mod-btn').disabled = true;
+}
+if('<%= a.status %>'==='false'){
+        document.getElementById('mod-btn').disabled = true;
+      }
+
+
+
+                 document.getElementById('emp_first_name').value = '<%= a.emp_first_name %>';
+                 document.getElementById('itemid').value = '<%= a.id %>';
+  document.getElementById('emp_middle_name').value = '<%= a.emp_middle_name %>';
+  document.getElementById('emp_last_name').value = '<%= a.emp_last_name %>';
+  document.getElementById('emp_dob').value = new Date('<%= a.emp_dob %>').toISOString().split('T')[0];
+  document.getElementById('emp_gender').value = '<%= a.emp_gender %>';
+  document.getElementById('emp_desig').value = '<%= a.emp_desig %>';
+  document.getElementById('emp_clinic').value = '<%= a.emp_clinic %>';
+  document.getElementById('emp_date_of_join').value = new Date('<%= a.emp_date_of_join %>').toISOString().split('T')[0];
+  document.getElementById('emp_marital_status').value = '<%= a.emp_marital_status %>';
+  document.getElementById('emp_number').value = '<%= a.emp_number %>';
+  document.getElementById('emp_pf_number').value = '<%= a.emp_pf_number %>';
+  document.getElementById('emp_pan_number').value = '<%= a.emp_pan_number %>';
+  document.getElementById('emp_email_id').value = '<%= a.emp_email_id %>';
+  document.getElementById('emp_access_card_number').value = '<%= a.emp_access_card_number %>';
+  document.getElementById('emp_exp').value = '<%= a.emp_exp %>';
+  document.getElementById('emp_edu').value = '<%= a.emp_edu %>';
+                document.getElementById('img-btn').addEventListener('click', function() {
+                    document.getElementById('emp_image').click();
+                });
+            
+                document.getElementById('emp_image').addEventListener('change', function(event) {
+                    const file = event.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            const img = document.createElement('img');
+                            img.src = e.target.result;
+                            img.style.maxWidth = '100%';
+                            img.style.maxHeight = '100px'; // Limit the preview size
+                            const previewDiv = document.getElementById('image-preview');
+                            previewDiv.innerHTML = '';
+                            previewDiv.appendChild(img);
+                        }
+                        reader.readAsDataURL(file);
+                    }
+                });
+            </script>
+               <script>
+                $(document).ready(function() {
+  
+                  console.log("Document is ready");
+              
+                  function validateForm(formId, errorDivId) {
+                    $(formId).on('submit', function(event) {
+                      event.preventDefault();
+                      console.log("Form submission prevented");
+                      let isValid = true;
+                      let errorMessage = '';
+              
+                      // Reset previous validation states
+                      $(this).find('.is-invalid').removeClass('is-invalid');
+              
+                      const inputs = $(this).find('input, select').toArray().reverse();
+                      let formData = {};
+              
+                      inputs.forEach(function(input) {
+                        const $input = $(input);
+                        const validationRules = $input.data('validation');
+                        const customErrorMessage = $input.data('error-message') || 'This field is required.';
+              
+                        if (validationRules) {
+                          const rules = validationRules.split(' ');
+              
+                          rules.forEach(rule => {
+                            switch (rule) {
+                              case 'required':
+                                if (!$input.val()) {
+                                  isValid = false;
+                                  errorMessage = customErrorMessage;
+                                  $input.addClass('is-invalid');
+                                  console.log(`Validation failed: ${customErrorMessage}`);
+                                }
+                                break;
+                              case 'email':
+                                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                                if (!emailRegex.test($input.val())) {
+                                  isValid = false;
+                                  errorMessage = customErrorMessage;
+                                  $input.addClass('is-invalid');
+                                }
+                                break;
+                              // Add more cases here for different validation rules
+                            }
+                          });
+                        }
+              
+                        formData[$input.attr('name')] = $input.val();
+                      });
+                      const data =new FormData(this);
+                      console.log(data)
+              
+                      if (isValid) {
+                        $.ajax({
+                          url: '/clinic/emp',
+                          type: 'POST',
+                          data: data,
+                          processData: false, 
+                          contentType: false,
+                          success: function(response) {
+                            
+                            alert(response.msg);
+                            $(errorDivId).removeClass('alert-danger').addClass('alert-success').text(response.msg).show();
+                            console.log('Response:', response);
+                          },
+                          error: function(xhr, status, error) {
+                            response=xhr.responseText();
+                            $(errorDivId).removeClass('alert-success').addClass('alert-danger').text(response.msg).show();
+                            console.error('Error:', error);
+                          }
+                        });
+                      } else {
+                        alert(errorMessage);
+                        $(errorDivId).removeClass('alert-success').addClass('alert-danger').text(errorMessage).show();
+                      }
+                    });
+                  }
+              
+                  validateForm('#emp-form', '#errordiv1');
+                });
+              </script>
+                    
+              <!--footer section start-->
+            

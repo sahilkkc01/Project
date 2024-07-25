@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>LifeLinker</title>
+    <%- include('../header'); -%>
+
+        <!-- //header-ends -->
+        <!-- main content start -->
+        <div class="main-content">
+
+            <div class="row content-top-gap2">
+                <div class="col-lg-12">
+                    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+                        <a class="navbar-brand text-center mr-5" href="#">
+                            <span class="dash-icon"><i class="fas fa-tachometer-alt"></i></span>
+                            Dashboard
+                        </a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav">
+                                <li class="nav-item active text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="far fa-user"></i></span>
+                                        Master
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-exchange-alt"></i></span>
+                                        Transaction
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-hand-holding-medical"></i></span>
+                                        Patient 360
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-receipt"></i></span>
+                                        Outside Reciept
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-file-invoice"></i></span>
+                                        Outpatient Department
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-chart-line"></i></span>
+                                        Analytics
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="far fa-clock"></i></span>
+                                        Waiting List
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-wrench"></i></span>
+                                        Adminstration
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-spinner"></i></span>
+                                        Additional
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+            <!-- content -->
+            <div class="container-fluid">
+
+                <div class="chart">
+                    <div class="row">
+
+                        <div class="col-lg-12 pl-lg-0 mt-2 ml-2">
+                            <h4 class="primary">Tariff Service</h4>
+                        </div>
+                        <div class="col-lg-12 pl-lg-2 chart-grid">
+                            <form id="BC-trf-ser">
+                                <div id="errordiv1"></div>
+                                <div class="card card_border">
+                                    <div class="">
+                                        <!--Past your code here starts-->
+
+                                        <div class="card">
+                                            <div class="col-xl-12 p-heading">
+                                                <h6 class="p-text">LIST OF TARIFF SERVICES</h6>
+                                            </div>
+                                            <div class="card-body">
+
+                                                <div class="form-row">
+                                                    <div class="col-6">
+                                                        <div class="form-group"><label class="input__label">Search</label><input name="service_name" type="text"  id="searchBox"
+                                                                class="form-control input-style" placeholder=""></div>
+                                                    </div>
+                                                    
+                                                </div>
+
+
+
+                                                <div class="form-row">
+                                                    <div class="col-12 mb-3">
+                                                        <div class="form-group">
+                                                            <div class="col col-12 pr-xl-0 pl-xl-0">
+                                                                <div class="slidx">
+
+
+                                                                    <table class="table2" id="trfListTable">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th contenteditable="true"></th>
+                                                                                <th contenteditable="true">Code</th>
+                                                                                <th contenteditable="true">Tariff Name
+                                                                                </th>
+                                                                                <th contenteditable="true">Service Name
+                                                                                </th>
+                                                                                <th contenteditable="true">Base Service
+                                                                                    Rate
+                                                                                </th>
+                                                                                <th contenteditable="true">Class</th>
+                                                                                <th contenteditable="true">Rate</th>
+                                                                                <th contenteditable="true">Service Tax
+                                                                                    Amount</th>
+                                                                                <th contenteditable="true">Staff
+                                                                                    Discount
+                                                                                    Amount</th>
+                                                                                <th contenteditable="true">Staff Parent
+                                                                                    Discount Amount</th>
+                                                                                <th contenteditable="true">Consession
+                                                                                    Amount
+                                                                                </th>
+                                                                                <th contenteditable="true">Doctor Share
+                                                                                    Amount</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody id="trfList">
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                                <div id="paginationControls"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="loadingIndicator"></div>
+                                        </div>
+
+
+                                        <!--Past your code here ends-->
+                                    </div>
+                                </div>
+
+                                <div class="form-group mt-1 mb-3 text-right">
+
+                                    <!-- <button type="button" class="btn-secondary btn-style btn mt-3 mr-2"><strong>Apply
+                                            Tax Linking</strong></button>
+
+                                    <button type="button" class="btn-primary btn-style btn mt-3 mr-2"><strong>Apply
+                                            Levels</strong></button>
+                                    <button type="button" class="btn-primary btn-style btn mt-3 mr-2"><strong>Assign
+                                            Tariff</strong></button>
+                                    <button type="button" class="btn-primary btn-style btn mt-3 mr-2"><strong>Assign
+                                            Concent</strong></button> -->
+
+
+                                    <button type="button" class="btn-success btn-style btn mt-3 mr-2" disabled><strong><i
+                                                class="fa-regular fa-pen-to-square"></i> Modify</strong></button>
+
+                                    <button type="button" class="btn-secondary btn-style btn mt-3 mr-2" onclick="window.location.href='/billing/5'"><strong><i
+                                                class="fa-solid fa-plus"></i> New</strong></button>
+
+                                    <button type="button" class="btn-danger btn-style btn mt-3 mr-2" disabled><strong><i
+                                                class="fas fa-times"></i> Cancel</strong></button>
+
+                                    <button type="submit" class="btn-primary btn-style btn mt-3" disabled><strong><i
+                                                class="far fa-save"></i> Save</strong></button>
+                                </div>
+                            </form>
+                        </div>
+                        <%- include('../footer'); -%>
+
+                            <script src="../javascripts/statusUpdate.js"></script>
+                            <script src="../javascripts/pageUpdate.js"></script>
+                            <script type="module">
+
+                                import { pagi_search } from '../javascripts/pagi_search.js';
+                                $(document).ready(function () {
+
+                                    console.log("Document is ready");
+                                    // Function to fetch and display data
+                                    function fetchData() {
+                                        $.ajax({
+                                            url: '/billing/get-trf-list',
+                                            type: 'GET',
+                                            success: function (data) {
+                                                console.log(data);
+                                                data.reverse();
+                                                let tableRows = '';
+                                                data.forEach(function (item) {
+                                                    console.log(item);
+                                                    tableRows += `
+                                                        <tr>
+                                                            <td><a type="button" class="btn btn-primary btn-style btn-change"  onClick=loadUpdatePage(${item.id}) href='/billing/11' >View</a></td>
+                                                            <td>${item.serviceCode}</td>
+                                                            <td></td>
+                                                            <td>${item.serviceName}</td>
+                                                            <td>${item.baseServiceRate}</td>
+                                                            <td>${item.className}</td>
+                                                            <td>${item.className_rate}</td>
+                                                            <td>${item.service_amount}</td>
+                                                            <td>${item.staffDiscount_amount}</td>
+                                                            <td>${item.staffParent_amount}</td>
+                                                            <td>${item.concession_amount}</td>
+                                                            <td>${item.doctor_amount}</td>
+                                                        </tr>
+                                                        `;
+                                                });
+                                                $('#trfList').html(tableRows);
+                                                pagi_search('#searchBox', '#trfListTable', '#paginationControls');
+                                            },
+                                            error: function (xhr, status, error) {
+                                                console.error('Error fetching classification details:', error);
+                                            }
+                                        });
+                                    }
+                                    fetchData();
+                                });
+                            </script>

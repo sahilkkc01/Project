@@ -1,0 +1,314 @@
+
+  <link rel="stylesheet" href="../stylesheets/style.css?v=0.2">
+  <link href="//fonts.googleapis.com/css?family=Montserrat:300,400,600,700,800,900&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+  <style>
+    .fas {
+      font-size: 13px;
+    }
+
+    .form-builder {
+      border-right: 1px solid #ddd;
+    }
+
+    .form-builder,
+    .form-preview {
+      height: 100vh;
+      overflow-y: auto;
+    }
+
+    .input__label {
+      font-size: 13px;
+      line-height: 15px;
+      text-transform: capitalize;
+      margin-bottom: 3px;
+      color: #5B646C;
+    }
+
+    .radio,
+    .checkbox {
+      display: inline-block;
+      margin: 0 10px 0 25px;
+      font-size: 13px;
+    }
+
+    .scrollmenu {
+      overflow-y: scroll;
+      max-height: 500px !important;
+    }
+
+    /* Internal CSS to hide the navbar */
+    .navbar-expand-lg {
+      display: none;
+    }
+
+    .file-input-container {
+      display: flex;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .file-input-container button {
+      margin-right: 5px;
+    }
+
+    .highlight {
+      border: 2px solid rgb(30, 134, 183);
+      box-shadow: 0 0 10px rgba(30, 134, 183, 0.7);
+      transition: border 0.5s ease, box-shadow 0.5s ease;
+    }
+
+    /* Define the locked styling */
+    .locked {
+      background-color: #ffcccc;
+      pointer-events: none;
+      opacity: 0.6;
+    }
+    .slidex{display:block;overflow-x:auto;}
+  </style>
+</head>
+
+<body class="sidebar-menu-collapsed">
+  <div class="se-pre-con"></div>
+  <section>
+    <!-- sidebar menu start -->
+    <div class="sidebar-menu sticky-sidebar-menu">
+      <!-- logo start -->
+      <div class="logo">
+        <h1><a href="index.html">LifeLinker</a></h1>
+      </div>
+      <div class="logo-icon text-center">
+        <a href="/1" title="logo"><img src="../images/TG3-Logo-Green.png" alt="logo-icon"> </a>
+      </div>
+      <!-- //logo end -->
+
+      <div class="sidebar-menu-inner">
+        <!-- sidebar nav start -->
+        <ul class="nav nav-pills nav-stacked custom-nav">
+          
+          <li class="menu-list">
+            <a href="#"><i class="fas fa-stethoscope"></i> <span>Clinical <i class="fas fa-chevron-down"></i></span></a>
+               <ul class="sub-menu-list scrollmenu">
+            <li><a href="/clinic/7">Department</a></li>
+            <li><a href="/clinic/25">Cluster</a></li>
+            <li><a href="/clinic/40">Clinic</a></li>
+            <li><a href="/clinic/13">Designation</a></li>
+            <li><a href="/clinic/41">Employee</a></li>
+            <li><a href="/clinic/28">Specialization</a></li>
+            <li><a href="/clinic/29">Sub-Specialization</a></li>
+            <li><a href="/clinic/19">Primary Symptoms</a></li>
+            <li><a href="/clinic/5">Classification</a></li>
+            <li><a href="/clinic/12">Doctor</a></li>
+            <li><a href="/clinic/30">Bank Master</a></li>
+            <li><a href="/clinic/32">Bank Branch Master</a></li>
+            <li><a href="/clinic/34">Country Master</a></li>
+            <li><a href="/clinic/36">State Master</a></li>
+            <li><a href="/clinic/3">City Master</a></li>
+            <li><a href="/clinic/21">Region Master</a></li>
+            <li><a href="/clinic/17">EMR Field Values</a></li>
+            <li><a href="/clinic/37">Cash Counter Master</a></li>
+            <li><a href="/clinic/15">EMR Chief Complaints</a></li>
+            <li><a href="/clinic/10">Doctor Category Master</a></li>
+            
+          </ul>
+          </li>
+          <li class="menu-list">
+            <a href="#"><i class="fas fa-calculator"></i> <span>Purchase&Accounts <i class="fas fa-chevron-down"></i></span></a>
+            <ul class="sub-menu-list scrollmenu">
+              <li><a href="/billing/6">Advance Against</a></li>
+              <li><a href="/billing/1">Company Other Details 1</a></li>
+              <li><a href="/billing/27">Tariff Master List</a></li>
+              <li><a href="/billing/4">List Of Expense Master</a></li>
+              <li><a href="/billing/11">Listing Of Service Master</a></li>
+              <li><a href="/billing/13">Service Rate DocCategory Vise</a></li>
+              <li><a href="/billing/15">List of Associated Company</a></li>
+              <li><a href="/billing/17">List of Tariff Services </a></li>
+              <li><a href="/billing/18">Doctor Share List</a></li>
+              <li><a href="/billing/20">List of Company type Details</a></li>
+              <li><a href="/billing/21">List of Bulk Rate Change</a></li>
+            </ul>
+          </li>
+          <li class="menu-list">
+            <a href="#"><i class="fas fa-briefcase"></i>
+              <span>Admin Inventory Module <i class="fas fa-chevron-down"></i></span></a>
+              <ul class="sub-menu-list scrollmenu">
+                <li><a href="/adminInv/1">Item Movement Master</a> </li>
+                <li><a href="/adminInv/2">Currency Master</a> </li>
+                <li><a href="/adminInv/3">Rack Master</a> </li>
+                <li><a href="/adminInv/4">Bin Master</a> </li>
+                <li><a href="/adminInv/5">Tax Master</a> </li>
+                <li><a href="/adminInv/6">Store</a> </li>
+                <li><a href="/adminInv/7">Supplier Category</a> </li>
+                <li><a href="/adminInv/17">Supplier</a> </li>
+                <li><a href="/adminInv/18">Shelf Master</a> </li>
+                <li><a href="/adminInv/43">Item</a> </li>
+                <li><a href="/adminInv/22">Item Category</a> </li>
+                <li><a href="/adminInv/24">Item Group</a> </li>
+                <li><a href="/adminInv/26">Storage Type</a> </li>
+                <li><a href="/adminInv/28">Dispensing Type</a> </li>
+                <li><a href="/adminInv/30">Molecule</a> </li>
+                <li><a href="/adminInv/32">Pregnancy Class</a> </li>
+                <li><a href="/adminInv/34">Item Company</a> </li>
+                <li><a href="/adminInv/36">Therapeutic Class</a> </li>
+                <li><a href="/adminInv/38">Unit Of Measurement</a> </li>
+                <li><a href="/adminInv/40">Terms & Conditions</a> </li>
+                <li><a href="/adminInv/44">Rate Contract</a> </li>
+                <li><a href="/adminInv/46">Strength Unit Master</a> </li>
+                <li><a href="/adminInv/48">Work Order Item</a> </li>
+                <li><a href="/adminInv/50">Cost Center Codes</a> </li>
+                <li><a href="/adminInv/52">HSN Codes Master</a> </li>
+              </ul>
+          </li>
+          <li class="menu-list">
+            <a><i class="fa-solid fa-hospital-user"></i>
+              <span>Patient Config<i class="fa-solid fa-hospital-user"></i></span></a>
+              <ul class="sub-menu-list scrollmenu">
+              <li><a href="/patient/1">List Of Source L1</a></li>
+              <li><a href="/patient/3">List Of Source L2</a></li>
+              <li><a href="/patient/5">Patient Charges Details</a></li>
+              <li><a href="/patient/7">Visit Type</a></li>
+              <li><a href="/patient/9">List of Patient Relation</a></li>
+              <li><a href="/patient/11">Patient Consent</a></li>
+              <li><a href="/patient/13">List of Referal Name</a></li>
+              <li><a href="/patient/15">Special Registration</a></li>
+              <li><a href="/patient/17">List of Prefix Master</a></li>  
+              <li><a href="/patient/19">List of Nationality Master</a></li>   
+              <li><a href="/patient/21">List of Preferred Language</a></li> 
+              <li><a href="/patient/23">List of Treatement Required</a></li>                       
+              <li><a href="/patient/25">List of Education Details</a></li> 
+              <li><a href="/patient/27">List of Camp Master</a></li> 
+              <li><a href="/patient/29">List of Agent Master</a></li> 
+              </ul>        
+            
+          </li>    
+        </ul>
+        
+        <!-- //sidebar nav end -->
+        <!-- toggle button start -->
+        <a class="toggle-btn">
+          <i class="fa fa-angle-double-left menu-collapsed__left"><span>Collapse Sidebar</span></i>
+          <i class="fa fa-angle-double-right menu-collapsed__right"></i>
+        </a>
+        <!-- //toggle button end -->
+      </div>
+    </div>
+    <!-- //sidebar menu end -->
+
+    <!-- header-starts -->
+    <div class="header sticky-header">
+      <!-- notification menu start -->
+      <div class="menu-right">
+        <div class="navbar user-panel-top">
+          <div class="search-box">
+            <form action="#search-results.html" method="get">
+              <input class="search-input" placeholder="Search Here..." type="search" id="search">
+              <button class="search-submit" value=""><span class="fa fa-search"></span></button>
+            </form>
+          </div>
+          <div class="user-dropdown-details d-flex">
+            <div class="profile_details_left">
+              <ul class="nofitications-dropdown">
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-bell-o"></i><span class="badge blue">3</span></a>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <div class="notification_header">
+                        <h3>You have 3 new notifications</h3>
+                      </div>
+                    </li>
+                    <li><a href="#" class="grid">
+                        <div class="user_img"></div>
+                        <div class="notification_desc">
+                          <p>Johnson purchased template</p>
+                          <span>Just Now</span>
+                        </div>
+                      </a></li>
+                    <li class="odd"><a href="#" class="grid">
+                        <div class="user_img"></div>
+                        <div class="notification_desc">
+                          <p>New customer registered </p>
+                          <span>1 hour ago</span>
+                        </div>
+                      </a></li>
+                    <li><a href="#" class="grid">
+                        <div class="user_img"></div>
+                        <div class="notification_desc">
+                          <p>Lorem ipsum dolor sit amet</p>
+                          <span>2 hours ago</span>
+                        </div>
+                      </a></li>
+                    <li>
+                      <div class="notification_bottom">
+                        <a href="#">See all notifications</a>
+                      </div>
+                    </li>
+                  </ul>
+                </li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-comment-o"></i><span class="badge blue">4</span></a>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <div class="notification_header">
+                        <h3>You have 4 new messages</h3>
+                      </div>
+                    </li>
+                    <li><a href="#" class="grid">
+                        <div class="user_img"></div>
+                        <div class="notification_desc">
+                          <p>Johnson purchased template</p>
+                          <span>Just Now</span>
+                        </div>
+                      </a></li>
+                    <li class="odd"><a href="#" class="grid">
+                        <div class="user_img"></div>
+                        <div class="notification_desc">
+                          <p>New customer registered </p>
+                          <span>1 hour ago</span>
+                        </div>
+                      </a></li>
+                    <li><a href="#" class="grid">
+                        <div class="user_img"></div>
+                        <div class="notification_desc">
+                          <p>Lorem ipsum dolor sit amet</p>
+                          <span>2 hours ago</span>
+                        </div>
+                      </a></li>
+                    <li>
+                      <div class="notification_bottom">
+                        <a href="#">See all messages</a>
+                      </div>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+            <div class="profile_details">
+              <ul>
+                <li class="dropdown profile_details_drop">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="navUserDropdown">
+                    <div class="profile_img">
+                      <img src="../images/profileimg.jpg" alt="profile_img">
+                      <div class="user-active">
+                        <span></span>
+                      </div>
+                    </div>
+                  </a>
+                  <ul class="dropdown-menu drp-mnu">
+                    <li> <a href="#"><i class="fa fa-user"></i>Profile</a> </li>
+                    <li> <a href="#"><i class="fa fa-cogs"></i> Settings</a> </li>
+                    <li id="logoutButton"> <a href="#"><i class="fa fa-sign-out-alt"></i> Logout</a> </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+        </div>
+      </div>
+      <!--notification menu end -->
+    </div>
+    <!-- //header-ends -->
+  </section>
+</body>
+
+</html>

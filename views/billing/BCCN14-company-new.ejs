@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<title>LifeLinker</title>
+
+	<%- include('../header'); -%>
+		<!-- main content start -->
+		<div class="main-content">
+
+			<div class="row content-top-gap2">
+				<div class="col-lg-12">
+					<nav class="navbar navbar-expand-lg navbar-light bg-white">
+						<a class="navbar-brand text-center mr-5" href="#">
+							<span class="dash-icon"><i class="fas fa-tachometer-alt"></i></span>
+							Dashboard
+						</a>
+						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+							aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+							<span class="navbar-toggler-icon"></span>
+						</button>
+						<div class="collapse navbar-collapse" id="navbarNav">
+							<ul class="navbar-nav">
+								<li class="nav-item active text-center mr-5">
+									<a class="nav-link" href="#">
+										<span class="dash-icon"><i class="far fa-user"></i></span>
+										Master
+									</a>
+								</li>
+								<li class="nav-item text-center mr-5">
+									<a class="nav-link" href="#">
+										<span class="dash-icon"><i class="fas fa-exchange-alt"></i></span>
+										Transaction
+									</a>
+								</li>
+								<li class="nav-item text-center mr-5">
+									<a class="nav-link" href="#">
+										<span class="dash-icon"><i class="fas fa-hand-holding-medical"></i></span>
+										Patient 360
+									</a>
+								</li>
+								<li class="nav-item text-center mr-5">
+									<a class="nav-link" href="#">
+										<span class="dash-icon"><i class="fas fa-receipt"></i></span>
+										Outside Reciept
+									</a>
+								</li>
+								<li class="nav-item text-center mr-5">
+									<a class="nav-link" href="#">
+										<span class="dash-icon"><i class="fas fa-file-invoice"></i></span>
+										Outpatient Department
+									</a>
+								</li>
+								<li class="nav-item text-center mr-5">
+									<a class="nav-link" href="#">
+										<span class="dash-icon"><i class="fas fa-chart-line"></i></span>
+										Analytics
+									</a>
+								</li>
+								<li class="nav-item text-center mr-5">
+									<a class="nav-link" href="#">
+										<span class="dash-icon"><i class="far fa-clock"></i></span>
+										Waiting List
+									</a>
+								</li>
+								<li class="nav-item text-center mr-5">
+									<a class="nav-link" href="#">
+										<span class="dash-icon"><i class="fas fa-wrench"></i></span>
+										Adminstration
+									</a>
+								</li>
+								<li class="nav-item text-center">
+									<a class="nav-link" href="#">
+										<span class="dash-icon"><i class="fas fa-spinner"></i></span>
+										Additional
+									</a>
+								</li>
+
+							</ul>
+						</div>
+					</nav>
+				</div>
+			</div>
+			<!-- content -->
+			<div class="container-fluid">
+
+				<div class="chart">
+					<div class="row">
+
+						<div class="col-lg-12 pl-lg-0 mt-2 ml-2">
+							<h4 class="primary">Company</h4>
+						</div>
+						<div class="col-lg-12 pl-lg-2 chart-grid">
+
+							<div id="errordiv1"></div>
+							<form id="bccn">
+								<div class="card card_border">
+									<div>
+										<!--Past your code here starts-->
+
+										<div class="card">
+
+											<div class="card-body">
+												<div class="pl-xl-0">
+													<h6 class="primary">Company Details</h6>
+												</div>
+												<div class="form-row">
+													<div class="col-3 mb-3">
+														<div class="form-group"><label
+																class="input__label">Code </label><input id="comp_code" 
+																name="comp_code" class="form-control input-style"
+																data-validation="required"
+																data-error-message="Code is required." placeholder="">
+														</div>
+													</div>
+													<div class="col-3 mb-3">
+														<div class="form-group"><label class="input__label">contact
+																person</label><input id="comp_cont_person" 
+																name="comp_cont_person" type="text"
+																class="form-control input-style" placeholder=""
+																data-validation="required"
+																data-error-message="Contact Person is required."></div>
+													</div>
+													<div class="col-3 mb-3">
+														<div class="form-group"><label class="input__label">Person
+																Role</label><input id="comp_pers_role"
+																name="comp_pers_role" type="text"
+																class="form-control input-style" placeholder=""
+																data-validation="required"
+																data-error-message="Person Role is required."></div>
+													</div>
+													<div class="col-3 mb-3">
+														<div class="form-group"><label class="input__label">contact
+																number</label><input id="comp_cont" name="comp_cont"
+																type="number" class="form-control input-style"
+																placeholder="" data-validation="required"
+																data-error-message="Contact number is required."></div>
+													</div>
+												</div>
+
+												<div class="form-row">
+													<div class="col-3 mb-3">
+														<div class="form-group"><label class="input__label">company
+																type</label>
+															<select class="form-control input-style" id="comp_type"
+																name="comp_type" data-validation="required"
+																data-error-message="Select Company type">
+																<option value="">Select</option>
+																<option value="a">a</option>
+																<option value="b">b</option>
+															</select>
+														</div>
+													</div>
+													<div class="col-3 mb-3">
+														<div class="form-group"><label class="input__label">email
+																address</label><input id="comp_email" name="comp_email"
+																type="email" class="form-control input-style"
+																placeholder="" data-validation="required email"
+																data-error-message="email is required."></div>
+													</div>
+													<div class="col-3 mb-3">
+														<div class="form-group"><label class="input__label">company
+																address</label><input id="comp_add" name="comp_add"
+																type="text" class="form-control input-style"
+																placeholder="" data-validation="required"
+																data-error-message="Company address is required."></div>
+													</div>
+													<div class="col-3 mb-3">
+                                                        <div class="form-group"><label class="input__label">patient
+                                                                source category</label><input
+                                                                name="patient_source_category" type="text"
+                                                                class="form-control input-style" placeholder="" data-validation="required" data-error-message="Patient Source Category is required"></div>
+                                                    </div>
+
+												</div>
+
+
+											</div>
+										</div>
+										<!--Past your code here ends-->
+									</div>
+								</div>
+						</div>
+						<!--section2-->
+
+						<div class="mt-1 col-lg-6 pl-lg-2">
+							<div class="card card_border">
+								<div class="mb-3">
+									<div class="form-group">
+										<div class="col-xl-12 p-heading">
+											<h6 class="p-text">LIST OF TERIFFs</h6>
+										</div>
+									</div>
+								</div>
+
+
+								<div class="form-row">
+									<div class="col-12 mb-3">
+										<div class="slidx">
+											<table class="table2" id="TrfMst">
+												<thead>
+													<tr>
+														<th contenteditable="true" width="20%">Select
+														</th>
+														<th contenteditable="true">Tariff</th>
+													</tr>
+												</thead>
+												<tbody id="TrfMst-table">
+												</tbody>
+											</table>
+										</div>
+										<div id="paginationControls"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="mt-1 col-lg-6">
+							<div class="card card_border">
+								<div class="mb-3">
+									<div class="form-group">
+										<div class="col-xl-12 p-heading">
+											<h6 class="p-text">LIST OF SELECTED TERIFFs</h6>
+										</div>
+									</div>
+								</div>
+
+
+								<div class="form-row">
+
+
+
+
+
+									<div class="col-12 mb-3">
+
+										<div class="slidx">
+											<table class="table2">
+												<thead>
+													<tr>
+
+														<th contenteditable="true">Tariff</th>
+														<th contenteditable="true">Delete</th>
+													</tr>
+												</thead>
+												<tbody id="apnd">
+
+												</tbody>
+											</table>
+										</div>
+
+									</div>
+								</div>
+
+
+							</div>
+
+
+						</div>
+						<div id="loadingIndicator"></div>
+
+					</div>
+					<div class="form-group mt-1 mb-3 text-right">
+
+						<button type="button" class="btn-success btn-style btn mt-3 mr-2"><strong><i
+									class="fa-regular fa-pen-to-square"></i> Modify</strong></button>
+
+						<button type="button" class="btn-secondary btn-style btn mt-3 mr-2" disabled><strong><i
+									class="fa-solid fa-plus"></i> New</strong></button>
+
+						<button type="button" class="btn-danger btn-style btn mt-3 mr-2"  onclick="window.location.href='/billing/1'"><strong><i
+									class="fas fa-times"></i> Cancel</strong></button>
+
+						<button type="submit" class="btn-primary btn-style btn mt-3"><strong><i class="far fa-save"></i>
+								Save</strong></button>
+					</div>
+					</form>
+				</div>
+				<!--footer section start-->
+				<%- include('../footer'); -%>
+
+					<script type="module">
+						import { validateForm } from '../javascripts/validation.js';
+						import { myAjax } from '../javascripts/myAjax.js';
+						$(document).ready(function () {
+							console.log("Document is ready");
+
+							$('#bccn').on('submit', function (event) {
+								event.preventDefault()
+								const { isValid, errorMessage, formData } = validateForm('#bccn')
+
+								console.log(formData)
+								const errorDivId = '#errordiv1'
+
+								if (isValid) {
+									const url = '/billing/bccn_Comp_Mas';
+									const loadingDiv = '#loadingIndicator'
+									myAjax(formData, errorDivId, url, loadingDiv)
+
+								} else {
+									alert(errorMessage);
+									$(errorDivId).removeClass('alert-success').addClass('alert-danger').text(errorMessage).show();
+									// $(errorDivId).text(errorMessage).show();
+								}
+							})
+						});
+						function fetchData() {
+							$.ajax({
+								url: '/billing/get-Tariff-list',
+								type: 'GET',
+								success: function (data) {
+									console.log(data);
+									data.reverse();
+									let tableRows = '';
+									data.forEach(function (item) {
+										console.log(item);
+										tableRows += `
+                                                        <tr>
+                                                            <td><input class="form-check-input mt-0" type="checkbox" id='${item.id}' name='${item.trf_name}' onClick=getCheckedValues(this)></td>                                                            
+                                                            <td>${item.trf_name}</td>
+                                                        </tr>
+                                                        `;
+									});
+									$('#TrfMst-table').html(tableRows);
+									pagi_search('#searchBox', '#TrfMst', '#paginationControls');
+								},
+								error: function (xhr, status, error) {
+									console.error('Error fetching classification details:', error);
+								}
+							});
+						}
+						fetchData();
+					</script>
+					<script>
+						function getCheckedValues(d) {
+							const b = d.name; const a = d.id;
+							if ($("#" + a).is(':checked')) {
+								if ($('#apnd tr[id="' + a + '"]').length === 0) {
+									const c = `<tr id='${a}'><td>${b}</td><td><i onclick='rmv(${a})' class='fas fa-times'></i></td></tr>`;
+									$('#apnd').append(c);
+								}
+							} else {
+								const f = $('#apnd tr[id="' + a + '"]');
+								f.remove();
+							}	
+						}
+						function rmv(a) {
+							const f = $('#apnd tr[id="' + a + '"]');
+							f.remove();
+							$($("#" + a))
+								.prop("checked", false)
+								.change()
+						}
+					</script>

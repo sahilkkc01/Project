@@ -1,0 +1,112 @@
+<footer class="dashboard">
+  <p>&copy 2024 LifeLnker. All Rights Reserved</p>
+</footer>
+<!--footer section end-->
+<!-- move top -->
+<button onclick="topFunction()" id="movetop" class="bg-primary" title="Go to top">
+  <span class="fa fa-angle-up"></span>
+</button>
+<script>
+  // When the user scrolls down 20px from the top of the document, show the button
+  window.onscroll = function () {
+    scrollFunction()
+  };
+
+  function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+      document.getElementById("movetop").style.display = "block";
+    } else {
+      document.getElementById("movetop").style.display = "none";
+    }
+  }
+
+  // When the user clicks on the button, scroll to the top of the document
+  function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+</script>
+<!-- /move top -->
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="../javascripts/jquery-3.3.1.min.js"></script>
+<script src="../javascripts/jquery-1.10.2.min.js"></script>
+
+<!-- chart js -->
+<script src="../javascripts/Chart.min.js"></script>
+<script src="../javascripts/utils.js"></script>
+<!-- //chart js -->
+
+<!-- Different scripts of charts.  Ex.Barchart, Linechart -->
+<script src="../javascripts/bar.js"></script>
+<script src="../javascripts/linechart.js"></script>
+ <script> 
+        const languagesData = { 
+            labels: ['Rajori Garden', 'Patel Nagar', 'Vasant Kunj', 'Tilak Nagar', 'Dwarka', 'Saket'], 
+            datasets: [{ 
+                data: [25, 20, 15, 10, 10, 20], 
+                backgroundColor: ['#4ac2b7', '#fac10c',  
+                    '#fba119', '#f9655e', '#2196f3', '#8585ff'], 
+            }], 
+        }; 
+        const config = { 
+            type: 'doughnut', 
+            data: languagesData, 
+            options: { 
+            aspectRatio: 3.75,
+                legend: {
+            display: true,
+        position: 'right'
+         }, 
+            }, 
+        }; 
+        const ctx = document.getElementById( 
+            'programmingLanguagesPieChart').getContext('2d'); 
+              
+        new Chart(ctx, config); 
+    </script>
+<!-- //Different scripts of charts.  Ex.Barchart, Linechart -->
+
+
+<script src="../javascripts/jquery.nicescroll.js"></script>
+<script src="../javascripts/scripts.js"></script>
+
+<!-- close script -->
+<script>
+  var closebtns = document.getElementsByClassName("close-grid");
+  var i;
+
+  for (i = 0; i < closebtns.length; i++) {
+    closebtns[i].addEventListener("click", function () {
+      this.parentElement.style.display = 'none';
+    });
+  }
+</script>
+<!-- //close script -->
+
+<!-- disable body scroll when navbar is in active -->
+<script>
+  $(function () {
+    $('.sidebar-menu-collapsed').click(function () {
+      $('body').toggleClass('noscroll');
+    })
+  });
+</script>
+<!-- disable body scroll when navbar is in active -->
+
+ <!-- loading-gif Js -->
+ <script src="../javascripts/modernizr.js"></script>
+ <script>
+     $(window).load(function () {
+         // Animate loader off screen
+         $(".se-pre-con").fadeOut("slow");;
+     });
+ </script>
+ <!--// loading-gif Js -->
+
+<!-- Bootstrap Core javascriptsss -->
+<script src="../javascripts/bootstrap.min.js"></script>
+
+</body>
+
+</html>

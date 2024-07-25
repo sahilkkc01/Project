@@ -1,0 +1,565 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>LifeLinker</title>
+
+    <%-include('../header');-%>
+        <!-- //header-ends -->
+        <!-- main content start -->
+        <div class="main-content">
+
+            <div class="row content-top-gap2">
+                <div class="col-lg-12">
+                    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+                        <a class="navbar-brand text-center mr-5" href="#">
+                            <span class="dash-icon"><i class="fas fa-tachometer-alt"></i></span>
+                            Dashboard
+                        </a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav">
+                                <li class="nav-item active text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="far fa-user"></i></span>
+                                        Master
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-exchange-alt"></i></span>
+                                        Transaction
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-hand-holding-medical"></i></span>
+                                        Patient 360
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-receipt"></i></span>
+                                        Outside Reciept
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-file-invoice"></i></span>
+                                        Outpatient Department
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-chart-line"></i></span>
+                                        Analytics
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="far fa-clock"></i></span>
+                                        Waiting List
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-wrench"></i></span>
+                                        Adminstration
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-spinner"></i></span>
+                                        Additional
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+            <!-- content -->
+            <div class="container-fluid">
+
+                <div class="chart">
+                    <div class="row">
+
+                        <div class="col-lg-12 pl-lg-0 mt-2 ml-2">
+                            <h4 class="primary">Supplier</h4>
+                        </div>
+                        <div class="col-lg-12 pl-lg-2 chart-grid">
+                            <div id="errordiv1"></div>
+                            <form id="supplier" method="post">
+                                <div class="card card_border">
+                                    <div>
+                                        <!--Past your code here starts-->
+                            
+                                        <div class="card">
+                                            <div class="form-row pl-lg-3 pr-lg-3 mt-2 mb-2">
+                                                <div class="col-3 mb-3">
+                                                    <div class="form-group">
+                                                        <label class="input__label" for="code">Code </label>
+                                                        <input id="code" name="code" type="text" class="form-control input-style" value="<%= result.code %>" <%= result.id ? 'disabled':'' %>
+                                                            placeholder="1" data-validation="required" data-error-message="Code is required.">
+                                                    </div>
+                                                </div>
+                                                <div class="col-3 mb-3">
+                                                    <div class="form-group">
+                                                        <label class="input__label" for="description">Description</label>
+                                                        <input id="description" name="description" value="<%= result.description %>" type="text" class="form-control input-style"
+                                                            placeholder="SAR HEALTHLINE PVT LTD" data-validation="required"
+                                                            data-error-message="Description is required.">
+                                                    </div>
+                                                </div>
+                                                <div class="col-3 mb-3">
+                                                    <div class="form-group">
+                                                        <label class="input__label" for="country">Country</label>
+                                                        <select id="country" name="country" class="form-control input-style"
+                                                            data-validation="required" data-error-message="Country is required.">
+                                                            <option value="<%= result.country ? result.country : '' %>"><%= result.id ? result.country : 'Select' %></option>
+                                                            <option>INDIA</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-3 mb-3">
+                                                    <div class="form-group">
+                                                        <label class="input__label" for="state">State</label>
+                                                        <select id="state" name="state" class="form-control input-style" data-validation="required"
+                                                            data-error-message="State is required.">
+                                                            <option value="<%= result.state ? result.state : '' %>"><%= result.id ? result.state : 'Select' %></option>
+                                                            <option>Telangana</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                            
+                                            <div class="form-row pl-lg-3 pr-lg-3">
+                                                <div class="col-3 mb-3">
+                                                    <div class="form-group">
+                                                        <label class="input__label" for="city">City</label>
+                                                        <select id="city" name="city" class="form-control input-style" data-validation="required"
+                                                            data-error-message="City is required.">
+                                                            <option value="<%= result.city ? result.city : '' %>"><%= result.id ? result.city : 'Select' %></option>
+                                                            <option>Hyderabad</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-3 mb-3">
+                                                    <div class="form-group">
+                                                        <label class="input__label" for="area">Area</label>
+                                                        <select id="area" name="area" class="form-control input-style" data-validation="required"
+                                                            data-error-message="Area is required.">
+                                                            <option value="<%= result.area ? result.area : '' %>"><%= result.id ? result.area : 'Select' %></option>
+                                                            <option value="cvv">cvv</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-3 mb-3">
+                                                    <div class="form-group">
+                                                        <label class="input__label" for="pin_code">Pin Code</label>
+                                                        <input id="pin_code" name="pin_code" type="text" class="form-control input-style" value="<%= result.pin_code %>"
+                                                            placeholder="500016" data-validation="required" data-error-message="Pin Code is required.">
+                                                    </div>
+                                                </div>
+                                                <div class="col-3 mb-3">
+                                                    <div class="form-group">
+                                                        <label class="input__label" for="supplier_category">Supplier Category</label>
+                                                        <select id="supplier_category" name="supplier_category" class="form-control input-style"
+                                                            data-validation="required" data-error-message="Supplier Category is required.">
+                                                            <option value="<%= result.supplier_category ? result.supplier_category : '' %>"><%= result.id ? result.supplier_category : 'Select' %></option>
+                                                            <option value="bff">bff</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                            
+                                            <div class="form-row pl-lg-3 pr-lg-3">
+                                                <div class="col-3 mb-3">
+                                                    <div class="form-group">
+                                                        <label class="input__label" for="address_line_1">Address Line 1</label>
+                                                        <textarea id="address_line_1" name="address_line_1" class="form-control input-style" value="<%= result.address_line_1 %>"
+                                                            placeholder="Flat No 201, 2nd Flore" data-validation="required"
+                                                            data-error-message="Address Line 1 is required."></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="col-3 mb-3">
+                                                    <div class="form-group">
+                                                        <label class="input__label" for="address_line_2">Address Line 2</label>
+                                                        <textarea id="address_line_2" name="address_line_2" class="form-control input-style" value="<%= result.address_line_2 %>"
+                                                            placeholder="Indian Airlines Colony" data-validation="required"
+                                                            data-error-message="Address Line 2 is required."></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="col-3 mb-3">
+                                                    <div class="form-group">
+                                                        <label class="input__label" for="address_line_3">Address Line 3</label>
+                                                        <textarea id="address_line_3" name="address_line_3" class="form-control input-style" value="<%= result.address_line_3 %>"
+                                                            placeholder="Begampet, Hyderabad" data-validation="required"
+                                                            data-error-message="Address Line 3 is required."></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="col-3 mb-3">
+                                                    <div class="form-group">
+                                                        <label class="input__label" for="depreciation">Depreciation</label>
+                                                        <input id="depreciation" name="depreciation" type="text" value="<%= result.depreciation %>"
+                                                            class="form-control input-style" placeholder="" data-validation="required"
+                                                            data-error-message="Depreciation is required.">
+                                                    </div>
+                                                </div>
+                                            </div>
+                            
+                                            <div class="form-row pl-lg-3 pr-lg-3">
+                                                <div class="col-3 mb-3">
+                                                    <div class="form-group">
+                                                        <label class="input__label" for="rating">Rating</label>
+                                                        <input id="rating" name="rating" type="text" class="form-control input-style" value="<%= result.rating %>"
+                                                            placeholder="" data-validation="required" data-error-message="Rating is required.">
+                                                    </div>
+                                                </div>
+                                                <div class="col-3 mb-3">
+                                                    <div class="form-group">
+                                                        <label class="input__label" for="po_auto_close_days">PO Auto Close (Days)</label>
+                                                        <input id="po_auto_close_days" name="po_auto_close_days" type="text" value="<%= result.po_auto_close_days %>"
+                                                            class="form-control input-style" placeholder="0" data-validation="required"
+                                                            data-error-message="PO Auto Close (Days) is required.">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                            
+                                        <div class="mt-1 col-lg-12 pl-lg-2 pr-lg-3">
+                                            <div class="card card_border">
+                                                <div class="mb-3">
+                                                    <div class="form-group">
+                                                        <div class="col-xl-12 p-heading">
+                                                            <h6 class="p-text">REG. OFF. ADDRESS</h6>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                            
+                                                <div class="form-row pl-lg-3 pr-lg-3">
+                                                    <div class="col-12 mb-1">
+                                                        <div class="form-group">
+                                                            <div class="pl-xl-0">
+                                                                <h6 class="primary">Contact Person 1</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                            
+                                                <div class="form-row pl-lg-3 pr-lg-3">
+                                                    <div class="col-12 mb-3">
+                                                        <div class="form-row">
+                                                            <div class="col-3 mb-3">
+                                                                <div class="form-group">
+                                                                    <label class="input__label" for="contact_person_1_name">Name</label>
+                                                                    <input id="contact_person_1_name" name="contact_person_1_name" type="text" value="<%= result.contact_person_1_name %>"
+                                                                        class="form-control input-style" placeholder="Naveen"
+                                                                        data-validation="required" data-error-message="Name is required.">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-3 mb-3">
+                                                                <div class="form-group">
+                                                                    <label class="input__label" for="contact_person_1_mobile_no">Mobile No</label>
+                                                                    <input id="contact_person_1_mobile_no" name="contact_person_1_mobile_no" value="<%= result.contact_person_1_mobile_no %>"
+                                                                        type="text" class="form-control input-style" placeholder="9849988684"
+                                                                        data-validation="required"
+                                                                        data-error-message="Mobile No is required.">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-3 mb-3">
+                                                                <div class="form-group">
+                                                                    <label class="input__label" for="contact_person_1_email">Email</label>
+                                                                    <input id="contact_person_1_email" name="contact_person_1_email" type="text" value="<%= result.contact_person_1_email %>"
+                                                                        class="form-control input-style" placeholder=""
+                                                                        data-validation="required" data-error-message="Email is required.">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-3 mb-3">
+                                                                <div class="form-group">
+                                                                    <label class="input__label" for="contact_person_1_phone_no">Phone No</label>
+                                                                    <input id="contact_person_1_phone_no" name="contact_person_1_phone_no" value="<%= result.contact_person_1_phone_no %>"
+                                                                        type="text" class="form-control input-style" placeholder=""
+                                                                        data-validation="required"
+                                                                        data-error-message="Phone No is required.">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-3 mb-3">
+                                                                <div class="form-group"><label class="input__label">Fax</label><input id="contact_person_1_fax" value="<%= result.contact_person_1_fax %>"
+                                                                        name="contact_person_1_fax" type="text" class="form-control input-style"
+                                                                        placeholder=""
+                                                                        data-validation="required"
+                                                                        data-error-message="Phone No is required."></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                        
+                    
+
+            <!-- Contact Person 2 -->
+            <div class="form-row pl-lg-3 pr-lg-3">
+                <div class="col-12 mb-3">
+                    <div class="form-row">
+                        <div class="col-3 mb-3">
+                            <div class="form-group"><label class="input__label">Name</label><input id="contact_person_2_name" value="<%= result.contact_person_2_name %>"
+                                    name="contact_person_2_name" type="text" class="form-control input-style" 
+                                    placeholder="Naveen" data-validation="required"
+                                    data-error-message="Name is required."></div>
+                        </div>
+                        <div class="col-3 mb-3">
+                            <div class="form-group"><label class="input__label">Mobile No</label><input
+                                    id="contact_person_2_mobile_no" name="contact_person_2_mobile_no" type="text" value="<%= result.contact_person_2_mobile_no %>"
+                                    class="form-control input-style" placeholder="9849988684" data-validation="required"
+                                    data-error-message="Mobile No is required."></div>
+                        </div>
+                        <div class="col-3 mb-3">
+                            <div class="form-group"><label class="input__label">Email</label><input id="contact_person_2_email" value="<%= result.contact_person_2_email %>"
+                                    name="contact_person_2_email" type="text" class="form-control input-style"
+                                    placeholder="" data-validation="required"
+                                    data-error-message="Email is required."></div>
+                        </div>
+                        <div class="col-3 mb-3">
+                            <div class="form-group"><label class="input__label">Phone No</label><input value="<%= result.contact_person_2_phone_no %>"
+                                    id="contact_person_2_phone_no" name="contact_person_2_phone_no" type="text"
+                                    class="form-control input-style" placeholder="" data-validation="required"
+                                    data-error-message="Phone No is required."></div>
+                        </div>
+                        <div class="col-3 mb-3">
+                            <div class="form-group"><label class="input__label">Fax</label><input id="contact_person_2_fax" value="<%= result.contact_person_2_fax %>"
+                                    name="contact_person_2_fax" type="text" class="form-control input-style"
+                                    placeholder="" data-validation="required"
+                                    data-error-message="Fax is required."></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: Payment Details -->
+            <div class="mt-4 col-lg-12 pl-lg-2 pr-lg-3">
+                <div class="card card_border">
+                    <div class="mb-3">
+                        <div class="form-group">
+                            <div class="col-xl-12 p-heading">
+                                <h6 class="p-text">PAYMENT DETAILS</h6>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row pl-lg-3 pr-lg-3">
+                        <div class="col-3 mb-3">
+                            <div class="form-group"><label class="input__label">Mode of Payment</label><select
+                                    id="mode_of_payment" name="mode_of_payment" class="form-control input-style"
+                                    data-validation="required" data-error-message="Mode of payment is required.">
+                                    <option value="<%= result.mode_of_payment ? result.mode_of_payment : '' %>"><%= result.id ? result.mode_of_payment : 'Select' %></option>
+                                    <option value="cash">Cash</option>
+                                </select></div>
+                        </div>
+                        <div class="col-3 mb-3">
+                            <div class="form-group"><label class="input__label">Terms of Payment</label><select
+                                    id="terms_of_payment" name="terms_of_payment" class="form-control input-style"
+                                    data-validation="required"data-error-message="Terms of payment is required.">
+                                    <option value="<%= result.terms_of_payment ? result.terms_of_payment : '' %>"><%= result.id ? result.terms_of_payment : 'Select' %></option>
+                                    <option value="cash">Cash</option>
+                                </select></div>
+                        </div>
+                        <div class="col-3 mb-3">
+                            <div class="form-group"><label class="input__label">Tax Nature</label><input
+                                    id="tax_nature" name="tax_nature" type="text" class="form-control input-style" value="<%= result.tax_nature %>"
+                                    placeholder=""  data-validation="required" data-error-message="Tax Nature is required."></div>
+                        </div>
+                        <div class="col-3 mb-3">
+                            <div class="form-group"><label class="input__label">Currency</label><select id="currency"
+                                    name="currency" class="form-control input-style" data-validation="required"
+                                    data-error-message="Currency is required.">
+                                    <option value="<%= result.currency ? result.currency : '' %>"><%= result.id ? result.currency : 'Select' %></option>
+                                    <option value="Rupee">rupee</option>
+                                </select></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 4: Tax Details -->
+            <div class="mt-4 col-lg-12 pl-lg-2 pr-lg-3">
+                <div class="card card_border">
+                    <div class="mb-3">
+                        <div class="form-group">
+                            <div class="col-xl-12 p-heading">
+                                <h6 class="p-text">TAX DETAILS</h6>
+                            </div>
+                        </div>
+                    </div>
+                        
+                    <div class="form-row pl-lg-3 pr-lg-3">
+                        <div class="col-3 mb-3">
+                            <div class="form-group">
+                                <label class="input__label" for="gst_registration_no">GST Registration No</label>
+                                <input id="gst_registration_no" name="gst_registration_no" type="text" value="<%= result.x %>"
+                                    class="form-control input-style" placeholder=""
+                                    data-validation="required" data-error-message="GST Registration No is required.">
+                            </div>
+                        </div>
+                        <div class="col-3 mb-3">
+                            <div class="form-group">
+                                <label class="input__label" for="mst_number">MST Number</label>
+                                <input id="mst_number" name="mst_number" type="text" value="<%= result.mst_number %>"
+                                    class="form-control input-style" placeholder=""
+                                    data-validation="required" data-error-message="MST Number is required.">
+                            </div>
+                        </div>
+                        <div class="col-3 mb-3">
+                            <div class="form-group">
+                                <label class="input__label" for="cst_number">CST Number</label>
+                                <input id="cst_number" name="cst_number" type="text" value="<%= result.cst_number %>"
+                                    class="form-control input-style" placeholder=""
+                                    data-validation="required" data-error-message="CST Number is required.">
+                            </div>
+                        </div>
+                        <div class="col-3 mb-3">
+                            <div class="form-group">
+                                <label class="input__label" for="vat_number">VAT Number</label>
+                                <input id="vat_number" name="vat_number" type="text" value="<%= result.vat_number %>"
+                                    class="form-control input-style" placeholder=""
+                                    data-validation="required" data-error-message="VAT Number is required.">
+                            </div>
+                        </div>
+                        <div class="col-3 mb-3">
+                            <div class="form-group">
+                                <label class="input__label" for="drug_licence_number">Drug Licence Number</label>
+                                <input id="drug_licence_number" name="drug_licence_number" type="text"
+                                    class="form-control input-style" placeholder="" value="<%= result.drug_licence_number %>"
+                                    data-validation="required" data-error-message="Drug Licence Number is required.">
+                            </div>
+                        </div>
+                        <div class="col-3 mb-3">
+                            <div class="form-group">
+                                <label class="input__label" for="service_tax_number">Service Tax Number</label>
+                                <input id="service_tax_number" name="service_tax_number" type="text"
+                                    class="form-control input-style" placeholder="" value="<%= result.service_tax_number %>"
+                                    data-validation="required" data-error-message="Service Tax Number is required.">
+                            </div>
+                        </div>
+                        <div class="col-3 mb-3">
+                            <div class="form-group">
+                                <label class="input__label" for="pan_number">PAN Number</label>
+                                <input id="pan_number" name="pan_number" type="text" value="<%= result.pan_number %>"
+                                    class="form-control input-style" placeholder=""
+                                    data-validation="required" data-error-message="PAN Number is required.">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+         </div>
+            
+
+       </div>
+                    <div class="form-group mt-1 mb-3 text-right">
+
+
+
+                        
+                        <button type="button" class="btn-success btn-style btn mt-3 mr-2" id="mod-btn" onclick="updateQuery()"><strong><i
+                            class="fa-regular fa-pen-to-square"></i> Modify</strong></button>
+
+                <button type="button" class="btn-secondary btn-style btn mt-3 mr-2" disabled><strong><i
+                            class="fa-solid fa-plus"></i> New</strong></button>
+
+                <a type="button" class="btn-danger btn-style btn mt-3 mr-2" href="/adminInv/17"><strong><i
+                            class="fas fa-times" id="submitCancel"></i> Cancel</strong></a>
+
+                <button type="submit" class="btn-primary btn-style btn mt-3" id="sub-btn"><strong><i
+                            class="far fa-save"></i>
+                        Save</strong></button>
+                    </div>
+
+                    </form>
+                    <div id="loadingDiv"></div>
+
+                </div>
+                <%-include('../footer');-%>
+                <script>
+
+
+function updateQuery(){
+                        console.log("Onclick");
+        $('#mod-btn').prop('disabled', true);   
+        $('input[data-validation], select[data-validation]').prop('disabled', false);
+        $('#code').prop('disabled', true);
+        document.getElementById('sub-btn').disabled = false;
+      }
+      if('<%= result.id %>'!==''){
+        console.log($('input[data-validation], select[data-validation]'));
+        $('input[data-validation], select[data-validation]').prop('disabled', true);
+        document.getElementById('sub-btn').disabled = true;
+        document.getElementById('mod-btn').disabled = false;
+        
+      }else{
+       
+        document.getElementById('mod-btn').disabled = true;
+      }
+
+
+                </script>
+                <script type="module">
+                    import { validateForm } from '../javascripts/validation.js';
+                    import { myAjax } from '../javascripts/myAjax.js';
+                
+                    $(document).ready(function() {
+                        console.log("Document is ready");
+                
+                        // Handle final submit button click
+                        $('#supplier').on('submit', function(event) {
+                            event.preventDefault();
+                            submitForms();
+                        });
+                
+                        // Function to submit forms
+                        const submitForms = () => {
+                            event.preventDefault();
+                
+                            const suppCategoryFormDetails = validateForm('#supplier');
+                            const { isValid: isSupplierFormValid, errorMessage: supplierFormError, formData: supplierFormData } = suppCategoryFormDetails;
+                            console.log(supplierFormData);
+                            let id='<%= result.id %>';
+                            if (id) {
+                                console.log(id);
+                                supplierFormData.id=id
+                            }
+
+                            const errorDivId = '#errordiv1';
+                
+                            if (isSupplierFormValid) {
+                                const url = '/adminInv/SupplierSubmit';
+                                const loadingDiv = '#loadingDiv';
+                                myAjax(supplierFormData, errorDivId, url, loadingDiv);
+                            } else {
+                                alert(supplierFormError);
+                                $(errorDivId).removeClass('alert-success').addClass('alert-danger').text(supplierFormError).show();
+                            }
+                        };
+                
+                        // Function to reset forms
+                        const resetForms = () => {
+                            $('#supplier')[0].reset();
+                            // Hide error messages
+                            $('#errordiv1').hide();
+                        };
+                
+                        // Attach reset function to cancel button
+                        $('#submitCancel').on('click', function() {
+                            resetForms();
+                        });
+                    });
+
+
+                </script>
+                

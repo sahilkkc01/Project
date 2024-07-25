@@ -1,0 +1,177 @@
+
+
+
+<!-- Template CSS -->
+<link rel="stylesheet" href="../stylesheets/style.css?v=0.2">
+
+
+
+<!-- google fonts -->
+<link href="//fonts.googleapis.com/css?family=Montserrat:300,400,600,700,800,900&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+
+<style>
+  .fas {
+    font-size: 13px;
+  }
+
+  .form-builder {
+    border-right: 1px solid #ddd;
+  }
+
+  .form-builder,
+  .form-preview {
+    height: 100vh;
+    overflow-y: auto;
+  }
+
+  .input__label {
+    font-size: 13px;
+    line-height: 15px;
+    text-transform: capitalize;
+    margin-bottom: 3px;
+    color: #5B646C;
+  }
+
+  .radio,
+  .checkbox {
+    display: inline-block;
+    margin: 0 10px 0 25px;
+    font-size: 13px;
+  }
+  .scrollmenu{overflow-y: scroll;max-height:500px !important;}
+</style>
+<style>
+  /* Internal CSS to hide the navbar */
+  .navbar-expand-lg {
+      display: none;
+  }
+</style>
+</head>
+
+<body class="sidebar-menu-collapsed">
+<div class="se-pre-con"></div>
+<section>
+  <!-- sidebar menu start -->
+  <div class="sidebar-menu sticky-sidebar-menu">
+
+    <!-- logo start -->
+    <div class="logo">
+      <h1><a href="index.html">LifeLinker</a></h1>
+    </div>
+    <div class="logo-icon text-center">
+      <a href="index.html" title="logo"><img src="../images/TG3-Logo-Green.png" alt="logo-icon"> </a>
+    </div>
+    <!-- //logo end -->
+
+
+    <div class="sidebar-menu-inner">
+
+     <!-- sidebar nav start -->
+     <ul class="nav nav-pills nav-stacked custom-nav">
+      <!-- <li class="active"><a href="index.html"><i class="fa fa-tachometer"></i><span> Dashboard</span></a>
+      </li>
+      <li class="menu-list">
+        <a href="#"><i class="fas fa-briefcase"></i>
+          <span>Business <i class="fas fa-chevron-down"></i></span></a>
+        <ul class="sub-menu-list">
+          <li><a href="carousels.html">Leads</a> </li>
+          <li><a href="cards.html">Appointments</a> </li>
+          <li><a href="#">Visits <i class="fas fa-chevron-down"></i></a></li>
+    <li><a href="#">Prescription</a> </li>
+    <li><a href="#">Procedure</a> </li>
+    <li><a href="#">Conversion</a> </li>
+    <li><a href="#">Revenue</a> </li>
+    <li><a href="#">Collection</a> </li>
+        </ul>
+      </li> -->
+  
+  <li class="menu-list">
+        <a href="#"><i class="fas fa-stethoscope"></i>
+          <span>Clinical <i class="fas fa-chevron-down"></i></span></a>
+          <ul class="sub-menu-list scrollmenu">
+            <li><a href="/clinic/7">Department</a></li>
+            <li><a href="/clinic/25">Cluster</a></li>
+            <li><a href="/clinic/40">Clinic</a></li>
+            <li><a href="/clinic/13">Designation</a></li>
+            <li><a href="/clinic/41">Employee</a></li>
+            <li><a href="/clinic/28">Specialization</a></li>
+            <li><a href="/clinic/29">Sub-Specialization</a></li>
+            <li><a href="/clinic/19">Primary Symptoms</a></li>
+            <li><a href="/clinic/5">Classification</a></li>
+            <li><a href="/clinic/12">Doctor</a></li>
+            <li><a href="/clinic/30">Bank Master</a></li>
+            <li><a href="/clinic/32">Bank Branch Master</a></li>
+            <li><a href="/clinic/34">Country Master</a></li>
+            <li><a href="/clinic/36">State Master</a></li>
+            <li><a href="/clinic/3">City Master</a></li>
+            <li><a href="/clinic/21">Region Master</a></li>
+            <li><a href="/clinic/17">EMR Field Values</a></li>
+            <li><a href="/clinic/37">Cash Counter Master</a></li>
+            <li><a href="/clinic/15">EMR Chief Complaints</a></li>
+            <li><a href="/clinic/10">Doctor Category Master</a></li>
+            
+          </ul>
+      </li>
+<!-- 		
+  <li class="menu-list">
+        <a href="#"><i class="fas fa-star-of-life"></i>
+          <span>Embrology <i class="fas fa-chevron-down"></i></span></a>
+      </li>
+  
+  <li class="menu-list">
+        <a href="#"><i class="fas fa-calculator"></i>
+          <span>Purchase & Accounts <i class="fas fa-chevron-down"></i></span></a>
+      </li> -->
+    </ul>
+    <!-- //sidebar nav end -->
+    <!-- toggle button start -->
+    <a class="toggle-btn">
+      <i class="fa fa-angle-double-left menu-collapsed__left"><span>Collapse Sidebar</span></i>
+      <i class="fa fa-angle-double-right menu-collapsed__right"></i>
+    </a>
+    <!-- //toggle button end -->
+  </div>
+</div>
+<!-- //sidebar menu end -->
+  <!-- header-starts -->
+  <div class="header sticky-header">
+
+    <!-- notification menu start -->
+    <div class="menu-right">
+      <div class="navbar user-panel-top">
+      
+        <div class="user-dropdown-details d-flex">
+          <div class="profile_details_left">
+           
+          </div>
+          <div class="profile_details">
+            <ul>
+              <li class="dropdown profile_details_drop">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="dropdownMenu3" aria-haspopup="true"
+                  aria-expanded="false">
+                  <div class="profile_img">
+                    <img src="../images/profileimg.jpg" class="rounded-circle" alt="" />
+                    <div class="user-active">
+                      <span></span>
+                    </div>
+                  </div>
+                </a>
+                <ul class="dropdown-menu drp-mnu" aria-labelledby="dropdownMenu3">
+                  <li class="user-info">
+                    <h5 class="user-name"></h5>
+                    <span class="status ml-2">Available</span>
+                  </li>
+                  <li> <a href="#"><i class="lnr lnr-user"></i>My Profile</a> </li>
+                 
+                  <li class="logout" id="logoutButton"> <a href="#"><i class="fa fa-power-off"></i> Logout</a> </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--notification menu end -->
+
+  </div>

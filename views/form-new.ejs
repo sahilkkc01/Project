@@ -1,0 +1,1793 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>LifeLinker</title>
+  
+  <%- include('header'); -%>
+  <!-- main content start -->
+  <style> #dv_appointment, #dv_visited, #dv_converted{display:none;} </style>	
+<div class="main-content">
+  
+  <div class="row content-top-gap2">
+ <div class="col-lg-12">
+   	<nav class="navbar navbar-expand-lg navbar-light bg-white">
+	<a class="navbar-brand text-center mr-5" href="#">
+	<span class="dash-icon"><i class="fas fa-tachometer-alt"></i></span>
+	Dashboard
+	</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+	<span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="navbarNav">
+	<ul class="navbar-nav">
+	  <li class="nav-item active text-center mr-5">
+		<a class="nav-link" href="#">
+		<span class="dash-icon"><i class="far fa-user"></i></span>
+	    Master
+		</a>
+	  </li>
+	  <li class="nav-item text-center mr-5">
+		<a class="nav-link" href="#">
+		<span class="dash-icon"><i class="fas fa-exchange-alt"></i></span>
+	    Transaction
+		</a>
+	  </li>
+	  <li class="nav-item text-center mr-5">
+		<a class="nav-link" href="#">
+		<span class="dash-icon"><i class="fas fa-hand-holding-medical"></i></span>
+	    Patient 360
+		</a>
+	  </li>
+	  <li class="nav-item text-center mr-5">
+		<a class="nav-link" href="#">
+		<span class="dash-icon"><i class="fas fa-receipt"></i></span>
+	    Outside Reciept
+		</a>
+	  </li>
+	  <li class="nav-item text-center mr-5">
+		<a class="nav-link" href="#">
+		<span class="dash-icon"><i class="fas fa-file-invoice"></i></span>
+	    Outpatient Department
+		</a>
+	  </li>
+	  <li class="nav-item text-center mr-5">
+		<a class="nav-link" href="#">
+		<span class="dash-icon"><i class="fas fa-chart-line"></i></span>
+	    Analytics
+		</a>
+	  </li>
+	  <li class="nav-item text-center mr-5">
+		<a class="nav-link" href="#">
+		<span class="dash-icon"><i class="far fa-clock"></i></span>
+	    Waiting List
+		</a>
+	  </li>
+	  <li class="nav-item text-center mr-5">
+		<a class="nav-link" href="#">
+		<span class="dash-icon"><i class="fas fa-wrench"></i></span>
+	    Adminstration
+		</a>
+	  </li>
+	  <li class="nav-item text-center">
+		<a class="nav-link" href="#">
+		<span class="dash-icon"><i class="fas fa-spinner"></i></span>
+	    Additional
+		</a>
+	  </li>
+
+	</ul>
+	</div>
+	</nav>
+  </div>
+ </div>
+ 
+  <!-- content -->
+  <div class="container-fluid">
+
+    <!--nav aria-label="breadcrumb">
+      <ol class="breadcrumb my-breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+      </ol>
+    </nav>
+    <div class="welcome-msg pt-3 pb-4">
+      <h1>Hi <span class="text-primary">John</span>, Welcome back</h1>
+      <p>Very detailed & featured admin.</p>
+    </div-->
+
+    <!-- charts -->
+	<div class="card-header chart-grid__header alert-link">
+              New KYC			  
+            </div>
+    <div class="chart">
+      <div class="row">
+        <div class="col-lg-3 pr-lg-2 chart-grid">
+		<!--form 1 start-->
+		<div id="message"></div>
+		<div class="card card_border">
+
+			<div id="errordiv1"></div>
+		  <form id="kycForm" method="post" class="m-3">
+        <input type="hidden" name="modQuery" value="0" id="modQuery" >
+			<div class="row">
+			  <div class="col-xl-6 pr-xl-2">
+				<div class="form-group">
+				  <label for="lead_no" class="input__label">Patient Id</label>
+				  <input type="text" class="form-control input-style" id="lead_no" name="lead_no"
+				  data-validation="" disabled data-error-message="Lead no is required." placeholder="">
+				</div>
+			  </div>
+			  <div class="col-xl-6 pr-xl-2">
+				<div class="form-group">
+				  <label for="lead_date" class="input__label">Lead Date</label>
+				  <input type="date" class="form-control input-style date-fieldMax" id="lead_date" name="lead_date"
+				  data-validation="required" data-error-message="Lead Date is required." placeholder=""  >
+				</div>
+			  </div>
+			  <div class="col-xl-6 pr-xl-2">
+				<div class="form-group">
+					
+					
+				  <label for="wife_name" class="input__label">Wife Name</label>
+				  <input type="text" class="form-control input-style only-characters" id="wife_name" name="wife_name" 
+				  data-validation=" onlyChar required " data-error-message="Wife name is required."
+				   placeholder="">
+				   
+				</div>
+			  </div>
+			  <div class="col-xl-6 pr-xl-2">
+				<div class="form-group">
+				  <label for="wife_age" class="input__label">Wife Age</label>
+				  <input type="number" class="form-control input-style wife-age" id="wife_age" name="wife_age"
+				  data-validation="required onlyNum" data-error-message="Wife age is required." placeholder=""
+				  >
+				</div>
+			  </div>
+			  <div class="col-xl-6 pr-xl-2">
+				<div class="form-group">
+				  <label for="husband_name" class="input__label">Husband Name</label>
+				  <input type="text" class="form-control input-style only-characters" id="husband_name" name="husband_name"
+				  data-validation="onlyChar required " data-error-message="Husband name is required." placeholder="">
+				</div>
+			  </div>
+			  <div class="col-xl-6 pr-xl-2">
+				<div class="form-group">
+				  <label for="husband_age" class="input__label">Husband Age</label>
+				  <input type="number" class="form-control input-style hus-age" id="husband_age" name="husband_age"
+				  data-validation="onlyNum required " data-error-message="Husband age is required." placeholder="">
+				</div>
+			  </div>
+			  <div class="col-xl-6 pr-xl-2">
+				<div class="form-group">
+				  <label for="married_life" class="input__label">Marriage Years</label>
+				  <input type="number" class="form-control input-style marriage-year" id="married_life" name="married_life"
+				  data-validation="onlyNum required " data-error-message="Marriage years is required." placeholder="">
+				</div>
+			  </div>
+			  <div class="col-xl-6 pr-xl-2">
+				<div class="form-group">
+				  <label for="contact_no_wife" class="input__label">Contact No 1</label>
+				  <input type="number" class="form-control input-style only-10" id="contact_no_wife" name="contact_no_wife"
+				  maxlength="10"
+				  data-validation=" mobileNum required " data-error-message="Contact no 1 is required." placeholder="">
+				</div>
+			  </div>
+			  <div class="col-xl-6 pr-xl-2">
+				<div class="form-group">
+				  <label for="contact_no_husband" class="input__label">Contact No 2</label>
+				  <input type="number" class="form-control input-style only-10" id="contact_no_husband" name="contact_no_husband"
+          data-validation   data-error-message="Contact no 2 is required." placeholder="">
+				</div>
+			  </div>
+			  <div class="col-xl-6 pr-xl-2">
+				<div class="form-group">
+				  <label for="whatsapp_no" class="input__label">WhatsApp No</label>
+				  <input type="number" class="form-control input-style only-10" id="whatsapp_no" name="whatsapp_no"
+          data-validation data-error-message="WhatsApp no is required." placeholder="">
+				</div>
+			  </div>
+			  <div class="col-xl-12 pr-xl-2">
+				<div class="form-group">
+				  <label for="email_id" class="input__label">Email ID</label>
+				  <input type="email" class="form-control input-style" id="email_id" name="email_id"
+          data-validation  placeholder="">
+				</div>
+			  </div>
+			</div>
+			<div class="row">
+				<div class="col-xl-12 pr-xl-2"><h6 class="form-heading">Address</h6></div>   
+        <div class="col-xl-6 pr-xl-2">
+					<div class="form-group">
+						<label for="country" class="input__label">Country</label>
+						<select id="country" name="country" class="form-control input-style" data-validation="required" data-error-message="Country is required.">
+							<option value="">Select Country</option>
+							<option value="INDIA">INDIA</option>
+							<!-- Options will be populated via AJAX -->
+						</select>
+						
+					</div>
+				</div>
+				<div class="col-xl-6 pr-xl-2">
+					<div class="form-group">
+						<label for="state" class="input__label">State</label>
+						<select id="state" name="state" onchange="loadCity(this)" class="form-control input-style" data-validation="required" data-error-message="State is required.">
+							<option value="">Select State</option>
+							<!-- Options will be populated via AJAX -->
+						</select>
+						
+					</div>
+				</div>
+				<div class="col-xl-6 pr-xl-2">
+					<div class="form-group">
+						<label for="city" class="input__label">City</label>
+						<select id="city" name="city" class="form-control input-style" data-validation="required" data-error-message="City is required.">
+							<option value="">Select City</option>
+							<!-- Options will be populated via AJAX -->
+						</select>
+					</div>
+				</div>
+				<div class="col-xl-6 pr-xl-2">
+					<div class="form-group">
+						<label for="area" class="input__label">Area</label>
+						<input type="text" class="form-control input-style" id="area"
+						data-validation="required " data-error-message="Area is required."
+							aria-describedby="emailHelp" placeholder="" name="area">
+					</div>
+				</div>
+				<div class="col-xl-6 pr-xl-2">
+					<div class="form-group">
+						<label for="pincode" class="input__label">Pincode</label>
+						<input type="number" class="form-control input-style only-6" id="pincode"
+						data-validation=" onlyNum required " data-error-message="Pincode is required."
+							placeholder="" name="pincode"> 
+					</div>
+				</div>
+      
+			</div>
+      <div class="row">
+        <div class="col-xl-12 pr-xl-2">
+					<div class="form-group">
+						<label for="Address" class="input__label">Address</label>
+            <textarea name="address"  class="form-control input-style " id="adress"
+            data-validation="" data-error-message="Pincode is required."></textarea>
+					
+					</div>
+				</div>
+      </div>
+			<div class="row">
+				<div class="col-xl-12 pr-xl-2"><h6 class="form-heading">Past History</h6></div>	
+					<div class="col-xl-4 pr-xl-2">
+						<div class="form-check">
+							<input class="form-check-input" type="checkbox" value="ivf" name="past_history" data-validation>
+							<label class="form-check-label" for="gridCheck1">IVF</label>
+						</div>
+						</div>
+						<div class="col-xl-4 pr-xl-2">
+						<div class="form-check">
+							<input class="form-check-input" type="checkbox" value="iui" name="past_history" data-validation>
+							<label class="form-check-label" for="gridCheck1">IUI</label>
+						</div>
+						</div>
+						<div class="col-xl-4 pr-xl-2">
+						<div class="form-check">
+							<input class="form-check-input" type="checkbox" id="other" onclick="toggleOtherInput()" data-validation>
+							<label class="form-check-label" for="gridCheck1">Other</label>
+						</div>
+						</div>
+						
+						<div class="col-xl-12 pr-xl-2">
+							<div class="form-group">
+								
+								<input type="text" class="form-control input-style mt-2" value="" id="other_input" name="past_history" 
+									aria-describedby="emailHelp" placeholder="Other" style="display:none;" data-validation>
+							</div>
+						</div>
+						
+						</div>
+						<div class="row">
+							<div class="col-xl-12 pr-xl-2"><h6 class="form-heading">Lead Source</h6></div>	
+								<div class="col-xl-6 pr-xl-2">
+										<div class="form-group">
+											<label for="exampleInputEmail1" class="input__label">Source</label>
+											
+												<select id="source" name="source" class="form-control input-style" data-validation="required" data-error-message="Source is required.">
+													<option value="">Select Source</option>
+													<!-- Options will be populated via AJAX -->
+												</select>
+										</div>
+									</div>
+									<div class="col-xl-6 pr-xl-2">
+										<div class="form-group">
+											<label for="exampleInputPassword1" class="input__label">Campaign</label>
+											<input type="text" class="form-control input-style" id="campaign"
+											data-validation data-error-message="Campaign is required."
+												placeholder="" name="campaign">
+										</div>
+									</div>
+									<div class="col-xl-6 pr-xl-2">
+										<div class="form-group">
+											<label for="exampleInputEmail1" class="input__label">Lead Owner</label>
+											<input type="text" class="form-control input-style" id="lead_owner"  value="<%= loginName %>"
+											data-validation="required" data-error-message="Lead Owner is required."
+												aria-describedby="emailHelp" placeholder="" name="lead_owner" readonly>
+										</div>
+									</div>
+                  <div class="col-xl-6 pr-xl-2">
+										<div class="form-group">
+											<label for="Reference" class="input__label">Reference</label>
+											
+                      <input type="text" class="form-control input-style" id="reference"
+											data-validation data-error-message="reference is required."
+												placeholder="" name="reference">
+										</div>
+									</div>
+									<div class="col-xl-6 pr-xl-2" style="display: none;" id="lead_owner_div">
+									 <a href="#" data-bs-toggle="modal" data-bs-target="#myModal"
+									 class="btn-primary btn-style-1 mt-4" >Change Lead Owner</a>   
+									</div>
+									</div>
+                  <div class="row">
+                    <div class="col-xl-12 pr-xl-2 mb-2">
+                      <h6 class="form-heading">Reports</h6>
+                    
+                      <div class="d-flex align-items-center">
+                        <button type="button" data-validation class="btn btn-primary btn-style btn-change" onclick="document.getElementById('imageInput').click();">
+                          <i class="fa-solid fa-image"></i>
+                        </button>
+                    
+                        <label for="remark0" class="input__label ml-2"></label>
+                    
+                        <input type="text" style="width: 100px;" class="form-control input-style ml-2" id="remark" data-validation placeholder="Enter Remark" name="remark">
+                    
+                        <button type="button" data-validation class="btn btn-primary btn-style btn-change ml-2" id="eyeBtn" data-bs-toggle="modal" data-bs-target="#imageModal">
+                          <i class="fa-solid fa-eye"></i>
+                        </button>
+                        
+                        <button type="button" data-validation class="btn btn-primary btn-style btn-change ml-2" onclick="document.getElementById('addBtn').click();">
+                          <i class="fa-solid fa-plus"></i> 
+                        </button>
+                        
+                      </div>
+                    
+                      <button type="button" id="addBtn" style="display: none;" onclick="addFileInput()">Add Another File</button>
+                    
+                      <input type="file" id="imageInput" style="display: none;" name="report">
+                    </div>
+                    
+                    <div id="additional-file-inputs">
+                      <!-- Additional file inputs will be appended here -->
+                    </div>
+                    
+                    <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                    
+                          <!-- Modal Header -->
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="imageModalLabel">Uploaded Image</h5>
+                            <button type="button" data-bs-dismiss="modal" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+                          </div>
+                    
+                          <!-- Modal Body -->
+                          <div class="modal-body">
+                            <img id="uploadedImage" src="" alt="Uploaded Image" class="img-fluid" style="display: none;">
+                            <p id="noImageMessage">No image uploaded</p>
+                          </div>
+                    
+                        </div>
+                      </div>
+                    </div>
+                    
+
+                  
+
+</div>
+
+<!-- image model -->
+
+
+			<button type="submit" id="kyc-btn" class="btn btn-primary btn-style mt-3">Save</button>
+			<button type="button" disabled id="mod-btn" onclick="modifyQuery()" class="btn btn-secondary btn-style mt-3">Modify</button>
+		  </form>
+		  <div id="loadingIndicator"></div>
+
+		  <!-- model -->
+		</div>
+		<!--form 1 finish-->
+		
+        </div>
+        <div class="col-lg-9 pl-lg-2 chart-grid">
+        <!--part 1-->
+		  <div class="card card_border">
+            <div class="card-body">
+
+             <div class="col-xl-12 pr-xl-2 form-menu">
+			 <div class="row">
+			 <span class="active"><i class="fas fa-exchange-alt"></i> Follow Up</a></span>
+			 <span><i class="fas fa-calendar-alt"></i> Appointment</span>
+			 <span><i class="fas fa-map-marker-alt"></i> Visited</span>
+			 <span><i class="fas fa-check-circle"></i> Converted</span>
+			 </div>
+			 </div>
+			 
+
+			 <!-- form 5 -->
+			 <div id="message5" class="mt-2"></div>
+			 <div class="col-xl-12 pr-xl-2" id="followUpDiv">
+				
+			 <form method="post" class="mt-2" id="follow_up_form">
+				<input name="lead_input1" type="hidden" id="lead_input1">
+				<div class="row">
+			 <!--div class="col-xl-4 pr-xl-2">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1" class="input__label">Last Call</label>
+                            <input type="text" class="form-control input-style" id="last_call"
+                                aria-describedby="emailHelp" placeholder="" name="last_call">
+                        </div>
+					</div-->
+					
+			 <div class="col-xl-4 pr-xl-2">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1" class="input__label">Remarks</label>
+                            <input type="text" class="form-control input-style" name="remark" id="remark"  
+							data-validation="required" data-error-message="Remark is required."
+                                aria-describedby="emailHelp" placeholder="" name="remark">
+                        </div>
+					</div>
+					<div class="col-xl-4 pr-xl-2">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1" class="input__label">Status</label>
+								<select class="form-control input-style" id="fu_status" name="fu_status" 
+								data-validation="required" data-error-message="Select Status.">
+								  <option value="">Select</option>
+								  <option value="Invalid">Invalid</option>
+								  <option value="Appointment">Appointment</option>
+								  <option value="Follow Up">Follow Up</option>
+								</select>
+                        </div>
+					</div>
+
+			 <div class="col-xl-2 pr-xl-2">
+                        <div class="form-group" id="followUpDiv1" style="display: none;">
+                            <label for="exampleInputEmail1" class="input__label ">Next Call</label>
+                            <input type="date" class="form-control input-style date-field" id="fu_next_call" 
+							data-validation="" data-error-message="Next call is required." min=""
+                                aria-describedby="emailHelp" placeholder="" name="fu_next_call" >
+                        </div>
+					</div>
+					
+			<div class="col-xl-2 pr-xl-2">
+                        <div class="form-group" id="followUpDiv2" style="display: none;">
+                            <label for="exampleInputEmail1" class="input__label">Next Call Time</label>
+                            <input type="time" class="form-control input-style" id="fu_next_call_time"
+                                aria-describedby="emailHelp" placeholder="" name="fu_next_call_time" >
+                        </div>
+					</div>
+			
+					
+			</div>
+			<button type="submit"  class="btn btn-primary btn-style mt-2" id="follow_up_btn">Add</button>
+			</form>
+            </div>
+			
+			<div class="col-xl-12 pr-xl-2 mt-3">
+			<div class="row pl-xl-2">
+		
+		<table class="table2" id="apt_table2" >
+		<tr>
+		<th>Remark</th>
+		<th>Next Call</th>
+		<th>Next Call Time</th>
+		<th>Status</th>
+		<th>Call</th>
+    <th>Recording</th>
+		</tr>
+		<tbody id="appointment_table_1">
+			<!-- Data will be loaded here via AJAX -->
+		  </tbody>
+		  <div class="pagination" id="pagination"></div>
+		</table>
+		<!-- <button type="submit" class="btn btn-primary btn-style mt-2 mr-2"><i class="fas fa-phone"></i> Call</button> -->
+		<!--button type="submit" class="btn btn-secondary btn-style mt-2 mr-2">Set an Appointment</button>
+		<button type="submit" class="btn btn-success btn-style mt-2">Change Status</button-->
+			</div>
+			</div>
+			
+			</div>
+          </div>
+		  <!--part 1 ended-->
+		
+		<div class="card card_border mt-3" id="dv_appointment">
+            <div class="card-body">
+
+             <div class="col-xl-12 pr-xl-2 form-menu">
+			 <div class="row">
+			 <span><i class="fas fa-exchange-alt"></i> Follow Up</a></span>
+			 <span class="active"><i class="fas fa-calendar-alt"></i> Appointment</span>
+			 <span><i class="fas fa-map-marker-alt"></i> Visited</span>
+			 <span><i class="fas fa-check-circle"></i> Converted</span>
+			 </div>
+			 </div>
+			 
+
+			 <!-- form 6 -->
+
+			 <div class="col-xl-12 pr-xl-2" id="aptDiv">
+				<div id="loadingIndicator2"></div>
+				<div id="message6" class="mt-2"></div>
+				<div id="loadingIndicator3"></div>
+			 <form  method="post" class="mt-2" id="apt_form">
+				<input name="lead_input2" type="hidden" id="lead_input2">
+				<input name="apt_id_input" type="hidden" id="apt_id_input" >
+				<input name="v_city" type="hidden" id="v_city">
+				<div class="row">
+
+					<div class="col-xl-4 pr-xl-2">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1" class="input__label">Clinic</label>
+							<select class="form-control input-style" id="clinic" name="clinic" 
+							data-validation="required" data-error-message="Select Clinic.">
+							  <option value="">Select</option>
+							 
+							</select>
+                        </div>
+					</div>
+
+					<div class="col-xl-4 pr-xl-2">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1" class="input__label">Doctor</label>
+                           
+								<select class="form-control input-style" id="doctor" name="doctor" 
+							data-validation="required" data-error-message="Select Doctor.">
+							  <option value="">Select</option>
+						
+							</select>
+                        </div>
+					</div>
+
+			 <div class="col-xl-4 pr-xl-2">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1" class="input__label">Appointment Date</label>
+                            <input type="date" class="form-control input-style date-field" id="apt_date" name="apt_date"
+							data-validation="required" data-error-message="Appointment Date is required." max=""
+
+                                aria-describedby="emailHelp" placeholder="">
+                        </div>
+					</div>
+					
+			 <div class="col-xl-4 pr-xl-2">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1" class="input__label">Appointment Time</label>
+							<input type="time" class="form-control input-style" id="apt_time"
+							aria-describedby="emailHelp" placeholder="" name="apt_time" value="10:00">
+                        </div>
+					</div>	
+					<div class="col-xl-4 pr-xl-2">
+                        <div class="form-group">
+                           
+								
+                        </div>
+					</div>		
+			</div>
+			<button type="submit" class="btn btn-primary btn-style mt-2" id="apt_apt_btn">Add</button>
+			</form>
+            </div>
+			
+			
+					<div class="col-xl-12 pr-xl-2 mt-3">
+			<div class="row pl-xl-2">
+		
+		<table class="table2" id="apt_date_tbl">
+		<tr>
+		<th>Appointment Date</th>
+		<th>Appointment Time</th>
+		<th>Doctor</th>
+		<th>Clinic</th>
+		<th>Status</th>
+		<th>Call</th>
+		<th>Recording</th>
+		<th></th>
+		</tr>
+		<tbody  id="appointment_table_2"></tbody>
+		</table>
+		<!--div class="col-xl-12 pl-xl-0">
+		<button type="submit" class="btn btn-success btn-style mt-3">Change Status</button>
+		</div-->
+			</div>
+			</div>
+			
+			</div>
+          </div>
+		
+        <div class="card card_border mt-3" id="dv_visited">
+            <div class="card-body">
+
+             <div class="col-xl-12 pr-xl-2 form-menu">
+			 <div class="row">
+			 <span><i class="fas fa-exchange-alt"></i> Follow Up</a></span>
+			 <span><i class="fas fa-calendar-alt"></i> Appointment</span>
+			 <span class="active"><i class="fas fa-map-marker-alt"></i> Visited</span>
+			 <span><i class="fas fa-check-circle"></i> Converted</span>
+			 </div>
+			 </div>
+			 
+
+			 <!-- form 7 -->
+			 <div class="col-xl-12 pr-xl-2" id="visitedDiv">
+				<div id="loadingIndicator4"></div>
+				<div id="message7" class="mt-2"></div>
+			 <form  method="post" class="mt-2" id="visited_form">
+				<input name="lead_input3" type="hidden" id="lead_input3">
+				<input name="vis_id_input" type="hidden" id="vis_id_input">
+				<div class="row">
+			 <div class="col-xl-4 pr-xl-2">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1" class="input__label">UHID No</label>
+                            <input type="text" class="form-control input-style" id="uhid_no" name="uhid_no"
+                                aria-describedby="emailHelp" placeholder="">
+                        </div>
+					</div>
+					
+			 <div class="col-xl-4 pr-xl-2">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1" class="input__label">Date</label>
+                            <input type="date" class="form-control input-style" id="v_date" name="apt_date"
+                                aria-describedby="emailHelp" placeholder="">
+                        </div>
+					</div>
+			 <div class="col-xl-4 pr-xl-2">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1" class="input__label">Doctor</label>
+							<select class="form-control input-style" id="v_doctor" name="doctor" 
+							data-validation="required" data-error-message="Select Doctor.">
+							  <option value="">Select</option>
+							</select>
+                        </div>
+					</div>
+					
+			<div class="col-xl-4 pr-xl-2">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1" class="input__label">Clinic</label>
+                            
+								<select class="form-control input-style" id="v_clinic" name="clinic" 
+								data-validation="required" data-error-message="Select Status.">
+								  <option value="">Select</option>
+								 
+								
+								</select>
+                        </div>
+					</div>
+			
+			<div class="col-xl-4 pr-xl-2">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1" class="input__label">Councelor</label>
+                          
+							<select class="form-control input-style" id="councelor" name="councelor" 
+								data-validation="required" data-error-message="Select Councelor.">
+								  <option value="">Select</option>
+								  <option value="ABC">ABC</option>
+								  </select>
+                        </div>
+					</div>
+					
+			<div class="col-xl-4 pr-xl-2">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1" class="input__label">Treatment</label>
+                           
+							<select class="form-control input-style" id="treatment" name="treatment" 
+								data-validation="required" data-error-message="Select Treatment.">
+								  <option value="">Select</option>
+								  <option value="ABC">ABC</option>
+								  </select>
+                        </div>
+					</div>
+					
+			
+			<div class="col-xl-4 pr-xl-2">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1" class="input__label">Package</label>
+                            <input type="number" class="form-control input-style" id="package" name="package"
+                            data-validation="required" data-error-message="Package is required."  
+							aria-describedby="emailHelp" placeholder="">
+                        </div>
+					</div>
+					
+			</div>
+			<button type="submit" id="vis_btn" class="btn btn-primary btn-style mt-2">Add</button>
+			</form>
+            </div>
+			
+			<div class="col-xl-12 pr-xl-2 mt-3">
+			<div class="row pl-xl-2">
+		
+		<table class="table2" id="apt_table_3">
+		<tr>
+		<th>UHID NO</th>
+		<th>Date Visited</th>
+		<th>Doctor</th>
+		<th>Clinic</th>
+		<!-- <th>councelor</th> -->
+		<th>Treatment</th>
+		<th>Status</th>
+    <th>Remark</th>
+		<th>Next Call</th>
+		<th>Call</th>
+		<th>Recording</th>
+    <th></th>
+		</tr>
+		<tbody  id="appointment_table_3"></tbody>
+		</table>
+
+		<div class="col-xl-12 pl-xl-0">
+		<!-- <button type="submit" class="btn btn-success btn-style mt-2">Change Status</button> -->
+		</div>
+			</div>
+			</div>
+			</div>
+          </div>
+
+        <div class="card card_border mt-3" id="dv_converted">
+            <div class="card-body">
+
+             <div class="col-xl-12 pr-xl-2 form-menu">
+			 <div class="row">
+			 <span><i class="fas fa-exchange-alt"></i> Follow Up</a></span>
+			 <span><i class="fas fa-calendar-alt"></i> Appointment</span>
+			 <span><i class="fas fa-map-marker-alt"></i> Visited</span>
+			 <span class="active"><i class="fas fa-check-circle"></i> Converted</span>
+			 </div>
+			 </div>
+			 
+			 <div class="col-xl-12 pr-xl-2" id="convertedDiv">
+			 <form id="conv_form" method="post" class="mt-2">
+				<input name="lead_input4" type="hidden" id="lead_input4">
+				<div class="row">
+			 <div class="col-xl-4 pr-xl-2">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1" class="input__label">UHID No</label>
+                            <input type="text" class="form-control input-style" id="con_uhid"  name="uhid_no"
+                                aria-describedby="emailHelp" placeholder="">
+                        </div>
+					</div>
+					
+			 <div class="col-xl-4 pr-xl-2">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1" class="input__label">Doctor Name</label>
+							<input type="text" class="form-control input-style" id="con_doc" name="doctor"
+							aria-describedby="emailHelp" placeholder="">
+								
+                        </div>
+					</div>
+			 <div class="col-xl-4 pr-xl-2">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1" class="input__label">Clinic</label>
+							<input type="text" class="form-control input-style" id="con_clinic" name="clinic"
+							aria-describedby="emailHelp" placeholder="">
+							
+                        </div>
+					</div>
+					
+					<div class="col-xl-4 pr-xl-2">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1" class="input__label">Treatment</label>
+                            <input type="text" class="form-control input-style" id="con_treat" name="treatment"
+                                aria-describedby="emailHelp" placeholder="">
+                        </div>
+					</div>
+			
+					<div class="col-xl-4 pr-xl-2">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1" class="input__label">Package</label>
+                            <input type="text" class="form-control input-style" id="con_package" name="package"
+                                aria-describedby="emailHelp" placeholder="">
+                        </div>
+					</div>
+					<div class="col-xl-4 pr-xl-2">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1" class="input__label">Booking Date</label>
+                            <input type="Date" class="form-control input-style date-field-con" id="con_date" name="con_date"
+                                aria-describedby="emailHelp" placeholder="">
+                        </div>
+					</div>
+			
+			
+			</div>
+			<button type="submit" id="con_btn" class="btn btn-primary btn-style mt-2">Add</button>
+			</form>
+            </div>
+			
+			<div class="col-xl-12 pr-xl-2 mt-3">
+			<div class="row pl-xl-2">
+		
+		<table class="table2">
+		<tr>
+		<th>UHID NO</th>
+		<th>Doctor Name</th>
+		<th>Clinic</th>
+		<th>Treatment</th>
+		<th>Package</th>
+		<th>Booking Date</th>
+		</tr>
+		<tr>
+		<tbody id="apt_table_4"></tbody>
+		</table>
+
+		</div>
+		</div>
+			</div>
+          </div> 		  
+        </div>
+      </div>
+    </div>
+    <!-- //charts -->
+
+<!-- The Modal -->
+<div class="modal" id="myModal">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+  
+		<!-- Modal Header -->
+		<div class="modal-header">
+			<a href="#" class="btn-close" data-bs-dismiss="modal"><i class="fa-solid fa-circle-xmark"></i></a>
+		</div>
+  
+		<!-- Modal body -->
+		<div class="modal-body">
+			<div class="row">
+				<table class="table2">
+				<tr>
+				<th>&nbsp;</th>
+				<th>Name</th>
+				<th>Designation</th>
+				</tr>
+				<% admins.forEach(admin => { %>
+					<tr>
+						<td><button onClick="changeLead('<%= admin.userId %>', '<%= admin.userName %>')" type="submit" class="btn btn-primary btn-style btn-change">Select</button></td>
+						<td><%= admin.userName %></td>
+						<td><%= admin.userRole %></td>
+					</tr>
+				<% }) %>
+				</table>
+			  </div>
+		</div>
+  
+	  </div>
+	</div>
+  </div>
+<!--Modal Ends-->
+
+
+
+<!--footer section start-->
+  <%- include ('footer'); -%>
+ 
+  <script src="../javascripts/multiplePhotos.js"></script>
+<script>
+  
+  
+  
+    function modifyQuery() {
+
+  document.getElementById('modQuery').value=1;
+          $('#kyc-btn').removeAttr('disabled');
+          $('#mod-btn').attr('disabled', 'disabled');
+          $('#contact_no_husband').removeAttr('disabled');
+          $('#whatsapp_no').removeAttr('disabled');
+          $('#email_id').removeAttr('disabled');
+          $('#adress').removeAttr('disabled');
+          $('#lead_owner').removeAttr('disabled');
+
+          $('#lead_owner_div').show();
+    };
+  
+	 document.addEventListener('DOMContentLoaded', function() {
+      const dateField = document.getElementById('apt_date');
+      const today = new Date().toISOString().split('T')[0]; // Get today's date in YYYY-MM-DD format
+      dateField.setAttribute('min', today);
+    });
+	document.addEventListener('DOMContentLoaded', function() {
+      const dateField = document.getElementById('lead_date');
+      const today = new Date().toISOString().split('T')[0]; // Get today's date in YYYY-MM-DD format
+      dateField.setAttribute('max', today);
+    });
+	  
+	const currentDate = new Date().toISOString().split('T')[0]; 
+	// alert(currentDate)
+	const date = document.getElementById('lead_date').value=currentDate;
+	date.max=currentDate
+
+
+
+	function toggleOtherInput() {
+    var otherCheckbox = document.getElementById('other');
+    var otherInput = document.getElementById('other_input');
+	
+	
+    
+    if (otherCheckbox.checked) {
+        otherInput.style.display = 'block';
+    } else {
+        otherInput.style.display = 'none';
+    }
+}
+
+function changeLead(a,b){
+	$("#lead_owner").val(b);
+	$("#myModal").modal('toggle');
+}
+	
+function loadCity(a) {
+  $.ajax({
+    url: '/clinic/cities', // Endpoint to fetch all cities
+    type: 'GET',
+    success: function(data) {
+      console.log(data);
+      
+      let selectOptions = '<option value="">Select city</option>'; // Initial select option
+      
+      // Filter cities based on selected stateCode
+      const filteredCities = data.filter(city => city.stateCode === a.value);
+      
+      filteredCities.forEach(function(city) {
+        selectOptions += `
+          <option value="${city.cityName}">${city.cityName}</option>
+        `;
+      });
+      
+      $('#city').html(selectOptions); // Populate select options
+    },
+    error: function(xhr, status, error) {
+      console.error('Error fetching cities:', error);
+    }
+  });
+}
+
+</script>
+  
+  <script type="module">
+		  import { validateForm } from '../javascripts/validation.js';
+		  import { myAjax } from '../javascripts/myAjax.js';
+		  import { generateUHID } from '../javascripts/uhid.js';
+		  import { charVal,numVal,valCheck,marriageYearVal,dateVal,dateValMax,validateConDate} from '../javascripts/lengthVal.js';
+		  validateConDate()
+      charVal();
+		dateVal();
+		dateValMax();
+
+    
+
+
+	$(document).ready(function() {
+  
+		$('#fu_status').on('change', function() {
+      
+        if ($(this).val() === 'Follow Up') {
+            $('#followUpDiv1').show();
+            $('#followUpDiv2').show();
+        } else {
+            $('#fu_next_call').val('');
+            $('#fu_next_call_time').val('');
+            $('#followUpDiv1').hide();
+            $('#followUpDiv2').hide();
+        }
+    });
+		function loadState(a){
+            fetch('/clinic/reloadState')
+                .then(response => response.json())
+                .then(data => {
+                    const dropdown = document.getElementById(a);
+                    data.forEach(state => {
+                        const option = document.createElement('option');
+                        option.value = state.stateCode;
+                        option.textContent = state.stateName;
+                        dropdown.appendChild(option);
+                        
+                    });
+                })
+                .catch(error => console.error('Error fetching states:', error));
+            }
+	       loadState('state');
+
+		function loadClinic(a){
+            fetch('/clinic/get-clinic-name')
+                .then(response => response.json())
+                .then(data => {
+					console.log(data)
+                    const dropdown = document.getElementById(a);
+                    data.forEach(item => {
+                        const option = document.createElement('option');
+                        option.value = item.clinic_area;
+                        option.textContent = item.clinic_area;
+                        dropdown.appendChild(option);
+                        
+                    });
+                })
+                .catch(error => console.error('Error fetching states:', error));
+            }
+	       loadClinic('clinic');
+	       loadClinic('v_clinic');
+	       loadClinic('con_clinic');
+
+       
+  
+		   function loadDoctor(a){
+            fetch('/clinic/get-doctor-details')
+                .then(response => response.json())
+                .then(data => {
+					
+					console.log(data)
+                    const dropdown = document.getElementById(a);
+                    data.forEach(item => {
+                        const option = document.createElement('option');
+                        option.value = item.doc_name;
+                        option.textContent = item.doc_name;
+                        dropdown.appendChild(option);
+                        
+                    });
+                })
+                .catch(error => console.error('Error fetching states:', error));
+            }
+	       loadDoctor('doctor');
+	       loadDoctor('v_doctor');
+	       loadDoctor('con_doc');
+
+		   function loadSource(a){
+            fetch('/clinic/get-Source-details')
+                .then(response => response.json())
+                .then(data => {
+					
+					console.log(data)
+                    const dropdown = document.getElementById(a);
+                    data.forEach(item => {
+                        const option = document.createElement('option');
+                        option.value = item.source;
+                        option.textContent = item.source;
+                        dropdown.appendChild(option);
+                        
+                    });
+                })
+                .catch(error => console.error('Error fetching states:', error));
+            }
+	       loadSource('source');
+
+         
+
+		numVal('.only-10',10);
+		numVal('.only-6',6);
+			valCheck('.wife-age',18,50)
+			valCheck('.hus-age',21,55)
+			marriageYearVal('.wife-age', '.hus-age', '.marriage-year');
+
+      //alert('11')
+		document.getElementById('logoutButton').addEventListener('click', function(event) {
+    event.preventDefault(); // Prevent the default action of following the link
+
+    // Make a POST request to logout endpoint
+    
+    fetch('/logout', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        // Optionally, you can send data in the body if needed
+        // body: JSON.stringify({ /* any data you need to send */ })
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Handle successful logout
+        console.log(data.msg); // Log the logout message
+         // Redirect to login page
+    })
+    .catch(error => {
+        console.error('Error logging out:', error);
+        // Handle error if necessary
+    });
+	window.location.href = '/1';
+});
+
+
+
+        console.log("Document is ready"); 
+		
+		//form 
+   
+    
+        $('#kycForm').on('submit', function(event) {
+          // alert('11')
+          event.preventDefault()
+          
+		  var wife_name = $('#wife_name').val();
+				var contact_no_wife = $('#contact_no_wife').val();
+				
+				var lead_no = `${wife_name.substring(0, 4)}${contact_no_wife.slice(-4)}${new Date().toISOString().split('T')[0].replace(/-/g, '')}`;
+    lead_no = lead_no.toUpperCase();
+    console.log('Generated lead_no:', lead_no);
+	document.getElementById('lead_no').value=lead_no;
+  const data =new FormData(this);
+
+  data.append('lead_no', lead_no);
+          const {isValid,errorMessage,formData}=validateForm('#kycForm')
+      
+        //   console.log(formData)
+        const errorDivId = '#errordiv1'
+		var leadInputValue = formData.lead_no
+        $('#lead_input1').val(leadInputValue);
+        $('#lead_input2').val(leadInputValue);
+        $('#lead_input3').val(leadInputValue);
+        $('#lead_input4').val(leadInputValue);
+		// alert(formData.city)
+		$('#v_city').val(formData.city)
+		
+	//   alert(formData.lead_no)
+  
+        if (isValid) {
+                const url ='/kycreg';
+                const loadingDiv = '#loadingIndicator'
+
+				
+
+				function myAjax1(formData,errorDivId,url,loadingDiv){
+					
+          
+$(loadingDiv).show();
+
+$.ajax({
+    url: url,
+    type: 'POST',
+    data: data,
+    processData: false, 
+    contentType: false,
+    beforeSend: function() {
+        // Show loading spinner or text
+        $(loadingDiv).text('Loading...').show();
+    },
+    success: function(response) {
+        // Hide loading indicator on success
+        $(loadingDiv).hide();
+
+		 
+		$('#mod-btn').removeAttr('disabled');
+		$('#kyc-btn').attr('disabled', 'disabled');
+		$('#lead_owner_div').hide();
+		
+
+		const kycForm = document.getElementById('kycForm');
+            const requiredInputs = kycForm.querySelectorAll('input[data-validation], select[data-validation],textarea[data-validation],button[data-validation]');
+            requiredInputs.forEach(input => {
+                input.setAttribute('disabled', 'true');
+            });
+
+        document.getElementById('follow_up_btn').removeAttribute('disabled')
+        
+        alert(response.msg);
+		
+        $(errorDivId).removeClass('alert-danger').addClass('alert-success').text(response.msg).show();
+        console.log('Response:', response);
+    },
+    error: function(xhr, status, error) {
+        // Hide loading indicator on error
+        $(loadingDiv).hide();
+        
+        alert('Error in saving form');
+        const response = JSON.parse(xhr.responseText);
+        $(errorDivId).removeClass('alert-success').addClass('alert-danger').text(response.msg).show();
+        console.error('Error:', error);
+    }
+});
+
+}
+				
+                myAjax1(formData,errorDivId,url,loadingDiv);
+                  
+                } else {
+                    // alert(errorMessage);
+                    $(errorDivId).removeClass('alert-success').addClass('alert-danger').text(errorMessage).show();
+                    // $(errorDivId).text(errorMessage).show();
+                }
+              })
+
+
+			  
+			
+			  
+			  //apt follow up
+
+
+			  $('#follow_up_form').on('submit', async function(event) {
+  event.preventDefault();
+
+  const { isValid, errorMessage, formData } = validateForm('#follow_up_form');
+  const errorDivId = '#message5';
+
+  if (isValid) {
+    try {
+      const url = '/appointment_1';
+      const loadingDiv = '#loadingIndicator2';
+
+      // Make the AJAX call to submit the form data
+         // Show loading indicator
+$(loadingDiv).show();
+
+$.ajax({
+    url: url,
+    type: 'POST',
+    contentType: 'application/json',
+    data: JSON.stringify(formData),
+    beforeSend: function() {
+        // Show loading spinner or text
+        $(loadingDiv).text('Loading...').show();
+    },
+    success: function(response) {
+        // Hide loading indicator on success
+		console.log('456789',response)
+        $(loadingDiv).hide();
+        // alert($('#apt_status').val)
+        $('#appointment_table_1').empty();
+   
+       
+     
+		response.data.forEach(record => {
+			if (!record.remark || record.remark.trim() === '') {
+        return; // Skip this iteration
+    }
+      const newRow = `
+        <tr >
+          <td>${record.remark}</td>
+          <td>${record.fu_next_call}</td>
+          <td>${record.fu_next_call_time}</td>
+          <td>${record.fu_status}</td>
+          <td>
+            <button type="submit" class="btn btn-primary btn-style mt-2 mr-2">
+              <i class="fas fa-phone"></i> Call
+            </button>
+          </td>
+           <td>
+            <button type="submit" class="btn btn-primary btn-style mt-2 mr-2"><i class="fa-solid fa-microphone"></i></button>
+          </td>
+        </tr>
+      `;
+
+      // Append each row to #appointment_table_1
+      
+      $('#appointment_table_1').append(newRow);
+      if($('#fu_status').val() === 'Appointment' || $('#fu_status').val() === 'Invalid'){
+        $('#follow_up_btn').attr('disabled', 'disabled');
+      }
+	 
+
+// 
+if($('#fu_status').val() === 'Appointment'){
+        $('#dv_appointment').css('display', 'block');
+        $('.highlight').removeClass('highlight');
+        $('#aptDiv').addClass('highlight');
+        $('html, body').animate({
+            scrollTop: $('#aptDiv').offset().top
+        }, 100);
+      }
+
+    });
+     $('#follow_up_form').find('input[type="text"], input[type="date"], input[type="number"], select, textarea').val('');
+        
+        alert('Form submitted successfully!');
+        $(errorDivId).removeClass('alert-danger').addClass('alert-success').text('Form submitted successfully!').show();
+        console.log('abc:', response);
+        return response;
+        
+    },
+    error: function(xhr, status, error) {
+        // Hide loading indicator on error
+        $(loadingDiv).hide();
+        alert('Error in saving form');
+        const response = JSON.parse(xhr.responseText);
+        $(errorDivId).removeClass('alert-success').addClass('alert-danger').text(response.msg).show();
+        console.error('Error:', error);
+    }
+});
+      
+    } catch (error) {
+      console.error('Error occurred:', error);
+      $(errorDivId).removeClass('alert-success').addClass('alert-danger').text('Error occurred. Please try again.').show();
+    }
+  } else {
+    // alert(errorMessage);
+    $(errorDivId).removeClass('alert-success').addClass('alert-danger').text(errorMessage).show();
+  }
+});
+
+
+
+
+
+
+			  //appointemtn apt
+			  $('#apt_form').on('submit', function(event) {
+          event.preventDefault()
+          const {isValid,errorMessage,formData}=validateForm('#apt_form')
+      
+        //   console.log(formData)
+        const errorDivId = '#message6' 
+	
+  
+        if (isValid) {
+			console.log(formData)
+			const uhid = generateUHID(formData.clinic,formData.v_city)
+ 	
+		
+			    $('#v_date').val(formData.apt_date);  
+				$('#v_doctor').val(formData.doctor); 
+				$('#v_clinic').val(formData.clinic);
+				$('#uhid_no').val(uhid);
+
+
+
+                const url ='/appointment_2';
+                const loadingDiv = '#loadingIndicator3'
+				
+				$(loadingDiv).show();
+
+// Perform the AJAX request
+$.ajax({
+  url: url,
+  type: 'POST',
+  contentType: 'application/json',
+  data: JSON.stringify(formData),
+  beforeSend: function() {
+    // Show loading spinner or text
+    $(loadingDiv).text('Loading...').show();
+  },
+  success: function(response) {
+    // Hide loading indicator on success
+    $(loadingDiv).hide();
+    $('#apt_apt_btn').attr('disabled', 'disabled');
+   
+    
+    $('#uhid_no').prop('disabled', true);
+        $('#v_date').prop('disabled', true);
+        // $('#v_doctor').prop('disabled', true);
+        $('#v_clinic').prop('disabled', true);
+    // $('input[type="text"], input[type="number"], input[type="email"], input[type="date"], input[type="time"]').val('');
+    //     $('textarea').val('');
+    //     $('select').val('');
+
+    // Alert and message for successful form submission
+    alert('Form submitted successfully!');
+    $(errorDivId).removeClass('alert-danger').addClass('alert-success').text('Form submitted successfully!').show();
+    console.log('Response:', response);
+	$('#apt_id_input').val(response.id);
+	// alert(response.id)
+    // Iterate through response array and append rows to #apt_date_tbl
+    $('#appointment_table_2').empty();
+    
+    response.data.forEach(item => {
+		if (!item.apt_date || item.apt_date.trim() === '') {
+        return; // Skip this iteration
+    }
+      const newRow = `
+        <tr id=${item.id} >
+              <td>${formatDate(item.apt_date)}</td>
+          <td>${item.apt_time}</td>
+          <td>${item.doctor}</td>
+          <td>${item.clinic}</td>
+          <td>
+            <select class="form-control input-style" id="apt_status${item.id}" name="apt_status" 
+                    data-validation="required" data-error-message="Select Status." >
+             <option value="" ${item.apt_status === '' ? 'selected' : ''}>Select</option>
+          <option value="Visited" ${item.apt_status === 'Visited' ? 'selected' : ''}>Visited</option>
+          <option value="Cancelled" ${item.apt_status === 'Cancelled' ? 'selected' : ''}>Cancelled</option>
+          <option value="Reschedule" ${item.apt_status === 'Reschedule' ? 'selected' : ''}>Reschedule</option>
+            </select>
+          </td>
+          <td>  
+            <button type="submit" class="btn btn-primary btn-style mt-2 mr-2"><i class="fas fa-phone"></i> Call</button>
+          </td> 
+          <td>
+            <button type="submit" class="btn btn-primary btn-style mt-2 mr-2"><i class="fa-solid fa-microphone"></i></button>
+          </td>
+          <td>
+            <button type="submit" id="apt_m_btn${item.id}" class="btn btn-primary btn-style mt-2 mr-2"><i class="fa-solid fa-pen-to-square"></i> </button>
+          </td>
+        </tr>
+      `;
+      $('#apt_status').val=item.apt_status
+	  function formatDate(dateString) {
+    if (!dateString) return ''; // Handle case where dateString is empty or undefined
+
+    let dateObj = new Date(dateString);
+    return dateObj.toLocaleDateString('en-US', { 
+        year: 'numeric', 
+        month: 'short', 
+        day: 'numeric' 
+    });
+}
+      // Append the new row to #apt_date_tbl
+      $('#appointment_table_2').append(newRow);
+      $('#apt_form').find('input[type="text"], input[type="date"], input[type="number"], select, textarea').val('');
+      
+// alert(item.id);
+
+const hiddiv = document.getElementById('dv_visited');
+const status = document.getElementById(`apt_status${item.id}`);
+const btn = document.getElementById(`apt_m_btn${item.id}`);
+$('#appointment_table_2 tr').not(':last').addClass('locked');
+
+// Correct the event listener target and event type
+btn.addEventListener('click', function() {
+  if (status.value === 'Visited') { // Compare the value of the select element
+    hiddiv.style.display = 'block';
+    $('.highlight').removeClass('highlight');
+    $('#visitedDiv').addClass('highlight');
+        $('html, body').animate({
+            scrollTop: $('#visitedDiv').offset().top
+        }, 500);
+
+  } else if(status.value==='Reschedule'){
+        $('#apt_apt_btn').removeAttr('disabled');
+					// $('#dv_appointment').css('display', 'none');
+					// $('#follow_up_btn').removeAttr('disabled');
+					// $('#apt_apt_btn').removeAttr('disabled');
+				}else if(status.value==='Cancelled'){
+          
+        $('#followUpDiv').addClass('highlight');
+        $('html, body').animate({
+            scrollTop: $('#followUpDiv').offset().top
+        }, 500);
+
+        $('#apt_apt_btn').removeAttr('disabled');
+					$('#dv_appointment').css('display', 'none');
+					$('#follow_up_btn').removeAttr('disabled');
+					// $('#apt_apt_btn').removeAttr('disabled');
+				}
+});
+
+$(document).on('click', `#apt_m_btn${item.id}`, function() {
+          const row = $(this).closest('tr'); // Get the closest row
+                row.addClass('locked');
+				
+				const Data = {
+      apt_id: item.id,
+      apt_status: $(`#apt_status${item.id}`).val()
+     
+    };
+    console.log('data',Data)
+				// alert('apt_m_btn');
+$.ajax({
+    url: '/modify-apt',
+    type: 'POST',
+    contentType: 'application/json',
+    data: JSON.stringify(Data),
+    success: function(response) {
+        // Display success message
+        alert('Form updated successfully!');
+        $('#errordiv1').removeClass('alert-danger').addClass('alert-success').text('Form updated successfully!').show();
+        console.log('Response:', response);
+		const row = $('#apt_id_input');
+
+
+row.addClass('locked');
+
+        // Return response if needed for further processing
+        return response;
+    },
+    error: function(xhr, status, error) {
+        // Display error message
+        alert('Error in saving form');
+        let response;
+        try {
+            response = JSON.parse(xhr.responseText);
+        } catch (e) {
+            response = { msg: 'Unknown error occurred' };
+        }
+        $('#errordiv1').removeClass('alert-success').addClass('alert-danger').text(response.msg).show();
+        console.error('Error:', error);
+    }
+});
+
+				
+				
+				
+				
+      });
+
+			
+
+    });
+  },
+  error: function(xhr, status, error) {
+    // Hide loading indicator on error
+    $(loadingDiv).hide();
+    alert('Error in saving form');
+    const response = JSON.parse(xhr.responseText);
+    $(errorDivId).removeClass('alert-success').addClass('alert-danger').text(response.msg).show();
+    console.error('Error:', error);
+  }
+});
+
+
+                } else {
+                    // alert(errorMessage);
+                    $(errorDivId).removeClass('alert-success').addClass('alert-danger').text(errorMessage).show();
+                    // $(errorDivId).text(errorMessage).show();
+                }
+              })
+			  
+
+
+              $('#visited_form').on('submit', function(event) {
+    event.preventDefault();
+    const {isValid, errorMessage, formData} = validateForm('#visited_form');
+
+    const errorDivId = '#message7';
+    if (isValid) {
+        $('#con_date').val(formData.apt_date);
+        const url = '/appointment_3';
+        const loadingDiv = '#loadingIndicator4';
+        $.ajax({
+            url: url,
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(formData),
+            beforeSend: function() {
+                $(loadingDiv).text('Loading...').show();
+            },
+            success: function(response) {
+                $(loadingDiv).hide();
+                $('#vis_btn').attr('disabled', 'disabled');
+                $('#lead_owner').val($('#councelor').val());
+                alert('Form submitted successfully!');
+                $(errorDivId).removeClass('alert-danger').addClass('alert-success').text('Form submitted successfully!').show();
+
+                $('#vis_id_input').val(response.id);
+
+                response.data.forEach(item => {
+                    if (!item.uhid_no || item.uhid_no.trim() === '') return;
+
+                    let newRow = `
+                        <tr id="${item.id}">
+                            <td>${item.uhid_no}</td>
+                            <td>${formatDate(item.apt_date)}</td>
+                            <td>${item.doctor}</td>
+                            <td>${item.clinic}</td>
+                            <td>${item.treatment}</td>
+                            <td>
+                                <select class="form-control input-style visited_status" data-id="${item.id}" id="visited_status${item.id}" name="visited_status" 
+                                    data-validation="required" data-error-message="Select Status.">
+                                    <option value="">Select</option>
+                                    <option value="Booked" ${item.visited_status === 'Booked' ? 'selected' : ''}>Booked</option>
+                                    <option value="Not Booked" ${item.visited_status === 'Not Booked' ? 'selected' : ''}>Not Booked</option>
+                                </select>
+                            </td>
+                            <td><input type="text" style="display:none;" class="form-control input-style remark" data-id="${item.id}" id="remark${item.id}" name="remark"
+                                data-validation=""></td>
+                            <td><input type="date" style="display:none;" class="form-control input-style next_call date-fieldMax" data-id="${item.id}" id="next_call${item.id}" name="next_call"
+                                data-validation=""></td>
+                            <td><button type="button" class="btn btn-primary btn-style mt-2 mr-2 modify-btn" data-id="${item.id}"><i class="fas fa-phone"></i></button></td>
+                            <td><button type="button" class="btn btn-primary btn-style mt-2 mr-2"><i class="fa-solid fa-microphone"></i></button></td>
+                            <td><button type="button" class="btn btn-primary btn-style mt-2 mr-2 vis_m_btn" data-id="${item.id}"><i class="fa-solid fa-pen-to-square"></i></button></td>
+                        </tr>
+                    `;
+
+                    $('#appointment_table_3').append(newRow);
+                    $(document).on('click', '.vis_m_btn', function() {
+    const visId = $(this).data('id');
+    const visStatus = $(`#visited_status${visId}`).val();
+    const remark = $(`#remark${visId}`).val();
+    const next_call = $(`#next_call${visId}`).val() || null;  // Set to null if empty
+
+    const row = $(this).closest('tr');
+    row.addClass('locked');
+
+    if (visStatus === 'Not Booked') {
+        const newid = visId + 1;  // or generate a unique ID
+        let newRow1 = `
+            <tr id="${newid}">
+                 <td>${item.uhid_no}</td>
+                            <td>${formatDate(item.apt_date)}</td>
+                            <td>${item.doctor}</td>
+                            <td>${item.clinic}</td>
+                            <td>${item.treatment}</td>
+                <td>
+                    <select class="form-control input-style visited_status" data-id="${newid}" id="visited_status${newid}" name="visited_status" 
+                        data-validation="required" data-error-message="Select Status.">
+                        <option value="">Select</option>
+                        <option value="Booked">Booked</option>
+                        <option value="Not Booked">Not Booked</option>
+                    </select>
+                </td>
+                <td><input type="text" style="display:none;" class="form-control input-style remark" data-id="${newid}" id="remark${newid}" name="remark"
+                    data-validation=""></td>
+                <td><input type="date" style="display:none;" class="form-control input-style next_call" data-id="${newid}" id="next_call${newid}" name="next_call"
+                    data-validation=""></td>
+                <td><button type="button" class="btn btn-primary btn-style mt-2 mr-2 modify-btn" data-id="${newid}"><i class="fas fa-phone"></i></button></td>
+                <td><button type="button" class="btn btn-primary btn-style mt-2 mr-2"><i class="fa-solid fa-microphone"></i></button></td>
+                <td><button type="button" class="btn btn-primary btn-style mt-2 mr-2 vis_m_btn" data-id="${newid}"><i class="fa-solid fa-pen-to-square"></i></button></td>
+            </tr>
+        `;
+        $('#appointment_table_3').append(newRow1);
+    }else{
+      $('#dv_converted').css('display', 'block');
+      $('.highlight').removeClass('highlight');
+        $('#convertedDiv').addClass('highlight');
+        $('html, body').animate({
+            scrollTop: $('#convertedDiv').offset().top
+        }, 100);
+                    $('#vis_btn').attr('disabled', 'disabled');
+    }
+
+    const data = {
+        vis_id: visId,
+        visited_status: visStatus,
+        remark: remark,
+        next_call: next_call
+    };
+
+    $.ajax({
+        url: '/modify-vis',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+        success: function(response) {
+            alert('Form updated successfully!');
+            $('#errordiv1')
+                .removeClass('alert-danger')
+                .addClass('alert-success')
+                .text('Form updated successfully!')
+                .show();
+            row.addClass('locked');
+        },
+        error: function(xhr, status, error) {
+            alert('Error in saving form');
+            let response;
+            try {
+                response = JSON.parse(xhr.responseText);
+            } catch (e) {
+                response = { msg: 'Unknown error occurred' };
+            }
+            $('#errordiv1')
+                .removeClass('alert-success')
+                .addClass('alert-danger')
+                .text(response.msg || 'Error in saving form')
+                .show();
+            console.error('Error:', error);
+        }
+    });
+});
+
+                });
+
+                $('#vis_btn').attr('disabled', 'disabled');
+
+                $('#con_uhid').val(formData.uhid_no);
+                $('#con_doc').val(formData.doctor);
+                $('#con_clinic').val(formData.clinic);
+                $('#con_treat').val(formData.treatment);
+                $('#con_package').val(formData.package);
+
+                $('#con_uhid').prop('disabled', true);
+                $('#con_doc').prop('disabled', true);
+                $('#con_clinic').prop('disabled', true);
+
+                if (formData.visited_status === 'Booked') {
+                    $('#dv_converted').css('display', 'block');
+                    $('#vis_btn').attr('disabled', 'disabled');
+                } else if (formData.visited_status === 'Not Booked') {
+                    $('#dv_appointment').css('display', 'none');
+                    $('#dv_visited').css('display', 'none');
+                    $('#follow_up_btn').removeAttr('disabled');
+                    $('#apt_apt_btn').removeAttr('disabled');
+                    $('#vis_btn').removeAttr('disabled');
+                }
+            },
+            error: function(xhr, status, error) {
+                $(loadingDiv).hide();
+                alert('Error in saving form');
+                const response = JSON.parse(xhr.responseText);
+                $(errorDivId).removeClass('alert-success').addClass('alert-danger').text(response.msg).show();
+                console.error('Error:', error);
+            }
+        });
+    } else {
+        $(errorDivId).removeClass('alert-success').addClass('alert-danger').text(errorMessage).show();
+    }
+});
+
+$(document).on('change', '.visited_status', function() {
+    const id = $(this).data('id');
+    if ($(this).val() === 'Not Booked') {
+        $(`#remark${id}`).show();
+        $(`#next_call${id}`).show();
+    } else {
+        $(`#remark${id}`).hide();
+        $(`#next_call${id}`).hide();
+    }
+});
+
+
+function formatDate(dateString) {
+    if (!dateString) return '';
+    let dateObj = new Date(dateString);
+    return dateObj.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+    });
+}
+
+			  $(document).on('submit', '#conv_form', function(event) {
+        event.preventDefault();
+        
+        const {isValid,errorMessage,formData}=validateForm('#conv_form')
+
+        
+
+        const url = '/appointment_4'; // Adjust URL as per your endpoint for #conv_form
+        const loadingDiv = '#loadingIndicator5';
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(formData),
+            beforeSend: function() {
+                $(loadingDiv).text('Loading...').show();
+            },
+            success: function(response) {
+                $(loadingDiv).hide();
+        //           $('input[type="text"], input[type="number"], input[type="email"], input[type="date"], input[type="time"]').val('');
+        // $('textarea').val('');
+        // $('select').val('');
+                alert('Conversion form submitted successfully!');
+                // Assuming you want to append the data to #apt_table_4
+                $('#apt_table_4').append(`
+                    <tr>
+                        <td>${formData.uhid_no}</td>
+                        <td>${formData.doctor}</td>
+                        <td>${formData.clinic}</td>
+                        <td>${formData.treatment}</td>
+                        <td>${formData.package}</td>
+                        <td>${formData.con_date}</td>
+                    </tr>
+                `);
+            },
+            error: function(xhr, status, error) {
+                $(loadingDiv).hide();
+                alert('Error in saving conversion form');
+                const response = JSON.parse(xhr.responseText);
+                console.error('Error:', error);
+            }
+        });
+    });
+
+		// 	  $('#conv_form').on('submit', function(event) {
+        //   event.preventDefault()
+		//   let formDataArray = $(this).serializeArray();
+        // let formData = {};
+
+        // // Convert array to object
+        // $.each(formDataArray, function() {
+        //     formData[this.name] = this.value;
+        // });
+		// 		console.log('abccc',formData)
+		// 			$('#apt_table_4').append(`
+        //         <tr>
+        //             <td>${formData.con_uhid}</td>
+        //             <td>${formData.con_doc}</td>
+        //             <td>${formData.con_clinic}</td>
+        //             <td>${formData.con_treat}</td>
+        //             <td>${formData.con_package}</td>
+                   
+        //         </tr>
+        //     `);
+
+		     	
+        //       })
+	  
+	  
+
+
+			
+	});  
+
+  </script>
