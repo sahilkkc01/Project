@@ -182,34 +182,43 @@
                         <!--footer section start-->
                         <%- include('../footer'); -%>
                         
-                        <script src="../javascripts/statusUpdate.js"></script>
+                        <script src="../javascripts/updateStatus.js"></script>
                         <script src="../javascripts/pageUpdate.js"></script>
-
+                        <script src="../javascripts/ViewBtn.js"></script>
                             <script type="module">
                                 import { pagi_search } from '../javascripts/pagi_search.js';
                                 $(document).ready(function () {
 
                                     console.log("Document is ready");
                                     // Function to fetch and display data
+                                    let dataList
                                     function fetchData() {
                                         $.ajax({
                                             url: '/adminInv/get-tax-list',
                                             type: 'GET',
                                             success: function (data) {
                                                 console.log(data);
-                                                data.reverse();
+                                                dataList = data.result
+                                                dataList.reverse();
                                                 let tableRows = '';
-                                                data.forEach(function (item) {
+                                                dataList.forEach(function (item) {
                                                     console.log(item);
                                                     tableRows += `
-                                                <tr>
-                                                    <td><a type="button" class="btn btn-primary btn-style btn-change" onClick=updatePageTax(${item.id}) href='/adminInv/11'>View</a></td>
+                                                <tr data-store-id="${item.id}">
+                                                    <td><a type="button" class="btn btn-primary btn-style btn-change" id="view_btn">View</a></td>
                                                     <td>${item.tax_code}</td>
                                                     <td>${item.tax_desc}</td>
-                                                    <td><input class="form-check-input mt-0" type="checkbox" id='${item.id}' onClick=ChangeStatusTax(${item.id}) ${item.status ? 'checked' : ''}></td>
+                                                    <td><input class="form-check-input mt-0" type="checkbox" id='${item.id}' onClick=ChangeStatus('${item.id}','${data.Encschema}',${item.id}) ${item.status ? 'checked' : ''}></td>
                                                 </tr>
                                                 `;
                                                 });
+                                                $('#tax-table').on('click', '#view_btn', function() {
+                                                    const id=$(this).closest('tr').data('store-id')
+                                                    const route='11'
+                                                    const module='adminInv'
+                                                    console.log("id", id);
+                                                    ViewBtn(route,id,module) 
+                                                    });
                                                 $('#tax-table').html(tableRows);
                                                 pagi_search('#searchBox', '#taxTable', '#paginationControls');
                                             },
@@ -222,9 +231,11 @@
                                 });
                             </script>
                             <script>
-                                function ChangeStatusTax(id) {
-                                    let url = '/adminInv/update-tax-status'
-                                    ChangeStatus(id, url)
+                                function ChangeStatus(Id, Schema, id) {
+                                    console.log("Id", Id);
+                                    console.log("Schema", Schema);
+                                    isStatus = $("#" + id).prop("checked")
+                                    updateStatus(Id, isStatus,Schema)
                                 }
                                 function updatePageTax(id) {
                                     let url = '/adminInv/update-page-tax'

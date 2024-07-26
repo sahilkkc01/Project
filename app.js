@@ -15,6 +15,7 @@ var adminInventory = require('./routes/adminInventory');
 var billing = require('./routes/billing');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+const { radioRouter } = require('./routes/Radiology');
 
 const { kycCtrl ,dashboardCtrl,modifyApt,modifyVisit,apt1,apt2,apt3,apt4,login,register,logout} = require('./controllers/controller');
 
@@ -84,6 +85,7 @@ app.use('/billing', billing);
 app.use('/adminInv', adminInventory);
 app.use('/clinic', clinicRoutes);
 app.use('/users', usersRouter);
+app.use('/radiology',radioRouter);
 
 
 

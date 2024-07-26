@@ -5,8 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>LifeLinker</title>
-    <%-include('../header');-%>
+    <title>LifeLinkr</title>
+    <%-include('../header')-%>
         <!-- main content start -->
         <div class="main-content">
 
@@ -90,7 +90,7 @@
                     <div class="row">
 
                         <div class="col-lg-12 pl-lg-0 mt-2 ml-2">
-                            <h4 class="primary">Shelf Master</h4>
+                            <h4 class="primary">HSN Codes Master</h4>
                         </div>
                         <div class="col-lg-12 pl-lg-2 chart-grid">
                             <form>
@@ -102,14 +102,14 @@
 
                                             <!-- <div class="card-body"> -->
                                                 
-                                                <div class="form-row pl-lg-3 pr-lg-3 mt-2 mb-3">
+                                                <div class="form-row pl-lg-3 pr-lg-3 mt-2 mb-1">
                                                     <div class="col-5 mb-2">
                                                         <div class="form-group"><label
                                                                 class="input__label">Description</label><input
                                                                 name="description" type="text" id="searchBox"
                                                                 class="form-control input-style" placeholder=""></div>
                                                     </div>
-                                                    <div class="col-7 mb-2">
+                                                    <div class="col-7 mb-1">
                                                         <div class="form-group"><button type="button"
                                                                 class="btn btn-style mt-4 btn-primary btn-style btn-change"><strong><i
                                                                         class="fas fa-search"></i>
@@ -121,7 +121,7 @@
                                                     <div class="col-12">
                                                         <div class="form-group">
                                                             <div class="pl-xl-0">
-                                                                <h6 class="primary">LIST OF SHELF MASTER DETAILS</h6>
+                                                                <h6 class="primary">LIST OF HSN CODES MASTER DETAILS</h6>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -133,7 +133,7 @@
                                                             <div class="col col-12 pr-xl-0 pl-xl-0">
                                                                 <div class="slidx">
 
-                                                                    <table class="table2" id="ShelfMstTable">
+                                                                    <table class="table2" id="HSNTable">
                                                                         <thead>
                                                                             <tr>
                                                                                 <th contenteditable="true" width="15%">View</th>
@@ -143,7 +143,8 @@
                                                                                 <th contenteditable="true" width="15%">Status</th>
                                                                             </tr>
                                                                         </thead>
-                                                                        <tbody id="shelfMstBody">
+                                                                        <tbody id="HSNBody">
+                                                                            
                                                                         </tbody>
                                                                     </table>
                                                                 </div>
@@ -160,88 +161,80 @@
                                     </div>
                                 </div>
                                 <div class="form-group mt-1 mb-3 text-right">
-
                                     <button type="button" class="btn-success btn-style btn mt-3 mr-2" disabled><strong><i
                                         class="fa-regular fa-pen-to-square"></i> Modify</strong></button>
     
-                            <a type="button" class="btn-secondary btn-style btn mt-3 mr-2" href='/adminInv/16'><strong><i
+                            <a type="button" class="btn-secondary btn-style btn mt-3 mr-2" href="/adminInv/53"><strong><i
                                         class="fa-solid fa-plus"></i> New</strong></a>
     
                             <button type="button" class="btn-danger btn-style btn mt-3 mr-2" disabled><strong><i
                                         class="fas fa-times"></i> Cancel</strong></button>
     
-                            <button type="button" class="btn-primary btn-style btn mt-3" disabled><strong><i class="far fa-save"></i>
+                            <button type="button"  disabled class="btn-primary btn-style btn mt-3"><strong><i class="far fa-save"></i>
                                     Save</strong></button>
 
                                 </div>
                     </form>
                 </div>
                 <!--footer section start-->
-                <%-include('../footer');-%>
+                <%-include('../footer')-%>
                 <script src="../javascripts/updateStatus.js"></script>
                 <script src="../javascripts/pageUpdate.js"></script>
                 <script src="../javascripts/ViewBtn.js"></script>
-
-                <script type="module">
-                    import { pagi_search } from '../javascripts/pagi_search.js';
-                    $(document).ready(function () {
-
-                        console.log("Document is ready");
-                        // Function to fetch and display data
-                        let dataList
-                        function fetchData() {
-                            $.ajax({
-                                url: '/adminInv/get-shelf-master-list',
-                                type: 'GET',
-                                success: function (data) {
+                    <script type="module">
+                        import { pagi_search } from '../javascripts/pagi_search.js';
+                        $(document).ready(function () {
+                            console.log("Document is ready");
+                            // Function to fetch and display data
+                            let dataList
+                            function fetchData() {
+                                $.ajax({
+                                    url: '/adminInv/get-HSN-code',
+                                    type: 'GET',
+                                    success: function (data) {
                                         console.log(data);
                                         dataList = data.result
                                         dataList.reverse();
                                         let tableRows = '';
                                         dataList.forEach(function (item) {
-                                        console.log(item);
-                                        tableRows += `
-                                            <tr data-store-id="${item.id}">
-                                                <td><a type="button" class="btn btn-primary btn-style btn-change" id="view_btn">View</a></td>
-                                                <td>${item.shelf_code}</td>
-                                                <td>${item.shelf_desc}</td>
-                                                <td><input class="form-check-input mt-0" type="checkbox" id='${item.id}' onClick=ChangeStatus('${item.id}','${data.Encschema}',${item.id}) ${item.status ? 'checked' : ''}></td>
-                                            </tr>
-                                            `;
-                                    });
+                                            console.log(item);
+                                            tableRows += `
+                                                <tr data-store-id="${item.id}">
+                                                    <td><a type="button" class="btn btn-primary btn-style btn-change" id="view_btn">View</a></td>
+                                                    <td>${item.code}</td>
+                                                    <td>${item.description}</td>
+                                                    <td><input class="form-check-input mt-0" type="checkbox" id='${item.id}' onClick=ChangeStatus('${item.id}','${data.Encschema}',${item.id}) ${item.status ? 'checked' : ''}></td>
+                                                `;
+                                        });
 
-
-                                    $('#shelfMstBody').on('click', '#view_btn', function() {
+                                        $('#HSNBody').on('click', '#view_btn', function() {
                                                     const id=$(this).closest('tr').data('store-id')
-                                                    const route='16'
+                                                    const route='53'
                                                     const module='adminInv'
                                                     console.log("id", id);
                                                     ViewBtn(route,id,module) 
                                                     });
-
-
-                                    $('#shelfMstBody').html(tableRows);
-                                    pagi_search('#searchBox', '#ShelfMstTable', '#paginationControls');
-                                },
-                                error: function (xhr, status, error) {
-                                    console.error('Error fetching classification details:', error);
+                                        $('#HSNBody').html(tableRows);
+                                        pagi_search('#searchBox', '#cocTable', '#paginationControls');
+                                    },
+                                    error: function (xhr, status, error) {
+                                        console.error('Error fetching classification details:', error);
+                                    }
+                                });
+                            }
+                            fetchData();
+                        });
+                    </script>
+                    <script>
+                        function ChangeStatus(Id, Schema, id) {
+                                    console.log("Id", Id);
+                                    console.log("Schema", Schema);
+                                    isStatus = $("#" + id).prop("checked")
+                                    updateStatus(Id, isStatus,Schema)
                                 }
-                            });
+
+                        function updatePageItemCat(id) {
+                            let url = '/adminInv/set-id'
+                            updatePage(id, url)
                         }
-                        fetchData();
-                    });
-                </script>
-                <script>
-
-                    function ChangeStatus(Id, Schema, id) {
-                        console.log("Id", Id);
-                        console.log("Schema", Schema);
-                        isStatus = $("#" + id).prop("checked")
-                        updateStatus(Id, isStatus,Schema)
-                    }
-
-                    function updateSupplierPage(id) {
-                        let url = '/adminInv/update-shelfMst-page'
-                        updatePage(id, url)
-                    }
-                </script>
+                    </script>    

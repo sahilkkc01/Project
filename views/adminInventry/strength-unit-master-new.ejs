@@ -5,8 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>LifeLinker</title>
-    <%-include('../header');-%> 
+    <title>LifeLinkr</title>
+    <%-include('../header');-%>
         <!-- main content start -->
         <div class="main-content">
 
@@ -90,10 +90,10 @@
                     <div class="row">
 
                         <div class="col-lg-12 pl-lg-0 mt-2 ml-2">
-                            <h4 class="primary">Terms & Conditions Details</h4>
+                            <h4 class="primary">Strength Unit Master Details</h4>
                         </div>
                         <div class="col-lg-12 pl-lg-2 chart-grid">
-                            <form id="termCondiForm">
+                            <form id="strunitMstForm">
                                 <div id="errordiv1"></div>
                                 <div class="card card_border">
                                     <div class="">
@@ -101,38 +101,45 @@
 
                                         <div class="card">
 
-                                            <div class="card-body">
+                                            <!-- <div class="card-body"> -->
 
-                                                <div class="form-row">
-                                                    <div class="col-6">
-                                                        <div class="form-group"><label
-                                                                class="input__label">Code</label><input
-                                                                name="code" type="text" id="code" value="<%= result.code %>" placeholder="1" data-validation="required" data-error-message="Code is required."
-                                                                class="form-control input-style" placeholder=""></div>
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <div class="form-group"><label
-                                                                class="input__label">Description</label><textarea
-                                                                name="description" type="textarea"   data-validation="required" data-error-message="Code is required."
-                                                                class="form-control input-style" placeholder="<%= result.description %>"> </textarea></div>
-                                                    </div>
+                                                <div class="form-row pl-lg-3 pr-lg-3 mt-2 mb-3">
                                                     
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label class="input__label">Code</label>
+                                                                <input name="code" id="code" type="text" class="form-control input-style" value="<%= result.code %>" placeholder="1" data-validation="required" data-error-message="Code is required." >
+                                                            </div>
+                                                    </div>
+
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label class="input__label">Description</label>
+                                                                <input name="description" type="text" class="form-control input-style" placeholder="NA" value="<%= result.description %>" placeholder="1" data-validation="required" data-error-message="Code is required.">
+                                                            </div>
+                                                    </div>
+
                                                 </div>
-                                            </div>
+
+
+
+
+
+                                            <!-- </div> -->
                                         </div>
                                         <div id="loadingDiv"></div>
+
                                         <!--Past your code here ends-->
                                     </div>
                                 </div>
                                 <div class="form-group mt-1 mb-3 text-right">
-
                                     <button type="button" class="btn-success btn-style btn mt-3 mr-2" id="mod-btn" onclick="updateQuery()"><strong><i
                                         class="fa-regular fa-pen-to-square"></i> Modify</strong></button>
             
                             <button type="button" class="btn-secondary btn-style btn mt-3 mr-2" disabled><strong><i
                                         class="fa-solid fa-plus"></i> New</strong></button>
             
-                            <a type="button" class="btn-danger btn-style btn mt-3 mr-2" href="/adminInv/40"><strong><i
+                            <a type="button" class="btn-danger btn-style btn mt-3 mr-2" href="/adminInv/46"><strong><i
                                         class="fas fa-times" id="submitCancel"></i> Cancel</strong></a>
             
                             <button type="submit" class="btn-primary btn-style btn mt-3" id="sub-btn"><strong><i
@@ -152,7 +159,7 @@
                                             console.log("Document is ready");
                                     
                                             // Handle final submit button click
-                                            $('#termCondiForm').on('submit', function(event) {
+                                            $('#strunitMstForm').on('submit', function(event) {
                                                 event.preventDefault();
                                                 submitForms();
                                             });
@@ -161,30 +168,30 @@
                                             const submitForms = () => {
                                                 event.preventDefault();
                                     
-                                                const termCondiFormDetails = validateForm('#termCondiForm');
-                                                const { isValid: termCondiFormValid, errorMessage: termCondiFormError, formData: termCondiFormData } = termCondiFormDetails;
-                                                console.log(termCondiFormData);
+                                                const strUnitMstFormDetails = validateForm('#strunitMstForm');
+                                                const { isValid: strUnitMstFormValid, errorMessage: strUnitMstFormError, formData: strUnitMstFormData } = strUnitMstFormDetails;
+                                                console.log(strUnitMstFormData);
                                                 let id='<%= result.id %>';
                                                 if (id) {
                                                     console.log(id);
-                                                    termCondiFormData.id=id
+                                                    strUnitMstFormData.id=id
                                                 }
                     
                                                 const errorDivId = '#errordiv1';
                                     
-                                                if (termCondiFormValid) {
-                                                    const url = '/adminInv/term&CondictionFormSubmit';
+                                                if (strUnitMstFormValid) {
+                                                    const url = '/adminInv/str-unit-mst-FormSubmit';
                                                     const loadingDiv = '#loadingDiv';
-                                                    myAjax(termCondiFormData, errorDivId, url, loadingDiv);
+                                                    myAjax(strUnitMstFormData, errorDivId, url, loadingDiv);
                                                 } else {
-                                                    alert(termCondiFormError);
-                                                    $(errorDivId).removeClass('alert-success').addClass('alert-danger').text(termCondiFormError).show();
+                                                    alert(strUnitMstFormError);
+                                                    $(errorDivId).removeClass('alert-success').addClass('alert-danger').text(strUnitMstFormError).show();
                                                 }
                                             };
                                     
                                             // Function to reset forms
                                             const resetForms = () => {
-                                                $('#therapeutiClassForm')[0].reset();
+                                                $('#storeTypeForm')[0].reset();
                                                 // Hide error messages
                                                 $('#errordiv1').hide();
                                             };
@@ -194,6 +201,8 @@
                                                 resetForms();
                                             });
                                         });
+                    
+                    
                                     </script>
                                     <script>
                                         function updateQuery(){

@@ -64,6 +64,12 @@
       pointer-events: none;
       opacity: 0.6;
     }
+    .lockField {
+  background-color: #e5dddd;
+  pointer-events: none;
+  opacity: 0.6;
+  user-select: none; /* Prevent text selection */
+}
     .slidex{display:block;overflow-x:auto;}
   </style>
 </head>
@@ -147,8 +153,8 @@
                 <li><a href="/adminInv/26">Storage Type</a> </li>
                 <li><a href="/adminInv/28">Dispensing Type</a> </li>
                 <li><a href="/adminInv/30">Molecule</a> </li>
-                <li><a href="/adminInv/32">Pregnancy Class</a> </li>
-                <li><a href="/adminInv/34">Item Company</a> </li>
+                <!-- <li><a href="/adminInv/32">Pregnancy Class</a> </li> -->
+                <li><a href="/adminInv/34">Manufacturer</a> </li>
                 <li><a href="/adminInv/36">Therapeutic Class</a> </li>
                 <li><a href="/adminInv/38">Unit Of Measurement</a> </li>
                 <li><a href="/adminInv/40">Terms & Conditions</a> </li>
@@ -180,8 +186,21 @@
               <li><a href="/patient/29">List of Agent Master</a></li> 
               </ul>        
             
-          </li>    
+          </li>   
+          <li class="menu-list">
+            <a href="#"><i class="fas fa-x-ray fa-fw"></i>
+              <span>Radiology <i class="fas fa-chevron-down"></i></span></a>
+              <ul class="sub-menu-list scrollmenu" >
+                <li><a href="/radiology/1">Modality</a> </li>
+                <li><a href="/radiology/3">Template Result</a> </li>
+                <li><a href="/radiology/5">Template Master</a> </li>
+                <li><a href="/radiology/7">Define Radiology</a> </li>
+                <li><a href="/radiology/8">Test Master</a> </li>
+              </ul>
+          </li> 
         </ul>
+        
+
         
         <!-- //sidebar nav end -->
         <!-- toggle button start -->

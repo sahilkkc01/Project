@@ -180,6 +180,7 @@
                 <%-include('../footer')-%>
                 <script src="../javascripts/updateStatus.js"></script>
                 <script src="../javascripts/pageUpdate.js"></script>
+                <script src="../javascripts/ViewBtn.js"></script>
                     <script type="module">
                         import { pagi_search } from '../javascripts/pagi_search.js';
                         $(document).ready(function () {
@@ -198,8 +199,8 @@
                                         dataList.forEach(function (item) {
                                         console.log(item);
                                         tableRows += `
-                                                <tr>
-                                                    <td><a type="button" class="btn btn-primary btn-style btn-change" onClick=updatePageItemCat(${item.id}) href='/adminInv/25'>View</a></td>
+                                                <tr data-store-id="${item.id}">
+                                                    <td><a type="button" class="btn btn-primary btn-style btn-change" id="view_btn">View</a></td>
                                                     <td>${item.code}</td>
                                                     <td>${item.description}</td>
                                                     <td>${item.general_ledger}</td>
@@ -207,6 +208,15 @@
                                                 
                                                 `;
                                         });
+
+                                        $('#itemGroup').on('click', '#view_btn', function() {
+                                                    const id=$(this).closest('tr').data('store-id')
+                                                    const route='25'
+                                                    const module='adminInv'
+                                                    console.log("id", id);
+                                                    ViewBtn(route,id,module) 
+                                                    });
+
                                         $('#itemGroup').html(tableRows);
                                         pagi_search('#searchBox', '#itemGroupTable', '#paginationControls');
                                     },

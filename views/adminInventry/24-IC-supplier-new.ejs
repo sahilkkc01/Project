@@ -107,14 +107,14 @@
                                                     <div class="form-group">
                                                         <label class="input__label" for="code">Code </label>
                                                         <input id="code" name="code" type="text" class="form-control input-style" value="<%= result.code %>" <%= result.id ? 'disabled':'' %>
-                                                            placeholder="1" data-validation="required" data-error-message="Code is required.">
+                                                            placeholder="" data-validation="required" data-error-message="Code is required.">
                                                     </div>
                                                 </div>
                                                 <div class="col-3 mb-3">
                                                     <div class="form-group">
                                                         <label class="input__label" for="description">Description</label>
                                                         <input id="description" name="description" value="<%= result.description %>" type="text" class="form-control input-style"
-                                                            placeholder="SAR HEALTHLINE PVT LTD" data-validation="required"
+                                                            placeholder="" data-validation="required"
                                                             data-error-message="Description is required.">
                                                     </div>
                                                 </div>
@@ -131,10 +131,10 @@
                                                 <div class="col-3 mb-3">
                                                     <div class="form-group">
                                                         <label class="input__label" for="state">State</label>
-                                                        <select id="state" name="state" class="form-control input-style" data-validation="required"
+                                                        <select id="state" name="state" class="form-control input-style" onchange="loadCity(this)" data-validation="required"
                                                             data-error-message="State is required.">
                                                             <option value="<%= result.state ? result.state : '' %>"><%= result.id ? result.state : 'Select' %></option>
-                                                            <option>Telangana</option>
+                                                            
                                                         </select>
                                                     </div>
                                                 </div>
@@ -147,25 +147,22 @@
                                                         <select id="city" name="city" class="form-control input-style" data-validation="required"
                                                             data-error-message="City is required.">
                                                             <option value="<%= result.city ? result.city : '' %>"><%= result.id ? result.city : 'Select' %></option>
-                                                            <option>Hyderabad</option>
+                                                           
                                                         </select>
                                                     </div>
                                                 </div>
                                                 <div class="col-3 mb-3">
                                                     <div class="form-group">
                                                         <label class="input__label" for="area">Area</label>
-                                                        <select id="area" name="area" class="form-control input-style" data-validation="required"
-                                                            data-error-message="Area is required.">
-                                                            <option value="<%= result.area ? result.area : '' %>"><%= result.id ? result.area : 'Select' %></option>
-                                                            <option value="cvv">cvv</option>
-                                                        </select>
+                                                        <input id="area" name="area" type="text" class="form-control input-style" value="<%= result.area %>"
+                                                        placeholder="" data-validation="required" data-error-message="Area is required.">
                                                     </div>
                                                 </div>
                                                 <div class="col-3 mb-3">
                                                     <div class="form-group">
                                                         <label class="input__label" for="pin_code">Pin Code</label>
-                                                        <input id="pin_code" name="pin_code" type="text" class="form-control input-style" value="<%= result.pin_code %>"
-                                                            placeholder="500016" data-validation="required" data-error-message="Pin Code is required.">
+                                                        <input id="pin_code" name="pin_code" type="number" class="form-control input-style only-6" value="<%= result.pin_code %>"
+                                                            placeholder="" data-validation="required" data-error-message="Pin Code is required.">
                                                     </div>
                                                 </div>
                                                 <div class="col-3 mb-3">
@@ -174,7 +171,15 @@
                                                         <select id="supplier_category" name="supplier_category" class="form-control input-style"
                                                             data-validation="required" data-error-message="Supplier Category is required.">
                                                             <option value="<%= result.supplier_category ? result.supplier_category : '' %>"><%= result.id ? result.supplier_category : 'Select' %></option>
-                                                            <option value="bff">bff</option>
+                                                            <% if (SupCat.length>0) {
+                                                                for (let i = 0; i < SupCat.length; i++) { %>
+                                                                    <option value="<%= SupCat[i].description%>"><%= SupCat[i].description%></option>
+                                                                    <% } } else { %>
+                                                                
+                                                                            <option>No any Suppiler</option>
+                                                                    
+                                                                        <% } %>
+
                                                         </select>
                                                     </div>
                                                 </div>
@@ -184,16 +189,16 @@
                                                 <div class="col-3 mb-3">
                                                     <div class="form-group">
                                                         <label class="input__label" for="address_line_1">Address Line 1</label>
-                                                        <textarea id="address_line_1" name="address_line_1" class="form-control input-style" value="<%= result.address_line_1 %>"
-                                                            placeholder="Flat No 201, 2nd Flore" data-validation="required"
-                                                            data-error-message="Address Line 1 is required."></textarea>
+                                                        <textarea id="address_line_1" name="address_line_1" class="form-control input-style" 
+                                                            placeholder="" data-validation="required"
+                                                            data-error-message="Address Line 1 is required."><%= result.address_line_1 %></textarea>
                                                     </div>
                                                 </div>
                                                 <div class="col-3 mb-3">
                                                     <div class="form-group">
                                                         <label class="input__label" for="address_line_2">Address Line 2</label>
                                                         <textarea id="address_line_2" name="address_line_2" class="form-control input-style" value="<%= result.address_line_2 %>"
-                                                            placeholder="Indian Airlines Colony" data-validation="required"
+                                                            placeholder="" data-validation=""
                                                             data-error-message="Address Line 2 is required."></textarea>
                                                     </div>
                                                 </div>
@@ -201,14 +206,14 @@
                                                     <div class="form-group">
                                                         <label class="input__label" for="address_line_3">Address Line 3</label>
                                                         <textarea id="address_line_3" name="address_line_3" class="form-control input-style" value="<%= result.address_line_3 %>"
-                                                            placeholder="Begampet, Hyderabad" data-validation="required"
+                                                            placeholder="" data-validation=""
                                                             data-error-message="Address Line 3 is required."></textarea>
                                                     </div>
                                                 </div>
                                                 <div class="col-3 mb-3">
                                                     <div class="form-group">
                                                         <label class="input__label" for="depreciation">Depreciation</label>
-                                                        <input id="depreciation" name="depreciation" type="text" value="<%= result.depreciation %>"
+                                                        <input id="depreciation" name="depreciation" type="number" value="<%= result.depreciation %>"
                                                             class="form-control input-style" placeholder="" data-validation="required"
                                                             data-error-message="Depreciation is required.">
                                                     </div>
@@ -219,15 +224,15 @@
                                                 <div class="col-3 mb-3">
                                                     <div class="form-group">
                                                         <label class="input__label" for="rating">Rating</label>
-                                                        <input id="rating" name="rating" type="text" class="form-control input-style" value="<%= result.rating %>"
+                                                        <input id="rating" name="rating" type="number" class="form-control input-style" value="<%= result.rating %>"
                                                             placeholder="" data-validation="required" data-error-message="Rating is required.">
                                                     </div>
                                                 </div>
                                                 <div class="col-3 mb-3">
                                                     <div class="form-group">
                                                         <label class="input__label" for="po_auto_close_days">PO Auto Close (Days)</label>
-                                                        <input id="po_auto_close_days" name="po_auto_close_days" type="text" value="<%= result.po_auto_close_days %>"
-                                                            class="form-control input-style" placeholder="0" data-validation="required"
+                                                        <input id="po_auto_close_days" name="po_auto_close_days" type="number" value="<%= result.po_auto_close_days %>"
+                                                            class="form-control input-style" placeholder="" data-validation="required"
                                                             data-error-message="PO Auto Close (Days) is required.">
                                                     </div>
                                                 </div>
@@ -261,7 +266,7 @@
                                                                 <div class="form-group">
                                                                     <label class="input__label" for="contact_person_1_name">Name</label>
                                                                     <input id="contact_person_1_name" name="contact_person_1_name" type="text" value="<%= result.contact_person_1_name %>"
-                                                                        class="form-control input-style" placeholder="Naveen"
+                                                                        class="form-control input-style" placeholder=""
                                                                         data-validation="required" data-error-message="Name is required.">
                                                                 </div>
                                                             </div>
@@ -269,7 +274,7 @@
                                                                 <div class="form-group">
                                                                     <label class="input__label" for="contact_person_1_mobile_no">Mobile No</label>
                                                                     <input id="contact_person_1_mobile_no" name="contact_person_1_mobile_no" value="<%= result.contact_person_1_mobile_no %>"
-                                                                        type="text" class="form-control input-style" placeholder="9849988684"
+                                                                        type="number" class="form-control input-style only-10" placeholder=""
                                                                         data-validation="required"
                                                                         data-error-message="Mobile No is required.">
                                                                 </div>
@@ -277,7 +282,7 @@
                                                             <div class="col-3 mb-3">
                                                                 <div class="form-group">
                                                                     <label class="input__label" for="contact_person_1_email">Email</label>
-                                                                    <input id="contact_person_1_email" name="contact_person_1_email" type="text" value="<%= result.contact_person_1_email %>"
+                                                                    <input id="contact_person_1_email" name="contact_person_1_email" type="email" value="<%= result.contact_person_1_email %>"
                                                                         class="form-control input-style" placeholder=""
                                                                         data-validation="required" data-error-message="Email is required.">
                                                                 </div>
@@ -286,7 +291,7 @@
                                                                 <div class="form-group">
                                                                     <label class="input__label" for="contact_person_1_phone_no">Phone No</label>
                                                                     <input id="contact_person_1_phone_no" name="contact_person_1_phone_no" value="<%= result.contact_person_1_phone_no %>"
-                                                                        type="text" class="form-control input-style" placeholder=""
+                                                                        type="number" class="form-control input-style only-10" placeholder=""
                                                                         data-validation="required"
                                                                         data-error-message="Phone No is required.">
                                                                 </div>
@@ -295,7 +300,7 @@
                                                                 <div class="form-group"><label class="input__label">Fax</label><input id="contact_person_1_fax" value="<%= result.contact_person_1_fax %>"
                                                                         name="contact_person_1_fax" type="text" class="form-control input-style"
                                                                         placeholder=""
-                                                                        data-validation="required"
+                                                                        data-validation=""
                                                                         data-error-message="Phone No is required."></div>
                                                             </div>
                                                         </div>
@@ -311,31 +316,31 @@
                         <div class="col-3 mb-3">
                             <div class="form-group"><label class="input__label">Name</label><input id="contact_person_2_name" value="<%= result.contact_person_2_name %>"
                                     name="contact_person_2_name" type="text" class="form-control input-style" 
-                                    placeholder="Naveen" data-validation="required"
+                                    placeholder="" data-validation=""
                                     data-error-message="Name is required."></div>
                         </div>
                         <div class="col-3 mb-3">
                             <div class="form-group"><label class="input__label">Mobile No</label><input
-                                    id="contact_person_2_mobile_no" name="contact_person_2_mobile_no" type="text" value="<%= result.contact_person_2_mobile_no %>"
-                                    class="form-control input-style" placeholder="9849988684" data-validation="required"
+                                    id="contact_person_2_mobile_no" name="contact_person_2_mobile_no" type="number" value="<%= result.contact_person_2_mobile_no %>"
+                                    class="form-control input-style only-10" placeholder="" data-validation=""
                                     data-error-message="Mobile No is required."></div>
                         </div>
                         <div class="col-3 mb-3">
                             <div class="form-group"><label class="input__label">Email</label><input id="contact_person_2_email" value="<%= result.contact_person_2_email %>"
-                                    name="contact_person_2_email" type="text" class="form-control input-style"
-                                    placeholder="" data-validation="required"
+                                    name="contact_person_2_email" type="email" class="form-control input-style"
+                                    placeholder="" data-validation=""
                                     data-error-message="Email is required."></div>
                         </div>
                         <div class="col-3 mb-3">
                             <div class="form-group"><label class="input__label">Phone No</label><input value="<%= result.contact_person_2_phone_no %>"
-                                    id="contact_person_2_phone_no" name="contact_person_2_phone_no" type="text"
-                                    class="form-control input-style" placeholder="" data-validation="required"
+                                    id="contact_person_2_phone_no" name="contact_person_2_phone_no" type="number"
+                                    class="form-control input-style only-10" placeholder="" data-validation=""
                                     data-error-message="Phone No is required."></div>
                         </div>
                         <div class="col-3 mb-3">
                             <div class="form-group"><label class="input__label">Fax</label><input id="contact_person_2_fax" value="<%= result.contact_person_2_fax %>"
                                     name="contact_person_2_fax" type="text" class="form-control input-style"
-                                    placeholder="" data-validation="required"
+                                    placeholder="" data-validation=""
                                     data-error-message="Fax is required."></div>
                         </div>
                     </div>
@@ -360,27 +365,54 @@
                                     data-validation="required" data-error-message="Mode of payment is required.">
                                     <option value="<%= result.mode_of_payment ? result.mode_of_payment : '' %>"><%= result.id ? result.mode_of_payment : 'Select' %></option>
                                     <option value="cash">Cash</option>
+                                    <option value="upi">UPI</option>
+                                    <option value="cheque">Cheque</option>
+                                    <option value="creditCard">Credit Card</option>
+                                    <option value="debitCard">Debite Card</option>
                                 </select></div>
                         </div>
                         <div class="col-3 mb-3">
-                            <div class="form-group"><label class="input__label">Terms of Payment</label><select
+                            <div class="form-group"><label class="input__label">Terms of Payment</label>
+                                <select
                                     id="terms_of_payment" name="terms_of_payment" class="form-control input-style"
                                     data-validation="required"data-error-message="Terms of payment is required.">
                                     <option value="<%= result.terms_of_payment ? result.terms_of_payment : '' %>"><%= result.id ? result.terms_of_payment : 'Select' %></option>
-                                    <option value="cash">Cash</option>
+                                   <option value="0">0</option>
+                                   <option value="7">7</option>
+                                   <option value="15">15</option>
+                                   <option value="20">20</option>
+                                   <option value="39">30</option>
+                                   <option value="45">45</option>
+                                   <option value="60">60</option>
+                                   <option value="75">75 </option> 
+                                   <option value="90">90</option> 
+                                   <option value="120">120</option> 
                                 </select></div>
                         </div>
                         <div class="col-3 mb-3">
-                            <div class="form-group"><label class="input__label">Tax Nature</label><input
-                                    id="tax_nature" name="tax_nature" type="text" class="form-control input-style" value="<%= result.tax_nature %>"
-                                    placeholder=""  data-validation="required" data-error-message="Tax Nature is required."></div>
+                            <div class="form-group"><label class="input__label">Tax Nature</label>
+                                
+                                <select
+                                    id="tax_nature" name="tax_nature" class="form-control input-style"
+                                    data-validation="required"data-error-message="Terms Nature is required.">
+                                    <option value="<%= result.tax_nature ? result.tax_nature : '' %>"><%= result.id ? result.tax_nature : 'Select' %></option>
+                                   <option value="YES">YES</option>
+                                   <option value="NO">NO</option>
+                                  
+                                </select>
+                                </div>
                         </div>
                         <div class="col-3 mb-3">
                             <div class="form-group"><label class="input__label">Currency</label><select id="currency"
                                     name="currency" class="form-control input-style" data-validation="required"
                                     data-error-message="Currency is required.">
                                     <option value="<%= result.currency ? result.currency : '' %>"><%= result.id ? result.currency : 'Select' %></option>
-                                    <option value="Rupee">rupee</option>
+                                    <% if (Currency.length>0) {
+                                        for (let i = 0; i < Currency.length; i++) { %>
+                                            <option value="<%= Currency[i].currency_desc%>"><%= Currency[i].currency_desc%></option>
+                                                <% } } else { %>                            
+                                                    <option>No any Suppiler</option>                            
+                                                <% } %>
                                 </select></div>
                         </div>
                     </div>
@@ -402,7 +434,7 @@
                         <div class="col-3 mb-3">
                             <div class="form-group">
                                 <label class="input__label" for="gst_registration_no">GST Registration No</label>
-                                <input id="gst_registration_no" name="gst_registration_no" type="text" value="<%= result.x %>"
+                                <input id="gstin_number" name="gstin_number" type="text" value="<%= result.gstin_number %>"
                                     class="form-control input-style" placeholder=""
                                     data-validation="required" data-error-message="GST Registration No is required.">
                             </div>
@@ -415,7 +447,7 @@
                                     data-validation="required" data-error-message="MST Number is required.">
                             </div>
                         </div>
-                        <div class="col-3 mb-3">
+                        <!--     <div class="col-3 mb-3">
                             <div class="form-group">
                                 <label class="input__label" for="cst_number">CST Number</label>
                                 <input id="cst_number" name="cst_number" type="text" value="<%= result.cst_number %>"
@@ -423,14 +455,16 @@
                                     data-validation="required" data-error-message="CST Number is required.">
                             </div>
                         </div>
-                        <div class="col-3 mb-3">
-                            <div class="form-group">
-                                <label class="input__label" for="vat_number">VAT Number</label>
-                                <input id="vat_number" name="vat_number" type="text" value="<%= result.vat_number %>"
-                                    class="form-control input-style" placeholder=""
-                                    data-validation="required" data-error-message="VAT Number is required.">
-                            </div>
-                        </div>
+                      
+<div class="col-3 mb-3">
+    <div class="form-group">
+        <label class="input__label" for="vat_number">VAT Number</label>
+        <input id="vat_number" name="vat_number" type="text" value="<%= result.vat_number %>" class="form-control input-style" placeholder=""
+            data-validation="required" data-error-message="VAT Number is required.">
+    </div>
+</div>
+-->
+
                         <div class="col-3 mb-3">
                             <div class="form-group">
                                 <label class="input__label" for="drug_licence_number">Drug Licence Number</label>
@@ -485,20 +519,68 @@
                     <div id="loadingDiv"></div>
 
                 </div>
+
+                
                 <%-include('../footer');-%>
-                <script>
+                <script >
+                        
+                        function loadCity(a) {
+    $.ajax({
+        url: '/clinic/cities', // Endpoint to fetch all cities
+        type: 'GET',
+        success: function(data) {
+        console.log(data);
+        
+        let selectOptions = '<option value="">Select city</option>'; // Initial select option
+        
+        // Filter cities based on selected stateCode
+        const filteredCities = data.filter(city => city.stateCode === a.value);
+        
+        filteredCities.forEach(function(city) {
+            selectOptions += `
+            <option value="${city.cityName}">${city.cityName}</option>
+            `;
+        });
+        
+        $('#city').html(selectOptions); // Populate select options
+        },
+        error: function(xhr, status, error) {
+        console.error('Error fetching cities:', error);
+        }
+    });
+    }
+
+
+                    
+                        function loadState(a){
+                fetch('/clinic/reloadState')
+                    .then(response => response.json())
+                    .then(data => {
+                        const dropdown = document.getElementById(a);
+                        data.forEach(state => {
+                            const option = document.createElement('option');
+                            option.value = state.stateCode;
+                            option.textContent = state.stateName;
+                            dropdown.appendChild(option);
+                            
+                        });
+                    })
+                    .catch(error => console.error('Error fetching states:', error));
+                }
+            loadState('state');
+            
 
 
 function updateQuery(){
                         console.log("Onclick");
         $('#mod-btn').prop('disabled', true);   
-        $('input[data-validation], select[data-validation]').prop('disabled', false);
+        $('input[data-validation], select[data-validation],textarea[data-validation]').prop('disabled', false);
         $('#code').prop('disabled', true);
         document.getElementById('sub-btn').disabled = false;
       }
       if('<%= result.id %>'!==''){
         console.log($('input[data-validation], select[data-validation]'));
-        $('input[data-validation], select[data-validation]').prop('disabled', true);
+        $('input[data-validation], select[data-validation],textarea[data-validation]').prop('disabled', true);
         document.getElementById('sub-btn').disabled = true;
         document.getElementById('mod-btn').disabled = false;
         
@@ -512,6 +594,10 @@ function updateQuery(){
                 <script type="module">
                     import { validateForm } from '../javascripts/validation.js';
                     import { myAjax } from '../javascripts/myAjax.js';
+                    import { numVal} from '../javascripts/lengthVal.js';
+		
+        numVal('.only-10',10);
+		numVal('.only-6',6);
                 
                     $(document).ready(function() {
                         console.log("Document is ready");

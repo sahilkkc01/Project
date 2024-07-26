@@ -5,10 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>LifeLinker</title>
+    <title>LifeLinkr</title>
     <%-include('../header');-%>
-
-        <!-- //header-ends -->
         <!-- main content start -->
         <div class="main-content">
 
@@ -92,11 +90,11 @@
                     <div class="row">
 
                         <div class="col-lg-12 pl-lg-0 mt-2 ml-2">
-                            <h4 class="primary">Tax Details</h4>
+                            <h4 class="primary">HSN Codes Master Details</h4>
                         </div>
                         <div class="col-lg-12 pl-lg-2 chart-grid">
-                            <div id="errordiv1"></div>
-                            <form id="tax" method="post">
+                            <form id="HSNForm">
+                                <div id="errordiv1"></div>
                                 <div class="card card_border">
                                     <div class="">
                                         <!--Past your code here starts-->
@@ -106,59 +104,22 @@
                                             <!-- <div class="card-body"> -->
 
                                                 <div class="form-row pl-lg-3 pr-lg-3 mt-2 mb-3">
-                                                    <div class="col-6">
-                                                        <div class="form-group"><label
-                                                                class="input__label">Code </label><input
-                                                                 type="text"
-                                                                class="form-control input-style" placeholder="224" id="tax_code" name="tax_code" data-validation="required" data-error-message="Tax Code  is required." value="<%= result.tax_code %>" <%= result.id ? 'disabled' : '' %>></div>
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <div class="form-group"><label
-                                                                class="input__label">Description</label><input
-                                                                 type="text"
-                                                                class="form-control input-style" placeholder="Hospimedica International Ltd." id="tax_desc" name="tax_desc" data-validation="required" data-error-message="Description Tax  is required." value="<%= result.tax_desc %>"></div>
-                                                    </div>
                                                     
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label class="input__label">Code</label>
+                                                                <input type="text" class="form-control input-style" value="<%= result.code %>" placeholder="224" id="code" name="code" data-validation="required" data-error-message="Code is required." >
+                                                            </div>
+                                                    </div>
+
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label class="input__label">Description</label>
+                                                                <input name="description" type="text" class="form-control input-style" value="<%= result.description %>" placeholder="224" data-validation="required" data-error-message="Code is required.">
+                                                            </div>
+                                                    </div>
+
                                                 </div>
-
-
-
-                                               
- 
-
-<!-- The Modal
-  <div class="modal" id="myModal">
-	<div class="modal-dialog modal-xl">
-	  <div class="modal-content">
-  
-		 Modal Header 
-		<div class="modal-header">
-			<a href="#" class="btn-close" data-bs-dismiss="modal"><i class="fa-solid fa-circle-xmark"></i></a>
-		</div>
-  
-		 Modal body
-		<div class="modal-body">
-			<div class="row">
-				<table class="table2">
-				<tr>
-				<th>&nbsp;</th>
-				<th>Name</th>
-				<th>Designation</th>
-				</tr>
-				<tr>
-				<td><button type="submit" class="btn btn-primary btn-style btn-change">Select</button></td>
-				<td>Bharat</td>
-				<td>Customer Care Executive</td>
-				</tr>
-				</table>
-			  </div>
-		</div>
-  
-	  </div>
-	</div>
-  </div> -->
-
-
 
 
 
@@ -166,51 +127,50 @@
 
                                             <!-- </div> -->
                                         </div>
-
+                                        <div id="loadingDiv"></div>
                                         <!--Past your code here ends-->
                                     </div>
                                 </div>
                                 <div class="form-group mt-1 mb-3 text-right">
 
                                     <button type="button" class="btn-success btn-style btn mt-3 mr-2" id="mod-btn" onclick="updateQuery()"><strong><i
-                                                class="fa-regular fa-pen-to-square"></i> Modify</strong></button>
+                                        class="fa-regular fa-pen-to-square"></i> Modify</strong></button>
 
-                                    <button type="button" class="btn-secondary btn-style btn mt-3 mr-2" disabled data-bs-target="#myModal" data-bs-toggle="modal" disabled><strong><i
-                                                class="fa-solid fa-plus"></i> New</strong></button>
+                            <button type="button" class="btn-secondary btn-style btn mt-3 mr-2" disabled><strong><i
+                                        class="fa-solid fa-plus"></i> New</strong></button>
 
-                                    <a type="button" class="btn-danger btn-style btn mt-3 mr-2" href="/adminInv/5"><strong><i
-                                                class="fas fa-times"></i> Cancel</strong></a>
+                            <a type="button" class="btn-danger btn-style btn mt-3 mr-2" href="/adminInv/52"><strong><i
+                                        class="fas fa-times" id="submitCancel"></i> Cancel</strong></a>
 
-                                    <button type="submit" class="btn-primary btn-style btn mt-3" id="sub-btn"><strong><i
-                                                class="far fa-save"></i>
-                                            Save</strong></button>
+                            <button type="submit" class="btn-primary btn-style btn mt-3" id="sub-btn"><strong><i
+                                        class="far fa-save"></i>
+                                    Save</strong></button>
 
                                 </div>
                             </form>
                             <div id="loadingDiv"></div>
                         </div>
                         <%-include('../footer');-%>
-
-                        
                         <script>
                             function updateQuery(){
                         console.log("Onclick");
-        $('#mod-btn').prop('disabled', true);   
-        $('input[data-validation], select[data-validation]').prop('disabled', false);
-        $('#tax_code').prop('disabled', true);
-        document.getElementById('sub-btn').disabled = false;
-      }
-      if('<%= result.id %>'!==''){
-        
-        $('input[data-validation], select[data-validation]').prop('disabled', true);
-        document.getElementById('sub-btn').disabled = true;
-        document.getElementById('mod-btn').disabled = false;
-        
-      }else{
-       
-        document.getElementById('mod-btn').disabled = true;
-      }
+                                    $('#mod-btn').prop('disabled', true);   
+                                    $('input[data-validation], select[data-validation]').prop('disabled', false);
+                                    $('#code').prop('disabled', true);
+                                    document.getElementById('sub-btn').disabled = false;
+                                }
+                                if('<%= result.id %>'!==''){
+                                    
+                                    $('input[data-validation], select[data-validation]').prop('disabled', true);
+                                    document.getElementById('sub-btn').disabled = true;
+                                    document.getElementById('mod-btn').disabled = false;
+                                    
+                                }else{
+                                
+                                    document.getElementById('mod-btn').disabled = true;
+                                }
                         </script>
+
                         <script type="module">
                             import { validateForm } from '../javascripts/validation.js';
                             import { myAjax } from '../javascripts/myAjax.js';
@@ -219,52 +179,47 @@
                                 console.log("Document is ready");
                         
                                 // Handle final submit button click
-                                $('#tax').on('submit', function(event) {
+                                $('#HSNForm').on('submit', function(event) {
                                     event.preventDefault();
-                                    submitForms(event);
+                                    submitForms();
                                 });
                         
                                 // Function to submit forms
-                                const submitForms = (event) => {
+                                const submitForms = () => {
                                     event.preventDefault();
                         
-                                    const taxFormDetails = validateForm('#tax');
-                                    const { isValid: isTaxFormValid, errorMessage: taxFormError, formData: taxFormData } = taxFormDetails;
-                        
-                                    // Handle checkbox values (assuming similar checkboxes exist in the form)
-                                
-                                    console.log(taxFormData);
+                                    const HSNFormDetails = validateForm('#HSNForm');
+                                    const { isValid: HSNFormValid, errorMessage: HSNFormError, formData: HSNFormData } = HSNFormDetails;
+                                    console.log(HSNFormData);
                                     let id='<%= result.id %>'
                                     if(id){
-                                        taxFormData.id=id
+                                        console.log("hello Id", id);
+                                        HSNFormData.id=id
                                     }
                                     const errorDivId = '#errordiv1';
                         
-                                    if (isTaxFormValid) {
-                                        const url = '/adminInv/TaxSubmit';
+                                    if (HSNFormValid) {
+                                        const url = '/adminInv/HSNSubmit';
                                         const loadingDiv = '#loadingDiv';
-                                        myAjax(taxFormData, errorDivId, url, loadingDiv);
+                                        myAjax(HSNFormData, errorDivId, url, loadingDiv);
                                     } else {
-                                        alert(taxFormError);
-                                        $(errorDivId).removeClass('alert-success').addClass('alert-danger').text(taxFormError).show();
+                                        alert(HSNFormError);
+                                        $(errorDivId).removeClass('alert-success').addClass('alert-danger').text(HSNFormError).show();
                                     }
                                 };
+                        
                                 // Function to reset forms
                                 const resetForms = () => {
-                                    $('#tax')[0].reset();
+                                    $('#HSNForm')[0].reset();
                                     // Hide error messages
                                     $('#errordiv1').hide();
                                 };
                         
                                 // Attach reset function to cancel button
-                                // $('#submitCancel').on('click', function() {
-                                //     resetForms();
-                                // });
+                                $('#submitCancel').on('click', function() {
+                                    resetForms();
+                                });
                             });
                         </script>
                         
-
-                        <script>
-
-                            
-                        </script>
+                        

@@ -147,38 +147,7 @@
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody id="supplierCtgory-table">
-                                                                        <tr>
-                                                                            <td contenteditable="true"><button
-                                                                                    type="submit"
-                                                                                    class="btn btn-primary btn-style btn-change">View</button>
-                                                                            </td>
-                                                                            <td contenteditable="true">224
-                                                                            </td>
-                                                                            <td contenteditable="true">Hospimedica
-                                                                                International Ltd.
-                                                                            </td>
 
-                                                                            <td contenteditable="true"><input
-                                                                                    class="form-check-input mt-1"
-                                                                                    type="checkbox" id="gridCheck1">
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td contenteditable="true"><button
-                                                                                    type="submit"
-                                                                                    class="btn btn-primary btn-style btn-change">View</button>
-                                                                            </td>
-                                                                            <td contenteditable="true">RD001
-                                                                            </td>
-                                                                            <td contenteditable="true">Wholesale
-                                                                                Medicine
-                                                                            </td>
-
-                                                                            <td contenteditable="true"><input
-                                                                                    class="form-check-input mt-1"
-                                                                                    type="checkbox" id="gridCheck1">
-                                                                            </td>
-                                                                        </tr>
                                                                     </tbody>
                                                                 </table>
                                                             </div>
@@ -194,11 +163,12 @@
                                 </div>
                                 <div class="form-group mt-1 mb-3 text-right">
 
-                                    <button type="button" class="btn-success btn-style btn mt-3 mr-2" disabled><strong><i
-                                                class="fa-regular fa-pen-to-square"></i> Modify</strong></button>
+                                    <button type="button" class="btn-success btn-style btn mt-3 mr-2"
+                                        disabled><strong><i class="fa-regular fa-pen-to-square"></i>
+                                            Modify</strong></button>
 
-                                    <a type="button" class="btn-secondary btn-style btn mt-3 mr-2" href="/adminInv/8"><strong><i
-                                                class="fa-solid fa-plus"></i> New</strong></a>
+                                    <a type="button" class="btn-secondary btn-style btn mt-3 mr-2"
+                                        href="/adminInv/8"><strong><i class="fa-solid fa-plus"></i> New</strong></a>
 
                                     <!-- <button type="button" class="btn-danger btn-style btn mt-3 mr-2"><strong><i
                                                 class="fas fa-times"></i> Cancel</strong></button> -->
@@ -212,33 +182,45 @@
                         </div>
                         <!--footer section start-->
                         <%- include('../footer'); -%>
-                            <script src="../javascripts/statusUpdate.js"></script>
+                            <script src="../javascripts/updateStatus.js"></script>
                             <script src="../javascripts/pageUpdate.js"></script>
+                            <script src="../javascripts/ViewBtn.js"></script>
                             <script type="module">
                                 import { pagi_search } from '../javascripts/pagi_search.js';
                                 $(document).ready(function () {
 
                                     console.log("Document is ready");
                                     // Function to fetch and display data
+                                    let dataList
                                     function fetchData() {
                                         $.ajax({
                                             url: '/adminInv/getAll-SCategory-list',
                                             type: 'GET',
                                             success: function (data) {
                                                 console.log(data);
-                                                data.reverse();
+                                                dataList = data.result
+                                                dataList.reverse();
                                                 let tableRows = '';
-                                                data.forEach(function (item) {
+                                                dataList.forEach(function (item) {
                                                     console.log(item);
                                                     tableRows += `
-                                                        <tr>
-                                                            <td><a type="button" class="btn btn-primary btn-style btn-change" onClick=updatePageSCategory(${item.id}) href='/adminInv/8'>View</a></td>
+                                                        <tr data-store-id="${item.id}">
+                                                            <td><a type="button" class="btn btn-primary btn-style btn-change" id="view_btn">View</a></td>
                                                             <td>${item.code}</td>
                                                             <td>${item.description}</td>
-                                                            <td><input class="form-check-input mt-0" type="checkbox" id='${item.id}' onClick=ChangeStatusSCategory(${item.id}) ${item.status ? 'checked' : ''}></td>
+                                                            <td><input class="form-check-input mt-0" type="checkbox" id='${item.id}' onClick=ChangeStatus('${item.id}','${data.Encschema}',${item.id}) ${item.status ? 'checked' : ''}></td>
                                                         </tr>
                                                         `;
                                                 });
+
+                                                $('#supplierCtgory-table').on('click', '#view_btn', function() {
+                                                    const id=$(this).closest('tr').data('store-id')
+                                                    const route='8'
+                                                    const module='adminInv'
+                                                    console.log("id", id);
+                                                    ViewBtn(route,id,module) 
+                                                    });
+
                                                 $('#supplierCtgory-table').html(tableRows);
                                                 pagi_search('#searchBox', '#SCategoryTable', '#paginationControls');
                                             },
@@ -256,12 +238,12 @@
                                     console.log("Id", Id);
                                     console.log("Schema", Schema);
                                     isStatus = $("#" + id).prop("checked")
-                                    updateStatus(Id, isStatus,Schema)
+                                    updateStatus(Id, isStatus, Schema)
                                 }
-                                function ChangeStatusSCategory(id) {
+                                function updatePageSCategory(id) {
                                     // alert($("#" + id).prop("checked"))
-                                    let url = '/adminInv/update-status-SCategory'
-                                    ChangeStatus(id, url)
+                                    let url = '/adminInv/set-id'
+                                    updatePage(id, url)
                                 }
 
                             </script>

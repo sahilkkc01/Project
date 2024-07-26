@@ -228,37 +228,48 @@
                         </div>
                         <!--footer section start-->
                         <%- include('../footer'); -%>
-                        <script src="../javascripts/statusUpdate.js"></script>
+                        <script src="../javascripts/updateStatus.js"></script>
                         <script src="../javascripts/pageUpdate.js"></script>
+                        <script src="../javascripts/ViewBtn.js"></script>
                             <script type="module">
                                 import { pagi_search } from '../javascripts/pagi_search.js';
                                 $(document).ready(function () {
 
                                     console.log("Document is ready");
                                     // Function to fetch and display data
+                                    let dataList
                                     function fetchData() {
                                         $.ajax({
                                             url: '/adminInv/getAll-store-list',
                                             type: 'GET',
                                             success: function (data) {
                                                 console.log(data);
-                                                data.reverse();
-                                                let tableRows = '';
-                                                data.forEach(function (item) {
+                                                    dataList = data.result
+                                                    dataList.reverse();
+                                                    let tableRows = '';
+                                                    dataList.forEach(function (item) {
                                                     console.log(item);
                                                     tableRows += `
-                                                        <tr>
-                                                            <td><a type="button" class="btn btn-primary btn-style btn-change" onClick=updatePageCurrMaster(${item.id}) href='/adminInv/10'>View</a></td>
+                                                        <tr data-store-id="${item.id}">
+                                                            <td><button type="button" class="btn btn-primary btn-style btn-change" id="view_btn">View</button></td>
                                                             <td>${item.clinic}</td>
                                                             <td>${item.parent_store}</td>
                                                             <td>${item.code}</td>
                                                             <td>${item.description}</td>
-                                                            <td><input class="form-check-input mt-0" type="checkbox" id='${item.id}' onClick=ChangeStatusStore(${item.id}) ${item.status ? 'checked' : ''}></td>
+                                                            <td><input class="form-check-input mt-0" type="checkbox" id='${item.id}' onClick=ChangeStatus('${item.id}','${data.Encschema}',${item.id}) ${item.status ? 'checked' : ''}></td>
                                                             <td>${item.cost_center_code}</td>
-                                                            <td>${item.is_quarantine_store ? 'Yes' : 'No'}</td >
+                                                            <td>${item.is_quarantine_store==1 ? 'Yes' : 'No'}</td >
                                                             </tr >
                                                         `;
                                                 });
+                                                $('#store-table').on('click', '#view_btn', function() {
+                                                    const id=$(this).closest('tr').data('store-id')
+                                                    const route='10'
+                                                    const module='adminInv'
+                                                    console.log("id", id);
+                                                    ViewBtn(route,id,module) 
+                                                    });
+
                                                 $('#store-table').html(tableRows);
                                                 pagi_search('#searchBox', '#storeTable', '#paginationControls');
                                             },
@@ -272,10 +283,11 @@
                                 //
                             </script>
                             <script>
-
-                                function ChangeStatusStore(id) {
-                                    let url = '/adminInv/update-status-store'
-                                    ChangeStatus(id, url)
+                                function ChangeStatus(Id, Schema, id) {
+                                    console.log("Id", Id);
+                                    console.log("Schema", Schema);
+                                    isStatus = $("#" + id).prop("checked")
+                                    updateStatus(Id, isStatus,Schema)
                                 }
 
                                 function updatePageCurrMaster(id) {

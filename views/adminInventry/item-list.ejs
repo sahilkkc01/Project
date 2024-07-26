@@ -414,7 +414,9 @@
                               <div class="form-row pl-lg-3 pr-lg-3">
                                 <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
                                   <div class="form-group"><label class="input__label">Store</label><select name="store"
-                                      id="store_tax" required class="form-control input-style">
+                                      id="store_tax" 
+                                      data-validation="required" data-error-message="Store is required"
+                                       class="form-control input-style">
                                       <option value="">Select</option>
                                       <option value="0">0</option>
                                              
@@ -422,14 +424,15 @@
                                 </div>
                                 <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
                                   <div class="form-group"><label class="input__label">Tax</label><select name="tax"
-                                      id="tax" required class="form-control input-style">
+                                      id="tax"  data-validation="required" data-error-message="Tax is required"
+                                       class="form-control input-style">
                                       <option value="">Select</option>
                                              
                                     </select></div>
                                 </div>
                                 <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
                                   <div class="form-group"><label class="input__label">Applicable For</label><select
-                                      name="applicable_for" required class="form-control input-style">
+                                      name="applicable_for"  data-validation="required" data-error-message="Applicable For is required" class="form-control input-style">
                                       <option value="">Select</option>
                                       <option value="Purchase Rate">Purchase Rate</option>
                                       <option value="Sale Rate">Sale Rate</option>
@@ -438,7 +441,8 @@
                                 </div>
                                 <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
                                   <div class="form-group"><label class="input__label">Applicable On</label><select
-                                      name="applicable_on" required class="form-control input-style">
+                                      name="applicable_on" data-validation="required" data-error-message="Applicable On is required"  class="form-control input-style"
+                                      >
                                       <option value="">Select</option>
                                       <option value="Purchase Rate">Purchase Rate</option>
                                       <option value="Sale Rate">Sale Rate</option>
@@ -448,7 +452,7 @@
                                 </div>
                                 <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
                                   <div class="form-group"><label class="input__label">Percentage</label><select
-                                      name="percentage" required class="form-control input-style">
+                                      name="percentage" data-validation="required" data-error-message="Percentages required" class="form-control input-style">
                                       <option value="">Select</option>
                                       <option value="2.2">2.2%</option>
                                       <option value="5">5%</option>
@@ -576,8 +580,9 @@
                                 <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
                                   <div class="form-group">
                                     <label class="input__label">Store</label>
-                                    <select name="store" class="form-control input-style" id="store">
-                                      <option>Select</option>
+                                    <select name="store"  class="form-control input-style" id="store"
+                                    data-validation="required" data-error-message="Store is required.">
+                                      <option value="">Select</option>
                                       <!-- Additional options -->
                                     </select>
                                   </div>
@@ -585,8 +590,9 @@
                                 <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
                                   <div class="form-group">
                                     <label class="input__label">Rack</label>
-                                    <select name="rack" class="form-control input-style" id="rack">
-                                      <option>Select</option>
+                                    <select name="rack"  class="form-control input-style" id="rack"
+                                    data-validation="required" data-error-message="Rack is required.">
+                                      <option value="">Select</option>
                                       <!-- Additional options -->
                                     </select>
                                   </div>
@@ -598,8 +604,9 @@
                                 <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
                                   <div class="form-group">
                                     <label class="input__label">Shelf</label>
-                                    <select name="shelf" class="form-control input-style" id="shelf">
-                                      <option>Select</option>
+                                    <select name="shelf" class="form-control input-style" id="shelf"
+                                    data-validation="required" data-error-message="Shelf is required.">
+                                      <option value="">Select</option>
                                       <!-- Additional options -->
                                     </select>
                                   </div>
@@ -607,8 +614,9 @@
                                 <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
                                   <div class="form-group">
                                     <label class="input__label">Bin</label>
-                                    <select name="bin" class="form-control input-style" id="bin">
-                                      <option>Select</option>
+                                    <select name="bin" class="form-control input-style" id="bin"
+                                    data-validation="required" data-error-message="Bin is required.">
+                                      <option value="">Select</option>
                                       <!-- Additional options -->
                                     </select>
                                   </div>
@@ -749,8 +757,9 @@
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                   <div class="form-group">
                                     <label class="input__label">From UOM</label>
-                                    <select name="from_uom" id="from_uom" class="form-control input-style">
-                                      <option>Select</option>
+                                    <select name="from_uom" id="from_uom" class="form-control input-style"
+                                    data-validation="required" data-error-message="From UOM is required.">
+                                      <option value="">Select</option>
                                       <!-- Additional options -->
                                     </select>
                                   </div>
@@ -758,8 +767,9 @@
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                   <div class="form-group">
                                     <label class="input__label">To UOM</label>
-                                    <select name="to_uom" id="to_uom" class="form-control input-style">
-                                      <option>Select</option>
+                                    <select name="to_uom" id="to_uom" class="form-control input-style"
+                                    data-validation="required" data-error-message="To UOM is required.">
+                                      <option value="">Select</option>
 
 
                                     </select>
@@ -770,7 +780,8 @@
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                   <div class="form-group">
                                     <label class="input__label">Conversion Factor</label>
-                                    <input name="conversion_factor" type="number" class="form-control input-style"
+                                    <input name="conversion_factor"
+                                    data-validation="required" data-error-message="Conversion Factor is required." type="number" class="form-control input-style"
                                       placeholder="">
                                   </div>
                                 </div>
@@ -802,7 +813,7 @@
                 <div class="modal-content">
                   <!-- Modal Header -->
                   <div class="modal-header">
-                    <h5 class="modal-title" id="itemDetailsModalLabel">Item Details</h5>
+                    <h5 class="modal-title" id="itemDetailsModalLabel">Item Other Details</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i
                         class="fa-solid fa-xmark"></i></button>
                   </div>
@@ -820,17 +831,17 @@
                           </div>
                           <div class="form-group">
                             <label class="input__label">Contra Indication</label>
-                            <textarea name="contra_indication" id="contra_indication" required
+                            <textarea name="contra_indication" id="contra_indication" data-validation="required" data-error-message=" Contra Indication is request"
                               class="form-control input-style" placeholder=""></textarea>
                           </div>
                           <div class="form-group">
                             <label class="input__label">Side Effects</label>
-                            <textarea name="side_effects" id="side_effects" required class="form-control input-style"
+                            <textarea name="side_effects" id="side_effects"  class="form-control input-style" data-validation="required" data-error-message=" Side Effects is request"
                               placeholder=""></textarea>
                           </div>
                           <div class="form-group">
                             <label class="input__label">Help URL</label>
-                            <input name="help_url" id="help_url" type="text" required class="form-control input-style"
+                            <input name="help_url" id="help_url" type="text"  class="form-control input-style" 
                               placeholder="">
                           </div>
                         </div>
@@ -848,264 +859,125 @@
                 </div>
               </div>
             </div>
-
-
+ <!--footer section start-->
+            <%- include('../footer'); -%>
 
             <script>
+              // Clear error div content and classes
               function clearErrorDiv5() {
                 $('#errordiv5').removeClass('alert-success alert-danger').text('');
               }
-
             </script>
-            <!--footer section start-->
-            <%- include('../footer'); -%>
-              <script type="module">
-                import { pagi_search } from '../javascripts/pagi_search.js'
-                import { myAjax } from '../javascripts/myAjax.js';
-                $(document).ready(function () {
-
-                  function loadRack(a) {
-                    fetch('/adminInv/get-rack-details')
-                      .then(response => response.json())
-                      .then(data => {
-
-                        console.log(data)
-                        const dropdown = document.getElementById(a);
-                        data.forEach(item => {
-                          const option = document.createElement('option');
-                          option.value = item.rank_desc;
-                          option.textContent = item.rank_desc;
-                          dropdown.appendChild(option);
-
-                        });
-                      })
-                      .catch(error => console.error('Error fetching states:', error));
-                  }
-                  loadRack('rack');
-                  function loadShelf(a) {
-                    fetch('/adminInv/get-shelf-details')
-                      .then(response => response.json())
-                      .then(data => {
-
-                        console.log(data)
-                        const dropdown = document.getElementById(a);
-                        data.forEach(item => {
-                          const option = document.createElement('option');
-                          option.value = item.shelf_desc;
-                          option.textContent = item.shelf_desc;
-                          dropdown.appendChild(option);
-
-                        });
-                      })
-                      .catch(error => console.error('Error fetching states:', error));
-                  }
-                  loadShelf('shelf');
-                  function loadBin(a) {
-                    fetch('/adminInv/get-bin-details')
-                      .then(response => response.json())
-                      .then(data => {
-
-                        console.log(data)
-                        const dropdown = document.getElementById(a);
-                        data.forEach(item => {
-                          const option = document.createElement('option');
-                          option.value = item.bin_desc;
-                          option.textContent = item.bin_desc;
-                          dropdown.appendChild(option);
-
-                        });
-                      })
-                      .catch(error => console.error('Error fetching states:', error));
-                  }
-                  loadBin('bin');
-                  function loadClinic(a) {
-                    fetch('/adminInv/get-clinic-details')
-                      .then(response => response.json())
-                      .then(data => {
-
-                        console.log(data)
-                        const dropdown = document.getElementById(a);
-                        data.forEach(item => {
-                          const option = document.createElement('option');
-                          option.value = item.clinic_desc;
-                          option.textContent = item.clinic_desc;
-                          dropdown.appendChild(option);
-
-                        });
-                      })
-                      .catch(error => console.error('Error fetching states:', error));
-                  }
-                  loadClinic('clinic');
-
-                  function loadStore(a) {
-                    fetch('/adminInv/get-store-details')
-                      .then(response => response.json())
-                      .then(data => {
-
-                        console.log(data)
-                        const dropdown = document.getElementById(a);
-                        data.forEach(item => {
-                          const option = document.createElement('option');
-                          option.value = item.description;
-                          option.textContent = item.description;
-                          dropdown.appendChild(option);
-
-                        });
-                      })
-                      .catch(error => console.error('Error fetching states:', error));
-                  }
-                  loadStore('store');
-                  // loadStore('store_tax');
-                  function loadUOM(a) {
-                    fetch('/adminInv/get-UOM-details')
-                      .then(response => response.json())
-                      .then(data => {
-
-                        console.log(data)
-                        const dropdown = document.getElementById(a);
-                        data.forEach(item => {
-                          const option = document.createElement('option');
-                          option.value = item.description;
-                          option.textContent = item.description;
-                          dropdown.appendChild(option);
-
-                        });
-                      })
-                      .catch(error => console.error('Error fetching states:', error));
-                  }
-                  loadUOM('purchase_uom');
-                  loadUOM('stock_uom');
-                  loadUOM('base_uom');
-                  loadUOM('sale_uom');
-                  loadUOM('from_uom');
-                  loadUOM('to_uom');
-
-
-                  function loadtTax(a) {
-                    fetch('/adminInv/get-tax-details')
-                      .then(response => response.json())
-                      .then(data => {
-
-                        console.log(data)
-                        const dropdown = document.getElementById(a);
-                        data.forEach(item => {
-                          const option = document.createElement('option');
-                          option.value = item.tax_desc;
-                          option.textContent = item.tax_desc;
-                          dropdown.appendChild(option);
-
-                        });
-                      })
-                      .catch(error => console.error('Error fetching states:', error));
-                  }
-                  loadtTax('tax');
-
-
-
-                  // Function to fetch and display data
-                  function fetchData() {
-                    $.ajax({
-                      url: '/admininv/get-item-details',
-                      type: 'GET',
-                      success: function (data) {
-                        let tableRows = '';
-                        data.reverse();
-                        data.forEach(function (item) {
-                          tableRows += `
-                                    <tr data-item-id="${item.id}">
-                  <td><button type="button" id="view_btn" class="btn btn-primary btn-style btn-change">View</button></td>
-                  <td>${item.item_code}</td>
-                  <td>${item.item_name}</td>
-                  <td>${item.molecule_name}</td>
-                  <td>${item.item_group}</td>
-                  <td>${item.item_category}</td>
-                  <td>${item.manufactured_by}</td>
-                  <td>${item.purchase_uom}</td>
-                  <td>${item.discount_on_sale}</td>
-                  <td style="display:none;">
-                            
+            
+            <script type="module">
+              import { pagi_search } from '../javascripts/pagi_search.js';
+              import { validateForm } from '../javascripts/validation.js';
+              import { myAjax } from '../javascripts/myAjax.js';
+            
+              $(document).ready(function () {
+            
+                // Load dropdown options for various elements
+                const loadDropdown = (url, elementId) => {
+                  fetch(url)
+                    .then(response => response.json())
+                    .then(data => {
+                      const dropdown = document.getElementById(elementId);
+                      data.forEach(item => {
+                        const option = document.createElement('option');
+                        option.value = item.description || item.rank_desc || item.shelf_desc || item.bin_desc || item.clinic_desc || item.tax_desc;
+                        option.textContent = item.description || item.rank_desc || item.shelf_desc || item.bin_desc || item.clinic_desc || item.tax_desc;
+                        dropdown.appendChild(option);
+                      });
+                    })
+                    .catch(error => console.error(`Error fetching ${elementId} details:`, error));
+                };
+            
+                loadDropdown('/adminInv/get-rack-details', 'rack');
+                loadDropdown('/adminInv/get-shelf-details', 'shelf');
+                loadDropdown('/adminInv/get-bin-details', 'bin');
+                loadDropdown('/adminInv/get-clinic-details', 'clinic');
+                loadDropdown('/adminInv/get-store-details', 'store');
+                loadDropdown('/adminInv/get-store-details', 'store_tax');
+                loadDropdown('/adminInv/get-UOM-details', 'purchase_uom');
+                loadDropdown('/adminInv/get-UOM-details', 'stock_uom');
+                loadDropdown('/adminInv/get-UOM-details', 'base_uom');
+                loadDropdown('/adminInv/get-UOM-details', 'sale_uom');
+                loadDropdown('/adminInv/get-UOM-details', 'from_uom');
+                loadDropdown('/adminInv/get-UOM-details', 'to_uom');
+                loadDropdown('/adminInv/get-tax-details', 'tax');
+            
+                // Fetch and display item details
+                const fetchData = () => {
+                  $.ajax({
+                    url: '/admininv/get-item-details',
+                    type: 'GET',
+                    success: function (data) {
+                      let tableRows = data.reverse().map(item => `
+                        <tr data-item-id="${item.id}">
+                          <td><button type="button" id="view_btn" class="btn btn-primary btn-style btn-change">View</button></td>
+                          <td>${item.item_code}</td>
+                          <td>${item.item_name}</td>
+                          <td>${item.molecule_name}</td>
+                          <td>${item.item_group}</td>
+                          <td>${item.item_category}</td>
+                          <td>${item.manufactured_by}</td>
+                          <td>${item.purchase_uom}</td>
+                          <td>${item.discount_on_sale}</td>
+                          <td style="display:none;">
                             <input type="hidden" name="base_uom" value="${item.base_uom}">
                             <input type="hidden" name="selling_uom" value="${item.selling_uom}">
                             <input type="hidden" name="stocking_uom" value="${item.stocking_uom}">
-                        </td>
-                </tr>
-                                  `;
-                        });
-                        $('#item-body').on('click', '#view_btn', function () {
-
-                          const clus_id = $(this).closest('tr').data('item-id')
-                          const route = '21'
-                          const module = 'adminInv'
-                          ViewBtn(route, clus_id, module)
-
-                        });
-
-                        $('#item-body').html(tableRows);
-                        pagi_search('#searchBox', '#tableid', '#paginationControls')
-                      },
-                      error: function (xhr, status, error) {
-                        console.error('Error fetching classification details:', error);
-                      }
-                    });
-                  }
-
-                  // Fetch data on page load
-                  fetchData();
-                });
-                $(document).ready(function () {
-
-                  document.getElementById('searchButton').addEventListener('click', function () {
-                    // Get the selected clinic name
-                    const clinic = document.getElementById('clinic').value;
-
-                    // Check if a clinic is selected
-                    if (clinic) {
-                      // Make an AJAX request to fetch stores based on the selected clinic
-                      fetchStoresByClinic(clinic);
-                    } else {
-                      alert('Please select a clinic.');
+                          </td>
+                        </tr>`).join('');
+            
+                      $('#item-body').html(tableRows);
+                      pagi_search('#searchBox', '#tableid', '#paginationControls');
+            
+                      $('#item-body').on('click', '#view_btn', function () {
+                        const clus_id = $(this).closest('tr').data('item-id');
+                        ViewBtn('21', clus_id, 'adminInv');
+                      });
+                    },
+                    error: function (xhr, status, error) {
+                      console.error('Error fetching classification details:', error);
                     }
                   });
-
-                  function fetchStoresByClinic(clinic) {
-                    axios.post('/adminInv/get-store-by-clinic', { clinic: clinic })
-                      .then(response => {
-                        let tableRows = '';
-                        let storeDetailsPromises = response.data.map(item => {
-                          // Fetch additional details for each item using item.id
-                          return axios.post('/adminInv/route-to-fetch-details', { store_id: item.id })
-                            .then(detailsResponse => {
-                              let details = detailsResponse.data;
-                              return {
-                                id: item.id,
-                                code: item.code,
-                                description: item.description,
-                                isSelected: details.isSelected,
-                                min: details.min,
-                                max: details.max,
-                                reorder: details.reorder
-                              };
-                            })
-                            .catch(() => {
-                              // If an error occurs (e.g., no data found), return default values
-                              return {
-                                id: item.id,
-                                code: item.code,
-                                description: item.description,
-                                isSelected: false,
-                                min: '',
-                                max: '',
-                                reorder: ''
-                              };
-                            });
-                        });
-
-                        // Wait for all the promises to resolve
-                        Promise.all(storeDetailsPromises)
-                          .then(allDetails => {
-                            allDetails.forEach(detail => {
-                              tableRows += `
-                            <tr data-item-id="${detail.id}">
+                };
+            
+                fetchData();
+            
+                // Fetch and display stores by clinic
+                const fetchStoresByClinic = clinic => {
+                  axios.post('/adminInv/get-store-by-clinic', { clinic })
+                    .then(response => {
+                      let tableRows = '';
+                      let storeDetailsPromises = response.data.map(item => {
+                        return axios.post('/adminInv/route-to-fetch-details', { store_id: item.id })
+                          .then(detailsResponse => ({
+                            id: item.id,
+                            code: item.code,
+                            description: item.description,
+                            isSelected: detailsResponse.data.isSelected,
+                            min: detailsResponse.data.min,
+                            max: detailsResponse.data.max,
+                            reorder: detailsResponse.data.reorder
+                          }))
+                          .catch(() => ({
+                            id: item.id,
+                            code: item.code,
+                            description: item.description,
+                            isSelected: false,
+                            min: '',
+                            max: '',
+                            reorder: ''
+                          }));
+                      });
+            
+                      Promise.all(storeDetailsPromises)
+                        .then(allDetails => {
+                          allDetails.forEach(detail => {
+                            tableRows += `
+                              <tr data-item-id="${detail.id}">
                                 <td><input class="mt-1" type="checkbox" name="isSelected" ${detail.isSelected ? 'checked' : ''}></td>
                                 <input type="hidden" name="store_id" value="${detail.id}">
                                 <input type="hidden" name="store_name" value="${detail.description}">
@@ -1113,406 +985,273 @@
                                 <td><input type="number" name="min" value="${detail.min}"></td>
                                 <td><input type="number" name="max" value="${detail.max}"></td>
                                 <td><input type="number" name="reorder" value="${detail.reorder}"></td>
-                            </tr>
-                        `;
-                            });
-                            document.getElementById('StoreTaxTblBody').innerHTML = tableRows;
-                          })
-                          .catch(error => {
-                            console.error('Error fetching additional details:', error);
+                              </tr>`;
                           });
-                      })
-                      .catch(error => {
-                        console.error('Error fetching stores:', error);
-                      });
-                  }
-
-
-                  function fetchAndRenderItems(selectedRowCode) {
-                    axios.post('/adminInv/get-Location-list', { code: selectedRowCode })
-                      .then(response => {
-                        console.log(response.data);
-
-                        let tableRows = '';
-                        response.data.forEach(function (item) {
-                          console.log(item);
-                          tableRows += `
-                        <tr>
-                            <td><a type="button" class="btn btn-primary btn-style btn-change">Modify</a></td>
-                            <td>${item.store}</td>
-                            <td>${item.rack}</td>
-                            <td>${item.shelf}</td>
-                            <td>${item.bin}</td>
-                            <td><button type="button" class="btn btn-danger" onClick="deleteItem('${item.id}', '${selectedRowCode}')">Delete</button></td>
-                          
-                            </tr>
-
-                    `;
-                        });
-                        document.getElementById('locationTblBody').innerHTML = tableRows;
-                      })
-                      .catch(error => {
-                        console.error('Error fetching details:', error);
-                      });
-                  }
-
-                  function fetchAndRenderItemsConv(selectedRowCode) {
-                    axios.post('/adminInv/get-conv-list', { code: selectedRowCode })
-                      .then(response => {
-                        console.log(response.data);
-
-                        let tableRows = '';
-                        response.data.forEach(function (item) {
-                          console.log(item);
-                          tableRows += `
-                        <tr>
-                            
-                            <td>${item.from_uom}</td>
-                            <td>${item.to_uom}</td>
-                            <td>${item.conversion_factor}</td>
-                           
-                           
-                            </tr>
-
-                    `;
-                        });
-                        document.getElementById('convTblBodu').innerHTML = tableRows;
-                      })
-                      .catch(error => {
-                        console.error('Error fetching details:', error);
-                      });
-                  }
-
-
-                  function fetchAndRenderItemsSupplier(selectedRowCode) {
-                    // Fetch all suppliers and the current suppliers for the item
-                    axios.all([
-                      axios.get('/adminInv/get-supplier-list'),
-                      axios.post('/adminInv/get-item-suppliers', { itemCode: selectedRowCode })
-                    ]).then(axios.spread((suppliersResponse, itemSuppliersResponse) => {
-                      const allSuppliers = suppliersResponse.data;
-                      const currentSuppliers = itemSuppliersResponse.data;
-
-                      // Create a set of current supplier codes for quick lookup
-                      const currentSupplierCodes = new Set(currentSuppliers.map(supplier => supplier.supplierCode));
-
-                      let tableRows = '';
-                      allSuppliers.forEach(function (item) {
-                        const isChecked = currentSupplierCodes.has(item.code) ? 'checked' : '';
-                        tableRows += `
-                <tr>
-                    <td><input type="checkbox" name="suppliers" value="${item.code}" ${isChecked}></td>
-                    <td>${item.description}</td>
-                </tr>
-            `;
-                      });
-
-                      document.getElementById('suppTblBody').innerHTML = tableRows;
-                      document.getElementById('itemCode').value = selectedRowCode; // Set the item code in a hidden field
-                    })).catch(error => {
-                      console.error('Error fetching details:', error);
-                    });
-                  }
-
-                  $(document).ready(function () {
-                    $('#itemSupplierForm').on('submit', function (event) {
-                      event.preventDefault(); // Prevent the default form submission
-
-                      // Get the item code
-                      const itemCode = $('#itemCode').val();
-
-                      // Get selected suppliers
-                      const selectedSuppliers = [];
-                      $('input[name="suppliers"]:checked').each(function () {
-                        selectedSuppliers.push($(this).val());
-                      });
-
-                      // Create the data object to send to the server
-                      const data = {
-                        itemCode: itemCode,
-                        suppliers: selectedSuppliers
-                      };
-
-                      // Send data to the server
-                      axios.post('/adminInv/save-item-suppliers', data)
-                        .then(response => {
-                          console.log('Response from server:', response.data);
-                          $('#errordiv5').removeClass('alert-danger').addClass('alert-success').text(response.data.msg).show();
+                          document.getElementById('StoreTaxTblBody').innerHTML = tableRows;
                         })
-                        .catch(error => {
-                          console.log(error);
-                          const errorMessage = error.response?.data?.msg || 'An error occurred';
-                          $('#errordiv5').removeClass('alert-success').addClass('alert-danger').text(errorMessage).show();
-                          console.error('Error:', error);
-                        });
-                    });
-
+                        .catch(error => console.error('Error fetching additional details:', error));
+                    })
+                    .catch(error => console.error('Error fetching stores:', error));
+                };
+            
+                // Fetch and render items
+                const fetchAndRenderItems = selectedRowCode => {
+                  axios.post('/adminInv/get-Location-list', { code: selectedRowCode })
+                    .then(response => {
+                      let tableRows = response.data.map(item => `
+                        <tr>
+                          <td><a type="button" class="btn btn-primary btn-style btn-change">Modify</a></td>
+                          <td>${item.store}</td>
+                          <td>${item.rack}</td>
+                          <td>${item.shelf}</td>
+                          <td>${item.bin}</td>
+                          <td><button type="button" class="btn btn-danger" onClick="deleteItem('${item.id}', '${selectedRowCode}')">Delete</button></td>
+                        </tr>`).join('');
+                      document.getElementById('locationTblBody').innerHTML = tableRows;
+                    })
+                    .catch(error => console.error('Error fetching details:', error));
+                };
+            
+                // Fetch and render conversion items
+                const fetchAndRenderItemsConv = selectedRowCode => {
+                  axios.post('/adminInv/get-conv-list', { code: selectedRowCode })
+                    .then(response => {
+                      let tableRows = response.data.map(item => `
+                        <tr>
+                          <td>${item.from_uom}</td>
+                          <td>${item.to_uom}</td>
+                          <td>${item.conversion_factor}</td>
+                        </tr>`).join('');
+                      document.getElementById('convTblBodu').innerHTML = tableRows;
+                    })
+                    .catch(error => console.error('Error fetching details:', error));
+                };
+            
+                // Fetch and render suppliers
+                const fetchAndRenderItemsSupplier = selectedRowCode => {
+                  axios.all([
+                    axios.get('/adminInv/get-supplier-list-item'),
+                    axios.post('/adminInv/get-item-suppliers', { itemCode: selectedRowCode })
+                  ]).then(axios.spread((suppliersResponse, itemSuppliersResponse) => {
+                    const allSuppliers = suppliersResponse.data;
+                    const currentSupplierCodes = new Set(itemSuppliersResponse.data.map(supplier => supplier.supplierCode));
+            
+                    let tableRows = allSuppliers.map(item => `
+                      <tr>
+                        <td><input type="checkbox" name="suppliers" value="${item.code}" ${currentSupplierCodes.has(item.code) ? 'checked' : ''}></td>
+                        <td>${item.description}</td>
+                      </tr>`).join('');
+            
+                    document.getElementById('suppTblBody').innerHTML = tableRows;
+                    document.getElementById('itemCode').value = selectedRowCode;
+                  })).catch(error => console.error('Error fetching details:', error));
+                };
+            
+                // Fetch and render store tax items
+                const fetchAndRenderStoreTaxItems = selectedRowCode => {
+                  axios.post('/adminInv/get-store-tax-list', { code: selectedRowCode })
+                    .then(response => {
+                      let tableRows = response.data.map(item => `
+                        <tr>
+                          <td>${item.store}</td>
+                          <td>${item.tax}</td>
+                          <td>${item.applicable_for}</td>
+                          <td>${item.applicable_on}</td>
+                          <td>${item.percentage}</td>
+                          <td>${item.taxType}</td>
+                          <td><button type="button" class="btn btn-danger" onClick="deleteItemStoreTax('${item.id}', '${selectedRowCode}')">Delete</button></td>
+                        </tr>`).join('');
+                      document.getElementById('storeTaxTblBody').innerHTML = tableRows;
+                    })
+                    .catch(error => console.error('Error fetching store tax items:', error));
+                };
+            
+                // Open item details modal
+                const openItemDetailsModal = itemCode => {
+                  const url = '/adminInv/getItemOtherDetails';
+                  axios.post(url, { itemCode })
+                    .then(response => {
+                      const data = response.data;
+                      $('#itemNameOther').val(data.itemName);
+                      $('#contra_indication').val(data.contra_indication);
+                      $('#side_effects').val(data.side_effects);
+                      $('#help_url').val(data.help_url);
+                    })
+                    .catch(error => console.error('Error fetching item details:', error));
+                };
+            
+                // Handle row click event
+                $('#item-body').on('click', 'tr', function () {
+                  // Remove 'locked' class from all rows and enable buttons
+                  $('#item-body tr').removeClass('locked');
+                  ['#location', '#conversion', '#applySupplier', '#storeAndTax', '#otherDetails'].forEach(selector => $(selector).removeAttr('disabled'));
+                  $(this).addClass('locked');
+                  const selectedRowText = $(this).find('td').eq(2).text();
+                  const selectedRowCode = $(this).find('td').eq(1).text();
+                  [
+                    { selector: '#itemName', value: selectedRowText },
+                    { selector: '#itemNameConv', value: selectedRowText },
+                    { selector: '#item_code_location', value: selectedRowCode },
+                    { selector: '#item_code_conv', value: selectedRowCode },
+                    { selector: '#item_code_othr', value: selectedRowCode },
+                    { selector: '#item_code_store_tax', value: selectedRowCode },
+                    { selector: '#itemNameOther', value: selectedRowText },
+                    { selector: '#itemNameStoreTax', value: selectedRowText },
+                    { selector: '#itemNameSupp', value: selectedRowText }
+                  ].forEach(field => $(field.selector).val(field.value).text(field.value));
+            
+                  const purchaseUom = $(this).find('td').eq(7).text();
+                  const saleUom = $(this).find('input[name="selling_uom"]').val();
+                  const stockUom = $(this).find('input[name="stocking_uom"]').val();
+                  const baseUom = $(this).find('input[name="base_uom"]').val();
+            
+                  $('#purchase_uom').val(purchaseUom);
+                  $('#sale_uom').val(saleUom);
+                  $('#stock_uom').val(stockUom);
+                  $('#base_uom').val(baseUom);
+            
+                  fetchAndRenderItems(selectedRowCode);
+                  fetchAndRenderItemsConv(selectedRowCode);
+                  fetchAndRenderItemsSupplier(selectedRowCode);
+                  fetchAndRenderStoreTaxItems(selectedRowCode);
+                  openItemDetailsModal(selectedRowCode);
+            
+                  // Clear the values for elements with data-validation attribute
+                  $('[data-validation]').each(function () {
+                    if ($(this).is('input, select, textarea')) {
+                      $(this).val('');
+                    } else {
+                      $(this).text('');
+                    }
                   });
-                  function openItemDetailsModal(itemCode) {
-                    const url = '/adminInv/getItemOtherDetails'; // Replace with your actual endpoint
-                    axios.post(url, { itemCode: itemCode })
-                      .then(response => {
-                        // Populate form fields with the fetched data
-                        const data = response.data;
-                        $('#item_code_othr').val(data.itemCode);
-                        $('#itemNameOther').text(data.itemName);
-                        $('#contra_indication').val(data.contra_indication);
-                        $('#side_effects').val(data.side_effects);
-                        $('#help_url').val(data.help_url);
-                        // Show the modal
-                        // $('#itemDetailsModalOtherDetails').modal('show');
-                      })
-                      .catch(error => {
-                        console.error('Error fetching item details:', error);
-                      });
-                  };
-
-
-                  function fetchAndRenderStoreTaxItems(selectedRowCode) {
-                    axios.post('/adminInv/get-store-tax-list', { code: selectedRowCode })
-                      .then(response => {
-                        console.log(response.data);
-
-                        let tableRows = '';
-                        response.data.forEach(function (item) {
-                          console.log(item);
-                          tableRows += `
-                    <tr>
-                        <td>${item.store}</td>
-                        <td>${item.tax}</td>
-                        <td>${item.applicable_for}</td>
-                        <td>${item.applicable_on}</td>
-                        <td>${item.percentage}</td>
-                        <td>${item.taxType}</td>
-                        <td><button type="button" class="btn btn-danger" onClick="deleteItemStoreTax('${item.id}', '${selectedRowCode}')">Delete</button></td>
-                    </tr>
-                `;
-                        });
-                        document.getElementById('storeTaxTblBody').innerHTML = tableRows;
-                      })
-                      .catch(error => {
-                        console.error('Error fetching store tax items:', error);
-                      });
-                  }
-                  $('#item-body').on('click', 'tr', function () {
-                    // Remove 'locked' class from all rows
-                    $('#item-body tr').removeClass('locked');
-
-                    // Enable buttons
-                    $('#location').removeAttr('disabled');
-                    $('#conversion').removeAttr('disabled');
-                    $('#applySupplier').removeAttr('disabled');
-                    $('#storeAndTax').removeAttr('disabled');
-                    $('#otherDetails').removeAttr('disabled');
-
-                    // Add 'locked' class to the clicked row
-                    $(this).addClass('locked');
-
-                    // Get the text from the clicked row
-                    const selectedRowText = $(this).find('td').eq(2).text();
-                    const selectedRowCode = $(this).find('td').eq(1).text();
-                    $('#itemName').text(selectedRowText);
-                    $('#itemNameConv').text(selectedRowText);
-                    $('#item_code_location').val(selectedRowCode);
-                    $('#item_code_conv').val(selectedRowCode);
-                    $('#item_code_othr').val(selectedRowCode);
-                    $('#item_code_store_tax').val(selectedRowCode);
-                    $('#itemNameOther').text(selectedRowText);
-                    $('#itemNameStoreTax').text(selectedRowText);
-                    $('#itemNameSupp').text(selectedRowText);
-
-
-                    const purchaseUom = $(this).find('td').eq(7).text();;
-                    const saleUom = $(this).find('input[name="selling_uom"]').val();
-                    const stockUom = $(this).find('input[name="stocking_uom"]').val();
-                    const baseUom = $(this).find('input[name="base_uom"]').val();
-
-                    // Set the values in the appropriate elements
-                    $('#purchase_uom').val(purchaseUom);
-                    $('#sale_uom').val(saleUom);
-                    $('#stock_uom').val(stockUom);
-                    $('#base_uom').val(baseUom);
-
-
-                    // Fetch and render items for the selected row code
-                    fetchAndRenderItems(selectedRowCode);
-                    fetchAndRenderItemsConv(selectedRowCode);
-                    fetchAndRenderItemsSupplier(selectedRowCode);
-                    fetchAndRenderStoreTaxItems(selectedRowCode);
-                    openItemDetailsModal(selectedRowCode);
-                    // alert(selectedRowCode)
-                  });
-                  window.deselectSelectedRow = function () {
-                    $('#item-body tr').removeClass('locked');
-                  };
-
-                  $(document).ready(function () {
-                    // Handle form submission
-                    $('#itemOtherDetails').on('submit', function (event) {
-                      event.preventDefault(); // Prevent the default form submission
-                      const formData = $(this).serialize(); // Serialize the form data
-                      console.log('formdata', formData);
-                      const url = '/adminInv/itemOtherDtlsSave'; // Replace with your actual endpoint
-
+                });
+            
+                // Deselect selected row
+                window.deselectSelectedRow = function () {
+                  $('#item-body tr').removeClass('locked');
+                };
+            
+                // Handle form submissions with validation
+                const handleFormSubmit = (formSelector, url, errorDivSelector, fetchCallback) => {
+                  $(formSelector).on('submit', function (event) {
+                    event.preventDefault();
+                    const { isValid } = validateForm(formSelector);
+                    if (isValid) {
+                      const formData = $(this).serialize();
                       axios.post(url, formData)
                         .then(response => {
-                          // Handle success
                           console.log('Response from server:', response.data);
-                          $('#errordiv3').removeClass('alert-danger').addClass('alert-success').text(response.data.msg).show();
+                          $(errorDivSelector).removeClass('alert-danger').addClass('alert-success').text(response.data.msg).show();
+                          const selectedRowCode = $('#itemCode').val();
+                          fetchCallback(selectedRowCode);
                         })
                         .catch(error => {
-                          // Handle error
-                          console.log(error);
-                          const errorMessage = error.response?.data?.msg || 'An error occurred';
-                          $('#errordiv3').removeClass('alert-success').addClass('alert-danger').text(errorMessage).show();
                           console.error('Error:', error);
+                          const errorMessage = error.response?.data?.msg || 'An error occurred';
+                          $(errorDivSelector).removeClass('alert-success').addClass('alert-danger').text(errorMessage).show();
                         });
-                    });
-
-                    // Function to populate the form with existing data
-
-                    // Function to clear error message when close button is clicked
-                    window.clearErrorDiv3 = function () {
-                      $('#errordiv3').removeClass('alert-success alert-danger').text('');
-                    };
-                  });
-
-
-
-                  $('#itemLocationForm').on('submit', function (event) {
-                    event.preventDefault();
-                    const formData = $(this).serialize();
-                    const url = '/adminInv/itemLocationSave';
-
-                    axios.post(url, formData)
-                      .then(response => {
-                        console.log('Response from server:', response.data);
-                        $('#errordiv1').removeClass('alert-danger').addClass('alert-success').text(response.data.msg).show();
-                        const selectedRowCode = $('#itemCode').val();
-                        fetchAndRenderItems(selectedRowCode);
-                      })
-                      .catch(error => {
-                        console.log(error)
-                        const errorMessage = error.response?.data?.msg
-                        $('#errordiv1').removeClass('alert-success').addClass('alert-danger').text(errorMessage).show();
-                        console.error('Error:', error);
-                      });
-                  });
-                  $('#itemConvForm').on('submit', function (event) {
-                    event.preventDefault();
-                    const formData = $(this).serialize();
-                    const url = '/adminInv/itemConvSave';
-
-                    axios.post(url, formData)
-                      .then(response => {
-                        console.log('Response from server:', response.data);
-                        $('#errordiv2').removeClass('alert-danger').addClass('alert-success').text(response.data.msg).show();
-                        // Refresh the item list after adding new data
-                        const selectedRowCode = $('#itemCode').val();
-                        fetchAndRenderItemsConv(selectedRowCode);
-                      })
-                      .catch(error => {
-                        console.error('Error:', error);
-                        const errorMessage = error.response?.data?.msg
-                        $('#errordiv2').removeClass('alert-success').addClass('alert-danger').text(errorMessage).show();
-                      });
-                  });
-                  $('#itemStoreTax').on('submit', function (event) {
-                    event.preventDefault(); // Prevent the default form submission
-                    const formData = $(this).serialize(); // Serialize the form data
-                    console.log('formdatatax', formData)
-                    const url = '/adminInv/itemStoreTaxSave'; // Replace with your actual endpoint
-
-                    axios.post(url, formData)
-                      .then(response => {
-                        // Handle success
-                        console.log('Response from server:', response.data);
-                        $('#errordiv4').removeClass('alert-danger').addClass('alert-success').text(response.data.msg).show();
-                        const selectedRowCode = $('#itemCode').val();
-                        fetchAndRenderStoreTaxItems(selectedRowCode);
-                      })
-                      .catch(error => {
-                        // Handle error
-                        console.log(error);
-                        const errorMessage = error.response?.data?.msg || 'An error occurred';
-                        $('#errordiv4').removeClass('alert-success').addClass('alert-danger').text(errorMessage).show();
-                        console.error('Error:', error);
-                      });
-                  });
-
-                  $('#ItemStoreMinMaxForm').on('submit', function (event) {
-                    event.preventDefault(); // Prevent the default form submission
-
-                    const formData = [];
-
-                    $('#StoreTaxTblBody tr').each(function () {
-                      const row = $(this);
-                      const isSelected = row.find('input[type="checkbox"]').is(':checked');
-
-                      // Only collect data for selected rows
-                      if (isSelected) {
-                        const itemData = {
-                          itemCode: $('#itemCode').val(), // Assuming itemCode is available somewhere in the form
-                          store_id: row.find('input[name="store_id"]').val(),
-                          store_name: row.find('input[name="store_name"]').val(),
-                          min: row.find('input[name="min"]').val(),
-                          max: row.find('input[name="max"]').val(),
-                          reorder: row.find('input[name="reorder"]').val(),
-                          isSelected: isSelected
-                        };
-                        formData.push(itemData);
-                      }
-                    });
-
-                    // Check if formData is empty
-                    if (formData.length === 0) {
-                      // Display a popup alert
-                      alert("Please select at least one row to save.");
-                      return; // Stop the process
+                    } else {
+                      $(errorDivSelector).removeClass('alert-success').addClass('alert-danger').text('Please Fill the Form').show();
                     }
-
-                    console.log('formdata', formData);
-                    const url = '/adminInv/itemStoreMinMaxSave'; // Replace with your actual endpoint
-
-                    axios.post(url, { data: formData })
-                      .then(response => {
-                        // Handle success
-                        console.log('Response from server:', response.data);
-                        $('#errordiv6').removeClass('alert-danger').addClass('alert-success').text(response.data.msg).show();
-                        const selectedRowCode = $('#itemCode').val();
-                        fetchAndRenderStoreTaxItems(selectedRowCode);
-                      })
-                      .catch(error => {
-                        // Handle error
-                        console.log(error);
-                        const errorMessage = error.response?.data?.msg || 'An error occurred';
-                        $('#errordiv6').removeClass('alert-success').addClass('alert-danger').text(errorMessage).show();
-                        console.error('Error:', error);
-                      });
                   });
-
-                  window.deleteItem = function (itemId, selectedRowCode) {
-                    axios.post('/adminInv/delete-item-location', { id: itemId })
-                      .then(response => {
-                        console.log('Item deleted:', response.data);
-                        // Refresh the item list after deleting an item
-                        fetchAndRenderItems(selectedRowCode);
-                      })
-                      .catch(error => {
-                        console.error('Error deleting item:', error);
-                      });
-                  };
-                  window.deleteItemStoreTax = function (itemId, selectedRowCode) {
-                    axios.post('/adminInv/delete-item-store-tax', { id: itemId })
-                      .then(response => {
-                        console.log('Item deleted:', response.data);
-                        // Refresh the item list after deleting an item
-                        fetchAndRenderStoreTaxItems(selectedRowCode);
-                      })
-                      .catch(error => {
-                        console.error('Error deleting item:', error);
-                      });
-                  };
+                };
+            
+                handleFormSubmit('#itemLocationForm', '/adminInv/itemLocationSave', '#errordiv1', fetchAndRenderItems);
+                handleFormSubmit('#itemConvForm', '/adminInv/itemConvSave', '#errordiv2', fetchAndRenderItemsConv);
+                handleFormSubmit('#itemStoreTax', '/adminInv/itemStoreTaxSave', '#errordiv4', fetchAndRenderStoreTaxItems);
+            
+                $('#itemSupplierForm').on('submit', function (event) {
+                  event.preventDefault();
+                  const itemCode = $('#itemCode').val();
+                  const selectedSuppliers = $('input[name="suppliers"]:checked').map(function () {
+                    return $(this).val();
+                  }).get();
+                  const data = { itemCode, suppliers: selectedSuppliers };
+                  axios.post('/adminInv/save-item-suppliers', data)
+                    .then(response => {
+                      console.log('Response from server:', response.data);
+                      $('#errordiv5').removeClass('alert-danger').addClass('alert-success').text(response.data.msg).show();
+                    })
+                    .catch(error => {
+                      console.error('Error:', error);
+                      const errorMessage = error.response?.data?.msg || 'An error occurred';
+                      $('#errordiv5').removeClass('alert-success').addClass('alert-danger').text(errorMessage).show();
+                    });
                 });
-
-              </script>
+            
+                $('#ItemStoreMinMaxForm').on('submit', function (event) {
+                  event.preventDefault();
+                  const formData = $('#StoreTaxTblBody tr').map(function () {
+                    const row = $(this);
+                    if (row.find('input[type="checkbox"]').is(':checked')) {
+                      return {
+                        itemCode: $('#itemCode').val(),
+                        store_id: row.find('input[name="store_id"]').val(),
+                        store_name: row.find('input[name="store_name"]').val(),
+                        min: row.find('input[name="min"]').val(),
+                        max: row.find('input[name="max"]').val(),
+                        reorder: row.find('input[name="reorder"]').val(),
+                        isSelected: true
+                      };
+                    }
+                  }).get();
+            
+                  if (formData.length === 0) {
+                    alert("Please select at least one row to save.");
+                    return;
+                  }
+            
+                  axios.post('/adminInv/itemStoreMinMaxSave', { data: formData })
+                    .then(response => {
+                      console.log('Response from server:', response.data);
+                      $('#errordiv6').removeClass('alert-danger').addClass('alert-success').text(response.data.msg).show();
+                      const selectedRowCode = $('#itemCode').val();
+                      fetchAndRenderStoreTaxItems(selectedRowCode);
+                    })
+                    .catch(error => {
+                      console.error('Error:', error);
+                      const errorMessage = error.response?.data?.msg || 'An error occurred';
+                      $('#errordiv6').removeClass('alert-success').addClass('alert-danger').text(errorMessage).show();
+                    });
+                });
+            
+                // Delete item location
+                window.deleteItem = function (itemId, selectedRowCode) {
+                  axios.post('/adminInv/delete-item-location', { id: itemId })
+                    .then(response => {
+                      console.log('Item deleted:', response.data);
+                      fetchAndRenderItems(selectedRowCode);
+                    })
+                    .catch(error => console.error('Error deleting item:', error));
+                };
+            
+                // Delete item store tax
+                window.deleteItemStoreTax = function (itemId, selectedRowCode) {
+                  axios.post('/adminInv/delete-item-store-tax', { id: itemId })
+                    .then(response => {
+                      console.log('Item deleted:', response.data);
+                      fetchAndRenderStoreTaxItems(selectedRowCode);
+                    })
+                    .catch(error => console.error('Error deleting item:', error));
+                };
+            
+                // Search button click event
+                document.getElementById('searchButton').addEventListener('click', function () {
+                  const clinic = document.getElementById('clinic').value;
+                  if (clinic) {
+                    fetchStoresByClinic(clinic);
+                  } else {
+                    alert('Please select a clinic.');
+                  }
+                });
+            
+                // Clear error div for itemOtherDetails form
+                window.clearErrorDiv3 = function () {
+                  $('#errordiv3').removeClass('alert-success alert-danger').text('');
+                };
+            
+                // Handle itemOtherDetails form submission
+                handleFormSubmit('#itemOtherDetails', '/adminInv/itemOtherDtlsSave', '#errordiv3', openItemDetailsModal);
+              });
+            </script>
+            

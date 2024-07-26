@@ -124,7 +124,14 @@
                                                         <label class="input__label">Parent Store</label>
                                                         <select id="parent_store" name="parent_store"  class="form-control input-style" data-validation="required" data-error-message="Parent Store is required">
                                                             <option value="<%= result.parent_store ? result.parent_store : '' %>"><%= result.id ? result.parent_store : 'Select' %></option>
-                                                            <option value="BFF">BFF</option>
+                                                            <% if (parentStore.length>0) {
+                                                                for (let i = 0; i < parentStore.length; i++) { %>
+                                                                    <option value="<%= parentStore[i].description%>"><%= parentStore[i].description%></option>
+                                                                    <% } } else { %>
+                                                                
+                                                                            <option>No any Cost Center Code</option>
+                                                                    
+                                                                        <% } %>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -133,7 +140,15 @@
                                                         <label class="input__label">Cost Center Code</label>
                                                         <select id="cost_center_code" name="cost_center_code" class="form-control input-style" data-validation="required" data-error-message="Cost Center Code is required">
                                                             <option value="<%= result.cost_center_code ? result.cost_center_code : '' %>"><%= result.id ? result.cost_center_code : 'Select' %></option>
-                                                            <option value="fgf">fgf</option>
+                                                            <% if (costCentCode.length>0) {
+                                                                for (let i = 0; i < costCentCode.length; i++) { %>
+                                                                    <option value="<%= costCentCode[i].description%>"><%= costCentCode[i].description%></option>
+                                                                    <% } } else { %>
+                                                                
+                                                                            <option>No any Cost Center Code</option>
+                                                                    
+                                                                        <% } %>
+
                                                         </select>
                                                     </div>
                                                 </div>
@@ -211,7 +226,34 @@
                 </div>
                 <!--footer section start-->
                 <%-include('../footer');-%>
+                <script>
+                    function loadClinic(a) {
+                    fetch('/adminInv/get-clinic-details')
+                      .then(response => response.json())
+                      .then(data => {
 
+                        console.log(data)
+                        const dropdown = document.getElementById(a);
+                        data.forEach(item => {
+                          const option = document.createElement('option');
+                          option.value = item.clinic_desc;
+                          option.textContent = item.clinic_desc;
+                          dropdown.appendChild(option);
+
+                        });
+                      })
+                      .catch(error => console.error('Error fetching states:', error));
+                  }
+                  loadClinic('clinic');
+                  
+                    $('#clustur-dtl').on('click', '#view_btn', function() {
+                    const clus_id=$(this).closest('tr').data('clustur-id')
+                    const route='24'
+                    const module='clinic'
+                    ViewBtn(route,clus_id,module)
+                
+                    });
+                </script>
 
                 <script>
                     function updateQuery(){
@@ -235,27 +277,6 @@ document.getElementById('mod-btn').disabled = true;
 
 
                 <script type="module">
-
-function loadClinic(a){
-            fetch('/adminInv/get-clinic-details')
-                .then(response => response.json())
-                .then(data => {
-					
-					console.log(data)
-                    const dropdown = document.getElementById(a);
-                    data.forEach(item => {
-                        const option = document.createElement('option');
-                        option.value = item.clinic_desc;
-                        option.textContent = item.clinic_desc;
-                        dropdown.appendChild(option);
-                        
-                    });
-                })
-                .catch(error => console.error('Error fetching states:', error));
-            }
-            loadClinic('clinic');
-
-
                     import { validateForm } from '../javascripts/validation.js';
                     import { myAjax } from '../javascripts/myAjax.js';
                 

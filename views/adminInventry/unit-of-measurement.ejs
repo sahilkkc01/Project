@@ -180,6 +180,7 @@
                 <%-include('../footer')-%>
                 <script src="../javascripts/updateStatus.js"></script>
                 <script src="../javascripts/pageUpdate.js"></script>
+                <script src="../javascripts/ViewBtn.js"></script>
                     <script type="module">
                         import { pagi_search } from '../javascripts/pagi_search.js';
                         $(document).ready(function () {
@@ -198,13 +199,22 @@
                                         dataList.forEach(function (item) {
                                             console.log(item);
                                             tableRows += `
-                                                <tr>
-                                                    <td><a type="button" class="btn btn-primary btn-style btn-change" onClick=updatePageItemCat(${item.id}) href='/adminInv/39'>View</a></td>
+                                                <tr data-store-id="${item.id}">
+                                                    <td><a type="button" class="btn btn-primary btn-style btn-change" id="view_btn">View</a></td>
                                                     <td>${item.code}</td>
                                                     <td>${item.description}</td>
                                                     <td><input class="form-check-input mt-0" type="checkbox" id='${item.id}' onClick=ChangeStatus('${item.id}','${data.Encschema}',${item.id}) ${item.status ? 'checked' : ''}></td>
                                                 `;
                                         });
+
+                                        $('#unitOfMeasurBody').on('click', '#view_btn', function() {
+                                                    const id=$(this).closest('tr').data('store-id')
+                                                    const route='39'
+                                                    const module='adminInv'
+                                                    console.log("id", id);
+                                                    ViewBtn(route,id,module) 
+                                                    });
+
                                         $('#unitOfMeasurBody').html(tableRows);
                                         pagi_search('#searchBox', '#unitOfMeasurTable', '#paginationControls');
                                     },

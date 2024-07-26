@@ -83,6 +83,9 @@
 	</nav>
   </div>
  </div>
+ <style>.nav-tabs button{font-size:14px;background:#0EB9AF;color:#D4FFFC;margin:0px 3px 0px 3px;box-shadow:0px -1px 2px 1px #7E7E7E40;}
+  .nav-tabs button .fas{margin-right:3px;font-size:13px;}.nav-tabs .nav-link.disabled {color: #d4fffc;background-color: #0eb9af91;border-color: transparent;
+  }.nav-tabs .nav-link.active{border:inherit;border-bottom:none;margin-bottom:-4px;}#dv_appointment, #dv_visited, #dv_converted{display:none;}</style>
  
   <!-- content -->
   <div class="container-fluid">
@@ -400,18 +403,33 @@
 		
         </div>
         <div class="col-lg-9 pl-lg-2 chart-grid">
+          <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <button style="margin-left:0px;" class="nav-link active" id="nav-followup-tab" data-bs-toggle="tab" data-bs-target="#nav-followup" type="button" role="tab" aria-controls="nav-followup" aria-selected="true"><i class="fas fa-exchange-alt"></i> Follow Up</button>
+    
+            <button class="nav-link disabled" id="nav-appointment-tab" data-bs-toggle="tab" data-bs-target="#nav-appointment" type="button" role="tab" aria-controls="nav-appointment" aria-selected="false"><i class="fas fa-calendar-alt"></i> Appointment</button>
+    
+            <button class="nav-link disabled" id="nav-visited-tab" data-bs-toggle="tab" data-bs-target="#nav-visited" type="button" role="tab" aria-controls="nav-visited" aria-selected="false"><i class="fas fa-map-marker-alt"></i> Visited</button>
+    
+            <button class="nav-link disabled" id="nav-converted-tab" data-bs-toggle="tab" data-bs-target="#nav-converted" type="button" role="tab" aria-controls="nav-converted" aria-selected="false"><i class="fas fa-check-circle"></i> Converted</button>
+            </div>
+          </nav> 
+      
+      <div class="tab-content" id="nav-tabContent">     
+      
         <!--part 1-->
+      <div class="tab-pane fade show active" id="nav-followup" role="tabpanel" aria-labelledby="nav-followup-tab">
 		  <div class="card card_border">
             <div class="card-body">
 
-             <div class="col-xl-12 pr-xl-2 form-menu">
+      <!--div class="col-xl-12 pr-xl-2 form-menu">
 			 <div class="row">
 			 <span class="active"><i class="fas fa-exchange-alt"></i> Follow Up</a></span>
 			 <span><i class="fas fa-calendar-alt"></i> Appointment</span>
 			 <span><i class="fas fa-map-marker-alt"></i> Visited</span>
 			 <span><i class="fas fa-check-circle"></i> Converted</span>
 			 </div>
-			 </div>
+			 </div-->
 			 
 
 			 <!-- form 5 -->
@@ -498,19 +516,22 @@
 			
 			</div>
           </div>
+        </div>
 		  <!--part 1 ended-->
 		
-		<div class="card card_border mt-3" id="dv_appointment">
+		<!--part 2 appointment-->
+    <div class="tab-pane fade" id="nav-appointment" role="tabpanel" aria-labelledby="nav-appointment-tab">
+      <div class="card card_border mt-3" id="dv_appointment">
             <div class="card-body">
 
-             <div class="col-xl-12 pr-xl-2 form-menu">
+      <!--div class="col-xl-12 pr-xl-2 form-menu">
 			 <div class="row">
 			 <span><i class="fas fa-exchange-alt"></i> Follow Up</a></span>
 			 <span class="active"><i class="fas fa-calendar-alt"></i> Appointment</span>
 			 <span><i class="fas fa-map-marker-alt"></i> Visited</span>
 			 <span><i class="fas fa-check-circle"></i> Converted</span>
 			 </div>
-			 </div>
+			 </div-->
 			 
 
 			 <!-- form 6 -->
@@ -601,18 +622,22 @@
 			
 			</div>
           </div>
+        </div>
+    <!--part 2 finsih-->
 		
+    <!--part 3 visited-->
+    <div class="tab-pane fade" id="nav-visited" role="tabpanel" aria-labelledby="nav-visited-tab">
         <div class="card card_border mt-3" id="dv_visited">
             <div class="card-body">
 
-             <div class="col-xl-12 pr-xl-2 form-menu">
+      <!--div class="col-xl-12 pr-xl-2 form-menu">
 			 <div class="row">
 			 <span><i class="fas fa-exchange-alt"></i> Follow Up</a></span>
 			 <span><i class="fas fa-calendar-alt"></i> Appointment</span>
 			 <span class="active"><i class="fas fa-map-marker-alt"></i> Visited</span>
 			 <span><i class="fas fa-check-circle"></i> Converted</span>
 			 </div>
-			 </div>
+			 </div-->
 			 
 
 			 <!-- form 7 -->
@@ -728,18 +753,22 @@
 			</div>
 			</div>
           </div>
+        </div>
+    <!-- part 3 finish-->
 
+    <!--part 4 converted-->
+    <div class="tab-pane fade" id="nav-converted" role="tabpanel" aria-labelledby="nav-converted-tab">
         <div class="card card_border mt-3" id="dv_converted">
             <div class="card-body">
 
-             <div class="col-xl-12 pr-xl-2 form-menu">
+             <!--div class="col-xl-12 pr-xl-2 form-menu">
 			 <div class="row">
 			 <span><i class="fas fa-exchange-alt"></i> Follow Up</a></span>
 			 <span><i class="fas fa-calendar-alt"></i> Appointment</span>
 			 <span><i class="fas fa-map-marker-alt"></i> Visited</span>
 			 <span class="active"><i class="fas fa-check-circle"></i> Converted</span>
 			 </div>
-			 </div>
+			 </div-->
 			 
 			 <div class="col-xl-12 pr-xl-2" id="convertedDiv">
 			 <form id="conv_form" method="post" class="mt-2">
@@ -818,7 +847,11 @@
 		</div>
 		</div>
 			</div>
-          </div> 		  
+          </div> 
+        </div>
+      <!--part 4 finish-->  
+         
+        </div>  
         </div>
       </div>
     </div>
@@ -961,6 +994,15 @@ function loadCity(a) {
 
 
 	$(document).ready(function() {
+
+    function setActiveTab(tabId) {
+                $('#nav-tab .nav-link').removeClass('active');
+                $(tabId).addClass('active');
+                
+                $('.tab-pane').removeClass('show active');
+                const targetTab = $(tabId).data('bs-target');
+                $(targetTab).addClass('show active');
+            }
   
 		$('#fu_status').on('change', function() {
       
@@ -1261,6 +1303,9 @@ $.ajax({
 // 
 if($('#fu_status').val() === 'Appointment'){
         $('#dv_appointment').css('display', 'block');
+        $('#nav-appointment-tab').removeClass("disabled");
+        setActiveTab('#nav-appointment-tab');
+
         $('.highlight').removeClass('highlight');
         $('#aptDiv').addClass('highlight');
         $('html, body').animate({
@@ -1437,6 +1482,10 @@ btn.addEventListener('click', function() {
 
         $('#apt_apt_btn').removeAttr('disabled');
 					$('#dv_appointment').css('display', 'none');
+          $('#nav-appointment-tab').addClass("disabled");
+          setActiveTab('#nav-followup-tab');
+
+
 					$('#follow_up_btn').removeAttr('disabled');
 					// $('#apt_apt_btn').removeAttr('disabled');
 				}
@@ -1608,6 +1657,9 @@ row.addClass('locked');
         $('#appointment_table_3').append(newRow1);
     }else{
       $('#dv_converted').css('display', 'block');
+      $('#nav-converted-tab').removeClass("disabled");
+      setActiveTab('#nav-converted-tab');
+
       $('.highlight').removeClass('highlight');
         $('#convertedDiv').addClass('highlight');
         $('html, body').animate({
@@ -1671,10 +1723,18 @@ row.addClass('locked');
 
                 if (formData.visited_status === 'Booked') {
                     $('#dv_converted').css('display', 'block');
+                    $('#nav-converted-tab').removeClass("disabled");
+                    setActiveTab('#nav-converted-tab');
+
                     $('#vis_btn').attr('disabled', 'disabled');
                 } else if (formData.visited_status === 'Not Booked') {
                     $('#dv_appointment').css('display', 'none');
+                    $('#nav-appointment-tab').addClass("disabled");
+                    
+
                     $('#dv_visited').css('display', 'none');
+                    $('#nav-visited-tab').addClass("disabled");
+
                     $('#follow_up_btn').removeAttr('disabled');
                     $('#apt_apt_btn').removeAttr('disabled');
                     $('#vis_btn').removeAttr('disabled');

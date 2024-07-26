@@ -101,9 +101,25 @@ const { setId, newSupplierCategory, newSupplier, newStore, newTax, newItem, newC
   itemStoreMinMax,
   fetchMinMax,
   loadCostCentCodePage,
-  newCostCentCode
+  newCostCentCode,
+  loadRateContractPage,
+  newRateContract,
+  getAllRateContractList,
+  changeFreeze,
+  loadStrUntMstPage,
+  newStrUnitMst,
+  getAllStrUnitMstList,
+  loadWorkOrdItemPage,
+  newWorkOrdItem,
+  getWorkOrdItemList,
+    getCostCenterCodeList,
+  loadHSNCodePage,
+  newHSNCode,
+  getHSNCodeList,
+  getItemCatList,
+  getSupplierListItem
 } = require('../controllers/adminInventryControllers');
-const { RackMaster, ShelfMaster, BinMaster, ItemMasterNew, UnitOfMeasurementNew, StoreDetails, TaxCategory, ItemSupplier, ItemOtherDetails, MoleculeNew, ItemGroupNew,  ItemCategoryNew, DispensingTypeNew, StorageTypeNew, PregnancyClassNew, TherapeuticClassNew } = require('../models/adminInventorySchema');
+const { RackMaster, ShelfMaster, BinMaster, ItemMasterNew, UnitOfMeasurementNew, StoreDetails, TaxCategory, ItemSupplier, ItemOtherDetails, MoleculeNew, ItemGroupNew,  ItemCategoryNew, DispensingTypeNew, StorageTypeNew, PregnancyClassNew, TherapeuticClassNew, StrUnitMasterNew } = require('../models/adminInventorySchema');
 
 
 
@@ -194,6 +210,33 @@ router.get('/40',(req,res)=>{
 router.get('/50',(req,res)=>{
   res.render('adminInventry/cost-center-codes')
 })
+
+router.get('/50',(req,res)=>{
+  res.render('adminInventry/cost-center-codes')
+})
+
+
+router.get('/44',(req,res)=>{
+  res.render('adminInventry/rate-contract')
+})
+
+router.get('/46',(req,res)=>{
+  res.render('adminInventry/strength-unit-master')
+})
+
+router.get('/48',(req,res)=>{
+  res.render('adminInventry/work-order-item')
+})
+
+router.get('/52',(req,res)=>{
+  res.render('adminInventry/HSN-codes-master')
+})
+router.get('/51',loadCostCentCodePage);
+
+router.get('/45', loadRateContractPage);
+router.get('/47', loadStrUntMstPage)
+router.get('/49', loadWorkOrdItemPage)
+router.get('/53',loadHSNCodePage);
 router.get('/51',loadCostCentCodePage);
 
 
@@ -288,6 +331,16 @@ router.get('/get-UOM-details',async (req, res) => {
   try {
     const UOM = await UnitOfMeasurementNew.findAll();
     res.status(200).json(UOM);
+  } catch (error) {
+    console.error('Error fetching  details:', error);
+    res.status(500).json({ msg: 'An error occurred while fetching  details.' });
+  }
+})
+router.get('/get-StrenghUnit-details',async (req, res) => {
+  console.log('11')
+  try {
+    const UOM = await StrUnitMasterNew.findAll();
+    res.status(200).json(UOM); 
   } catch (error) {
     console.error('Error fetching  details:', error);
     res.status(500).json({ msg: 'An error occurred while fetching  details.' });
@@ -473,6 +526,9 @@ router.get('/get-rackMaster-List', getAllRackMasterList);
 router.post('/update-status-RackMaster', updateRackMasterStatus);
 router.post('/update-page-RackMaster', getUpdatePageRackMaster)
 
+router.post('/work-ord-item-FormSubmit',newWorkOrdItem)
+router.post('/HSNSubmit',newHSNCode);
+
 router.post('/get-item-suppliers', async (req, res) => {
   try {
       const { itemCode } = req.body;
@@ -486,8 +542,9 @@ router.post('/get-item-suppliers', async (req, res) => {
 
 router.post('/getItemOtherDetails', async (req, res) => {
   try {
+    console.log('s',req.body)
       const { itemCode } = req.body;
-      const itemDetails = await ItemOtherDetails.findOne({ where: { itemCode } });
+      const itemDetails = await ItemOtherDetails.findOne({ where: { itemCode:itemCode } });
 
       if (itemDetails) {
           res.status(200).json(itemDetails);
@@ -509,6 +566,7 @@ router.post('/getItemOtherDetails', async (req, res) => {
 router.post('/save-item-suppliers', saveItemSupp);
 
 router.get('/get-supplier-list', getSupplierList);
+router.get('/get-supplier-list-item', getSupplierListItem);
 router.post('/get-store-tax-list', getStoreTaxDtls);
 router.post('/update-suppiler-status', updateSupplierStatus);
 router.post('/update-supplier-page', getUpdateSupplierPage);
@@ -544,5 +602,19 @@ router.get('/getAll-therapeutic-list',getTheraClassList)
 router.get('/getAll-unitOfMeasur-list',getUnitOfMeasurementList)
 
 router.get('/getAll-tarm&Cond',getAllTermAndCond)
+router.get('/getAll-rateContract-list',getAllRateContractList)
+router.post('/isFreeze-change',changeFreeze);
+
+router.get('/getAll-str-unit-mst-list',getAllStrUnitMstList)
+
+router.get('/get-work-ord-Item',getWorkOrdItemList)
+
+router.get('/get-cost-center-code',getCostCenterCodeList);
+
+router.get('/get-HSN-code',getHSNCodeList);
+
+router.get('/get-item-cat-list',getItemCatList);
+router.post('/rateContractFormSubmit',newRateContract)
+router.post('/str-unit-mst-FormSubmit',newStrUnitMst)
 
 module.exports = router;

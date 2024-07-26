@@ -5,8 +5,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>LifeLinker</title>
-<%- include('../header') -%>
+    <title>LifeLinkr</title>
+
+    <%- include('../header') %>
+
+        <!-- main content start -->
         <div class="main-content">
 
             <div class="row content-top-gap2">
@@ -89,7 +92,7 @@
                     <div class="row">
 
                         <div class="col-lg-12 pl-lg-0 mt-2 ml-2">
-                            <h4 class="primary">Contra Indication & Side Effects</h4>
+                            <h4 class="primary">Define Radiologist</h4>
                         </div>
                         <div class="col-lg-12 pl-lg-2 chart-grid">
                             <form>
@@ -99,65 +102,81 @@
 
                                         <div class="card">
 
-                                            <!-- <div class="card-body"> -->
+                                            <div class="col-xl-12 p-heading">
+                                                <h6 class="p-text">TEMPLATE NAME : Anomaly Scan</h6>
+                                            </div>
 
-                                                <div class="form-row pl-lg-3 pr-lg-3 mt-2 mb-3">
-                                                    
-                                                    <div class="col-lg-3 col-md-4 col-sm-12">
-                                                      
-                                                    </div>
+                                            <div class="card-body pb-3 pt-0 ">
+                                                
+                                               
 
-                                                    <div class="col-lg-3 col-md-4 col-sm-12">
+                                                <div class="form-row  mt-2 mb-1">
+                                                    <div class="col-12">
                                                         <div class="form-group">
-                                                            <label class="input__label">Item Name</label>
-                                                            <h6 class="p-text" id="">Item Name</h6>
+                                                            <div class="pl-lg-0 pr-lg-0">
+                                                                <h6 class="primary">DEFINE RADIOLOGIST</h6>
                                                             </div>
-                                                        <div class="form-group">
-                                                            <label class="input__label">Contra Indication</label>
-                                                            <textarea name="header_text" class="form-control input-style"
-                                                            placeholder=""></textarea>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label class="input__label">Side Effects</label>
-                                                                <textarea name="header_text" class="form-control input-style"
-                                                                placeholder=""></textarea>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label class="input__label">Help URL</label>
-                                                                    <input name="description" type="text" class="form-control input-style" placeholder="">
-                                                                    </div>
+                                                        </div>
                                                     </div>
-                                                    <div class="col-lg-3 col-md-4 col-sm-12">
-                                                       
-                                                    </div>
-                                                    <div class="col-lg-3 col-md-4 col-sm-12">
-                                                        
-                                                    </div>
-
                                                 </div>
 
+                                                <div class="form-row">
+                                                    <div class="col-12">
+                                                        <div class="form-group">
+                                                            <div class="col col-12 pr-lg-0 pl-lg-0">
+                                                                <div class="slidx">
 
+                                                                    <table class="table2">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th contenteditable="true" width="15%">Status</th>
+                                                                                <th contenteditable="true" class="text-left pl-4">Radiologist</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                
+                                                                                <td contenteditable="true"><input
+                                                                                    class="form-check-input mt-1"
+                                                                                    type="checkbox" id="gridCheck1">
+                                                                                </td>
+                                                                                <td contenteditable="true" class="text-left pl-4"></td>
 
+                                                                            </tr>
 
+                                                                            <tr>
+                                                                                
+                                                                                <td contenteditable="true"><input
+                                                                                    class="form-check-input mt-1"
+                                                                                    type="checkbox" id="gridCheck1">
+                                                                                </td>
+                                                                                <td contenteditable="true" class="text-left pl-4"></td>
 
-                                            <!-- </div> -->
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
                                         </div>
-
+                                        
                                         <!--Past your code here ends-->
                                     </div>
                                 </div>
                                 <div class="form-group mt-1 mb-3 text-right">
 
-                                    
-
-                                    <button type="button" class="btn-danger btn-style btn mt-3 mr-2"><strong><i
-                                                class="fas fa-times"></i> Close</strong></button>
-
-                                    <button type="button" class="btn-primary btn-style btn mt-3"><strong><i
-                                                class="far fa-save"></i>
-                                            Save</strong></button>
+                            <a href="/radiology/5"><button type="button" class="btn-danger btn-style btn mt-3 mr-2"><strong><i
+                                        class="fas fa-times"></i> Close</strong></button></a>
+    
+                            <button type="button" class="btn-primary btn-style btn mt-3"><strong><i class="far fa-save"></i>
+                                    Save</strong></button>
 
                                 </div>
-                            </form>
-                        </div>
-                     <%- include('../footer'); -%>
+                    </form>
+                </div>
+
+    <%- include('../footer') %>  

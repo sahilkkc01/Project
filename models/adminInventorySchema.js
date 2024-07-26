@@ -17,7 +17,7 @@ const SupplierCategory = sequelize.define('SupplierCategory', {
 }, {
     alert: true,
     timestamps: true,
-    tableName: 'tblsuppliercategory',
+    tableName: 'AdmInvsuppliercategory',
 })
 
 const StoreDetails = sequelize.define('StoreDetails', {
@@ -60,7 +60,7 @@ const StoreDetails = sequelize.define('StoreDetails', {
 }, {
     alert: true,
     timestamps: true,
-    tableName: 'tblstore',
+    tableName: 'AdmInvstore',
 });
 const TaxCategory = sequelize.define('TaxCategory', {
     tax_desc: {
@@ -78,7 +78,7 @@ const TaxCategory = sequelize.define('TaxCategory', {
 }, {
     alert: true,
     timestamps: true,
-    tableName: 'tbltaxcategory',
+    tableName: 'AdmInvtaxcategory',
 });
 const ItemMove = sequelize.define('ItemMove', {
     item_desc: {
@@ -96,7 +96,7 @@ const ItemMove = sequelize.define('ItemMove', {
 }, {
     alert: true,
     timestamps: true,
-    tableName: 'tblitemmove',
+    tableName: 'AdmInvitemmove',
 });
 const CurrencyMaster = sequelize.define('CurrencyMaster', {
     currency_desc: {
@@ -118,7 +118,7 @@ const CurrencyMaster = sequelize.define('CurrencyMaster', {
 }, {
     alert: true,
     timestamps: true,
-    tableName: 'tblcurrencyMaster',
+    tableName: 'AdmInvcurrencyMaster',
 });
 const RackMaster = sequelize.define('RackMaster', {
     rank_desc: {
@@ -134,7 +134,7 @@ const RackMaster = sequelize.define('RackMaster', {
 }, {
     alert: true,
     timestamps: true,
-    tableName: 'tblrackmaster',
+    tableName: 'AdmInvrackmaster',
 });
 const ItemLocation = sequelize.define('itemlocation', {
     itemCode: {
@@ -158,7 +158,7 @@ const ItemLocation = sequelize.define('itemlocation', {
 }, {
     alert: true,
     timestamps: true,
-    tableName: 'itemlocation',
+    tableName: 'AdmInvitemlocation',
 });
 const ItemConv = sequelize.define('itemConv', {
     itemCode: {
@@ -179,7 +179,7 @@ const ItemConv = sequelize.define('itemConv', {
 }, {
     alert: true,
     timestamps: true,
-    tableName: 'itemConv',
+    tableName: 'AdmInvitemConv',
 });
 const BinMaster = sequelize.define('BinMaster', {
     bin_desc: {
@@ -195,7 +195,7 @@ const BinMaster = sequelize.define('BinMaster', {
 }, {
     alert: true,
     timestamps: true,
-    tableName: 'tblbinmaster',
+    tableName: 'AdmInvbinmaster',
 });
 const ShelfMaster = sequelize.define('ShelfMaster', {
     shelf_desc: {
@@ -211,7 +211,7 @@ const ShelfMaster = sequelize.define('ShelfMaster', {
 }, {
     alert: true,
     timestamps: true,
-    tableName: 'tblshelfmaster',
+    tableName: 'AdmInvshelfmaster',
 });
 
 
@@ -332,7 +332,7 @@ const PackageMembership = sequelize.define('PackageMembership', {
 }, {
     alert: true,
     timestamps: true,
-    tableName: 'tblpackagemembership',
+    tableName: 'AdmInvpackagemembership',
 });
 
 
@@ -458,7 +458,7 @@ const ItemMasterNew = sequelize.define('ItemMaster', {
 }, {
     alert: true,
     timestamps: true,
-    tableName: 'ItemMaster'
+    tableName: 'AdmInvItemMaster'
 });
 
 const ItemCategoryNew = sequelize.define('ItemCategoryNew', {
@@ -475,7 +475,7 @@ const ItemCategoryNew = sequelize.define('ItemCategoryNew', {
 }, {
     alert: true,
     timestamps: true,
-    tableName: 'item_categories',
+    tableName: 'AdmInvitem_categories',
 });
 
 const ItemGroupNew = sequelize.define('ItemCategory', {
@@ -498,7 +498,7 @@ const ItemGroupNew = sequelize.define('ItemCategory', {
     }
 }, {
     alert: true,
-    tableName: 'item_Groups',
+    tableName: 'AdmInvitem_Groups',
     timestamps: true,
 });
 
@@ -517,7 +517,7 @@ const StorageTypeNew = sequelize.define('StorageType', {
     }
 }, {
     alert: true,
-    tableName: 'storage_types',
+    tableName: 'AdmInvstorage_types',
     timestamps: true,
 });
 
@@ -536,7 +536,7 @@ const DispensingTypeNew = sequelize.define('DispensingTypeNew', {
     }
 }, {
     alert: true,
-    tableName: 'dispensing_type',
+    tableName: 'AdmInvdispensing_type',
     timestamps: true,
 });
 
@@ -556,7 +556,7 @@ const MoleculeNew = sequelize.define('MoleculeNew', {
     }
 }, {
     alert: true,
-    tableName: 'molecule',
+    tableName: 'AdmInvmolecule',
     timestamps: true,
 });
 
@@ -576,7 +576,7 @@ const PregnancyClassNew = sequelize.define('PregnancyClassNew', {
     }
 }, {
     alert: true,
-    tableName: 'pregnancy_class',
+    tableName: 'AdmInvpregnancy_class',
     timestamps: true,
 });
 const ItemCompanyNew = sequelize.define('ItemCompanyNew', {
@@ -594,7 +594,7 @@ const ItemCompanyNew = sequelize.define('ItemCompanyNew', {
     }
 }, {
     alert: true,
-    tableName: 'item_company',
+    tableName: 'AdmInvitem_company',
     timestamps: true,
 });
 
@@ -614,7 +614,7 @@ const TherapeuticClassNew = sequelize.define('TherapeuticClassNew', {
     }
 }, {
     alert: true,
-    tableName: 'therapeutic-class',
+    tableName: 'AdmInvtherapeuticclass',
     timestamps: true,
 });
 const UnitOfMeasurementNew = sequelize.define('UnitOfMeasurementNew', {
@@ -632,7 +632,7 @@ const UnitOfMeasurementNew = sequelize.define('UnitOfMeasurementNew', {
     }
 }, {
     alert: true,
-    tableName: 'unit-of-measurement',
+    tableName: 'AdmInvunitofmeasurement',
     timestamps: true,
 });
 
@@ -651,7 +651,7 @@ const TearmAndConditionNew = sequelize.define('TearmAndConditionNew', {
     }
 }, {
     alert: true,
-    tableName: 'tearm-&-condition',
+    tableName: 'AdmInvtearmandcondition',
     timestamps: true,
 });
 const ItemStoreMinMax = sequelize.define('ItemStoreMinMax', {
@@ -686,7 +686,7 @@ const ItemStoreMinMax = sequelize.define('ItemStoreMinMax', {
     }
   }, {
     // Other model options go here
-    tableName: 'ItemStoreMinMax', // Make sure this matches your actual table name
+    tableName: 'AdmInvItemStoreMinMax', // Make sure this matches your actual table name
     timestamps: true // Disable createdAt and updatedAt if you don't use them
   });
 const ItemStoreTax = sequelize.define('ItemStoreTax', {
@@ -722,7 +722,7 @@ const ItemStoreTax = sequelize.define('ItemStoreTax', {
 
 }, {
     alert: true,
-    tableName: 'ItemStoreTax', 
+    tableName: 'AdmInvItemStoreTax', 
     timestamps: true,
 });
 const ItemOtherDetails = sequelize.define('ItemOtherDetails', {
@@ -745,7 +745,7 @@ const ItemOtherDetails = sequelize.define('ItemOtherDetails', {
    
 }, {
     alert: true,
-    tableName: 'ItemOtherDetails', 
+    tableName: 'AdmInvItemOtherDetails', 
     timestamps: true,
 });
 
@@ -766,7 +766,7 @@ const ItemSupplier = sequelize.define('ItemSupplier', {
     },
   
 }, {
-    tableName: 'ItemSupplier',
+    tableName: 'AdmInvItemSupplier',
     timestamps: true
 });
 
@@ -883,9 +883,89 @@ const Supplier = sequelize.define('Supplier', {
 }, {
     alert: true,
     timestamps: true,
-    tableName: 'tblsupplier',
+    tableName: 'AdmInvsupplier',
 });
 
+const RateContractNew = sequelize.define('RateContract', {
+    code: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    description: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    contractDate: {
+        type: DataTypes.DATE,
+        allowNull: false
+    },
+    contractStartDate: {
+        type: DataTypes.DATE,
+        allowNull: false
+    },
+    contractEndDate: {
+        type: DataTypes.DATE,
+        allowNull: false
+    },
+    supplier: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    clinicRepresentative: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    isFreeze:{
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+    },
+    status:{
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+    }
+}, {
+    alert: true,
+    tableName: 'AdmInvrate_contracts',
+    timestamps: true,
+});
+
+
+const StrUnitMasterNew = sequelize.define('StrUnitMaster', {
+    code: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    description: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    status: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+    }
+}, {
+    alert: true,
+    tableName: 'AdmInvStrength_unit_master',
+    timestamps: true,
+});
+const WorkOrderItemNew = sequelize.define('WorkOrderItemNew', {
+    code: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    description: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    status: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+    }
+}, {
+    alert: true,
+    tableName: 'AdmInvwork_order_item',
+    timestamps: true,
+});
 const CostCenterCodeNew = sequelize.define('CostCenterCodeNew', {
     code: {
         type: DataTypes.STRING,
@@ -904,7 +984,24 @@ const CostCenterCodeNew = sequelize.define('CostCenterCodeNew', {
     tableName: 'AdmInvcost_center_code',
     timestamps: true,
 });
-
+const HSNCodeNew = sequelize.define('HSNCodeNew', {
+    code: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    description: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    status: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+    }
+}, {
+    alert: true,
+    tableName: 'AdmInvHSN_Code_Master',
+    timestamps: true,
+});
 
 sequelize.sync();
 
@@ -916,5 +1013,6 @@ module.exports = {
     ItemOtherDetails,
     ItemSupplier,
     ItemCategoryNew,
-    CostCenterCodeNew
+    RateContractNew,StrUnitMasterNew,WorkOrderItemNew ,CostCenterCodeNew ,
+    HSNCodeNew
 };

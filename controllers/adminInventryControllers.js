@@ -8,7 +8,10 @@ const { Supplier, SupplierCategory, StoreDetails, TaxCategory, ItemMove, Currenc
     ItemOtherDetails,
     ItemSupplier,
     ItemStoreMinMax,
-    CostCenterCodeNew
+    CostCenterCodeNew,
+    StrUnitMasterNew,
+    WorkOrderItemNew,
+    HSNCodeNew
 } = require("../models/adminInventorySchema");
 
 let store = {};
@@ -406,7 +409,6 @@ const getAllBinMst = async (req, res) => {
         });
     }
 }
-
 const updateStatusBin = async (req, res) => {
     try {
         const Bid = req.body.id;
@@ -437,7 +439,7 @@ const getUpdatePageBin = async (req, res) => {
 }
 
 const loadBinPage = async (req, res) => {
-    const binId = req.flash('binId')[0];
+    const binId = req.query.id;
     console.log(binId);
     let result = ''
     if (binId) {
@@ -459,11 +461,13 @@ const loadBinPage = async (req, res) => {
     }
 }
 
-
 const getAllTax = async (req, res) => {
     try {
-        const allTaxList = await TaxCategory.findAll();
-        res.status(200).json(allTaxList)
+        const result = await TaxCategory.findAll();
+        const schema = 'TaxCategory';
+        const Encschema = encryptDataForUrl(schema.toString());
+        console.log("hdshfjvfsffjsh", Encschema);
+        res.status(200).json({ result, Encschema });
     } catch (error) {
         res.status(500).json({
             success: false,
@@ -504,7 +508,7 @@ const getUpdateTaxPage = async (req, res) => {
 }
 
 const loadTaxPage = async (req, res) => {
-    const taxId = req.flash('taxId')[0];
+    const taxId = req.query.id;
     console.log(taxId);
     let result = ''
     if (taxId) {
@@ -528,8 +532,11 @@ const loadTaxPage = async (req, res) => {
 
 const getStoreList = async (req, res) => {
     try {
-        const storeList = await StoreDetails.findAll();
-        res.status(200).json(storeList)
+        const result = await StoreDetails.findAll();
+        const schema = 'StoreDetails';
+        const Encschema = encryptDataForUrl(schema.toString());
+        console.log("hdshfjvfsffjsh", Encschema);
+        res.status(200).json({ result, Encschema });
     } catch (error) {
         console.error('Error fetching department data:', error);
         res.status(500).json({
@@ -568,15 +575,17 @@ const getUpdateStorePage = async (req, res) => {
 }
 
 const loadStorePage = async (req, res) => {
-    const storeId = req.flash('storeId')[0];
-    console.log(storeId);
+    console.log(req.query.id);
     let result = ''
-    if (storeId) {
+    const costCentCode = await CostCenterCodeNew.findAll();
+    const clinic = await CostCenterCodeNew.findAll();
+    const parentStore = await StoreDetails.findAll();
+    if (req.query.id) {
         try {
-            result = await StoreDetails.findOne({ where: { id: storeId } });
+            result = await StoreDetails.findOne({ where: { id: req.query.id } });
             console.log(result);
             const currentDate = new Date().toISOString().split('T')[0];
-            res.render('adminInventry/26-IC-store-new', { currentDate, result })
+            res.render('adminInventry/26-IC-store-new', { currentDate, result, costCentCode, clinic, parentStore })
         } catch (error) {
             console.error('Error fetching department data:', error);
             res.status(500).json({
@@ -586,15 +595,17 @@ const loadStorePage = async (req, res) => {
         }
     }
     else {
-        res.render('adminInventry/26-IC-store-new', { result: result });
+        res.render('adminInventry/26-IC-store-new', { result, costCentCode, clinic, parentStore });
     }
 }
-
 
 const getAllSuplyCategory = async (req, res) => {
     try {
         const result = await SupplierCategory.findAll();
-        res.status(200).json(result)
+        const schema = 'SupplierCategory';
+        const Encschema = encryptDataForUrl(schema.toString());
+        console.log("hdshfjvfsffjsh", Encschema);
+        res.status(200).json({ result, Encschema });
     } catch (error) {
         res.status(500).json({
             success: false,
@@ -602,7 +613,6 @@ const getAllSuplyCategory = async (req, res) => {
         });
     }
 }
-
 const updateSCategoryStatus = async (req, res) => {
     console.log("Here is Data", req.body);
     try {
@@ -631,9 +641,8 @@ const getUpdatePageSCategory = async (req, res) => {
         });
     }
 }
-
 const loadSCategoryPage = async (req, res) => {
-    const SCategoryId = req.flash('SCategoryId')[0];
+    const SCategoryId = req.query.id;
     console.log(SCategoryId);
     let result = ''
     if (SCategoryId) {
@@ -658,7 +667,10 @@ const loadSCategoryPage = async (req, res) => {
 const getAllCurMaster = async (req, res) => {
     try {
         const result = await CurrencyMaster.findAll();
-        res.status(200).json(result);
+        const schema = 'CurrencyMaster';
+        const Encschema = encryptDataForUrl(schema.toString());
+        console.log("hdshfjvfsffjsh", Encschema);
+        res.status(200).json({ result, Encschema });
     } catch (error) {
         res.status(500).json({
             success: false,
@@ -696,7 +708,7 @@ const getUpdatePageCurMaster = async (req, res) => {
 }
 
 const loadCurMasterPage = async (req, res) => {
-    const CurMasterId = req.flash('CurMasterId')[0];
+    const CurMasterId = req.query.id;
     console.log(CurMasterId);
     let result = ''
     if (CurMasterId) {
@@ -720,8 +732,12 @@ const loadCurMasterPage = async (req, res) => {
 
 const getAllRackMasterList = async (req, res) => {
     try {
-        const rankData = await RackMaster.findAll()
-        res.status(200).json(rankData)
+        const result = await RackMaster.findAll()
+        const schema = 'RackMaster';
+        const Encschema = encryptDataForUrl(schema.toString());
+        console.log("hdshfjvfsffjsh", Encschema);
+        res.status(200).json({ result, Encschema });
+
     } catch (error) {
         console.error(error);
         res.status(500).json({
@@ -730,7 +746,6 @@ const getAllRackMasterList = async (req, res) => {
         });
     }
 }
-
 const updateRackMasterStatus = async (req, res) => {
     try {
         const RMasterId = req.body.id
@@ -761,7 +776,7 @@ const getUpdatePageRackMaster = async (req, res) => {
 }
 
 const loadRackMasterPage = async (req, res) => {
-    const RMasterId = req.flash('RMasterId')[0];
+    const RMasterId = req.query.id;
     console.log(RMasterId);
     let result = ''
     if (RMasterId) {
@@ -785,8 +800,11 @@ const loadRackMasterPage = async (req, res) => {
 
 const getItemMovementMaster = async (req, res) => {
     try {
-        const ItemMovementMaster = await ItemMove.findAll();
-        res.status(200).json(ItemMovementMaster)
+        const result = await ItemMove.findAll();
+        const schema = 'ItemMove';
+        const Encschema = encryptDataForUrl(schema.toString());
+        console.log("hdshfjvfsffjsh", Encschema);
+        res.status(200).json({ result, Encschema });
     } catch (error) {
         console.error(error);
         res.status(500).json({
@@ -826,7 +844,7 @@ const updatePageItemMove = async (req, res) => {
 }
 
 const loadItemMovePage = async (req, res) => {
-    const ItemModeId = req.flash('ItemModeId')[0];
+    const ItemModeId = req.query.id;
     console.log(ItemModeId);
     let result = ''
     if (ItemModeId) {
@@ -847,8 +865,22 @@ const loadItemMovePage = async (req, res) => {
         res.render('adminInventry/30-IC-item-movement-master-new', { result: result });
     }
 }
-
 const getSupplierList = async (req, res) => {
+    try {
+        const result = await Supplier.findAll();
+        const schema = 'Supplier';
+        const Encschema = encryptDataForUrl(schema.toString());
+        console.log("hdshfjvfsffjsh", Encschema);
+        res.status(200).json({ result, Encschema });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            success: false,
+            message: error.message,
+        });
+    }
+}
+const getSupplierListItem = async (req, res) => {
     try {
         const supplierList = await Supplier.findAll();
         console.log(supplierList);
@@ -895,15 +927,17 @@ const getUpdateSupplierPage = async (req, res) => {
 }
 
 const loadSuppilerPage = async (req, res) => {
-    const suppilerId = req.flash('suppilerId')[0];
+    const suppilerId = req.query.id;
     console.log(suppilerId);
+    const SupCat = await SupplierCategory.findAll();
+    const Currency = await CurrencyMaster.findAll();
     let result = ''
     if (suppilerId) {
         try {
             result = await Supplier.findOne({ where: { id: suppilerId } });
             console.log(result);
             const currentDate = new Date().toISOString().split('T')[0];
-            res.render('adminInventry/24-IC-supplier-new', { currentDate, result })
+            res.render('adminInventry/24-IC-supplier-new', { currentDate, result, SupCat, Currency })
         } catch (error) {
             console.error('Error fetching department data:', error);
             res.status(500).json({
@@ -913,14 +947,17 @@ const loadSuppilerPage = async (req, res) => {
         }
     }
     else {
-        res.render('adminInventry/24-IC-supplier-new', { result: result });
+        res.render('adminInventry/24-IC-supplier-new', { result: result, SupCat, Currency });
     }
 }
 
 const getShelfMasterList = async (req, res) => {
     try {
         const result = await ShelfMaster.findAll();
-        res.status(200).json(result)
+        const schema = 'ShelfMaster';
+        const Encschema = encryptDataForUrl(schema.toString());
+        console.log("hdshfjvfsffjsh", Encschema);
+        res.status(200).json({ result, Encschema });
     } catch (error) {
         console.error('Error fetching department data:', error);
         res.status(500).json({
@@ -961,7 +998,7 @@ const getUpdateShelfMasterPage = async (req, res) => {
 }
 
 const loadShelfMstPage = async (req, res) => {
-    const ShelfMstId = req.flash('ShelfMstId')[0];
+    const ShelfMstId = req.query.id;
     console.log(ShelfMstId);
     let result = ''
     if (ShelfMstId) {
@@ -1090,7 +1127,7 @@ const itemLocationSave = async (req, res) => {
         if (existingItem) {
             return res.status(400).json({
                 success: false,
-                msg: "Duplicate entry. Item location with this itemCode and store already exists!"
+                msg: "Duplicate entry"
             });
         }
 
@@ -1110,31 +1147,35 @@ const itemLocationSave = async (req, res) => {
 const itemConvSave = async (req, res) => {
     console.log(req.body);
     try {
-        // Check if the same entry exists in the database
-        const existingEntry = await ItemConv.findOne({
-            where: {
-                from_uom: req.body.from_uom,
-                to_uom: req.body.to_uom
-            }
-        });
-
-        if (existingEntry) {
-            return res.status(400).json({
-                success: false,
-                msg: "This conversion already exists"
-            });
+      // Check if the same entry exists in the database for the specific itemCode, from_uom, and to_uom
+      const existingEntry = await ItemConv.findOne({
+        where: {
+          itemCode: req.body.itemCode,
+          from_uom: req.body.from_uom,
+          to_uom: req.body.to_uom
         }
-
-        await ItemConv.create(req.body);
-        res.status(200).json({ msg: "Save Successfully" });
-    } catch (error) {
-        console.error('Error saving Item Conversion Data', error);
-        res.status(500).json({
-            success: false,
-            msg: error.message,
+      });
+  
+      if (existingEntry) {
+        return res.status(400).json({
+          success: false,
+          msg: "This conversion already exists for the specified itemCode"
         });
+      }
+  
+      await ItemConv.create(req.body);
+      res.status(200).json({ msg: "Save Successfully" });
+    } catch (error) {
+      console.error('Error saving Item Conversion Data', error);
+      res.status(500).json({
+        success: false,
+        msg: error.message,
+      });
     }
-};
+  };
+  
+  module.exports = itemConvSave;
+  
 const itemStoreTax = async (req, res) => {
     console.log(req.body);
     try {
@@ -1189,7 +1230,7 @@ const itemOtherDtls = async (req, res) => {
         const { itemCode, contra_indication, side_effects, help_url } = req.body;
 
         // Check if the entry with the given itemCode exists
-        const existingItem = await ItemOtherDetails.findOne({ where: { itemCode } });
+        const existingItem = await ItemOtherDetails.findOne({ where: { itemCode:itemCode } });
 
         if (existingItem) {
             // Update the existing entry
@@ -1263,8 +1304,7 @@ const getItemCategoryList = async (req, res) => {
 }
 
 const loadItemCatPage = async (req, res) => {
-    const key = 'dataKey';
-    const itemCatId = store[key];
+    const itemCatId = req.query.id;
     console.log(itemCatId);
     let result = ''
     if (itemCatId) {
@@ -1316,17 +1356,14 @@ const newItemGroup = async (req, res) => {
         })
     }
 }
-
 const loadItemGroupPage = async (req, res) => {
-    const key = 'dataKey';
-    const itemGrpId = store[key];
+    const itemGrpId = req.query.id
     console.log(itemGrpId);
     let result = ''
     if (itemGrpId) {
         try {
             console.log("Hello Satya");
             result = await ItemGroupNew.findOne({ where: { id: itemGrpId } });
-            store = {}
             console.log(result);
             res.render('adminInventry/item-group-new', { result: result });
         } catch (error) {
@@ -1340,6 +1377,7 @@ const loadItemGroupPage = async (req, res) => {
         res.render('adminInventry/item-group-new', { result: result })
     }
 }
+
 
 const getItemGroupList = async (req, res) => {
     try {
@@ -1358,8 +1396,7 @@ const getItemGroupList = async (req, res) => {
 }
 
 const loadStoreTypePage = async (req, res) => {
-    const key = 'dataKey';
-    const storeTypeId = store[key];
+    const storeTypeId = req.query.id;
     console.log(storeTypeId);
     let result = ''
     if (storeTypeId) {
@@ -1380,7 +1417,6 @@ const loadStoreTypePage = async (req, res) => {
         res.render('adminInventry/storage-type-new', { result })
     }
 }
-
 const newStoreType = async (req, res) => {
     try {
         console.log(req.body);
@@ -1429,8 +1465,7 @@ const getAllStorageType = async (req, res) => {
 }
 
 const loadDispensingPage = async (req, res) => {
-    const key = 'dataKey';
-    const disTypeId = store[key];
+    const disTypeId = req.query.id;
     console.log(disTypeId);
     let result = ''
     if (disTypeId) {
@@ -1500,15 +1535,13 @@ const getAllDisType = async (req, res) => {
 }
 
 const loadMoleculePage = async (req, res) => {
-    const key = 'dataKey';
-    const molId = store[key];
+    const molId = req.query.id;
     console.log(molId);
     let result = ''
     if (molId) {
         try {
             console.log("Hello Satya");
             result = await MoleculeNew.findOne({ where: { id: molId } });
-            store = {}
             console.log(result);
             res.render('adminInventry/molecule-new', { result: result });
         } catch (error) {
@@ -1805,8 +1838,7 @@ const newItemCompany = async (req, res) => {
 
 
 const loadItemCompanyPage = async (req, res) => {
-    const key = 'dataKey';
-    const molId = store[key];
+    const molId = req.query.id;
     console.log(molId);
     let result = ''
     if (molId) {
@@ -1845,17 +1877,14 @@ const getItemCompanyList = async (req, res) => {
 }
 
 
-
 const loadTherapeuticClassPage = async (req, res) => {
-    const key = 'dataKey';
-    const molId = store[key];
+    const molId = req.query.id;
     console.log(molId);
     let result = ''
     if (molId) {
         try {
             console.log("Hello Satya");
             result = await TherapeuticClassNew.findOne({ where: { id: molId } });
-            store = {}
             console.log(result);
             res.render('adminInventry/therapeutic-class-new', { result: result });
         } catch (error) {
@@ -1920,15 +1949,13 @@ const getTheraClassList = async (req, res) => {
 }
 
 const loadUnitOfMeasurmentPage = async (req, res) => {
-    const key = 'dataKey';
-    const molId = store[key];
+    const molId = req.query.id;
     console.log(molId);
     let result = ''
     if (molId) {
         try {
             console.log("Hello Satya");
             result = await UnitOfMeasurementNew.findOne({ where: { id: molId } });
-            store = {}
             console.log(result);
             res.render('adminInventry/unit-of-measurement-new', { result: result });
         } catch (error) {
@@ -1942,6 +1969,7 @@ const loadUnitOfMeasurmentPage = async (req, res) => {
         res.render('adminInventry/unit-of-measurement-new', { result })
     }
 }
+
 
 const newUnitOfMeasurement = async (req, res) => {
     try {
@@ -1991,15 +2019,14 @@ const getUnitOfMeasurementList = async (req, res) => {
 }
 
 const loadTermCondictionPage = async (req, res) => {
-    const key = 'dataKey';
-    const molId = store[key];
+    const molId = req.query.id;
     console.log(molId);
     let result = ''
     if (molId) {
         try {
             console.log("Hello Satya");
             result = await TearmAndConditionNew.findOne({ where: { id: molId } });
-            store = {}
+
             console.log(result);
             res.render('adminInventry/terms-&-conditions-new', { result: result });
         } catch (error) {
@@ -2083,7 +2110,241 @@ const saveItemSupp =async (req, res) => {
     }
   }
 
-  const loadCostCentCodePage = async (req, res) => {
+
+
+
+const loadRateContractPage = async (req, res) => {
+    const key = 'dataKey';
+    const molId = store[key];
+    console.log(molId);
+    let result = ''
+    const supplier = await Supplier.findAll();
+    const clinic = await Supplier.findAll();
+    if (molId) {
+        try {
+            console.log("Hello Satya");
+            result = await RateContractNew.findOne({ where: { id: molId } });
+            console.log(result);
+            res.render('adminInventry/rate-contract-new', { result: result, supplier: supplier, clinic: clinic });
+        } catch (error) {
+            console.log('Error fetching Item Data Save', error.message);
+            res.status(500).json({
+                success: false,
+                message: error.message,
+            })
+        }
+    } else {
+        res.render('adminInventry/rate-contract-new', { result, supplier, clinic })
+    }
+}
+
+const newRateContract = async (req, res) => {
+    try {
+        console.log(req.body);
+        const { id } = req.body;
+        if (id) {
+            console.log(id);
+            await RateContractNew.update(req.body, { where: { id: id } })
+            res.status(200).json({
+                success: true,
+                message: "Thank you for updating",
+            })
+        } else {
+            const { code } = req.body;
+            console.log(code);
+            const isExist = await RateContractNew.findOne({ where: { code: code } })
+            if (isExist) {
+                res.status(400).json({ success: false, msg: "Item Code Already Exist!" })
+            } else {
+                await RateContractNew.create(req.body);
+                res.status(200).json({ success: true, msg: "Item Category Data Save Succesfully" });
+            }
+        }
+    } catch (error) {
+        console.error('Error fetching Item Data Save', error.message);
+        res.status(500).json({
+            success: false,
+            message: error.message,
+        })
+    }
+}
+
+const getAllRateContractList = async (req, res) => {
+    try {
+        const result = await RateContractNew.findAll();
+        const schema = 'RateContractNew';
+        const Encschema = encryptDataForUrl(schema.toString());
+        console.log("hdshfjvfsffjsh", Encschema);
+        res.status(200).json({ result, Encschema });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message,
+        })
+    }
+}
+
+const changeFreeze = async (req, res) => {
+    try {
+        const id = req.body.id
+        const freeze = req.body.isFreeze
+        console.log(freeze);
+        const isFreeze = await RateContractNew.update({ isFreeze: freeze }, { where: { id: id } })
+        console.log(isFreeze);
+        res.status(200).json({
+            success: true,
+            message: "Change Freeze status",
+        })
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message,
+        })
+    }
+}
+
+const loadStrUntMstPage = async (req, res) => {
+    const molId = req.query.id;
+    console.log(molId);
+    let result = ''
+
+    if (molId) {
+        try {
+            console.log("Hello Satya");
+            result = await StrUnitMasterNew.findOne({ where: { id: molId } });
+            res.render('adminInventry/strength-unit-master-new', { result: result, });
+        } catch (error) {
+            console.log('Error fetching Item Data Save', error.message);
+            res.status(500).json({
+                success: false,
+                message: error.message,
+            })
+        }
+    } else {
+        res.render('adminInventry/strength-unit-master-new', { result })
+    }
+}
+
+
+const newStrUnitMst = async (req, res) => {
+    try {
+        console.log(req.body);
+        const { id } = req.body;
+        if (id) {
+            console.log(id);
+            await StrUnitMasterNew.update(req.body, { where: { id: id } })
+            res.status(200).json({
+                success: true,
+                message: "Thank you for updating",
+            })
+        } else {
+            const { code } = req.body;
+            console.log(code);
+            const isExist = await StrUnitMasterNew.findOne({ where: { code: code } })
+            if (isExist) {
+                res.status(400).json({ success: false, msg: "Item Code Already Exist!" })
+            } else {
+                await StrUnitMasterNew.create(req.body);
+                res.status(200).json({ success: true, msg: "Item Category Data Save Succesfully" });
+            }
+        }
+    } catch (error) {
+        console.error('Error fetching Item Data Save', error.message);
+        res.status(500).json({
+            success: false,
+            message: error.message,
+        })
+    }
+}
+
+const getAllStrUnitMstList = async (req, res) => {
+    try {
+        const result = await StrUnitMasterNew.findAll();
+        const schema = 'StrUnitMasterNew';
+        const Encschema = encryptDataForUrl(schema.toString());
+        console.log("hdshfjvfsffjsh", Encschema);
+        res.status(200).json({ result, Encschema });
+    } catch (error) {
+        console.error('Error fetching Item Data Save', error.message);
+        res.status(500).json({
+            success: false,
+            message: error.message,
+        })
+    }
+}
+
+
+const loadWorkOrdItemPage = async (req, res) => {
+    const molId = req.query.id;
+    console.log(molId);
+    let result = ''
+    if (molId) {
+        try {
+            console.log("Hello Satya");
+            result = await WorkOrderItemNew.findOne({ where: { id: molId } });
+            store = {}
+            res.render('adminInventry/work-order-item-new', { result: result, });
+        } catch (error) {
+            console.log('Error fetching Item Data Save', error.message);
+            res.status(500).json({
+                success: false,
+                message: error.message,
+            })
+        }
+    } else {
+        res.render('adminInventry/work-order-item-new', { result })
+    }
+}
+
+const newWorkOrdItem = async (req, res) => {
+    try {
+        console.log(req.body);
+        const { id } = req.body;
+        if (id) {
+            console.log(id);
+            await WorkOrderItemNew.update(req.body, { where: { id: id } })
+            res.status(200).json({
+                success: true,
+                message: "Thank you for updating",
+            })
+        } else {
+            const { code } = req.body;
+            console.log(code);
+            const isExist = await WorkOrderItemNew.findOne({ where: { code: code } })
+            if (isExist) {
+                res.status(400).json({ success: false, msg: "Item Code Already Exist!" })
+            } else {
+                await WorkOrderItemNew.create(req.body);
+                res.status(200).json({ success: true, msg: "Item Category Data Save Succesfully" });
+            }
+        }
+    } catch (error) {
+        console.error('Error fetching Item Data Save', error.message);
+        res.status(500).json({
+            success: false,
+            msg: error.message,
+        })
+    }
+}
+
+
+const getWorkOrdItemList = async (req, res) => {
+    try {
+        const result = await WorkOrderItemNew.findAll();
+        const schema = 'WorkOrderItemNew';
+        const Encschema = encryptDataForUrl(schema.toString());
+        console.log("hdshfjvfsffjsh", Encschema);
+        res.status(200).json({ result, Encschema });
+    } catch (error) {
+        console.error('Error fetching Item Data Save', error.message);
+        res.status(500).json({
+            success: false,
+            message: error.message,
+        })
+    }
+}
+
+const loadCostCentCodePage = async (req, res) => {
     const molId = req.query.id;
     console.log(molId);
     let result = ''
@@ -2104,6 +2365,7 @@ const saveItemSupp =async (req, res) => {
         res.render('adminInventry/cost-center-codes-new', { result })
     }
 }
+
 const newCostCentCode = async (req, res) => {
     try {
         console.log(req.body);
@@ -2127,6 +2389,116 @@ const newCostCentCode = async (req, res) => {
             }
         }
     } catch (error) {
+        console.error('Error fetching Item Data Save', error.message);
+        res.status(500).json({
+            success: false,
+            message: error.message,
+        })
+    }
+}
+
+
+const getCostCenterCodeList = async (req, res) => {
+    try {
+        const result = await CostCenterCodeNew.findAll();
+        const schema = 'CostCenterCodeNew';
+        const Encschema = encryptDataForUrl(schema.toString());
+        console.log("hdshfjvfsffjsh", Encschema);
+        res.status(200).json({ result, Encschema });
+    } catch (error) {
+        console.error('Error fetching Item Data Save', error.message);
+        res.status(500).json({
+            success: false,
+            message: error.message,
+        })
+    }
+}
+
+const loadHSNCodePage = async (req, res) => {
+    const molId = req.query.id;
+    console.log(molId);
+    let result = ''
+    if (molId) {
+        try {
+            console.log("Hello Satya");
+            result = await CostCenterCodeNew.findOne({ where: { id: molId } });
+            store = {}
+            res.render('adminInventry/HSN-codes-master-new', { result: result, });
+        } catch (error) {
+            console.log('Error fetching Item Data Save', error.message);
+            res.status(500).json({
+                success: false,
+                message: error.message,
+            })
+        }
+    } else {
+        res.render('adminInventry/HSN-codes-master-new', { result })
+    }
+}
+
+const getHSNCodeList = async (req, res) => {
+    try {
+        const result = await HSNCodeNew.findAll();
+        const schema = 'HSNCodeNew';
+        const Encschema = encryptDataForUrl(schema.toString());
+        console.log("hdshfjvfsffjsh", Encschema);
+        res.status(200).json({ result, Encschema });
+    } catch (error) {
+        console.error('Error fetching Item Data Save', error.message);
+        res.status(500).json({
+            success: false,
+            message: error.message,
+        })
+    }
+}
+
+
+
+
+const getItemCatList = async(req,res)=>{
+    try {
+        const result = await ItemMasterNew.findAll();
+        const itemCat =await ItemCategoryNew.findAll()
+        const itemGrp=await ItemGroupNew.findAll();
+        const molecule=await MoleculeNew.findAll();
+        const schema = 'ItemMasterNew';
+        console.log("SATya");
+        const Encschema = encryptDataForUrl(schema.toString());
+        console.log("hdshfjvfsffjsh", Encschema);
+        res.status(200).json({ result, Encschema ,itemCat,molecule,itemGrp});
+    } catch (error) {
+        console.error('Error fetching Item Data Save', error.message);
+        res.status(500).json({
+            success: false,
+            message: error.message,
+        })
+    }
+}
+const newHSNCode = async (req, res) => {
+    try {
+        console.log(req.body);
+        const { id } = req.body;
+        console.log(id);
+        if (id) {
+            console.log(id);
+            await HSNCodeNew.update(req.body, { where: { id: id } })
+            res.status(200).json({
+                success: true,
+                message: "Thank you for updating",
+            })
+        } else {
+            const { code } = req.body;
+            console.log(code);
+            const isExist = await HSNCodeNew.findOne({ where: { code: code } })
+            if (isExist) {
+                res.status(400).json({ success: false, msg: "Item Code Already Exist!" })
+            } else {
+                await HSNCodeNew.create(req.body);
+                res.status(200).json({ success: true, msg: "Item Category Data Save Succesfully" });
+            }
+        }
+    } catch (error) {
+        console.log(error.message);
         console.error('Error fetching Item Data Save', error.message);
         res.status(500).json({
             success: false,
@@ -2223,6 +2595,23 @@ module.exports = {
     itemStoreMinMax,
     fetchMinMax,
     loadCostCentCodePage,
-    newCostCentCode
+    newCostCentCode,
+    newCostCentCode,
+  loadRateContractPage,
+  newRateContract,
+  getAllRateContractList,
+  changeFreeze,
+  loadStrUntMstPage,
+  newStrUnitMst,
+  getAllStrUnitMstList,
+  loadWorkOrdItemPage,
+  newWorkOrdItem,
+  getWorkOrdItemList,
+    getCostCenterCodeList,
+  loadHSNCodePage,
+  newHSNCode,
+  getHSNCodeList,
+  getItemCatList,
+  getSupplierListItem
 
 };

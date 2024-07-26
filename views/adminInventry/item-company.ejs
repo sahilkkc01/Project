@@ -90,7 +90,7 @@
                     <div class="row">
 
                         <div class="col-lg-12 pl-lg-0 mt-2 ml-2">
-                            <h4 class="primary">Item Company</h4>
+                            <h4 class="primary">Manufacturer</h4>
                         </div>
                         <div class="col-lg-12 pl-lg-2 chart-grid">
                             <form>
@@ -121,7 +121,7 @@
                                                     <div class="col-12 mb-2 mt-2">
                                                         <div class="form-group">
                                                             <div class="pl-xl-0">
-                                                                <h6 class="primary">LIST OF ITEM COMPANY DETAILS</h6>
+                                                                <h6 class="primary">LIST OF MANUFACTURER DETAILS</h6>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -164,7 +164,7 @@
                                     <button type="button" class="btn-success btn-style btn mt-3 mr-2" disabled><strong><i
                                         class="fa-regular fa-pen-to-square"></i> Modify</strong></button>
     
-                            <a type="button" class="btn-secondary btn-style btn mt-3 mr-2" href="/adminInv/33"><strong><i
+                            <a type="button" class="btn-secondary btn-style btn mt-3 mr-2" href="/adminInv/35"><strong><i
                                         class="fa-solid fa-plus"></i> New</strong></a>
     
                             <button type="button" class="btn-danger btn-style btn mt-3 mr-2" disabled><strong><i
@@ -180,6 +180,7 @@
                 <%-include('../footer')-%>
                 <script src="../javascripts/updateStatus.js"></script>
                 <script src="../javascripts/pageUpdate.js"></script>
+                <script src="../javascripts/ViewBtn.js"></script>
                     <script type="module">
                         import { pagi_search } from '../javascripts/pagi_search.js';
                         $(document).ready(function () {
@@ -198,13 +199,22 @@
                                         dataList.forEach(function (item) {
                                             console.log(item);
                                             tableRows += `
-                                                <tr>
-                                                    <td><a type="button" class="btn btn-primary btn-style btn-change" onClick=updatePageItemCat(${item.id}) href='/adminInv/35'>View</a></td>
+                                                <tr data-store-id="${item.id}">
+                                                    <td><a type="button" class="btn btn-primary btn-style btn-change" id="view_btn">View</a></td>
                                                     <td>${item.code}</td>
                                                     <td>${item.description}</td>
                                                     <td><input class="form-check-input mt-0" type="checkbox" id='${item.id}' onClick=ChangeStatus('${item.id}','${data.Encschema}',${item.id}) ${item.status ? 'checked' : ''}></td>
                                                 `;
                                         });
+
+                                        $('#itemCompBody').on('click', '#view_btn', function() {
+                                                    const id=$(this).closest('tr').data('store-id')
+                                                    const route='35'
+                                                    const module='adminInv'
+                                                    console.log("id", id);
+                                                    ViewBtn(route,id,module) 
+                                                    });
+
                                         $('#itemCompBody').html(tableRows);
                                         pagi_search('#searchBox', '#itemCompTable', '#paginationControls');
                                     },

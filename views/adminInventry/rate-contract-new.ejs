@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <title>LifeLinker</title>
-    <%-include('../header');-%>
+    <%-include('../header');-%> 
         <!-- main content start -->
         <div class="main-content">
 
@@ -93,7 +93,8 @@
                             <h4 class="primary">Company</h4>
                         </div> -->
                         <div class="col-lg-12 pl-lg-2 mt-3 chart-grid">
-                            <form>
+                            <form id="rateContractForm">
+                                <div id="errordiv1"></div>
                                 <div class="card card_border">
                                     <div>
                                         <!--Past your code here starts-->
@@ -112,54 +113,67 @@
                                                     <div class="form-group">
                                                         <label
                                                             class="input__label">Code</label>
-                                                            <input name="description" type="text" class="form-control input-style" placeholder="">
+                                                            <input name="code" type="text" value="<%= result.code %>" placeholder="1" data-validation="required" data-error-message="Code is required." class="form-control input-style" placeholder="">
                                                         </div>
                                                 </div>
                                                 <div class="col-lg-3 col-md-4 col-sm-12 mb-1">
                                                     <div class="form-group"><label
                                                         class="input__label">Description</label>
-                                                        <input name="description" type="text" class="form-control input-style" placeholder=""> 
+                                                        <input name="description" type="text" class="form-control input-style" value="<%= result.description %>" placeholder="1" data-validation="required" data-error-message="Code is required."> 
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-3 col-md-4 col-sm-12 mb-1">
                                                     <div class="form-group"><label
                                                         class="input__label">Contract Start Date</label>
-                                                        <input name="description" type="date" class="form-control input-style" placeholder="">
+                                                        <input name="contractStartDate" type="date" class="form-control input-style" value="<%= result.description %>" placeholder="" data-validation="required" data-error-message="Code is required.">
                                                         </div>
                                                 </div>
                                                 <div class="col-lg-3 col-md-4 col-sm-12 mb-1">
                                                     <div class="form-group"><label
                                                             class="input__label">Contract End Date</label>
-                                                            <input name="description" type="date" class="form-control input-style" placeholder="">
+                                                            <input name="contractEndDate" type="date" class="form-control input-style" placeholder="">
                                                         </div>
                                                 </div>
                                                 <div class="col-lg-3 col-md-4 col-sm-12 mb-3">
                                                     <div class="form-group"><label
                                                         class="input__label">Contract Date</label>
-                                                        <input name="description" type="date" class="form-control input-style" placeholder="">
+                                                        <input name="contractDate" type="date" class="form-control input-style" placeholder="">
                                                         </div>
                                                 </div>
                                                 <div class="col-lg-3 col-md-4 col-sm-12 mb-3">
                                                     <div class="form-group"><label
                                                         class="input__label">Supplier</label>
-                                                        <select name="report_generated_by"
+                                                        <select name="supplier"
                                                         class="form-control input-style">
                                                         <option>Select</option>
-                                                        </select>
+                                                        <% if (supplier.length>0) {
+                                                            for (let i = 0; i < supplier.length; i++) { %>
+                                                                <option value="<%= supplier[i].description%>"><%= supplier[i].description%></option>
+                                                                <% } } else { %>
+                                                            
+                                                                        <option>No any Suppiler</option>
+                                                                
+                                                                    <% } %>
+                                                       </select>
                                                         </div>
                                                 </div>
                                                 <div class="col-lg-3 col-md-4 col-sm-12 mb-3">
                                                     <div class="form-group"><label
                                                         class="input__label">Clinic Representative</label>
-                                                        <select name="report_generated_by"
+                                                        <select name="clinicRepresentative"
                                                         class="form-control input-style">
                                                         <option>Select</option>
-                                                        </select>
+                                                        <% if (clinic.length>0) {
+                                                            for (let i = 0; i < clinic.length; i++) { %>
+                                                                <option value="<%= clinic[i].description%>"><%= clinic[i].description%></option>
+                                                                <% } } else { %>
+                                                            
+                                                                        <option>No any Suppiler</option>
+                                                                
+                                                                    <% } %>
+                                                    </select>
                                                         </div>
                                                 </div>
-
-
-                                               
                                                 
                                             </div>
 
@@ -255,7 +269,7 @@
 
                                 <div class="form-row pl-lg-4 pr-lg-3">
                                     <!-- <div class="col-lg-3 col-md-4 col-sm-12 "> -->
-                                        <div class="form-group"><button type="button" class="btn btn-style mt-3 btn-secondary btn-style btn-change"><strong><i class="fa-solid fa-plus"></i> Add Items</strong></button></div>
+                                        <div class="form-group"><button type="button" class="btn btn-style mt-3 btn-secondary btn-style btn-change" data-bs-toggle="modal" data-bs-target="#myModal1"><strong><i class="fa-solid fa-plus"></i> Add Items</strong></button></div>
                                 
                                                     <!-- </div> -->
                                         <div class="form-check-label ml-4">
@@ -285,112 +299,252 @@
 
                                 </div>
 
-
+                                <div id="loadingDiv"></div>
 
                             </div>
                         </div>
 
+
+
+
                     </div>
                     <div class="form-group mt-1 mb-3 text-right">
+                        <button type="button" class="btn-success btn-style btn mt-3 mr-2" id="mod-btn" onclick="updateQuery()"><strong><i
+                            class="fa-regular fa-pen-to-square"></i> Modify</strong></button>
 
-                        <button type="button" class="btn-success btn-style btn mt-3 mr-2"><strong><i
-                                    class="fa-regular fa-pen-to-square"></i> Modify</strong></button>
+                <button type="button" class="btn-secondary btn-style btn mt-3 mr-2" disabled><strong><i
+                            class="fa-solid fa-plus"></i> New</strong></button>
 
-                        <button type="button" class="btn-secondary btn-style btn mt-3 mr-2"><strong><i
-                                    class="fa-solid fa-plus"></i> New</strong></button>
+                <a type="button" class="btn-danger btn-style btn mt-3 mr-2" href="/adminInv/44"><strong><i
+                            class="fas fa-times" id="submitCancel"></i> Cancel</strong></a>
 
-                        <button type="button" class="btn-danger btn-style btn mt-3 mr-2"><strong><i
-                                    class="fas fa-times"></i> Cancel</strong></button>
+                <button type="submit" class="btn-primary btn-style btn mt-3" id="sub-btn"><strong><i
+                            class="far fa-save"></i>
+                        Save</strong></button>
 
-                        <button type="button" class="btn-primary btn-style btn mt-3"><strong><i class="far fa-save"></i>
-                                Save</strong></button>
                     </div>
+        </form>
+    </div>
 
-                    </form>
 
-                </div>
-                <!--footer section start-->
-                <%-include('../footer');-%>
-                <script type="module">
-                    import { validateForm } from '../javascripts/validation.js';
-                    import { myAjax } from '../javascripts/myAjax.js';
-                
-                    $(document).ready(function() {
-                        console.log("Document is ready");
-                
-                        // Handle final submit button click
-                        $('#tax').on('submit', function(event) {
-                            event.preventDefault();
-                            submitForms(event);
-                        });
-                
-                        // Function to submit forms
-                        const submitForms = (event) => {
-                            event.preventDefault();
-                
-                            const taxFormDetails = validateForm('#tax');
-                            const { isValid: isTaxFormValid, errorMessage: taxFormError, formData: taxFormData } = taxFormDetails;
-                
-                            // Handle checkbox values (assuming similar checkboxes exist in the form)
+<!-- The Modal -->
+  <div class="modal" id="myModal1" data-bs-dismiss="modal">
+	<div class="modal-dialog modal-xl">
+	  <div class="modal-content">
+  
+		<!-- Modal Header -->
+		<div class="modal-header">
+			<a href="#" class="btn-close" data-bs-dismiss="modal"><i class="fa-solid fa-circle-xmark"></i></a>
+		</div>
+  
+		<!-- Modal body -->
+		<div class="modal-body">
+            <form>
+                        <div class="card card_border">
+                            <div class="">
+                                <!--Past your code here starts-->
+
+                                <div class="card">
+
+                                    <!-- <div class="card-body"> -->
+                                        
+                                        <div class="form-row pl-lg-3 pr-lg-3 mt-2 mb-3">
+                                            <div class="col-lg-3 col-md-6 col-sm-12 mb-2">
+                                                <div class="form-group"><label
+                                                        class="input__label">Item Name</label><input
+                                                        name="description" type="text" id="searchBox"
+                                                        class="form-control input-style" placeholder=""></div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-6 col-sm-12 mb-2">
+                                                <div class="form-group"><label
+                                                        class="input__label">Brand Name</label><input
+                                                        name="description" type="text" id="searchBox"
+                                                        class="form-control input-style" placeholder=""></div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-6 col-sm-12 mb-2">
+                                                <div class="form-group"><label
+                                                        class="input__label">Item Code</label><input
+                                                        name="description" type="text" id="searchBox"
+                                                        class="form-control input-style" placeholder=""></div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-6 col-sm-12 mb-2">
+                                                <div class="form-group"><label
+                                                        class="input__label">Item Category</label><select name="report_generated_by"
+                                                        class="form-control input-style">
+                                                        <option>Select</option>
+                                                       
+                                                        
+                                                 </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-6 col-sm-12 mb-2">
+                                                <div class="form-group"><label
+                                                        class="input__label">Item Group</label><select name="report_generated_by"
+                                                        class="form-control input-style">
+                                                        <option>Select</option>
+                                                   </select></div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-6 col-sm-12 mb-2">
+                                                <div class="form-group"><label
+                                                        class="input__label">Molecule</label><select name="report_generated_by"
+                                                        class="form-control input-style">
+                                                        <option>Select</option>
+                                                   </select></div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-6 col-sm-12 mb-2">
+                                                <div class="form-group"><label
+                                                        class="input__label">Manufactured By</label><select name="report_generated_by"
+                                                        class="form-control input-style">
+                                                        <option>Select</option>
+                                                   </select></div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-6 col-sm-12 mb-2">
+                                                <div class="form-group"><button type="button"
+                                                        class="btn btn-style mt-4 btn-primary btn-style btn-change"><strong><i
+                                                                class="fas fa-search"></i>
+                                                            Search</strong></button></div>
+                                            </div>
+                                        </div>
+
+                                        
+
+                                        <div class="form-row pl-lg-3 pr-lg-3  mb-3">
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                <div class="form-group">
+                                                    <div class="col col-12 pr-xl-0 pl-xl-0">
+                                                        <div class="slidx">
+
+                                                            <table class="table2" id="addItemTable">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th contenteditable="true" width="15%">Status</th>
+                                                                        <th contenteditable="true">Item Code</th>
+                                                                        <th contenteditable="true">Item name</th>
+                                                                        
+                                                                        <th contenteditable="true">Item Category</th>
+                                                                        <th contenteditable="true">Manufactured By</th>
+                                                                        <th contenteditable="true">Item Group</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody id="addItemBody">                                                                  
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <div id="paginationControls"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                    <!-- </div> -->
+                                </div>
+                                
+                            
+                            </div>
+                        </div>
+                        <div class="form-group mt-1 mb-3 text-right">
+
+                            
+
+                    <button type="button" class="btn-danger btn-style btn mt-3 mr-2"><strong><i
+                                class="fas fa-times btn-close" ></i> Cancel</strong></button>
+
+                    <button type="button" class="btn-primary btn-style btn mt-3"><strong>
+                            Ok</strong></button>
+
+                        </div>
+            </form>
+		</div>
+
+	</div>
+	</div>
+</div>
+
+    <!--footer section start-->
+    <%-include('../footer');-%>
+    <script src="../javascripts/updateStatus.js"></script>
+                        <script type="module">
+                            import { validateForm } from '../javascripts/validation.js';
+                            import { myAjax } from '../javascripts/myAjax.js';
+                            import { validateConDate } from '../javascripts/lengthVal.js';
+                            import { pagi_search } from '../javascripts/pagi_search.js';
+
+                            $(document).ready(function() {
+                                console.log("Document is ready");
                         
-                            console.log(taxFormData);
-                
-                            const errorDivId = '#errordiv1';
-                
-                            if (isTaxFormValid) {
-                                const url = '/adminInv/TaxSubmit';
-                                const loadingDiv = '#loadingDiv';
-                                myAjax(taxFormData, errorDivId, url, loadingDiv);
-                            } else {
-                                alert(taxFormError);
-                                $(errorDivId).removeClass('alert-success').addClass('alert-danger').text(taxFormError).show();
-                            }
-                        };
-
-                        // Function to reset forms
-                        const resetForms = () => {
-                            $('#tax')[0].reset();
-                            // Hide error messages
-                            $('#errordiv1').hide();
-                        };
-                        // Attach reset function to cancel button
-                        // $('#submitCancel').on('click', function() {
-                        //     resetForms();
-                        // });
-                        // Function to fetch and display data
-                        function fetchData() {
-                                        $.ajax({
-                                            url: '/adminInv/get-All-Item',
-                                            type: 'GET',
-                                            success: function (data) {
-                                                console.log(data);
-                                                data.reverse();
-                                                let tableRows = '';
-                                                data.forEach(function (item) {
-                                                    console.log(item);
-                                                    tableRows += `
-                                                        <tr>
-                                                            <td><a type="button" class="btn btn-primary btn-style btn-change" onClick=updatePageCurrMaster(${item.id}) href='/adminInv/10'>View</a></td>
-                                                            <td>${item.item_code}</td>
-                                                            <td>${item.item_name}</td>
-                                                            <td>${item.manufactured_by}</td>
-                                                            <td>${item.description}</td>
-                                                            <td>${item.item_price}</td>
-                                                            <td><input class="form-check-input mt-0" type="checkbox" id='${item.id}' onClick=ChangeStatusStore(${item.id}) ${item.status ? 'checked' : ''}></td>
-                                                            <td>${item.cost_center_code}</td>
-                                                            <td>${item.is_quarantine_store ? 'Yes' : 'No'}</td >
-                                                            </tr >
-                                                        `;
-                                                });
-                                                $('#store-table').html(tableRows);
-                                                pagi_search('#searchBox', '#storeTable', '#paginationControls');
-                                            },
-                                            error: function (xhr, status, error) {
-                                                console.error('Error fetching classification details:', error);
-                                            }
-                                        });
+                                // Handle final submit button click
+                                $('#rateContractForm').on('submit', function(event) {
+                                    event.preventDefault();
+                                    submitForms();
+                                });
+                        
+                                // Function to submit forms
+                                const submitForms = () => {
+                                    event.preventDefault();
+                        
+                                    const rateContractFormDetails = validateForm('#rateContractForm');
+                                    const { isValid: rateContractFormValid, errorMessage: rateContractFormError, formData: rateContractFormData } = rateContractFormDetails;
+                                    console.log(rateContractFormData);
+                                
+        
+                                    const errorDivId = '#errordiv1';
+                        
+                                    if (rateContractFormValid) {
+                                        const url = '/adminInv/rateContractFormSubmit';
+                                        const loadingDiv = '#loadingDiv';
+                                        myAjax(rateContractFormData, errorDivId, url, loadingDiv);
+                                    } else {
+                                        alert(rateContractFormError);
+                                        $(errorDivId).removeClass('alert-success').addClass('alert-danger').text(rateContractFormError).show();
                                     }
-                                    fetchData();
+                                };
+                        
+                                // Function to reset forms
+                                const resetForms = () => {
+                                    $('#rateContractForm')[0].reset();
+                                    // Hide error messages
+                                    $('#errordiv1').hide();
+                                };
+                                let dataList
+                    function fetchData() {
+                        $.ajax({
+                        url: '/adminInv/get-item-cat-list',
+                        type: 'GET',
+                        success: function (data) {
+                            dataList = data.result
+                            dataList.reverse();
+                            let tableRows = ''
+                            dataList.forEach(function (item) {
+                            console.log(item);
+                                tableRows += `
+                                    <tr>
+                                        <td><input class="form-check-input mt-0" type="checkbox" id='${item.id}' onClick=ChangeStatus('${item.id}','${data.Encschema}',${item.id}) ${item.status ? 'checked' : ''}></td>
+                                        <td>${item.item_code}</td>
+                                        <td>${item.item_name}</td>
+                                        <td>${item.item_category}</td>
+                                        <td>${item.manufactured_by}</td>
+                                        <td>${item.item_group}</td>
+                                        
+                                    `;
+                            
+                            });
+                            $('#addItemBody').html(tableRows);
+                            pagi_search('#searchBox', '#addItemTable', '#paginationControls');
+                        },
+                        error: function (xhr, status, error) {
+                            console.error('Error fetching classification details:', error);
+                        }
                     });
-                </script>
-                
+                }
+                fetchData();
+                });
+                        </script>
+                        <script>
+                            function ChangeStatus(Id, Schema, id) {
+                                    console.log("Id", Id);
+                                    console.log("Schema", Schema);
+                                    isStatus = $("#" + id).prop("checked")
+                                    updateStatus(Id, isStatus,Schema)
+                                }
+                    </script>
+

@@ -181,34 +181,47 @@
                         </div>
                         <!--footer section start-->
                         <%- include('../footer'); -%>
-                            <script src="../javascripts/statusUpdate.js"></script>
+                            <script src="../javascripts/updateStatus.js"></script>
                             <script src="../javascripts/pageUpdate.js"></script>
+                            <script src="../javascripts/ViewBtn.js"></script>
                             <script type="module">
                                 import { pagi_search } from '../javascripts/pagi_search.js';
                                 $(document).ready(function () {
 
                                     console.log("Document is ready");
                                     // Function to fetch and display data
+                                    let dataList
                                     function fetchData() {
                                         $.ajax({
                                             url: '/adminInv/getAll-CurMaster-list',
                                             type: 'GET',
                                             success: function (data) {
                                                 console.log(data);
-                                                data.reverse();
+                                                dataList = data.result
+                                                dataList.reverse();
                                                 let tableRows = '';
-                                                data.forEach(function (item) {
+                                                dataList.forEach(function (item) {
                                                     console.log(item);
                                                     tableRows += `
-                                                        <tr>
-                                                            <td><a type="button" class="btn btn-primary btn-style btn-change" onClick=updatePageCurMaster(${item.id}) href='/adminInv/13'>View</a></td>
+                                                        <tr data-store-id="${item.id}">
+                                                            <td><a type="button" class="btn btn-primary btn-style btn-change" id="view_btn">View</a></td>
                                                             <td>${item.currency_code}</td>
                                                             <td>${item.currency_desc}</td>
                                                             <td>${item.currency_symbol}</td>
-                                                            <td><input class="form-check-input mt-0" type="checkbox" id='${item.id}' onClick=ChangeStatusCurMaster(${item.id}) ${item.status ? 'checked' : ''}></td>
+                                                            <td><input class="form-check-input mt-0" type="checkbox" id='${item.id}' onClick=ChangeStatus('${item.id}','${data.Encschema}',${item.id}) ${item.status ? 'checked' : ''}></td>
                                                         </tr>
                                                         `;
                                                 });
+
+                                                $('#currencyMaster').on('click', '#view_btn', function() {
+                                                    const id=$(this).closest('tr').data('store-id')
+                                                    const route='13'
+                                                    const module='adminInv'
+                                                    console.log("id", id);
+                                                    ViewBtn(route,id,module) 
+                                                    });
+
+
                                                 $('#currencyMaster').html(tableRows);
                                                 pagi_search('#searchBox', '#currencyMasterTable', '#paginationControls');
                                             },
@@ -226,10 +239,11 @@
                                     let url = '/adminInv/update-page-CurMaster'
                                     updatePage(id, url)
                                 }
-                                function ChangeStatusCurMaster(id) {
-                                    // alert($("#" + id).prop("checked"))
-                                    let url = '/adminInv/update-status-CurMaster'
-                                    ChangeStatus(id, url)
+                                function ChangeStatus(Id, Schema, id) {
+                                    console.log("Id", Id);
+                                    console.log("Schema", Schema);
+                                    isStatus = $("#" + id).prop("checked")
+                                    updateStatus(Id, isStatus,Schema)
                                 }
 
                             </script>
