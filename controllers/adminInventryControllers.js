@@ -11,7 +11,8 @@ const { Supplier, SupplierCategory, StoreDetails, TaxCategory, ItemMove, Currenc
     CostCenterCodeNew,
     StrUnitMasterNew,
     WorkOrderItemNew,
-    HSNCodeNew
+    HSNCodeNew,
+    RateContract
 } = require("../models/adminInventorySchema");
 
 let store = {};
@@ -761,6 +762,22 @@ const updateRackMasterStatus = async (req, res) => {
 }
 
 const getUpdatePageRackMaster = async (req, res) => {
+    try {
+        const RMasterId = req.body.id;
+        console.log(RMasterId)
+        req.flash('RMasterId', RMasterId);
+        res.sendStatus(200);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            success: false,
+            message: error.message,
+        });
+    }
+}
+const SaveRateContract = async (req, res) => {
+    console.log(req.body)
+    return 
     try {
         const RMasterId = req.body.id;
         console.log(RMasterId)
@@ -2136,36 +2153,26 @@ const loadRateContractPage = async (req, res) => {
     } else {
         res.render('adminInventry/rate-contract-new', { result, supplier, clinic })
     }
-}
+} 
 
 const newRateContract = async (req, res) => {
     try {
-        console.log(req.body);
-        const { id } = req.body;
-        if (id) {
-            console.log(id);
-            await RateContractNew.update(req.body, { where: { id: id } })
-            res.status(200).json({
-                success: true,
-                message: "Thank you for updating",
-            })
-        } else {
-            const { code } = req.body;
-            console.log(code);
-            const isExist = await RateContractNew.findOne({ where: { code: code } })
-            if (isExist) {
-                res.status(400).json({ success: false, msg: "Item Code Already Exist!" })
-            } else {
-                await RateContractNew.create(req.body);
-                res.status(200).json({ success: true, msg: "Item Category Data Save Succesfully" });
-            }
-        }
+        const { contractItems, ...rateContractData } = req.body;
+
+        // Iterate over contractItems and save each as a new row in the RateContract table
+        const promises = contractItems.map(item => {
+            return RateContract.create({
+                ...rateContractData,
+                ...item
+            });
+        });
+
+        const savedData = await Promise.all(promises);
+
+        res.status(200).json({ message: 'Rate contract and items saved successfully', data: savedData });
     } catch (error) {
-        console.error('Error fetching Item Data Save', error.message);
-        res.status(500).json({
-            success: false,
-            message: error.message,
-        })
+        console.error('Error saving rate contract:', error);
+        res.status(500).json({ message: 'Error saving rate contract', error: error.message });
     }
 }
 
@@ -2612,6 +2619,7 @@ module.exports = {
   newHSNCode,
   getHSNCodeList,
   getItemCatList,
-  getSupplierListItem
+  getSupplierListItem,
+  SaveRateContract
 
 };

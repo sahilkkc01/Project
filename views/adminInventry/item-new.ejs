@@ -365,11 +365,12 @@
 
                                                 <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
                                                     <div class="form-group"><label class="input__label">HSN
-                                                            Codes</label><select name="hsn_codes" 
+                                                            Codes</label><select name="hsn_codes" id="hsn_codes" 
                                                             data-validation="required" data-error-message=" Select HSN Code"
                                                             class="form-control input-style">
                                                             <option value=""> Select</option>
-                                                            <option value="ABC"> ABC</option>
+                                                            <option value="1111">1111</option>
+                                                           
                                                         </select></div>
                                                 </div>
                                                 
@@ -666,6 +667,25 @@
                 .catch(error => console.error('Error fetching states:', error));
             }
             loadStorageType('storage_type');
+
+            function loadHSN(a) {
+  fetch('/adminInv/get-HSN-Code-details')
+    .then(response => response.json())
+    .then(data => {
+      console.log(data); // Ensure data is logged correctly
+      const dropdown = document.getElementById(a);
+      data.forEach(item => {
+        const option = document.createElement('option');
+        option.value = item.HSN_CD; // Use HSN_DESC for the option value
+        option.textContent = item.HSN_CD; // Use HSN_DESC for the option text
+        dropdown.appendChild(option);
+      });
+    })
+    .catch(error => console.error('Error fetching HSN codes:', error));
+}
+
+// Ensure this function is called after the DOM is fully loaded
+// loadHSN('hsn_codes')
          
 
 

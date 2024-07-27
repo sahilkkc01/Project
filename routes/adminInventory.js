@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 const session = require('express-session');
 var flash = require('express-flash');
+const fs = require('fs');
+const path = require('path');
 
 router.use(session({
   secret: 'keyboard cat',
@@ -117,7 +119,8 @@ const { setId, newSupplierCategory, newSupplier, newStore, newTax, newItem, newC
   newHSNCode,
   getHSNCodeList,
   getItemCatList,
-  getSupplierListItem
+  getSupplierListItem,
+  SaveRateContract
 } = require('../controllers/adminInventryControllers');
 const { RackMaster, ShelfMaster, BinMaster, ItemMasterNew, UnitOfMeasurementNew, StoreDetails, TaxCategory, ItemSupplier, ItemOtherDetails, MoleculeNew, ItemGroupNew,  ItemCategoryNew, DispensingTypeNew, StorageTypeNew, PregnancyClassNew, TherapeuticClassNew, StrUnitMasterNew } = require('../models/adminInventorySchema');
 
@@ -390,6 +393,29 @@ router.get('/get-StorgeType-details',async (req, res) => {
     res.status(500).json({ msg: 'An error occurred while fetching  details.' });
   }
 })
+router.get('/get-HSN-Code-details', async (req, res) => {
+  console.log('Fetching HSN Code details');
+  const filePath = path.join(__dirname,'..', 'myjson','HSN_SAC.json'); // Adjust the path to your JSON file if necessary
+
+  fs.readFile(filePath, 'utf8', (err, data) => {
+    if (err) {
+      console.error('Error reading JSON file:', err);
+      res.status(500).json({ msg: 'An error occurred while fetching details.' });
+      return;
+    }
+
+    try {
+      const jsonData = JSON.parse(data);
+      console.log(jsonData)
+      res.status(200).json(jsonData);
+
+    } catch (parseError) {
+      console.error('Error parsing JSON data:', parseError);
+      res.status(500).json({ msg: 'An error occurred while parsing details.' });
+    }
+  });
+});
+
 router.get('/get-Molecule-details',async (req, res) => {
   console.log('11')
   try {
@@ -524,7 +550,8 @@ router.post('/update-page-CurMaster', getUpdatePageCurMaster);
 
 router.get('/get-rackMaster-List', getAllRackMasterList);
 router.post('/update-status-RackMaster', updateRackMasterStatus);
-router.post('/update-page-RackMaster', getUpdatePageRackMaster)
+router.post('/update-page-RackMaster', getUpdatePageRackMaster);
+router.post('/rateContractForm', SaveRateContract);
 
 router.post('/work-ord-item-FormSubmit',newWorkOrdItem)
 router.post('/HSNSubmit',newHSNCode);
@@ -614,7 +641,12 @@ router.get('/get-cost-center-code',getCostCenterCodeList);
 router.get('/get-HSN-code',getHSNCodeList);
 
 router.get('/get-item-cat-list',getItemCatList);
+
+
+
 router.post('/rateContractFormSubmit',newRateContract)
+
+
 router.post('/str-unit-mst-FormSubmit',newStrUnitMst)
 
 module.exports = router;

@@ -886,47 +886,79 @@ const Supplier = sequelize.define('Supplier', {
     tableName: 'AdmInvsupplier',
 });
 
-const RateContractNew = sequelize.define('RateContract', {
+const RateContract = sequelize.define('RateContract', {
     code: {
-        type: DataTypes.STRING,
-        allowNull: false,
+        type: DataTypes.STRING
     },
     description: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    contractDate: {
-        type: DataTypes.DATE,
-        allowNull: false
+        type: DataTypes.STRING
     },
     contractStartDate: {
-        type: DataTypes.DATE,
-        allowNull: false
+        type: DataTypes.DATEONLY
     },
     contractEndDate: {
-        type: DataTypes.DATE,
-        allowNull: false
+        type: DataTypes.DATEONLY
+    },
+    contractDate: {
+        type: DataTypes.DATEONLY
     },
     supplier: {
-        type: DataTypes.STRING,
-        allowNull: false
+        type: DataTypes.STRING
     },
     clinicRepresentative: {
-        type: DataTypes.STRING,
-        allowNull: false
+        type: DataTypes.STRING
     },
-    isFreeze:{
-        type: DataTypes.BOOLEAN,
-        defaultValue: false,
+    remark: {
+        type: DataTypes.STRING
     },
-    status:{
-        type: DataTypes.BOOLEAN,
-        defaultValue: false,
+    net_amount: {
+        type: DataTypes.DECIMAL(10, 2)
+    },
+    item_code: {
+        type: DataTypes.STRING
+    },
+    item_name: {
+        type: DataTypes.STRING
+    },
+    manufactured_by: {
+        type: DataTypes.STRING 
+    },
+    purchase_quantity: {
+        type: DataTypes.INTEGER
+    },
+    transaction_uom: {
+        type: DataTypes.STRING
+    },
+    purchase_cost_price: {
+        type: DataTypes.DECIMAL(10, 2)
+    },
+    cost_amount: {
+        type: DataTypes.DECIMAL(10, 2)
+    },
+    mrp: {
+        type: DataTypes.DECIMAL(10, 2)
+    },
+    amount: {
+        type: DataTypes.DECIMAL(10, 2)
+    },
+    discount_percent: {
+        type: DataTypes.DECIMAL(5, 2)
+    },
+    discount_amount: {
+        type: DataTypes.DECIMAL(10, 2)
+    },
+    net_amount_item: {
+        type: DataTypes.DECIMAL(10, 2)
+    },
+    hsn_code: {
+        type: DataTypes.STRING
+    },
+    remarks_item: {
+        type: DataTypes.STRING
     }
 }, {
-    alert: true,
-    tableName: 'AdmInvrate_contracts',
-    timestamps: true,
+    timestamps:true,
+    tableName: 'AdmInvrate_contracts'
 });
 
 
@@ -1013,6 +1045,6 @@ module.exports = {
     ItemOtherDetails,
     ItemSupplier,
     ItemCategoryNew,
-    RateContractNew,StrUnitMasterNew,WorkOrderItemNew ,CostCenterCodeNew ,
+    RateContract,StrUnitMasterNew,WorkOrderItemNew ,CostCenterCodeNew ,
     HSNCodeNew
 };
