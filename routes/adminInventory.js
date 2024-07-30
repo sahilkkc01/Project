@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 const session = require('express-session');
 var flash = require('express-flash');
-const fs = require('fs');
+// const fs = require('fs');
 const path = require('path');
 
 router.use(session({
@@ -13,7 +13,7 @@ router.use(session({
     maxAge: 1000 * 60
   },
 }));
-router.use(flash());
+// router.use(flash());
 
 
 const { setId, newSupplierCategory, newSupplier, newStore, newTax, newItem, newCurrency, newRank, newBin, newShelf, newPackageMember
@@ -122,7 +122,7 @@ const { setId, newSupplierCategory, newSupplier, newStore, newTax, newItem, newC
   getSupplierListItem,
   SaveRateContract
 } = require('../controllers/adminInventryControllers');
-const { RackMaster, ShelfMaster, BinMaster, ItemMasterNew, UnitOfMeasurementNew, StoreDetails, TaxCategory, ItemSupplier, ItemOtherDetails, MoleculeNew, ItemGroupNew,  ItemCategoryNew, DispensingTypeNew, StorageTypeNew, PregnancyClassNew, TherapeuticClassNew, StrUnitMasterNew } = require('../models/adminInventorySchema');
+const { RackMaster, ShelfMaster, BinMaster, ItemMasterNew, UnitOfMeasurementNew, StoreDetails, TaxCategory, ItemSupplier, ItemOtherDetails, MoleculeNew, ItemGroupNew,  ItemCategoryNew, DispensingTypeNew, StorageTypeNew, PregnancyClassNew, TherapeuticClassNew, StrUnitMasterNew, RateContract } = require('../models/adminInventorySchema');
 
 
 
@@ -250,9 +250,24 @@ router.get('/20', function (req, res, next) {
   res.render('adminInventry/1-PC-package-membership-details', { currentDate })
 })
 
-router.get('/21', function (req, res, next) {
-  const currentDate = new Date().toISOString().split('T')[0];
-  res.render('adminInventry/item-new', { currentDate })
+router.get('/21', async function (req, res, next) {
+  // const currentDate = new Date().toISOString().split('T')[0];
+  const { id } = req.query;
+  // const decryptedId =decryptData(decodeURIComponent(id), 'll');
+  if (id) {
+    try {
+      const cmData = await ItemMasterNew.findByPk(id);
+      const cmValues = cmData.get({ plain: true });
+      console.log('ssd',cmValues)
+      res.render('adminInventry/item-new',{a:cmValues})
+    } catch (error) {
+      console.error('Error fetching  data:', error);
+      res.status(500).send('Internal Server Error');
+    }
+  } else {
+    res.render('adminInventry/item-new',{a:''})
+  }
+
 })
 router.get('/43', function (req, res, next) {
   const currentDate = new Date().toISOString().split('T')[0];
@@ -630,6 +645,23 @@ router.get('/getAll-unitOfMeasur-list',getUnitOfMeasurementList)
 
 router.get('/getAll-tarm&Cond',getAllTermAndCond)
 router.get('/getAll-rateContract-list',getAllRateContractList)
+
+
+router.get('/get-contract-details/:id', async (req, res) => {
+  try {
+      const contractCode = req.params.id;
+      const contractDetails = await RateContract.findAll({
+          where: { code: contractCode }
+      });
+
+      res.status(200).json({ details: contractDetails });
+  } catch (error) {
+      console.error('Error fetching contract details:', error);
+      res.status(500).json({ msg: 'An error occurred while fetching contract details.' });
+  }
+});
+
+
 router.post('/isFreeze-change',changeFreeze);
 
 router.get('/getAll-str-unit-mst-list',getAllStrUnitMstList)

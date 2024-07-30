@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>LifeLinkr</title>
+
+    <!-- Template CSS -->
+   <%- include('../header'); -%>
+        <!-- //header-ends -->
+        <!-- main content start -->
+        <div class="main-content">
+
+            <div class="row content-top-gap2">
+                <div class="col-lg-12">
+                    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+                        <a class="navbar-brand text-center mr-5" href="#">
+                            <span class="dash-icon"><i class="fas fa-tachometer-alt"></i></span>
+                            Dashboard
+                        </a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav">
+                                <li class="nav-item active text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="far fa-user"></i></span>
+                                        Master
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-exchange-alt"></i></span>
+                                        Transaction
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-hand-holding-medical"></i></span>
+                                        Patient 360
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-receipt"></i></span>
+                                        Outside Reciept
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-file-invoice"></i></span>
+                                        Outpatient Department
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-chart-line"></i></span>
+                                        Analytics
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="far fa-clock"></i></span>
+                                        Waiting List
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-wrench"></i></span>
+                                        Adminstration
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-spinner"></i></span>
+                                        Additional
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+            <!-- content -->
+            <div class="container-fluid">
+
+                <div class="chart">
+                    <div class="row">
+
+                        <div class="col-lg-12 pl-lg-0 mt-2 ml-2">
+                            <h4 class="primary">Add Visit Type Master</h4>
+                        </div>
+                        <div class="col-lg-12 pl-lg-2 chart-grid">
+                            <div id="errordiv1"></div>
+                            <form id="visitMaster"  method="post">
+                                <input type="hidden" name="query" id="query" value="0">
+                                <div class="card card_border">
+                                    <div class="">
+                                        <!--Past your code here starts-->
+
+                                        <div class="card">
+
+                                            <div class="card-body pl-lg-3 pr-lg-3 pt-lg-2 pb-lg-1">
+
+                                                <div class="form-row">
+
+                                                    <div class="col-lg-3 col-md-3 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label class="input__label">Code</label>
+                                                            <input name="code" id="code" type="text" data-validation="required" value="<%- a.code -%>" data-error-message="Code is Required"
+                                                                class="form-control input-style"   <%= a.id ? 'disabled' : '' %> >
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-3 col-md-3 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label class="input__label">Description</label>
+                                                            <input name="description" id="description" data-validation="required" value="<%- a.description -%>" data-error-message="Description is Required" type="text"
+                                                                class="form-control input-style"  <%= a.id ? 'disabled' : '' %> 
+                                                                >
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="col-lg-3 col-md-3 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label class="input__label">Free Days</label>
+                                                            <input name="freeDays"  id="freeDays" data-validation="required"  value="<%- a.freeDays -%>"data-error-message="Free Days is Required" type="text"
+                                                                class="form-control input-style"  <%= a.id ? 'disabled' : '' %> >
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-3 col-md-3 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label class="input__label">Consultation Visit Type</label>
+                                                            <select name="visitType" id="visitType" data-validation="required"  data-error-message="Consultation Visit Type is Required"  <%= a.id ? 'disabled' : '' %>
+                                                                class="form-control input-style">
+                                                                <option value="">Select</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-3 col-md-3 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label class="input__label">Service</label>
+                                                            <select name="services" id="services" data-validation="required" data-error-message="Service is Required"  <%= a.id ? 'disabled' : '' %>
+                                                                class="form-control input-style">
+                                                                <option value="">Select</option>
+                                                            </select>
+
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-3 col-md-6 col-sm-12">
+                                                        <div class="form-check-label">
+                                                            <div class="radio my-4">
+                                                                <label class="form-check-label pt-1">
+                                                                    <input class="form-check-input mt-1" name="isClinical" id="isClinical" type="checkbox" value="1" <%= a.id ? 'disabled' : '' %> <%= a.isClinical == 1 ? 'checked' : '' %> >
+                                                                    Is Clinical
+                                                                </label>
+                                                            </div>
+                                                    
+                                                            <div class="radio my-4">
+                                                                <label class="form-check-label pt-1">
+                                                                    <input class="form-check-input mt-1" name="isFree" id="isFree" type="checkbox" value="1" <%= a.id ? 'disabled' : '' %> <%= a.isFree == 1 ? 'checked' : '' %> >
+                                                                    Is Free
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
+
+
+
+
+
+                                            </div>
+                                        </div>
+
+                                        <!--Past your code here ends-->
+                                    </div>
+                                </div>
+                                <div class="form-group mt-1 mb-3 text-right">
+
+
+
+                                    <button type="button" class="btn-success btn-style btn mt-3 mr-2" id="mod-btn" onclick="updateQuery()"><strong><i
+                                                class="fa-regular fa-pen-to-square"></i> Modify</strong></button>
+
+                                    <button type="button" class="btn-secondary btn-style btn mt-3 mr-2" disabled><strong><i
+                                                class="fa-solid fa-plus"></i> New</strong></button>
+
+                                    <button type="button" class="btn-danger btn-style btn mt-3 mr-2" onclick="window.location.href='/patient/7'"><strong><i
+                                                class="fas fa-times"></i> Cancel</strong></button>
+
+                                    <button type="submit" class="btn-primary btn-style btn mt-3"><strong><i
+                                                class="far fa-save"></i>
+                                            Save</strong></button>
+
+                                </div>
+                            </form>
+                            <div id="loadingIndicator"></div>
+                        </div>
+                        <!--footer section start-->
+ <%- include('../footer'); -%>
+ 
+ <script>
+    function updateQuery(){
+        document.getElementById('query').value=1;
+        $('#mod-btn').prop('disabled', true);   
+        $('input[data-validation], select[data-validation] ,textarea[data-validation],#isClinical,#isFree').prop('disabled', false);
+        document.getElementById('code').disabled = true;
+        document.getElementById('submit').disabled = true;
+      }
+      if('<%= a.id %>'!==''){
+        $('input[data-validation], select[data-validation],textarea[data-validation],#isClinical,#isFree').prop('disabled', true);
+    
+        
+      } if('<%= a.status %>'!=='true'){
+        document.getElementById('mod-btn').disabled = true;
+      }
+      else{
+        document.getElementById('submit').disabled=false;
+      }
+</script>
+
+<script type="module">
+    import { pagi_search } from '../javascripts/pagi_search.js';
+    import { validateForm } from '../javascripts/validation.js';
+    import { myAjax } from '../javascripts/myAjax.js';
+
+    $(document).ready(function () {
+        console.log("Document is ready");
+
+        // Function to load services and populate the select
+        function loadServices() {
+    $.ajax({
+        url: '/patient/getServices',
+        method: 'GET',
+        success: function(data) {
+            const select = $('#services, #visitType');
+            select.empty(); // Clear existing options
+
+            // Add a default select option
+            const defaultOption = $('<option>', {
+                value: "",
+                text: "Please select"
+            });
+            select.append(defaultOption);
+
+            data.forEach(item => {
+                const option = $('<option>', {
+                    value: item.id,
+                    text: item.serviceName
+                });
+
+                // Conditionally set the selected attribute
+                if (item.serviceName === "<%= s %>") {
+                    option.attr('selected', 'selected');
+                }
+
+                select.append(option);
+            });
+        },
+        error: function(xhr, status, error) {
+            console.error('Error fetching services:', error);
+        }
+    });
+}
+
+    loadServices();
+
+
+        // Convert serialized form data to JSON object
+        function convertFormDataToJson(serializedArray) {
+    const jsonObj = {};
+    serializedArray.forEach(item => {
+        if (jsonObj[item.name]) {
+            if (!Array.isArray(jsonObj[item.name])) {
+                jsonObj[item.name] = [jsonObj[item.name]];
+            }
+            jsonObj[item.name].push(item.value);
+        } else {
+            jsonObj[item.name] = item.value;
+        }
+    });
+    
+    // Ensure that if 'isClinical' and 'isFree' are unchecked, they are set to '0'
+    if (!jsonObj['isClinical']) {
+        jsonObj['isClinical'] = '0';
+    }
+    if (!jsonObj['isFree']) {
+        jsonObj['isFree'] = '0';
+    }
+
+    return jsonObj;
+}
+
+        // Form submission handling
+        $('#visitMaster').on('submit', function (event) {
+            event.preventDefault();
+            const { isValid, errorMessage, formData } = validateForm('#visitMaster');
+
+            // Ensure the 'code' field is included and properly serialized
+            const code = $('#code').val();
+            if (!code) {
+                alert('Code is required.');
+                return;
+            }
+
+            const serializedArray = $(this).serializeArray();
+            const jsonFormData = convertFormDataToJson(serializedArray);
+            jsonFormData.code = code; // Ensure 'code' field is included
+            console.log(JSON.stringify(jsonFormData));
+
+            const errorDivId = '#errordiv1';
+            if (isValid) {
+                const url = '/patient/VisitMasterSubmit';
+                const loadingDiv = '#loadingIndicator';
+                $.ajax({
+                    type: 'POST',
+                    url: url,
+                    contentType: 'application/json',
+                    data: JSON.stringify(jsonFormData),
+                    beforeSend: function() {
+                        // Show loading spinner or text
+                        $(loadingDiv).text('Loading...').show();
+                    },
+                    success: function(response) {
+                        // Hide loading indicator on success
+                        $(loadingDiv).hide();
+                        alert('Form submitted successfully!');
+                        $(errorDivId).removeClass('alert-danger').addClass('alert-success').text('Form submitted successfully!').show();
+                        console.log('Response:', response);
+                    },
+                    error: function(xhr, status, error) {
+                        // Hide loading indicator on error
+                        $(loadingDiv).hide();
+                        let response;
+                        try {
+                            response = JSON.parse(xhr.responseText);
+                        } catch (e) {
+                            response = { msg: 'An error occurred while processing your request.' };
+                        }
+                        console.log('Error:', response);
+                        $(errorDivId).removeClass('alert-success').addClass('alert-danger').text(response.msg).show();
+                        console.error('Error:', error);
+                    }
+                });
+            } else {
+                alert(errorMessage);
+                $(errorDivId).removeClass('alert-success').addClass('alert-danger').text(errorMessage).show();
+            }
+        });
+    });
+</script>
+
+ 

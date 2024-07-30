@@ -749,13 +749,27 @@ router.post('/upload', upload.single('image'), async (req, res) => {
   });
   
   router.get('/loadDocCat', (req, res) => {
-    fs.readFile(path.join(__dirname, '../', 'DocCat.json'), 'utf8', (err, data) => {
+    fs.readFile(path.join(__dirname, '../myjson', 'DocCat.json'), 'utf8', (err, data) => {
       if (err) {
+        console.error('Error reading the file:', err);
         res.status(500).send('Error reading the file');
         return;
       }
-      console.log(data)
-      res.json(JSON.parse(data));
+      
+      try {
+        const docCat = JSON.parse(data);
+        const encryptedSpec = docCat.map(docCat => {
+          const encryptedId = encryptDataForUrl(docCat.id.toString());
+          return {
+            ...docCat,
+            id: encryptedId,
+          };
+        });
+        res.status(200).json(encryptedSpec);
+      } catch (parseError) {
+        console.error('Error parsing JSON:', parseError);
+        res.status(500).json({ msg: 'Error parsing JSON data.' });
+      }
     });
   }); 
   

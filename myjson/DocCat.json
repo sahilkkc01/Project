@@ -58,23 +58,5 @@
     "clinic_id": "0",
     "doc_cat_master_code": "5",
     "doc_cat_master_desc": "Embryologist"
-  },
-  {
-    "id": 11,
-    "clinic_id": "0",
-    "doc_cat_master_code": "10",
-    "doc_cat_master_desc": "ABC"
-  },
-  {
-    "id": 12,
-    "clinic_id": "0",
-    "doc_cat_master_code": "A",
-    "doc_cat_master_desc": "A"
-  },
-  {
-    "id": 13,
-    "clinic_id": "0",
-    "doc_cat_master_code": "99a",
-    "doc_cat_master_desc": "descj"
   }
 ]

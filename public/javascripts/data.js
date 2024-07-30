@@ -18,6 +18,7 @@ export function loadDocCat (a){
 
 export function loadSpec(a){
     
+   
       fetch('/clinic/loadSpec')
           .then(response => response.json())
           .then(data => {
@@ -38,22 +39,22 @@ export function loadSpec(a){
       }
 
      
-export function loadSubSpec(a){
-    
-        fetch('/clinic/loadSubSpec')
+      export function loadSubSpec(a, selectedSpec) {
+        fetch(`/clinic/loadSubSpec?spec=${encodeURIComponent(selectedSpec)}`)
             .then(response => response.json())
             .then(data => {
                 const dropdown = document.getElementById(a);
+                dropdown.innerHTML = ''; // Clear previous options
                 data.forEach(doc => {
                     const option = document.createElement('option');
-                    option.value = doc.sub_spec_desc;
-                    option.textContent = doc.sub_spec_desc;
+                    option.value = doc;
+                    option.textContent = doc;
                     dropdown.appendChild(option);
-                    
                 });
             })
-            .catch(error => console.error('Error fetching states:', error));
-        }  
+            .catch(error => console.error('Error fetching sub-specializations:', error));
+    }
+    
 export function loadRack(a){
     
         fetch('/clinic/loadRack')
@@ -72,29 +73,7 @@ export function loadRack(a){
         }  
             
     
-    export function loadDepttbl(a,b){
-            const checkedOptions = b.split(',');
-          
-          
-        fetch('/clinic/loadDept')
-            .then(response => response.json())
-            .then(data => {
-                // console.log(data)
-                const doctorDetails = data; // Assuming the response is the array of doctor details
-            const tableBody = $(a);
-            tableBody.empty();
-
-            doctorDetails.forEach((item) => {
-                const row = `<tr>
-                    <td><input class="form-check-input mt-0 sub_spec" type="checkbox"  name="dept_desc" value="${item.dept_desc}" ${checkedOptions.includes(`${item.dept_desc}`) ? 'checked' : '' }></td>
-                    <td>${item.dept_desc}</td>
-                   
-                </tr>`;
-                tableBody.append(row);
-            });
-            })
-            .catch(error => console.error('Error fetching states:', error));
-        }   
+   
      export function loadDepttbl(a,b){
             const checkedOptions = b.split(',');
           

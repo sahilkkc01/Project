@@ -936,10 +936,14 @@
                         $('#item-body').html(tableRows);
                         pagi_search('#searchBox', '#tableid', '#paginationControls');
 
-                        $('#item-body').on('click', '#view_btn', function () {
-                          const clus_id = $(this).closest('tr').data('item-id');
-                          ViewBtn('21', clus_id, 'adminInv');
-                        });
+                        $('#item-body').on('click', '#view_btn', function() {
+                    
+                    const id=$(this).closest('tr').data('item-id')
+                      const route='21'
+                      const module='AdminInv'
+                      ViewBtn(route,id,module)             // window.location.href = '/clinic/8' 
+                           });
+                           
                       },
                       error: function (xhr, status, error) {
                         console.error('Error fetching classification details:', error);

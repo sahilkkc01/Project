@@ -1056,33 +1056,46 @@ const getPackList = async (req, res) => {
 
 
 const newItemMaster = async (req, res) => {
-    console.log('11');
-    console.log("Request body:", req.body);
+    console.log(req.body);
     try {
-        console.log("Inside try block");
+        // Check if query parameter is '0' (insert new data)
+        if (req.body.query === '0') {
+            const existing = await ItemMasterNew.findOne({ where: { item_code: req.body.item_code } });
 
-        // Check if an item with the same item_code already exists using Sequelize
-        const existingItem = await ItemMasterNew.findOne({
-            where: {
-                item_code: req.body.item_code
+            if (existing) {
+                return res.status(400).send({ msg: 'Item code already exists.' });
             }
-        });
 
-        if (existingItem) {
-            console.log("Duplicate item_code found");
-            return res.status(400).json({ success: false, msg: "Duplicate item_code. Item already exists!" });
+            const newItem = await ItemMasterNew.create(req.body);
+            return res.status(200).json({ msg: 'Item saved successfully!', data: newItem });
+
+        // Check if query parameter is '1' (update existing data)
+        } else if (req.body.query === '1') {
+            const existing = await ItemMasterNew.findOne({ where: { id: req.body.itemId } });
+
+            if (!existing) {
+                return res.status(404).send({ msg: 'Item not found.' });
+            }
+
+            // Check if new item_code exists for another item master
+            if (req.body.item_code && req.body.item_code !== existing.item_code) {
+                const codeExists = await ItemMasterNew.findOne({ where: { item_code: req.body.item_code } });
+
+                if (codeExists) {
+                    return res.status(400).send({ msg: 'Item code already exists.' });
+                }
+            }
+
+            await existing.update(req.body);
+            return res.status(200).json({ msg: 'Item details updated successfully!', data: existing });
+
+        // If query parameter is neither '0' nor '1'
+        } else {
+            return res.status(400).json({ msg: 'Invalid query parameter.' });
         }
-
-        // If not, proceed to save the new item
-        await ItemMasterNew.create(req.body);
-        console.log("Item saved successfully");
-        res.status(200).json({ success: true, msg: "Item saved successfully!" });
     } catch (error) {
-        console.error('Error saving item data:', error);
-        res.status(500).json({
-            success: false,
-            message: error.message,
-        });
+        console.error('Error saving item details:', error);
+        return res.status(500).json({ msg: 'An error occurred while saving item details.' });
     }
 };
 const fetchMinMax = async (req, res) => {
@@ -2178,18 +2191,32 @@ const newRateContract = async (req, res) => {
 
 const getAllRateContractList = async (req, res) => {
     try {
-        const result = await RateContractNew.findAll();
+        const result = await RateContract.findAll();
+
+        // Using a Map to store unique rate contracts by code
+        const uniqueRateContracts = new Map();
+
+        result.forEach(rateContract => {
+            if (!uniqueRateContracts.has(rateContract.code)) {
+                uniqueRateContracts.set(rateContract.code, rateContract);
+            }
+        });
+
+        // Converting the Map back to an array
+        const uniqueResult = Array.from(uniqueRateContracts.values());
+
         const schema = 'RateContractNew';
         const Encschema = encryptDataForUrl(schema.toString());
-        console.log("hdshfjvfsffjsh", Encschema);
-        res.status(200).json({ result, Encschema });
+
+        res.status(200).json({ result: uniqueResult, Encschema });
     } catch (error) {
         res.status(500).json({
             success: false,
             message: error.message,
-        })
+        });
     }
-}
+};
+
 
 const changeFreeze = async (req, res) => {
     try {

@@ -1,0 +1,953 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>LifeLinkr</title>
+
+    <!-- Template CSS -->
+    <%- include('../header'); -%>
+        <!-- //header-ends -->
+        <!-- main content start -->
+        <div class="main-content">
+
+            <div class="row content-top-gap2">
+                <div class="col-lg-12">
+                    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+                        <a class="navbar-brand text-center mr-5" href="#">
+                            <span class="dash-icon"><i class="fas fa-tachometer-alt"></i></span>
+                            Dashboard
+                        </a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav">
+                                <li class="nav-item active text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="far fa-user"></i></span>
+                                        Master
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-exchange-alt"></i></span>
+                                        Transaction
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-hand-holding-medical"></i></span>
+                                        Patient 360
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-receipt"></i></span>
+                                        Outside Reciept
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-file-invoice"></i></span>
+                                        Outpatient Department
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-chart-line"></i></span>
+                                        Analytics
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="far fa-clock"></i></span>
+                                        Waiting List
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-wrench"></i></span>
+                                        Adminstration
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-spinner"></i></span>
+                                        Additional
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+            <!-- content -->
+            <div class="container-fluid">
+
+                <div class="chart">
+                    <div class="row">
+
+                        <div class="col-lg-12 pl-lg-0 mt-2 ml-2">
+                            <h4 class="primary">Agent Master</h4>
+                        </div>
+                        <div class="col-lg-12 pl-lg-2 chart-grid">
+                            <div id="errordiv1"></div>
+                            <form id="AgentInfo" method="post">
+                                <input type="hidden" name="query" id="query" value="0">
+                                <div class="card card_border">
+                                    <div class="">
+                                        <!--Past your code here starts-->
+
+                                        <div class="card">
+                                            <div class="form-row pl-3 pt-1 col-12">
+                                                <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                                    <div class="form-group">
+                                                        <label class="input__label">ART BANK REG NO</label>
+                                                        <input name="artRegNo" id="artRegNo" type="text"
+                                                            class="form-control input-style" placeholder=""
+                                                            data-validation="required" 
+                                                            data-error-message="ART RegNo is required" <%= a.id ? 'disabled' : '' %> value='<%- a.artRegNo -%>'>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                                    <div class="form-group">
+                                                        <label class="input__label">REGISTRATION DATE</label>
+                                                        <input name="regDate" id="regDate" type="date" value="<%= currentDate %>" max="<%= currentDate %>" 
+                                                            class="form-control input-style" placeholder=""
+                                                            data-validation="required"
+                                                            data-error-message="RegDate is required" <%= a.id ? 'disabled' : '' %> value='<%- a.regDate -%>'>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                                    <div class="form-group">
+                                                        <label class="input__label">ART BANK NAME</label>
+                                                        <input name="artBankName" id="artBankName" type="text"
+                                                            class="form-control input-style" placeholder=""
+                                                            data-validation="required"
+                                                            data-error-message="ART BankName is required"<%= a.id ? 'disabled' : '' %> value='<%- a.artBankName -%>'>
+                                                    </div>
+                                                </div>
+
+                                                <div class="card-body pt-lg-3 pb-lg-3">
+
+
+                                                    <div class="form-row">
+                                                        <div class="col-12">
+                                                            <div class="form-group">
+                                                                <div class="pl-xl-0 ">
+                                                                    <h6 class="primary">AGENT INFORMATION</h6>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-row">
+                                                        <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                                            <div class="form-group">
+                                                                <label class="input__label">Name</label>
+                                                                <input name="agentName" id="agentName" type="text"
+                                                                    class="form-control input-style" placeholder=""
+                                                                    data-validation="required"
+                                                                    data-error-message="Name is required" <%= a.id ? 'disabled' : '' %> value='<%- a.agentName -%>'>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                                            <div class="form-group">
+                                                                <label class="input__label">D.O.B</label>
+                                                                <input name="agentDob" id="agentDob" type="date"
+                                                                    class="form-control input-style" placeholder=""
+                                                                    data-validation="required"  max="<%= currentDate %>"
+                                                                    data-error-message="D.O.B is required" <%= a.id ? 'disabled' : '' %> value='<%- a.agentDob -%>'>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                                            <div class="form-group">
+                                                                <label class="input__label">Occupation</label>
+                                                                <select name="occupation" id="occupation" data-validation="required"
+                                                                    class="form-control input-style"
+                                                                    
+                                                                    data-error-message="Occupation is required">
+                                                                    <option value="">Select</option>
+                                                                    <option value="Self-Employed" <%= a.occupation ? 'Selected' : '' %>>Self-Employed</option>
+
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                                            <div class="form-group">
+                                                                <label class="input__label">Year of Marriage</label>
+                                                                <input name="yearOfMarriage" id="yearOfMarriage"
+                                                                    type="number" class="form-control input-style"
+                                                                    placeholder="" data-validation="required"
+                                                                    data-error-message="Year of Marriage is required" <%= a.id ? 'disabled' : '' %> value='<%- a.yearOfMarriage -%>'>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-3 col-md-6 col-sm-12">
+                                                            <label class="input__label">Married</label>
+                                                            <div class="form-radio-label">
+                                                                <div class="radio mt-0 ml-4">
+                                                                    <label class="form-radio-label pt-1">
+                                                                        <input name="isMarried" id="agentMarriedYes"
+                                                                            type="radio" class="form-check-input mt-1"
+                                                                            value="Yes" data-validation="required"
+                                                                            data-error-message="Married field is required">Yes
+                                                                    </label>
+                                                                </div>
+                                                                <div class="radio mt-0">
+                                                                    <label class="form-radio-label pt-1">
+                                                                        <input name="isMarried" id="agentMarriedNo"
+                                                                            type="radio" class="form-check-input mt-1"
+                                                                            value="No">No
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Spouse Information Section -->
+                                                    <div id="spouseInfo"class="row">
+                                                        <div class="col col-lg-6  pl-xl-1 pr-xl-1 mt-3">
+                                                            <div class="form-row card_border mr-2 ml-2 pb-3">
+                                                                <div class="col-xl-12 p-heading pl-3 ">
+                                                                    <h6 class="p-text">SPOUSE INFORMATION</h6>
+                                                                </div>
+
+                                                                <div class="form-row pl-3 pt-1 col-12">
+                                                                    <div class="col-lg-6 col-md-6 col-sm-12 mb-2">
+                                                                        <div class="form-group">
+                                                                            <label class="input__label">Name</label>
+                                                                            <input name="spouseName" id="spouseName"
+                                                                                type="text"
+                                                                                class="form-control input-style"
+                                                                                placeholder="" disabled <%= a.id ? 'disabled' : '' %> value='<%- a.spouseName -%>'
+                                                                                >
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-6 col-md-6 col-sm-12 mb-2">
+                                                                        <div class="form-group">
+                                                                            <label class="input__label">D.O.B</label>
+                                                                            <input name="spouseDob" id="spouseDob"
+                                                                                type="date"  max="<%= currentDate %>"
+                                                                                class="form-control input-style"
+                                                                                placeholder="" disabled <%= a.id ? 'disabled' : '' %> value='<%- a.spouseDob -%>'
+                                                                                >
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+
+
+                                                    </div>
+                                                </div>
+                                                <div class="col col-lg-6  pl-xl-1 pr-xl-1 mt-3">
+                                                    <div class="col-lg-6 col-md-6 col-sm-12">
+                                                        <label class="input__label">Previous Done</label>
+                                                        <div class="form-radio-label">
+                                                            <div class="radio mt-0 ml-4">
+                                                                <label class="form-radio-label pt-1">
+                                                                    <input name="previousDone"
+                                                                        id="spousePreviousDoneYes" type="radio"
+                                                                        class="form-check-input mt-1" value="Yes"
+                                                                        data-validation="required"
+                                                                        data-error-message="Previous Done field is required">Yes
+                                                                </label>
+                                                            </div>
+
+                                                            <div class="radio mt-0">
+                                                                <label class="form-radio-label pt-1">
+                                                                    <input name="previousDone"
+                                                                        id="spousePreviousDoneNo" type="radio"
+                                                                        class="form-check-input mt-1" value="No">No
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-row card_border mr-2 ml-2 pb-3" id="donationInfo" >
+                                                        <div class="col-xl-12 p-heading pl-3 ">
+                                                            <h6 class="p-text">DONATION INFORMATION</h6>
+                                                        </div>
+
+                                                        <div class="form-row pl-3 pt-1 col-12">
+
+                                                            <div class="col-lg-6 col-md-6 col-sm-12 mb-2">
+                                                                <div class="form-group">
+                                                                    <label class="input__label">No. of Donations</label>
+                                                                    <input name="donations" id="donations"
+                                                                        type="number" class="form-control input-style"
+                                                                        placeholder="" data-validation="required"
+                                                                        data-error-message="No. of Donations is required" <%= a.id ? 'disabled' : '' %> value='<%- a.donations -%>'>
+                                                                </div>
+                                                            </div>
+
+
+                                                        </div>
+                                                        <div class="col-12 pl-3 pr-3">
+                                                            <div class="slidx">
+
+                                                                <table class="table2">
+                                                                    <thead>
+                                                                        <tr>
+
+                                                                            <th contenteditable="true" width="15%">
+                                                                                Sr No</th>
+                                                                            <th contenteditable="true"
+                                                                                class="text-left pl-4">Year</th>
+                                                                            <th contenteditable="true"
+                                                                                class="text-left pl-4">Clinic</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr>
+
+                                                                            <td contenteditable="true">
+                                                                            </td>
+                                                                            <td contenteditable="true"
+                                                                                class="text-left pl-4">
+
+                                                                            </td>
+                                                                            <td contenteditable="true"
+                                                                                class="text-left pl-4">
+
+                                                                            </td>
+                                                                        </tr>
+
+                                                                        <tr>
+
+                                                                            <td contenteditable="true">
+                                                                            </td>
+                                                                            <td contenteditable="true"
+                                                                                class="text-left pl-">
+
+                                                                            </td>
+                                                                            <td contenteditable="true"
+                                                                                class="text-left pl-">
+
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+
+                                                        </div>
+
+
+
+                                                    </div>
+                                                </div>
+                                                <!-- third div -->
+
+
+                                                <!-- fourth Div -->
+
+                                                <div class="col col-lg-6 pl-xl-1 pr-xl-1 mt-3 ">
+
+                                                    <div class="form-row card_border mr-2 ml-2 pb-2">
+
+
+                                                        <div class="col-xl-12 p-heading pl-3 ">
+                                                            <h6 class="p-text">CONTACT INFORMATION</h6>
+                                                        </div>
+
+
+                                                        <div class="form-row pl-3 pt-1 col-12">
+
+
+
+                                                            <div class="col-lg-6 col-md-6 col-sm-12 mb-2">
+                                                                <div class="form-row">
+                                                                    <div class="col-lg-4 ">
+                                                                        <div class="form-group"><label
+                                                                                class="input__label">Mobile
+                                                                                No.</label><select name="mobileCountryCode" id="mobileCountryCode"
+                                                                                
+                                                                                class="form-control input-style"
+                                                                                placeholder="" data-validation="required"
+                                                                                data-error-message="Mobile
+                                                                                No.Code is required" <%= a.id ? 'disabled' : '' %> >
+                                                                                <option value="">Select </option>
+                                                                                <option value="91"  <%= a.id ? 'Selected' : '' %>>91</option>
+                                                                            
+                                                                            
+                                                                            </select>
+
+                                                                                
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-8">
+                                                                        <div class="form-group"><label
+                                                                                class="input__label"></label><input
+                                                                                name="mobileNo" id="mobileNo" type="number"
+                                                                                class="form-control input-style"
+                                                                                placeholder=""data-validation="required"
+                                                                                data-error-message="Mobile
+                                                                                No. is required" <%= a.id ? 'disabled' : '' %> value='<%- a.mobileNo -%>'>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+
+                                                            </div>
+                                                            <div class="col-lg-6 col-md-6 col-sm-12 mb-2">
+                                                                <div class="form-row">
+                                                                    <div class="col-lg-4 ">
+                                                                        <div class="form-group"><label
+                                                                                class="input__label">Alt Mob.
+                                                                                No.</label><select name="altCountryCode" id="altMobileCountryCode"
+                                                                                data-validation
+                                                                                class="form-control input-style"
+                                                                                placeholder="" <%= a.id ? 'disabled' : '' %> >
+                                                                                <option value="">Select</option>
+                                                                                <option value="91" <%= a.id ? 'Selected' : '' %>>91</option>
+                                                                        </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-8">
+                                                                        <div class="form-group"><label
+                                                                                class="input__label"></label><input
+                                                                                name="altMobileNo" id="altMobileNo"type="number"
+                                                                                class="form-control input-style" data-validation
+                                                                                placeholder="" <%= a.id ? 'disabled' : '' %> value='<%- a.altMobileNo -%>'>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+
+                                                            </div>
+                                                            <div class="col-lg-6 col-md-6 col-sm-12 mb-2">
+                                                                <div class="form-row">
+                                                                    <div class="col-lg-4 ">
+                                                                        <div class="form-group"><label
+                                                                                class="input__label">Landline
+                                                                                No.</label><select name="landlineCountryCode" id="landlineCountryCode"
+                                                                                type="number" data-validation
+                                                                                class="form-control input-style"
+                                                                                placeholder="" <%= a.id ? 'disabled' : '' %>>
+                                                                                <option value="">Select</option>
+                                                                                <option value="011" <%= a.id ? 'Selected' : '' %>>011</option>
+                                                                                </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-8">
+                                                                        <div class="form-group"><label
+                                                                                class="input__label"></label><input
+                                                                                name="landlineNo" id="landlineNo" type="number"
+                                                                                class="form-control input-style" data-validation
+                                                                                placeholder="" <%= a.id ? 'disabled' : '' %> value='<%- a.landlineNo -%>'>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+
+                                                            </div>
+
+
+
+
+
+                                                            <!-- <div class="col-7 mb-1">
+                                                                <div class="form-group"><button type="button"
+                                                                        class="btn btn-style mt-4 btn-primary btn-style btn-change"><strong><i
+                                                                                class="fas fa-search"></i>
+                                                                            Search</strong></button></div>
+                                                            </div> -->
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                                <!-- fifth div -->
+
+
+
+                                                <!-- sixth div -->
+
+                                                <div class="col col-lg-12 pl-xl-1 pr-xl-1 mt-3 ">
+
+                                                    <div class="form-row card_border mr-2 ml-2 pb-2">
+
+
+                                                        <div class="col-xl-12 p-heading pl-3 ">
+                                                            <h6 class="p-text">ADDRESS</h6>
+                                                        </div>
+
+
+                                                        <div class="form-row pl-3 pt-1 col-12">
+
+
+
+                                                            <div class="col-lg-3 col-md-6 col-sm-12 mb-2">
+                                                                <div class="form-group"><label
+                                                                        class="input__label">Address Line
+                                                                        1</label><input type="text"
+                                                                        name="addressLine1"
+                                                                        class="form-control input-style" data-validation="required"
+                                                                        data-error-message="Address
+                                                                         is required" <%= a.id ? 'disabled' : '' %> value='<%- a.addressLine1 -%>'></div>
+
+                                                            </div>
+                                                            <div class="col-lg-3 col-md-6 col-sm-12 mb-2">
+                                                                <div class="form-group"><label
+                                                                        class="input__label">Address Line
+                                                                        2</label><input type="text"
+                                                                        name="addressLine2" data-validation
+                                                                        class="form-control input-style" <%= a.id ? 'disabled' : '' %> value='<%- a.addressLine2 -%>'/></div>
+
+                                                            </div>
+                                                            <div class="col-lg-3 col-md-6 col-sm-12 mb-2">
+                                                                <div class="form-group"><label
+                                                                        class="input__label">Street</label><input
+                                                                        name="street" type="text"
+                                                                        class="form-control input-style" placeholder=""data-validation="required"
+                                                                        data-error-message="Street
+                                                                        is required" <%= a.id ? 'disabled' : '' %> value='<%- a.street -%>'>
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="col-lg-3 col-md-6 col-sm-12 mb-2">
+                                                                <div class="form-group"><label
+                                                                        class="input__label">Landmark</label><input
+                                                                        name="landmark" type="text"
+                                                                        class="form-control input-style" placeholder="" data-validation="required"
+                                                                        data-error-message="Landmark
+                                                                         is required" <%= a.id ? 'disabled' : '' %> value='<%- a.landmark -%>'>
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="col-lg-3 col-md-6 col-sm-12 mb-2">
+                                                                <div class="form-group"><label
+                                                                        class="input__label">Country</label><select
+                                                                        name="country"
+                                                                        class="form-control input-style" data-validation="required"
+                                                                        data-error-message="Country
+                                                                         is required" <%= a.id ? 'disabled' : '' %> >
+                                                                        <option value="">Select</option>
+                                                                        <option value="india" <%= a.country ? 'Selected' : '' %>>India</option>
+                                                                               
+                                                                    </select></div>
+
+                                                            </div>
+                                                            <div class="col-lg-3 col-md-6 col-sm-12 mb-2">
+                                                                <div class="form-group"><label
+                                                                        class="input__label">State</label><select name="state" id="state"  class="form-control input-style" data-validation="required" data-error-message="State is required">
+                                                                            <option value="">Select</option>
+                                                                            <!-- State options -->
+                                                                        </select>
+                                                                        </div>
+
+                                                            </div>
+                                                            <div class="col-lg-3 col-md-6 col-sm-12 mb-2">
+                                                                <div class="form-group">
+                                                                    <label for="city" class="input__label">City</label>
+                                                                    <select name="city" id="city" class="form-control input-style"  data-validation="required" data-error-message="City is required">
+                                                                        <option value="hh">Select</option>
+                                                                       
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <div class="col-lg-3 col-md-6 col-sm-12 mb-2">
+                                                                <div class="form-group"><label
+                                                                        class="input__label">Area</label><input
+                                                                        type="text" name="area"
+                                                                        class="form-control input-style" data-validation="required"
+                                                                        data-error-message="Area
+                                                                         is required" <%= a.id ? 'disabled' : '' %> value='<%- a.area -%>'></div>
+
+                                                            </div>
+
+
+
+
+                                                            <!-- <div class="col-7 mb-1">
+                                                                <div class="form-group"><button type="button"
+                                                                        class="btn btn-style mt-4 btn-primary btn-style btn-change"><strong><i
+                                                                                class="fas fa-search"></i>
+                                                                            Search</strong></button></div>
+                                                            </div> -->
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col col-lg-12 pl-xl-1 pr-xl-1 mt-3 ">
+
+                                                    <div class="form-row card_border mr-2 ml-2 pb-2">
+
+
+                                                        <div class="col-xl-12 p-heading pl-3 ">
+                                                            <h6 class="p-text">ACCOUNT INFORMATION</h6>
+                                                        </div>
+
+
+                                                        <div class="form-row pl-3 pt-1 col-12">
+                                                            <div class="col-lg-6 col-md-6 col-sm-12 mb-2">
+                                                                <div class="form-group"><label class="input__label">Pan
+                                                                        No.</label><input name="panNo" type="text"
+                                                                        class="form-control input-style" placeholder=""data-validation="required"
+                                                                        data-error-message="Pan
+                                                                        No. is required" <%= a.id ? 'disabled' : '' %> value='<%- a.panNo -%>'>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6 col-md-6 col-sm-12 mb-2">
+                                                                <div class="form-group"><label
+                                                                        class="input__label">Aadhar
+                                                                        No.</label><input name="aadharNo" type="number"
+                                                                        class="form-control input-style" placeholder="" data-validation="required"
+                                                                        data-error-message="Adhar
+                                                                        No. is required" <%= a.id ? 'disabled' : '' %> value='<%- a.aadharNo -%>'>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-3 col-md-6 col-sm-12 mb-2">
+                                                                <div class="form-group"><label
+                                                                        class="input__label">Account
+                                                                        No.</label><input name="accountNo" type="number"
+                                                                        class="form-control input-style" placeholder="" data-validation="required"
+                                                                        data-error-message="Account
+                                                                        No. is required" <%= a.id ? 'disabled' : '' %> value='<%- a.accountNo -%>'>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-3 col-md-6 col-sm-12 mb-2">
+                                                                <div class="form-group"><label class="input__label">Bank
+                                                                        Name</label><input name="bankName"
+                                                                        type="text" class="form-control input-style"
+                                                                        placeholder="" data-validation="required"
+                                                                        data-error-message="Bank Name is required" <%= a.id ? 'disabled' : '' %> value='<%- a.bankName -%>'></div>
+                                                            </div>
+                                                            <div class="col-lg-3 col-md-6 col-sm-12 mb-2">
+                                                                <div class="form-group"><label
+                                                                        class="input__label">Branch Name
+                                                                    </label><input name="branchName" type="text"
+                                                                        class="form-control input-style" placeholder="" data-validation="required"
+                                                                        data-error-message="Branch is required" <%= a.id ? 'disabled' : '' %> value='<%- a.branchName -%>'>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-3 col-md-6 col-sm-12 mb-2">
+                                                                <div class="form-group"><label
+                                                                        class="input__label">Account Holder Name
+                                                                    </label><input name="accHolderName" type="text"
+                                                                        class="form-control input-style" placeholder="" data-validation="required"
+                                                                        data-error-message="Account Holder Name is required" <%= a.id ? 'disabled' : '' %> value='<%- a.accHolderName -%>'>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-3 col-md-6 col-sm-12 mb-2">
+                                                                <div class="form-group"><label class="input__label">IFSC
+                                                                        Code
+                                                                    </label><input name="ifscCode" type="text"
+                                                                        class="form-control input-style" placeholder="" data-validation="required"
+                                                                        data-error-message="IFSC
+                                                                        Code is required" <%= a.id ? 'disabled' : '' %> value='<%- a.ifscCode -%>'>
+                                                                </div>
+                                                            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+                                                            <!-- <div class="col-7 mb-1">
+                                                                <div class="form-group"><button type="button"
+                                                                        class="btn btn-style mt-4 btn-primary btn-style btn-change"><strong><i
+                                                                                class="fas fa-search"></i>
+                                                                            Search</strong></button></div>
+                                                            </div> -->
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+
+
+
+
+                                            <!-- <div class="form-row">
+                                                    <div class="col-12">
+                                                        <div class="form-group">
+                                                            <div class="col col-12 pr-xl-0 pl-xl-0">
+                                                                <div class="slidx">
+
+                                                                    <table class="table2">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th contenteditable="true" width="15%">View</th>
+                                                                                <th contenteditable="true" width="15%">Code</th>
+                                                                                <th contenteditable="true">Description</th>
+                                                                                <th contenteditable="true" width="15%">Status</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td contenteditable="true">
+                                                                                    <button type="submit" class="btn btn-primary btn-style btn-change"><Strong>View</Strong></button>
+                                                                                </td>
+                                                                                <td contenteditable="true">1
+                                                                                </td>
+                                                                                <td contenteditable="true">Camp 1
+                                                                                </td>
+                                                                                <td contenteditable="true"><input
+                                                                                    class="form-check-input mt-1"
+                                                                                    type="checkbox" id="gridCheck1">
+                                                                                </td>
+                                                                            </tr>
+
+                                                                            <tr>
+                                                                                <td contenteditable="true"><button
+                                                                                    type="submit"
+                                                                                    class="btn btn-primary btn-style btn-change"><strong>View</strong></button>
+                                                                                </td>
+                                                                                <td contenteditable="true">2
+                                                                                </td>
+                                                                                <td contenteditable="true">Camp 2
+                                                                                </td>
+                                                                                <td contenteditable="true"><input
+                                                                                    class="form-check-input mt-1"
+                                                                                    type="checkbox" id="gridCheck1">
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div> -->
+
+                                        </div>
+                                    </div>
+
+                                    <!--Past your code here ends-->
+                                </div>
+                        </div>
+                        <div class="form-group mt-1 mb-3 text-right">
+
+
+
+                            <button type="button" class="btn-success btn-style btn mt-3 mr-2" id="mod-btn" onclick="updateQuery()"><strong><i
+                                        class="fa-regular fa-pen-to-square"></i> Modify</strong></button>
+
+                            <button type="button" class="btn-secondary btn-style btn mt-3 mr-2" disabled><strong><i
+                                        class="fa-solid fa-plus"></i> New</strong></button>
+
+                            <button type="button" class="btn-danger btn-style btn mt-3 mr-2"  onclick="window.location.href='/patient/29'"><strong><i
+                                        class="fas fa-times"></i> Cancel</strong></button>
+
+                            <button type="submit" class="btn-primary btn-style btn mt-3"><strong><i
+                                        class="far fa-save"></i>
+                                    Save</strong></button>
+
+                        </div>
+                        </form>
+                        <div id="loadingIndicator"></div>
+                    </div>
+                    <!--footer section start-->
+                    <%- include('../footer'); -%>
+                    <script>
+                        function updateQuery(){
+                            document.getElementById('query').value=1;
+                            $('#mod-btn').prop('disabled', true);   
+                            $('input[data-validation], select[data-validation] ,textarea[data-validation]').prop('disabled', false);
+                            document.getElementById('code').disabled = true;
+                            document.getElementById('submit').disabled = false;
+                          }
+                          if('<%= a.id %>'!==''){
+                            $('input[data-validation], select[data-validation],textarea[data-validation]').prop('disabled', true);
+                          } if('<%= a.status %>'!=='true'){
+                            document.getElementById('mod-btn').disabled = true;
+                            
+                          }
+                          else{
+                            
+                            document.getElementById('submit').disabled=false;
+                          }
+                    </script>
+                    
+                    <script type="module">
+                        import { pagi_search } from '../javascripts/pagi_search.js';
+                        import { validateForm } from '../javascripts/validation.js';
+                        import { myAjax } from '../javascripts/myAjax.js';
+                    
+                        $(document).ready(function () {
+                            console.log("Document is ready");
+                    
+                            // Load state and city dropdowns
+                            const selectedStateCode ='<%=  a.state -%>'; // Assume this is provided somewhere in your script
+    const selectedCityName = '<%= a.city %>'; // Assume this is also provided
+    console.log(selectedStateCode+selectedCityName+"jj");
+
+    loadState('state', selectedStateCode);
+
+    $('#state').on('change', function () {
+        loadCity(this, selectedCityName); // Pass selectedCityName for initial load
+    });
+
+    function loadState(elementId, selectedStateCode) {
+        fetch('/patient/reloadState')
+            .then(response => response.json())
+            .then(data => {
+                const dropdown = document.getElementById(elementId);
+                data.sort((a, b) => a.stateName.localeCompare(b.stateName));
+                data.forEach(state => {
+                    const option = document.createElement('option');
+                    option.value = state.stateCode;
+                    option.textContent = state.stateName;
+                    option.selected = state.stateCode === selectedStateCode; // Set selected based on fetched value
+                    dropdown.appendChild(option);
+                });
+                if (selectedStateCode) { // Automatically trigger city loading on initial setup
+                    loadCity(dropdown, selectedCityName);
+                }
+            })
+            .catch(error => console.error('Error fetching states:', error));
+    }
+
+    function loadCity(selectElement, selectedCityName) {
+        const stateCode = selectElement.value;
+        $.ajax({
+            url: '/patient/reloadCity',
+            type: 'GET',
+            data: { stateCode: stateCode }, // Ensure backend uses this to filter cities
+            dataType: 'json',
+            success: function (data) {
+                let selectOptions = '<option value="">Select city</option>';
+                const filteredCities = data.filter(city => city.stateCode === stateCode);
+                filteredCities.forEach(function (city) {
+                    selectOptions += `<option value="${city.cityName}"${city.cityName === selectedCityName ? ' selected' : ''}>${city.cityName}</option>`;
+                });
+                $('#city').html(selectOptions);
+            },
+            error: function (xhr, status, error) {
+                console.error('Error fetching cities:', error);
+            }
+        });
+    }
+
+                            // Phone number validation for digit-only inputs
+                            $('input[type="number"]').on('change', function () {
+                                const nonDigitPattern = /[^0-9]/g;
+                                if (this.value.match(nonDigitPattern)) {
+                                    alert("Only digits are allowed.");
+                                    this.value = '';
+                                }
+                            });
+                    
+                            // Spouse and donation info handling
+                            $('input[type="radio"][name="isMarried"]').change(function () {
+                                toggleSectionAvailability('#spouseInfo', $(this).val() === 'No');
+                            });
+                    
+                            $('input[type="radio"][name="previousDone"]').change(function () {
+                                toggleSectionAvailability('#donationInfo', $(this).val() === 'No');
+                            });
+                    
+                            function toggleSectionAvailability(sectionId, isDisabled) {
+                                $(sectionId + ' input, ' + sectionId + ' select').prop('disabled', isDisabled)
+                                    .attr('data-validation', isDisabled ? null : 'required')
+                                    .attr('data-error-message', isDisabled ? null : 'This field is required');
+                            }
+                    
+                            // Form submission handling
+                            $('#AgentInfo').on('submit', function (event) {
+                                event.preventDefault();
+                                const mobileNumber = formatAndValidatePhoneNumber('mobile');
+                                const altMobileNumber = formatAndValidatePhoneNumber('altMobile');
+                                const landlineNumber = formatAndValidatePhoneNumber('landline');
+                                const { isValid, errorMessage } = validateForm('#AgentInfo');
+                                if (!isValid) {
+                                    alert(errorMessage);
+                                    return;
+                                }
+                    
+                               
+                    
+                                if (!isValid) {
+                                    alert(errorMessage);
+                                    return;
+                                }
+                    
+                                const serializedArray = $(this).serializeArray();
+                                const jsonFormData = convertFormDataToJson(serializedArray);
+                                Object.assign(jsonFormData, {
+                                    mobileNo: mobileNumber,
+                                    altMobileNo: altMobileNumber,
+                                    landlineNo: landlineNumber
+                                });
+                    
+                                console.log(JSON.stringify(jsonFormData));
+                    
+                                submitForm(jsonFormData);
+                            });
+                    
+                            function formatAndValidatePhoneNumber(phoneType) {
+                                var countryCode = $('#' + phoneType + 'CountryCode').val();
+                                var phoneNumber = $('#' + phoneType + 'No').val();
+                                if (!phoneNumber) return ""; // Skip validation if phone number is empty
+                    
+                                phoneNumber = phoneNumber.replace(/\D/g, '');
+                                if (phoneType !== 'landline' && phoneNumber.length !== 10) {
+                                    alert(phoneType.charAt(0).toUpperCase() + phoneType.slice(1) + " number must be exactly 10 digits.");
+                                    $('#' + phoneType + 'No').val('');
+                                    return null;
+                                }
+                                return countryCode + phoneNumber;
+                            }
+                    
+                            function convertFormDataToJson(serializedArray) {
+                                const jsonObj = {};
+                                serializedArray.forEach(item => {
+                                    jsonObj[item.name] = item.value; // Overwrite if multiple entries of the same name
+                                });
+                                return jsonObj;
+                            }
+                    
+                            function submitForm(jsonFormData) {
+    const errorDivId = '#errordiv1';
+    const loadingDiv = '#loadingIndicator';
+    const url = '/patient/AgentMasterSubmit';
+
+    $.ajax({
+        type: 'POST',
+        url: url,
+        contentType: 'application/json',
+        data: JSON.stringify(jsonFormData),
+        beforeSend: function() {
+            $(loadingDiv).text('Loading...').show();
+        },
+        success: function(response) {
+            $(loadingDiv).hide();
+            alert('Form submitted successfully!');
+            $(errorDivId).removeClass('alert-danger').addClass('alert-success').text('Form submitted successfully!').show();
+            console.log('Response:', response);
+        },
+        error: function(xhr, status, error) {
+        // Hide loading indicator on error
+        $(loadingDiv).hide();
+        
+        const response = JSON.parse(xhr.responseText);
+        console.log('Error:', response);
+        $(errorDivId).removeClass('alert-success').addClass('alert-danger').text(response.msg).show();
+        console.error('Error:', error);
+    }
+    });
+}
+
+                        });
+                    </script>
+                    
+                    

@@ -412,8 +412,21 @@ if('<%= a.status %>'!=='true'){
              import { loadSubSpec } from '../javascripts/data.js';
 
              loadDocCat('doc_catg');
-             loadSpec('doc_spec');
-             loadSubSpec('doc_sub_spec');
+
+             document.getElementById('doc_spec').addEventListener('change', function() {
+    const selectedSpec = this.value;
+    loadSubSpec('doc_sub_spec', selectedSpec);
+});
+
+// Initial loading of specializations
+loadSpec('doc_spec');
+
+// Ensure sub-specializations are loaded initially if a specialization is pre-selected
+const initialSelectedSpec = document.getElementById('doc_spec').value;
+if (initialSelectedSpec) {
+    loadSubSpec('doc_sub_spec', initialSelectedSpec);
+}
+
 
          
               

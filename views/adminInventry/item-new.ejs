@@ -95,6 +95,8 @@
                         <div class="col-lg-12 pl-lg-2 chart-grid">
                             <div id="errordiv1"></div>
                             <form id="ItemMst" enctype="multipart/form-data">
+                                <input type="hidden" name="query" id="query" value="0">
+                                <input type="hidden" name="itemId" id="itemId" value='<%=a.id%>'>
                                 <div class="card card_border">
                                     <div class="">
                                         <!--Past your code here starts-->
@@ -110,7 +112,7 @@
                                                 
                                                     <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
                                                         <div class="form-group"><label class="input__label">Item
-                                                                Code</label><input name="item_code" type="text" data-validation="required" data-error-message="Code is required." class="form-control input-style" placeholder=""></div>
+                                                                Code</label><input name="item_code" id="item_code" type="text" data-validation="required" data-error-message="Code is required." class="form-control input-style" placeholder=""></div>
                                                     </div>
                                                 </div>
 
@@ -194,7 +196,7 @@
                                                 <div class="col-lg-3 col-md-3 col-sm-12 mb-3">
                                                     <div class="form-group"><label class="input__label">Storage
                                                             Degree</label><input name="storage_degree" type="number"
-                                                            data-validation="required" data-error-message="Storage Degree."
+                                                         id="storage_degree"   data-validation="required" data-error-message="Storage Degree."
                                                             class="form-control input-style" placeholder="">
                                                     </div>
                                                 </div>
@@ -271,14 +273,14 @@
                                                 <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
                                                     <div class="form-group"><label class="input__label">Base Unit
                                                             MRP</label><input name="base_unit_mrp" type="number"  data-validation="required" data-error-message="Base Unit is required"
-                                                            class="form-control input-style" placeholder="">
+                                                           id="base_unit_mrp" class="form-control input-style" placeholder="">
                                                     </div>
                                                 </div>
 
                                                 <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
                                                     <div class="form-group"><label class="input__label">Base Unit
                                                             Cost Price</label><input name="base_unit_cost_price" data-validation="required" data-error-message="Base Unit is required"
-                                                            type="number" class="form-control input-style"
+                                                       id="base_unit_cost_price"     type="number" class="form-control input-style"
                                                             placeholder=""></div>
                                                 </div>
 
@@ -286,13 +288,13 @@
                                                 <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
                                                     <div class="form-group"><label class="input__label">Discount On
                                                             Sale (%)</label><input name="discount_on_sale" max="100" data-validation="required" data-error-message="Select Therapeutic Class"
-                                                            type="number" class="form-control input-style"
+                                                  id="discount_on_sale"          type="number" class="form-control input-style"
                                                             placeholder=""></div>
                                                 </div>
 
                                                 <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
                                                     <div class="form-group"><label class="input__label">Route
-                                                        </label><select name="route" class="form-control input-style" data-validation="required" data-error-message="Select Route">
+                                                        </label><select name="route" id="route" class="form-control input-style" data-validation="required" data-error-message="Select Route">
                                                             <option value="">Select</option>
                                                             <option value="IV">IV</option>
                                                             <option value="IM">IM</option>
@@ -307,25 +309,29 @@
 
 
                                                 <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
-
-                                                    <div class="form-group"><label class="input__label ml-1">Analysis
-                                                            Required</label></div>
-
-                                                    <div class="radio"><label class="form-check-label"><input
-                                                        value="ABC" name="AnalysisRequired" class="form-check-input"
-                                                                data-validation="requiredRequired" data-error-message="Analysis Requiredx"
-                                                                type="radio">ABC</label></div>
-
-                                                    <div class="radio"><label class="form-check-label"><input
-                                                        value="FNS" name="AnalysisRequired" class="form-check-input"
-                                                                type="radio">FSN</label></div>
-
-                                                    <div class="radio"><label class="form-check-label"><input
-                                                        value="VED" name="AnalysisRequired" class="form-check-input"
-                                                                type="radio">VED</label></div>
-
-
+                                                    <div class="form-group">
+                                                        <label class="input__label ml-1">Analysis Required</label>
+                                                    </div>
+                                                
+                                                    <div class="radio">
+                                                        <label class="form-check-label">
+                                                            <input value="ABC" name="AnalysisRequired" class="form-check-input" data-validation="required" data-error-message="Analysis Required" type="radio" <%= a.AnalysisRequired === 'ABC' ? 'checked' : '' %> > ABC
+                                                        </label>
+                                                    </div>
+                                                
+                                                    <div class="radio">
+                                                        <label class="form-check-label">
+                                                            <input value="FSN" name="AnalysisRequired" class="form-check-input" type="radio" <%= a.AnalysisRequired === 'FSN' ? 'checked' : '' %> > FSN
+                                                        </label>
+                                                    </div>
+                                                
+                                                    <div class="radio">
+                                                        <label class="form-check-label">
+                                                            <input value="VED" name="AnalysisRequired" class="form-check-input" type="radio" <%= a.AnalysisRequired === 'VED' ? 'checked' : '' %> > VED
+                                                        </label>
+                                                    </div>
                                                 </div>
+                                                
 
 
 
@@ -345,19 +351,22 @@
                                                     <div class="form-group"><label class="input__label">Expiry Alert
                                                             Before In Days</label><input
                                                             name="expiry_alert_before_in_days" type="number"
-                                                            data-validation="required" data-error-message=" Expiry Alert
+                                                         id="expiry_alert_before_in_days"    data-validation="required" data-error-message=" Expiry Alert
                                                             Before In Days is required"
                                                             class="form-control input-style" placeholder=""></div>
                                                 </div>
 
                                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                                     <div class="form-check-label">
-                                                        <div class="radio my-4"><label class="form-check-label"><input
-                                                                    name="batchesRequired" value="YES" class="form-check-input" type="checkbox">
-                                                                Batches Required</label>
+                                                        <div class="radio my-4">
+                                                            <label class="form-check-label">
+                                                                <input name="batchesRequired" value="YES" class="form-check-input" type="checkbox" <%= a.batchesRequired === 'YES' ? 'checked' : '' %>>
+                                                                Batches Required
+                                                            </label>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                
 
                                             </div>
 
@@ -366,7 +375,7 @@
                                                 <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
                                                     <div class="form-group"><label class="input__label">HSN
                                                             Codes</label><select name="hsn_codes" id="hsn_codes" 
-                                                            data-validation="required" data-error-message=" Select HSN Code"
+                                                        id="hsn_codes"    data-validation="required" data-error-message=" Select HSN Code"
                                                             class="form-control input-style">
                                                             <option value=""> Select</option>
                                                             <option value="1111">1111</option>
@@ -382,7 +391,7 @@
                                                     <div class="form-group"><label class="input__label">Staff-
                                                             Discount on sale%</label><input
                                                             name="staff_discount_on_sale" type="number" max="100"
-                                                            data-validation="required" data-error-message=" Staff-
+                                                         id="staff_discount_on_sale"   data-validation="required" data-error-message=" Staff-
                                                             Discount on sale% is required"
                                                             class="form-control input-style" placeholder=""></div>
                                                 </div>
@@ -396,7 +405,7 @@
                                                     <div class="form-group"><label class="input__label">Registered
                                                             Patients - Discount on sale%</label><input
                                                             name="registered_patients_discount_on_sale" type="number" max="100"
-                                                            data-validation="required" data-error-message=" Registered
+                                                          id="registered_patients_discount_on_sale"  data-validation="required" data-error-message=" Registered
                                                             Patients - Discount on sale%"
                                                             class="form-control input-style" placeholder=""></div>
                                                 </div>
@@ -410,7 +419,7 @@
                                                     <div class="form-group"><label class="input__label">Walk-in
                                                             Patients - Discount on sale %</label><input
                                                             name="walk_in_patients_discount_on_sale" type="number" max="100"
-                                                            data-validation="required" data-error-message=" Walk-in Patients - Discount on sale %"
+                                                          id="walk_in_patients_discount_on_sale"   data-validation="required" data-error-message=" Walk-in Patients - Discount on sale %"
                                                             class="form-control input-style" placeholder=""></div>
                                                 </div>
                                             </div>
@@ -435,18 +444,19 @@
                                     <button type="button" disabled  data-bs-toggle="modal" data-bs-target="#itemStoreModal" class="btn-secondary btn-style btn mt-3 mr-2"><strong>Apply
                                             Store and Tax</strong></button>
 
+                                            
                                     <button type="button" disabled class="btn-success btn-style btn mt-3 mr-2"><strong>Other
                                             Details</strong></button>
 
-                                    <!-- <button type="button" class="btn-secondary btn-style btn mt-3 mr-2"><strong><i
-                                                class="fa-solid fa-plus"></i> New</strong></button> -->
-
+                                            <button type="button" class="btn-success btn-style btn mr-2 mt-3"  disabled id="mod-btn" onclick="updateQuery()"><strong><i
+                                                class="fa-regular fa-pen-to-square" ></i> Modify</strong></button>
+                            
                                    
-                                    <button type="submit" class="btn-primary btn-style btn mt-3"><strong><i
+                                    <button type="submit" id="sub-btn" class="btn-primary btn-style btn mt-3"><strong><i
                                                 class="far fa-save"></i>
                                             Save</strong></button>
-                                            <button type="button" onclick="window.location.href = '/adminInv/43';" class="btn-danger btn-style btn mt-3 mr-2"><strong><i
-                                                class="fas fa-times"></i> Cancel</strong></button>
+                                            <button type="button"    onclick="window.location.href = '/adminInv/43';" class="btn-danger btn-style btn mt-3 mr-2"><strong><i
+                                             class="fas fa-times"></i> Cancel</strong></button>
 
 
                                 </div>
@@ -457,16 +467,50 @@
                         <!-- Button to Open the Modal -->
 
   
-
-  
-  
-  
-  
-  
-
-
-
                         <%-include('../footer');-%>
+                        <script>
+                            
+
+
+                            document.getElementById('item_code').value='<%= a.item_code %>'
+                            document.getElementById('brand_name').value='<%= a.brand_name %>'
+                            document.getElementById('strength').value='<%= a.strength %>'
+                            document.getElementById('item_name').value='<%= a.item_name %>'
+                            document.getElementById('storage_degree').value='<%= a.storage_degree%>'
+                            document.getElementById('manufactured_by').value='<%= a.manufactured_by%>'
+                            document.getElementById('base_unit_mrp').value='<%= a.base_unit_mrp%>'
+                            document.getElementById('base_unit_cost_price').value='<%= a.base_unit_cost_price%>'
+                            document.getElementById('discount_on_sale').value='<%= a.discount_on_sale%>'
+                            document.getElementById('walk_in_patients_discount_on_sale').value='<%= a.walk_in_patients_discount_on_sale%>'
+                            document.getElementById('expiry_alert_before_in_days').value='<%= a.expiry_alert_before_in_days%>'
+                            document.getElementById('hsn_codes').value='<%= a.hsn_codes%>'
+                            document.getElementById('staff_discount_on_sale').value='<%= a.staff_discount_on_sale%>'
+                            document.getElementById('registered_patients_discount_on_sale').value='<%= a.staff_discount_on_sale%>'
+                            document.getElementById('route').value='<%= a.route%>'
+                            
+                            function updateQuery(){
+        document.getElementById('query').value=1;
+        $('#mod-btn').prop('disabled', true);   
+        $('input[data-validation], select[data-validation]').prop('disabled', false);
+        $('#sub_spec_code').prop('disabled', true);
+        document.getElementById('sub-btn').disabled = false;
+      }
+                            if('<%= a.id %>'!==''){
+                                
+        $('input[data-validation], select[data-validation]').prop('disabled', true);
+        document.getElementById('sub-btn').disabled = true;
+        document.getElementById('mod-btn').disabled = false;
+       
+      }else{
+      
+        document.getElementById('mod-btn').disabled = true;
+      }
+                        </script>
+
+
+
+                      
+                        
                       <script>
                         $(document).ready(function() {
 
@@ -490,199 +534,281 @@
     //item group fetch 
 
             
-    function loadItemGroup(a){
-      
-            fetch('/adminInv/get-ItemGroup-details')
-                .then(response => response.json())
-                .then(data => {
-					
-					console.log(data)
-                    const dropdown = document.getElementById(a);
-                    data.forEach(item => {
-                        const option = document.createElement('option');
-                        option.value = item.description;
-                        option.textContent = item.description;
-                        dropdown.appendChild(option);
-                        
-                    });
-                })
-                .catch(error => console.error('Error fetching states:', error));
-            }
-            loadItemGroup('item_group');
+    async function loadItemGroup(a) {
+    try {
+        const response = await fetch('/adminInv/get-ItemGroup-details');
+        const data = await response.json();
 
-            function loadItemCat(a){
-                // alert('1')
-            fetch('/adminInv/get-ItemCat-details')
-                .then(response => response.json())
-                .then(data => {
-					
-					console.log(data)
-                    const dropdown = document.getElementById(a);
-                    data.forEach(item => {
-                        const option = document.createElement('option');
-                        option.value = item.Item_description;
-                        option.textContent = item.Item_description;
-                        dropdown.appendChild(option);
-                        
-                    });
-                })
-                .catch(error => console.error('Error fetching states:', error));
-            }
-            loadItemCat('item_category');
-                          
-            function loadDispType(a){
-                // alert('1')
-            fetch('/adminInv/get-DispType-details')
-                .then(response => response.json())
-                .then(data => {
-					
-					console.log(data)
-                    const dropdown = document.getElementById(a);
-                    data.forEach(item => {
-                        const option = document.createElement('option');
-                        option.value = item.description;
-                        option.textContent = item.description;
-                        dropdown.appendChild(option);
-                        
-                    });
-                })
-                .catch(error => console.error('Error fetching states:', error));
-            }
-            loadDispType('dispensing_type');
-                          
-                          function loadUOM(a){
-            fetch('/adminInv/get-UOM-details')
-                .then(response => response.json())
-                .then(data => {
-					
-					console.log(data)
-                    const dropdown = document.getElementById(a);
-                    data.forEach(item => {
-                        const option = document.createElement('option');
-                        option.value = item.description;
-                        option.textContent = item.description;
-                        dropdown.appendChild(option);
-                        
-                    });
-                })
-                .catch(error => console.error('Error fetching states:', error));
-            }
-            loadUOM('purchase_uom');
-            loadUOM('stock_uom');
-            loadUOM('base_uom');
-            loadUOM('selling_uom');
+        console.log(data);
+        const dropdown = document.getElementById(a);
+        data.forEach(item => {
+            const option = document.createElement('option');
+            option.value = item.description;
+            option.textContent = item.description;
+            dropdown.appendChild(option);
+        });
 
-            function loadStenghtUnit(a){
-            fetch('/adminInv/get-StrenghUnit-details')
-                .then(response => response.json())
-                .then(data => {
-					
-					console.log(data)
-                    const dropdown = document.getElementById(a);
-                    data.forEach(item => {
-                        const option = document.createElement('option');
-                        option.value = item.description;
-                        option.textContent = item.description;
-                        dropdown.appendChild(option);
-                        
-                    });
-                })
-                .catch(error => console.error('Error fetching states:', error));
-            }
-         
-            loadStenghtUnit('strength_unit');
-
-            function loadMolecule(a){
-            fetch('/adminInv/get-Molecule-details')
-                .then(response => response.json())
-                .then(data => {
-					
-					console.log(data)
-                    const dropdown = document.getElementById(a);
-                    data.forEach(item => {
-                        const option = document.createElement('option');
-                        option.value = item.description;
-                        option.textContent = item.description;
-                        dropdown.appendChild(option);
-                        
-                    });
-                })
-                .catch(error => console.error('Error fetching states:', error));
-            }
-            loadMolecule('molecule_name');
-         
-            function loadTherClass(a){
-            fetch('/adminInv/get-TherClass-details')
-                .then(response => response.json())
-                .then(data => {
-					
-					console.log(data)
-                    const dropdown = document.getElementById(a);
-                    data.forEach(item => {
-                        const option = document.createElement('option');
-                        option.value = item.description;
-                        option.textContent = item.description;
-                        dropdown.appendChild(option);
-                        
-                    });
-                })
-                .catch(error => console.error('Error fetching states:', error));
-            }
-            loadTherClass('therapeutic_class');
-         
-            function loadPregClass(a){
-            fetch('/adminInv/get-PregClass-details')
-                .then(response => response.json())
-                .then(data => {
-					
-					console.log(data)
-                    const dropdown = document.getElementById(a);
-                    data.forEach(item => {
-                        const option = document.createElement('option');
-                        option.value = item.description;
-                        option.textContent = item.description;
-                        dropdown.appendChild(option);
-                        
-                    });
-                })
-                .catch(error => console.error('Error fetching states:', error));
-            }
-            loadPregClass('pregnancy_class');
-         
-            function loadStorageType(a){
-            fetch('/adminInv/get-StorgeType-details')
-                .then(response => response.json())
-                .then(data => {
-					
-					console.log(data)
-                    const dropdown = document.getElementById(a);
-                    data.forEach(item => {
-                        const option = document.createElement('option');
-                        option.value = item.description;
-                        option.textContent = item.description;
-                        dropdown.appendChild(option);
-                        
-                    });
-                })
-                .catch(error => console.error('Error fetching states:', error));
-            }
-            loadStorageType('storage_type');
-
-            function loadHSN(a) {
-  fetch('/adminInv/get-HSN-Code-details')
-    .then(response => response.json())
-    .then(data => {
-      console.log(data); // Ensure data is logged correctly
-      const dropdown = document.getElementById(a);
-      data.forEach(item => {
-        const option = document.createElement('option');
-        option.value = item.HSN_CD; // Use HSN_DESC for the option value
-        option.textContent = item.HSN_CD; // Use HSN_DESC for the option text
-        dropdown.appendChild(option);
-      });
-    })
-    .catch(error => console.error('Error fetching HSN codes:', error));
+        // Dispatch a custom event indicating the dropdown is populated
+        const event = new Event('dropdownPopulated');
+        dropdown.dispatchEvent(event);
+    } catch (error) {
+        console.error('Error fetching item groups:', error);
+    }
 }
+
+// Call the function with the dropdown ID
+loadItemGroup('item_group');
+
+// Listen for the custom event and set the value
+document.getElementById('item_group').addEventListener('dropdownPopulated', function() {
+    this.value = '<%= a.item_group %>';
+});
+
+
+async function loadItemCat(a) {
+    try {
+        const response = await fetch('/adminInv/get-ItemCat-details');
+        const data = await response.json();
+
+        console.log(data);
+        const dropdown = document.getElementById(a);
+        data.forEach(item => {
+            const option = document.createElement('option');
+            option.value = item.Item_description;
+            option.textContent = item.Item_description;
+            dropdown.appendChild(option);
+        });
+
+        const event = new Event('dropdownPopulated');
+        dropdown.dispatchEvent(event);
+    } catch (error) {
+        console.error('Error fetching item categories:', error);
+    }
+}
+
+async function loadDispType(a) {
+    try {
+        const response = await fetch('/adminInv/get-DispType-details');
+        const data = await response.json();
+
+        console.log(data);
+        const dropdown = document.getElementById(a);
+        data.forEach(item => {
+            const option = document.createElement('option');
+            option.value = item.description;
+            option.textContent = item.description;
+            dropdown.appendChild(option);
+        });
+
+        const event = new Event('dropdownPopulated');
+        dropdown.dispatchEvent(event);
+    } catch (error) {
+        console.error('Error fetching dispensing types:', error);
+    }
+}
+
+async function loadUOM(a) {
+    try {
+        const response = await fetch('/adminInv/get-UOM-details');
+        const data = await response.json();
+
+        console.log(data);
+        const dropdown = document.getElementById(a);
+        data.forEach(item => {
+            const option = document.createElement('option');
+            option.value = item.description;
+            option.textContent = item.description;
+            dropdown.appendChild(option);
+        });
+
+        const event = new Event('dropdownPopulated');
+        dropdown.dispatchEvent(event);
+    } catch (error) {
+        console.error('Error fetching UOM details:', error);
+    }
+}
+
+async function loadStrengthUnit(a) {
+    try {
+        const response = await fetch('/adminInv/get-StrenghUnit-details');
+        const data = await response.json();
+
+        console.log(data);
+        const dropdown = document.getElementById(a);
+        data.forEach(item => {
+            const option = document.createElement('option');
+            option.value = item.description;
+            option.textContent = item.description;
+            dropdown.appendChild(option);
+        });
+
+        const event = new Event('dropdownPopulated');
+        dropdown.dispatchEvent(event);
+    } catch (error) {
+        console.error('Error fetching strength units:', error);
+    }
+}
+
+async function loadMolecule(a) {
+    try {
+        const response = await fetch('/adminInv/get-Molecule-details');
+        const data = await response.json();
+
+        console.log(data);
+        const dropdown = document.getElementById(a);
+        data.forEach(item => {
+            const option = document.createElement('option');
+            option.value = item.description;
+            option.textContent = item.description;
+            dropdown.appendChild(option);
+        });
+
+        const event = new Event('dropdownPopulated');
+        dropdown.dispatchEvent(event);
+    } catch (error) {
+        console.error('Error fetching molecules:', error);
+    }
+}
+
+async function loadTherClass(a) {
+    try {
+        const response = await fetch('/adminInv/get-TherClass-details');
+        const data = await response.json();
+
+        console.log(data);
+        const dropdown = document.getElementById(a);
+        data.forEach(item => {
+            const option = document.createElement('option');
+            option.value = item.description;
+            option.textContent = item.description;
+            dropdown.appendChild(option);
+        });
+
+        const event = new Event('dropdownPopulated');
+        dropdown.dispatchEvent(event);
+    } catch (error) {
+        console.error('Error fetching therapeutic classes:', error);
+    }
+}
+
+async function loadPregClass(a) {
+    try {
+        const response = await fetch('/adminInv/get-PregClass-details');
+        const data = await response.json();
+
+        console.log(data);
+        const dropdown = document.getElementById(a);
+        data.forEach(item => {
+            const option = document.createElement('option');
+            option.value = item.description;
+            option.textContent = item.description;
+            dropdown.appendChild(option);
+        });
+
+        const event = new Event('dropdownPopulated');
+        dropdown.dispatchEvent(event);
+    } catch (error) {
+        console.error('Error fetching pregnancy classes:', error);
+    }
+}
+
+async function loadStorageType(a) {
+    try {
+        const response = await fetch('/adminInv/get-StorgeType-details');
+        const data = await response.json();
+
+        console.log(data);
+        const dropdown = document.getElementById(a);
+        data.forEach(item => {
+            const option = document.createElement('option');
+            option.value = item.description;
+            option.textContent = item.description;
+            dropdown.appendChild(option);
+        });
+
+        const event = new Event('dropdownPopulated');
+        dropdown.dispatchEvent(event);
+    } catch (error) {
+        console.error('Error fetching storage types:', error);
+    }
+}
+
+async function loadHSN(a) {
+    try {
+        const response = await fetch('/adminInv/get-HSN-Code-details');
+        const data = await response.json();
+
+        console.log(data);
+        const dropdown = document.getElementById(a);
+        data.forEach(item => {
+            const option = document.createElement('option');
+            option.value = item.HSN_CD;
+            option.textContent = item.HSN_CD;
+            dropdown.appendChild(option);
+        });
+
+        const event = new Event('dropdownPopulated');
+        dropdown.dispatchEvent(event);
+    } catch (error) {
+        console.error('Error fetching HSN codes:', error);
+    }
+}
+
+// Call the functions with their respective dropdown IDs
+loadItemGroup('item_group');
+loadItemCat('item_category');
+loadDispType('dispensing_type');
+loadUOM('purchase_uom');
+loadUOM('stock_uom');
+loadUOM('base_uom');
+loadUOM('selling_uom');
+loadStrengthUnit('strength_unit');
+loadMolecule('molecule_name');
+loadTherClass('therapeutic_class');
+// loadPregClass('pregnancy_class');
+loadStorageType('storage_type');
+// loadHSN('hsn_codes');
+
+// Listen for the custom event and set the value
+document.getElementById('item_group').addEventListener('dropdownPopulated', function() {
+    this.value = '<%= a.item_group %>';
+});
+document.getElementById('item_category').addEventListener('dropdownPopulated', function() {
+    this.value = '<%= a.item_category %>';
+});
+document.getElementById('dispensing_type').addEventListener('dropdownPopulated', function() {
+    this.value = '<%= a.dispensing_type %>';
+});
+document.getElementById('purchase_uom').addEventListener('dropdownPopulated', function() {
+    this.value = '<%= a.purchase_uom %>';
+});
+document.getElementById('stock_uom').addEventListener('dropdownPopulated', function() {
+    this.value = '<%= a.stocking_uom %>';
+});
+document.getElementById('base_uom').addEventListener('dropdownPopulated', function() {
+    this.value = '<%= a.base_uom %>';
+});
+document.getElementById('selling_uom').addEventListener('dropdownPopulated', function() {
+    this.value = '<%= a.selling_uom %>';
+});
+document.getElementById('strength_unit').addEventListener('dropdownPopulated', function() {
+    this.value = '<%= a.strength_unit %>';
+});
+document.getElementById('molecule_name').addEventListener('dropdownPopulated', function() {
+    this.value = '<%= a.molecule_name %>';
+});
+document.getElementById('therapeutic_class').addEventListener('dropdownPopulated', function() {
+    this.value = '<%= a.therapeutic_class %>';
+});
+// document.getElementById('pregnancy_class').addEventListener('dropdownPopulated', function() {
+//     this.value = '<%= a.pregnancy_class %>';
+// });
+document.getElementById('storage_type').addEventListener('dropdownPopulated', function() {
+    this.value = '<%= a.storage_type %>';
+});
+// document.getElementById('hsn_codes').addEventListener('dropdownPopulated', function() {
+//     this.value = '<%= a.hsn_codes %>';
+// });
 
 // Ensure this function is called after the DOM is fully loaded
 // loadHSN('hsn_codes')

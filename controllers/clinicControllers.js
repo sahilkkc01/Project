@@ -1199,38 +1199,54 @@ const getCountMas = async (req, res) => {
   }
 };
 
-const getSpec = async (req, res) => {
-  try {
-    const spec = await Specialization.findAll();
-    const encryptedSpec = spec.map(spec => {
-      const encryptedId = encryptDataForUrl(spec.id.toString());
-      return {
-        ...spec.toJSON(),
-        id: encryptedId,
-      };
-    });
-    res.status(200).json(encryptedSpec);
-  } catch (error) {
-    console.error('Error fetching  details:', error);
-    res.status(500).json({ msg: 'An error occurred .' });
-  }
+const getSpec = (req, res) => {
+  console.log('Fetching specializations');
+  fs.readFile(path.join(__dirname, '../myjson', 'spec.json'), 'utf8', (err, data) => {
+    if (err) {
+      console.error('Error reading the file:', err);
+      res.status(500).send('Error reading the file');
+      return;
+    }
+    
+    try {
+      const spec = JSON.parse(data);
+      const encryptedSpec = spec.map(spec => {
+        const encryptedId = encryptDataForUrl(spec.id.toString());
+        return {
+          ...spec,
+          id: encryptedId,
+        };
+      });
+      res.status(200).json(encryptedSpec);
+    } catch (parseError) {
+      console.error('Error parsing JSON:', parseError);
+      res.status(500).json({ msg: 'Error parsing JSON data.' });
+    }
+  });
 };
-const getSubSpec = async (req, res) => {
-  try {
-    const subspec = await SubSpecialization.findAll();
-    const encryptedSpec = subspec.map(spec => {
-      const encryptedId = encryptDataForUrl(spec.id.toString());
-      return {
-        ...spec.toJSON(),
-        id: encryptedId,
-      };
-    });
-    res.status(200).json(encryptedSpec);
-  } catch (error) {
-    console.error('Error fetching  details:', error);
-    res.status(500).json({ msg: 'An error occurred .' });
-  }
+
+
+const getSubSpec = (req, res) => {
+  console.log('Fetching sub-specializations');
+  fs.readFile(path.join(__dirname, '../myjson', 'subSpec.json'), 'utf8', (err, data) => {
+    if (err) {
+      console.error('Error reading the file:', err);
+      res.status(500).send('Error reading the file');
+      return;
+    }
+    
+    try {
+      const subSpecs = JSON.parse(data);
+      const selectedSpec = req.query.spec;
+      const filteredSubSpecs = subSpecs.find(spec => spec.spec_desc === selectedSpec);
+      res.status(200).json(filteredSubSpecs ? filteredSubSpecs.sub_spec_desc : []);
+    } catch (parseError) {
+      console.error('Error parsing JSON:', parseError);
+      res.status(500).json({ msg: 'Error parsing JSON data.' });
+    }
+  });
 };
+
 // Get all State Master records
 const getStateMas = async (req, res) => {
   try {

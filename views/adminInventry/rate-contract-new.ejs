@@ -60,21 +60,21 @@
                                             <div class="form-group"><label class="input__label">Contract Start Date</label>
                                                 <input name="contractStartDate" type="date"
                                                 data-validation="required"
-                                                data-error-message="Contract Start Date is required." class="form-control input-style" value="<%= result.contractStartDate %>">
+                                                data-error-message="Contract Start Date is required." class="form-control input-style date-field" value="<%= result.contractStartDate %>">
                                             </div>
                                         </div>
                                         <div class="col-lg-3 col-md-4 col-sm-12 mb-1">
                                             <div class="form-group"><label class="input__label">Contract End Date</label>
                                                 <input name="contractEndDate" type="date"
                                                 data-validation="required"
-                                                data-error-message="Contract End Date is required." class="form-control input-style" value="<%= result.contractEndDate %>">
+                                                data-error-message="Contract End Date is required." class="form-control input-style date-field" value="<%= result.contractEndDate %>">
                                             </div>
                                         </div>
                                         <div class="col-lg-3 col-md-4 col-sm-12 mb-3">
                                             <div class="form-group"><label class="input__label">Contract Date</label>
                                                 <input name="contractDate" type="date"
                                                 data-validation="required"
-                                                data-error-message="Contract Date is required." class="form-control input-style" value="<%= result.contractDate %>">
+                                                data-error-message="Contract Date is required." class="form-control input-style date-field" value="<%= result.contractDate %>">
                                             </div>
                                         </div>
                                         <div class="col-lg-3 col-md-4 col-sm-12 mb-3">
@@ -306,6 +306,7 @@
         </div>
     </div>
 
+
     <!-- Footer section start -->
     <%- include('../footer'); -%>
     <script src="../javascripts/updateStatus.js"></script>
@@ -314,6 +315,9 @@
         import { myAjax } from '../javascripts/myAjax.js';
         import { validateConDate } from '../javascripts/lengthVal.js';
         import { pagi_search } from '../javascripts/pagi_search.js';
+        import { dateVal} from '../javascripts/lengthVal.js';
+           
+            dateVal();
         document.addEventListener('DOMContentLoaded', function() {
     // Function to fetch data and populate modal
     function fetchData() {
