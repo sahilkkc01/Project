@@ -128,6 +128,8 @@
                                                                             <tr>
                                                                                 <th contenteditable="true" >View</th>
                                                                                 <th contenteditable="true" width="25%">
+                                                                                    Doctor Category</th>
+                                                                                <th contenteditable="true" width="25%">
                                                                                     Service Name</th>
                                                                                 <th contenteditable="true" width="20%">
                                                                                     Class Name</th>
@@ -183,7 +185,7 @@
 
                             function updateExp4(id) {
                                 console.log(id);
-                               alert(1);
+                               
                               
                                 let url = '/billing/update-ser-master'
                                 console.log(id+url);
@@ -203,12 +205,14 @@
                 type: 'GET',
                 success: function (data) {
                     data.reverse();
-                    console.log(data);
+                    console.log(data+"ju");
                     let tableRows = '';
                     data.forEach(function (item) {
+                        console.log(item)
                         tableRows += `
                             <tr>
                                 <td><a type="button" class="btn btn-primary btn-style btn-change"  onClick=updateExp4(${item.id}) href='/billing/24'>View</a></td>
+                                 <td>${item.docCategory}</td>
                                 <td>${item.serviceName}</td>
                                 <td>${item.className}</td>
                                 <td>${item.serviceRate}</td>

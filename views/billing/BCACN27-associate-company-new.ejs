@@ -128,7 +128,7 @@
                                                                 value="">
                                                                 <option value="">Select</option>
                                                                 <option value="<%= result.company %>" <%=result.company
-                                                                    ? 'selected' : '' %>> <%= result.company %>
+                                                                    ? 'selected' : 'hidden' %>> <%= result.company %>
                                                                 </option>
                                                                 <option value="Company 1">Company 1</option>
                                                                 <option value="Company 2">Company 2</option>
@@ -140,7 +140,7 @@
                                                                 class="form-control input-style">
                                                                 <option>Select</option>
                                                                 <option value="<%= result.tariff %>" <%=result.tariff
-                                                                    ? 'selected' : '' %>> <%= result.tariff %>
+                                                                    ? 'selected' : 'hidden' %>> <%= result.tariff %>
                                                                 </option>
                                                                 <option value="Tariff 1">Tariff 1</option>
                                                                 <option value="Tariff 2">Tariff 2</option>
@@ -169,6 +169,7 @@
                             </form>
                         </div>
                        <%- include('../footer'); -%>
+                       
                         <script>
                             function updateQuery(){
                                 document.getElementById('query').value=1;
@@ -179,9 +180,13 @@
                               }
                               if('<%= result.id %>'!==''){
                                 $('input[data-validation], select[data-validation]').prop('disabled', true);  
-                              }else{
+                              }
+                              if('<%= result.status %>'!=='true'){
+                              document.getElementById('mod-btn').disabled = true;
+      }
+                              else{
                                 document.getElementById('submit').disabled=false;
-                                document.getElementById('mod-btn').disabled=true;}
+                               }
                         </script>
 
                             <script type="module">

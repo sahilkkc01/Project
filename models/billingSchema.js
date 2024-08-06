@@ -1,6 +1,6 @@
 
 const { DataTypes } = require('sequelize');
-const { sequelize} = require('../sequelize')
+const {sequelize} = require('../sequelize');
 const flash = require('express-flash');
 
 const ServiceMaster = sequelize.define('ServiceMaster', {
@@ -37,7 +37,7 @@ const ServiceMaster = sequelize.define('ServiceMaster', {
   },
   ser_base_rate: {
     type: DataTypes.DECIMAL
-  }
+  },
 }, {
   timestamps: true, // Adds createdAt and updatedAt timestamps
   alter: true,
@@ -54,7 +54,7 @@ const BCExpMaster = sequelize.define('BCExpMaster', {
     defaultValue: 0
   },
   exp_master_code: {
-    type: DataTypes.STRING 
+    type: DataTypes.STRING
   },
   exp_master_desc: {
     type: DataTypes.STRING
@@ -69,7 +69,76 @@ const BCExpMaster = sequelize.define('BCExpMaster', {
   tableName: 'exp_masters' // Specify the table name
 });
 
+const ConcessionMaster = sequelize.define('ConcessionMaster', {
+  userId: {
+    type: DataTypes.INTEGER,
+  },
+  clinic_id: {
+    type: DataTypes.INTEGER,
+    defaultValue: 0
+  },
+  exp_master_code: {
+    type: DataTypes.STRING
+  },
+  exp_master_desc: {
+    type: DataTypes.STRING
+  },
+  exp_status: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false,
+  }
+}, {
+  timestamps: true, // Adds createdAt and updatedAt timestamps
+  alter: true,
+  tableName: 'BCConcessionMaster' // Specify the table name
+});
 
+const SacMaster = sequelize.define('SacMaster', {
+  userId: {
+    type: DataTypes.INTEGER,
+  },
+  clinic_id: {
+    type: DataTypes.INTEGER,
+    defaultValue: 0
+  },
+  exp_master_code: {
+    type: DataTypes.STRING
+  },
+  exp_master_desc: {
+    type: DataTypes.STRING
+  },
+  exp_status: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false,
+  }
+}, {
+  timestamps: true, // Adds createdAt and updatedAt timestamps
+  alter: true,
+  tableName: 'BCSacMaster' // Specify the table name
+});
+const RefundMaster = sequelize.define('RefundMaster', {
+  userId: {
+    type: DataTypes.INTEGER,
+  },
+  clinic_id: {
+    type: DataTypes.INTEGER,
+    defaultValue: 0
+  },
+  exp_master_code: {
+    type: DataTypes.STRING
+  },
+  exp_master_desc: {
+    type: DataTypes.STRING
+  },
+  exp_status: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false,
+  }
+}, {
+  timestamps: true, // Adds createdAt and updatedAt timestamps
+  alter: true,
+  tableName: 'BCRefundMaster' // Specify the table name
+});
 const bcCompDetails = sequelize.define('bcCompDetails', {
   clinic_id: {
     type: DataTypes.INTEGER,
@@ -257,31 +326,50 @@ const bcSerMastApplyLev = sequelize.define('bcSerMastApplyLev', {
 });
 
 const selectedDoctor = sequelize.define('selectedDoctor', {
-Userid:{
+  Userid: {
     type: DataTypes.STRING,
   },
-name: {
+  name: {
     type: DataTypes.STRING,
-},
-spec: {
+  },
+  spec: {
     type: DataTypes.STRING,
-      // Set to true if the specialization can be optional
-},
-subSpec: {
+  },
+  subSpec: {
     type: DataTypes.STRING,
-     // Set to true if the sub specialization can be optional
-},
-tariff:{
-  type:DataTypes.STRING
-},
-status:{
+  },
+  subSpecs: {
+    type: DataTypes.JSON,  // Use JSONB or JSON depending on your needs and DB support
+  },
+  tariff: {
+    type: DataTypes.STRING,
+  },
+  status: {
     type: DataTypes.BOOLEAN,
-    defaultValue:false
+    defaultValue: false
   },
 }, {
   timestamps: false,
   tableName: 'selectedDoctor'
 });
+
+const DoctorService = sequelize.define('DoctorService', {
+  UserId:{
+    type:DataTypes.STRING,
+  },
+  doctorName: {
+    type: DataTypes.STRING,
+ 
+  },
+  services: {
+    type: DataTypes.JSON,
+    
+  }
+},{
+  timestamps: true,
+  tableName: 'bcDoctorService'
+});
+
 
 
 
@@ -289,11 +377,14 @@ status:{
 const bcTariffMasterNew = sequelize.define('bcTariffMasterNew', {
   trf_code: {
     type: DataTypes.STRING,
-    allowNull:true
+  
   },
   trf_name: {
     type: DataTypes.STRING,
-    allowNull: false
+    
+  },
+  services:{
+    type:DataTypes.JSON,
   },
   trf_status:{
     type: DataTypes.BOOLEAN,
@@ -405,20 +496,37 @@ const Adnin = sequelize.define('Admin', {
 })
 
 const bcBullRateChange = sequelize.define('bcBullRateChange', {
-  fromEffDate: {
-    type: DataTypes.DATE,
+  UserId:{
+    type:DataTypes.STRING
   },
-  toEffDate: {
-    type: DataTypes.DATE
-  },
+  TariffCode:{
+  type: DataTypes.STRING
+},
   TariffName: {
     type: DataTypes.STRING
   },
+  remarks: {
+    type: DataTypes.STRING
+  },
+  effectiveDate: {
+    type: DataTypes.DATE
+  },
+  freeze: {
+    type: DataTypes.BOOLEAN
+  },
+  bulkRateChange: {
+    type: DataTypes.JSON // Assuming bulkRateChange is a JSON field
+  },
+  status:{
+    type:DataTypes.BOOLEAN,
+    defaultValue:false
+  }
 }, {
   timestamps: true, // Adds createdAt and updatedAt timestamps
   alter: true,
   tableName: 'bcBullRateChange' // Specify the table name
 });
+
 
 const Doctor = sequelize.define('Doctor', {
   clinic_id: {
@@ -483,7 +591,7 @@ const Doctor = sequelize.define('Doctor', {
     type: DataTypes.STRING
   },
   doc_education: {
-    type: DataTypes.STRING
+    type: DataTypes.STRING  
   }
 },
 {
@@ -495,17 +603,21 @@ const SelectedService = sequelize.define('SelectedService', {
   userId:{
     type:DataTypes.STRING,
   },
+  docCategory:{
+    type:DataTypes.STRING,
+
+  },
   serviceName: {
       type: DataTypes.STRING,
-      allowNull: false
+      
   },
   className: {
       type: DataTypes.STRING,
-      allowNull: false
+    
   },
   serviceRate:{
     type: DataTypes.STRING,
-    allowNull: false
+    
 
   },
   status : {
@@ -724,6 +836,10 @@ module.exports = {
   ServiceMasterSchema,
   SelectedService,
   CompanyType,
-  selectedDoctor
+  selectedDoctor,
+  ConcessionMaster,
+  SacMaster,
+  RefundMaster,
+  DoctorService
 };
 

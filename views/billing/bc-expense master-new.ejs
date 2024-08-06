@@ -96,6 +96,7 @@
 
                             <div id="errordiv1"></div>
                             <form id="BC-exp-master">
+                                <input type="hidden" name="query" value="0" id="query">
                                 <div class="card card_border">
                                     <div class="">
                                         <!--Past your code here starts-->
@@ -139,7 +140,7 @@
                                     <div id="loadingIndicator"></div>
                                 </div>
                                 <div class="form-group mt-1 mb-3 text-right">
-                                    <button type="button" class="btn-success btn-style btn mt-3 mr-2 "
+                                    <button type="button" class="btn-success btn-style btn mt-3 mr-2 " id="mod-btn" onclick="updateQuery()"
                                     ><strong><i class="fa-regular fa-pen-to-square"></i>
                                             Modify</strong></button>
 
@@ -149,14 +150,32 @@
                                             <button type="button" class="btn-danger btn-style btn mt-3 mr-2"  onclick="window.location.href='/billing/4';"><strong><i
                                                 class="fa-solid fa-plus"></i> Cancel</strong></button>        
 
-                                    <button type="submit" class="btn-primary btn-style btn mt-3 " <%= result.id ? 'disabled' : '' %>><strong><i
+                                    <button type="submit" id="submit"class="btn-primary btn-style btn mt-3 " <%= result.id ? 'disabled' : '' %>><strong><i
                                                 class="far fa-save"></i> Save</strong></button>
                                 </div>
                             </form>
                         </div>
                         <!--footer section start-->
                         <%- include('../footer'); -%>
+<script>
+      function updateQuery(){
+        document.getElementById('query').value=1;
+        $('#mod-btn').prop('disabled', true);   
+        $('input[data-validation], select[data-validation]').prop('disabled', false);
+        $('#exp_master_code').prop('disabled', true);
+        document.getElementById('submit').disabled=false;
+      }
+      if('<%= result.id %>'!==''){
+        $('input[data-validation], select[data-validation]').prop('disabled', true); 
+      }
+      if('<%= result.exp_status %>'!=='true'){
+        document.getElementById('mod-btn').disabled = true;
+      }else{
 
+        document.getElementById('submit').disabled=false;
+       
+       }
+</script>
                             <script type="module">
                                 import { validateForm } from '../javascripts/validation.js';
                                 import { myAjax } from '../javascripts/myAjax.js';
@@ -175,7 +194,7 @@
                                             const loadingDiv = '#loadingIndicator'
                                             myAjax(formData, errorDivId, url, loadingDiv)
                                         } else {
-                                            alert(errorMessage);
+                                            
                                             $(errorDivId).removeClass('alert-success').addClass('alert-danger').text(errorMessage).show();
                                             // $(errorDivId).text(errorMessage).show();
                                         }

@@ -113,7 +113,7 @@
                                                 <div class="form-row">
                                                     <div class="col-6 mb-3 mb-3">
                                                         <div class="form-group"><label
-                                                                class="input__label">Code</label><input name="code" data-validation="required" data-error-message="Code is required"
+                                                                class="input__label">Code</label><input name="code" data-validation="required" data-error-message="Code is required" id="serviceCode"
                                                                 type="text" class="form-control input-style" value="<%= result.adv_agnt_code %>"
                                                                 placeholder="" <%= result.id ? 'disabled' : '' %>> </div>
                                                     </div>
@@ -140,7 +140,7 @@
                                     <button type="button" class="btn-danger btn-style btn mt-3 mr-2" onclick="window.location.href='/billing/6';"><strong><i
                                                 class="fas fa-times"></i> Cancel</strong></button>
 
-                                    <button type="submit" class="btn-primary btn-style btn mt-3" id="sub-btn" <%= result.id ? 'disabled' : '' %>><strong><i
+                                    <button type="submit" class="btn-primary btn-style btn mt-3" id="submit" <%= result.id ? 'disabled' : '' %>><strong><i
                                                 class="far fa-save"></i> Save</strong></button>
                                 </div>
                             </form>
@@ -148,21 +148,23 @@
 
                        <%- include('../footer'); -%>
                        <script>
-                        function updateQuery(){
+                       function updateQuery(){
         document.getElementById('query').value=1;
         $('#mod-btn').prop('disabled', true);   
         $('input[data-validation], select[data-validation]').prop('disabled', false);
-    
-        document.getElementById('sub-btn').disabled = false;
+        $('#serviceCode').prop('disabled', true);
+        document.getElementById('submit').disabled=false;
       }
       if('<%= result.id %>'!==''){
-        $('input[data-validation], select[data-validation]').prop('disabled', true);
-    
-        
-      }else{
-       
+        $('input[data-validation], select[data-validation]').prop('disabled', true); 
+      }
+      if('<%= result.adv_agnt_status %>'!=='true'){
         document.getElementById('mod-btn').disabled = true;
-      }
+      }else{
+
+        document.getElementById('submit').disabled=false;
+       
+       }
                        </script>
                         
                         <script type="module">

@@ -12,11 +12,12 @@ const session = require('express-session');
 const {Admin} = require('./models/Kyc')
 const clinicRoutes = require('./routes/clinicalRoute')
 var adminInventory = require('./routes/adminInventory');
-var billing = require('./routes/billing');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const { radioRouter } = require('./routes/Radiology');
 var patientconfigRouter = require('./routes/patientconfig')
+const palashInv = require('./routes/palshInv');
+var billing = require('./routes/billing');
 
 const { kycCtrl ,dashboardCtrl,modifyApt,modifyVisit,apt1,apt2,apt3,apt4,login,register,logout} = require('./controllers/controller');
 
@@ -82,12 +83,14 @@ const todayDateMiddleware = (req, res, next) => {
 app.use(todayDateMiddleware);
 
 
-app.use('/billing', billing);
+
 app.use('/adminInv', adminInventory);
 app.use('/clinic', clinicRoutes);
 app.use('/users', usersRouter);
 app.use('/radiology',radioRouter);
 app.use('/patient',patientconfigRouter);
+app.use('/palashinv',palashInv);
+app.use('/billing', billing);
 
 
 

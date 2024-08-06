@@ -454,7 +454,11 @@
             type: DataTypes.STRING,
 
 
-        }
+        },
+        batchesRequired: {
+            type: DataTypes.STRING,
+        },
+
     }, {
         alert: true,
         timestamps: true,

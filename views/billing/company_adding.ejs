@@ -158,13 +158,14 @@
                                 document.getElementById('submit').disabled=false;
                               }
                               if('<%= result.id %>'!==''){
-                                $('input[data-validation], select[data-validation]').prop('disabled', true);
-                            
-                                
-                              }else{
+                                $('input[data-validation], select[data-validation]').prop('disabled', true); 
+                              }
+                              if('<%= result.status %>'!=='true'){
+        document.getElementById('mod-btn').disabled = true;
+      }else{
                                 document.getElementById('submit').disabled=false;
                                
-                                document.getElementById('mod-btn').disabled=true;}
+                                }
                         </script>
                         <script type="module">
                             import { validateForm } from '../javascripts/validation.js';

@@ -1,0 +1,365 @@
+
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>LifeLinkr</title>
+    <%-include('../header');-%>
+        <!-- main content start -->
+        <div class="main-content">
+
+            <div class="row content-top-gap2">
+                <div class="col-lg-12">
+                    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+                        <a class="navbar-brand text-center mr-5" href="#">
+                            <span class="dash-icon"><i class="fas fa-tachometer-alt"></i></span>
+                            Dashboard
+                        </a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav">
+                                <li class="nav-item active text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="far fa-user"></i></span>
+                                        Master
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-exchange-alt"></i></span>
+                                        Transaction
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-hand-holding-medical"></i></span>
+                                        Patient 360
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-receipt"></i></span>
+                                        Outside Reciept
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-file-invoice"></i></span>
+                                        Outpatient Department
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-chart-line"></i></span>
+                                        Analytics
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="far fa-clock"></i></span>
+                                        Waiting List
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-wrench"></i></span>
+                                        Adminstration
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-spinner"></i></span>
+                                        Additional
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+            <!-- content -->
+            <div class="container-fluid">
+
+                <div class="chart">
+                    <div class="row">
+
+                        <div class="col-lg-12 pl-lg-0 mt-2 ml-2">
+                            <h4 class="primary">Inventory Dashboard</h4>
+
+                            <div class="row pt-0 pl-lg-3 mb-3  ">
+    
+                                 <button type="button" class="btn-primary btn-style btn mt-3 mr-2"><strong>
+                                Recorder List</strong></button>
+
+                                 <button type="button" class="btn-primary btn-style btn mt-3 mr-2"><strong>
+                                Expired Items</strong></button>
+
+                                 <button type="button" class="btn-primary btn-style btn mt-3 mr-2"><strong>
+                                Pending Indents</strong></button>
+
+                                 <button type="button" class="btn-primary btn-style btn mt-3 mr-2"><strong>
+                                Pending Purchase Orders</strong></button>
+                                
+                                 <button type="button" class="btn-primary btn-style btn mt-3 mr-2"><strong>
+                                Pending Purchase Requisition</strong></button>
+
+                            </div>
+                        </div>
+
+
+
+
+                            
+                            
+
+                            
+
+
+                        <div class="col-lg-12 pl-lg-2 chart-grid">
+                            <form>
+                                <div class="card card_border">
+                                    <div class="">
+                                        <!--Past your code here starts-->
+
+                                        <div class="card">
+
+                                            <div class="form-group">
+                                                <div class="col-xl-12 p-heading">
+                                                    <h6 class="p-text">PENDING PURCHASE REQUISITION LIST</h6>
+                                                </div>
+                                            </div>
+
+                                            <div class="card-body pb-3 pt-1">
+                                                
+                                                <div class="pl-lg-0 pr-lg-0">
+                                                    <h6 class="primary">STORE</h6>
+                                                </div>
+
+                                                <div class="form-row">
+                                                    <div class="col-lg-6 col-md-6 col-sm-12 mb-2">
+                                                        <div class="form-group"><label
+                                                                class="input__label">From Store</label><select name="report_generated_by"
+                                                                class="form-control input-style">
+                                                                <option>Select</option>
+                                                            </select></div>
+                                                    </div>
+
+                                                    <div class="col-lg-6 col-md-6 col-sm-12 mb-2">
+                                                        <div class="form-group"><label
+                                                                class="input__label">To Store</label><select name="report_generated_by"
+                                                                class="form-control input-style">
+                                                                <option>Select</option>
+                                                            </select></div>
+                                                    </div>
+
+                                                    <!-- <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                                        <div class="form-group"><label
+                                                                class="input__label">Store</label><select name="report_generated_by"
+                                                                class="form-control input-style">
+                                                                <option>Select</option>
+                                                            </select></div>
+                                                    </div>
+
+                                                    <div class="col-lg-3 col-md-4 col-sm-12">
+                                                        <div class="form-group"><button type="button"
+                                                                class="btn btn-style mt-4 btn-primary btn-style btn-change"><strong><i
+                                                                        class="fas fa-search"></i>
+                                                                    Search</strong></button></div>
+                                                    </div> -->
+
+                                                </div>
+
+
+
+                                                <div class="pl-lg-0 pr-lg-0 mt-2">
+                                                    <h6 class="primary">PURCHASE REQUISITION DATE</h6>
+                                                </div>
+
+                                                <div class="form-row">
+                                                    <div class="col-lg-6 col-md-6 col-sm-12 mb-2">
+                                                        <div class="form-group"><label
+                                                                class="input__label">From Date</label><input
+                                                                name="description" type="date"
+                                                                class="form-control input-style" placeholder=""></div>
+                                                    </div>
+
+                                                    <div class="col-lg-6 col-md-6 col-sm-12 mb-2">
+                                                        <div class="form-group"><label
+                                                                class="input__label">To Date</label><input
+                                                                name="description" type="date"
+                                                                class="form-control input-style" placeholder=""></div>
+                                                    </div>
+
+                                                    <!-- <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                                        <div class="form-group"><label
+                                                                class="input__label">Store</label><select name="report_generated_by"
+                                                                class="form-control input-style">
+                                                                <option>Select</option>
+                                                            </select></div>
+                                                    </div>
+
+                                                    <div class="col-lg-3 col-md-4 col-sm-12">
+                                                        <div class="form-group"><button type="button"
+                                                                class="btn btn-style mt-4 btn-primary btn-style btn-change"><strong><i
+                                                                        class="fas fa-search"></i>
+                                                                    Search</strong></button></div>
+                                                    </div> -->
+
+                                                </div>
+
+
+
+                                                <div class="pl-lg-0 pr-lg-0 mt-2">
+                                                    <h6 class="primary">PR NO.</h6>
+                                                </div>
+
+                                                <div class="form-row">
+                                                    <div class="col-lg-6 col-md-6 col-sm-12 mb-2">
+                                                        <div class="form-group"><label
+                                                                class="input__label">PR No.</label><input
+                                                                name="description" type="text"
+                                                                class="form-control input-style" placeholder=""></div>
+                                                    </div>
+
+                                                    <!-- <div class="col-lg-6 col-md-6 col-sm-12 mb-2">
+                                                        <div class="form-group"><label
+                                                                class="input__label">To Store</label><select name="report_generated_by"
+                                                                class="form-control input-style">
+                                                                <option>Select</option>
+                                                            </select></div>
+                                                    </div> -->
+
+                                                    <!-- <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                                        <div class="form-group"><label
+                                                                class="input__label">Store</label><select name="report_generated_by"
+                                                                class="form-control input-style">
+                                                                <option>Select</option>
+                                                            </select></div>
+                                                    </div> -->
+
+                                                    <div class="col-lg-2 col-md-2 col-sm-12 text-left">
+                                                        <div class="form-group"><button type="button"
+                                                                class="btn btn-style mt-4 btn-primary btn-style btn-change"><strong><i
+                                                                        class="fas fa-search"></i>
+                                                                    Search</strong></button></div>
+                                                    </div>
+
+                                                    <div class="col-lg-4 col-md-4 col-sm-12 text-right">
+                                                        <div class="form-check-label">
+                                                            <div class="radio pt-4">
+                                                                
+                                                                <label class="form-check-label pt-1 pr-4"><input class="form-check-input mt-1" type="radio">Single Selection</label>
+
+                                                                <label class="form-check-label pt-1 pl-4"><input class="form-check-input mt-1" type="radio">Multiple Selection</label>
+                                                            
+                                                                
+                                                                </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                <!-- <div class="form-row mb-1">
+                                                    <div class="col-12">
+                                                        <div class="form-group">
+                                                            <div class="pl-xl-0">
+                                                                <h6 class="primary">LIST OF MODALITY DETAILS</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div> -->
+
+                                                <div class="form-row">
+                                                    <div class="col-12">
+                                                        <div class="form-group">
+                                                            <div class="col col-12 pr-xl-0 pl-xl-0">
+                                                                <div class="slidx">
+
+                                                                    <table class="table2">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th contenteditable="true">Close Purchase Requisition</th>
+                                                                                <th contenteditable="true">Purchase Requisition No.</th>
+                                                                                <th contenteditable="true">Date</th>
+                                                                                <th contenteditable="true">Delivery Date</th>
+                                                                                <th contenteditable="true">From Store</th>
+                                                                                <th contenteditable="true">To Store</th>
+                                                                                <th contenteditable="true">Status</th>
+                                                                                <th contenteditable="true">PR Base Item Qty.</th>
+                                                                                <th contenteditable="true">PO Base Item Qty.</th>
+                                                                                
+                                                                                
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                
+                                                                                <td contenteditable="true"> </td>
+                                                                                <td contenteditable="true"> </td>
+                                                                                <td contenteditable="true"> </td>
+                                                                                <td contenteditable="true"> </td>
+                                                                                <td contenteditable="true"> </td>
+                                                                                <td contenteditable="true"> </td>
+                                                                                <td contenteditable="true"><input
+                                                                                        class="form-check-input mt-1"
+                                                                                        type="checkbox" id="gridCheck1"></td>
+                                                                                <td contenteditable="true"> </td>
+                                                                                <td contenteditable="true"> </td>
+                                                                                
+                                                                                
+                                                                                
+                                                                            </tr>
+
+                                                                            <tr>
+                                                                                
+                                                                                <td contenteditable="true"> </td>
+                                                                                <td contenteditable="true"> </td>
+                                                                                <td contenteditable="true"> </td>
+                                                                                <td contenteditable="true"> </td>
+                                                                                <td contenteditable="true"> </td>
+                                                                                <td contenteditable="true"> </td>
+                                                                                <td contenteditable="true"><input
+                                                                                        class="form-check-input mt-1"
+                                                                                        type="checkbox" id="gridCheck1"></td>
+                                                                                <td contenteditable="true"> </td>
+                                                                                <td contenteditable="true"> </td>
+                                                                                
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+
+
+                                                                
+
+                                                                
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                        
+                                        <!--Past your code here ends-->
+                                    </div>
+                                </div>
+                                <div class="form-group mt-1 mb-3 text-right">
+
+                                    
+    
+                            <button type="button" class="btn-secondary btn-style btn mt-3"><strong><i class="fa-solid fa-print"></i> Print</strong></button>
+                                </div>
+                    </form>
+                </div>
+                <!--footer section start-->
+                <%-include('../footer');-%>

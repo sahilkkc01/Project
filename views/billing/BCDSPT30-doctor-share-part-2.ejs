@@ -118,8 +118,8 @@
                                                         <div class="form-group">
 
                                                             <input class="form-check-input" type="checkbox"
-                                                                id="gridCheck1">
-                                                            <label class="form-check-label mr-5" for="gridCheck1">Apply
+                                                                id="allDoctorCheckbox">
+                                                            <label class="form-check-label mr-5" for="allDoctorCheckbox">Apply
                                                                 To All Doctors</label>
 
                                                         </div>
@@ -127,19 +127,15 @@
                                                     <div class="col-3">
                                                         <div class="form-group">
 
-                                                            <input class="form-check-input" type="checkbox"
-                                                                id="gridCheck1">
-                                                            <label class="form-check-label mr-5"
-                                                                for="gridCheck1">Pending Doctors</label>
+                                                            <input class="form-check-input" type="checkbox" id="gridCheckPendingDoctors" data-bs-toggle="modal" data-bs-target="#myModal">
+                                                            <label class="form-check-label mr-5" for="gridCheckPendingDoctors">Pending Doctors</label>
 
                                                         </div>
                                                     </div>
                                                     <div class="col-3">
                                                         <div class="form-group">
-                                                            <input class="form-check-input" type="checkbox"
-                                                                id="gridCheck1">
-                                                            <label class="form-check-label mr-5" for="gridCheck1">Search
-                                                                Doctors</label>
+                                                            <input class="form-check-input" type="checkbox" id="gridCheckSearchDoctors">
+                                                            <label class="form-check-label mr-5" for="gridCheckSearchDoctors">Search Doctors</label>
 
                                                         </div>
                                                     </div>
@@ -282,9 +278,8 @@
                                     <div class="form-row pl-lg-3 pr-lg-3">
                                         <div class="col-2 mt-4">
                                             <div class="form-group">
-                                                <input class="form-check-input" type="radio" id="gridCheck1">
-                                                <label class="form-check-label mr-5" for="gridCheck1">Apply To All
-                                                    Doctors</label>
+                                                <input class="form-check-input" type="checkbox" id="specWiseCheckbox" >
+                                                <label class="form-check-label mr-5" for="specWiseCheckbox">Specialization Wise</label>
 
                                             </div>
                                         </div>
@@ -292,9 +287,9 @@
                                         <div class="col-3">
                                             <div class="form-group">
                                                 <label class="input__label">Tariff</label>
-                                                <select name="tariff" class="form-control input-style td" <%=result.id
+                                                <select name="tariff" class="form-control input-style td" id="tariffSelect" <%=result.id
                                                     ? 'disabled' : '' %>
-                                                    id="tariffSelect">
+                                                    >
                                                     <!-- Options will be dynamically filled here -->
                                                 </select>
                                             </div>
@@ -305,8 +300,8 @@
                                         <div class="col-3 pl-4 mt-4">
                                             <div class="form-group">
 
-                                                <input class="form-check-input" type="checkbox" id="gridCheck1">
-                                                <label class="form-check-label mr-5" for="gridCheck1">Search
+                                                <input class="form-check-input" type="checkbox" id="searchDoctorCheckbox">
+                                                <label class="form-check-label mr-5" for="searchDoctorCheckbox">Search
                                                     Doctors</label>
 
                                             </div>
@@ -340,26 +335,410 @@
                     </form>
                     <div id="loadingIndicator"></div>
                 </div>
+
+
+                
                 <!--footer section start-->
                 <%- include('../footer'); -%>
 
+                <div class="modal" id="myModal">
+                    <div class="modal-dialog  modal-lg">
+                      <div class="modal-content">
+                  
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <a href="#" class="btn-close" id="closebtn" data-bs-dismiss="modal"><i class="fa-solid fa-circle-xmark"></i></a>
+                        </div>
+                  
+                        <!-- Modal body -->
+                        <div class="modal-body modal-xl">
+                            <div class="chart">
+                                <div class="row">
+                                  
+                                  <div class="col-lg-12 pl-lg-2 chart-grid mt-3">
+                                  <!--part 1-->
+                          <h6 class="primary mb-2">Doctor List</h6>		
+                                  <div class="card card_border">
+                                      <div class="">
+                                       <div class="col-xl-12 mb-4">
+                                       <form action="#" method="post" class="mt-2">
+                                          <div class="row">
+                                              
+                                      <div class="col-xl-4 pr-xl-2">
+                                                  <div class="form-group">
+                                                      <label for="exampleInputEmail1" class="input__label">First Name</label>
+                                                      <input type="email" class="form-control input-style" id="searchBox"
+                                                          aria-describedby="emailHelp" placeholder="">
+                                                  </div>
+                                              </div>
+                                     
+                          <div class="col-xl-12 mt-3">
+                                  
+                                  <div class="row">
+                                  <h6 class="primary pl-xl-0 mb-2">List of Doctors</h6>
+                                  <table class="table2 text-left" id="pendingDoctor">
+                                  <tr>
+                                  <th>Select</th>
+                                  <th>Doctor Name</th>
+                                  <th>Specilization</th>
+                                  <th>SubSpecilization</th>
+                                 
+                                  </tr>
+                                  <tbody id="ld">
+
+                                  </tbody>
+                                  
+                                  </table>
+                                  <div id="paginationControls"></div>
+                                  
+                                  <div class="text-right col-lg-12">
+                                    <button type="button" class="btn btn-primary btn-style mt-2 mr-2" id="addpending"><strong>Add</strong></button>
+                                    <button type="button" id="modalCancelButton"class="btn btn-primary btn-style mt-2 mr-2"><strong>Cancel</strong></button>
+                                    </div>
+                                      </form>
+                                      
+                                      </div>
+                                  
+                                    </div>
+                                    <!--part 1 ended-->
+                                    
+                                  </div>
+                                </div>
+                              </div>
+                             
+                            </div>
+                        </div>
+                  
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+                <div class="modal" id="mdl2">
+                    <div class="modal-dialog  modal-lg">
+                      <div class="modal-content">
+                  
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <a href="#" class="btn-close" id="closebtn" data-bs-dismiss="modal"><i class="fa-solid fa-circle-xmark"></i></a>
+                        </div>
+                  
+                        <!-- Modal body -->
+                            <div class="modal-body modal-xl">
+                                <div class="col-lg-12 pl-lg-2 chart-grid mt-3">
+                                    <!--part 1-->
+                                    <div class="card card_border">
+                                        <div class="">
+                                        <div class="col-xl-12 mb-4">
+                                        <form action="#" method="post" class="mt-2">
+                                            <div class="row">
+                                                
+                                        <div class="col-xl-4 pr-xl-2">
+                                                    <div class="form-group">
+                                                        <label for="shareInputAll" class="input__label">Share in % (for all)</label>
+        <input type="number" class="form-control input-style" id="shareInputAll" aria-describedby="emailHelp" placeholder="">
+                                                    </div>
+                                                </div>
+                                        
+                                        <div class="col-xl-4">
+                                                    <div class="form-group">
+                                                        <div class="form-check">
+                                                            <input class="mt-4 form-check-input" type="checkbox" id="allSpecWise">
+                                                            <label class="form-check-label ml-2 mt-4" for="allSpecWise">Apply to All SubSpecialization</label>
+                                                    </div>
+                                                    </div>
+                                                </div>			
+                                        
+                                        </div>
+                            <div class="col-xl-12 mt-3 pr-xl-0 pl-xl-0">
+                                    <div class="row">
+                                    
+                                    <div class="col-xl-6 pr-xl-0">
+                                    <table class="table2 text-left">
+                                    <tr>
+                                    <th colspan="2">List of Specilization</th>
+                                    </tr>
+                                    <tbody id="spec">
+
+                                    </tbody>
+                                    </table>
+                                    
+                                        
+                                        </div>
+                                        
+                                    <div class="col-xl-6 pl-xl-1 pr-xl-2">		
+                                    <table class="table2 text-left">
+                                    <tr>
+                                    <th colspan="4">List of SubSpecilization</th>
+                                    </tr>
+                                    <tbody id="subSpec"></tbody>
+                                    </table>
+                                    </div>
+                                    
+
+                                    <div class="text-right col-lg-12">
+                                        <button type="button" id="addButton" class="btn btn-primary btn-style mt-2 mr-2"><strong>Add</strong></button>
+                                        <button type="button" class="btn btn-primary btn-style mt-2 mr-2"><strong>Cancel</strong></button>
+                                        </div>
+                                        </form>
+                                        </div>
+                                        
+                                        </div>
+                                    
+                                    </div>
+                                    <!--part 1 ended-->
+                                    
+                                
+                                    </div>
+                            </div>
+                  
+                      </div>
+                    </div>
+                  </div>
+            </div>
+        </div>
+    </div>
+<script>
+       $('#gridCheckSearchDoctors').change(function() {
+    if ($(this).is(':checked')) {
+        // Show the list of doctors when the checkbox is checked
+        $('#doctor-table').show();
+    } else {
+        // Hide the list of doctors when the checkbox is unchecked
+        $('#doctor-table').hide();
+    }
+}).change(); // Trigger change to apply initial state based on checkbox status
+
+// Handle modal close and cancel button actions for Pending Doctors
+
+
+// Also handle the cancel button inside the modal
+$('#modalCancelButton,#closebtn').click(function() {
+    // Using Bootstrap's modal method to hide the modal
+    $('#myModal').modal('hide');
+
+    // Uncheck the Pending Doctors checkbox (assuming you have a checkbox for this)
+    $('#gridCheckPendingDoctors').prop('checked', false);
+});
+$('#addpending').click(function() {
+    $('#gridCheckPendingDoctors').prop('checked', false);
+});
+
+</script>
+<script>
+        var allSubSpecializations = [];
+   function loadSpec(elementId) {
+    fetch('/billing/reloadSpec')
+        .then(response => response.json())
+        .then(data => {
+            const tbody = document.getElementById(elementId);
+            tbody.innerHTML = ''; // Clear existing entries
+
+            data.forEach(spec => {
+                const tr = document.createElement('tr');  // Create a new row
+                tr.setAttribute('data-spec-desc', spec.spec_desc); // Store spec_code as a data attribute
+                const td = document.createElement('td');  // Create a cell
+
+                td.textContent = spec.spec_desc;  // Set the text of the cell to the specialization description
+                tr.appendChild(td);  // Add the cell to the row
+                tbody.appendChild(tr);  // Add the row to the tbody
+            });
+
+            addRowClickEvent();
+        })
+        .catch(error => console.error('Error fetching specializations:', error));
+}
+
+document.getElementById('addButton').addEventListener('click', function() {
+        const selectedDoctors = document.querySelectorAll('.doctor-checkbox:checked');
+
+        selectedDoctors.forEach(doc => {
+            const doctorId = doc.value; // Assuming the checkbox value is the doctor ID
+            const doctorRow = document.querySelector(`#doctorRow${doctorId}`);
+
+            allSubSpecializations.forEach(subSpec => {
+    // Iterate over each description in the sub_spec_desc array
+    subSpec.sub_spec_desc.forEach(desc => {
+        const specInfo = `${desc} (${subSpec.sub_spec_code})`; // Create the display string
+        const cell = document.createElement('td');
+        cell.textContent = specInfo;
+        doctorRow.appendChild(cell); // Append each description as a separate cell
+    });
+});
+
+        });
+
+        $('#mdl2').modal('hide'); // Close the modal
+    });
+
+    loadSpec('spec');  // Correct function call
+
+    function addRowClickEvent() {
+    const rows = document.querySelectorAll('#spec tr');
+    rows.forEach(row => {
+        row.addEventListener('click', function() {
+            const specDesc = this.getAttribute('data-spec-desc');  // Get the spec_code from the data attribute
+            loadSubSpec('subSpec', specDesc);  // Load sub-specs for the clicked spec
+        });
+    });
+}
+function loadSubSpec(elementId, specCode) {
+    fetch(`/billing/reloadSubSpec?spec_desc=${specCode}`)
+        .then(response => response.json())
+        .then(data => {
+            const tbody = document.getElementById(elementId);
+            tbody.innerHTML = ''; // Clear existing entries
+            allSubSpecializations = []; // Reset the global sub-specialization array
+
+            data.forEach(subSpec => {
+                allSubSpecializations.push(subSpec); // Store in global array
+
+                // Create a new row for each description within the sub_spec_desc array
+                subSpec.sub_spec_desc.forEach(desc => {
+                    const tr = document.createElement('tr');
+                    const tdDesc = document.createElement('td');
+                    const tdInput = document.createElement('td');
+                    const shareInput = document.createElement('input');
+                    const selectCheckbox = document.createElement('input');
+
+                    // Configure the share input
+                    shareInput.type = 'number';
+                    shareInput.className = 'form-control';
+                    shareInput.placeholder = 'Share %';
+                    shareInput.disabled = true;
+
+                    // Configure the select checkbox
+                    selectCheckbox.type = 'checkbox';
+                    selectCheckbox.className = 'mr-2';
+                    selectCheckbox.onchange = () => { shareInput.disabled = !selectCheckbox.checked; };
+
+                    // Set description text
+                    tdDesc.textContent = `${desc} (${subSpec.sub_spec_code})`;
+
+                    // Append elements to the row
+                    tr.appendChild(selectCheckbox);
+                    tdInput.appendChild(shareInput);
+                    tr.appendChild(tdDesc);
+                    tr.appendChild(tdInput);
+                    tbody.appendChild(tr); // Append the new row to the tbody
+                });
+            });
+        })
+        .catch(error => console.error('Error:', error));
+}
+
+
+
+
+document.getElementById('allSpecWise').addEventListener('change', function() {
+    const shareValue = document.getElementById('shareInputAll').value; // Get the value from the input field
+    const allCheckboxes = document.querySelectorAll('#subSpec input[type="checkbox"]'); // Select all checkboxes
+    const allShareInputs = document.querySelectorAll('#subSpec input[type="number"]'); // Select all share % inputs
+
+    if (this.checked) {
+        allCheckboxes.forEach(checkbox => {
+            checkbox.checked = true;
+            checkbox.onchange(); // Trigger onchange to enable the input
+        });
+        allShareInputs.forEach(input => {
+            input.value = shareValue;
+        });
+    } else {
+        allCheckboxes.forEach(checkbox => {
+            checkbox.checked = false;
+            checkbox.onchange(); // Trigger onchange to disable the input
+        });
+        allShareInputs.forEach(input => {
+            input.value = ''; // Clear the value of each input
+        });
+    }
+});
+
+
+
+
+</script>
+
                     <script>
-                       var selectedDoctors = [];
+                     var selectedDoctors = [];
     const itemid = '<%= result.id %>';
     const query = $('#query').val();
-    alert(query);
+    
     selectedDoctors[0] = { itemid: itemid, query: query };
 
-    function handleDelete(checkboxId) {
-        // Remove the row from the table
-        $(`#apnd tr[data-id="${checkboxId}"]`).remove();
-
-        // Find the index of the doctor in the array and remove it
-        const index = selectedDoctors.findIndex(doc => doc.id === checkboxId);
+    // Function to handle doctor deletion from the list
+    function handleDelete(doctorId) {
+        console.log("Attempting to delete ID:", doctorId);
+        $(`#apnd tr[data-id="${doctorId}"]`).remove();
+        const index = selectedDoctors.findIndex(doc => doc.id === parseInt(doctorId, 10));
         if (index > -1) {
             selectedDoctors.splice(index, 1);
         }
+        console.log("After deletion:", selectedDoctors);
     }
+    document.getElementById('addButton').addEventListener('click', function() {
+    document.querySelectorAll('#apnd tr').forEach(row => {
+        const doctorId = parseInt(row.getAttribute('data-id'));
+        const doctor = selectedDoctors.find(doc => doc.id === doctorId);
+
+        if (doctor) {
+            // Clear previous sub-spec entries to prevent duplication
+            $(row).find('.subSpecCell').remove();
+
+            document.querySelectorAll('#subSpec input[type="number"]:not(:disabled)').forEach(input => {
+                const index = Array.from(document.querySelectorAll('#subSpec input[type="number"]')).indexOf(input);
+                const subSpecInfo = allSubSpecializations[index];
+
+                // Handle each description within the subSpecInfo
+                subSpecInfo.sub_spec_desc.forEach(desc => {
+                    const specDesc = `${desc} (${input.value}%)`;
+
+                    // Create new cell for sub-spec description and percentage
+                    const newCell = document.createElement('td');
+                    newCell.classList.add('subSpecCell');
+                    newCell.textContent = specDesc;
+                     // Append the new cell to the existing row
+
+                    // Initialize subSpecs if not already initialized
+                    doctor.subSpecs = doctor.subSpecs || [];
+                    doctor.subSpecs.push({
+                        subSpecDesc: desc,
+                        share: input.value
+                    });
+                });
+            });
+        } else {
+            console.error("Doctor with ID " + doctorId + " not found in selectedDoctors array.");
+        }
+
+        console.log(doctor);
+    });
+
+    $('#mdl2').modal('hide'); // Hide the modal after updating
+});
+
+
+
+
+
+ 
+var modal1 = new bootstrap.Modal(document.getElementById('myModal'));
+    var modal2 = new bootstrap.Modal(document.getElementById('mdl2'));
+
+    $('#pendingDoctorsCheckbox').on('click', function() {
+        if (this.checked) {
+            modal1.show();
+        }
+    });
+
+    $('#specWiseCheckbox').on('click', function() {
+        if (this.checked) {
+            loadSpec('spec')
+            modal2.show();
+
+        }
+    });
 
                         function updateQuery() {
                             selectedDoctors[0].query = 1;
@@ -370,9 +749,12 @@
 
                         if ('<%= result.id %>' !== '') {
                             $('input[data-validation], select[data-validation]').prop('disabled', true);
-                        } else {
+                        }
+                        if('<%= result.status %>'!=='true'){
+        document.getElementById('mod-btn').disabled = true;
+      } else {
                             document.getElementById('submit').disabled = false;
-                            document.getElementById('mod-btn').disabled = true;
+                        
                         }
                     </script>
 
@@ -385,49 +767,118 @@
 
                             const tariffSelect = $('#tariffSelect');
                             const doctorTable = $('#doctor-table');
+                            const ld = $('#ld')
                             const errorDivId = '#errordiv1';
                             const loadingDiv = '#loadingIndicator';
 
                             doctorTable.on('change', '.doctor-checkbox', function () {
                                 const checkbox = $(this);
                                 const docInfo = checkbox.data('info');
+                              
                                 getCheckedValues(docInfo, checkbox.is(':checked'));
                             });
 
-                            function getCheckedValues(docInfo, isChecked) {
-                                const checkboxId = docInfo.id;
-                                if (isChecked) {
-                                    if (!$(`#apnd tr[data-id="${checkboxId}"]`).length) {
-                                        const selectedTariff = tariffSelect.find('option:selected').text();
-                                        docInfo.tariff = selectedTariff;
-                                        selectedDoctors.push(docInfo);
-                                        const rowHtml = `<tr data-id='${checkboxId}'><td><button type="button" onclick='handleDelete("${checkboxId}")' class='btn btn-link'><i class='fas fa-times'></i></button></td><td>${docInfo.name}</td><td>${docInfo.spec}</td><td>${docInfo.subSpec}</td><td>${selectedTariff}</td></tr>`;
-                                        $('#apnd').append(rowHtml);
+                          // This function will be triggered when the "Add" button is clicked.
+                          $('#addpending').on('click', function () {
+    // Ensure the tariff is fetched each time before processing
+    const selectedTariff = $('#tariffSelect option:selected').text();
+
+    $('#myModal .doctor-checkbox:checked').each(function () {
+        const checkbox = $(this);
+        const docInfo = checkbox.data('info');
+        docInfo.tariff = selectedTariff; // Assign the selected tariff
+
+        if (!$(`#apnd tr[data-id="${docInfo.id}"]`).length) {
+            const newRow = `
+                <tr data-id="${docInfo.id}">
+                    <td><button type="button" onclick="handleDelete('${docInfo.id}')" class="btn btn-link"><i class="fas fa-times"></i></button></td>
+                    <td>${docInfo.name}</td>
+                    <td>${docInfo.spec}</td>
+                    <td>${docInfo.subSpec}</td>
+                    <td>${docInfo.tariff}</td>
+                </tr>`;
+            $('#apnd').append(newRow);
+            selectedDoctors.push(docInfo); // Add to array if not already added
+        }
+    });
+
+    // Close the modal and uncheck all checkboxes after adding
+    $('#myModal').modal('hide');
+    $('#myModal .doctor-checkbox').prop('checked', false);
+});
+
+
+
+function getCheckedValues(docInfo, isChecked) {
+    console.log("Checking values:", $('#tariffSelect option').length, $('#tariffSelect').val());
+
+    const checkboxId = docInfo.id;
+    if (isChecked) {
+        if (!$(`#apnd tr[data-id="${checkboxId}"]`).length) {
+            const selectedTariff = $('#tariffSelect option:selected').text();  // Getting the text of the selected option
+            const selectedTariffValue = $('#tariffSelect').val();  // Getting the value of the selected option
+
+            if (!selectedTariff) {
+                console.error("Selected tariff is undefined.");
+            } else {
+                alert("Selected Tariff: " + selectedTariff);
+                docInfo.tariff = selectedTariff;
+                selectedDoctors.push(docInfo);
+                const rowHtml = `<tr data-id='${checkboxId}'><td><button type="button" onclick='handleDelete("${checkboxId}")' class='btn btn-link'><i class='fas fa-times'></i></button></td><td>${docInfo.name}</td><td>${docInfo.spec}</td><td>${docInfo.subSpec}</td><td>${docInfo.tariff}</td></tr>`;
+                $('#apnd').append(rowHtml);
+            }
+        }
+    } else {
+        $(`#apnd tr[data-id="${checkboxId}"]`).remove();
+        const index = selectedDoctors.findIndex(doc => doc.id === checkboxId);
+        if (index > -1) selectedDoctors.splice(index, 1);
+    }
+}
+
+
+                            $('#gridCheckPendingDoctors').click(function() {
+                                fetchDoctors('/billing/get-available-doctors');
+                            }); 
+
+                            function fetchDoctors(url) {
+                                $.ajax({
+                                    url: url,
+                                    type: 'GET',
+                                    success: function(data) {
+                                        let tableRows = '';
+                                        data.forEach(item => {
+                                            const docInfo = { id: item.id, name: item.doc_name, spec: item.doc_spec, subSpec: item.doc_sub_spec };
+                                            tableRows += `<tr><td><input class='form-check-input mt-0 doctor-checkbox td' type='checkbox' id='${item.id}' data-info='${JSON.stringify(docInfo)}' name='${item.doc_name}'></td><td>${item.doc_name}</td><td>${item.doc_spec}</td><td>${item.doc_sub_spec}</td></tr>`;
+                                        });
+                                        ld.html(tableRows);
+                                        pagi_search('#searchBox', '#pendingDoctor', '#paginationControls');
+                                    },
+                                    error: function() {
+                                        alert('Error loading doctors.');
                                     }
-                                } else {
-                                    $(`#apnd tr[data-id="${checkboxId}"]`).remove();
-                                    const index = selectedDoctors.findIndex(doc => doc.id === checkboxId);
-                                    if (index > -1) selectedDoctors.splice(index, 1);
-                                }
+                                });
                             }
+                
 
 
 
                             function fetchTariffs() {
-                                $.ajax({
-                                    url: '/billing/get-Tariffs',
-                                    type: 'GET',
-                                    success: function (data) {
-                                        tariffSelect.empty();
-                                        data.forEach(tariff => {
-                                            tariffSelect.append(new Option(tariff.trf_code, tariff.id));
-                                        });
-                                    },
-                                    error: function (xhr, status, error) {
-                                        console.error('Error fetching tariffs:', error);
-                                    }
-                                });
-                            }
+    $.ajax({
+        url: '/billing/get-Tariffs',
+        type: 'GET',
+        success: function (data) {
+            tariffSelect.empty();
+            data.forEach(tariff => {
+                tariffSelect.append(new Option(tariff.trf_code, tariff.id));
+            });
+            // Enable interaction or trigger any dependent functionality here
+        },
+        error: function (xhr, status, error) {
+            console.error('Error fetching tariffs:', error);
+        }
+    });
+}
+
 
                             function fetchData() {
                                 $.ajax({
@@ -448,14 +899,17 @@
                                 });
                             }
 
+
+                          
+
                             $('#doctorSel').on('submit', function (event) {
                                 event.preventDefault();
-
+                                const formData= {doctors:selectedDoctors};
+console.log(selectedDoctors);
                                 const { isValid, errorMessage } = validateForm('#doctorSel');
                                 if (isValid) {
-                                    const formData = { doctors: selectedDoctors };
-                                    console.log(formData);
-                                    console.log(JSON.stringify(formData))
+                                  
+                                    
                                     $(loadingDiv).show();
                                     myAjax(formData, errorDivId, '/billing/doctorSelected', loadingDiv, function (response) {
                                         alert("Form submitted successfully");
@@ -475,3 +929,59 @@
                             fetchData();
                         });
                     </script>
+                     <!-- <script >
+                        $(document).ready(function () {
+                            const doctorTable = $('#doctor-table');
+                
+                            $('#gridCheckPendingDoctors').click(function() {
+                                fetchDoctors('/billing/get-available-doctors');
+                            });
+                
+                            $('#gridCheckSearchDoctors').click(function() {
+                                fetchDoctors('/billing/get-Doctor');
+                            });
+                
+                            $('#modalCancelButton, .btn-close').click(function() {
+                                $('#myModal').modal('hide');
+                                $('#gridCheckPendingDoctors').prop('checked', false);
+                            });
+                
+                            function fetchDoctors(url) {
+                                $.ajax({
+                                    url: url,
+                                    type: 'GET',
+                                    success: function(data) {
+                                        let html = '<tr><th>Name</th><th>Specialization</th><th>Select</th></tr>';
+                                        data.forEach(doctor => {
+                                            html += `<tr><td>${doctor.name}</td><td>${doctor.spec}</td><td><button class="select-btn" data-id="${doctor.id}">Select</button></td></tr>`;
+                                        });
+                                        doctorTable.html(html);
+                                    },
+                                    error: function() {
+                                        alert('Error loading doctors.');
+                                    }
+                                });
+                            }
+                
+                            $(doctorTable).on('click', '.select-btn', function() {
+                                const id = $(this).data('id');
+                                addDoctorToSelected(id);
+                            });
+                
+                            function addDoctorToSelected(doctorId) {
+                                // Logic to add doctor to the selected table or list
+                                console.log('Selected Doctor ID:', doctorId);
+                                // This needs implementation based on your specific needs
+                            }
+                
+                            $('#submitDoctors').click(function() {
+                                submitSelectedDoctors();
+                            });
+                
+                            function submitSelectedDoctors() {
+                                // Logic to submit selected doctors
+                                console.log('Submitting selected doctors');
+                                // Implement submission logic as required
+                            }
+                        });
+                    </script> -->

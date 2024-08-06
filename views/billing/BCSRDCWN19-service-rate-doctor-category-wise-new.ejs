@@ -90,6 +90,7 @@
             <div class="container-fluid">
 
                 <div class="chart">
+                    <div id="errordiv1"></div>
                     <form id="selService" method="post">
                         <input type="hidden" name="query" id="query" value="0">
                         
@@ -112,9 +113,9 @@
                                                 <div class="form-row pl-lg-3 pr-lg-4 mt-1 mb-2">
                                                     <div class="col-lg-6 col-md-4 col-sm-3">
                                                         <div class="form-group"><label
-                                                            class="input__label">Doctor Category</label><select name="doctorCategory" id="doctorCategory"
+                                                            class="input__label">Doctor Category</label><select name="docCategory" id="docCategory"   id="docCategory"  data-validation="required" data-error-message="Doctor Category is Required"
                                                             class="form-control input-style">
-                                                            <option>Select</option>
+                                                            <option value="">Select</option>
                                                         </select>
                                                     </div>  
                                                     </div>  
@@ -220,7 +221,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr <%= result.id ? '' : 'hidden' %>>
+                                                    <tr <%= result.id ? 'disable' : 'hidden' %>>
                                                         <td contenteditable="true" ><%= result.serviceName %></td>
                                                         <td contenteditable="true"><%= result.className %></td>
                                                         <td contenteditable="true"><%= result.serviceRate %></td>
@@ -249,7 +250,7 @@
                                     class="fa-solid fa-plus" ></i> New</strong></button>
 
                        <button type="button" class="btn-danger btn-style btn mt-3 mr-2" onclick="window.location.href='/billing/13'"><strong><i
-                                        class="fa-solid fa-plus"></i>Cancel</strong></button>            
+                                        class="fas fa-times"></i>Cancel</strong></button>            
 
                         <button type="submit" class="btn-primary btn-style btn mt-3" id="submit" <%= result.id ? 'disabled' : '' %>><strong><i class="far fa-save"></i>
                                 Save</strong></button>
@@ -264,7 +265,7 @@
                     var selectedServices = [];
                     const itemid = '<%= result.id %>'; // This is a server-side templating example (e.g., using EJS).
 const query = $('#query').val(); 
-alert(query)  // jQuery method to get the value of the 'query' input field.
+ // jQuery method to get the value of the 'query' input field.
 
                     selectedServices[0] = { itemid:itemid, query:query }; // Initialize with server-side values
                 
@@ -277,21 +278,28 @@ alert(query)  // jQuery method to get the value of the 'query' input field.
                         $('.td').prop('disabled', false);
                         $('#code').prop('disabled', true);
                         document.getElementById('submit').disabled = false;
-                
+                        $('#docCategory').prop('disabled', false);
                         console.log('Query updated:', selectedServices[0].query); // Log to console for verification
                     }
                 
                     if ('<%= result.id %>' !== '') {
-                        $('input[data-validation], select[data-validation]').prop('disabled', true);
-                    } else {
+                        $('input[data-validation], select[data-validation] #selectedServicesTable ').prop('disabled', true);
+                    } 
+                    if('<%= result.status %>'!=='true'){
+        document.getElementById('mod-btn').disabled = true;
+      }else {
+    
+                 
                         document.getElementById('submit').disabled = false;
-                        document.getElementById('mod-btn').disabled = true;
+                    
                     }
                 </script>
                 
  
 <script type="module">
     import { pagi_search } from '../javascripts/pagi_search.js';
+    import { validateForm } from '../javascripts/validation.js';
+    import { myAjax } from '../javascripts/myAjax.js';
 
     $(document).ready(function() {
         var jsonData = [
@@ -309,15 +317,59 @@ alert(query)  // jQuery method to get the value of the 'query' input field.
  { "id": 12, "clinic_id": "0", "doc_cat_master_code": "A", "doc_cat_master_desc": "A" },
  { "id": 13, "clinic_id": "0", "doc_cat_master_code": "99a", "doc_cat_master_desc": "descj" }
 ];
-        var $doctorCategorySelect = $('#doctorCategory');
-        jsonData.forEach(item => {
-            $doctorCategorySelect.append($('<option>', {
-                value: item.doc_cat_master_code,
-                text: item.doc_cat_master_desc
-            }));
-        });
+var $docCategorySelect = $('#docCategory');
+    var selectedCategory = '<%= result.docCategory %>'; // Embed EJS variable
+    var itemId = '<%= result.id %>'; // Embed EJS variable
+    console.log(selectedCategory+itemId)
+
+    jsonData.forEach(item => {
+    var isSelected = (selectedCategory === item.doc_cat_master_desc);
+   
+
+    $docCategorySelect.append($('<option>', {
+        value: item.doc_cat_master_desc,
+        text: item.doc_cat_master_desc,
+        selected: isSelected
+    }));
+});
+
+    // Disable the select if itemId is not empty    
+    if (itemId) {
+        $docCategorySelect.prop('disabled', true);
+    }
 
 // Define selectedServices array globally if not already defined
+function fetchServices() {
+            $.ajax({
+                url: '/billing/get-service',
+                method: 'GET',
+                success: function(data) {
+                    populateServicesTable(data);
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error fetching services:', xhr.responseText);
+                }
+            });
+        }
+
+        // Function to populate services table
+        function populateServicesTable(services) {
+            var $tblbody = $('#tblbody');
+            $tblbody.empty(); // Clear existing rows
+
+            services.forEach(function(service) {
+                var row = `<tr>
+                    <td><input class="form-check-input mt-1 td" type="checkbox" <%= result.id ? 'disabled' : '' %>></td>
+                    <td>${service.serviceName}</td>
+                    <td>${service.className}</td>
+                    <td>${service.baseServiceRate}</td>
+                </tr>`;
+                $tblbody.append(row);
+            });
+        }
+
+        // Fetch services when the document is ready
+        fetchServices();
 
 
 
@@ -333,6 +385,7 @@ alert(query)  // jQuery method to get the value of the 'query' input field.
             
 
             if (isChecked) {
+                var docCategory = $('#docCategory').val();
                 var newRow = `<tr>
                     <td contenteditable="true">${serviceName}</td>
                     <td contenteditable="true">${className}</td>
@@ -340,7 +393,8 @@ alert(query)  // jQuery method to get the value of the 'query' input field.
                     <td><button class="btn btn-danger btn-sm delete-btn" data-service-name="${serviceName}">Delete</button></td>
                 </tr>`;
                 $('#selectedServicesTable tbody').append(newRow);
-                selectedServices.push({ serviceName, className, serviceRate });
+                selectedServices.push({ serviceName, className, serviceRate,docCategory });
+                console.log(selectedServices);
             } else {
                 $('#selectedServicesTable tbody tr').each(function() {
                     if ($(this).find('td').eq(0).text() === serviceName) {
@@ -371,9 +425,11 @@ alert(query)  // jQuery method to get the value of the 'query' input field.
 
         $('#selService').on('submit', function(event) {
           
-            
-          
+            const { isValid, errorMessage } = validateForm('#selService');
+        
+           
             event.preventDefault();
+            if(isValid){
             $.ajax({
                 url: '/billing/selectedService',
                 method: 'POST',
@@ -387,10 +443,15 @@ alert(query)  // jQuery method to get the value of the 'query' input field.
                     console.error('Error:', response);
                 }
             });
+        }else{
+            alert(errorMessage);
+            $('#errordiv1').removeClass('alert-success').addClass('alert-danger').text(errorMessage).show();
+       
+        }
         });
 
         pagi_search('#searchBox', '#servicesTable', '#paginationControls');
     });
 </script>
 
-                
+

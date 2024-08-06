@@ -87,6 +87,7 @@
             <!-- content -->
             <div class="container-fluid">
                 <form id="BC-ser-master">
+                    <input type="hidden" id="query" name="query" value="0">
                     <div class="chart">
                         <div class="row">
 
@@ -129,21 +130,22 @@
                                                         <div class="form-group">
                                                             <label class="input__label">Specialization</label>
                                                             <select name="specialization" class="form-control input-style" data-validation="required" data-error-message="Specialization is required" <%= result.id ? 'disabled' : '' %>>
-                                                                <option value="<%= result.specialization %>"><%= result.specialization %></option>
-                                                                <option value="1">1</option>
-                                                                <option value="2">2</option>
+                                                                <option value="">Select</option>
+                                                                <option value="<%= result.specialization %>" <%= result.specialization ? 'Selected' : 'hidden' %>><%= result.specialization %></option>
+                                                                
+                                                                
                                                             </select>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3 mb-3">
                                                         <div class="form-group">
                                                             <label class="input__label">Sub-Specialization</label>
-                                                            <select name="subSpecialization" class="form-control input-style" data-validation="required" data-error-message="Sub-Specialization is required"  <%= result.id ? 'disabled' : '' %>  >
-                                                                <option value="<%= result.subSpecialization %>"><%= result.subSpecialization %></option>
-                                                                <option value="1">1</option>
-                                                                <option value="2">2</option>
+                                                            <select name="subSpecialization" class="form-control input-style" data-validation="required" data-error-message="Sub-Specialization is required"  <%= result.id ? 'disabled' : '' %>   >
+                                                                <option value="">Select</option>
+                                                                <option value="<%= result.subSpecialization %>" <%= result.subSpecialization ? 'Selected' : 'hidden' %>><%= result.subSpecialization %></option>
+                                                               
                                                             </select>
-                                                        </div>
+                                                        </div>  
                                                     </div>
                                                     <div class="col-md-3 mb-3">
                                                         <div class="form-group">
@@ -201,7 +203,7 @@
                                                 <div class="col-md-4 mb-3">
                                                     <div class="form-check-label">
                                                         <div class="radio mt-4">
-                                                            <input class="form-check-input" type="checkbox" name="inHouse" data-validation id="inHouse">
+                                                            <input class="form-check-input" type="checkbox" name="inHouse" data-validation id="inHouse"   <%= result.inHouse == 'yes' ? 'checked' : '' %>>
                                                             <label class="form-check-label mr-5" for="inHouse">In House</label>
                                                         </div>
                                                     </div>
@@ -221,7 +223,7 @@
                                                 <div class="col-md-4 mb-1">
                                                     <div class="form-check-label">
                                                         <div class="radio mt-4">
-                                                            <input class="form-check-input" name="service_tax" id="service_tax" type="checkbox">
+                                                            <input class="form-check-input" name="service_tax" id="service_tax" data-validation type="checkbox"   <%= result.service_tax == 'yes' ? 'checked' : '' %> >
                                                             <label class="form-check-label mr-5" for="service_tax">Service Tax</label>
                                                         </div>
                                                     </div>
@@ -241,7 +243,7 @@
                                                 <div class="col-md-4 mb-1">
                                                     <div class="form-check-label">
                                                         <div class="radio mt-4">
-                                                            <input class="form-check-input" type="checkbox" name="staffDiscount" id="staffDiscount">
+                                                            <input class="form-check-input" type="checkbox" name="staffDiscount" data-validation id="staffDiscount" <%= result.staffDiscount == 'yes' ? 'checked' : '' %> >
                                                             <label class="form-check-label mr-5" for="staffDiscount">Staff Discount</label>
                                                         </div>
                                                     </div>
@@ -262,7 +264,7 @@
                                                     <div class="form-check-label">
                                                         <div class="radio mt-4">
                                                             <label class="form-check-label">
-                                                                <input name="staffParentAccount" id="staffParentAccount" class="form-check-input" type="checkbox">Staff Parent Account
+                                                                <input name="staffParentAccount" id="staffParentAccount" class="form-check-input"  data-validation type="checkbox" <%= result.staffParentAccount == 'yes' ? 'checked' : '' %>>Staff Parent Account
                                                             </label>
                                                         </div>
                                                     </div>
@@ -283,7 +285,7 @@
                                                     <div class="form-check-label">
                                                         <div class="radio mt-4">
                                                             <label class="form-check-label">
-                                                                <input name="concession" id="concession" class="form-check-input" type="checkbox">Concession
+                                                                <input name="concession" id="concession" class="form-check-input" type="checkbox"  data-validation <%= result.concession == 'yes' ? 'checked' : '' %>>Concession
                                                             </label>
                                                         </div>
                                                     </div>
@@ -304,7 +306,7 @@
                                                     <div class="form-check-label">
                                                         <div class="radio mt-4">
                                                             <label class="form-check-label">
-                                                                <input name="doctor" id="doctor" class="form-check-input" type="checkbox">Doctor Share
+                                                                <input name="doctor" id="doctor" class="form-check-input" type="checkbox" data-validation <%= result.doctor == 'yes' ? 'checked' : '' %>>Doctor Share
                                                             </label>
                                                         </div>
                                                     </div>
@@ -325,7 +327,7 @@
                                                     <div class="form-check-label">
                                                         <div class="radio mt-4">
                                                             <label class="form-check-label">
-                                                                <input name="rateEditable" id="rateEditable" class="form-check-input" type="checkbox">Rate Editable
+                                                                <input name="rateEditable" id="rateEditable" class="form-check-input"  data-validation type="checkbox" <%= result.rateEditable == 'yes' ? 'checked' : '' %>>Rate Editable
                                                             </label>
                                                         </div>
                                                     </div>
@@ -346,7 +348,7 @@
                                                     <div class="form-check-label">
                                                         <div class="radio mt-4">
                                                             <label class="form-check-label">
-                                                                <input name="S_Citizen_Con" id="S_Citizen_Con" class="form-check-input" type="checkbox">Senior Citizen Concession
+                                                                <input name="S_Citizen_Con" id="S_Citizen_Con" class="form-check-input"  data-validation type="checkbox" <%= result.S_Citizen_Con == 'yes' ? 'checked' : '' %>>Senior Citizen Concession
                                                             </label>
                                                         </div>
                                                     </div>
@@ -367,7 +369,7 @@
                                                     <div class="form-check-label">
                                                         <div class="radio mt-4">
                                                             <label class="form-check-label">
-                                                                <input name="luxuryTax" id="luxuryTax" class="form-check-input" type="checkbox">Luxury Tax
+                                                                <input name="luxuryTax" id="luxuryTax" class="form-check-input" type="checkbox"  data-validation <%= result.luxuryTax == 'yes' ? 'checked' : '' %>>Luxury Tax
                                                             </label>
                                                         </div>
                                                     </div>
@@ -589,7 +591,7 @@
                         <!--Past your code here starts-->
 
                         <form id="service-master">
-                            <input type="hidden" id="query" name="query" value="0">
+                           
                             <div id="errordiv1"></div>
                             <div class="col-lg-12">
                                 <h4 class="primary"></h4>
@@ -689,205 +691,288 @@
         $('input[data-validation], select[data-validation]').prop('disabled', false);
         $('#serviceCode').prop('disabled', true);
         document.getElementById('submit').disabled=false;
-        
-
-    
-        document.getElementById('sub-btn').disabled = false;
       }
       if('<%= result.id %>'!==''){
-        $('input[data-validation], select[data-validation]').prop('disabled', true);
-    
-        
-      }else{
+        $('input[data-validation], select[data-validation]').prop('disabled', true); 
+      }
+      if('<%= result.status %>'!=='true'){
+        document.getElementById('mod-btn').disabled = true;
+      }else{
+
         document.getElementById('submit').disabled=false;
        
-        document.getElementById('mod-btn').disabled=true;}
+       }
+
 </script>
 
-                <script type="module">
-                    import { validateForm } from '../javascripts/validation.js';
-                    import { myAjax } from '../javascripts/myAjax.js';
-                    $(document).ready(function () {
-                        console.log("Document is ready");
+<script type="module">
+    import { validateForm } from '../javascripts/validation.js';
+    import { myAjax } from '../javascripts/myAjax.js';
 
+    $(document).ready(function () {
+        console.log("Document is ready");
 
-                        var packageRate = parseFloat($("#packageRate").val());
-          
-          // Function to update percentage based on rate
-          const updatePercentage = (rate, baseRate) => {
+        var packageRate = parseFloat($("#packageRate").val());
+
+        // Function to update percentage based on rate
+        const updatePercentage = (rate, baseRate) => {
             if (!isNaN(rate) && !isNaN(baseRate) && baseRate > 0) {
-              return (rate / baseRate) * 100;
+                return (rate / baseRate) * 100;
             }
             return "";
-          };
-      
-          // Function to update rate based on percentage
-          const updateRate = (percentage, baseRate) => {
-            if (!isNaN(percentage) && !isNaN(baseRate) && baseRate > 0) {
-              return (percentage / 100) * baseRate;
-            }
-            return "";
-          };
-      
-          // Common function to handle input events
-          const handleInputEvent = (percentageSelector, rateSelector) => {
-            $(percentageSelector).on("input", function () {
-              var percentage = parseFloat($(this).val());
-              var rate = updateRate(percentage, packageRate);
-              if (rate !== "") {
-                $(rateSelector).val(rate.toFixed(2));
-              } else {
-                $(rateSelector).val("");
-              }
-            });
-      
-            $(rateSelector).on("input", function () {
-              var rate = parseFloat($(this).val());
-              var percentage = updatePercentage(rate, packageRate);
-              if (percentage !== "") {
-                $(percentageSelector).val(percentage.toFixed(2));
-              } else {
-                $(percentageSelector).val("");
-              }
-            });
-          };
-      
-          // List of form elements to handle
-          const formElements = [
-    {
-        checkbox: "#inHouse",
-        percentage: "#inHouse_per",
-        rate: "#inHouse_amount",
-    },
-    {
-        checkbox: "#service_tax",
-        percentage: "#service_per",
-        rate: "#service_amount",
-    },
-    {
-        checkbox: "#staffDiscount",
-        percentage: "#staffDiscount_per",
-        rate: "#staffDiscount_amount",
-    },
-    {
-        checkbox: "#staffParentAccount",
-        percentage: "#staffParent_per",
-        rate: "#staffParent_amount",
-    },
-    {
-        checkbox: "#concession",
-        percentage: "#concession_per",
-        rate: "#concession_amount",
-    },
-    {
-        checkbox: "#doctor",
-        percentage: "#doctor_per",
-        rate: "#doctor_amount",
-    },
-    {
-        checkbox: "#rateEditable",
-        percentage: "#rateEditable_per",
-        rate: "#rateEditable_amount",
-    },
-    {
-        checkbox: "#S_Citizen_Con",
-        percentage: "#S_Citizen_per",
-        rate: "#S_Citizen_amount",
-    },
-    {
-        checkbox: "#luxuryTax",
-        percentage: "#luxuryTax_per",
-        rate: "#luxuryTax_amount",
-    },
-];
+        };
 
-      
-          // Attach input event handlers to each form element
-          formElements.forEach((element) => {
+        // Function to update rate based on percentage
+        const updateRate = (percentage, baseRate) => {
+            if (!isNaN(percentage) && !isNaN(baseRate) && baseRate > 0) {
+                return (percentage / 100) * baseRate;
+            }
+            return "";
+        };
+
+        // Common function to handle input events
+        const handleInputEvent = (percentageSelector, rateSelector) => {
+            $(percentageSelector).on("input", function () {
+                var percentage = parseFloat($(this).val());
+                var rate = updateRate(percentage, packageRate);
+                if (rate !== "") {
+                    $(rateSelector).val(rate.toFixed(2));
+                } else {
+                    $(rateSelector).val("");
+                }
+            });
+
+            $(rateSelector).on("input", function () {
+                var rate = parseFloat($(this).val());
+                var percentage = updatePercentage(rate, packageRate);
+                if (percentage !== "") {
+                    $(percentageSelector).val(percentage.toFixed(2));
+                } else {
+                    $(percentageSelector).val("");
+                }
+            });
+        };
+
+        // List of form elements to handle
+        const formElements = [
+            {
+                checkbox: "#inHouse",
+                percentage: "#inHouse_per",
+                rate: "#inHouse_amount",
+            },
+            {
+                checkbox: "#service_tax",
+                percentage: "#service_per",
+                rate: "#service_amount",
+            },
+            {
+                checkbox: "#staffDiscount",
+                percentage: "#staffDiscount_per",
+                rate: "#staffDiscount_amount",
+            },
+            {
+                checkbox: "#staffParentAccount",
+                percentage: "#staffParent_per",
+                rate: "#staffParent_amount",
+            },
+            {
+                checkbox: "#concession",
+                percentage: "#concession_per",
+                rate: "#concession_amount",
+            },
+            {
+                checkbox: "#doctor",
+                percentage: "#doctor_per",
+                rate: "#doctor_amount",
+            },
+            {
+                checkbox: "#rateEditable",
+                percentage: "#rateEditable_per",
+                rate: "#rateEditable_amount",
+            },
+            {
+                checkbox: "#S_Citizen_Con",
+                percentage: "#S_Citizen_per",
+                rate: "#S_Citizen_amount",
+            },
+            {
+                checkbox: "#luxuryTax",
+                percentage: "#luxuryTax_per",
+                rate: "#luxuryTax_amount",
+            },
+        ];
+
+        // Attach input event handlers to each form element
+        formElements.forEach((element) => {
             handleInputEvent(element.percentage, element.rate);
-          });
-      
-          // Handle packageRate input event
-          $("#packageRate").on("input", function () {
+        });
+
+        // Handle packageRate input event
+        $("#packageRate").on("input", function () {
             var value = parseFloat($(this).val());
             if (value < 0) {
-              $(this).val(0);
-              alert("Package Rate cannot be negative");
+                $(this).val(0);
+                alert("Package Rate cannot be negative");
             } else {
-              packageRate = value;
-              // Update rates and percentages based on new packageRate
-              formElements.forEach((element) => {
-                var percentage = parseFloat($(element.percentage).val());
-                if (!isNaN(percentage)) {
-                  var rate = updateRate(percentage, packageRate);
-                  $(element.rate).val(rate.toFixed(2));
-                }
-      
-                var rate = parseFloat($(element.rate).val());
-                if (!isNaN(rate)) {
-                  var percentage = updatePercentage(rate, packageRate);
-                  $(element.percentage).val(percentage.toFixed(2));
-                }
-              });
-            }
-          });
-      
+                packageRate = value;
+                // Update rates and percentages based on new packageRate
+                formElements.forEach((element) => {
+                    var percentage = parseFloat($(element.percentage).val());
+                    if (!isNaN(percentage)) {
+                        var rate = updateRate(percentage, packageRate);
+                        $(element.rate).val(rate.toFixed(2));
+                    }
 
-                        $('#BC-ser-master').on('submit', function (event) {
-                            event.preventDefault()
-                            const { isValid, errorMessage, formData } = validateForm('#BC-ser-master')
-                            let classNames = [];
+                    var rate = parseFloat($(element.rate).val());
+                    if (!isNaN(rate)) {
+                        var percentage = updatePercentage(rate, packageRate);
+                        $(element.percentage).val(percentage.toFixed(2));
+                    }
+                });
+            }
+        });
+
+        // Function to populate select fields
+        const populateSelect = (selectSelector, data, valueField, textField, selectedValue) => {
+            const $select = $(selectSelector);
+            $select.empty().append(new Option("Select", ""));
+            console.log("Selected value for", selectSelector, "is", selectedValue);
+            data.forEach(item => {
+                let option = new Option(item[textField], item[textField]);
+                if (String(item[textField]) === String(selectedValue)) {  // Ensure string comparison
+                    option.selected = true;
+                    console.log("Matching item found:", item[textField]);
+                }
+                $select.append(option);
+            });
+        };
+        const populateSelect2 = (selectSelector, data, valueField, textField, selectedValue) => {
+            const $select = $(selectSelector);
+            $select.empty().append(new Option("Select", ""));
+            console.log("Selected value for", selectSelector, "is", selectedValue);
+            data.forEach(item => {
+                let option = new Option(item[textField], item[textField]);
+              
+                if (String(item[textField]) === String(selectedValue)) {  // Ensure string comparison
+                    option.selected = true;
+                    console.log("Matching item found:", item[textField]);
+                }
+                $select.append(option);
+            });
+        };
+
+        // Sample JSON data for specialization and sub-specialization
+        const specializations = [
+            { "id": 1, "spec_desc": "Reproductive Medicine" },
+            { "id": 2, "spec_desc": "Fetomaternal Medicine" },
+            { "id": 3, "spec_desc": "Endoscopy" },
+            { "id": 4, "spec_desc": "Paediatrics" },
+            { "id": 5, "spec_desc": "Andrology" },
+            { "id": 6, "spec_desc": "Gynaec Imaging" },
+            { "id": 7, "spec_desc": "Other Specialities" },
+            { "id": 8, "spec_desc": "Antenatal" },
+            { "id": 9, "spec_desc": "Consultation" },
+            { "id": 10, "spec_desc": "Clinical Laboratory" },
+            { "id": 11, "spec_desc": "CHD-LAB" },
+            { "id": 12, "spec_desc": "OBS & GYNAE" },
+            { "id": 13, "spec_desc": "IVF-Theatre" },
+            { "id": 14, "spec_desc": "IVF-OPU" },
+            { "id": 15, "spec_desc": "IUI" },
+            { "id": 16, "spec_desc": "Gynaecologist" },
+            { "id": 17, "spec_desc": "Gyn-Theatre" },
+            { "id": 18, "spec_desc": "Andrology / Embryology" },
+            { "id": 19, "spec_desc": "Embrology" },
+            { "id": 20, "spec_desc": "OT" },
+            { "id": 21, "spec_desc": "CODE" },
+            { "id": 22, "spec_desc": "6789" },
+            { "id": 23, "spec_desc": "DESC" },
+            { "id": 24, "spec_desc": "879" }
+        ];
+
+        const subSpecializations = [
+            { "id": 1, "sub_spec_desc": "ABC" },
+            { "id": 2, "sub_spec_desc": "Reproductive Medicine" },
+            { "id": 3, "sub_spec_desc": "Fetomaternal Medicine" },
+            { "id": 4, "sub_spec_desc": "Endoscopy" },
+            { "id": 5, "sub_spec_desc": "Paediatrics" },
+            { "id": 6, "sub_spec_desc": "Andrology" },
+            { "id": 7, "sub_spec_desc": "Gynaec Imaging" },
+            { "id": 8, "sub_spec_desc": "Other Specialities" },
+            { "id": 9, "sub_spec_desc": "Antenatal" },
+            { "id": 24, "sub_spec_desc": "SUB SPEC" },
+            { "id": 25, "sub_spec_desc": "DESC" },
+            { "id": 26, "sub_spec_desc": "DESCSDS" }
+        ];
+
+        const selectedSpecialization = '<%= result.specialization %>'; // Ensure these values are properly being injected
+const selectedSubSpecialization = '<%= result.subSpecialization %>';
+
+// Populate the specialization and sub-specialization select fields
+populateSelect('select[name="specialization"]', specializations, 'id', 'spec_desc', selectedSpecialization);
+populateSelect2('select[name="subSpecialization"]', subSpecializations, 'id', 'sub_spec_desc', selectedSubSpecialization);
+$('#BC-ser-master').on('submit', function (event) {
+    event.preventDefault();
+
+    // Temporarily enable disabled inputs for serialization
+    $(this).find(':input:disabled').removeAttr('disabled');
+    
+    // Serialize form data
+    var serializedData = $(this).serialize();
+    console.log("Serialized Data:", serializedData);
+
+    // Immediately re-disable the inputs after serialization
+    $(this).find(':input').filter(function () {
+        return this.disabled;
+    }).attr('disabled', 'disabled');
+
+    // Convert serialized data to an object for easy manipulation
+    var formData = serializedData.split('&').reduce(function(acc, current) {
+        var parts = current.split('=');
+        acc[decodeURIComponent(parts[0])] = decodeURIComponent(parts[1].replace(/\+/g, ' '));
+        return acc;
+    }, {});
+
+    const { isValid, errorMessage } = validateForm('#BC-ser-master');
+    let classNames = [];
     let className_rate = [];
 
-    // Check if the IPD checkbox is checked and capture the corresponding rate
     if ($('#ipdCheck').is(':checked')) {
         classNames.push('IPD');
-        // Correctly retrieve the value of the IPD rate input
-        let ipdRate = $('#ipdrate').val(); // Assuming 'ipdrate' is the ID for the IPD rate input
-        className_rate.push(ipdRate);
+        className_rate.push($('#ipdrate').val());
     }
-
-    // Check if the OPD checkbox is checked and capture the corresponding rate
     if ($('#opdCheck').is(':checked')) {
         classNames.push('OPD');
-        // Correctly retrieve the value of the OPD rate input
-        let opdRate = $('#opdrate').val(); // Assuming 'opdrate' is the ID for the OPD rate input
-        className_rate.push(opdRate);
+        className_rate.push($('#opdrate').val());
     }
 
-    // Update formData with the classNames and rates joined by commas
-    formData.className = classNames.join(', ');
-    formData.className_rate = className_rate.join(',');
+    formData['className'] = classNames.join(', ');
+    formData['className_rate'] = className_rate.join(', ');
 
-                            // const inputs = $('#BC-ser-master').find('input, select,textarea').toArray().reverse();
-                            // console.log(inputs)
-                            console.log(formData);
-                            const errorDivId = '#errordiv1'
+    formElements.forEach((element) => {
+        if (!$(element.checkbox).is(":checked")) {
+            formData[element.percentage.slice(1)] = "";
+            formData[element.rate.slice(1)] = "";
+        }
+        else if ($(element.checkbox).is(":checked")) {
+            formData[element.checkbox.slice(1)] = "yes";
+            
+        }
+    });
 
-                            formElements.forEach((element) => {
-                  if (!$(element.checkbox).is(":checked")) {
-                    formData[element.percentage] = null;
-                    formData[element.rate] = null;
-                  }
-                });
+    console.log("Final Form Data:", formData);
 
-                            if (isValid) {
-                                const url = '/billing/bc-Servise-mst';
-                                const loadingDiv = '#loadingIndicator'
-                                myAjax(formData, errorDivId, url, loadingDiv)
+    if (isValid) {
+        const url = '/billing/bc-Servise-mst';
+        const loadingDiv = '#loadingIndicator';
+        myAjax(formData, '#errordiv1', url, loadingDiv);
+    } else {
+        alert(errorMessage);
+        $(errorDivId).removeClass('alert-success').addClass('alert-danger').text(errorMessage).show();
+    }
+});
 
-                            } else {
-                                alert(errorMessage);
-                                $(errorDivId).removeClass('alert-success').addClass('alert-danger').text(errorMessage).show();
-                                // $(errorDivId).text(errorMessage).show();
-                            }
-                        })
-
-
-                    });
-
-
-                </script>
+    });
+</script>
                 <script type="module">
                     import { validateForm } from '../javascripts/validation.js';
                     import { myAjax } from '../javascripts/myAjax.js';
@@ -899,7 +984,7 @@
                             const { isValid, errorMessage, formData } = validateForm('#service-master')
 
                             console.log(formData)
-                            const errorDivId = '#errordiv1'
+                            const errorDivId = '#errordiv1' 
 
                             if (isValid) {
                                 const url = '/billing/bc-ser-mas-ass-cont';

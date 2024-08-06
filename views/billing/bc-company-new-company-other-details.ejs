@@ -123,7 +123,7 @@
 
                                                             <label class="input__label">Header text</label>
                                                             <textarea name="header_text"
-                                                                class="form-control input-style" placeholder=""
+                                                                class="form-control input-style" placeholder="" id="compHeader"
                                                                 data-validation="required"
                                                                 data-error-message="Header Text is required."></textarea>
                                                         </div>
@@ -132,7 +132,7 @@
                                                         <div class="form-group"><label class="input__label">footer
                                                                 text</label><textarea name="footer_text"
                                                                 class="form-control input-style" placeholder=""
-                                                                data-validation="required"
+                                                                data-validation="required" id="compFooter"
                                                                 data-error-message="Footer text  is required."></textarea>
                                                         </div>
                                                     </div>
@@ -251,7 +251,16 @@
 
                   <%- include('../footer'); -%>
                     <!--footer section end-->
-
+                    <script src="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.js"></script>
+                    <script>
+                        const quill = new Quill("#compHeader", {
+                          theme: "snow",
+                        });
+                        const quill1 = new Quill("#compFooter", {
+                          theme: "snow",
+                        });
+                      </script>  
+                      
                         <script type="module">
                             import { uploadImg } from '../javascripts/uploadImg.js';
                             uploadImg('#comp_logo', '#comp_logo_img', '#comp_logo_btn', '#cancel1')

@@ -1,0 +1,672 @@
+    <!doctype html>
+    <html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <title>LifeLinkr</title>
+        <!-- Add Bootstrap CSS -->
+        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
+    </head>
+
+    <body>
+
+    <%- include('../header'); -%>
+
+    <div class="main-content">
+        <div class="row content-top-gap2">
+            <div class="col-lg-12">
+                <nav class="navbar navbar-expand-lg navbar-light bg-white">
+                    <a class="navbar-brand text-center mr-5" href="#">
+                        <span class="dash-icon"><i class="fas fa-tachometer-alt"></i></span>
+                        Dashboard
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav">
+                            <li class="nav-item active text-center mr-5">
+                                <a class="nav-link" href="#">
+                                    <span class="dash-icon"><i class="far fa-user"></i></span>
+                                    Master
+                                </a>
+                            </li>
+                            <li class="nav-item text-center mr-5">
+                                <a class="nav-link" href="#">
+                                    <span class="dash-icon"><i class="fas fa-exchange-alt"></i></span>
+                                    Transaction
+                                </a>
+                            </li>
+                            <li class="nav-item text-center mr-5">
+                                <a class="nav-link" href="#">
+                                    <span class="dash-icon"><i class="fas fa-hand-holding-medical"></i></span>
+                                    Patient 360
+                                </a>
+                            </li>
+                            <li class="nav-item text-center mr-5">
+                                <a class="nav-link" href="#">
+                                    <span class="dash-icon"><i class="fas fa-receipt"></i></span>
+                                    Outside Receipt
+                                </a>
+                            </li>
+                            <li class="nav-item text-center mr-5">
+                                <a class="nav-link" href="#">
+                                    <span class="dash-icon"><i class="fas fa-file-invoice"></i></span>
+                                    Outpatient Department
+                                </a>
+                            </li>
+                            <li class="nav-item text-center mr-5">
+                                <a class="nav-link" href="#">
+                                    <span class="dash-icon"><i class="fas fa-chart-line"></i></span>
+                                    Analytics
+                                </a>
+                            </li>
+                            <li class="nav-item text-center mr-5">
+                                <a class="nav-link" href="#">
+                                    <span class="dash-icon"><i class="far fa-clock"></i></span>
+                                    Waiting List
+                                </a>
+                            </li>
+                            <li class="nav-item text-center mr-5">
+                                <a class="nav-link" href="#">
+                                    <span class="dash-icon"><i class="fas fa-wrench"></i></span>
+                                    Administration
+                                </a>
+                            </li>
+                            <li class="nav-item text-center">
+                                <a class="nav-link" href="#">
+                                    <span class="dash-icon"><i class="fas fa-spinner"></i></span>
+                                    Additional
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+
+        <!-- content -->
+        <div class="container-fluid">
+            <div class="chart">
+                <div class="row">
+                    <div class="col-lg-12 pl-lg-0 mt-2 ml-2">
+                        <h4 class="primary">Opening Balance</h4>
+                    </div>
+
+                    <div class="col-lg-12 pl-lg-2 chart-grid">
+                        <div id="errordiv1"></div>
+                        <form id="orderform">
+                            <div class="card card_border">
+                                <div class="card-body pb-3 pt-2">
+                                    <div class="form-row">
+                                        <div class="col-lg-6 col-md-6 col-sm-12 mb-2">
+                                            <div class="form-group"><label class="input__label">Clinic</label><select
+                                                    name="clinic" required id="clinic" class="form-control input-style">
+                                                <option>Select</option>
+                                            </select></div>
+                                        </div>
+
+                                        <div class="col-lg-6 col-md-6 col-sm-12 mb-2">
+                                            <div class="form-group"><label class="input__label">Store</label><select
+                                                    name="store" id="store" required class="form-control input-style">
+                                                <option>Select</option>
+                                            </select></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <div class="col col-12 pr-xl-0 pl-xl-0 pt-2">
+                                                    <div class="slidex">
+                                                        <table class="table2">
+                                                            <thead>
+                                                            <tr>
+                                                                <th contenteditable="true">Item Name</th>
+                                                                <th contenteditable="true" style="min-width: 100px;">Batch Code</th>
+                                                                <th contenteditable="true">Expiry Date</th>
+                                                                <th contenteditable="true" >Quantity</th>
+                                                                <th contenteditable="true">UOM</th>
+                                                                <th contenteditable="true">S.UOM</th>
+                                                                <th contenteditable="true">Conversion Factor</th>
+                                                                <th contenteditable="true">Total Quantity</th>
+                                                                <th contenteditable="true" style="min-width: 100px;">CP</th>
+                                                                <th contenteditable="true" style="min-width: 100px;">MRP</th>
+                                                                <th contenteditable="true" style="min-width: 100px;">Total CP</th>
+                                                                <th contenteditable="true" style="min-width: 100px;">Discount On Sale (%)</th>
+                                                                <th contenteditable="true" style="min-width: 100px;">CGST (%)</th>
+                                                                <th contenteditable="true" style="min-width: 100px;">CGST Amount</th>
+                                                                <th contenteditable="true" style="min-width: 100px;">SGST (%)</th>
+                                                                <th contenteditable="true" style="min-width: 100px;">SGST Amount</th>
+                                                                <th contenteditable="true" style="min-width: 100px;">IGST (%)</th>
+                                                                <th contenteditable="true" style="min-width: 100px;">IGST Amount</th>
+                                                                <th contenteditable="true" style="min-width: 100px;">Total Net CP</th>
+                                                                <th contenteditable="true" style="min-width: 100px;">Discount Amount</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody id="selectedItemsTable">
+                                                            <!-- Selected items will be displayed here -->
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+
+                                                    <div class="form-check-label text-right">
+                                                        <button type="button" data-toggle="modal"
+                                                                data-target="#itemSearchModal"
+                                                                class="btn-secondary btn-style btn btn-change mt-3">
+                                                            <strong><i class="fa-solid fa-plus"></i> Add Items</strong>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                            <div class="form-group"><label class="input__label">CGST Amount</label><input
+                                                    name="cgst_amount" id="total_cgst_amount" readonly type="text"
+                                                    class="form-control input-style" placeholder="">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                            <div class="form-group"><label class="input__label">SGST Amount</label><input
+                                                    name="sgst_amount" id="total_sgst_amount" readonly type="text"
+                                                    class="form-control input-style" placeholder="">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                            <div class="form-group"><label class="input__label">IGST Amount</label><input
+                                                    name="igst_amount" id="total_igst_amount" readonly type="text"
+                                                    class="form-control input-style" placeholder="">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                            <div class="form-group">
+                                                <label class="input__label">Net Amount</label>
+                                                <input name="net_amount" id="total_net_amount" readonly type="text"
+                                                    class="form-control input-style" placeholder="">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                            <div class="form-group"><label class="input__label">Total Amount</label><input
+                                                    name="total_amount" id="total_amount" readonly type="text"
+                                                    class="form-control input-style" placeholder="">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                            <div class="form-group">
+                                                <label class="input__label">Remarks</label>
+                                                <textarea name="remarks" class="form-control input-style"
+                                                        placeholder=""></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-check-label text-right">
+                                        <div class="radio mr-0">
+                                            <!-- <label class="form-check-label pt-1"><input
+                                                    class="form-check-input mt-1" type="checkbox">
+                                                Export To Excel</label> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group mt-1 mb-3 text-right">
+                                <button type="button" disabled class="btn-secondary btn-style btn mt-3 mr-2">
+                                    <strong><i class="fa-solid fa-print"></i> Print</strong>
+                                </button>
+                                <button type="button" disabled class="btn-secondary btn-style btn mt-3 mr-2">
+                                    <strong><i class="fa-solid fa-plus"></i> New</strong></button>
+                                <button type="button" onclick="window.location.href = '/palashinv/7';" class="btn-danger btn-style btn mt-3 mr-2"><strong><i
+                                        class="fas fa-times"></i> Cancel</strong></button>
+                                <button type="button" class="btn-primary btn-style btn mt-3" id="saveFormBtn"><strong><i
+                                        class="far fa-save"></i> Save</strong></button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- The Modal -->
+                    <div class="modal fade" id="itemSearchModal">
+                        <div class="modal-dialog modal-xl">
+                            <div class="modal-content">
+
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Item Search</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;"></button>
+                                </div>
+
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    <form>
+                                        <div class="card card_border mt-3">
+                                            <div class="card">
+                                                <div class="col-xl-12 p-heading">
+                                                    <h6 class="p-text">ITEM SEARCH</h6>
+                                                </div>
+                                                <div class="form-row card-body pb-3 pt-2">
+                                                    <div class="col-lg-3 col-md-4 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label class="input__label">Item Name</label>
+                                                            <input name="service name" type="text"
+                                                                class="form-control input-style" placeholder="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-4 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label class="input__label">Brand Name</label>
+                                                            <input name="service name" type="text"
+                                                                class="form-control input-style" placeholder="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-4 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label class="input__label">Item Code</label>
+                                                            <input name="service name" type="number"
+                                                                class="form-control input-style" placeholder="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-4 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label class="input__label">Item Category</label>
+                                                            <select name="report_generated_by"
+                                                                    class="form-control input-style">
+                                                                <option>Select</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-4 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label class="input__label">Item Group</label>
+                                                            <select name="report_generated_by"
+                                                                    class="form-control input-style">
+                                                                <option>Select</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-4 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label class="input__label">Molecule</label>
+                                                            <select name="report_generated_by"
+                                                                    class="form-control input-style">
+                                                                <option>Select</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-4 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label class="input__label">Store</label>
+                                                            <select name="report_generated_by"
+                                                                    class="form-control input-style">
+                                                                <option>Select</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-4 col-sm-12 text-left">
+                                                        <div class="form-group">
+                                                            <button type="button"
+                                                                    class="btn btn-style mt-4 btn-primary btn-style btn-change">
+                                                                <strong><i class="fas fa-search"></i> Search</strong>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card card_border mt-3">
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                <div class="form-check-label">
+                                                    <div class="radio mt-2 mb-2">
+                                                        <label class="form-check-label pt-1">
+                                                            <input class="form-check-input mt-1" type="checkbox">
+                                                            Select All Items
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-row card-body pt-1 pb-3">
+                                                <div class="col-12 mb-0">
+                                                    <div class="form-group">
+                                                        <div class="col col-12 pr-xl-0 pl-xl-0">
+                                                            <div class="slidx">
+                                                                <table class="table2">
+                                                                    <thead>
+                                                                    <tr>
+                                                                        <th contenteditable="true">Select</th>
+                                                                        <th contenteditable="true">Item Code</th>
+                                                                        <th contenteditable="true">Item Name</th>
+                                                                        <th contenteditable="true">Brand Name</th>
+                                                                        <th contenteditable="true">Purchase Tax %</th>
+                                                                        <th contenteditable="true">Sales Tax %</th>
+                                                                        <th contenteditable="true">Suspend</th>
+                                                                        <th contenteditable="true">Available Stock</th>
+                                                                        <th contenteditable="true">Stock UOM</th>
+                                                                    </tr>
+                                                                    </thead>
+                                                                    <tbody id="tbodyid">
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mt-1 mb-3 text-right">
+                                            <button type="button" class="btn-danger btn-style btn mt-3 mr-2"
+                                                    data-dismiss="modal">
+                                                <strong><i class="fas fa-times"></i> Cancel</strong>
+                                            </button>
+                                            <button type="button" class="btn-primary btn-style btn mt-3"
+                                                    data-dismiss="modal" id="addSelectedItemsBtn">
+                                                <strong><i class="fas fa-check"></i> OK</strong>
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--footer section start-->
+                    <%- include('../footer'); -%>
+
+                    <!-- Add jQuery and Bootstrap JS -->
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+                    <script>
+                        const loadDropdown = (url, elementId) => {
+                            fetch(url)
+                                .then(response => response.json())
+                                .then(data => {
+                                    const dropdown = document.getElementById(elementId);
+                                    data.forEach(item => {
+                                        const option = document.createElement('option');
+                                        option.value = item.description || item.rank_desc || item.shelf_desc || item.bin_desc || item.clinic_desc || item.tax_desc;
+                                        option.textContent = item.description || item.rank_desc || item.shelf_desc || item.bin_desc || item.clinic_desc || item.tax_desc;
+                                        dropdown.appendChild(option);
+                                    });
+                                })
+                                .catch(error => console.error(`Error fetching ${elementId} details:`, error));
+                        };
+                        loadDropdown('/adminInv/get-clinic-details', 'clinic');
+                        loadDropdown('/adminInv/get-store-details', 'store');
+                        
+                        $(document).ready(function () {
+                            // Function to fetch and display data
+                            function fetchData() {
+                                $.ajax({
+                                    url: '/admininv/get-item-details',
+                                    type: 'GET',
+                                    success: function (data) {
+                                        let tableRows = '';
+                                        data.forEach(function (item) {
+                                            tableRows += `
+                                                <tr data-item-id="${item.id}">
+                                                    <td><input class="form-check-input mt-0" type="checkbox"></td>
+                                                    <td>${item.item_code}</td>
+                                                    <td>${item.item_name}</td>
+                                                    <td>${item.brand_name}</td>
+                                                    <td style="display:none;"><input type="hidden" value="${item.base_unit_cost_price}"></td>
+                                                    <td style="display:none;"><input type="hidden" value="${item.base_unit_mrp}"></td>
+                                                    <td>0.00</td>
+                                                    <td>0.00</td>
+                                                    <td><input class="form-check-input mt-0" type="checkbox"></td>
+                                                    <td>0.00</td>
+                                                    <td>${item.stocking_uom}</td>
+                                                    <td style="display:none;"><input type="hidden" value="${item.purchase_uom}"></td>
+                                                    <td style="display:none;"><input type="hidden" value="${item.selling_uom}"></td>
+                                                </tr>
+                                            `;
+                                        });
+                                        $('#tbodyid').html(tableRows);
+                                    },
+                                    error: function (xhr, status, error) {
+                                        console.error('Error fetching classification details:', error);
+                                    }
+                                });
+                            }
+                    
+                            // Fetch data on page load
+                            fetchData();
+                    
+                            // Function to fetch UOM data based on item code
+                            function fetchUomData(itemCode, callback) {
+                                $.ajax({
+                                    url: '/adminInv/get-conv-list',  // Ensure this is the correct endpoint for fetching conversion details
+                                    type: 'POST',
+                                    contentType: 'application/json',
+                                    data: JSON.stringify({ code: itemCode }),
+                                    success: function (data) {
+                                        callback(data);
+                                    },
+                                    error: function (xhr, status, error) {
+                                        console.error('Error fetching UOM details:', error);
+                                    }
+                                });
+                            }
+                    
+                            // Handle adding selected items to the table outside the modal
+                            $('#addSelectedItemsBtn').click(function () {
+                                let selectedItems = [];
+                                $('#tbodyid tr').each(function () {
+                                    if ($(this).find('input[type="checkbox"]').is(':checked')) {
+                                        let itemId = $(this).data('item-id');
+                                        let itemCode = $(this).find('td').eq(1).text();
+                                        let itemData = {
+                                            item_id: itemId,
+                                            item_code: itemCode,
+                                            item_name: $(this).find('td').eq(2).text(),
+                                            brand_name: $(this).find('td').eq(3).text(),
+                                            cp: $(this).find('td').eq(4).find('input').val(),
+                                            mrp: $(this).find('td').eq(5).find('input').val(),
+                                            purchase_uom: $(this).find('td').eq(11).find('input').val(),
+                                            selling_uom: $(this).find('td').eq(12).find('input').val()
+                                        };
+                                        selectedItems.push(itemData);
+                                    }
+                                });
+                    
+                                let selectedTableRows = '';
+                                let itemsProcessed = 0;
+                                selectedItems.forEach(function (item) {
+                                    fetchUomData(item.item_code, function (uomData) {
+                                        let uomOptions = uomData.map(uom => `<option value="${uom.from_uom}">${uom.from_uom}</option>`).join('');
+                                        let suomOptions = uomData.map(uom => `<option value="${uom.to_uom}">${uom.to_uom}</option>`).join('');
+                                        let conversionFactors = uomData.reduce((acc, uom) => {
+                                            acc[uom.from_uom] = { to_uom: uom.to_uom, conversion_factor: uom.conversion_factor };
+                                            return acc;
+                                        }, {});
+                    
+                                        selectedTableRows += `
+                                            <tr data-item-id="${item.item_id}">
+                                                <td>${item.item_name}</td>
+                                                <td><input name="batch_code" type="text" class="form-control input-style "></td>
+                                                <td><input name="expiry_date" type="date" class="form-control input-style"></td>
+                                                <td><input name="quantity" type="number" class="form-control input-style quantity-input"></td>
+                                                <td>
+                                                    <select name="uom" class="form-control input-style uom-select">
+                                                        ${uomOptions}
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <select name="s_uom" class="form-control input-style suom-select">
+                                                        ${suomOptions}
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <input name="conversion_factor" type="number" class="form-control input-style conversion-factor" value="${conversionFactors[uomData[0].from_uom].conversion_factor}" readonly>
+                                                </td>
+                                                <td><input name="total_quantity" type="number" class="form-control input-style total-quantity" readonly></td>
+                                                <td><input name="cp" type="number" class="form-control input-style" value="${item.cp}" readonly></td>
+                                                <td><input name="mrp" type="number" class="form-control input-style" value="${item.mrp}" readonly></td>
+                                                <td><input name="total_cp" type="number" class="form-control input-style total-cp" readonly></td>
+                                                <td><input name="discount_on_sale" type="number" class="form-control input-style discount-on-sale"></td>
+                                                <td><input name="cgst" type="number" class="form-control input-style cgst"></td>
+                                                <td><input name="cgst_amount" type="number" class="form-control input-style cgst-amount" readonly></td>
+                                                <td><input name="sgst" type="number" class="form-control input-style sgst"></td>
+                                                <td><input name="sgst_amount" type="number" class="form-control input-style sgst-amount" readonly></td>
+                                                <td><input name="igst" type="number" class="form-control input-style igst"></td>
+                                                <td><input name="igst_amount" type="number" class="form-control input-style igst-amount" readonly></td>
+                                                <td><input name="total_net_cp" type="number" class="form-control input-style total-net-cp" readonly></td>
+                                                <td><input name="discount_amount" type="number" class="form-control input-style discount-amount" readonly></td>
+                                            </tr>
+                                        `;
+                                        itemsProcessed++;
+                                        if (itemsProcessed === selectedItems.length) {
+                                            $('#selectedItemsTable').html(selectedTableRows);
+                                            $('#itemSearchModal').modal('hide');
+                    
+                                            // Update S.UOM and conversion factor based on UOM selection
+                                            $('.uom-select').change(function () {
+                                                let selectedUom = $(this).val();
+                                                let conversionData = conversionFactors[selectedUom];
+                                                let $row = $(this).closest('tr');
+                    
+                                                $row.find('.suom-select').val(conversionData.to_uom);
+                                                $row.find('.conversion-factor').val(conversionData.conversion_factor);
+                    
+                                                updateCalculations($row);
+                                            });
+                    
+                                            // Update calculations on quantity and conversion factor change
+                                            $('.quantity-input, .conversion-factor').on('input', function () {
+                                                let $row = $(this).closest('tr');
+                                                updateCalculations($row);
+                                            });
+                    
+                                            // Update calculations on discount, cgst, sgst, or igst change
+                                            $('.discount-on-sale, .cgst, .sgst, .igst').on('input', function () {
+                                                let $row = $(this).closest('tr');
+                                                updateNetCP($row);
+                                            });
+                                        }
+                                    });
+                                });
+                            });
+                    
+                            function updateCalculations($row) {
+                                let quantity = parseFloat($row.find('.quantity-input').val()) || 0;
+                                let conversionFactor = parseFloat($row.find('.conversion-factor').val()) || 1;
+                                let cp = parseFloat($row.find('[name="cp"]').val()) || 0;
+                    
+                                let totalQuantity = quantity * conversionFactor;
+                                let totalCP = totalQuantity * cp;
+                    
+                                $row.find('.total-quantity').val(totalQuantity.toFixed(2));
+                                $row.find('.total-cp').val(totalCP.toFixed(2));
+                    
+                                updateNetCP($row);
+                            }
+                    
+                            function updateNetCP($row) {
+                                let totalCP = parseFloat($row.find('.total-cp').val()) || 0;
+                                let discount = parseFloat($row.find('.discount-on-sale').val()) || 0;
+                                let cgst = parseFloat($row.find('.cgst').val()) || 0;
+                                let sgst = parseFloat($row.find('.sgst').val()) || 0;
+                                let igst = parseFloat($row.find('.igst').val()) || 0;
+                    
+                                let discountAmount = totalCP * (discount / 100);
+                                let cgstAmount = (totalCP - discountAmount) * (cgst / 100);
+                                let sgstAmount = (totalCP - discountAmount) * (sgst / 100);
+                                let igstAmount = (totalCP - discountAmount) * (igst / 100);
+                                let totalNetCP = totalCP - discountAmount;
+                    
+                                $row.find('.discount-amount').val(discountAmount.toFixed(2));
+                                $row.find('.cgst-amount').val(cgstAmount.toFixed(2));
+                                $row.find('.sgst-amount').val(sgstAmount.toFixed(2));
+                                $row.find('.igst-amount').val(igstAmount.toFixed(2));
+                                $row.find('.total-net-cp').val(totalNetCP.toFixed(2));
+                    
+                                updateTotals();
+                            }
+                    
+                            function updateTotals() {
+                                let totalCGST = 0;
+                                let totalSGST = 0;
+                                let totalIGST = 0;
+                                let totalNet = 0;
+                    
+                                $('#selectedItemsTable tr').each(function () {
+                                    totalCGST += parseFloat($(this).find('.cgst-amount').val()) || 0;
+                                    totalSGST += parseFloat($(this).find('.sgst-amount').val()) || 0;
+                                    totalIGST += parseFloat($(this).find('.igst-amount').val()) || 0;
+                                    totalNet += parseFloat($(this).find('.total-net-cp').val()) || 0;
+                                });
+                    
+                                $('#total_cgst_amount').val(totalCGST.toFixed(2));
+                                $('#total_sgst_amount').val(totalSGST.toFixed(2));
+                                $('#total_igst_amount').val(totalIGST.toFixed(2));
+                                $('#total_net_amount').val(totalNet.toFixed(2));
+                                $('#total_amount').val((totalNet + totalCGST + totalSGST + totalIGST).toFixed(2));
+                            }
+                    
+                            // Handle form submission
+                            $('#saveFormBtn').click(function () {
+                                let formData = {
+                                    clinic: $('#clinic').val(),
+                                    store: $('#store').val(),
+                                    total_cgst_amount: $('#total_cgst_amount').val(),
+                                    total_sgst_amount: $('#total_sgst_amount').val(),
+                                    total_igst_amount: $('#total_igst_amount').val(),
+                                    total_net_amount: $('#total_net_amount').val(),
+                                    total_amount: $('#total_amount').val(),
+                                    remarks: $('[name="remarks"]').val(),
+                                    items: []
+                                };
+                    
+                                $('#selectedItemsTable tr').each(function () {
+                                    let itemData = {
+                                        item_id: $(this).data('item-id'),
+                                        batch_code: $(this).find('[name="batch_code"]').val(),
+                                        expiry_date: $(this).find('[name="expiry_date"]').val(),
+                                        quantity: $(this).find('[name="quantity"]').val(),
+                                        uom: $(this).find('[name="uom"]').val(),
+                                        s_uom: $(this).find('[name="s_uom"]').val(),
+                                        conversion_factor: $(this).find('[name="conversion_factor"]').val(),
+                                        total_quantity: $(this).find('[name="total_quantity"]').val(),
+                                        cp: $(this).find('[name="cp"]').val(),
+                                        mrp: $(this).find('[name="mrp"]').val(),
+                                        total_cp: $(this).find('[name="total_cp"]').val(),
+                                        discount_on_sale: $(this).find('[name="discount_on_sale"]').val(),
+                                        cgst: $(this).find('[name="cgst"]').val(),
+                                        cgst_amount: $(this).find('[name="cgst_amount"]').val(),
+                                        sgst: $(this).find('[name="sgst"]').val(),
+                                        sgst_amount: $(this).find('[name="sgst_amount"]').val(),
+                                        igst: $(this).find('[name="igst"]').val(),
+                                        igst_amount: $(this).find('[name="igst_amount"]').val(),
+                                        total_net_cp: $(this).find('[name="total_net_cp"]').val(),
+                                        discount_amount: $(this).find('[name="discount_amount"]').val()
+                                    };
+                                    formData.items.push(itemData);
+                                });
+
+                    
+                                $.ajax({
+                                    url: '/palashinv/save-opening-balance',
+                                    type: 'POST',
+                                    contentType: 'application/json',
+                                    data: JSON.stringify(formData),
+                                    success: function (response) {
+                                        alert('Data saved successfully');
+                                        $('#errordiv1').addClass('alert-success').removeClass('alert-danger').text('Saved Succesfully').show();
+                                        
+                                    },
+                                    error: function (xhr, status, error) {
+                                        console.error('Error saving data:', error);
+                                        $('#errordiv1').removeClass('alert-success').addClass('alert-danger').text('Something went wrong').show();
+                                        alert('Failed to save data');
+                                    }
+                                });
+                            });
+                        });
+                    </script>
+                    
+    </body>
+
+    </html>
