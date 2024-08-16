@@ -1,17 +1,16 @@
-    <!doctype html>
-    <html lang="en">
+<!doctype html>
+<html lang="en">
 
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>LifeLinkr</title>
+    <!-- Add Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
 
-        <title>LifeLinkr</title>
-        <!-- Add Bootstrap CSS -->
-        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
-    </head>
-
-    <body>
-
+<body>
     <%- include('../header'); -%>
 
     <div class="main-content">
@@ -23,7 +22,7 @@
                         Dashboard
                     </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNav">
@@ -155,7 +154,7 @@
 
                                                     <div class="form-check-label text-right">
                                                         <button type="button" data-toggle="modal"
-                                                                data-target="#itemSearchModal"
+                                                                data-target="#itemSearchModal" id="addItems"
                                                                 class="btn-secondary btn-style btn btn-change mt-3">
                                                             <strong><i class="fa-solid fa-plus"></i> Add Items</strong>
                                                         </button>
@@ -208,9 +207,6 @@
 
                                     <div class="form-check-label text-right">
                                         <div class="radio mr-0">
-                                            <!-- <label class="form-check-label pt-1"><input
-                                                    class="form-check-input mt-1" type="checkbox">
-                                                Export To Excel</label> -->
                                         </div>
                                     </div>
                                 </div>
@@ -322,7 +318,7 @@
                                                 <div class="form-check-label">
                                                     <div class="radio mt-2 mb-2">
                                                         <label class="form-check-label pt-1">
-                                                            <input class="form-check-input mt-1" type="checkbox">
+                                                            <input class="form-check-input mt-1" type="checkbox" id="selectAllItemsCheckbox">
                                                             Select All Items
                                                         </label>
                                                     </div>
@@ -340,8 +336,9 @@
                                                                         <th contenteditable="true">Item Code</th>
                                                                         <th contenteditable="true">Item Name</th>
                                                                         <th contenteditable="true">Brand Name</th>
-                                                                        <th contenteditable="true">Purchase Tax %</th>
-                                                                        <th contenteditable="true">Sales Tax %</th>
+                                                                        <th contenteditable="true">CGST</th>
+                                                                        <th contenteditable="true">SGST</th>
+                                                                        <th contenteditable="true">IGST</th>
                                                                         <th contenteditable="true">Suspend</th>
                                                                         <th contenteditable="true">Available Stock</th>
                                                                         <th contenteditable="true">Stock UOM</th>
@@ -351,8 +348,7 @@
                                                                     </tbody>
                                                                 </table>
                                                             </div>
-                                                        </div>
-                                                    </div>
+                                                        </div                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -380,65 +376,31 @@
                     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
                     <script>
-                        const loadDropdown = (url, elementId) => {
-                            fetch(url)
-                                .then(response => response.json())
-                                .then(data => {
-                                    const dropdown = document.getElementById(elementId);
-                                    data.forEach(item => {
-                                        const option = document.createElement('option');
-                                        option.value = item.description || item.rank_desc || item.shelf_desc || item.bin_desc || item.clinic_desc || item.tax_desc;
-                                        option.textContent = item.description || item.rank_desc || item.shelf_desc || item.bin_desc || item.clinic_desc || item.tax_desc;
-                                        dropdown.appendChild(option);
-                                    });
-                                })
-                                .catch(error => console.error(`Error fetching ${elementId} details:`, error));
-                        };
-                        loadDropdown('/adminInv/get-clinic-details', 'clinic');
-                        loadDropdown('/adminInv/get-store-details', 'store');
-                        
                         $(document).ready(function () {
-                            // Function to fetch and display data
-                            function fetchData() {
-                                $.ajax({
-                                    url: '/admininv/get-item-details',
-                                    type: 'GET',
-                                    success: function (data) {
-                                        let tableRows = '';
-                                        data.forEach(function (item) {
-                                            tableRows += `
-                                                <tr data-item-id="${item.id}">
-                                                    <td><input class="form-check-input mt-0" type="checkbox"></td>
-                                                    <td>${item.item_code}</td>
-                                                    <td>${item.item_name}</td>
-                                                    <td>${item.brand_name}</td>
-                                                    <td style="display:none;"><input type="hidden" value="${item.base_unit_cost_price}"></td>
-                                                    <td style="display:none;"><input type="hidden" value="${item.base_unit_mrp}"></td>
-                                                    <td>0.00</td>
-                                                    <td>0.00</td>
-                                                    <td><input class="form-check-input mt-0" type="checkbox"></td>
-                                                    <td>0.00</td>
-                                                    <td>${item.stocking_uom}</td>
-                                                    <td style="display:none;"><input type="hidden" value="${item.purchase_uom}"></td>
-                                                    <td style="display:none;"><input type="hidden" value="${item.selling_uom}"></td>
-                                                </tr>
-                                            `;
+                            // Function to load dropdown options
+                            const loadDropdown = (url, elementId) => {
+                                fetch(url)
+                                    .then(response => response.json())
+                                    .then(data => {
+                                        const dropdown = document.getElementById(elementId);
+                                        data.forEach(item => {
+                                            const option = document.createElement('option');
+                                            option.value = item.description || item.rank_desc || item.shelf_desc || item.bin_desc || item.clinic_desc || item.tax_desc;
+                                            option.textContent = item.description || item.rank_desc || item.shelf_desc || item.bin_desc || item.clinic_desc || item.tax_desc;
+                                            dropdown.appendChild(option);
                                         });
-                                        $('#tbodyid').html(tableRows);
-                                    },
-                                    error: function (xhr, status, error) {
-                                        console.error('Error fetching classification details:', error);
-                                    }
-                                });
-                            }
-                    
-                            // Fetch data on page load
-                            fetchData();
-                    
+                                    })
+                                    .catch(error => console.error(`Error fetching ${elementId} details:`, error));
+                            };
+                        
+                            // Load dropdown data
+                            loadDropdown('/adminInv/get-clinic-details', 'clinic');
+                            loadDropdown('/adminInv/get-store-details', 'store');
+                        
                             // Function to fetch UOM data based on item code
                             function fetchUomData(itemCode, callback) {
                                 $.ajax({
-                                    url: '/adminInv/get-conv-list',  // Ensure this is the correct endpoint for fetching conversion details
+                                    url: '/adminInv/get-conv-list',
                                     type: 'POST',
                                     contentType: 'application/json',
                                     data: JSON.stringify({ code: itemCode }),
@@ -450,8 +412,66 @@
                                     }
                                 });
                             }
-                    
+                        
+                            // Function to fetch data based on clinic and store
+                            function fetchData(clinic, store) {
+                                axios.get('/admininv/get-opening-balance-items', {
+                                    params: {
+                                        clinic: clinic,
+                                        store: store
+                                    }
+                                })
+                                .then(function (response) {
+                                    let data = response.data;
+                                    let tableRows = '';
+                                    data.forEach(function (item) {
+                                        tableRows += `
+                                            <tr data-item-id="${item.id}">
+                                                <td><input class="form-check-input mt-0 item-checkbox" type="checkbox"></td>
+                                                <td>${item.itemCode}</td>
+                                                <td>${item.itemName}</td>
+                                                <td>${item.brandName}</td>
+                                                <td style="display:none;"><input type="hidden" name="expiry_date" value="${item.expiry_days}"></td>
+                                                <td style="display:none;"><input type="hidden" name="base_cp" value="${item.base_cp}"></td>
+                                                <td style="display:none;"><input type="hidden" name="base_mrp" value="${item.base_mrp}"></td>
+                                                <td style="display:none;"><input type="hidden" name="discount_on_sale" value="${item.discount_on_sale}"></td>
+                                                <td ><input type="hidden" name="cgst_percent" value="${item.CGST}">${item.CGST}</td>
+                                                <td ><input type="hidden" name="sgst_percent" value="${item.SGST}">${item.SGST}</td>
+                                                <td ><input type="hidden" name="igst_percent" value="${item.IGST}">${item.IGST}</td>
+                                                <td><input type="checkbox" ${item.suspend === true ? 'checked' : ''}></td>
+                                                <td>0.00</td>
+                                                <td>${item.stockingUom}</td>
+                                            </tr>
+                                        `;
+                                    });
+                                    $('#tbodyid').html(tableRows);
+                                })
+                                .catch(function (error) {
+                                    console.error('Error fetching classification details:', error);
+                                });
+                            }
+                        
+                            // Handle "Select All Items" checkbox
+                            $('#selectAllItemsCheckbox').on('change', function () {
+                                const isChecked = $(this).is(':checked');
+                                $('#tbodyid .item-checkbox').prop('checked', isChecked);
+                            });
+                        
                             // Handle adding selected items to the table outside the modal
+                            $('#addItems').click(function (e) {
+                                let clinic = $('#clinic').val();
+                                let store = $('#store').val();
+                        
+                                if (!clinic || clinic === 'Select' || !store || store === 'Select') {
+                                    alert('Please select both clinic and store.');
+                                    e.preventDefault(); // Prevent the default action of opening the modal
+                                    e.stopPropagation(); // Stop the event from bubbling up
+                                    return;
+                                }
+                        
+                                fetchData(clinic, store);
+                            });
+                        
                             $('#addSelectedItemsBtn').click(function () {
                                 let selectedItems = [];
                                 $('#tbodyid tr').each(function () {
@@ -463,15 +483,18 @@
                                             item_code: itemCode,
                                             item_name: $(this).find('td').eq(2).text(),
                                             brand_name: $(this).find('td').eq(3).text(),
-                                            cp: $(this).find('td').eq(4).find('input').val(),
-                                            mrp: $(this).find('td').eq(5).find('input').val(),
-                                            purchase_uom: $(this).find('td').eq(11).find('input').val(),
-                                            selling_uom: $(this).find('td').eq(12).find('input').val()
+                                            expiry_days: $(this).find('input[name="expiry_date"]').val(),
+                                            base_cp: $(this).find('input[name="base_cp"]').val(),
+                                            base_mrp: $(this).find('input[name="base_mrp"]').val(),
+                                            discount_on_sale: $(this).find('input[name="discount_on_sale"]').val(),
+                                            cgst_percent: $(this).find('input[name="cgst_percent"]').val(),
+                                            sgst_percent: $(this).find('input[name="sgst_percent"]').val(),
+                                            igst_percent: $(this).find('input[name="igst_percent"]').val()
                                         };
                                         selectedItems.push(itemData);
                                     }
                                 });
-                    
+                        
                                 let selectedTableRows = '';
                                 let itemsProcessed = 0;
                                 selectedItems.forEach(function (item) {
@@ -482,12 +505,12 @@
                                             acc[uom.from_uom] = { to_uom: uom.to_uom, conversion_factor: uom.conversion_factor };
                                             return acc;
                                         }, {});
-                    
+                        
                                         selectedTableRows += `
                                             <tr data-item-id="${item.item_id}">
                                                 <td>${item.item_name}</td>
-                                                <td><input name="batch_code" type="text" class="form-control input-style "></td>
-                                                <td><input name="expiry_date" type="date" class="form-control input-style"></td>
+                                                <td><input name="batch_code" type="text" class="form-control input-style"></td>
+                                                <td><input name="expiry_date" type="date" class="form-control input-style expiry-date" ></td>
                                                 <td><input name="quantity" type="number" class="form-control input-style quantity-input"></td>
                                                 <td>
                                                     <select name="uom" class="form-control input-style uom-select">
@@ -503,15 +526,15 @@
                                                     <input name="conversion_factor" type="number" class="form-control input-style conversion-factor" value="${conversionFactors[uomData[0].from_uom].conversion_factor}" readonly>
                                                 </td>
                                                 <td><input name="total_quantity" type="number" class="form-control input-style total-quantity" readonly></td>
-                                                <td><input name="cp" type="number" class="form-control input-style" value="${item.cp}" readonly></td>
-                                                <td><input name="mrp" type="number" class="form-control input-style" value="${item.mrp}" readonly></td>
+                                                <td><input name="cp" type="number" class="form-control input-style"  value="${item.base_cp * conversionFactors[uomData[0].from_uom].conversion_factor}" readonly></td>
+                                                <td><input name="mrp" type="number" class="form-control input-style" value="${item.base_mrp * conversionFactors[uomData[0].from_uom].conversion_factor}" readonly></td>
                                                 <td><input name="total_cp" type="number" class="form-control input-style total-cp" readonly></td>
-                                                <td><input name="discount_on_sale" type="number" class="form-control input-style discount-on-sale"></td>
-                                                <td><input name="cgst" type="number" class="form-control input-style cgst"></td>
+                                                <td><input name="discount_on_sale" readonly type="number" class="form-control input-style discount-on-sale" value="${item.discount_on_sale}"></td>
+                                                <td><input name="cgst" type="number" readonly class="form-control input-style cgst" value="${item.cgst_percent}"></td>
                                                 <td><input name="cgst_amount" type="number" class="form-control input-style cgst-amount" readonly></td>
-                                                <td><input name="sgst" type="number" class="form-control input-style sgst"></td>
+                                                <td><input name="sgst" type="number" readonly class="form-control input-style sgst" value="${item.sgst_percent}"></td>
                                                 <td><input name="sgst_amount" type="number" class="form-control input-style sgst-amount" readonly></td>
-                                                <td><input name="igst" type="number" class="form-control input-style igst"></td>
+                                                <td><input name="igst" type="number" readonly class="form-control input-style igst" value="${item.igst_percent}"></td>
                                                 <td><input name="igst_amount" type="number" class="form-control input-style igst-amount" readonly></td>
                                                 <td><input name="total_net_cp" type="number" class="form-control input-style total-net-cp" readonly></td>
                                                 <td><input name="discount_amount" type="number" class="form-control input-style discount-amount" readonly></td>
@@ -519,27 +542,27 @@
                                         `;
                                         itemsProcessed++;
                                         if (itemsProcessed === selectedItems.length) {
-                                            $('#selectedItemsTable').html(selectedTableRows);
+                                            $('#selectedItemsTable').append(selectedTableRows);
                                             $('#itemSearchModal').modal('hide');
-                    
+                        
                                             // Update S.UOM and conversion factor based on UOM selection
                                             $('.uom-select').change(function () {
                                                 let selectedUom = $(this).val();
                                                 let conversionData = conversionFactors[selectedUom];
                                                 let $row = $(this).closest('tr');
-                    
+                        
                                                 $row.find('.suom-select').val(conversionData.to_uom);
                                                 $row.find('.conversion-factor').val(conversionData.conversion_factor);
-                    
+                        
                                                 updateCalculations($row);
                                             });
-                    
+                        
                                             // Update calculations on quantity and conversion factor change
                                             $('.quantity-input, .conversion-factor').on('input', function () {
                                                 let $row = $(this).closest('tr');
                                                 updateCalculations($row);
                                             });
-                    
+                        
                                             // Update calculations on discount, cgst, sgst, or igst change
                                             $('.discount-on-sale, .cgst, .sgst, .igst').on('input', function () {
                                                 let $row = $(this).closest('tr');
@@ -549,63 +572,69 @@
                                     });
                                 });
                             });
-                    
+                        
+                            function getFutureDate(days) {
+                                let date = new Date();
+                                date.setDate(date.getDate() + parseInt(days));
+                                return date.toISOString().split('T')[0];
+                            }
+                        
                             function updateCalculations($row) {
                                 let quantity = parseFloat($row.find('.quantity-input').val()) || 0;
                                 let conversionFactor = parseFloat($row.find('.conversion-factor').val()) || 1;
                                 let cp = parseFloat($row.find('[name="cp"]').val()) || 0;
-                    
+                        
                                 let totalQuantity = quantity * conversionFactor;
                                 let totalCP = totalQuantity * cp;
-                    
+                        
                                 $row.find('.total-quantity').val(totalQuantity.toFixed(2));
                                 $row.find('.total-cp').val(totalCP.toFixed(2));
-                    
+                        
                                 updateNetCP($row);
                             }
-                    
+                        
                             function updateNetCP($row) {
                                 let totalCP = parseFloat($row.find('.total-cp').val()) || 0;
                                 let discount = parseFloat($row.find('.discount-on-sale').val()) || 0;
                                 let cgst = parseFloat($row.find('.cgst').val()) || 0;
                                 let sgst = parseFloat($row.find('.sgst').val()) || 0;
                                 let igst = parseFloat($row.find('.igst').val()) || 0;
-                    
+                        
                                 let discountAmount = totalCP * (discount / 100);
                                 let cgstAmount = (totalCP - discountAmount) * (cgst / 100);
                                 let sgstAmount = (totalCP - discountAmount) * (sgst / 100);
                                 let igstAmount = (totalCP - discountAmount) * (igst / 100);
                                 let totalNetCP = totalCP - discountAmount;
-                    
+                        
                                 $row.find('.discount-amount').val(discountAmount.toFixed(2));
                                 $row.find('.cgst-amount').val(cgstAmount.toFixed(2));
                                 $row.find('.sgst-amount').val(sgstAmount.toFixed(2));
                                 $row.find('.igst-amount').val(igstAmount.toFixed(2));
                                 $row.find('.total-net-cp').val(totalNetCP.toFixed(2));
-                    
+                        
                                 updateTotals();
                             }
-                    
+                        
                             function updateTotals() {
                                 let totalCGST = 0;
                                 let totalSGST = 0;
                                 let totalIGST = 0;
                                 let totalNet = 0;
-                    
+                        
                                 $('#selectedItemsTable tr').each(function () {
                                     totalCGST += parseFloat($(this).find('.cgst-amount').val()) || 0;
                                     totalSGST += parseFloat($(this).find('.sgst-amount').val()) || 0;
                                     totalIGST += parseFloat($(this).find('.igst-amount').val()) || 0;
                                     totalNet += parseFloat($(this).find('.total-net-cp').val()) || 0;
                                 });
-                    
+                        
                                 $('#total_cgst_amount').val(totalCGST.toFixed(2));
                                 $('#total_sgst_amount').val(totalSGST.toFixed(2));
                                 $('#total_igst_amount').val(totalIGST.toFixed(2));
                                 $('#total_net_amount').val(totalNet.toFixed(2));
                                 $('#total_amount').val((totalNet + totalCGST + totalSGST + totalIGST).toFixed(2));
                             }
-                    
+                        
                             // Handle form submission
                             $('#saveFormBtn').click(function () {
                                 let formData = {
@@ -619,7 +648,7 @@
                                     remarks: $('[name="remarks"]').val(),
                                     items: []
                                 };
-                    
+                        
                                 $('#selectedItemsTable tr').each(function () {
                                     let itemData = {
                                         item_id: $(this).data('item-id'),
@@ -645,28 +674,18 @@
                                     };
                                     formData.items.push(itemData);
                                 });
-
-                    
-                                $.ajax({
-                                    url: '/palashinv/save-opening-balance',
-                                    type: 'POST',
-                                    contentType: 'application/json',
-                                    data: JSON.stringify(formData),
-                                    success: function (response) {
+                        
+                                axios.post('/palashinv/save-opening-balance', formData)
+                                    .then(function (response) {
                                         alert('Data saved successfully');
-                                        $('#errordiv1').addClass('alert-success').removeClass('alert-danger').text('Saved Succesfully').show();
-                                        
-                                    },
-                                    error: function (xhr, status, error) {
+                                        $('#errordiv1').addClass('alert-success').removeClass('alert-danger').text('Saved Successfully').show();
+                                    })
+                                    .catch(function (error) {
                                         console.error('Error saving data:', error);
-                                        $('#errordiv1').removeClass('alert-success').addClass('alert-danger').text('Something went wrong').show();
+                                        $('#errordiv1').removeClass('alert-success').addClass('alert-danger').text(error.response.data.message).show();
                                         alert('Failed to save data');
-                                    }
-                                });
+                                    });
                             });
                         });
-                    </script>
-                    
-    </body>
-
-    </html>
+                        </script>
+                        

@@ -342,7 +342,7 @@
                 </div>
             </div>
 
-            <script src="../javascripts/statusUpdate.js"></script>
+            <script src="../javascripts/updateStatus.js"></script>
             <script src="../javascripts/pageUpdate.js"></script>
 
             <script>
@@ -365,9 +365,9 @@
                 // Use delegation to handle clicks on dynamically added buttons
                 $(document).on('click', '.view-button', function() {
                     const subSpecs = JSON.parse($(this).attr('data-subspecs'));
-                    console.log(subSpecs)
+                   
                     const doctorName = $(this).closest('tr').find('.doctorName').text(); // Fetch the doctor name from the same row
-                    alert(doctorName)
+                   
                     $('#myModal').data('doctorName', doctorName); // Save the doctor name to the modal
                     fetchServices(subSpecs);
                 });
@@ -381,9 +381,7 @@
             const subSpecDescs = subSpecs.flatMap(spec => spec.subSpecDesc); // Use flatMap to handle arrays of descriptions
             const filteredServices = services.filter(service => subSpecDescs.includes(service.subSpecialization));
 
-            console.log("Descriptions:", subSpecDescs); // Debug: Log descriptions
-            console.log("Filtered Services:", filteredServices); // Debug: Log filtered services
-
+          
             if (filteredServices.length === 0) {
                 console.log("No services match the provided sub-specializations.");
             }
@@ -400,19 +398,26 @@
 function displayServices(services, subSpecs) {
     let htmlContent = '';
     if (services.length > 0) {
-        services.forEach(service => {
+        services.forEach((service, index) => {
             const matchingSubSpecs = subSpecs.filter(spec => spec.subSpecDesc.includes(service.subSpecialization));
             if (matchingSubSpecs.length > 0) {
                 matchingSubSpecs.forEach(subSpec => {
-                    const sharePercentage = subSpec.share || 0;
+                    const sharePercentage = parseFloat(subSpec.share) || 0;  // Ensure sharePercentage is a number
                     const discountedRate = calculateDiscount(service.baseServiceRate, sharePercentage);
+                    const serviceId = `service-${index}`;
 
                     htmlContent += `
-                        <tr>
+                        <tr id="${serviceId}">
                             <td class="col-md-2">${service.serviceName}</td>
                             <td>${service.baseServiceRate}</td>
-                            <td><input type="text" class="form-control input-style" value="${discountedRate.toFixed(2)}" /></td>
-                            <td>${sharePercentage}%</td>
+                            <td>
+                                <input type="text" class="form-control input-style discounted-rate" 
+                                    value="${discountedRate.toFixed(2)}" data-base-rate="${service.baseServiceRate}" />
+                            </td>
+                            <td>
+                                <input type="text" class="form-control input-style share-percentage" 
+                                    value="${sharePercentage.toFixed(2)}" data-base-rate="${service.baseServiceRate}" />
+                            </td>
                             <td>${service.subSpecialization}</td>
                         </tr>
                     `;
@@ -425,12 +430,35 @@ function displayServices(services, subSpecs) {
         htmlContent = '<tr><td colspan="5">No services available or matched your filters.</td></tr>';
     }
     $("#services").html(htmlContent);
+
+    // Attach event listeners
+    $(".discounted-rate").on('input', function() {
+        const baseRate = parseFloat($(this).data('base-rate'));
+        const discountedRate = parseFloat($(this).val());
+        if (!isNaN(discountedRate)) {
+            const sharePercentage = calculateShare(baseRate, discountedRate);
+            $(this).closest('tr').find('.share-percentage').val(sharePercentage.toFixed(2));
+        }
+    });
+
+    $(".share-percentage").on('input', function() {
+        const baseRate = parseFloat($(this).data('base-rate'));
+        const sharePercentage = parseFloat($(this).val());
+        if (!isNaN(sharePercentage)) {
+            const discountedRate = calculateDiscount(baseRate, sharePercentage);
+            $(this).closest('tr').find('.discounted-rate').val(discountedRate.toFixed(2));
+        }
+    });
 }
 
         
-            function calculateDiscount(rate, percentage) {
-                return (rate * (percentage / 100));
-            }
+function calculateShare(baseRate, discountedRate) {
+    return ((baseRate - discountedRate) / baseRate) * 100;
+}
+
+function calculateDiscount(baseRate, sharePercentage) {
+    return baseRate - (baseRate * (sharePercentage / 100));
+}
         </script>
         
 
@@ -451,7 +479,7 @@ function displayServices(services, subSpecs) {
                                 data.forEach(function (item) {
                                     console.log(JSON.stringify(item.subSpecs));
                                     tableRows += `
-                    <tr>
+                    <tr data-mod-id="${item.id}">
                         <td><button type="button" class="btn btn-primary btn-style btn-change view-button"
     data-bs-toggle="modal" data-bs-target="#myModal" data-subspecs='${JSON.stringify(item.subSpecs)}'>
     View
@@ -460,7 +488,7 @@ function displayServices(services, subSpecs) {
                         <td>${item.tariff}</td>
                         <td>${item.spec}</td>
                         <td>${item.subSpec}</td>
-                        <td><input class="form-check-input mt-0" type="checkbox" id='${item.id}' ${item.status ? 'checked' : ''}></td>
+                        <td><input class="form-check-input mt-0" type="checkbox" id='status-checkbox' data-id="${item.id}"' ${item.status ? 'checked' : ''}></td>
                     </tr>
                 `;
                                 });
@@ -476,46 +504,56 @@ function displayServices(services, subSpecs) {
                             }
                         });
                     }
-
+                    $('#exp-table').on('click', '#status-checkbox', function () {
+                                  const itemId = $(this).data('id');
+                                  const isChecked = $(this).is(':checked');
+                                  const schema = '<%= a %>'
+                                  const status = '<%= b %>'
+                                  console.log(itemId, isChecked,schema)
+                                  updateStatus(itemId, isChecked,schema,status);
+                               });
                     fetchData();
 
                     attachViewEventListeners();
                    
 
                     $('#addServicesButton').click(function() {
-            const services = [];
-            const doctorName = $('#myModal').data('doctorName'); // Retrieve the doctor name saved in modal data
+    const services = [];
+    const doctorName = $('#myModal').data('doctorName'); // Retrieve the doctor name saved in modal data
 
-            $('#services tr').each(function() {
-                const serviceName = $(this).find('td').eq(1).text();
-                const serviceRate = $(this).find('td').eq(2).text();
-                const shareAmount = $(this).find('input').val();
-                const sharePercentage = $(this).find('td').eq(4).text().replace('%', '');
-                const subSpecialization = $(this).find('td').eq(5).text();
+    $('#services tr').each(function() {
+        const serviceName = $(this).find('td').eq(0).text().trim(); // Assuming service name is in the first column
+        const serviceRate = parseFloat($(this).find('td').eq(1).text().trim()); // Assuming service rate is in the second column
+        const shareAmount = parseFloat($(this).find('input.discounted-rate').val().trim()); // Assuming share amount comes from a specifically classed input for discounted rate
+        const sharePercentage = parseFloat($(this).find('input.share-percentage').val().trim()); // Correctly targeting the share percentage input assuming it has a specific class
+        const subSpecialization = $(this).find('td').eq(4).text().trim(); // Assuming sub-specialization is in the fifth column
 
-                services.push({
-                    serviceName,
-                    serviceRate,
-                    shareAmount,
-                    sharePercentage,
-                    subSpecialization
-                });
-            });
-
-            $.ajax({
-                url: '/billing/add-services',
-                type: 'POST',
-                contentType: 'application/json',
-                data: JSON.stringify({ doctorName, services }),
-                success: function(response) {
-                    alert('Services added successfully');
-                    $('#myModal').modal('hide');
-                },
-                error: function(xhr, status, error) {
-                    console.error('Failed to add services:', error);
-                    alert('Failed to add services');
-                }
-            });
+        services.push({
+            serviceName,
+            serviceRate,
+            shareAmount,
+            sharePercentage,
+            subSpecialization
         });
+    });
+
+    console.log("Sending the following services data:", JSON.stringify(services));
+
+    $.ajax({
+        url: '/billing/add-services',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({ doctorName, services }),
+        success: function(response) {
+            alert('Services added successfully');
+            $('#myModal').modal('hide');
+        },
+        error: function(xhr, status, error) {
+            console.error('Failed to add services:', error);
+            alert('Failed to add services');
+        }
+    });
+});
+
                 });
             </script>

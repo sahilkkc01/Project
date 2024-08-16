@@ -232,7 +232,7 @@
                                 // Assuming crypto-functions.js is in the same directory
 
                                 import { pagi_search } from '../javascripts/pagi_search.js';
-                                import { updateStatus } from '../javascripts/statusUpdate.js'
+                       
 
 
                                 $(document).ready(function () {
@@ -294,7 +294,7 @@
                                                     const itemId = $(this).data('id');
                                                     const isChecked = $(this).is(':checked');
                                                     console.log(itemId + isChecked)
-                                                    updateStatus(itemId, isChecked, 'SourceL1');
+                                                    updateStatus(itemId, isChecked, 'SourceL1','patient');
                                                 });
                                     fetchData();
                                 });

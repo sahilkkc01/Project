@@ -779,7 +779,7 @@ router.post('/upload', upload.single('image'), async (req, res) => {
   
   router.get('/loadDept', (req, res) => {
     console.log('111')
-    fs.readFile(path.join(__dirname,'../', 'Dept.json'), 'utf8', (err, data) => {
+    fs.readFile(path.join(__dirname,'../myjson/Dept.json'), 'utf8', (err, data) => {
       if (err) {
         res.status(500).send('Error reading the file');
         return;

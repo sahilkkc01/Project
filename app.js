@@ -7,17 +7,24 @@ var flash = require('connect-flash');
 const multer= require('multer')
 const md5 = require('md5')
 const session = require('express-session');
+const compression = require('compression');
+const helmet = require('helmet');
+
+
 
 
 const {Admin} = require('./models/Kyc')
 const clinicRoutes = require('./routes/clinicalRoute')
 var adminInventory = require('./routes/adminInventory');
-var indexRouter = require('./routes/index');
+
 var usersRouter = require('./routes/users');
 const { radioRouter } = require('./routes/Radiology');
 var patientconfigRouter = require('./routes/patientconfig')
 const palashInv = require('./routes/palshInv');
 var billing = require('./routes/billing');
+var indexRouter = require('./routes/Admin');
+var patRegRoute = require('./routes/PatientRegistration');
+var packageConfigRouter = require('./routes/packageConfig')
 
 const { kycCtrl ,dashboardCtrl,modifyApt,modifyVisit,apt1,apt2,apt3,apt4,login,register,logout} = require('./controllers/controller');
 
@@ -37,18 +44,37 @@ const upload = multer({ storage: storage });
 var app = express();
 
 app.use(cookieParser())
+
 app.use(session({
-  secret: 'abc', 
+  secret: 'abc', // change 'your_secret_key' to a real secret
   resave: false,
   saveUninitialized: true,
-  cookie: {
-    secure: false, 
-    maxAge: 24 * 60 * 60 * 1000 *1000 // 1 day in milliseconds
-  }
+  cookie: { secure: 'auto', maxAge: 3600000 } // Adjust settings as necessary
 }));
 
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-app.use(flash());
+app.use(express.static(path.join(__dirname, 'public')));
+
+
+
+
+
+
+app.use(compression({
+  level: 6,
+  threshold: 100*1000,
+  filter: (req, res)=>{
+  if(req.header['x-no-compression']){
+   return false
+  }
+ return compression.filter(req,res)
+ }
+ }));
+ 
+//  app.use(helmet());
 
 
 app.get('/home', async(req, res) => {
@@ -67,11 +93,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 // Middleware setup
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+
 
 // Middleware function to get today's date and store it in req.todayDate
 const todayDateMiddleware = (req, res, next) => {
@@ -92,11 +114,15 @@ app.use('/patient',patientconfigRouter);
 app.use('/palashinv',palashInv);
 app.use('/billing', billing);
 
+app.use('/Admin', indexRouter);
+app.use('/findPatient', patRegRoute);
+app.use('/package',packageConfigRouter);
+
 
 
 const loginName=''
 app.get('/home', (req, res) => {
- 
+
   res.render('form-new', { loginName: req.session.user.userName});
 });
 
@@ -114,7 +140,7 @@ app.get('/1', (req, res) => {
 
 
 app.get('/2',(req,res)=>{
-  res.redirect(301,'/home')
+  res.redirect(301,'/1')
 })
 
 app.get('/dashboard',dashboardCtrl); 
@@ -123,8 +149,11 @@ app.get('/dashboard',dashboardCtrl);
 
 app.post('/register', register);
 
+  // Track active sessions by user ID
+
 // POST request handler for user login
-app.post('/login', login);
+app.post('/login', login)
+
 
 app.post('/logout', logout);
 
@@ -156,6 +185,7 @@ app.use(function (err, req, res, next) {
 
 // Start the server
 const {con} =require('./sequelize');
+const { SuperAdmin } = require('./models/Admin');
 
 const PORT = 5000;
 app.listen(PORT, async() => {

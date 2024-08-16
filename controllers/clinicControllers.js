@@ -1517,7 +1517,7 @@ const SpecCtrl = async (req, res) => {
 const getClinicName = async (req, res) => {
   try {
     const clinics = await ClinicConfiguration.findAll();
-    console.log(clinics)
+    // console.log(clinics)
     res.status(200).json(clinics);
   } catch (error) {
     console.error('Error fetching primary symptoms details:', error);

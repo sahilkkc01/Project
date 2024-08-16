@@ -71,71 +71,50 @@ body{display:flex;align-items:center;justify-content:center;height:100vh;margin:
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-
-
-    
-
-  const loginForm = document.getElementById('loginForm');
-  const loadingIndicator = document.getElementById('loadingIndicator');
-  const errorDiv = document.getElementById('errorDiv');
-
-  loginForm.addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent the default form submission
-
-    // Get form data
-    const formData = {
-      userEmail: loginForm.userEmail.value,
-      userPassword: loginForm.userPassword.value
-    };
-
-    // Show loading indicator
-    loadingIndicator.textContent = 'Loading...';
-    loadingIndicator.style.display = 'block';
-
-    // Validate form data (basic validation)
-    if (!formData.userEmail || !formData.userPassword) {
-      errorDiv.textContent = 'Please fill out all fields.';
-      errorDiv.style.display = 'block';
-      loadingIndicator.style.display = 'none'; // Hide loading indicator
-      return;
-    }
-
-    // Perform the POST request using fetch API
-    fetch('/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(formData)
-    })
-    .then(response => {
-      if (!response.ok) {
-        alert("Invalid Username or password")
-        throw new Error('Network response was not ok');
-        
-      }
-      return response.json();
-    })
-    .then(data => {
-      // Handle successful login
-      console.log('Login successful:', data);
-      // alert('Login successful!');
-      window.location.href = '/home';
-      errorDiv.style.display = 'none'; // Hide error message if shown
-      loginForm.reset(); // Optionally reset the form after successful login
-      // Perform any additional actions after successful login
-
-    })
-    .catch(error => {
-      // Handle errors
-      console.error('Error:', error);
-      errorDiv.textContent = 'invalid user email or password.';
-      errorDiv.style.display = 'block';
-    })
-    .finally(() => {
-      loadingIndicator.style.display = 'none'; // Hide loading indicator regardless of success or error
-    });
+      const loginForm = document.getElementById('loginForm');
+      const loadingIndicator = document.getElementById('loadingIndicator');
+      const errorDiv = document.getElementById('errorDiv');
+  
+      loginForm.addEventListener('submit', function(event) {
+          event.preventDefault();  // Prevent the default form submission
+  
+          const formData = {
+              userEmail: loginForm.userEmail.value,
+              userPassword: loginForm.userPassword.value
+          };
+  
+          loadingIndicator.textContent = 'Loading...';
+          loadingIndicator.style.display = 'block';
+  
+          fetch('/login', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(formData)
+          })
+          .then(response => {
+              if (response.status === 409) {
+                  alert("User is already logged in.");
+                  return;  // Prevent further execution
+              }
+              if (!response.ok) {
+                  throw new Error('Failed to log in');
+              }
+              return response.json();
+          })
+          .then(data => {
+              window.location.href = '/home';
+          })
+          .catch(error => {
+              console.error('Login Error:', error);
+              errorDiv.textContent = 'Failed to log in. Please try again.';
+              errorDiv.style.display = 'block';
+          })
+          .finally(() => {
+              loadingIndicator.style.display = 'none';
+          });
+      });
   });
-});
-
-</script>
+  </script>
+  

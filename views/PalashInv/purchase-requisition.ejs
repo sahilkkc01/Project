@@ -347,11 +347,11 @@
                     type: 'GET',
                     success: function(data) {
                         console.log(data);
-                        let details = data.details;
+                        let details = data.items;
                         let fetchDetailsPromises = details.map(detail => {
                             return new Promise((resolve, reject) => {
                                 $.ajax({
-                                    url: `/palashinv/get-items/${detail.item_id}`,
+                                    url: `/palashinv/get-items/${detail.item_code}`,
                                     type: 'GET',
                                     success: function(itemData) {
                                         // Assuming itemData contains both uom and item_name
@@ -402,19 +402,19 @@
                 });
             }
     
-            function updateFreezeStatus(requisitionId, freezeStatus) {
+            function updateFreezeStatus(type, id, freezeStatus) {
                 $.ajax({
-                    url: `/palashinv/update-freeze-status/${requisitionId}`,
+                    url: `/palashinv/update-freeze-status/${type}/${id}`,
                     type: 'POST',
                     data: JSON.stringify({ freeze: freezeStatus }),
                     contentType: 'application/json',
                     success: function(response) {
-                        alert('Requisition Freezed and Updated Successfully')
-                        console.log(`Freeze status of requisition ${requisitionId} updated successfully`);
+                        alert(`${type.charAt(0).toUpperCase() + type.slice(1)} Freezed and Updated Successfully`);
+                        console.log(`Freeze status of ${type} ${id} updated successfully`);
                         fetchData(); // Refresh the data
                     },
                     error: function(xhr, status, error) {
-                        console.error('Error updating freeze status:', error);
+                        console.error(`Error updating freeze status for ${type}:`, error);
                     }
                 });
             }
@@ -441,9 +441,19 @@
             $('#rateContBody').on('change', '.freeze-checkbox', function(event) {
                 let requisitionId = $(this).data('id');
                 let freezeStatus = $(this).is(':checked');
-                updateFreezeStatus(requisitionId, freezeStatus);
+                updateFreezeStatus('requisition', requisitionId, freezeStatus);
+            });
+    
+            // Alert for From Store and To Store validation
+            $('#from_store, #to_store').on('change', function() {
+                const fromStore = $('#from_store').val();
+                const toStore = $('#to_store').val();
+    
+                if (fromStore && toStore && fromStore === toStore) {
+                    alert('From Store and To Store cannot be the same.');
+                    $(this).val(''); // Reset the selected value
+                }
             });
         });
     </script>
-</body>
-</html>
+    

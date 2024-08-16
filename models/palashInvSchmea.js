@@ -32,6 +32,12 @@ const OpeningBalance = sequelize.define('OpeningBalance', {
 });
 
 const OpeningBalanceItem = sequelize.define('OpeningBalanceItem', {
+  clinic: {
+    type: DataTypes.STRING,
+},
+  store: {
+    type: DataTypes.STRING,
+},
     opening_balance_id: {
         type: DataTypes.INTEGER,
         references: {
@@ -189,8 +195,8 @@ const Indent = sequelize.define('Indent', {
       type: DataTypes.INTEGER,
      
     },
-    item_id: {
-      type: DataTypes.INTEGER,
+    item_code: {
+      type: DataTypes.STRING,
      
     },
     indent_quantity: {
@@ -285,12 +291,17 @@ const Indent = sequelize.define('Indent', {
         key: 'id'
       }
     },
-    item_id: {
-      type: DataTypes.INTEGER,
+    item_code: {
+      type: DataTypes.STRING,
     },
     requisition_quantity: {
       type: DataTypes.INTEGER,
     },
+    
+    pending_quantity: {
+      type: DataTypes.INTEGER,
+    },
+
     available_stock: {
       type: DataTypes.INTEGER,
     }
@@ -324,7 +335,191 @@ const Indent = sequelize.define('Indent', {
     tableName: 'prefixes', // Optional: specify the table name if it's different
     timestamps: false, // Optional: disable timestamps if not needed
   });
+
+  const CurrentItemStock = sequelize.define('InventoryItem', {
+    clinic: {
+      type: DataTypes.STRING,
+    },
+    store: {
+      type: DataTypes.STRING,
+    },
+    
+    item_id: {
+      type: DataTypes.INTEGER,
+    },
+    isFree: {
+      type: DataTypes.BOOLEAN,
+    },
+     
+    batchCode: {
+      type: DataTypes.STRING,
+    },
+    availableStock: {
+      type: DataTypes.INTEGER,
+    },
   
+    expiryDate: {
+      type: DataTypes.DATE,
+    },
+    
+  }, {
+    tableName: 'invcurrentitemstock',
+    timestamps: true, // You can change this if you need timestamps
+  });
+  
+  const PurchaseOrder = sequelize.define('PurchaseOrder', {
+    date: {
+        type: DataTypes.DATEONLY,
+    },
+    store: {
+        type: DataTypes.STRING,
+    },
+    payment_mode: {
+        type: DataTypes.STRING,
+    },
+    supplier: {
+        type: DataTypes.STRING,
+    },
+    payment_terms: {
+        type: DataTypes.STRING,
+    },
+    delivery: {
+        type: DataTypes.STRING,
+    },
+    delivery_duration: {
+        type: DataTypes.STRING,
+    },
+    guarantee_warranty: {
+        type: DataTypes.STRING,
+    },
+    schedule: {
+        type: DataTypes.STRING,
+    },
+    instructions: {
+        type: DataTypes.TEXT,
+    },
+    gross_amount: {
+        type: DataTypes.DECIMAL(10, 2),
+    },
+    total_cgst: {
+        type: DataTypes.DECIMAL(10, 2),
+    },
+    total_sgst: {
+        type: DataTypes.DECIMAL(10, 2),
+    },
+    total_igst: {
+        type: DataTypes.DECIMAL(10, 2),
+    },
+    other_charges: {
+        type: DataTypes.DECIMAL(10, 2),
+    },
+    total_discount: {
+        type: DataTypes.DECIMAL(10, 2),
+    },
+    po_discount: {
+        type: DataTypes.DECIMAL(10, 2),
+    },
+    total_net_amount: {
+        type: DataTypes.DECIMAL(10, 2),
+    },
+    remarks: {
+        type: DataTypes.TEXT,
+    },
+}, {
+    timestamps: true,
+    tableName: 'invpurchase_orders'
+});
+
+const POItemDetails = sequelize.define('ItemDetails', {
+  purchase_order_id: {
+    type: DataTypes.INTEGER,
+    references: {
+        model: PurchaseOrder,
+        key: 'id'
+    }
+},
+  item_code: {
+      type: DataTypes.STRING,
+  },
+  item_name: {
+      type: DataTypes.STRING,
+  },
+  pr_quantity: {
+      type: DataTypes.STRING,
+  },
+  pr_pending_quantity: {
+      type: DataTypes.STRING,
+  },
+  purchase_uom: {
+      type: DataTypes.STRING,
+  },
+  purchase_quantity: {
+      type: DataTypes.STRING, 
+  },
+  stocking_uom: {
+      type: DataTypes.STRING,
+  },
+  transaction_uom: { 
+      type: DataTypes.STRING,
+  },
+  purchase_cost_price: {
+      type: DataTypes.DECIMAL(10, 2),
+  },
+  cost_amount: {
+      type: DataTypes.DECIMAL(10, 2),
+  },
+  mrp: {
+      type: DataTypes.DECIMAL(10, 2),
+  },
+  amount: {
+      type: DataTypes.DECIMAL(10, 2),
+  },
+  available_stock: {
+      type: DataTypes.STRING,
+  },
+  discount_on_sale: {
+      type: DataTypes.DECIMAL(10, 2),
+  },
+  discount_amount: {
+      type: DataTypes.DECIMAL(10, 2),
+  },
+  cgst_percent: {
+      type: DataTypes.STRING,
+  },
+  cgst_amount: {
+      type: DataTypes.DECIMAL(10, 2),
+  },
+  sgst_percent: {
+      type: DataTypes.STRING,
+  },
+  sgst_amount: {
+      type: DataTypes.DECIMAL(10, 2),
+  },
+  igst_percent: {
+      type: DataTypes.STRING,
+  },
+  igst_amount: {
+      type: DataTypes.DECIMAL(10, 2),
+  },
+  net_amount: {
+      type: DataTypes.DECIMAL(10, 2),
+  },
+  specification: {
+      type: DataTypes.STRING,
+  },
+  hsn_code: {
+      type: DataTypes.STRING,
+  },
+ 
+}, {
+  timestamps: true,
+  tableName: 'invpurchase_order_details'
+});
+
+// Define association
+PurchaseOrder.hasMany(POItemDetails, { foreignKey: 'purchase_order_id' });
+POItemDetails.belongsTo(PurchaseOrder, { foreignKey: 'purchase_order_id' });
+
   
 
-module.exports = {OpeningBalanceItem,OpeningBalance,IndentItem,Indent,Requisition,RequisitionItem,Prefix};
+module.exports = {OpeningBalanceItem,OpeningBalance,IndentItem,Indent,Requisition,RequisitionItem,Prefix,CurrentItemStock,PurchaseOrder,POItemDetails};

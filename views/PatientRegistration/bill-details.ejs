@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>LifeLinker</title>
+
+   <%- include('../header'); -%>
+        <!-- main content start -->
+        <div class="main-content">
+
+            <div class="row content-top-gap2">
+                <div class="col-lg-12">
+                    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+                        <a class="navbar-brand text-center mr-5" href="#">
+                            <span class="dash-icon"><i class="fas fa-tachometer-alt"></i></span>
+                            Dashboard
+                        </a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav">
+                                <li class="nav-item active text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="far fa-user"></i></span>
+                                        Master
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-exchange-alt"></i></span>
+                                        Transaction
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-hand-holding-medical"></i></span>
+                                        Patient 360
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-receipt"></i></span>
+                                        Outside Reciept
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-file-invoice"></i></span>
+                                        Outpatient Department
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-chart-line"></i></span>
+                                        Analytics
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="far fa-clock"></i></span>
+                                        Waiting List
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-wrench"></i></span>
+                                        Adminstration
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-spinner"></i></span>
+                                        Additional
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+            <!-- content -->
+            <div class="container-fluid">
+
+                <div class="chart">
+                    <div class="row">
+
+                        <div class="col-lg-12 pl-lg-0 mt-2 ml-2">
+                            <h4 class="primary">Bill Details</h4>
+                        </div>
+                        <div class="col-lg-12 pl-lg-2 chart-grid">
+                            <form>
+                                <div class="card card_border">
+                                    <div class="">
+                                        <!--Past your code here starts-->
+
+                                        <div class="card">
+                                            <div class="col-xl-12 p-heading">
+                                                <h6 class="p-text">BILL LIST</h6>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="pl-xl-0">
+                                                    <h6 class="primary"></h6>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="col-6 mb-3 mb-3">
+                                                        <div class="form-group"><label
+                                                                class="input__label">Search</label><input
+                                                                name="description" type="text" id="searchBox"
+                                                                class="form-control input-style" placeholder=""></div>
+                                                    </div>
+                                                   
+                                                </div>
+
+                                                <div class="form-row"></div>
+                                                <div class="form-row"></div>
+                                                <div class="form-row">
+                                                    <div class="col-12 mb-3 mb-3">
+                                                        <div class="form-group">
+                                                            <div class="col col-12 pr-xl-0 pl-xl-0">
+                                                                <div class="slidx">
+
+                                                                    <table class="table2" id="bcExp">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th contenteditable="true">View</th>
+																				<th contenteditable="true">Date</th>
+                                                                                <th contenteditable="true">Bill No</th>
+                                                                                <th contenteditable="true">Mr No
+                                                                                </th>
+																				<th contenteditable="true">Total Amount
+                                                                                </th>
+																				<th contenteditable="true">Total Concession Amount
+                                                                                </th>
+																				<th contenteditable="true">Net Amount
+                                                                                </th>
+																				<th contenteditable="true">Balance Amount
+                                                                                </th>
+																				<th contenteditable="true">Freezed
+                                                                                </th>
+                                                                                <th contenteditable="true">Status</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody id="exp-table"></tbody>
+                                                                    </table>
+                                                                </div>
+                                                                <div id="paginationControls"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-row"></div>
+                                            </div>
+                                        </div>
+
+                                        <!--Past your code here ends-->
+                                    </div>
+                                </div>
+                                <div class="form-group mt-1 mb-3 text-right">
+
+                                    <button type="button" class="btn-success btn-style btn mt-3 mr-2" disabled><strong><i
+                                                class="fa-regular fa-pen-to-square"></i> Modify</strong></button>
+
+                                    <button type="button" class="btn-secondary btn-style btn mt-3 mr-2" onclick="window.location.href='/findpatient/25';"><strong><i
+                                                class="fa-solid fa-plus" ></i> New</strong></button>
+
+                                    <button type="button" class="btn-danger btn-style btn mt-3 mr-2" onclick="window.location.href='/findpatient/29';" disabled><strong><i
+                                                class="fas fa-times" ></i> Cancel</strong></button>
+
+                                    <button type="button" class="btn-primary btn-style btn mt-3" disabled><strong><i
+                                                class="far fa-save"></i> Save</strong></button>
+
+                                </div>
+                            </form>
+                        </div>
+                       <%- include('../footer'); -%>
+                            <script src="../javascripts/updateStatus.js"></script>
+                      
+						
+							
+                           
+                            <script type="module">
+                                import { pagi_search } from '../javascripts/pagi_search.js';
+								
+
+                                // console.log(statusUpdate);
+                                $(document).ready(function () {
+                                    // Function to fetch and display data
+                                    function fetchData() {
+                                        $.ajax({
+                                            url: '/findpatient/getpatientBills',
+                                            type: 'GET',
+                                            success: function (data) {
+                                                data.reverse();
+                                                let tableRows = '';
+                                                data.forEach(function (item) {
+                                                    console.log(item)
+                                                    tableRows += `
+                                                        <tr data-mod-id="${item.id}">
+                                                            <td><button id="view-btn" type="button" class="btn btn-primary btn-style btn-change"  >View</button></td>
+                                                            <td>${item.date}</td>
+                                                            <td></td>
+															<td>${item.mrNo}</td>
+															<td>${item.totalBillAmount}</td>
+															<td>${item.totalConcessionAmount}</td>
+															<td>${item.totalNetBillAmount}</td>
+															<td></td>
+															<td>${item.freeze}</td>
+                                                            <td><input class="form-check-input mt-0" type="checkbox" id='status-checkbox' data-id="${item.id}"  ${item.status ? 'checked' : ''}></td>
+                                                        </tr>
+                                                        `;
+                                                });
+                                                $('#exp-table').html(tableRows);
+                                                pagi_search('#searchBox', '#bcExp', '#paginationControls');
+                                            },
+                                            error: function (xhr, status, error) {
+                                                console.error('Error fetching classification details:', error);
+                                            }
+                                        });
+                                    }
+                                    $('#exp-table').on('click', '#view-btn',function(){
+                                       const id=$(this).closest('tr').data('mod-id')
+                                       console.log(id)
+                                        ViewBtn('25',id,'findpatient');      
+                                   });
+                                    $('#exp-table').on('click', '#status-checkbox', function () {
+                                       const itemId = $(this).data('id');
+                                       const isChecked = $(this).is(':checked');
+                                       const schema = '<%= a %>'
+                                       const status = '<%= b %>'
+                                       console.log(itemId, isChecked,schema)
+                                       updateStatus(itemId,isChecked,schema,status,'findpatient');
+                                    });
+                                    fetchData();
+                                });
+                            </script>
+                          
+                          

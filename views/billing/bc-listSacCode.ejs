@@ -173,56 +173,55 @@
                             </form>
                         </div>
                        <%- include('../footer'); -%>
-                            <script src="../javascripts/statusUpdate.js"></script>
-                            <script src="../javascripts/pageUpdate.js"></script>
-                            <script>
-                              
-                                function ChangeStatus3(b) {
-                                    console.log(b);
-                                    let url = '/billing/change-sac-status'
-                                    updateStatus(b, url)
-                                }
+                       <script src="../javascripts/updateStatus.js"></script>
+                       <script src="../javascripts/pageUpdate.js"></script>
+                      
+                       <script type="module">
+                           import { pagi_search } from '../javascripts/pagi_search.js';
 
-                                function updateExp(id) {
-
-                                    // console.log(id);
-                                    let url = '/billing/update-exp-master'
-                                    updatePage(id, url)
-                                }
-                            </script>
-
-                            <script type="module">
-                                import { pagi_search } from '../javascripts/pagi_search.js';
-
-                                // console.log(statusUpdate);
-                                $(document).ready(function () {
-                                    // Function to fetch and display data
-                                    function fetchData() {
-                                        $.ajax({
-                                            url: '/billing/get-sac-m',
-                                            type: 'GET',
-                                            success: function (data) {
-                                                data.reverse();
-                                                let tableRows = '';
-                                                data.forEach(function (item) {
-                                                    tableRows += `
-                                                        <tr>
-                                                            <td><a type="button" class="btn btn-primary btn-style btn-change"  onClick=updateExp(${item.id}) href='/billing/31' >View</a></td>
-                                                            <td>${item.exp_master_code}</td>
-                                                            <td>${item.exp_master_desc}</td>
-                                                            <td><input class="form-check-input mt-0" type="checkbox" id='${item.id}' onClick=ChangeStatus3(${item.id}) ${item.exp_status ? 'checked' : ''}></td>
-                                                        </tr>
-                                                        `;
-                                                });
-                                                $('#exp-table').html(tableRows);
-                                                pagi_search('#searchBox', '#bcExp', '#paginationControls');
-                                            },
-                                            error: function (xhr, status, error) {
-                                                console.error('Error fetching classification details:', error);
-                                            }
-                                        });
-                                    }
-                                    fetchData();
-                                });
-                            </script>
-                          
+                           // console.log(statusUpdate);
+                           $(document).ready(function () {
+                               // Function to fetch and display data
+                               function fetchData() {
+                                   $.ajax({
+                                       url: '/billing/get-sac-m',
+                                       type: 'GET',
+                                       success: function (data) {
+                                           data.reverse();
+                                           let tableRows = '';
+                                           data.forEach(function (item) {
+                                               console.log(item)
+                                               tableRows += `
+                                                   <tr data-mod-id="${item.id}">
+                                                       <td><button id="view-btn" type="button" class="btn btn-primary btn-style btn-change"  >View</button></td>
+                                                       <td>${item.exp_master_code}</td>
+                                                       <td>${item.exp_master_desc}</td>
+                                                       <td><input class="form-check-input mt-0" type="checkbox" id='status-checkbox' data-id="${item.id}"  ${item.exp_status ? 'checked' : ''}></td>
+                                                   </tr>
+                                                   `;
+                                           });
+                                           $('#exp-table').html(tableRows);
+                                           pagi_search('#searchBox', '#bcExp', '#paginationControls');
+                                       },
+                                       error: function (xhr, status, error) {
+                                           console.error('Error fetching classification details:', error);
+                                       }
+                                   });
+                               }
+                               $('#exp-table').on('click', '#view-btn',function(){
+                                  const id=$(this).closest('tr').data('mod-id')
+                                  console.log(id)
+                                    ViewBtn('31',id,'billing');      
+                              });
+                               $('#exp-table').on('click', '#status-checkbox', function () {
+                                  const itemId = $(this).data('id');
+                                  const isChecked = $(this).is(':checked');
+                                  const schema = '<%= a %>'
+                                  const status = '<%= b %>'
+                                  console.log(itemId, isChecked,schema)
+                                  updateStatus(itemId, isChecked,schema,status);
+                               });
+                               fetchData();
+                           });
+                       </script>
+                     

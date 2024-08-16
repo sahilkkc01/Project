@@ -218,7 +218,7 @@ function paginateTable() {
                         <td><button type="button" id="view_btn" class="btn btn-primary btn-style btn-change">View</button></td>
                         <td>${item.prim_symp_code}</td>
                         <td>${item.prim_symp_desc}</td>
-                        <td><input class="form-check-input mt-0" onclick="updateStatus('${item.id}', this.checked,'<%= a %>')" type="checkbox" ${item.status ? 'checked' : ''}></td>
+                        <td><input class="form-check-input mt-0" onclick="updateStatus('${item.id}', this.checked,'<%= a %>','clinic')" type="checkbox" ${item.status ? 'checked' : ''}></td>
                       </tr>
                     `;
                   });

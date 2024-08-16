@@ -1,5 +1,25 @@
-const { createOpeningBalance, addOpeningBalanceItem, getOpeningBalance, getItemDetails, createIndent, getStoreIndent, getIndentDetails, getItems, deleteIndent, updateFreezeStatus, getindent, createOrUpdateIndent, createOrUpdateRequisition } = require('../controllers/palashInvCtrls');
-
+const {
+  createOpeningBalance,
+  getOpeningBalance,
+  getItemDetails,
+  createOrUpdateIndent,
+  getStoreIndent,
+  getIndentDetails,
+  getItems,
+  deleteIndent,
+  updateFreezeStatus,
+  getIndent,
+  createOrUpdateRequisition,
+  getAllRequisitions,
+  getRequisitionDetails,
+  getRequisition,
+  deleteRequisition,
+  getCurrentItemStock,
+  getUniqueItemsWithStock,
+  savePurchaseOrder,
+  approvePR,
+  fetchRequisitionItemsWithDetails
+} = require('../controllers/palashInvCtrls');
 const router = require('express').Router();
 
 router.get('/1',(req,res)=>{
@@ -305,20 +325,34 @@ router.get('/42',(req,res)=>{
     res.render('PalashInv/75-PIM-approve-direct[17-40]');
   });
 
-  router.post('/save-opening-balance',createOpeningBalance);
-  router.get('/get-opening-balance',getOpeningBalance);
-  router.get('/getAll-indents',getStoreIndent);
-  router.get('/get-opening-balance-item/:itemId',getItemDetails);
-  router.get('/get-indent-details/:itemId',getIndentDetails);
-  router.get('/get-items/:itemId',getItems);
-  router.get('/get-indent/:id',getindent)
-
-  router.post('/createindent',createOrUpdateIndent)
+  router.post('/save-opening-balance', createOpeningBalance);
+  router.get('/get-opening-balance', getOpeningBalance);
+  router.get('/get-current-item-stock-dtls', getCurrentItemStock);
+  router.get('/getAll-indents', getStoreIndent);
+  router.get('/get-opening-balance-item/:itemId', getItemDetails);
+  router.get('/get-current-item-stock/:itemId', getItemDetails);
+  router.get('/get-indent-details/:itemId', getIndentDetails);
+  router.get('/get-items/:item_code', getItems);
+  router.get('/get-indent/:id', getIndent);
+  
+  router.post('/createindent', createOrUpdateIndent);
   router.delete('/delete-indent/:id', deleteIndent);
-  router.post('/update-freeze-status/:id', updateFreezeStatus);
+  router.post('/update-freeze-status/:type/:id', updateFreezeStatus);
   
-  router.post('/createrequisition',createOrUpdateRequisition)
-  
+  router.post('/createrequisition', createOrUpdateRequisition);
+  router.get('/getAll-requisitions', getAllRequisitions);
+
+  router.get('/get-requisition-details/:id', getRequisitionDetails);
+  router.get('/get-requisition/:id', getRequisition);
+  router.delete('/delete-requisition/:id', deleteRequisition); // Add this route
+  router.post('/approve-requisition/:id', approvePR); // Add this route
+
+  router.get('/get-current-item-counts',getUniqueItemsWithStock)
+
+  router.post('/save-purchase-order',savePurchaseOrder)
+
+  router.get('/getprdata',fetchRequisitionItemsWithDetails)
+
   
   
 

@@ -161,7 +161,7 @@
                                                                     <table class="table2" id="serMstTable">
                                                                         <thead>
                                                                             <tr>
-                                                                                <th contenteditable="true">&nbsp;</th>
+                                                                                <th contenteditable="true">View</th>
                                                                                 <th contenteditable="true">Code</th>
                                                                                 <th contenteditable="true">Service Name
                                                                                 </th>
@@ -212,22 +212,6 @@
                         <!--footer section start-->
                        <%- include('../footer'); -%>
                     <!-- Correct path and load order for scripts -->
-<script src="../javascripts/statusUpdate.js"></script>
-<script src="../javascripts/pageUpdate.js"></script>
-<script>
-    
-    function ChangeStatus2(id) {
-        console.log(id+"status"+status);
-        let url = '/billing/update_services'
-        updateStatus(id, url)
-    }
-    function updatePageAdvAgent2(id) {
-        console.log(id+"you");
-        
-        let url = '/billing/update-ser-master'
-        updatePage(id, url)
-    }
-</script>
 <script type="module">
     import { pagi_search } from '../javascripts/pagi_search.js';
     $(document).ready(function () {
@@ -246,15 +230,14 @@
                 data.forEach(function (item) {
                     console.log(item);
                     tableRows += `
-                        <tr>
-                            <td><a type="button" class="btn btn-primary btn-style btn-change"  onClick=updatePageAdvAgent2(${item.id}) href='/billing/5' >View</a></td>
+                        <tr data-mod-id='${item.id}'>
+                            <td><button id='view-btn'  class="btn btn-primary btn-style btn-change" >View</button></td>
                             <td>${item.serviceCode}</td>
                             <td>${item.serviceName}</td>
                             <td>${item.specialization}</td>
                             <td>${item.subSpecialization}</td>
                             <td>${item.baseServiceRate}</td>
-                            <td><input class="form-check-input mt-0" type="checkbox" id='${item.id}' 
-    onClick="ChangeStatus2(${item.id}, this.checked)" ${item.status ? 'checked' : ''}>
+                            <td><input id='status-checkbox' class="form-check-input mt-0" type="checkbox" data-id='${item.id}' ${item.status ? 'checked' : ''}>
 </td>
                         </tr>
                         `;
@@ -266,5 +249,18 @@
                 console.error('Error fetching classification details:', error);
             }
         });
+        $('#serMst').on('click', '#view-btn',function(){
+                                       const id=$(this).closest('tr').data('mod-id')
+                                       console.log(id)
+                                         ViewBtn('5',id,'billing');      
+                                   });
+                                    $('#serMst').on('click', '#status-checkbox', function () {
+                                       const itemId = $(this).data('id');
+                                       const isChecked = $(this).is(':checked');
+                                       const schema = '<%= a %>'
+                                       const status = '<%= b %>'
+                                       console.log(itemId, isChecked,schema)
+                                       updateStatus(itemId, isChecked,schema,status);
+                                    });
     }
 </script>

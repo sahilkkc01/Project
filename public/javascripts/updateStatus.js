@@ -1,6 +1,6 @@
- function updateStatus(itemId, isChecked,Schema) {
+ function updateStatus(itemId, isChecked,Schema,module) {
    
-    axios.post('/clinic/save-status-data', {
+    axios.post(`/${module}/save-status-data`, {
     id: itemId, 
     status: isChecked, 
     schema: Schema 

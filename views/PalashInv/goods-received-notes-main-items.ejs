@@ -276,94 +276,80 @@
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <div class="pl-lg-4 pr-lg-4 form-row">
-                                            <!-- Nav Tabs are here once have a look--->
-                                            <h6 class="primary">Main Items</h6>
-                                        </div>
-
-                                        <div class="form-row">
-                                            <div class="col-12 mb-3 mt-3 pl-lg-4 pr-lg-4">
-                                                <div class="slidx">
-                                                    <table class="table2">
-                                                        <thead>
-                                                            <tr>
-                                                                <th contenteditable="true">Bar Code</th>
-                                                                <th contenteditable="true">Item Name</th>
-                                                                <th contenteditable="true">Batch Code</th>
-                                                                <th contenteditable="true">Expiry Date</th>
-                                                                <th contenteditable="true">Received Quantity</th>
-                                                                <th contenteditable="true">Purchase UOM</th>
-                                                                <th contenteditable="true">Rate</th>
-                                                                <th contenteditable="true">Average Cost</th>
-                                                                <th contenteditable="true">Average Cost Amount</th>
-                                                                <th contenteditable="true">Net Amount</th>
-                                                                
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                
-                                                                <td contenteditable="true"></td>
-                                                                <td contenteditable="true"></td>
-                                                                <td contenteditable="true"></td>
-                                                                <td contenteditable="true"></td>
-                                                                <td contenteditable="true"></td>
-                                                                <td contenteditable="true"></td>
-                                                                <td contenteditable="true"></td>
-                                                                <td contenteditable="true"></td>
-                                                                <td contenteditable="true"></td>
-                                                                <td contenteditable="true"></td>
-                                                                
-                                                            </tr>
-                                                            <tr>
-                                                                
-                                                                <td contenteditable="true"></td>
-                                                                <td contenteditable="true"></td>
-                                                                <td contenteditable="true"></td>
-                                                                <td contenteditable="true"></td>
-                                                                <td contenteditable="true"></td>
-                                                                <td contenteditable="true"></td>
-                                                                <td contenteditable="true"></td>
-                                                                <td contenteditable="true"></td>
-                                                                <td contenteditable="true"></td>
-                                                                <td contenteditable="true"></td>
-                                                                
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
+                                        <div class="card card_border">
+                                            <!-- Buttons to Toggle Between Main Items and Free Items -->
+                                            <nav>
+                                                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                                    <button class="nav-link active" id="nav-mainitem-tab" data-toggle="tab" data-target="#nav-mainitem" type="button" role="tab" aria-controls="nav-mainitem" aria-selected="true"><i class="fas fa-box"></i> Main Items</button>
+                                                    <button class="nav-link" id="nav-freeitem-tab" data-toggle="tab" data-target="#nav-freeitem" type="button" role="tab" aria-controls="nav-freeitem" aria-selected="false"><i class="fas fa-gift"></i> Free Items</button>
                                                 </div>
-
-
-                                                
-                                                <!-- <div class="form-check-label text-right">
-
-                                                    <div class="radio mt-3 mr-0 pr-4">
-                                                        <label class="form-check-label pt-1"><input
-                                                                class="form-check-input mt-1" type="checkbox">
-                                                            Freeze Purchase Requisition</label>
+                                            </nav>
+                                    
+                                            <!-- Tab Content -->
+                                            <div class="col-md-12 tab-content" id="nav-tabContent">
+                                                <!-- Main Items -->
+                                                <div class="tab-pane fade show active" id="nav-mainitem" role="tabpanel" aria-labelledby="nav-mainitem-tab">
+                                                    <div class="pl-lg-4 pr-lg-4 form-row">
+                                                        <h6 class="primary">Main Items</h6>
                                                     </div>
-
-                                                    <button type="button"
-                                                        class="btn-secondary btn-style btn btn-change "><strong><i
-                                                                class="fa-solid fa-plus"></i>
-                                                            Add Items</strong></button>
-
-                                                </div> -->
-
-                                               
-
-                                                <!-- <div class="form-row">
-                                                    <div class="col-lg-12 col-md-12 col-sm-12 mt-3">
-                                                        <div class="form-group"><textarea name="" class="form-control input-style" placeholder="Add Remarks Here."></textarea></div>
-
-                                                        
+                                                    <div class="form-row">
+                                                        <div class="col-12 mb-3 mt-3 pl-lg-4 pr-lg-4">
+                                                            <div class="slidex">
+                                                                <table class="table2">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th contenteditable="true">Bar Code</th>
+                                                                            <th contenteditable="true">Item Name</th>
+                                                                            <th contenteditable="true">Batch Code</th>
+                                                                            <th contenteditable="true">Expiry Date</th>
+                                                                            <th contenteditable="true">Received Quantity</th>
+                                                                            <th contenteditable="true">Purchase UOM</th>
+                                                                            <th contenteditable="true">Rate</th>
+                                                                            <th contenteditable="true">Average Cost</th>
+                                                                            <th contenteditable="true">Average Cost Amount</th>
+                                                                            <th contenteditable="true">Net Amount</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <!-- Data will be inserted here -->
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div> -->
-
+                                                </div>
+                                    
+                                                <!-- Free Items -->
+                                                <div class="tab-pane fade" id="nav-freeitem" role="tabpanel" aria-labelledby="nav-freeitem-tab">
+                                                    <div class="pl-lg-4 pr-lg-4 form-row">
+                                                        <h6 class="primary">Free Items</h6>
+                                                    </div>
+                                                    <div class="form-row">
+                                                        <div class="col-12 mb-3 mt-3 pl-lg-4 pr-lg-4">
+                                                            <div class="slidex">
+                                                                <table class="table2">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th contenteditable="true">Bar Code</th>
+                                                                            <th contenteditable="true">Item Name</th>
+                                                                            <th contenteditable="true">Batch Code</th>
+                                                                            <th contenteditable="true">Expiry Date</th>
+                                                                            <th contenteditable="true">Received Quantity</th>
+                                                                            <th contenteditable="true">Purchase UOM</th>
+                                                                            <th contenteditable="true">Rate</th>
+                                                                            <th contenteditable="true">Net Amount</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <!-- Data will be inserted here -->
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-
 
                                     </div>
                                 </div>
@@ -375,7 +361,7 @@
                                     <button type="button" class="btn-secondary btn-style btn mt-3 mr-2"><strong><i
                                                 class="fa-solid fa-print"></i> Print</strong></button>
 
-                                    <button type="button" class="btn-secondary btn-style btn mt-3 mr-2"><strong><i
+                                    <button type="button" onclick=" window.location.href = '/palashinv/16'"  class="btn-secondary btn-style btn mt-3 mr-2"><strong><i
                                                 class="fa-solid fa-plus"></i> New</strong></button>
 
                                     <button type="button" class="btn-danger btn-style btn mt-3 mr-2"><strong><i
@@ -393,3 +379,4 @@
                         </div>
                         <!--footer section start-->
                         <%-include('../footer');-%>
+                    

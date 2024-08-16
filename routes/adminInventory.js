@@ -120,9 +120,10 @@ const { setId, newSupplierCategory, newSupplier, newStore, newTax, newItem, newC
   getHSNCodeList,
   getItemCatList,
   getSupplierListItem,
-  SaveRateContract
+  SaveRateContract,
+  getOpeningBalanceItems
 } = require('../controllers/adminInventryControllers');
-const { RackMaster, ShelfMaster, BinMaster, ItemMasterNew, UnitOfMeasurementNew, StoreDetails, TaxCategory, ItemSupplier, ItemOtherDetails, MoleculeNew, ItemGroupNew,  ItemCategoryNew, DispensingTypeNew, StorageTypeNew, PregnancyClassNew, TherapeuticClassNew, StrUnitMasterNew, RateContract } = require('../models/adminInventorySchema');
+const { RackMaster, ShelfMaster, BinMaster, ItemMasterNew, UnitOfMeasurementNew, StoreDetails, TaxCategory, ItemSupplier, ItemOtherDetails, MoleculeNew, ItemGroupNew,  ItemCategoryNew, DispensingTypeNew, StorageTypeNew, PregnancyClassNew, TherapeuticClassNew, StrUnitMasterNew, RateContract, Supplier } = require('../models/adminInventorySchema');
 
 
 
@@ -328,6 +329,16 @@ router.get('/get-store-details',async (req, res) => {
   console.log('11')
   try {
     const clinic = await StoreDetails.findAll();
+    res.status(200).json(clinic);
+  } catch (error) {
+    console.error('Error fetching designation details:', error);
+    res.status(500).json({ msg: 'An error occurred while fetching designation details.' });
+  }
+})
+router.get('/get-supplier-details',async (req, res) => {
+  console.log('11')
+  try {
+    const clinic = await Supplier.findAll();
     res.status(200).json(clinic);
   } catch (error) {
     console.error('Error fetching designation details:', error);
@@ -680,5 +691,7 @@ router.post('/rateContractFormSubmit',newRateContract)
 
 
 router.post('/str-unit-mst-FormSubmit',newStrUnitMst)
+
+router.get('/get-opening-balance-items',getOpeningBalanceItems)
 
 module.exports = router;

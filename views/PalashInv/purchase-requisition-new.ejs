@@ -115,8 +115,17 @@
                                                 </div>
                                                 <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
                                                     <div class="form-group"><label class="input__label">Due
-                                                            Date</label><input name="due_date" id="due_date" type="date"
-                                                            class="form-control input-style" placeholder=""></div>
+                                                            Date</label><input name="due_date" id="due_date" type="date" data-validation="required"
+                                                            data-error-message="Due Date is required." class="form-control input-style" placeholder=""></div>
+                                                </div>
+                                                <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                                    <div class="form-group"><label class="input__label">Clinic
+                                                            </label><select name="clinic" id="clinic"
+                                                            data-validation="required"
+                                                            data-error-message="Clinic is required."
+                                                            class="form-control input-style">
+                                                            <option value="">Select</option>
+                                                        </select></div>
                                                 </div>
                                             </div>
                                             <div class="pl-lg-0 pr-lg-0">
@@ -125,15 +134,15 @@
                                             <div class="form-row">
                                                 <div class="col-lg-3 col-md-4 col-sm-12 mb-1">
                                                     <div class="form-group"><label class="input__label">From
-                                                            Store</label><select name="from_store" id="from_store"
-                                                            class="form-control input-style">
+                                                            Store</label><select name="from_store" id="from_store" data-validation="required"
+                                                            data-error-message="From Store is required." class="form-control input-style">
                                                             <option value="">Select</option>
                                                         </select></div>
                                                 </div>
                                                 <div class="col-lg-3 col-md-4 col-sm-12 mb-1">
                                                     <div class="form-group"><label class="input__label">To
-                                                            Store</label><select name="to_store" id="to_store"
-                                                            class="form-control input-style">
+                                                            Store</label><select name="to_store" id="to_store" data-validation="required"
+                                                            data-error-message="To Store is required." class="form-control input-style">
                                                             <option value="">Select</option>
                                                         </select></div>
                                                 </div>
@@ -163,7 +172,7 @@
                                                 </table>
                                             </div>
                                             <div class="form-check-label text-right">
-                                                <button type="button" class="btn-secondary btn-style btn btn-change"
+                                                <button type="button" id="addItems" class="btn-secondary btn-style btn btn-change"
                                                     data-toggle="modal" data-target="#itemSearchModal"><strong><i
                                                         class="fa-solid fa-plus"></i> Add Items</strong></button>
                                             </div>
@@ -198,14 +207,17 @@
                             </div>
                         </form>
                     </div>
+                  
                     <div class="modal fade" id="itemSearchModal">
                         <div class="modal-dialog modal-xl">
                             <div class="modal-content">
+
                                 <!-- Modal Header -->
                                 <div class="modal-header">
                                     <h4 class="modal-title">Item Search</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;"></button>
                                 </div>
+
                                 <!-- Modal body -->
                                 <div class="modal-body">
                                     <form>
@@ -218,28 +230,29 @@
                                                     <div class="col-lg-3 col-md-4 col-sm-12">
                                                         <div class="form-group">
                                                             <label class="input__label">Item Name</label>
-                                                            <input name="item_name" type="text"
+                                                            <input name="service name" type="text"
                                                                 class="form-control input-style" placeholder="">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-3 col-md-4 col-sm-12">
                                                         <div class="form-group">
                                                             <label class="input__label">Brand Name</label>
-                                                            <input name="brand_name" type="text"
+                                                            <input name="service name" type="text"
                                                                 class="form-control input-style" placeholder="">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-3 col-md-4 col-sm-12">
                                                         <div class="form-group">
                                                             <label class="input__label">Item Code</label>
-                                                            <input name="item_code" type="number"
+                                                            <input name="service name" type="number"
                                                                 class="form-control input-style" placeholder="">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-3 col-md-4 col-sm-12">
                                                         <div class="form-group">
                                                             <label class="input__label">Item Category</label>
-                                                            <select name="item_category" class="form-control input-style">
+                                                            <select name="report_generated_by"
+                                                                    class="form-control input-style">
                                                                 <option>Select</option>
                                                             </select>
                                                         </div>
@@ -247,7 +260,8 @@
                                                     <div class="col-lg-3 col-md-4 col-sm-12">
                                                         <div class="form-group">
                                                             <label class="input__label">Item Group</label>
-                                                            <select name="item_group" class="form-control input-style">
+                                                            <select name="report_generated_by"
+                                                                    class="form-control input-style">
                                                                 <option>Select</option>
                                                             </select>
                                                         </div>
@@ -255,7 +269,8 @@
                                                     <div class="col-lg-3 col-md-4 col-sm-12">
                                                         <div class="form-group">
                                                             <label class="input__label">Molecule</label>
-                                                            <select name="molecule" class="form-control input-style">
+                                                            <select name="report_generated_by"
+                                                                    class="form-control input-style">
                                                                 <option>Select</option>
                                                             </select>
                                                         </div>
@@ -263,14 +278,16 @@
                                                     <div class="col-lg-3 col-md-4 col-sm-12">
                                                         <div class="form-group">
                                                             <label class="input__label">Store</label>
-                                                            <select name="store" class="form-control input-style">
+                                                            <select name="report_generated_by"
+                                                                    class="form-control input-style">
                                                                 <option>Select</option>
                                                             </select>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-3 col-md-4 col-sm-12 text-left">
                                                         <div class="form-group">
-                                                            <button type="button" class="btn btn-style mt-4 btn-primary btn-style btn-change">
+                                                            <button type="button"
+                                                                    class="btn btn-style mt-4 btn-primary btn-style btn-change">
                                                                 <strong><i class="fas fa-search"></i> Search</strong>
                                                             </button>
                                                         </div>
@@ -294,35 +311,38 @@
                                                     <div class="form-group">
                                                         <div class="col col-12 pr-xl-0 pl-xl-0">
                                                             <div class="slidx">
-                                                                <table id="popup-table" class="table2">
+                                                                <table class="table2">
                                                                     <thead>
-                                                                        <tr>
-                                                                            <th>Select</th>
-                                                                            <th>Item Code</th>
-                                                                            <th>Item Name</th>
-                                                                            <th>Brand Name</th>
-                                                                            <th>Purchase Tax %</th>
-                                                                            <th>Sales Tax %</th>
-                                                                            <th>Suspend</th>
-                                                                            <th>Available Stock</th>
-                                                                            <th>Stock UOM</th>
-                                                                        </tr>
+                                                                    <tr>
+                                                                        <th contenteditable="true">Select</th>
+                                                                        <th contenteditable="true">Item Code</th>
+                                                                        <th contenteditable="true">Item Name</th>
+                                                                        <th contenteditable="true">Brand Name</th>
+                                                                        <th contenteditable="true">CGST</th>
+                                                                        <th contenteditable="true">SGST</th>
+                                                                        <th contenteditable="true">IGST</th>
+                                                                        <th contenteditable="true">Suspend</th>
+                                                                        <th contenteditable="true">Available Stock</th>
+                                                                        <th contenteditable="true">Stock UOM</th>
+                                                                    </tr>
                                                                     </thead>
-                                                                    <tbody id="popup-table-body">
-                                                                        <!-- Rows will be inserted here -->
+                                                                    <tbody id="tbodyid">
                                                                     </tbody>
                                                                 </table>
                                                             </div>
-                                                        </div>
-                                                    </div>
+                                                        </div                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-group mt-1 mb-3 text-right">
                                             <button type="button" class="btn-danger btn-style btn mt-3 mr-2"
-                                                data-dismiss="modal"><strong><i class="fas fa-times"></i> Cancel</strong></button>
+                                                    data-dismiss="modal">
+                                                <strong><i class="fas fa-times"></i> Cancel</strong>
+                                            </button>
                                             <button type="button" class="btn-primary btn-style btn mt-3"
-                                                data-dismiss="modal" id="addSelectedItemsBtn"><strong><i class="fas fa-check"></i> OK</strong></button>
+                                                    data-dismiss="modal" id="addSelectedItemsBtn">
+                                                <strong><i class="fas fa-check"></i> OK</strong>
+                                            </button>
                                         </div>
                                     </form>
                                 </div>
@@ -344,195 +364,236 @@
                             function fetchRequisitionData(id) {
                                 $.ajax({
                                     url: `/palashinv/get-requisition/${id}`,
-                                    type: 'GET',
-                                    success: function (response) {
-                                        populateRequisitionForm(response.requisition);
-                                        populateRequisitionItems(response.items);
-                                    },
-                                    error: function (xhr, status, error) {
-                                        console.error('Error fetching requisition data:', error);
-                                    }
-                                });
-                            }
-                    
-                            function populateRequisitionForm(requisition) {
-                                $('#requisition_no').val(requisition.requisition_no);
-                                $('#requisition_date').val(requisition.requisition_date.split('T')[0]);
-                                $('#due_date').val(requisition.due_date.split('T')[0]);
-                                $('#from_store').val(requisition.from_store);
-                                $('#to_store').val(requisition.to_store);
-                                $('#remark').val(requisition.remark);
-                                $('#freeze').prop('checked', requisition.freeze);
-                                if(requisition.freeze){
-                                    $('#save-requisition').prop('disabled', true);   
-                                }
-                            }
-                    
-                            function populateRequisitionItems(items) {
-                                let tableRows = '';
-                                items.forEach(function (item) {
-                                    tableRows += `
-                                        <tr>
-                                            <td>${item.itemDetails.item_name}</td>
-                                            <td><input type="number" class="form-control input-style" name="requisition_quantity" value="${item.requisition_quantity}"></td>
-                                            <td>${item.itemDetails.purchase_uom}</td>
-                                            <td><button type="button" class="btn btn-danger btn-sm remove-item"><i class="fa-solid fa-trash-can"></i></button></td>
-                                        </tr>
-                                    `;
-                                });
-                                $('#main-table-body').html(tableRows);
-                            }
-                    
-                            // Load dropdowns
-                            const loadDropdown = (url, elementId) => {
-                                fetch(url)
-                                    .then(response => response.json())
-                                    .then(data => {
-                                        const dropdown = document.getElementById(elementId);
-                                        data.forEach(item => {
-                                            const option = document.createElement('option');
-                                            option.value = item.description || item.rank_desc || item.shelf_desc || item.bin_desc || item.clinic_desc || item.tax_desc;
-                                            option.textContent = item.description || item.rank_desc || item.shelf_desc || item.bin_desc || item.clinic_desc || item.tax_desc;
-                                            dropdown.appendChild(option);
-                                        });
-                                    })
-                                    .catch(error => console.error(`Error fetching ${elementId} details:`, error));
-                            };
-                    
-                            // Load dropdowns
-                            loadDropdown('/adminInv/get-store-details', 'from_store');
-                            loadDropdown('/adminInv/get-store-details', 'to_store');
-                    
-                            // Set current date for Requisition Date
-                            const today = new Date().toISOString().split('T')[0];
-                            document.getElementById('requisition_date').value = today;
-                    
-                            // Ensure Due Date is greater than today's date
-                            document.getElementById('due_date').setAttribute('min', today);
-                    
-                            // Fetch data in the popup table
-                            function fetchData() {
-                                $.ajax({
-                                    url: '/admininv/get-item-details',
-                                    type: 'GET',
-                                    success: function (data) {
-                                        let tableRows = '';
-                                        data.forEach(function (item) {
-                                            tableRows += `
-                                                <tr data-item-id="${item.id}">
-                                                    <td><input class="form-check-input mt-0 item-checkbox" type="checkbox"></td>
-                                                    <td>${item.item_code}</td>
-                                                    <td>${item.item_name}</td>
-                                                    <td>${item.brand_name}</td>
-                                                    <td style="display:none;"><input type="hidden" value="${item.base_unit_cost_price}"></td>
-                                                    <td style="display:none;"><input type="hidden" value="${item.base_unit_mrp}"></td>
-                                                    <td>0.00</td>
-                                                    <td>0.00</td>
-                                                    <td><input class="form-check-input mt-0" type="checkbox"></td>
-                                                    <td>0.00</td>
-                                                    <td>${item.stocking_uom}</td>
-                                                    <td style="display:none;"><input type="hidden" value="${item.purchase_uom}"></td>
-                                                    <td style="display:none;"><input type="hidden" name="item_id" value="${item.id}"></td>
-                                                </tr>
-                                            `;
-                                        });
-                                        $('#popup-table-body').html(tableRows);
-                                    },
-                                    error: function (xhr, status, error) {
-                                        console.error('Error fetching item details:', error);
-                                    }
-                                });
-                            }
-                    
-                            // Add selected items to the main table
-                            function addSelectedItems() {
-                                $('#popup-table-body input.item-checkbox:checked').each(function () {
-                                    const row = $(this).closest('tr');
-                                    const itemName = row.find('td:eq(2)').text();
-                                    const purchaseUOM = row.find('td:eq(11) input').val();
-                                    const itemId = row.find('td:eq(12) input').val();
-                    
-                                    const newRow = `
-                                        <tr>
-                                            <td>${itemName}</td>
-                                            <td><input type="number" data-validation="required"
-                                                    data-error-message="Quantity is required." class="form-control input-style" name="requisition_quantity"></td>
-                                            <td>${purchaseUOM}</td>
-                                            <td style="display:none;"><input type="hidden" name="item_id" value="${itemId}"></td>
-                                            <td><button type="button" class="btn btn-danger btn-sm remove-item"><i class="fa-solid fa-trash-can"></i></button></td>
-                                        </tr>
-                                    `;
-                                    $('#main-table-body').append(newRow);
-                                });
-                            }
-                    
-                            // Fetch data on page load
-                            fetchData();
-                    
-                            // Add event listener to select all items checkbox
-                            $('#select-all-items').on('change', function () {
-                                const isChecked = $(this).is(':checked');
-                                $('#popup-table-body input.item-checkbox').prop('checked', isChecked);
-                            });
-                    
-                            // Add event listener to add selected items button
-                            $('#addSelectedItemsBtn').on('click', addSelectedItems);
-                    
-                            // Add event listener to remove item button
-                            $(document).on('click', '.remove-item', function () {
-                                $(this).closest('tr').remove();
-                            });
-                    
-                            // Gather and submit the form data
-                            $('#save-requisition').on('click', function () {
-                                const requisitionData = {
-                                    requisition_no: $('#requisition_no').val(),
-                                    requisition_date: $('#requisition_date').val(),
-                                    due_date: $('#due_date').val(),
-                                    from_store: $('#from_store').val(),
-                                    to_store: $('#to_store').val(),
-                                    remark: $('#remark').val(),
-                                    freeze: $('#freeze').is(':checked'),
-                                    items: []
-                                };
-                    
-                                $('#main-table-body tr').each(function () {
-                                    const item = {
-                                        item_id: $(this).find('input[name="item_id"]').val(),
-                                        requisition_quantity: $(this).find('input[name="requisition_quantity"]').val()
-                                    };
-                                    requisitionData.items.push(item);
-                                });
-                    
-                                if (requisitionData.items.length === 0) {
-                                    alert('Please add at least one item.');
-                                    return;
-                                }
-                    
-                                const { isValid, errorMessage } = validateForm('#requisitionForm');
-                                if (isValid) {
-                                    $.ajax({
-                                        url: '/palashinv/createrequisition',
-                                        type: 'POST',
-                                        contentType: 'application/json',
-                                        data: JSON.stringify(requisitionData),
+                                        type: 'GET',
                                         success: function (response) {
-                                            $('#requisition_no').val(response.requisition.requisition_no);
-                                            $('#errordiv1').addClass('alert-success').removeClass('alert-danger').text(response.message).show();
-                                            alert(response.message);
+                                            populateRequisitionForm(response.requisition);
+                                            populateRequisitionItems(response.items);
                                         },
                                         error: function (xhr, status, error) {
-                                            alert('Something Went Wrong');
-                                            $('#errordiv1').removeClass('alert-success').addClass('alert-danger').text('Something went wrong').show();
-                                            console.error('Error creating requisition:', error);
+                                            console.error('Error fetching requisition data:', error);
                                         }
                                     });
-                                } else {
-                                    $('#errordiv1').removeClass('alert-success').addClass('alert-danger').text(errorMessage);
                                 }
-                            });
-                        });
-                    </script>
-</body>
+                        
+                                function populateRequisitionForm(requisition) {
+                                    console.log(requisition);
+                                    $('#requisition_no').val(requisition.requisition_no);
+                                    $('#requisition_date').val(requisition.requisition_date.split('T')[0]);
+                                    $('#due_date').val(requisition.due_date.split('T')[0]);
+                                    $('#from_store').val(requisition.from_store);
+                                    $('#to_store').val(requisition.to_store);
+                                    $('#remark').val(requisition.remark);
+                                    $('#freeze').prop('checked', requisition.freeze);
+                                    if(requisition.freeze){
+                                        $('#save-requisition').prop('disabled', true);   
+                                    }
+                                }
+                        
+                                function populateRequisitionItems(items) {
+                                    let tableRows = '';
+                                    items.forEach(function (item) {
+                                        tableRows += `
+                                            <tr>
+                                                <td>${item.itemDetails.item_name}</td>
+                                                <td><input type="number" class="form-control input-style" name="requisition_quantity" value="${item.requisition_quantity}"></td>
+                                                <td>${item.itemDetails.purchase_uom}</td>
+                                                <td><button type="button" class="btn btn-danger btn-sm remove-item"><i class="fa-solid fa-trash-can"></i></button></td>
+                                            </tr>
+                                        `;
+                                    });
+                                    $('#main-table-body').html(tableRows);
+                                }
+                        
+                                // Load dropdowns
+                                const loadDropdown = (url, elementId) => {
+                                    fetch(url)
+                                        .then(response => response.json())
+                                        .then(data => {
+                                            const dropdown = document.getElementById(elementId);
+                                            data.forEach(item => {
+                                                const option = document.createElement('option');
+                                                option.value = item.description || item.rank_desc || item.shelf_desc || item.bin_desc || item.clinic_desc || item.tax_desc;
+                                                option.textContent = item.description || item.rank_desc || item.shelf_desc || item.bin_desc || item.clinic_desc || item.tax_desc;
+                                                dropdown.appendChild(option);
+                                            });
+                                        })
+                                        .catch(error => console.error(`Error fetching ${elementId} details:`, error));
+                                };
+                                // Load dropdowns
+                                loadDropdown('/adminInv/get-store-details', 'from_store');
+                                loadDropdown('/adminInv/get-store-details', 'to_store');
+                                loadDropdown('/adminInv/get-clinic-details', 'clinic');
+                        
+                                // Set current date for Requisition Date
+                                const today = new Date().toISOString().split('T')[0];
+                                document.getElementById('requisition_date').value = today;
+                        
+                                // Ensure Due Date is greater than today's date
+                                document.getElementById('due_date').setAttribute('min', today);
+                        
+                                // Fetch data in the popup table
+                                function fetchData(from_store) {
+            $.ajax({
+                url: '/palashinv/get-current-item-counts',
+                type: 'GET',
+                data: { 
+                    store: from_store,
+                    clinic: '' // Set clinic to blank
+                },
+                success: function (data) {
+                    console.log(data);
+                    let tableRows = '';
+                    data.data.forEach(function (item) {
+                        tableRows += `
+                            <tr data-item-id="${item.id}">
+                                <td><input class="form-check-input mt-0 item-checkbox" type="checkbox"></td>
+                                <td>${item.item_code}</td>
+                                <td>${item.item_name}</td>
+                                <td>${item.brand_name}</td>
+                                <td>${item.CGST.toFixed(2)}%</td>
+                                <td>${item.SGST.toFixed(2)}%</td>
+                                <td>${item.IGST.toFixed(2)}%</td>
+                                <td><input class="form-check-input mt-0 suspend-checkbox" type="checkbox" ${item.suspend ? 'checked' : ''} disabled></td>
+                                <td>${item.availableStock}</td>
+                                <td>${item.stocking_uom}</td>
+                                <td style="display:none;"><input type="hidden" value="${item.purchase_uom}"></td>
+                                <td style="display:none;"><input type="hidden" name="item_id" value="${item.id}"></td>
+                                <td style="display:none;"><input type="hidden" name="item_code" value="${item.item_code}"></td>
+                            </tr>
+                        `;
+                    });
+                    $('#tbodyid').html(tableRows);
 
-</html>
+                    // Add the select all checkbox functionality
+                    $('#select-all-items').on('change', function () {
+                        const isChecked = $(this).is(':checked');
+                        $('#tbodyid input.item-checkbox').prop('checked', isChecked);
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error fetching item details:', error);
+                }
+            });
+        }
+
+                                // Add selected items to the main table
+                                function addSelectedItems() {
+                                    $('#tbodyid input.item-checkbox:checked').each(function () {
+                                        const row = $(this).closest('tr');
+                                        const itemName = row.find('td:eq(2)').text();
+                                        const purchaseUOM = row.find('td:eq(10) input').val();
+                                        const itemId = row.find('td:eq(11) input').val();
+                        
+                                        const newRow = `
+                                            <tr>
+                                                <td>${itemName}</td>
+                                                <td><input type="number" data-validation="required"
+                                                        data-error-message="Quantity is required." class="form-control input-style" name="requisition_quantity"></td>
+                                                <td>${purchaseUOM}</td>
+                                                <td style="display:none;"><input type="hidden" name="item_id" value="${itemId}"></td>
+                                                <td><button type="button" class="btn btn-danger btn-sm remove-item"><i class="fa-solid fa-trash-can"></i></button></td>
+                                            </tr>
+                                        `;
+                                        $('#main-table-body').append(newRow);
+                                    });
+                                }
+                        
+                                // Fetch data on page load
+                                fetchData();
+                        
+                                // Add event listener to select all items checkbox
+                                $('#select-all-items').on('change', function () {
+                                    const isChecked = $(this).is(':checked');
+                                    $('#popup-table-body input.item-checkbox').prop('checked', isChecked);
+                                });
+                        
+                                $('#addItems').click(function (e) {
+            let from_store = $('#from_store').val();
+
+            if (!from_store || from_store === 'Select') {
+                alert('Please select From store.');
+                e.preventDefault(); // Prevent the default action of opening the modal
+                e.stopPropagation(); // Stop the event from bubbling up
+                return;
+            }
+
+            fetchData(from_store);
+        });
+
+                                // Add event listener to add selected items button
+                                $('#addSelectedItemsBtn').on('click', addSelectedItems);
+                        
+                                // Add event listener to remove item button
+                                $(document).on('click', '.remove-item', function () {
+                                    $(this).closest('tr').remove();
+                                });
+                        
+                                // Event listener for change in from_store and to_store
+                                $('#from_store, #to_store').on('change', function() {
+                                    const fromStore = $('#from_store').val();
+                                    const toStore = $('#to_store').val();
+                                    
+                                    if (fromStore && toStore && fromStore === toStore) {
+                                        alert('From Store and To Store cannot be the same.');
+                                        $(this).val(''); // Clear the selected value
+                                    }
+                                });
+                        
+                                // Gather and submit the form data
+                                $('#save-requisition').on('click', function () {
+                                    const requisitionData = {
+                                        clinic: $('#clinic').val(),
+                                        requisition_no: $('#requisition_no').val(),
+                                        requisition_date: $('#requisition_date').val(),
+                                        due_date: $('#due_date').val(),
+                                        from_store: $('#from_store').val(),
+                                        to_store: $('#to_store').val(),
+                                        remark: $('#remark').val(),
+                                        freeze: $('#freeze').is(':checked'),
+                                        items: []
+                                    };
+
+                                  
+                        
+                                    $('#main-table-body tr').each(function () {
+                                        const item = {
+                                            item_id: $(this).find('input[name="item_id"]').val(),
+                                            requisition_quantity: $(this).find('input[name="requisition_quantity"]').val()
+                                        };
+                                        requisitionData.items.push(item);
+                                    });
+                        
+                                    if (requisitionData.items.length === 0) {
+                                        alert('Please add at least one item.');
+                                        return;
+                                    }
+                        
+                                    const { isValid, errorMessage } = validateForm('#requisitionForm');
+                                    if (isValid) {
+                                        if (requisitionData.from_store === requisitionData.to_store) {
+                                            $('#errordiv1').removeClass('alert-success').addClass('alert-danger').text('From Store and To Store cannot be the same.');
+                                        } else {
+                                            $.ajax({
+                                                url: '/palashinv/createrequisition',
+                                                type: 'POST',
+                                                contentType: 'application/json',
+                                                data: JSON.stringify(requisitionData),
+                                                success: function (response) {
+                                                    $('#requisition_no').val(response.requisition.requisition_no);
+                                                    $('#errordiv1').addClass('alert-success').removeClass('alert-danger').text(response.message).show();
+                                                    alert(response.message);
+                                                },
+                                                error: function (xhr, status, error) {
+                                                    alert('Something Went Wrong');
+                                                    $('#errordiv1').removeClass('alert-success').addClass('alert-danger').text('Something went wrong').show();
+                                                    console.error('Error creating requisition:', error);
+                                                }
+                                            });
+                                        }
+                                    } else {
+                                        $('#errordiv1').removeClass('alert-success').addClass('alert-danger').text(errorMessage);
+                                    }
+                                });
+                            });
+                        </script>
+                        

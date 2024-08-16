@@ -138,7 +138,7 @@
                                                                                 <th contenteditable="true">Status</th>
                                                                             </tr>
                                                                         </thead>
-                                                                        <tbody id="exp-table">
+                                                                        <tbody id="serRateDocCatWise">
                                                                             
                                                                           
                                                                         </tbody>
@@ -173,26 +173,6 @@
                         </div>
 
                         <%- include('../footer'); -%>
-                        <script src="../javascripts/statusUpdate.js"></script>
-                        <script src="../javascripts/pageUpdate.js"></script>
-                        <script>
-                          
-                            function ChangeStatus4(b) {
-                                console.log(b);
-                                let url = '/billing/change_ser_status'
-                                updateStatus(b, url)
-                            }
-
-                            function updateExp4(id) {
-                                console.log(id);
-                               
-                              
-                                let url = '/billing/update-ser-master'
-                                console.log(id+url);
-                                updatePage(id, url)
-                            }
-                        </script>
-
 <script type="module">
     import { pagi_search } from '../javascripts/pagi_search.js';
 
@@ -210,23 +190,36 @@
                     data.forEach(function (item) {
                         console.log(item)
                         tableRows += `
-                            <tr>
-                                <td><a type="button" class="btn btn-primary btn-style btn-change"  onClick=updateExp4(${item.id}) href='/billing/24'>View</a></td>
+                            <tr data-mod-id='${item.id}'>
+                                <td><button id='view-btn' type="button" class="btn btn-primary btn-style btn-change" >View</butotn></td>
                                  <td>${item.docCategory}</td>
                                 <td>${item.serviceName}</td>
                                 <td>${item.className}</td>
                                 <td>${item.serviceRate}</td>
-                                <td><input class="form-check-input mt-0" type="checkbox" id='${item.id}' onClick=ChangeStatus4(${item.id}) ${item.status ? 'checked' : ''}></td>
+                                <td><input class="form-check-input mt-0" id='status-checkbox' type="checkbox" data-id='${item.id}' onClick=ChangeStatus4(${item.id}) ${item.status ? 'checked' : ''}></td>
                             </tr>
                             `;
                     });
-                    $('#exp-table').html(tableRows);
+                    $('#serRateDocCatWise').html(tableRows);
                     pagi_search('#searchBox', '#bcExp', '#paginationControls');
                 },
                 error: function (xhr, status, error) {
                     console.error('Error fetching classification details:', error);
                 }
             });
+            $('#serRateDocCatWise').on('click', '#view-btn',function(){
+                                       const id=$(this).closest('tr').data('mod-id')
+                                       console.log(id)
+                                         ViewBtn('24',id,'billing');      
+                                   });
+                                    $('#serRateDocCatWise').on('click', '#status-checkbox', function () {
+                                       const itemId = $(this).data('id');
+                                       const isChecked = $(this).is(':checked');
+                                       const schema = '<%= a %>'
+                                       const status = '<%= b %>'
+                                       console.log(itemId, isChecked,schema)
+                                       updateStatus(itemId, isChecked,schema,status);
+                                    });
         }
         fetchData();
     });

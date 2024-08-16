@@ -129,7 +129,7 @@
                                                                         <thead>
                                                                             <tr>
                                                                                 <th contenteditable="true">View</th>
-                                                                                <th contenteditable="true">id</th>
+                                                                                
                                                                                 <th contenteditable="true">Effective Date
                                                                                 </th>
                                                                                 <th contenteditable="true">Tariff Name
@@ -174,23 +174,9 @@
                             </form>
                         </div>
                        <%- include('../footer'); -%>
-                            <script src="../javascripts/statusUpdate.js"></script>
+                            <script src="../javascripts/updateStatus.js"></script>
                             <script src="../javascripts/pageUpdate.js"></script>
-                            <script>
-                              
-                                function ChangeStatus3(b) {
-                                    console.log(b);
-                                    let url = '/billing/changeBulkTariffStatus'
-                                    updateStatus(b, url)
-                                }
-
-                                function updateExp(id) {
-
-                                    // console.log(id);
-                                    let url = '/billing/update-exp-master'
-                                    updatePage(id, url)
-                                }
-                            </script>
+                            
 
 <script type="module">
     import { pagi_search } from '../javascripts/pagi_search.js';
@@ -212,14 +198,14 @@
                                               date.getFullYear();
 
                         tableRows += `
-                            <tr>
-                                <td><a type="button" class="btn btn-primary btn-style btn-change" onClick=updateExp(${item.id}) href='/billing/22'>View</a></td>
-                                <td>${item.id}</td>
+                            <tr data-mod-id='${item.id}'>
+                                <td><a type="button" id="view-btn" class="btn btn-primary btn-style btn-change"  href='/billing/22'>View</a></td>
+                               
                                 <td>${formattedDate}</td>
                                 <td>${item.TariffName}</td>
                                 <td>${item.UserId}</td>
                                 <td><input class="form-check-input mt-0" type="checkbox" disabled ${item.freeze ? 'checked' : ''}></td>
-                                <td><input class="form-check-input mt-0" type="checkbox" id='${item.id}' onClick=ChangeStatus3(${item.id}) ${item.status ? 'checked' : ''}></td>
+                              <td><input id='status-checkbox' class="form-check-input mt-0" type="checkbox" data-id='${item.id}'  ${item.status ? 'checked' : ''}></td>
                             </tr>
                         `;
                     });
@@ -232,6 +218,21 @@
             });
         }
         fetchData();
+        $('#exp-table').on('click', '#view-btn',function(){
+                                       const id=$(this).closest('tr').data('mod-id')
+                                       console.log(id)
+                                         ViewBtn('22',id,'billing');      
+                                   });
+
+                                   $('#exp-table').on('click', '#status-checkbox', function () {
+                                    
+                                       const itemId = $(this).data('id');
+                                       const isChecked = $(this).is(':checked');
+                                       const schema = '<%= a %>'
+                                       const status = '<%= b %>'
+                                       console.log(itemId, isChecked,schema)
+                                       updateStatus(itemId, isChecked,schema,status);
+                                    });
     });
 </script>
 

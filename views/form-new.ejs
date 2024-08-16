@@ -1181,31 +1181,29 @@
 
               //alert('11')
               document.getElementById('logoutButton').addEventListener('click', function (event) {
-                event.preventDefault(); // Prevent the default action of following the link
+    event.preventDefault(); // Prevent the default action of following the link
 
-                // Make a POST request to logout endpoint
-
-                fetch('/logout', {
-                  method: 'POST',
-                  headers: {
-                    'Content-Type': 'application/json'
-                  },
-                  // Optionally, you can send data in the body if needed
-                  // body: JSON.stringify({ /* any data you need to send */ })
-                })
-                  .then(response => response.json())
-                  .then(data => {
-                    // Handle successful logout
-                    console.log(data.msg); // Log the logout message
-                    // Redirect to login page
-                  })
-                  .catch(error => {
-                    console.error('Error logging out:', error);
-                    // Handle error if necessary
-                  });
-                window.location.href = '/1';
-              });
-
+    fetch('/logout', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Logout failed');
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log(data.msg); // Log the logout message
+      window.location.href = '/1'; // Redirect to login page after successful logout
+    })
+    .catch(error => {
+      console.error('Error logging out:', error);
+      alert('Failed to log out. Please try again.'); // Provide user feedback
+    });
+});
 
 
               console.log("Document is ready");
@@ -1380,6 +1378,7 @@
                           if ($('#fu_status').val() === 'Appointment') {
                             $('#dv_appointment').css('display', 'block');
                             $('#nav-appointment-tab').removeClass("disabled");
+                            $('#nav-followup-tab').addClass("disabled");
                             setActiveTab('#nav-appointment-tab');
 
                             $('.highlight').removeClass('highlight');
@@ -1536,7 +1535,11 @@
 
                         // Correct the event listener target and event type
                         btn.addEventListener('click', function () {
-                          if (status.value === 'Visited') { // Compare the value of the select element
+                          if (status.value === 'Visited') { 
+                            // Compare the value of the select element
+                            $('#nav-visited-tab').removeClass("disabled");
+                            $('#nav-appointment-tab').addClass("disabled");
+                            setActiveTab('#nav-visited-tab');
                             hiddiv.style.display = 'block';
                             $('.highlight').removeClass('highlight');
                             $('#visitedDiv').addClass('highlight');
@@ -1545,12 +1548,13 @@
                             }, 500);
 
                           } else if (status.value === 'Reschedule') {
+                            $('#nav-followup-tab').removeClass("disabled");
                             $('#apt_apt_btn').removeAttr('disabled');
                             // $('#dv_appointment').css('display', 'none');
                             // $('#follow_up_btn').removeAttr('disabled');
                             // $('#apt_apt_btn').removeAttr('disabled');
                           } else if (status.value === 'Cancelled') {
-
+                            $('#nav-followup-tab').removeClass("disabled");
                             $('#followUpDiv').addClass('highlight');
                             $('html, body').animate({
                               scrollTop: $('#followUpDiv').offset().top
@@ -1798,8 +1802,11 @@
                       $('#con_clinic').prop('disabled', true);
 
                       if (formData.visited_status === 'Booked') {
+
                         $('#dv_converted').css('display', 'block');
                         $('#nav-converted-tab').removeClass("disabled");
+                     
+                        $('#nav-visited-tab').addClass("disabled");
                         setActiveTab('#nav-converted-tab');
 
                         $('#vis_btn').attr('disabled', 'disabled');

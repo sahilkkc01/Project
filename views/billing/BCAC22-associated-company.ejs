@@ -204,13 +204,13 @@
                                                 data.forEach(function (item) {
                                                     console.log(item);
                                                     tableRows += `
-                                                        <tr>
-                                                            <td><a type="button" class="btn btn-primary btn-style btn-change"  onClick=loadUpdatePage(${item.id}) href='/billing/19' >View</a></td>
+                                                        <tr data-mod-id='${item.id}'>
+                                                            <td><button id='view-btn' class="btn btn-primary btn-style btn-change" >View</button></td>
                                                             <td>${item.code}</td>
                                                             <td>${item.description}</td>
                                                             <td>${item.company}</td>
                                                             <td>${item.tariff}</td>
-                                                            <td><input class="form-check-input mt-0" type="checkbox" id='${item.id}' onClick=ChangeStatus(${item.id}) ${item.status ? 'checked' : ''}></td>
+                                                            <td><input id='status-checkbox' class="form-check-input mt-0" type="checkbox" data-id='${item.id}'  ${item.status ? 'checked' : ''}></td>
                                                         </tr>
                                                         `;
                                                 });
@@ -223,33 +223,19 @@
                                         });
                                     }
                                     fetchData();
+                                    $('#assComp-table').on('click', '#view-btn',function(){
+                                       const id=$(this).closest('tr').data('mod-id')
+                                       console.log(id)
+                                         ViewBtn('19',id,'billing');      
+                                   });
+                                    $('#assComp-table').on('click', '#status-checkbox', function () {
+                                       const itemId = $(this).data('id');
+                                       const isChecked = $(this).is(':checked');
+                                       const schema = '<%= a %>'
+                                       const status = '<%= b %>'
+                                       console.log(itemId, isChecked,schema)
+                                       updateStatus(itemId, isChecked,schema,status);
+                                    });
                                 });
                             </script>
-                            <script>
-                                function ChangeStatus(b) {
-                                    $.ajax({
-                                        url: '/billing/change-Comp-status',
-                                        type: 'POST',
-                                        data: { b, status: $("#" + b).prop("checked") },
-                                        success: function (data) {
-                                            console.log(data);
-                                        },
-                                        error: function (xhr, status, error) {
-                                            console.error('Error fetching classification details:', error);
-                                        }
-                                    })
-                                }
-                                function loadUpdatePage(b) {
-                                    $.ajax({
-                                        url: '/billing/update-acc-master',
-                                        type: 'POST',
-                                        data: { id: b },
-                                        success: function (data) {
-                                            console.log(data);
-                                        },
-                                        error: function (xhr, status, error) {
-                                            console.error('Error fetching classification details:', error);
-                                        }
-                                    })
-                                }
-                            </script>
+                           

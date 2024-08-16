@@ -103,14 +103,14 @@
                     </div>
                     <div class="card-body">
                       <div class="form-row">
-                        <div class="col-6 mb-3 mb-3">
-                          <div class="form-group"><label class="input__label">Description </label><input type="text"
-                             id="searchBox"  class="form-control input-style" placeholder=""></div>
+                        <div class="col-4 mb-3 mb-3">
+                          <div class="form-group"><label class="input__label">Description </label>
+                            <input type="text" id="searchBox" class="form-control input-style" placeholder="Search..">
+
+                          </div>
                         </div>
                         <div class="col-2 mb-3 mb-3">
-                          <div class="form-group mt-4">
-						  <button type="submit"
-                              class="btn btn-primary btn-style btn-change"><i class="fas fa-search"></i> Search</button></div>
+                          
                         </div>
                       </div>
 
@@ -183,7 +183,7 @@
       <td>${item.dept_code}</td>
       <td>${item.dept_desc}</td>
       <td>${item.dept_isClinic}</td>
-       <td><input class="form-check-input mt-0 status-checkbox" onclick="updateStatus('${item.id}', this.checked,'<%= a %>')"  type="checkbox" id="status_${item.id}" name="status_${item.id}" ${item.status ? 'checked' : ''}></td>
+       <td><input class="form-check-input mt-0 status-checkbox" onclick="updateStatus('${item.id}', this.checked,'<%= a %>','clinic')"  type="checkbox" id="status_${item.id}" name="status_${item.id}" ${item.status ? 'checked' : ''}></td>
     </tr>
                       `;
                     });

@@ -188,7 +188,7 @@
     <td>${formatDate(item.emp_dob)}</td>
      <td>${item.emp_clinic}</td>
     
-    <td><input class="form-check-input mt-0" onclick="updateStatus('${item.id}', this.checked,'<%= a %>')" type="checkbox" ${item.status ? 'checked' : ''}></td>
+    <td><input class="form-check-input mt-0" onclick="updateStatus('${item.id}', this.checked,'<%= a %>','clinic')" type="checkbox" ${item.status ? 'checked' : ''}></td>
   </tr>
                     `;
                   });

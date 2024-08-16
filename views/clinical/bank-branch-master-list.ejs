@@ -203,7 +203,7 @@
             <td>${item.bank_branch_m_desc}</td>
             <td>${item.bank_branch_m_bank}</td>
             <td>${item.bank_branch_m_micr_no}</td>
-            <td><input class="form-check-input mt-0" onclick="updateStatus('${item.id}', this.checked,'<%= a %>')" type="checkbox" ${item.status ? 'checked' : ''}></td>
+            <td><input class="form-check-input mt-0" onclick="updateStatus('${item.id}', this.checked,'<%= a %>','clinic')" type="checkbox" ${item.status ? 'checked' : ''}></td>
           </tr>
                             `;
                           });

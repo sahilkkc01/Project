@@ -1,0 +1,2078 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>LifeLinker</title>
+
+  <!-- Template CSS -->
+  <%- include('../header'); -%>
+
+    <!-- main content start -->
+    <div class="main-content">
+
+      <div class="row content-top-gap2">
+        <div class="col-lg-12">
+          <nav class="navbar navbar-expand-lg navbar-light bg-white">
+            <a class="navbar-brand text-center mr-5" href="#">
+              <span class="dash-icon"><i class="fas fa-tachometer-alt"></i></span>
+              Dashboard
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item active text-center mr-5">
+                  <a class="nav-link" href="#">
+                    <span class="dash-icon"><i class="far fa-user"></i></span>
+                    Master
+                  </a>
+                </li>
+                <li class="nav-item text-center mr-5">
+                  <a class="nav-link" href="#">
+                    <span class="dash-icon"><i class="fas fa-exchange-alt"></i></span>
+                    Transaction
+                  </a>
+                </li>
+                <li class="nav-item text-center mr-5">
+                  <a class="nav-link" href="#">
+                    <span class="dash-icon"><i class="fas fa-hand-holding-medical"></i></span>
+                    Patient 360
+                  </a>
+                </li>
+                <li class="nav-item text-center mr-5">
+                  <a class="nav-link" href="#">
+                    <span class="dash-icon"><i class="fas fa-receipt"></i></span>
+                    Outside Reciept
+                  </a>
+                </li>
+                <li class="nav-item text-center mr-5">
+                  <a class="nav-link" href="#">
+                    <span class="dash-icon"><i class="fas fa-file-invoice"></i></span>
+                    Outpatient Department
+                  </a>
+                </li>
+                <li class="nav-item text-center mr-5">
+                  <a class="nav-link" href="#">
+                    <span class="dash-icon"><i class="fas fa-chart-line"></i></span>
+                    Analytics
+                  </a>
+                </li>
+                <li class="nav-item text-center mr-5">
+                  <a class="nav-link" href="#">
+                    <span class="dash-icon"><i class="far fa-clock"></i></span>
+                    Waiting List
+                  </a>
+                </li>
+                <li class="nav-item text-center mr-5">
+                  <a class="nav-link" href="#">
+                    <span class="dash-icon"><i class="fas fa-wrench"></i></span>
+                    Adminstration
+                  </a>
+                </li>
+                <li class="nav-item text-center">
+                  <a class="nav-link" href="#">
+                    <span class="dash-icon"><i class="fas fa-spinner"></i></span>
+                    Additional
+                  </a>
+                </li>
+
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+      <!-- content -->
+      <div class="container-fluid">
+
+        <div class="chart">
+          <div class="row">
+
+            <div class="col-lg-12 pl-lg-0 mt-2 ml-2">
+              <h4 class="primary">Package Membership Details</h4>
+            </div>
+            <div class="col-lg-12 pl-lg-2 chart-grid">
+              <div class="card card_border">
+
+
+                <div class="">
+                  <!--Past your code here starts-->
+
+                  <form id="">
+
+                    <div class="card">
+                      <div class="col-xl-12 p-heading">
+                        <h6 class="p-text">List of Packages</h6>
+                      </div>
+                      <div class="card-body">
+                        <!-- <div class="pl-xl-0 mb-2">
+                                                    <h6 class="primary">List of Packages</h6>
+                                                </div> -->
+                        <div class="form-row">
+                          <div class="col-6 mb-3">
+                            <div class="form-group"><label class="input__label">Package
+                                Name</label><input name="package_name" type="text" class="form-control input-style"
+                                placeholder="">
+                            </div>
+                          </div>
+
+                          <div class="col-5">
+                            <div class="form-group">
+                              <label class="input__label pl-2">Specialization</label><select name="specialization"
+                                class="form-control input-style ml-2">
+                                <option></option>
+                              </select>
+                            </div>
+                          </div>
+
+                          <div class="col-1">
+                            <div class="form-group text-right">
+                              <button type="button" class="btn-primary btn-style btn mt-4 btn-change text-right"
+                                id="searchBox"><strong><i class="fa-solid fa-magnifying-glass"></i>
+                                  Search</strong></button>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="form-row">
+                          <div class="col-12 mb-0">
+                            <div class="form-group">
+                              <div class="col col-12 pr-xl-0 pl-xl-0">
+                                <div class="slidx">
+
+                                  <table class="table2" id="data-table">
+                                    <thead>
+                                      <tr>
+                                        <th contenteditable="true">Code </th>
+                                        <th contenteditable="true">Package Name</th>
+                                        <th contenteditable="true">Short Description
+                                        </th>
+                                        <th contenteditable="true">Long Description
+                                        </th>
+                                        <th contenteditable="true">Specialization
+                                        </th>
+                                        <th contenteditable="true">Sub
+                                          Specialization</th>
+                                        <th contenteditable="true">Rate</th>
+                                        <th contenteditable="true">Status</th>
+                                        <th contenteditable="true">Package Freezed
+                                        </th>
+                                        <th contenteditable="true">Package Approved
+                                        </th>
+                                      </tr>
+                                    </thead>
+                                    <tbody id="categtable">
+                                      <tr>
+                                        <td contenteditable="true"></td>
+                                        <td contenteditable="true"></td>
+                                        <td contenteditable="true"></td>
+                                        <td contenteditable="true"></td>
+                                        <td contenteditable="true"></td>
+                                        <td contenteditable="true"></td>
+                                        <td contenteditable="true"></td>
+                                        <td contenteditable="true"><input class="form-check-input mt-1 " type="checkbox"
+                                            id="gridCheck1"></td>
+                                        <td contenteditable="true"></td>
+                                        <td contenteditable="true"></td>
+                                      </tr>
+                                      <tr>
+                                        <td contenteditable="true"></td>
+                                        <td contenteditable="true"></td>
+                                        <td contenteditable="true"></td>
+                                        <td contenteditable="true"></td>
+                                        <td contenteditable="true"></td>
+                                        <td contenteditable="true"></td>
+                                        <td contenteditable="true"></td>
+                                        <td contenteditable="true"><input class="form-check-input mt-1" type="checkbox"
+                                            id="gridCheck1"></td>
+                                        <td contenteditable="true"></td>
+                                        <td contenteditable="true"></td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                  <div class="paginationControls"></div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!--Past your code here ends-->
+                </div>
+              </div>
+              <div class="form-group mt-1 mb-3 text-right">
+
+                <button id="myButton1" data-bs-toggle="modal" data-bs-target="#myModal1" type="button"
+                  class="btn-secondary btn-style btn mt-3 mr-2" disabled><strong> Assign Consent</strong></button>
+                <button id="myButton2" type="button" class="btn-secondary btn-style btn mt-3 mr-2"
+                  data-bs-toggle="modal" data-bs-target="#myModal2" disabled onclick="fetchAllTariff()"><strong>Assign
+                    Tariff</strong></button>
+                <button id="myButton3" type="button" class="btn-primary btn-style btn mt-3 mr-2" data-bs-toggle="modal"
+                  data-bs-target="#myModal3" disabled onclick="fetchServicesData()"><strong>
+                    Package Defination</strong></button>
+                <button type="button" class="btn-success btn-style btn mt-3 mr-2" disabled><strong><i
+                      class="fa-regular fa-pen-to-square"></i> Modify</strong></button>
+                <a href="/package/2"><button type="button" class="btn-secondary btn-style btn mt-3 mr-2"><strong><i
+                        class="fa-solid fa-plus"></i> New</strong></button></a>
+                <button type="button" class="btn-danger btn-style btn mt-3 mr-2" disabled><strong><i
+                      class="fas fa-times"></i> Cancel</strong></button>
+                <button type="button" class="btn-primary btn-style btn mt-3" disabled><strong><i
+                      class="far fa-save"></i>
+                    Save</strong></button>
+              </div>
+              </form>
+            </div>
+
+            <!-- The Modal -->
+            <!-- Assign Consent -->
+            <div class="modal" id="myModal1" tabindex="-1">
+              <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+
+                  <!-- Modal Header -->
+                  <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                      <i class="fa-solid fa-circle-xmark"></i>
+                    </button>
+                  </div>
+
+                  <!-- Modal Body -->
+                  <div class="modal-body">
+                    <div class="row">
+                      <div class="col-lg-12 pl-lg-2 chart-grid">
+                        <form>
+                          <div class="card card_border">
+                            <div class="card">
+                              <div class="col-xl-12 p-heading">
+                                <h6 class="p-text">SEARCH CONSENT</h6>
+                              </div>
+
+                              <div class="card-body pb-3 pt-2">
+                                <div class="row">
+                                  <div class="col-lg-6 col-md-5 col-sm-12 mb-2">
+                                    <div class="form-group">
+                                      <label class="input__label">Department</label>
+                                      <select name="report_generated_by" class="form-control input-style">
+                                        <option>Select</option>
+                                      </select>
+                                    </div>
+                                  </div>
+
+                                  <div class="col-lg-5 col-md-5 col-sm-12 mb-2">
+                                    <div class="form-group">
+                                      <label class="input__label">Template Name</label>
+                                      <select name="report_generated_by" class="form-control input-style">
+                                        <option>Select</option>
+                                      </select>
+                                    </div>
+                                  </div>
+
+                                  <div class="col-lg-1 col-md-2 col-sm-12 text-end">
+                                    <div class="form-group">
+                                      <button type="button" class="btn btn-style mt-4 btn-primary btn-change">
+                                        <strong><i class="fas fa-search"></i> Search</strong>
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col-12">
+                                    <div class="form-group">
+                                      <div class="col col-12 pr-xl-0 pl-xl-0">
+                                        <div class="slidx">
+                                          <table class="table2">
+                                            <thead>
+                                              <tr>
+                                                <th contenteditable="true" width="15%"></th>
+                                                <th contenteditable="true">Consent</th>
+                                              </tr>
+                                            </thead>
+                                            <tbody>
+                                              <tr>
+                                                <td contenteditable="true">
+                                                  <input class="form-check-input mt-1" type="checkbox" id="gridCheck1">
+                                                </td>
+                                                <td contenteditable="true"></td>
+                                              </tr>
+                                              <tr>
+                                                <td contenteditable="true">
+                                                  <input class="form-check-input mt-1" type="checkbox" id="gridCheck2">
+                                                </td>
+                                                <td contenteditable="true"></td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <!-- Buttons -->
+                            <div class="form-group mt-1 mb-3 text-end">
+                              <button type="button" class="btn btn-danger btn-style mt-3 me-2">
+                                <strong><i class="fas fa-times"></i> Cancel</strong>
+                              </button>
+                              <button type="button" class="btn btn-primary btn-style mt-3">
+                                <strong><i class="far fa-save"></i> Save</strong>
+                              </button>
+                            </div>
+
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <!-- Assign Tariff Model -->
+            <div class="modal" id="myModal2" tabindex="-1">
+              <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+
+                  <!-- Modal Header -->
+                  <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                      <i class="fa-solid fa-circle-xmark"></i>
+                    </button>
+                  </div>
+
+                  <!-- Modal Body -->
+                  <div class="modal-body">
+                    <div class="chart">
+                      <div class="row">
+                        <div class="col-lg-12 pl-lg-2 chart-grid">
+                          <form>
+                            <div class="card card_border mt-3">
+                              <div>
+                                <div class="card">
+                                  <div>
+                                    <div class="form-group">
+                                      <div class="col-xl-12 p-heading">
+                                        <h6 class="p-text">SERVICE NAME : Additional Medicine Package 1</h6>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="card-body pt-2">
+                                    <h6 class="primary">SELECT THE OPERATION YOU WANT</h6>
+                                    <div class="form-row">
+                                      <div class="col-lg-12 col-md-12 col-sm-12">
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="radio" name="operation"
+                                            id="linkWithTariff" value="link">
+                                          <label class="form-check-label" for="linkWithTariff">Link With Tariff /
+                                            Package</label>
+                                        </div>
+                                      </div>
+                                      <div class="col-lg-12 col-md-12 col-sm-12 mt-2">
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="radio" name="operation" id="changeRate"
+                                            value="change" onclick="fetchAllTariff()">
+                                          <label class="form-check-label" for="changeRate">Change Rate Of Existing
+                                            Tariff / Package</label>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="form-group mt-1 mb-3 text-right">
+                          <button type="button" class="btn-danger btn-style btn mr-2"><strong><i
+                                class="fas fa-times"></i> Cancel</strong></button>
+                          <button type="button" id="okButton" class="btn-primary btn-style btn"><strong><i
+                                class="fas fa-check"></i> OK</strong></button>
+                        </div>
+                        </form>
+                      </div>
+
+                      <!-- Modals -->
+                      <div class="modal fade" id="linkModal" data-tabindex="-1" aria-labelledby="linkModalLabel"
+                        aria-hidden="true" style="background:#66666694">
+                        <div class="modal-dialog modal-lg">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <a href="#" class="btn-close" data-bs-dismiss="modal"><i
+                                  class="fa-solid fa-circle-xmark"></i></a>
+                            </div>
+                            <div class="modal-body">
+                              <div class="chart">
+                                <div class="row">
+                                  <div class="col-lg-12 pl-lg-2 chart-grid">
+                                    <form>
+                                      <div class="card card_border mt-3">
+                                        <div>
+                                          <div class="card">
+                                            <div>
+                                              <div class="form-group">
+                                                <div class="col-xl-12 p-heading">
+                                                  <h6 class="p-text">SERVICE NAME : Additional Medicine Package 1</h6>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="card-body pt-2 pb-0">
+                                              <h6 class="primary">FILTER BY</h6>
+                                            </div>
+                                            <div class="form-row card-body pt-lg-0 pb-3">
+                                              <div class="col-lg-1 col-md-6 col-sm-12">
+                                                <div class="form-check-label">
+                                                  <div class="radio mt-2">
+                                                    <label class="form-check-label pt-1"><input
+                                                        class="form-check-input mt-1" type="radio" checked>
+                                                      Teriff</label>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <div class="col-lg-6 col-md-6 col-sm-12">
+                                                <div class="form-check-label">
+                                                  <div class="radio mt-2">
+                                                    <label class="form-check-label pt-1 pr-4"><input
+                                                        onclick="loadTariff()" data-bs-toggle="modal"
+                                                        data-bs-target="#myModal21a" data-bs-target="#myModal"
+                                                        class="form-check-input mt-1" type="checkbox"
+                                                        id="applyRateToAllCheckbox">
+                                                      Apply Rate To All</label>
+                                                    <label class="form-check-label pt-1 pl-4"><input
+                                                        class="form-check-input mt-1" id="searchTariffCheckbox"
+                                                        type="checkbox">
+                                                      Search Tariff</label>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="form-row card-body pt-lg-0 pb-3" id="searchFieldContainer">
+                                              <!-- Search field will be inserted here -->
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                  </div>
+                                  <div class="mt-1 col-lg-12 pl-lg-2 pr-lg-3">
+                                    <div class="card card_border">
+                                      <div class="mb-3">
+                                        <div class="form-group">
+                                          <div class="col-xl-12 p-heading">
+                                            <h6 class="p-text">ASSIGN RATE</h6>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="form-row card-body pt-0 pb-3">
+                                        <div class="col-12 mb-0">
+                                          <div class="form-group">
+                                            <div class="col col-12 pr-xl-0 pl-xl-0">
+                                              <div class="slidx">
+                                                <table class="table2" id="tariffTable">
+                                                  <thead>
+                                                    <tr>
+                                                      <th contenteditable="true">Select</th>
+                                                      <th contenteditable="true">Class Name</th>
+                                                      <th contenteditable="true">Rate</th>
+                                                    </tr>
+                                                  </thead>
+                                                  <tbody id="tariffBody">
+                                                    <!-- <tr>
+                                                      <td contenteditable="true" colspan="3" class="text-left pl-4">
+                                                        <i class="fa-solid fa-caret-down pr-2"
+                                                          style="color: #11CDF0;"></i> Tariff Name: F9F (1 item)
+                                                      </td>
+                                                    </tr>
+                                                    <tr>
+                                                      <td contenteditable="true" width="10%"><input
+                                                          class="form-check-input mt-1" type="checkbox" id="gridCheck1">
+                                                      </td>
+                                                      <td contenteditable="true">IPD</td>
+                                                      <td contenteditable="true" width="15%">1600.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                      <td contenteditable="true" width="10%"><input
+                                                          class="form-check-input mt-1" type="checkbox" id="gridCheck1">
+                                                      </td>
+                                                      <td contenteditable="true">OPD</td>
+                                                      <td contenteditable="true" width="15%">1600.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                      <td contenteditable="true" colspan="3" class="text-left pl-4">
+                                                        <i class="fa-solid fa-caret-down pr-2"
+                                                          style="color: #11CDF0;"></i> Tariff Name: Karimnagar (1 item)
+                                                      </td>
+                                                    </tr>
+                                                    <tr>
+                                                      <td contenteditable="true" width="10%"><input
+                                                          class="form-check-input mt-1" type="checkbox" id="gridCheck1">
+                                                      </td>
+                                                      <td contenteditable="true">IPD</td>
+                                                      <td contenteditable="true" width="15%">1600.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                      <td contenteditable="true" width="10%"><input
+                                                          class="form-check-input mt-1" type="checkbox" id="gridCheck1">
+                                                      </td>
+                                                      <td contenteditable="true">OPD</td>
+                                                      <td contenteditable="true" width="15%">1600.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                      <td contenteditable="true" colspan="3" class="text-left pl-4">
+                                                        <i class="fa-solid fa-caret-down pr-2"
+                                                          style="color: #11CDF0;"></i> Tariff Name: Vijyawada (2 item)
+                                                      </td>
+                                                    </tr>
+                                                    <tr>
+                                                      <td contenteditable="true" width="10%"><input
+                                                          class="form-check-input mt-1" type="checkbox" id="gridCheck1">
+                                                      </td>
+                                                      <td contenteditable="true">OPD</td>
+                                                      <td contenteditable="true" width="15%">1600.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                      <td contenteditable="true" colspan="3" class="text-left pl-4">
+                                                        <i class="fa-solid fa-caret-down pr-2"
+                                                          style="color: #11CDF0;"></i> Tariff Name: F8j (2 item)
+                                                      </td>
+                                                    </tr>
+                                                    <tr>
+                                                      <td contenteditable="true" width="10%"><input
+                                                          class="form-check-input mt-1" type="checkbox" id="gridCheck1">
+                                                      </td>
+                                                      <td contenteditable="true">OPD</td>
+                                                      <td contenteditable="true" width="15%">1600.00</td>
+                                                    </tr> -->
+                                                  </tbody>
+                                                </table>
+                                              </div>
+                                              <div id="paginationControls"></div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="form-group mt-1 mb-3 text-right">
+                                  <button type="button" class="btn-danger btn-style btn mr-2"
+                                    data-bs-dismiss="modal"><strong><i class="fas fa-times"></i> Close</strong></button>
+                                  <button type="button" id="okButton" class="btn-primary btn-style btn"><strong><i
+                                        class="fas fa-check"></i> Save</strong></button>
+                                </div>
+                                </form>
+                              </div>
+
+                              <!-- Pop Up inside Model -->
+                              <div class="modal mt-5" id="myModal21a" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                aria-hidden="true" style="background:#66666694">
+                                <div class="modal-dialog">
+                                  <div class="modal-content">
+                                    <!-- Modal Header -->
+                                    <div class="modal-header">
+                                      <a href="#" class="btn-close" data-bs-dismiss="modal"><i
+                                          class="fa-solid fa-circle-xmark"></i></a>
+                                    </div>
+                                    <!-- Modal body -->
+                                    <div class="modal-body">
+                                      <div class="primary mb-2">
+                                        Apply Class Rate To All Tariff
+                                      </div>
+                                      <div>
+                                        <input type="checkbox" id="applyBaseRateCheckbox" onclick="getNewModule()">
+                                        <label for="applyBaseRateCheckbox">Apply Base Rate</label>
+                                      </div>
+                                      <table class="table2" id="selectedServicesTable">
+                                        <thead>
+                                          <tr>
+                                            <th>Select</th>
+                                            <th>Class Name</th>
+                                            <th>Rate</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody id="selectedServicesBody">
+                                        </tbody>
+                                      </table>
+                                      <div id="paginationControlsSer"></div>
+                                      <div class="form-group mt-1 mb-3 text-right">
+                                        <button type="button" class="btn-danger btn-style btn btn-close mr-2"
+                                          id="modalCancelButton" data-bs-dismiss="modal"><strong><i
+                                              class="fas fa-times"></i>
+                                            Cancel</strong></button>
+                                        <button type="button" id="okButton" class="btn-primary btn-style btn"
+                                          data-bs-toggle="modal" data-bs-target="#myModal"><strong><i
+                                              class="fas fa-check"></i> OK</strong></button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="modal fade" id="changeModal" tabindex="-1" aria-labelledby="changeModalLabel"
+                        aria-hidden="true" style="background:#66666694">
+                        <div class="modal-dialog modal-lg">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <a href="#" class="btn-close" data-bs-dismiss="modal"><i
+                                  class="fa-solid fa-circle-xmark"></i></a>
+                            </div>
+                            <div class="modal-body">
+                              <div class="chart">
+                                <div class="row">
+                                  <div class="col-lg-12 pl-lg-2 chart-grid">
+                                    <form>
+                                      <div class="card card_border mt-3">
+                                        <div>
+                                          <div class="card">
+                                            <div>
+                                              <div class="form-group">
+                                                <div class="col-xl-12 p-heading">
+                                                  <h6 class="p-text">SERVICE NAME : Additional Medicine Package 1</h6>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="card-body pt-2 pb-0">
+                                              <h6 class="primary">FILTER BY</h6>
+                                            </div>
+                                            <div class="form-row card-body pt-lg-0 pb-3">
+                                              <div class="col-lg-1 col-md-6 col-sm-12">
+                                                <div class="form-check-label">
+                                                  <div class="radio mt-2">
+                                                    <label class="form-check-label pt-1"><input
+                                                        class="form-check-input mt-1" type="radio" checked>
+                                                      Teriff</label>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <div class="col-lg-6 col-md-6 col-sm-12">
+                                                <div class="form-check-label">
+                                                  <div class="radio mt-2">
+                                                    <label class="form-check-label pt-1 pr-4"><input
+                                                        data-bs-toggle="modal" data-bs-target="#myModal22a"
+                                                        class="form-check-input mt-1" type="checkbox"
+                                                        id="applyRateToAllCheckbox">
+                                                      Apply Rate To All</label>
+                                                    <label class="form-check-label pt-1 pl-4"><input
+                                                        class="form-check-input mt-1" id="searchTariffCheckbox2"
+                                                        type="checkbox">
+                                                      Search Tariff</label>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="form-row card-body pt-lg-0 pb-3" id="searchFieldContainer2">
+                                              <!-- Search field will be inserted here -->
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                  </div>
+                                  <div class="mt-1 col-lg-12 pl-lg-2 pr-lg-3">
+                                    <div class="card card_border">
+                                      <div class="mb-3">
+                                        <div class="form-group">
+                                          <div class="col-xl-12 p-heading">
+                                            <h6 class="p-text">ASSIGN RATE</h6>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="form-row card-body pt-0 pb-3">
+                                        <div class="col-12 mb-0">
+                                          <div class="form-group">
+                                            <div class="col col-12 pr-xl-0 pl-xl-0">
+                                              <div class="slidx">
+                                                <table class="table2" id="serviceTable1">
+                                                  <thead>
+                                                    <tr>
+                                                      <th contenteditable="true">Select</th>
+                                                      <th contenteditable="true">Class Name</th>
+                                                      <th contenteditable="true">Rate</th>
+                                                    </tr>
+                                                  </thead>
+                                                  <tbody id="serviceBody1">
+
+                                                  </tbody>
+                                                </table>
+                                              </div>
+                                              <div id="paginationControls"></div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="form-group mt-1 mb-3 text-right">
+                                  <button type="button" class="btn-danger btn-style btn mr-2"><strong><i
+                                        class="fas fa-times"></i> Close</strong></button>
+                                  <button type="button" id="okButton" class="btn-primary btn-style btn"><strong><i
+                                        class="fas fa-check"></i> Save</strong></button>
+                                </div>
+                                </form>
+                              </div>
+
+                              <!-- Pop Up inside Model -->
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Package Defination -->
+            <div class="modal" id="myModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                  <!-- Modal Header -->
+                  <div class="modal-header">
+                    <a href="#" class="btn-close" data-bs-dismiss="modal"><i class="fa-solid fa-circle-xmark"></i></a>
+                  </div>
+                  <!-- Modal body -->
+                  <div class="modal-body">
+                    <div class="row">
+                      <div class="chart">
+                        <div class="row">
+                          <!-- <div class="col-lg-12 pl-lg-0 mt-2 ml-2">
+                            <h4 class="primary">Company</h4>
+                        </div> -->
+                          <div class="col-lg-12 pl-lg-2 chart-grid">
+                            <form>
+                              <div class="card card_border mt-3">
+                                <div>
+                                  <!--Past your code here starts-->
+                                  <div class="container mt-5">
+                                    <div class="card">
+                                      <div class="form-row card-body pb-2 pt-2">
+                                        <div class="col-3">
+                                          <div class="form-group">
+                                            <label class="input__label">Package Name</label>
+                                            <input disabled id="packageName" name="packageName" type="text"
+                                              class="form-control input-style" placeholder="">
+                                          </div>
+                                        </div>
+
+                                        <div class="col-3">
+                                          <div class="form-group">
+                                            <label class="input__label">Package Amount</label>
+                                            <input id="packageAmount" name="packageAmount" type="number"
+                                              class="form-control input-style" placeholder="" disabled>
+                                          </div>
+                                        </div>
+
+                                        <div class="col-3">
+                                          <div class="form-group">
+                                            <label class="input__label">Package Duration</label>
+                                            <div class="d-flex">
+                                              <input id="packageDuration" name="packageDuration" type="text"
+                                                class="form-control input-style me-2" style="width: 50%;"
+                                                placeholder="">
+                                              <select name="report_generated_by" class="form-control input-style">
+                                                <option>Days</option>
+                                                <option>Months</option>
+                                              </select>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="card-body pt-2 pb-2">
+                                        <h6 class="primary">DISTRIBUTION DETAILS</h6>
+                                      </div>
+                                      <div class="form-row card-body pt-lg-0 pb-0">
+                                        <div class="col-lg-3 col-md-6 col-sm-12">
+                                          <div class="form-group">
+                                            <label class="input__label">Service Component</label>
+                                            <input id="serviceComponent" name="count" type="number"
+                                              class="form-control input-style" placeholder="0">
+                                          </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-6 col-sm-12">
+                                          <div class="form-group">
+                                            <label class="input__label">Pharmacy Component</label>
+                                            <input id="pharmacyComponent" name="count" type="number"
+                                              class="form-control input-style" placeholder="0">
+                                          </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-6 col-sm-12">
+                                          <div class="form-check-label">
+                                            <div class="radio my-4">
+                                              <label class="form-check-label pt-1"><input class="form-check-input mt-1"
+                                                  type="radio"> Fixed</label>
+                                            </div>
+                                            <label class="form-check-label pl-4 pt-1"><input
+                                                class="form-check-input mt-1" type="radio"> Percentage</label>
+                                          </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-6 col-sm-12">
+                                          <div class="form-check-label">
+                                            <div class="radio my-4">
+                                              <label class="form-check-label pt-1"><input class="form-check-input mt-1"
+                                                  type="checkbox"> Freeze Package</label>
+                                            </div>
+                                          </div>
+                                        </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                <!--section2-->
+                <nav>
+                  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+
+                    <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#nav-appointment" type="button"
+                      role="tab" aria-controls="nav-appointment" aria-selected="false"><i
+                        class="fas fa-calendar-alt"></i> Services </button>
+
+                    <button class="nav-link " id="nav-followup-tab" data-bs-toggle="tab" data-bs-target="#nav-followup"
+                      type="button" role="tab" aria-controls="nav-followup" aria-selected="true"><i
+                        class="fas fa-exchange-alt"></i> Pharmacy Items</button>
+
+                  </div>
+                </nav>
+                <div class="col-md-12 tab-content" id="nav-tabContent">
+
+                  <!--Div pharmacy starts-->
+                  <div class="tab-pane fade show " id="nav-followup" role="tabpanel" aria-labelledby="nav-followup-tab">
+                    <div class="mt-1 col-lg-12 pl-lg-2 pr-lg-3">
+                      <div class="card card_border">
+                        <div class="mb-3">
+                          <div class="form-group">
+                            <div class="col-xl-12 p-heading">
+                              <!-- Nav Tabs are here once have a look--->
+                              <h6 class="p-text">PHARMACY ITEMS</h6>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="card-body pt-0">
+                          <h6 class="primary">LIST OF ITEMSS</h6>
+                        </div>
+                        <form id="saveItem">
+                          <div class="form-row card-body pt-1">
+                            <div class="col-12">
+                              <div class="form-group">
+                                <div class="col col-12 pr-xl-0 pl-xl-0">
+                                  <div class="slidx">
+                                    <table class="table2" id="itemTable">
+                                      <thead>
+                                        <tr>
+                                          <th contenteditable="true">Oral Medicine</th>
+                                          <th contenteditable="true">Injunction</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody id="itemBody">
+                                      </tbody>
+                                    </table>
+                                    <div class="form-check-label text-right">
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="form-group mt-1 mb-3 text-right">
+                            <!-- <div class="radio my-4"><label class="form-check-label pt-1"><input class="form-check-input mt-1" type="checkbox">Freeze Package</label></div> -->
+                            <button id="addItemButton" data-bs-toggle="modal" data-bs-target="#myModal4" type="button"
+                              class="btn-secondary btn-style btn mt-3 mr-2"><strong><i class="fa-solid fa-plus"></i>
+                                Add Items</strong></button>
+                            <button type="submit" class="btn-primary btn-style btn mt-3"
+                              onclick="resetForm(saveItem)"><strong><i class="far fa-save"></i> Save
+                                Items</strong></button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                  <!--Div pharmacy ends-->
+
+                  <!--Div Services starts-->
+                  <div class="tab-pane fade show active" id="nav-appointment" role="tabpanel"
+                    aria-labelledby="nav-appointment-tab">
+                    <div class="mt-1 col-lg-12 pl-lg-2 pr-lg-3">
+                      <div class="card card_border">
+                        <div class="mb-3">
+                          <div class="form-group">
+                            <div class="col-xl-12 p-heading">
+
+                              <!-- Nav Tabs are here once have a look--->
+                              <h6 class="p-text">SERVICES</h6>
+                            </div>
+                          </div>
+                        </div>
+
+
+                        <div class="card-body pt-0 pb-2">
+                          <h6 class="primary">LIST OF SERVICES</h6>
+                        </div>
+
+                        <div class="card-body pt-1 pb-3">
+                          <form>
+                            <div class="col-12 mb-0">
+                              <div class="">
+                                <div class="col col-12 pr-xl-0 pl-xl-0">
+                                  <div class="slidx">
+                                    <table class="table2" id="serviceTable">
+                                      <thead>
+                                        <tr>
+                                          <th> SERVICES</th>
+                                          <th> Define Rule</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody id="serviceBody">
+                                        <!-- <tr>
+                                          <td contenteditable="true">Misc. Charges (P)</td>
+                                          <td contenteditable="true"
+                                            class="o text-primary bg-light border-0 hover-bg-blue hover-underline"
+                                            data-bs-toggle="modal" data-bs-target="#myModalDefineRule">Define
+                                            Rule</td>
+                                          <td contenteditable="true">Rate - Adjustable Head (P)</td>
+                                          <td contenteditable="true">Quantity - 1</td>
+                                          <td contenteditable="true">Gender - Both</td>
+                                          <td contenteditable="true"> Discount - 0%</td>
+                                          <td contenteditable="true"><i class="fa-solid fa-trash-can"
+                                              style="color: red;"></i></td>
+                                        </tr>
+
+                                        <tr>
+
+                                          <td contenteditable="true" colspan="7" class="text-left px-3 py-2">
+                                            Procedure : OTHERS
+                                          </td>
+
+                                        </tr>
+
+                                        <tr>
+                                          <td contenteditable="true">Schedule -</td>
+                                          <td contenteditable="true"><input class="form-check-input mt-1 "
+                                              type="checkbox" id="gridCheck1">1</td>
+                                          <td contenteditable="true"><input class="form-check-input mt-1 "
+                                              type="checkbox" id="gridCheck1">2</td>
+                                          <td contenteditable="true"><input class="form-check-input mt-1 "
+                                              type="checkbox" id="gridCheck1">3</td>
+                                          <td contenteditable="true"><input class="form-check-input mt-1 "
+                                              type="checkbox" id="gridCheck1">4</td>
+                                          <td contenteditable="true"><input class="form-check-input mt-1 "
+                                              type="checkbox" id="gridCheck1">5</td>
+                                          <td contenteditable="true"></td>
+
+                                        </tr> -->
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group mt-1 mb-3 text-right">
+                      <button data-bs-toggle="modal" data-bs-target="#myModal5" type="button"
+                        class="btn-secondary btn-style btn mt-3"><strong><i class="fa-solid fa-plus"></i> Add
+                          Services / Groups</strong></button>
+                    </div>
+                    </form>
+                    <!-- Pop Up for Define Rule -->
+                    <div class="modal" id="myModalDefineRule" style="background:#66666694">
+                      <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                          <!-- Modal Header -->
+                          <div class="modal-header">
+                            <a href="#" class="btn-close" data-bs-dismiss="modal"><i
+                                class="fa-solid fa-circle-xmark"></i></a>
+                          </div>
+                          <!-- Modal Body -->
+                          <div class="modal-body">
+                            <div class="chart">
+                              <form id="defienRuleId">
+                                <div class="row">
+                                  <!-- <div class="col-lg-12 pl-lg-0 mt-2 ml-2">
+                                                            <h4 class="primary">Company</h4>
+                                                        </div> -->
+                                  <div class="col-lg-12 pl-lg-2 chart-grid">
+
+                                    <div class="card card_border mt-3">
+                                      <div>
+                                        <!--Past your code here starts-->
+
+
+                                        <div class="card">
+                                          <div class="col-xl-12 p-heading">
+                                            <h6 class="p-text">Misc. Charges (P)</h6>
+                                          </div>
+
+                                          <div class="col-lg-12 col-md-12 col-sm-12">
+                                            <div class="form-check-label">
+                                              <!-- <label class="form-check-label pr-4 pt-1 ml-2">
+                                                <input id="adjustable-head-checkbox" class="form-check-input mt-1"
+                                                  type="checkbox">
+                                                Adjustable Head
+                                              </label> -->
+                                              <!-- <div id="adjustable-head-options" class="radio mt-2"
+                                                style="display: none;">
+                                                <label class="form-check-label pr-4 pt-1">
+                                                  <input class="form-check-input mt-1" type="radio" name="head-type"
+                                                    value="clinical"> Clinical
+                                                </label>
+                                                <label class="form-check-label pl-4 pr-4 pt-1">
+                                                  <input class="form-check-input mt-1" type="radio" name="head-type"
+                                                    value="pharmacy"> Pharmacy
+                                                </label>
+                                              </div> -->
+                                            </div>
+                                          </div>
+                                          <div class="form-row card-body pb-2 pt-2">
+                                            <div class="col-lg-3 col-md-6 col-sm-12">
+                                              <div class="form-group"><label
+                                                  class="input__label">Procedure</label><select id="procedure-field"
+                                                  name="procedure" class="form-control input-style">
+                                                  <option value="days">Days</option>
+                                                  <option>Select</option>
+                                                </select>
+                                              </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-6 col-sm-12">
+                                              <div class="form-group"><label class="input__label">Gender</label><select
+                                                  name="gender" class="form-control input-style">
+                                                  <option>Select</option>
+                                                  <option value="male">Male</option>
+                                                  <option value="female">female</option>
+                                                </select>
+                                              </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-6 col-sm-12">
+                                              <div class="form-group"><label class="input__label">Applicable
+                                                  Relations</label><select name="applicable_relations"
+                                                  class="form-control input-style">
+                                                  <option value="days">Days</option>
+                                                  <option>Select</option>
+                                                </select>
+                                              </div>
+                                            </div>
+
+                                            <div class="col-lg-3 col-md-6 col-sm-12">
+                                              <div class="form-group">
+                                                <label class="input__label">Age Limit</label>
+                                                <input name="age_limit" type="text" class="form-control input-style"
+                                                  placeholder="0">
+                                              </div>
+                                            </div>
+
+                                            <div class="col-lg-3 col-md-6 col-sm-12">
+                                              <div class="form-group">
+                                                <label class="input__label">Discount (%)</label>
+                                                <input name="discount" type="text" class="form-control input-style"
+                                                  placeholder="00">
+                                              </div>
+                                            </div>
+
+                                            <div class="col-lg-3 col-md-6 col-sm-12">
+                                              <div class="form-group">
+                                                <label class="input__label">Quantity</label>
+                                                <input type="number" class="form-control" id="quantity" placeholder="0"
+                                                  name="quantity">
+                                              </div>
+                                            </div>
+
+                                            <div class="col-lg-3 col-md-6 col-sm-12">
+                                              <div class="form-group">
+                                                <div class='d-flex'>
+                                                  <label class="form-check-label pl-4 pr-4 pt-1">
+                                                    <input class="form-check-input mt-1" type="radio" name="rate_type"
+                                                      value="fixed"> Fixed
+                                                  </label>
+                                                  <label class="form-check-label pl-4 pr-4 pt-1">
+                                                    <input class="form-check-input mt-1" type="radio" name="rate_type"
+                                                      value="percentage"> Percentage
+                                                  </label>
+                                                  <label class="form-check-label pl-4 pr-4 pt-1">
+                                                    <input class="form-check-input mt-1" type="radio" name="rate_type"
+                                                      value="same-as-doctor-share"> Same As
+                                                    Doctor Share
+                                                  </label>
+                                                </div>
+                                                <label class="input__label">Rate / Limit</label>
+                                                <input id="rate-limit" name="rate_limit" type="number"
+                                                  class="form-control input-style" placeholder="00">
+                                              </div>
+                                            </div>
+                                          </div>
+
+                                          <div class="col-lg-12 col-md-12 col-sm-12">
+                                            <div class="form-check-label">
+                                              <div class="radio mt-2 mb-3">
+                                                <label class="form-check-label pl-4 pr-4 pt-1"><input
+                                                    id="is_consumables_field" class="form-check-input mt-1"
+                                                    name="is_consumables" type="checkbox">
+                                                  Is Consumables</label>
+
+                                                <label class="form-check-label pl-4 pr-4 pt-1"><input
+                                                    class="form-check-input mt-1" type="checkbox"
+                                                    name="discount_on_quantity" id="discount_on_quantity">
+                                                  Discount On Quantity</label>
+
+                                                <label class="form-check-label pl-4 pr-4 pt-1"><input
+                                                    class="form-check-input mt-1" type="checkbox"
+                                                    name="unlimited_quantity" id="unlimited_quantity">
+                                                  Unlimited Quantity</label>
+
+                                                <label class="form-check-label pl-4 pr-4 pt-1"><input
+                                                    class="form-check-input mt-1" type="checkbox"
+                                                    name="include_in_adjustable_head" id="include_in_adjustable_head">
+                                                  Include In Adjustable Head</label>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <!--Past your code here ends-->
+                                      </div>
+                                    </div>
+
+                                  </div>
+                                  <!--section2-->
+                                  <!-- <div class="mt-1 col-lg-12 pl-lg-2 pr-lg-3">
+                                  <div class="card card_border">
+                                    <div class="mb-3">
+                                      <div class="form-group">
+                                        <div class="col-xl-12 p-heading">
+                                          <h6 class="p-text">FOLLOWUP CALENDER</h6>
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                      <div class="form-check-label">
+                                        <div class="radio mb-2 mt-0">
+
+                                          <label class="form-check-label pt-1"><input class="form-check-input mt-1"
+                                              type="checkbox">Followup Not
+                                            Required</label>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="form-row card-body pt-0 pb-3">
+                                      <div class="col-12 mb-0">
+                                        <div class="form-group">
+                                          <div class="col col-12 pr-xl-0 pl-xl-0">
+                                            <div class="table-container mt-3">
+                                              <table class="table table-bordered table2">
+                                                <thead>
+                                                  <tr id="tableHeader" class="table-header">
+                                                    <th contenteditable="true">01</th>
+                                                  </tr>
+                                                </thead>
+                                                <tbody id="tableBody" class="table-body">
+                                                  <tr id="defaultRow">
+                                                    <td contenteditable="true"><input class="form-check-input mt-1"
+                                                        type="checkbox"></td>
+                                                  </tr>
+                                                </tbody>
+                                              </table>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div> -->
+                                </div>
+                                <div class="form-group mt-1 mb-3 text-right">
+
+                                  <button type="button" class="btn-danger btn-style btn mt-3 mr-2"
+                                    data-bs-dismiss="modal"><strong><i class="fas fa-times"></i>
+                                      Cancel</strong></button>
+
+                                  <button type="submit" class="btn-primary btn-style btn mt-3"><strong><i
+                                        class="far fa-save"></i>
+                                      Save</strong></button>
+                                </div>
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!--Div Services ends-->
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+      
+    </div>
+
+    <!-- Add Services/Groups -->
+    <div class="modal" id="myModal5" style="background:#66666694">
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <a href="#" class="btn-close" data-bs-dismiss="modal"><i class="fa-solid fa-circle-xmark"></i></a>
+          </div>
+          <!-- Modal Body -->
+          <div class="modal-body">
+            <div class="chart">
+
+              <div class="row">
+                <div class="col-lg-12 pl-lg-2 chart-grid">
+                  <div class="card card_border mt-3">
+                    <div>
+                      <div class="card">
+                        <div class="col-xl-12 p-heading">
+                          <h6 class="p-text">SERVICE DETAILS</h6>
+                        </div>
+                        <div class="form-row card-body pb-3 pt-3">
+
+                          <div class="col-lg-3 col-md-6 col-sm-12">
+                            <div class="form-group">
+                              <label class="input__label">Service Name</label>
+                              <input type="hidden" class="form-control" id="service_id" name="service_id" />
+                              <select name="service_name" id="service_name" class="form-control input-style">
+                                <option value="">Select Service</option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="col-lg-2 col-md-2 col-sm-12 text-left">
+                            <div class="form-group">
+                              <button type="button" class="btn btn-style mt-4 btn-primary btn-style btn-change">
+                                <strong><i class="fas fa-search"></i> Search</strong>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!--section2-->
+
+                <div class="mt-1 col-lg-12 pl-lg-2 pr-lg-3">
+                  <div class="card card_border">
+                    <div class="mb-3">
+                      <div class="form-group">
+                        <div class="col-xl-12 p-heading">
+                          <h6 class="p-text">LIST OF SERVICE</h6>
+                        </div>
+                      </div>
+                    </div>
+                    <form id="addServices">
+                      <div class="form-row card-body pt-0 pb-3">
+
+                        <div class="col-12 mb-0">
+                          <div class="form-group">
+                            <div class="col col-12 pr-xl-0 pl-xl-0">
+                              <div class="slidx">
+                                <table class="table2" id="serviceTable">
+                                  <input type="hidden" name="PackageId" id="ServicePackageId">
+                                  <thead>
+                                    <tr>
+                                      <th>Service Name</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody id="serviceList">
+                                  </tbody>
+                                </table>
+                              </div>
+                              <div id="paginationControls"></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group mt-1 mb-3 text-right">
+                <button type="submit" class="btn-secondary btn-style btn mt-3 mr-2" data-bs-dismiss="modal"><strong><i
+                      class="fa-solid fa-plus"></i> Add</strong></button>
+                <button type="button" class="btn-danger btn-style btn mt-3" data-bs-dismiss="modal"><strong><i
+                      class="fas fa-times"></i>
+                    Cancel</strong></button>
+              </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Add Items Model -->
+    <div class="modal " id="myModal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+      style="background:#66666694">
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <a href="#" class="btn-close" data-bs-dismiss="modal"><i class="fa-solid fa-circle-xmark"></i></a>
+          </div>
+          <!-- Modal body -->
+          <div class="container-fluid">
+            <form id="addItem">
+              <div class="chart">
+                <div class="row">
+                  <div class="col-lg-12 pl-lg-2 chart-grid">
+                    <div class=" mt-3">
+                      <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                          <div class="form-group">
+                            <label class="input__label">Oral Medicine</label>
+                            <input name="oralMedicine" id="oralMedicine" type="number" class="form-control input-style"
+                              placeholder="" data-validation="required" data-error-message="Service Code is required">
+                          </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                          <div class="form-group">
+                            <label class="input__label">Injunction</label>
+                            <input name="injunction" id="injunction" type="number" class="form-control input-style"
+                              placeholder="" data-validation="required" data-error-message="Service Code is required">
+                            <input name="PackageId" id="PackageId" type="hidden">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group mt-1 mb-3 text-right">
+                  <button type="button" class="btn-danger btn-style btn mt-3 mr-2" data-bs-dismiss="modal"><strong><i
+                        class="fas fa-times"></i>
+                      Cancel</strong></button>
+
+                  <button type="submit" class="btn-primary btn-style btn mt-3 btn-close"
+                    data-bs-dismiss="modal"><strong><i class="fas fa-check"></i>
+                      OK</strong></button>
+                </div>
+
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!--footer section start-->
+      <%- include('../footer'); -%>
+        <script src="../javascripts/validation.js"></script>
+        <script src="../javascripts/myAjax.js"></script>
+        <script src="../javascripts/pagi_search.js"></script>
+        <script src="../javascripts/updateStatus.js"></script>
+
+        <script>
+          document.addEventListener('DOMContentLoaded', () => {
+            const serviceList = document.getElementById('serviceList');
+            const selectedServicesTableBody = document.querySelector('.selected-services tbody');
+
+            serviceList.addEventListener('change', (event) => {
+              if (event.target.type === 'checkbox' && event.target.checked) {
+                const row = event.target.closest('tr');
+                const serviceName = row.cells[1].innerText;
+                const specialization = row.cells[2].innerText;
+                const rate = row.cells[3].innerText;
+
+                const newRow = document.createElement('tr');
+                newRow.innerHTML = `
+                    <td>${serviceName}</td>
+                `;
+
+                selectedServicesTableBody.appendChild(newRow);
+
+                const removeButtons = document.querySelectorAll('.remove-service');
+                removeButtons.forEach(button => {
+                  button.addEventListener('click', (event) => {
+                    const rowToRemove = event.target.closest('tr');
+                    selectedServicesTableBody.removeChild(rowToRemove);
+                  });
+                });
+              }
+            });
+          });
+        </script>
+
+        <!-- Define Rule -->
+        <script>
+          document.addEventListener('DOMContentLoaded', () => {
+            const packageAmount = document.getElementById('packageAmount');
+            const serviceComponent = document.getElementById('serviceComponent');
+            const pharmacyComponent = document.getElementById('pharmacyComponent');
+
+            const validateComponents = () => {
+              const packageAmountValue = parseFloat(packageAmount.value) || 0;
+              const serviceComponentValue = parseFloat(serviceComponent.value) || 0;
+              const pharmacyComponentValue = parseFloat(pharmacyComponent.value) || 0;
+              const totalComponents = serviceComponentValue + pharmacyComponentValue;
+
+              if (totalComponents > packageAmountValue) {
+                alert('The sum of Service Component and Pharmacy Component cannot exceed the Package Amount.');
+                serviceComponent.value = Math.max(0, packageAmountValue - pharmacyComponentValue);
+              }
+
+              if (serviceComponentValue < pharmacyComponentValue) {
+                pharmacyComponent.value = packageAmountValue - serviceComponentValue;
+              }
+            };
+
+            serviceComponent.addEventListener('input', validateComponents);
+            pharmacyComponent.addEventListener('input', validateComponents);
+          });
+        </script>
+        <script>
+          document.addEventListener('DOMContentLoaded', function () {
+            const rateLimitInput = document.getElementById('rate-limit');
+            const adjustableHeadCheckbox = document.getElementById('adjustable-head-checkbox');
+            const adjustableHeadOptions = document.getElementById('adjustable-head-options');
+            const rateTypeRadios = document.querySelectorAll('input[name="rate_type"]');
+
+            rateTypeRadios.forEach(radio => {
+              radio.addEventListener('change', function () {
+                const value = this.value;
+                if (value === 'fixed') {
+                  rateLimitInput.value = 2000; // Set predefined value
+                  rateLimitInput.disabled = false;
+                } else if (value === 'percentage') {
+                  rateLimitInput.value = ''; // Clear the field
+                  rateLimitInput.disabled = false;
+                } else if (value === 'same-as-doctor-share') {
+                  rateLimitInput.value = ''; // Hide the field
+                  rateLimitInput.disabled = true;
+                }
+              });
+            });
+            const fields = document.querySelectorAll('.form-group input, .form-group select');
+            const checkboxes = document.querySelectorAll('.form-check-input[type="checkbox"]');
+            const tableInputs = document.querySelectorAll('.table2-container input');
+            const tableCells = document.querySelectorAll('.table2-container td[contenteditable="true"]');
+
+            // Fields to be excluded from disabling
+            const excludedFields = document.querySelectorAll('#procedure-field, #is-consumables-field');
+
+            function toggleFieldsState(disable) {
+              // Toggle all fields except the excluded ones
+              fields.forEach(field => {
+                if (![...excludedFields].includes(field)) {
+                  field.disabled = disable;
+                }
+              });
+
+              // Toggle all other checkboxes
+              checkboxes.forEach(field => {
+                if (![...excludedFields].includes(field) && field !== adjustableHeadCheckbox) {
+                  field.disabled = disable;
+                }
+              });
+
+              // Toggle all table inputs and cells
+              tableInputs.forEach(input => {
+                input.disabled = disable;
+              });
+              tableCells.forEach(cell => {
+                cell.setAttribute('contenteditable', disable ? 'false' : 'true');
+              });
+
+              // Show or hide adjustable head options
+              adjustableHeadOptions.style.display = disable ? 'block' : 'none';
+            }
+
+            adjustableHeadCheckbox.addEventListener('change', function () {
+              if (this.checked) {
+                toggleFieldsState(true);
+                adjustableHeadOptions.style.display = 'block';
+              } else {
+                toggleFieldsState(false);
+                adjustableHeadOptions.style.display = 'none';
+              }
+            });
+          });
+
+          //follow up table dynamically incremention
+          document.getElementById('quantity').addEventListener('change', function () {
+            const quantity = document.getElementById('quantity').value || 1;
+            const tableHeader = document.getElementById('tableHeader');
+            const tableBody = document.getElementById('tableBody');
+
+            tableHeader.innerHTML = '';
+            tableBody.innerHTML = '';
+
+            const headerRow = document.createElement('tr');
+            const bodyRow = document.createElement('tr');
+
+            for (let i = 1; i <= quantity; i++) {
+              const headerCell = document.createElement('th');
+              headerCell.contentEditable = true;
+              headerCell.textContent = i < 10 ? `0${i}` : i;
+              headerRow.appendChild(headerCell);
+
+              const bodyCell = document.createElement('td');
+              bodyCell.contentEditable = true;
+              const checkbox = document.createElement('input');
+              checkbox.type = 'checkbox';
+              checkbox.className = 'form-check-input mt-1';
+              bodyCell.appendChild(checkbox);
+              bodyRow.appendChild(bodyCell);
+            }
+
+            tableHeader.appendChild(headerRow);
+            tableBody.appendChild(bodyRow);
+          });
+        </script>
+
+        <!-- Assign Tarrif ApplyBaseRate -->
+        <script>
+          // document.getElementById('applyBaseRateCheckbox').addEventListener('change', function () {
+          //   const opdCheckbox = document.getElementById('gridCheckOPD');
+          //   const opdRate = document.getElementById('opdRate');
+
+          //   if (this.checked) {
+          //     opdCheckbox.checked = true;
+          //     opdCheckbox.disabled = true;
+          //     opdRate.textContent = '20000.00';
+          //   } else {
+          //     opdCheckbox.checked = false;
+          //     opdCheckbox.disabled = false;
+          //     opdRate.textContent = '1600.00';
+          //   }
+          // });
+          // document.getElementById('applyBaseRateCheckbox2').addEventListener('change', function () {
+          //   const opdCheckbox = document.getElementById('gridCheckOPD2');
+          //   const opdRate = document.getElementById('opdRate2');
+
+          //   if (this.checked) {
+          //     opdCheckbox.checked = true;
+          //     opdCheckbox.disabled = true;
+          //     opdRate.textContent = '20000.00';
+          //   } else {
+          //     opdCheckbox.checked = false;
+          //     opdCheckbox.disabled = false;
+          //     opdRate.textContent = '1600.00';
+          //   }
+          // });
+        </script>
+
+        <!-- Pharmacy Items -->
+        <script>
+          document.getElementById('setAllItems').addEventListener('change', function () {
+            const setItemsDiscount = document.getElementById('setItemsDiscount');
+            const addItemButton = document.getElementById('addItemButton');
+
+            if (this.checked) {
+              addItemButton.disabled = true;
+              const checkbox = document.createElement('div');
+              checkbox.className = 'col-lg-2 col-md-2 col-sm-12 mt-2';
+              checkbox.innerHTML = `
+        <div class="input-group mb-3">
+          <span class="mb-1">Discount %</span>
+          <input type="number" class="form-control" height='100px' value=0>
+        </div>
+      `;
+              setItemsDiscount.appendChild(checkbox);
+            } else {
+              setItemsDiscount.innerHTML = '';
+              addItemButton.disabled = false;
+            }
+          }); 
+        </script>
+        <!-- Assign tarrif SearchBox -->
+        <script>
+          document.getElementById('searchTariffCheckbox').addEventListener('change', function () {
+            const searchFieldContainer = document.getElementById('searchFieldContainer');
+            if (this.checked) {
+              const searchField = document.createElement('div');
+              searchField.className = 'col-lg-6 col-md-6 col-sm-12 mt-2';
+              searchField.innerHTML = `
+        <div class="input-group mb-3">
+          <span class="mt-1">Tariff Name:</span>
+          <input type="text" class="form-control" height='100px' placeholder="Search...">
+          <button class="btn btn-outline-secondary" type="button">Search</button>
+        </div>
+      `;
+              searchFieldContainer.appendChild(searchField);
+            } else {
+              searchFieldContainer.innerHTML = '';
+            }
+          });
+          document.getElementById('searchTariffCheckbox2').addEventListener('change', function () {
+            const searchFieldContainer = document.getElementById('searchFieldContainer2');
+            if (this.checked) {
+              const searchField = document.createElement('div');
+              searchField.className = 'col-lg-6 col-md-6 col-sm-12 mt-2';
+              searchField.innerHTML = `
+        <div class="input-group mb-3">
+          <span class="mt-1">Tariff Name:</span>
+          <input type="text" class="form-control" height='100px' placeholder="Search...">
+          <button class="btn btn-outline-secondary" type="button">Search</button>
+        </div>
+      `;
+              searchFieldContainer.appendChild(searchField);
+            } else {
+              searchFieldContainer.innerHTML = '';
+            }
+          });
+        </script>
+
+        <script>
+          document.getElementById('okButton').addEventListener('click', function () {
+            const selectedOperation = document.querySelector('input[name="operation"]:checked');
+            if (selectedOperation) {
+              const selectedValue = selectedOperation.value;
+              if (selectedValue === 'link') {
+                $('#linkModal').modal('show');
+              } else if (selectedValue === 'change') {
+                $('#changeModal').modal('show');
+              }
+            } else {
+              alert('Please select an operation.');
+            }
+          });
+        </script>
+        <script>
+          document.getElementById('items').addEventListener('click', function () {
+            showContent('items-content');
+          });
+
+          document.getElementById('items-category').addEventListener('click', function () {
+            showContent('items-category-content');
+          });
+
+          document.getElementById('items-group').addEventListener('click', function () {
+            showContent('items-group-content');
+          });
+
+          function showContent(contentId) {
+            // Hide all content divs
+            document.querySelectorAll('.content-div').forEach(function (div) {
+              div.style.display = 'none';
+            });
+            // Show the selected content div
+            document.getElementById(contentId).style.display = 'block';
+          }
+          showContent('items-content');
+        </script>
+        <script>
+          function updateQuery() {
+            console.log("Onclick");
+            $('#mod-btn').prop('disabled', true);
+            $('input[data-validation], select[data-validation]').prop('disabled', false);
+            $('#code').prop('disabled', true);
+            document.getElementById('sub-btn').disabled = false;
+          }
+        </script>
+        <script type="module">
+
+
+          $(document).ready(function () {
+            console.log("Document is ready");
+
+            function FetchingDataBackend(route, id) {
+              $.ajax({
+                url: `/package/${route}`,
+                type: 'GET',
+                data: { id },
+                dataType: 'json',
+                success: function (data) {
+                  console.log(data);
+                },
+                error: function (xhr, status, error) {
+                  console.error('Error fetching cities:', error);
+                }
+              });
+            }
+
+            function fetchData() {
+              axios.get('/package/getNewPackage')
+                .then(response => {
+                  console.log(response.data);
+                  let data = response.data;
+                  let tableRows = '';
+
+                  data.forEach((item, key) => {
+                    tableRows += `
+              <tr data-mod-id="${item.id}">
+                 <td contenteditable="true">${item.packageCode}</td>
+                 <td contenteditable="true">${item.packageName}</td>
+                 <td contenteditable="true">${item.shortDescription}</td>
+                 <td contenteditable="true">${item.longDescription}</td>
+                 <td contenteditable="true">${item.specialization}</td>
+                 <td contenteditable="true">${item.subSpecialization}</td>
+                 <td contenteditable="true">${item.packageRate}</td>
+                 <td>
+                     <input class="form-check-input mt-0 status-checkbox" id="status-checkbox" type="checkbox" data-id="${item.id}" ${item.status ? 'checked' : ''}>
+                </td>
+                 <td>
+                     <input class="form-check-input mt-0 status-checkbox" id="status-checkbox" type="checkbox" data-id="${item.id}" ${item.packageFreezed ? 'checked' : ''}>
+                </td>
+                 <td>
+                     <input class="form-check-input mt-0 status-checkbox" id="status-checkbox" type="checkbox" data-id="${item.id}" ${item.packageApproved ? 'checked' : ''}>
+                </td>
+             </tr>
+`;
+                  });
+
+                  $('#categtable').html(tableRows);
+
+                  pagi_search('#searchBox', '#data-table', '.paginationControls');
+                })
+                .catch(error => {
+                  console.error('Error fetching data:', error);
+                });
+            }
+
+            $('#categtable').on('click', '#status-checkbox', function () {
+              const itemId = $(this).data('id');
+              const isChecked = $(this).is(':checked');
+              const schema = '<%= a %>'
+              console.log(itemId, isChecked, schema);
+              updateStatus(itemId, isChecked, schema);
+            });
+            $('#categtable').on('click', 'tr', function () {
+              // Remove 'locked' class from all rows and enable buttons
+              $('#item-body tr').removeClass('locked');
+              ['#myButton1', '#myButton2', '#myButton3'].forEach(selector => $(selector).removeAttr('disabled'));
+              $(this).addClass('locked');
+              const selectedRowText1 = $(this).find('td').eq(1).text();
+              const selectedRowText2 = $(this).find('td').eq(6).text();
+              const selectedRowText3 = $(this).find('td').eq(0).text();
+              console.log(selectedRowText3);
+              [
+                { selector: '#packageName', value: selectedRowText1 },
+                { selector: '#packageAmount', value: selectedRowText2 },
+                { selector: '#PackageId', value: selectedRowText3 },
+              ].forEach(field => $(field.selector).val(field.value).text(field.value));
+              const itemId = $(this).data('mod-id');
+              FetchingDataBackend('schema', itemId);
+            });
+
+            fetchData();
+
+
+            $("#addItem").on("submit", function (event) {
+              event.preventDefault();
+              addForms();
+            });
+
+            // Function to submit forms
+            const addForms = () => {
+              event.preventDefault();
+
+              const pharmacyItemFormDetails = validateForm("#addItem");
+              const {
+                isValid: pharmacyItemFormValid,
+                errorMessage: pharmacyItemFormError,
+                formData: pharmacyItemFormData,
+              } = pharmacyItemFormDetails;
+
+              console.log(pharmacyItemFormData);
+              let tableRows = '';
+              tableRows += `
+                      <tr data-mod-id="${pharmacyItemFormData.PackageId}">
+                        <td><input type="hidden" name="oralMedicine" value="${pharmacyItemFormData.oralMedicine}">${pharmacyItemFormData.oralMedicine}</td>
+                        <td><input type="hidden" name="injunction" value="${pharmacyItemFormData.injunction}">${pharmacyItemFormData.injunction}</td>
+                        <td style="display:'none';"><input type="hidden" name="PackageId" value="${pharmacyItemFormData.PackageId}" ></td>
+                      </tr>
+                    `;
+              $('#itemBody').html(tableRows);
+              pagi_search('#searchBox', '#itemTable', '.paginationControls');
+              resetForm(addItem)
+            };
+
+            function resetForm(formId) {
+              $('#' + formId).reset();
+            }
+
+            $("#saveItem").on("submit", function (event) {
+              event.preventDefault();
+
+              submitForms();
+            });
+
+            // Function to submit forms
+            const submitForms = () => {
+
+              event.preventDefault();
+
+              const pharmacyItemFormDetails = validateForm("#saveItem");
+              const {
+                isValid: pharmacyItemFormValid,
+                errorMessage: pharmacyItemFormError,
+                formData
+
+                ,
+              } = pharmacyItemFormDetails;
+
+              console.log(formData);
+
+              if (pharmacyItemFormValid) {
+                const url = "/package/new-pharmacy-item";
+                const loadingDiv = "#loadingDiv";
+                const errorDiv1 = '#errorDiv1'
+                myAjax(formData, errorDiv1, url, loadingDiv);
+              } else {
+                alert(pharmacyItemFormError);
+              }
+            };
+
+            const loadDropdown = (url, elementId) => {
+              fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                  const dropdown = document.getElementById(elementId);
+                  data.forEach(item => {
+                    console.log(item);
+                    const option = document.createElement('option');
+                    option.value = item.id
+                    option.text = item.ser_name
+                    option.onclick = () => handleOptionClick(item);
+                    dropdown.appendChild(option);
+
+                  });
+                  dropdown.addEventListener('change', (event) => {
+                    const selectedOption = event.target.options[event.target.selectedIndex];
+                    handleOptionClick(data.find(item => item.id == selectedOption.value));
+                  });
+                })
+                .catch(error => console.error(`Error fetching ${elementId} details:`, error));
+            };
+            // Load dropdowns
+
+            loadDropdown('/package/get-service', 'service_name');
+            let tableRows
+            const handleOptionClick = (item) => {
+              const b = item.id;
+              const a = $('#' + b).length;
+              if (a == 0) {
+              } else {
+                alert("already exists");
+                return false;
+              }
+              console.log('Option clicked:', item);
+              tableRows += `
+              <tr data-mod-id="${item.id}">
+                <td contenteditable="true" ><input type="hidden" name="Service_id" id="${item.id}" value="${item.id}" >${item.ser_name}</td>
+                </tr>`
+
+              $('#serviceList').html(tableRows);
+              pagi_search('#searchBox', '#serviceTable', '#paginationControls');
+            };
+
+          });
+        </script>
+        <script type="module">
+
+          $("#addServices").on("submit", function (event) {
+            event.preventDefault();
+            let PackageId = $('#PackageId').val();
+            $('#ServicePackageId').val(PackageId);
+            const formDataArray = $('#addServices').serializeArray();
+            // var json = JSON.stringify(formData);
+            const formData = {};
+            formDataArray.forEach(item => {
+              if (formData[item.name]) {
+                if (Array.isArray(formData[item.name])) {
+                  formData[item.name].push(item.value);
+                } else {
+                  formData[item.name] = [formData[item.name], item.value];
+                }
+              } else {
+                formData[item.name] = item.value;
+              }
+            });
+            console.log(formData);
+            submitForms(formData);
+          });
+
+          const submitForms = (formData) => {
+
+            event.preventDefault();
+
+            const servicesItemFormDetails = validateForm("#addServices");
+            const {
+              isValid: servicesItemFormValid,
+              errorMessage: servicesItemFormError
+
+            } = servicesItemFormDetails;
+
+            console.log(formData);
+
+            if (servicesItemFormValid) {
+              const url = "/package/new-services-item";
+              const loadingDiv = "#loadingDiv";
+              const errorDiv1 = '#errorDiv1'
+              myAjax(formData, errorDiv1, url, loadingDiv);
+            } else {
+              alert(servicesItemFormError);
+            }
+          };
+        </script>
+        <script>
+
+          function fetchAllTariff() {
+            // let PackageId = $('#PackageId').val();
+            axios.get('/package/get-tariff')
+              .then(response => {
+                console.log(response.data);
+                let data = response.data;
+                let tableRows = '';
+                data.forEach((item) => {
+                  tableRows += `
+                    <tr>
+                      <td contenteditable="true">${item.serviceName}</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <input class="form-check-input mt-0"  type="checkbox">
+                      </td>
+                      <td contenteditable="true">${item.className}</td>
+                      <td contenteditable="true">${item.serviceRate}</td>
+                      </tr>
+                    `;
+                });
+                addOtherTable(tableRows)
+                $('#tariffBody').html(tableRows);
+                pagi_search('#searchBox', '#tariffTable', '#paginationControls');
+              })
+              .catch(error => {
+                console.error('Error fetching data:', error);
+              });
+          }
+          function addOtherTable(tableRows) {
+            $('#serviceBody1').html(tableRows);
+            pagi_search('#searchBox', '#serviceTable1', '#paginationControls');
+          }
+        </script>
+
+        <script>
+
+          function fetchServicesData() {
+            let PackageId = $('#PackageId').val();
+            let ser_name;
+            axios.post('/package/getallservices', { PackageId: PackageId })
+              .then(response => {
+                console.log(response.data.packageId);
+                let data = response.data;
+                ser_name = data.SerName
+                let tableRows = '';
+                ser_name.forEach((item) => {
+                  tableRows += `
+                    <tr>
+                      <td contenteditable="true">${item.ser_name}</td>
+                      <td contenteditable="true"
+                        class="o text-primary bg-light border-0 hover-bg-blue hover-underline"
+                        data-bs-toggle="modal" data-bs-target="#myModalDefineRule" onclick="setId('${item.ser_id}',' ${data.packageId}')">Define
+                        Rule</td>
+                      </tr>
+                    `;
+                });
+                $('#serviceBody').html(tableRows);
+                pagi_search('#searchBox', '#serviceTable', '.paginationControls');
+              })
+              .catch(error => {
+                console.error('Error fetching data:', error);
+              });
+          }
+          let defServicesId;
+          let PackageId;
+          function setId(Id, packageId) {
+            PackageId = packageId
+            defServicesId = Id
+          }
+          $("#defienRuleId").on("submit", function (event) {
+            event.preventDefault();
+            submitFormsRule();
+          });
+          const submitFormsRule = () => {
+
+            event.preventDefault();
+
+            const defineRuleFormDetails = validateForm("#defienRuleId");
+            const {
+              isValid: defineRuleFormValid,
+              errorMessage: defineRuleFormError,
+              formData
+            } = defineRuleFormDetails;
+            setCheckedValue('is_consumables_field', 'is_consumables', formData)
+            setCheckedValue('discount_on_quantity', 'discount_on_quantity', formData)
+            setCheckedValue('unlimited_quantity', 'unlimited_quantity', formData)
+            setCheckedValue('include_in_adjustable_head', 'include_in_adjustable_head', formData)
+
+            formData.defServicesId = defServicesId
+            formData.PackageId = PackageId
+
+            console.log(formData);
+
+            function setCheckedValue(id, fiels, formData) {
+              const data = $('#' + id).is(':checked')
+              if (data) {
+                formData[fiels] = true
+              } else {
+                formData[fiels] = false
+              }
+            }
+            if (defineRuleFormValid) {
+              const url = "/package/new-rule-define";
+              const loadingDiv = "#loadingDiv";
+              const errorDiv1 = '#errorDiv1'
+              myAjax(formData, errorDiv1, url, loadingDiv);
+            } else {
+              alert(defineRuleFormError);
+            }
+          };
+          function getNewModule() {
+            // console.log("Id =>",id , "Rate =>" ,rate);
+            let BaseIdStatus = $('#applyBaseRateCheckbox').is(':checked')
+            console.log(BaseIdStatus);
+            if (!BaseIdStatus) {
+
+            } else {
+              $('#opdRate').val('20000.00');
+              let opdRate = $('#opdRate').val();
+              console.log(opdRate);
+              console.log("Satya");
+            }
+          }
+
+
+        </script>
+        <script>
+          function loadTariff() {
+            let isChecked = $('#applyRateToAllCheckbox').is(':checked');
+            if (isChecked) {
+              fetchServicesDataAllSer()
+            }
+          }
+          function fetchServicesDataAllSer() {
+            let PackageId = $('#PackageId').val();
+            let ser_name;
+            axios.post('/package/getallservices', { PackageId: PackageId })
+              .then(response => {
+                console.log(response.data.SerName);
+                let data = response.data.SerName;
+                let tableRows = '';
+                data.forEach((item) => {
+                  tableRows += `
+                    <tr>
+                      <td width="10%"><input class="form-check-input " type="checkbox" id="gridCheckOPD"></td>
+                      <td contenteditable="true">${item.ser_name}</td>
+                      <td width="15%"><input type="number" id="opdRate"+${item.id} value="${item.ser_base_rate}"></td>
+                      </tr>
+                    `;
+                });
+                $('#selectedServicesBody').html(tableRows);
+                pagi_search('#searchBox', '#selectedServicesTable', '#paginationControlsSer');
+              })
+              .catch(error => {
+                console.error('Error fetching data:', error);
+              });
+          }
+        </script>

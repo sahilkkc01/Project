@@ -180,7 +180,7 @@
       <td>${item.cash_counter_master_code}</td>
       <td>${item.cash_counter_name}</td>
       <td>${item.clinic_name}</td>
-      <td><input class="form-check-input mt-0" onclick="updateStatus('${item.id}', this.checked,'<%= a %>')" type="checkbox" ${item.status ? 'checked' : ''}></td>
+      <td><input class="form-check-input mt-0" onclick="updateStatus('${item.id}', this.checked,'<%= a %>','clinic')" type="checkbox" ${item.status ? 'checked' : ''}></td>
     </tr>
                       `;
                     });

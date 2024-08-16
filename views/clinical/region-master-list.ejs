@@ -254,7 +254,7 @@ function paginateTable() {
                         <td>${item.state_id}</td>
                         <td>${item.city_id}</td>
                         <td>${item.region_m_pincode}</td>
-                        <td><input class="form-check-input mt-0" onclick="updateStatus('${item.id}', this.checked,'<%= a %>')" type="checkbox" ${item.status ? 'checked' : ''}></td>
+                        <td><input class="form-check-input mt-0" onclick="updateStatus('${item.id}', this.checked,'<%= a %>','clinic')" type="checkbox" ${item.status ? 'checked' : ''}></td>
                       </tr>
                     `;
                   });

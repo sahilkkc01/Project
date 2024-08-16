@@ -581,15 +581,15 @@ router.post('/save-status-data', async (req, res) => {
         const secretKey = 'll'; // Replace with your actual secret key
 
         // Decrypt id and schema
-        const id = decryptData(decodeURIComponent(encryptedId), secretKey); // URL decode
-        const schema = decryptData(decodeURIComponent(encryptedSchema), secretKey); // URL decode
+        // const id = decryptData(decodeURIComponent(encryptedId), secretKey); // URL decode
+        // const schema = decryptData(decodeURIComponent(encryptedSchema), secretKey); // URL decode
 
-        console.log('Decrypted id:', id);
-        console.log('Decrypted schema:', schema);
+        // console.log('Decrypted id:', id);
+        // console.log('Decrypted schema:', schema);
 
         // Use decrypted id and schema to fetch data from the model
-        const Model = require('../models/patientConfig')[schema]; 
-        const data = await Model.findByPk(id);
+        const Model = require('../models/patientConfig')[encryptedSchema]; 
+        const data = await Model.findByPk(encryptedId);
 
         if (data) {
             // Update status and save

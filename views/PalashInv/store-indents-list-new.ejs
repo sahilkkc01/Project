@@ -120,12 +120,22 @@
                                                             data-error-message="Expected Delivery date is required."
                                                             class="form-control input-style" placeholder=""></div>
                                                 </div>
+                                                <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                                    <div class="form-group"><label class="input__label">Clinic
+                                                            </label><select name="clinic" id="clinic"
+                                                            data-validation="required"
+                                                            data-error-message="Clinic is required."
+                                                            class="form-control input-style">
+                                                            <option value="">Select</option>
+                                                        </select></div>
+                                                </div>
                                             </div>
                                             <div class="pl-lg-0 pr-lg-0">
                                                 <h6 class="primary">STORE</h6>
                                             </div>
                                             <div class="form-row">
                                                 <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                                    
                                                     <div class="form-group"><label class="input__label">From
                                                             Store</label><select name="from_store" id="from_store"
                                                             data-validation="required"
@@ -203,7 +213,7 @@
                                                 </table>
                                             </div>
                                             <div class="form-check-label text-right">
-                                                <button type="button" class="btn-secondary btn-style btn btn-change"
+                                                <button type="button" id="addItems" class="btn-secondary btn-style btn btn-change"
                                                     data-toggle="modal" data-target="#itemSearchModal"><strong><i
                                                         class="fa-solid fa-plus"></i> Add Items</strong></button>
                                             </div>
@@ -239,14 +249,17 @@
                             </div>
                         </form>
                     </div>
-                    <div class="modal fade" id="itemSearchModal">
+                  
+                     <div class="modal fade" id="itemSearchModal">
                         <div class="modal-dialog modal-xl">
                             <div class="modal-content">
+
                                 <!-- Modal Header -->
                                 <div class="modal-header">
                                     <h4 class="modal-title">Item Search</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;"></button>
                                 </div>
+
                                 <!-- Modal body -->
                                 <div class="modal-body">
                                     <form>
@@ -340,35 +353,38 @@
                                                     <div class="form-group">
                                                         <div class="col col-12 pr-xl-0 pl-xl-0">
                                                             <div class="slidx">
-                                                                <table id="popup-table" class="table2">
+                                                                <table class="table2">
                                                                     <thead>
-                                                                        <tr>
-                                                                            <th>Select</th>
-                                                                            <th>Item Code</th>
-                                                                            <th>Item Name</th>
-                                                                            <th>Brand Name</th>
-                                                                            <th>Purchase Tax %</th>
-                                                                            <th>Sales Tax %</th>
-                                                                            <th>Suspend</th>
-                                                                            <th>Available Stock</th>
-                                                                            <th>Stock UOM</th>
-                                                                        </tr>
+                                                                    <tr>
+                                                                        <th contenteditable="true">Select</th>
+                                                                        <th contenteditable="true">Item Code</th>
+                                                                        <th contenteditable="true">Item Name</th>
+                                                                        <th contenteditable="true">Brand Name</th>
+                                                                        <th contenteditable="true">CGST</th>
+                                                                        <th contenteditable="true">SGST</th>
+                                                                        <th contenteditable="true">IGST</th>
+                                                                        <th contenteditable="true">Suspend</th>
+                                                                        <th contenteditable="true">Available Stock</th>
+                                                                        <th contenteditable="true">Stock UOM</th>
+                                                                    </tr>
                                                                     </thead>
-                                                                    <tbody id="popup-table-body">
-                                                                        <!-- Rows will be inserted here -->
+                                                                    <tbody id="tbodyid">
                                                                     </tbody>
                                                                 </table>
                                                             </div>
-                                                        </div>
-                                                    </div>
+                                                        </div                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-group mt-1 mb-3 text-right">
                                             <button type="button" class="btn-danger btn-style btn mt-3 mr-2"
-                                                data-dismiss="modal"><strong><i class="fas fa-times"></i> Cancel</strong></button>
+                                                    data-dismiss="modal">
+                                                <strong><i class="fas fa-times"></i> Cancel</strong>
+                                            </button>
                                             <button type="button" class="btn-primary btn-style btn mt-3"
-                                                data-dismiss="modal" id="addSelectedItemsBtn"><strong><i class="fas fa-check"></i> OK</strong></button>
+                                                    data-dismiss="modal" id="addSelectedItemsBtn">
+                                                <strong><i class="fas fa-check"></i> OK</strong>
+                                            </button>
                                         </div>
                                     </form>
                                 </div>
@@ -379,241 +395,280 @@
                     <%-include('../footer');-%>
 
                     <script type="module">
-                        import { validateForm } from '../javascripts/validation.js';
-                    
-                        $(document).ready(function () {
-                            const indentId = $('#indentId').val();
-                            if (indentId) {
-                                fetchIndentData(indentId);
-                            }
-                    
-                            function fetchIndentData(id) {
-                                $.ajax({
-                                    url: `/palashinv/get-indent/${id}`,
-                                    type: 'GET',
-                                    success: function (response) {
-                                        populateIndentForm(response.indent);
-                                        populateIndentItems(response.items);
-                                    },
-                                    error: function (xhr, status, error) {
-                                        console.error('Error fetching indent data:', error);
-                                    }
-                                });
-                            }
-                    
-                            function populateIndentForm(indent) {
-                                $('#indent_no').val(indent.indent_no);
-                                $('#indent_date').val(indent.indent_date.split('T')[0]);
-                                $('#exp_del_date').val(indent.exp_del_date.split('T')[0]);
-                                $('#from_store').val(indent.from_store);
-                                $('#to_store').val(indent.to_store);
-                                $('#mr_no_pat').val(indent.mr_no_pat);
-                                $('#patient_name').val(indent.patient_name);
-                                $('#remark').val(indent.remark);
-                                $('#freeze').prop('checked', indent.freeze);
-                                if(indent.freeze){
-                                    $('#save-indent').prop('disabled', true);   
-                                }
-                                
+    import { validateForm } from '../javascripts/validation.js';
 
-                            }
-                    
-                            function populateIndentItems(items) {
-                                let tableRows = '';
-                                items.forEach(function (item) {
-                                    tableRows += `
-                                        <tr>
-                                            <td>${item.itemDetails.item_name}</td>
-                                            <td><input type="number" class="form-control input-style" name="indent_quantity" value="${item.indent_quantity}"></td>
-                                            <td>${item.itemDetails.purchase_uom}</td>
-                                            <td><input type="number" class="form-control input-style" name="available_stock" value="${item.available_stock}"></td>
-                                            <td>${item.itemDetails.stocking_uom}</td>
-                                            <td style="display:none;"><input type="hidden" name="item_id" value="${item.item_id}"></td>
-                                            <td><button type="button" class="btn btn-danger btn-sm remove-item"><i class="fa-solid fa-trash-can"></i></button></td>
-                                        </tr>
-                                    `;
-                                });
-                                $('#main-table-body').html(tableRows);
-                            }
-                    
-                            // Load dropdowns
-                            const loadDropdown = (url, elementId) => {
-                                fetch(url)
-                                    .then(response => response.json())
-                                    .then(data => {
-                                        const dropdown = document.getElementById(elementId);
-                                        data.forEach(item => {
-                                            const option = document.createElement('option');
-                                            option.value = item.description || item.rank_desc || item.shelf_desc || item.bin_desc || item.clinic_desc || item.tax_desc;
-                                            option.textContent = item.description || item.rank_desc || item.shelf_desc || item.bin_desc || item.clinic_desc || item.tax_desc;
-                                            dropdown.appendChild(option);
-                                        });
-                                    })
-                                    .catch(error => console.error(`Error fetching ${elementId} details:`, error));
-                            };
-                    
-                            // Load dropdowns
-                            loadDropdown('/adminInv/get-store-details', 'from_store');
-                            loadDropdown('/adminInv/get-store-details', 'to_store');
-                    
-                            // Set current date for Indent Date and set it as readonly
-                            const today = new Date().toISOString().split('T')[0];
-                            document.getElementById('indent_date').value = today;
-                    
-                            // Ensure Expected Delivery Date is greater than today's date
-                            document.getElementById('exp_del_date').setAttribute('min', today);
-                    
-                            // Fetch data in the popup table
-                            function fetchData() {
-                                $.ajax({
-                                    url: '/admininv/get-item-details',
-                                    type: 'GET',
-                                    success: function (data) {
-                                        let tableRows = '';
-                                        data.forEach(function (item) {
-                                            tableRows += `
-                                                <tr data-item-id="${item.id}">
-                                                    <td><input class="form-check-input mt-0 item-checkbox" type="checkbox"></td>
-                                                    <td>${item.item_code}</td>
-                                                    <td>${item.item_name}</td>
-                                                    <td>${item.brand_name}</td>
-                                                    <td style="display:none;"><input type="hidden" value="${item.base_unit_cost_price}"></td>
-                                                    <td style="display:none;"><input type="hidden" value="${item.base_unit_mrp}"></td>
-                                                    <td>0.00</td>
-                                                    <td>0.00</td>
-                                                    <td><input class="form-check-input mt-0" type="checkbox"></td>
-                                                    <td>0.00</td>
-                                                    <td>${item.stocking_uom}</td>
-                                                    <td style="display:none;"><input type="hidden" value="${item.purchase_uom}"></td>
-                                                    <td style="display:none;"><input type="hidden" name="item_id" value="${item.id}"></td>
-                                                </tr>
-                                            `;
-                                        });
-                                        $('#popup-table-body').html(tableRows);
-                                    },
-                                    error: function (xhr, status, error) {
-                                        console.error('Error fetching item details:', error);
-                                    }
-                                });
-                            }
-                    
-                            // Add selected items to the main table
-                            function addSelectedItems() {
-                                $('#popup-table-body input.item-checkbox:checked').each(function () {
-                                    const row = $(this).closest('tr');
-                                    const itemName = row.find('td:eq(2)').text();
-                                    const availableStock = row.find('td:eq(9) input').val();
-                                    const stockingUOM = row.find('td:eq(10)').text();
-                                    const purchaseUOM = row.find('td:eq(11) input').val();
-                                    const itemId = row.find('td:eq(12) input').val();
-                    
-                                    const newRow = `
-                                        <tr>
-                                            <td>${itemName}</td>
-                                            <td><input type="number" data-validation="required"
-                                                    data-error-message="Quantity is required." class="form-control input-style" name="indent_quantity"></td>
-                                            <td>${purchaseUOM}</td>
-                                            <td><input type="number" data-validation="required"
-                                                    data-error-message="Available Stock is required." class="form-control input-style" name="available_stock" value="${availableStock}"></td>
-                                            <td>${stockingUOM}</td>
-                                            <td style="display:none;"><input type="hidden" name="item_id" value="${itemId}"></td>
-                                            <td><button type="button" class="btn btn-danger btn-sm remove-item"><i class="fa-solid fa-trash-can"></i></button></td>
-                                        </tr>
-                                    `;
-                                    $('#main-table-body').append(newRow);
-                                });
-                            }
-                    
-                            // Fetch data on page load
-                            fetchData();
-                    
-                            // Add event listener to select all items checkbox
-                            $('#select-all-items').on('change', function () {
-                                const isChecked = $(this).is(':checked');
-                                $('#popup-table-body input.item-checkbox').prop('checked', isChecked);
-                            });
-                    
-                            // Add event listener to add selected items button
-                            $('#addSelectedItemsBtn').on('click', addSelectedItems);
-                    
-                            // Add event listener to remove item button
-                            $(document).on('click', '.remove-item', function () {
-                                $(this).closest('tr').remove();
-                            });
-                    
-                            // Show or hide MR.No. and Patient Name fields based on "Against Patient" checkbox
-                            $('#against_pat').on('change', function () {
-                                if ($(this).is(':checked')) {
-                                    $('#mr_no_pat, #patient_name').prop('disabled', false);
-                                } else {
-                                    $('#mr_no_pat, #patient_name').prop('disabled', true);
-                                }
-                            });
-                    
-                            // Initially disable MR.No. and Patient Name fields
-                            $('#mr_no_pat, #patient_name').prop('disabled', true);
-                    
-                            // Add event listener to check if from_store and to_store are the same
-                            $('#from_store, #to_store').on('change', function () {
-                                const fromStore = $('#from_store').val();
-                                const toStore = $('#to_store').val();
-                                if (fromStore === toStore && fromStore !== 'Select') {
-                                    alert('From Store and To Store cannot be the same.');
-                                    $(this).val('Select');
-                                }
-                            });
-                    
-                            // Gather and submit the form data
-                            $('#save-indent').on('click', function () {
-                                const indentData = {
-                                    indent_no: $('#indent_no').val(),
-                                    indent_date: $('#indent_date').val(),
-                                    exp_del_date: $('#exp_del_date').val(),
-                                    from_store: $('#from_store').val(),
-                                    to_store: $('#to_store').val(),
-                                    mr_no_pat: $('#mr_no_pat').val(),
-                                    patient_name: $('#patient_name').val(),
-                                    remark: $('#remark').val(),
-                                    freeze: $('#freeze').is(':checked'),
-                                    items: []
-                                };
-                    
-                                $('#main-table-body tr').each(function () {
-                                    const item = {
-                                        item_id: $(this).find('input[name="item_id"]').val(),
-                                        indent_quantity: $(this).find('input[name="indent_quantity"]').val(),
-                                        available_stock: $(this).find('input[name="available_stock"]').val()
-                                    };
-                                    indentData.items.push(item);
-                                });
-                    
-                                if (indentData.items.length === 0) {
-                                    alert('Please add at least one item.');
-                                    return;
-                                }
-                    
-                                const { isValid, errorMessage } = validateForm('#indentForm');
-                                if (isValid) {
-                                    $.ajax({
-                                        url: '/palashinv/createindent',
-                                        type: 'POST',
-                                        contentType: 'application/json',
-                                        data: JSON.stringify(indentData),
-                                        success: function (response) {
-                                            $('#indent_no').val(response.indent.indent_no);
-                                            $('#errordiv1').addClass('alert-success').removeClass('alert-danger').text(response.message).show();
-                                            alert(response.message);
-                                        },
-                                        error: function (xhr, status, error) {
-                                            alert('Something Went Wrong');
-                                            $('#errordiv1').removeClass('alert-success').addClass('alert-danger').text('Something went wrong').show();
-                                            console.error('Error creating indent:', error);
-                                        }
-                                    });
-                                } else {
-                                    $('#errordiv1').removeClass('alert-success').addClass('alert-danger').text(errorMessage);
-                                }
-                            });
-                        });
-                    </script>
+    $(document).ready(function () {
+        const indentId = $('#indentId').val();
+        if (indentId) {
+            fetchIndentData(indentId);
+        }
+
+        function fetchIndentData(id) {
+            $.ajax({
+                url: `/palashinv/get-indent/${id}`,
+                type: 'GET',
+                success: function (response) {
+                  
+                    populateIndentForm(response.indent);
+                    populateIndentItems(response.items);
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error fetching indent data:', error);
+                }
+            });
+        }
+
+        function populateIndentForm(indent) {
+            $('#indent_no').val(indent.indent_no);
+            $('#indent_date').val(indent.indent_date.split('T')[0]);
+            $('#exp_del_date').val(indent.exp_del_date.split('T')[0]);
+            $('#from_store').val(indent.from_store);
+            $('#to_store').val(indent.to_store);
+            $('#mr_no_pat').val(indent.mr_no_pat);
+            $('#patient_name').val(indent.patient_name);
+            $('#remark').val(indent.remark);
+            $('#freeze').prop('checked', indent.freeze);
+            if (indent.freeze) {
+                $('#save-indent').prop('disabled', true);
+            }
+        }
+
+        function populateIndentItems(items) {
+            let tableRows = '';
+            items.forEach(function (item) {
+                tableRows += `
+                    <tr>
+                        <td>${item.itemDetails.item_name}</td>
+                        <td><input type="number" class="form-control input-style" name="indent_quantity" value="${item.indent_quantity}"></td>
+                        <td>${item.itemDetails.purchase_uom}</td>
+                        <td><input type="number" class="form-control input-style" name="available_stock" value="${item.available_stock}"></td>
+                        <td>${item.itemDetails.stocking_uom}</td>
+                        <td style="display:none;"><input type="hidden" name="item_id" value="${item.item_id}"></td>
+                        <td><button type="button" class="btn btn-danger btn-sm remove-item"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                `;
+            });
+            $('#main-table-body').html(tableRows);
+        }
+
+        // Load dropdowns
+        const loadDropdown = (url, elementId) => {
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    const dropdown = document.getElementById(elementId);
+                    data.forEach(item => {
+                        const option = document.createElement('option');
+                        option.value = item.description || item.rank_desc || item.shelf_desc || item.bin_desc || item.clinic_desc || item.tax_desc;
+                        option.textContent = item.description || item.rank_desc || item.shelf_desc || item.bin_desc || item.clinic_desc || item.tax_desc;
+                        dropdown.appendChild(option);
+                    });
+                })
+                .catch(error => console.error(`Error fetching ${elementId} details:`, error));
+        };
+
+        // Load dropdowns
+        loadDropdown('/adminInv/get-store-details', 'from_store');
+        loadDropdown('/adminInv/get-store-details', 'to_store');
+        loadDropdown('/adminInv/get-clinic-details', 'clinic');
+
+        // Set current date for Indent Date and set it as readonly
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('indent_date').value = today;
+
+        // Ensure Expected Delivery Date is greater than today's date
+        document.getElementById('exp_del_date').setAttribute('min', today);
+
+        // Fetch data in the popup table
+        function fetchData(from_store) {
+            $.ajax({
+                url: '/palashinv/get-current-item-counts',
+                type: 'GET',
+                data: { 
+                    store: from_store,
+                    clinic: '' // Set clinic to blank
+                },
+                success: function (data) {
+                    console.log(data);
+                    let tableRows = '';
+                    data.data.forEach(function (item) {
+                        tableRows += `
+                            <tr data-item-id="${item.id}">
+                                <td><input class="form-check-input mt-0 item-checkbox" type="checkbox"></td>
+                                <td>${item.item_code}</td>
+                                <td>${item.item_name}</td>
+                                <td>${item.brand_name}</td>
+                                <td>${item.CGST.toFixed(2)}%</td>
+                                <td>${item.SGST.toFixed(2)}%</td>
+                                <td>${item.IGST.toFixed(2)}%</td>
+                                <td><input class="form-check-input mt-0 suspend-checkbox" type="checkbox" ${item.suspend ? 'checked' : ''} disabled></td>
+                                <td>${item.availableStock}</td>
+                                <td>${item.stocking_uom}</td>
+                                <td style="display:none;"><input type="hidden" value="${item.purchase_uom}"></td>
+                                <td style="display:none;"><input type="hidden" name="item_id" value="${item.id}"></td>
+                                <td style="display:none;"><input type="hidden" name="item_code" value="${item.item_code}"></td>
+                            </tr>
+                        `;
+                    });
+                    $('#tbodyid').html(tableRows);
+
+                    // Add the select all checkbox functionality
+                    $('#select-all-items').on('change', function () {
+                        const isChecked = $(this).is(':checked');
+                        $('#tbodyid input.item-checkbox').prop('checked', isChecked);
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error fetching item details:', error);
+                }
+            });
+        }
+
+        // Add selected items to the main table
+        function addSelectedItems() {
+            $('#tbodyid input.item-checkbox:checked').each(function () {
+                const row = $(this).closest('tr');
+                const itemName = row.find('td:eq(2)').text();
+                const availableStock = row.find('td:eq(8)').text().trim();
+                const stockingUOM = row.find('td:eq(9)').text().trim();
+                const purchaseUOM = row.find('td:eq(10) input').val().trim();
+                const itemId = row.find('td:eq(11) input[name="item_id"]').val();
+                const item_code = row.find('td:eq(12) input[name="item_code"]').val();
+
+                // Ensure that availableStock is correctly displayed in the input field
+                const newRow = `
+                    <tr>
+                        <td>${itemName}</td>
+                        <td><input type="number" data-validation="required"
+                                data-error-message="Quantity is required." class="form-control input-style" name="indent_quantity" min="1"></td>
+                        <td>${purchaseUOM}</td>
+                        <td><input type="number" data-validation="required" readonly
+                                data-error-message="Available Stock is required." class="form-control input-style" name="available_stock" value="${availableStock}"></td>
+                        <td>${stockingUOM}</td>
+                        <td style="display:none;"><input type="hidden" name="item_id" value="${itemId}"></td>
+                        <td style="display:none;"><input type="hidden" name="item_code" value="${item_code}"></td>
+                        <td><button type="button" class="btn btn-danger btn-sm remove-item"><i class="fa-solid fa-trash-can"></i></button></td>
+                    </tr>
+                `;
+                
+                // Check if item already exists in the main table to prevent duplicates
+                let exists = false;
+                $('#main-table-body tr').each(function() {
+                    if ($(this).find('input[name="item_id"]').val() === itemId) {
+                        exists = true;
+                    }
+                });
+
+                if (!exists) {
+                    $('#main-table-body').append(newRow);
+                }
+            });
+
+            // Attach event listener to remove buttons
+            $('.remove-item').on('click', function () {
+                $(this).closest('tr').remove();
+            });
+        }
+
+        // Fetch data on page load
+        $('#addItems').click(function (e) {
+            let from_store = $('#from_store').val();
+
+            if (!from_store || from_store === 'Select') {
+                alert('Please select From store.');
+                e.preventDefault(); // Prevent the default action of opening the modal
+                e.stopPropagation(); // Stop the event from bubbling up
+                return;
+            }
+
+            fetchData(from_store);
+        });
+
+        // Add event listener to add selected items button
+        $('#addSelectedItemsBtn').on('click', addSelectedItems);
+
+        // Add event listener to remove item button
+        $(document).on('click', '.remove-item', function () {
+            $(this).closest('tr').remove();
+        });
+
+        
+
+        // Show or hide MR.No. and Patient Name fields based on "Against Patient" checkbox
+        $('#against_pat').on('change', function () {
+            if ($(this).is(':checked')) {
+                $('#mr_no_pat, #patient_name').prop('disabled', false);
+            } else {
+                $('#mr_no_pat, #patient_name').prop('disabled', true);
+            }
+        });
+
+        // Initially disable MR.No. and Patient Name fields
+        $('#mr_no_pat, #patient_name').prop('disabled', true);
+
+        // Add event listener to check if from_store and to_store are the same
+        $('#from_store, #to_store').on('change', function () {
+            const fromStore = $('#from_store').val();
+            const toStore = $('#to_store').val();
+            if (fromStore === toStore && fromStore !== 'Select') {
+                alert('From Store and To Store cannot be the same.');
+                $(this).val('Select');
+            }
+        });
+
+        // Gather and submit the form data
+        $('#save-indent').on('click', function () {
+            const indentData = {
+                clinic: $('#clinic').val(),
+                indent_no: $('#indent_no').val(),
+                indent_date: $('#indent_date').val(),
+                exp_del_date: $('#exp_del_date').val(),
+                from_store: $('#from_store').val(),
+                to_store: $('#to_store').val(),
+                mr_no_pat: $('#mr_no_pat').val(),
+                patient_name: $('#patient_name').val(),
+                remark: $('#remark').val(),
+                freeze: $('#freeze').is(':checked'),
+                items: []
+            };
+
+            $('#main-table-body tr').each(function () {
+                const item = {
+                    item_code: $(this).find('input[name="item_code"]').val(),
+                    indent_quantity: $(this).find('input[name="indent_quantity"]').val(),
+                    available_stock: $(this).find('input[name="available_stock"]').val()
+                };
+                indentData.items.push(item);
+            });
+
+            if (indentData.items.length === 0) {
+                alert('Please add at least one item.');
+                return;
+            }
+
+            const { isValid, errorMessage } = validateForm('#indentForm');
+            if (isValid) {
+                $.ajax({
+                    url: '/palashinv/createindent',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(indentData),
+                    success: function (response) {
+                        $('#indent_no').val(response.indent.indent_no);
+                        $('#errordiv1').addClass('alert-success').removeClass('alert-danger').text(response.message).show();
+                        alert(response.message);
+                    },
+                    error: function (xhr, status, error) {
+                        alert('Something Went Wrong');
+                        $('#errordiv1').removeClass('alert-success').addClass('alert-danger').text('Something went wrong').show();
+                        console.error('Error creating indent:', error);
+                    }
+                });
+            } else {
+                $('#errordiv1').removeClass('alert-success').addClass('alert-danger').text(errorMessage);
+            }
+        });
+    });
+</script>
+
                     

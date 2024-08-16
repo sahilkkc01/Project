@@ -1107,7 +1107,8 @@ const fetchMinMax = async (req, res) => {
         // Check if an item with the same item_code already exists using Sequelize
         item = await ItemStoreMinMax.findOne({
             where: {
-                store_id: req.body.store_id
+                store_id: req.body.store_id,
+                itemCode: req.body.itemCode,
             }
         });
         console.log(item);
@@ -1206,15 +1207,26 @@ const itemConvSave = async (req, res) => {
   
   module.exports = itemConvSave;
   
-const itemStoreTax = async (req, res) => {
+  const itemStoreTax = async (req, res) => {
     console.log(req.body);
     try {
-        // Check if the same entry exists in the database
-       
+        // Check if an entry with the same itemCode already exists
+        const existingItem = await ItemStoreTax.findOne({
+            where: { itemCode: req.body.itemCode },
+        });
+
+        if (existingItem) {
+            return res.status(400).json({ 
+                success: false, 
+                msg: "Tax entry for this item already exists." 
+            });
+        }
+
+        // If no entry exists, create a new one
         await ItemStoreTax.create(req.body);
-        res.status(200).json({ msg: "Save Successfully" });
+        res.status(200).json({ msg: "Saved Successfully" });
     } catch (error) {
-        console.error('Error saving Item  Data', error);
+        console.error('Error saving Item Data', error);
         res.status(500).json({
             success: false,
             msg: error.message,
@@ -2541,6 +2553,76 @@ const newHSNCode = async (req, res) => {
     }
 }
 
+const getOpeningBalanceItems = async (req, res) => {
+    console.log(req.query);  
+    const { clinic, store } = req.query;
+  
+    try {
+      // Define the where condition based on the presence of clinic
+      const whereCondition = clinic ? { clinic, store_name: store } : { store_name: store };
+
+      // Find all itemCodes based on clinic and store from ItemStoreMinMax
+      const itemStoreMinMax = await ItemStoreMinMax.findAll({
+        where: whereCondition,
+        attributes: ['itemCode']
+      });
+  
+      if (!itemStoreMinMax.length) {
+        return res.status(404).json({ error: 'No items found for the given criteria' });
+      }
+  
+      const itemCodes = itemStoreMinMax.map(item => item.itemCode);
+  
+      // Get item details from ItemMasterNew
+      const itemDetails = await ItemMasterNew.findAll({
+        where: { item_code: itemCodes }
+      });
+  
+      if (!itemDetails.length) {
+        return res.status(404).json({ error: 'Item details not found' });
+      }
+  
+      // Get tax details from ItemStoreTax (including CGST, SGST, and IGST)
+      const taxDetails = await ItemStoreTax.findAll({
+        where: {
+          itemCode: itemCodes,
+          ...(clinic && { clinic })  // Include clinic in where condition only if clinic is provided
+        },
+        attributes: ['itemCode', 'CGST', 'SGST', 'IGST']
+      });
+  
+      // Combine item details with tax details
+      const result = itemDetails.map(item => {
+        const itemTaxDetails = taxDetails.find(tax => tax.itemCode === item.item_code) || {};
+  
+        return {
+          id: item.id,
+          itemCode: item.item_code,
+          itemName: item.item_name,
+          brandName: item.brand_name,
+          suspend: item.suspend,
+          expiry_days: item.expiry_alert_before_in_days,
+          base_cp: item.base_unit_cost_price,
+          base_mrp: item.base_unit_mrp,
+          discount_on_sale: item.discount_on_sale,
+          stockingUom: item.stocking_uom,
+          CGST: itemTaxDetails.CGST || 0,
+          SGST: itemTaxDetails.SGST || 0,
+          IGST: itemTaxDetails.IGST || 0,
+        };
+      });
+  
+      // Respond with combined item and tax details
+      return res.json(result);
+    } catch (error) {
+      console.error('Error fetching item and tax details:', error);
+      return res.status(500).json({ error: 'Internal Server Error' });
+    }
+};
+
+  
+
+
 module.exports = {
     setId,
     saveStatusData,
@@ -2647,6 +2729,7 @@ module.exports = {
   getHSNCodeList,
   getItemCatList,
   getSupplierListItem,
-  SaveRateContract
+  SaveRateContract,
+  getOpeningBalanceItems
 
 };

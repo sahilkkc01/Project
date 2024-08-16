@@ -130,7 +130,7 @@
                                                                     <table class="table2" id="AvExp">
                                                                         <thead>
                                                                             <tr>
-                                                                                <th contenteditable="true"></th>
+                                                                                <th contenteditable="true">View</th>
                                                                                 <th contenteditable="true">Code</th>
                                                                                 <th contenteditable="true">Description
                                                                                 </th>
@@ -170,8 +170,6 @@
                             </form>
                             <!--footer section start-->
                            <%- include('../footer'); -%>
-                                <script src="../javascripts/statusUpdate.js"></script>
-                                <script src="../javascripts/pageUpdate.js"></script>
                                 <script type="module">
                                     import { pagi_search } from '../javascripts/pagi_search.js';
                                     $(document).ready(function () {
@@ -189,11 +187,11 @@
                                                     data.forEach(function (item) {
                                                         console.log(item);
                                                         tableRows += `
-                                                        <tr>
-                                                            <td><a type="button" class="btn btn-primary btn-style btn-change" onClick=updatePageAdvAgent(${item.id}) href='/billing/16'  >View</a></td>
+                                                        <tr data-mod-id='${item.id}'>
+                                                            <td><button id="view-btn" class="btn btn-primary btn-style btn-change" onClick=updatePageAdvAgent(${item.id}) >View</button></td>
                                                             <td>${item.adv_agnt_code}</td>
                                                             <td>${item.description}</td>
-                                                            <td><input class="form-check-input mt-0" type="checkbox" id='${item.id}' onClick=ChangeStatus(${item.id}) ${item.adv_agnt_status ? 'checked' : ''}></td>
+                                                            <td><input class="form-check-input mt-0" type="checkbox" id='status-checkbox' data-id="${item.id}" ${item.adv_agnt_status ? 'checked' : ''}></td>
                                                         </tr>
                                                         `;
                                                     });
@@ -207,17 +205,17 @@
                                         }
                                         fetchData();
                                     });
-                                    // 
-                                </script>
-                                <script>
-                                    function ChangeStatus(id) {
-                                        console.log(id);
-                                        let url = '/billing/change-adv-agent-status'
-                                        updateStatus(id, url)
-                                    }
-
-                                    function updatePageAdvAgent(id) {
-                                        let url = '/billing/update-adv-master'
-                                        updatePage(id, url)
-                                    }
+                                    $('#agnt-table').on('click', '#view-btn',function(){
+                                       const id=$(this).closest('tr').data('mod-id')
+                                       console.log(id)
+                                         ViewBtn('16',id,'billing');      
+                                   });
+                                    $('#agnt-table').on('click', '#status-checkbox', function () {
+                                       const itemId = $(this).data('id');
+                                       const isChecked = $(this).is(':checked');
+                                       const schema = '<%= a %>'
+                                        const status = '<%= b %>'
+                                       console.log(itemId, isChecked,schema,status)
+                                       updateStatus(itemId, isChecked,schema,status);
+                                    });
                                 </script>

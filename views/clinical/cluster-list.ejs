@@ -106,18 +106,13 @@
                                             </div>
 
                                             <div class="form-row pl-lg-3 pr-lg-3 mt-2">
-                                                <div class="col-5">
+                                                <div class="col-4">
                                                     <div class="form-group"><label class="input__label">Description</label><input name="desc" type="text"
                                                             class="form-control input-style" placeholder="" id="searchBox">
                                                     </div>
                                                 </div>
                                                 <div class="col-7">
-                                                    <div class="form-group">
-                                                        <button type="button"
-                                                                class="btn btn-style mt-4 btn-primary btn-style btn-change mb-3"><strong><i
-                                                                        class="fas fa-search"></i> Search
-                                                                </strong></button>
-                                                    </div>
+                                                   
                                                 </div>
                                                
                                             </div>
@@ -201,7 +196,7 @@
       <td>${item.clus_code}</td>
       <td>${item.clus_desc}</td>
       
-      <td><input class="form-check-input mt-0" onclick="updateStatus('${item.id}', this.checked,'<%= a %>')" type="checkbox" ${item.status ? 'checked' : ''}></td>
+      <td><input class="form-check-input mt-0" onclick="updateStatus('${item.id}', this.checked,'<%= a %>','clinic')" type="checkbox" ${item.status ? 'checked' : ''}></td>
     </tr>
                       `;
                     });

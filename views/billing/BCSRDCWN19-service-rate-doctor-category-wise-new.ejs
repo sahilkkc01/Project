@@ -225,7 +225,7 @@
                                                         <td contenteditable="true" ><%= result.serviceName %></td>
                                                         <td contenteditable="true"><%= result.className %></td>
                                                         <td contenteditable="true"><%= result.serviceRate %></td>
-                                                        <td contenteditable="true"> <button class="btn btn-danger btn-sm delete-btn td"   <%= result.id ? 'disabled' : '' %> data-service-name="${serviceName}">Delete</button></td>
+                                                        <td contenteditable="true"> <button class="btn btn-danger btn-sm delete-btn td" data-service-name="${serviceName}"   <%= result.id ? 'disabled' : '' %> >Delete</button></td>
                                                     </tr>
                                                     <tr hidden>
                                                         <td contenteditable="true"></td>
@@ -264,10 +264,9 @@
                 <script>
                     var selectedServices = [];
                     const itemid = '<%= result.id %>'; // This is a server-side templating example (e.g., using EJS).
-const query = $('#query').val(); 
- // jQuery method to get the value of the 'query' input field.
-
-                    selectedServices[0] = { itemid:itemid, query:query }; // Initialize with server-side values
+                    const query = $('#query').val(); // jQuery method to get the value of the 'query' input field.
+                
+                    selectedServices[0] = { itemid: itemid, query: query }; // Initialize with server-side values
                 
                     function updateQuery() {
                         selectedServices[0].query = 1; // Set query to 1 in the array
@@ -277,6 +276,7 @@ const query = $('#query').val();
                         $('#mod-btn').prop('disabled', true);
                         $('.td').prop('disabled', false);
                         $('#code').prop('disabled', true);
+                
                         document.getElementById('submit').disabled = false;
                         $('#docCategory').prop('disabled', false);
                         console.log('Query updated:', selectedServices[0].query); // Log to console for verification
@@ -284,174 +284,191 @@ const query = $('#query').val();
                 
                     if ('<%= result.id %>' !== '') {
                         $('input[data-validation], select[data-validation] #selectedServicesTable ').prop('disabled', true);
-                    } 
-                    if('<%= result.status %>'!=='true'){
-        document.getElementById('mod-btn').disabled = true;
-      }else {
-    
-                 
+                    }
+                    if ('<%= result.status %>' !== 'true') {
+                        document.getElementById('mod-btn').disabled = true;
+                    } else {
                         document.getElementById('submit').disabled = false;
-                    
                     }
                 </script>
                 
- 
-<script type="module">
-    import { pagi_search } from '../javascripts/pagi_search.js';
-    import { validateForm } from '../javascripts/validation.js';
-    import { myAjax } from '../javascripts/myAjax.js';
-
-    $(document).ready(function() {
-        var jsonData = [
- { "id": 1, "clinic_id": "0", "doc_cat_master_code": "1", "doc_cat_master_desc": "Consultant" },
- { "id": 2, "clinic_id": "0", "doc_cat_master_code": "2", "doc_cat_master_desc": "Senior Consultant" },
- { "id": 3, "clinic_id": "0", "doc_cat_master_code": "3", "doc_cat_master_desc": "Counsellor" },
- { "id": 4, "clinic_id": "0", "doc_cat_master_code": "4", "doc_cat_master_desc": "Laparoscopic Surgeon" },
- { "id": 5, "clinic_id": "0", "doc_cat_master_code": "5", "doc_cat_master_desc": "Embryologist" },
- { "id": 6, "clinic_id": "0", "doc_cat_master_code": "1", "doc_cat_master_desc": "Consultant" },
- { "id": 7, "clinic_id": "0", "doc_cat_master_code": "2", "doc_cat_master_desc": "Senior Consultant" },
- { "id": 8, "clinic_id": "0", "doc_cat_master_code": "3", "doc_cat_master_desc": "Counsellor" },
- { "id": 9, "clinic_id": "0", "doc_cat_master_code": "4", "doc_cat_master_desc": "Laparoscopic Surgeon" },
- { "id": 10, "clinic_id": "0", "doc_cat_master_code": "5", "doc_cat_master_desc": "Embryologist" },
- { "id": 11, "clinic_id": "0", "doc_cat_master_code": "10", "doc_cat_master_desc": "ABC" },
- { "id": 12, "clinic_id": "0", "doc_cat_master_code": "A", "doc_cat_master_desc": "A" },
- { "id": 13, "clinic_id": "0", "doc_cat_master_code": "99a", "doc_cat_master_desc": "descj" }
-];
-var $docCategorySelect = $('#docCategory');
-    var selectedCategory = '<%= result.docCategory %>'; // Embed EJS variable
-    var itemId = '<%= result.id %>'; // Embed EJS variable
-    console.log(selectedCategory+itemId)
-
-    jsonData.forEach(item => {
-    var isSelected = (selectedCategory === item.doc_cat_master_desc);
-   
-
-    $docCategorySelect.append($('<option>', {
-        value: item.doc_cat_master_desc,
-        text: item.doc_cat_master_desc,
-        selected: isSelected
-    }));
-});
-
-    // Disable the select if itemId is not empty    
-    if (itemId) {
-        $docCategorySelect.prop('disabled', true);
-    }
-
-// Define selectedServices array globally if not already defined
-function fetchServices() {
-            $.ajax({
-                url: '/billing/get-service',
-                method: 'GET',
-                success: function(data) {
-                    populateServicesTable(data);
-                },
-                error: function(xhr, status, error) {
-                    console.error('Error fetching services:', xhr.responseText);
-                }
-            });
-        }
-
-        // Function to populate services table
-        function populateServicesTable(services) {
-            var $tblbody = $('#tblbody');
-            $tblbody.empty(); // Clear existing rows
-
-            services.forEach(function(service) {
-                var row = `<tr>
-                    <td><input class="form-check-input mt-1 td" type="checkbox" <%= result.id ? 'disabled' : '' %>></td>
-                    <td>${service.serviceName}</td>
-                    <td>${service.className}</td>
-                    <td>${service.baseServiceRate}</td>
-                </tr>`;
-                $tblbody.append(row);
-            });
-        }
-
-        // Fetch services when the document is ready
-        fetchServices();
-
-
-
-
-
-        // Update the handling of checkboxes for both dynamic and manual entries
-        function handleCheckboxChanges(checkbox, isChecked) {
-            var row = $(checkbox).closest('tr');
-            var serviceName = row.find('td').eq(1).text();
-            var className = row.find('td').eq(2).text();
-            var serviceRate = row.find('td').eq(3).text();
-
-            
-
-            if (isChecked) {
-                var docCategory = $('#docCategory').val();
-                var newRow = `<tr>
-                    <td contenteditable="true">${serviceName}</td>
-                    <td contenteditable="true">${className}</td>
-                    <td contenteditable="true">${serviceRate}</td>
-                    <td><button class="btn btn-danger btn-sm delete-btn" data-service-name="${serviceName}">Delete</button></td>
-                </tr>`;
-                $('#selectedServicesTable tbody').append(newRow);
-                selectedServices.push({ serviceName, className, serviceRate,docCategory });
-                console.log(selectedServices);
-            } else {
-                $('#selectedServicesTable tbody tr').each(function() {
-                    if ($(this).find('td').eq(0).text() === serviceName) {
-                        $(this).remove();
-                    }
-                });
-               
-                selectedServices = selectedServices.filter(service => service.serviceName !== serviceName);
-            }
-        }
-
-        $('#tblbody').on('change', 'input[type="checkbox"]', function() {
-            handleCheckboxChanges(this, this.checked);
-        });
-
-        $('#selectedServicesTable').on('click', '.delete-btn', function() {
-            var serviceName = $(this).data('service-name');
-            // Uncheck the corresponding checkbox in the "LIST OF SERVICES" table
-            $('#tblbody input[type="checkbox"]').each(function() {
-                if ($(this).closest('tr').find('td').eq(1).text() === serviceName) {
-                    $(this).prop('checked', false);
-                }
-            });
-            // Remove the row from the "LIST OF SELECTED SERVICES" table
-            $(this).closest('tr').remove();
-            selectedServices = selectedServices.filter(service => service.serviceName !== serviceName);
-        });
-
-        $('#selService').on('submit', function(event) {
-          
-            const { isValid, errorMessage } = validateForm('#selService');
-        
-           
-            event.preventDefault();
-            if(isValid){
-            $.ajax({
-                url: '/billing/selectedService',
-                method: 'POST',
-                contentType: 'application/json',
-                data: JSON.stringify(selectedServices),
-                success: function(response) {
-                    alert('Form submitted successfully!');
-                },
-                error: function(xhr, status, error) {
-                    const response = JSON.parse(xhr.responseText);
-                    console.error('Error:', response);
-                }
-            });
-        }else{
-            alert(errorMessage);
-            $('#errordiv1').removeClass('alert-success').addClass('alert-danger').text(errorMessage).show();
-       
-        }
-        });
-
-        pagi_search('#searchBox', '#servicesTable', '#paginationControls');
-    });
-</script>
-
-
+                <script type="module">
+                    import { pagi_search } from '../javascripts/pagi_search.js';
+                    import { validateForm } from '../javascripts/validation.js';
+                    import { myAjax } from '../javascripts/myAjax.js';
+                
+                    $(document).ready(function () {
+                        var jsonData = [
+                            { "id": 1, "clinic_id": "0", "doc_cat_master_code": "1", "doc_cat_master_desc": "Consultant" },
+                            { "id": 2, "clinic_id": "0", "doc_cat_master_code": "2", "doc_cat_master_desc": "Senior Consultant" },
+                            { "id": 3, "clinic_id": "0", "doc_cat_master_code": "3", "doc_cat_master_desc": "Counsellor" },
+                            { "id": 4, "clinic_id": "0", "doc_cat_master_code": "4", "doc_cat_master_desc": "Laparoscopic Surgeon" },
+                            { "id": 5, "clinic_id": "0", "doc_cat_master_code": "5", "doc_cat_master_desc": "Embryologist" },
+                            { "id": 6, "clinic_id": "0", "doc_cat_master_code": "1", "doc_cat_master_desc": "Consultant" },
+                            { "id": 7, "clinic_id": "0", "doc_cat_master_code": "2", "doc_cat_master_desc": "Senior Consultant" },
+                            { "id": 8, "clinic_id": "0", "doc_cat_master_code": "3", "doc_cat_master_desc": "Counsellor" },
+                            { "id": 9, "clinic_id": "0", "doc_cat_master_code": "4", "doc_cat_master_desc": "Laparoscopic Surgeon" },
+                            { "id": 10, "clinic_id": "0", "doc_cat_master_code": "5", "doc_cat_master_desc": "Embryologist" },
+                            { "id": 11, "clinic_id": "0", "doc_cat_master_code": "10", "doc_cat_master_desc": "ABC" },
+                            { "id": 12, "clinic_id": "0", "doc_cat_master_code": "A", "doc_cat_master_desc": "A" },
+                            { "id": 13, "clinic_id": "0", "doc_cat_master_code": "99a", "doc_cat_master_desc": "descj" }
+                        ];
+                        var $docCategorySelect = $('#docCategory');
+                        var selectedCategory = '<%= result.docCategory %>'; // Embed EJS variable
+                        var itemId = '<%= result.id %>'; // Embed EJS variable
+                        console.log(selectedCategory + itemId)
+                
+                        jsonData.forEach(item => {
+                            var isSelected = (selectedCategory === item.doc_cat_master_desc);
+                
+                            $docCategorySelect.append($('<option>', {
+                                value: item.doc_cat_master_desc,
+                                text: item.doc_cat_master_desc,
+                                selected: isSelected
+                            }));
+                        });
+                
+                        // Disable the select if itemId is not empty    
+                        if (itemId) {
+                            $docCategorySelect.prop('disabled', true);
+                        }
+                
+                        // Define selectedServices array globally if not already defined
+                        function fetchServices() {
+                            $.ajax({
+                                url: '/billing/get-service',
+                                method: 'GET',
+                                success: function (data) {
+                                    populateServicesTable(data);
+                                    markSelectedServices(data);
+                                },
+                                error: function (xhr, status, error) {
+                                    console.error('Error fetching services:', xhr.responseText);
+                                }
+                            });
+                        }
+                
+                        // Function to populate services table
+                        function populateServicesTable(services) {
+                            var $tblbody = $('#tblbody');
+                            $tblbody.empty(); // Clear existing rows
+                
+                            services.forEach(function (service) {
+                                var row = `<tr>
+                                    <td><input class="form-check-input mt-1 td" type="checkbox" <%= result.id ? 'disabled' : '' %>></td>
+                                    <td>${service.serviceName}</td>
+                                    <td>${service.className}</td>
+                                    <td>${service.baseServiceRate}</td>
+                                </tr>`;
+                                $tblbody.append(row);
+                            });
+                        }
+                
+                        // Function to mark selected services
+                        function markSelectedServices(allServices) {
+                            const selectedServices = $('#selectedServicesTable tbody tr').map(function () {
+                                return $(this).find('td:first').text().trim();
+                            }).get();
+                
+                            selectedServices.forEach(function (serviceName) {
+                                $('#tblbody tr').each(function () {
+                                    const $checkbox = $(this).find('input[type="checkbox"]');
+                                    const rowServiceName = $(this).find('td:nth-child(2)').text().trim();
+                                    if (serviceName === rowServiceName) {
+                                        $checkbox.prop('checked', true);
+                                    }
+                                });
+                            });
+                        }
+                
+                        // Call fetchServices to initialize the table
+                        fetchServices();
+                
+                        // Update the handling of checkboxes for both dynamic and manual entries
+                        function handleCheckboxChanges(checkbox, isChecked) {
+                            var row = $(checkbox).closest('tr');
+                            var serviceName = row.find('td').eq(1).text();
+                            var className = row.find('td').eq(2).text();
+                            var serviceRate = row.find('td').eq(3).text();
+                
+                            if (isChecked) {
+                                var docCategory = $('#docCategory').val();
+                                var newRow = `<tr>
+                                    <td contenteditable="true">${serviceName}</td>
+                                    <td contenteditable="true">${className}</td>
+                                    <td contenteditable="true">${serviceRate}</td>
+                                    <td><button class="btn btn-danger btn-sm delete-btn" data-service-name="${serviceName}">Delete</button></td>
+                                </tr>`;
+                                $('#selectedServicesTable tbody').append(newRow);
+                                selectedServices.push({ serviceName, className, serviceRate, docCategory });
+                                console.log(selectedServices);
+                            } else {
+                                $('#selectedServicesTable tbody tr').each(function () {
+                                    if ($(this).find('td').eq(0).text() === serviceName) {
+                                        $(this).remove();
+                                    }
+                                });
+                
+                                selectedServices = selectedServices.filter(service => service.serviceName !== serviceName);
+                            }
+                        }
+                
+                        $('#tblbody').on('change', 'input[type="checkbox"]', function () {
+                            handleCheckboxChanges(this, this.checked);
+                        });
+                
+                        $('#docCategory').on('change', function () {
+                            const newDocCategory = $(this).val();
+                            selectedServices.forEach(service => service.docCategory = newDocCategory);
+                            console.log(selectedServices);
+                        });
+                
+                        $(document).on('click', '.delete-btn', function () {
+                            const serviceName = $(this).data('service-name');
+                
+                            // Find and uncheck the corresponding checkbox in tblbody
+                            $('#tblbody tr').each(function () {
+                                const $checkbox = $(this).find('input[type="checkbox"]');
+                                const rowServiceName = $(this).find('td:nth-child(2)').text().trim();
+                                if (serviceName === rowServiceName) {
+                                    $checkbox.prop('checked', false);
+                                }
+                            });
+                
+                            // Remove the service row from selectedServicesTable
+                            $(this).closest('tr').remove();
+                        });
+                
+                        $('#selService').on('submit', function (event) {
+                            event.preventDefault();
+                            
+                            // Always update the docCategory for all selected services before submission
+                            const newDocCategory = $('#docCategory').val();
+                            selectedServices.forEach(service => service.docCategory = newDocCategory);
+                
+                            const { isValid, errorMessage } = validateForm('#selService');
+                
+                            if (isValid) {
+                                $.ajax({
+                                    url: '/billing/selectedService',
+                                    method: 'POST',
+                                    contentType: 'application/json',
+                                    data: JSON.stringify(selectedServices),
+                                    success: function (response) {
+                                        alert('Form submitted successfully!');
+                                    },
+                                    error: function (xhr, status, error) {
+                                        const response = JSON.parse(xhr.responseText);
+                                        console.error('Error:', response);
+                                    }
+                                });
+                            } else {
+                                alert(errorMessage);
+                                $('#errordiv1').removeClass('alert-success').addClass('alert-danger').text(errorMessage).show();
+                            }
+                        });
+                
+                        pagi_search('#searchBox', '#servicesTable', '#paginationControls');
+                    });
+                </script>
+                

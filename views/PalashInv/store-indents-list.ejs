@@ -218,7 +218,7 @@
                                                                             <th  style="min-width: 100px;">Date</th>
                                                                             <th  style="min-width: 100px;">Indent No.</th>
                                                                             <th>Clinic</th>
-                                                                            <th>From Store</th>
+                                                                            <th  style="min-width: 70px;">From Store</th>
                                                                             <th  style="min-width: 70px;">To Store</th>
                                                                             <th  style="min-width: 100px;">Expected Delivery Date</th>
                                                                             <th>MR No.</th>
@@ -344,7 +344,7 @@
                                     <td><input type="checkbox" class="freeze-checkbox" data-id='${item.id}' ${item.freeze ? 'checked disabled' : ''}></td>
                                     <td><input type="checkbox" class="approved-checkbox" disabled data-id='${item.id}' ${item.approved ? 'checked' : ''}></td>
                                     <td>
-                                        <button type="button" class="btn btn-danger btn-style btn-change cancel-btn" data-id="${item.id}">
+                                        <button type="button" class="btn btn-danger btn-style btn-change cancel-btn" data-id="${item.id}" ${item.freeze ? 'disabled' : ''}>
                                             <i class="fas fa-times"></i>
                                         </button>
                                     </td>
@@ -353,11 +353,11 @@
                         });
                         $('#rateContBody').html(tableRows);
                         $('#rateContBody').on('click', '#view_btn', function() {
-                            const id=$(this).closest('tr').data('indent-code')
-                      const route='10'
-                      const module='palashinv'
-                      ViewBtn(route,id,module)
-                             });
+                            const id = $(this).closest('tr').data('indent-code');
+                            const route = '10';
+                            const module = 'palashinv';
+                            ViewBtn(route, id, module);
+                        });
                         $('#total_indents').val(dataList.length); // Set total indents count
                         pagi_search('#searchBox', '#rateContTable', '#paginationControls');
                     },
@@ -379,10 +379,9 @@
                         let fetchDetailsPromises = details.map(detail => {
                             return new Promise((resolve, reject) => {
                                 $.ajax({
-                                    url: `/palashinv/get-items/${detail.item_id}`,
+                                    url: `/palashinv/get-items/${detail.item_code}`,
                                     type: 'GET',
                                     success: function(itemData) {
-                                        // Assuming itemData contains both uom and item_name
                                         detail.uom = itemData.stocking_uom;
                                         detail.item_name = itemData.item_name;
                                         resolve(detail);
@@ -431,20 +430,19 @@
                 });
             }
     
-            function updateFreezeStatus(indentId, freezeStatus) {
+            function updateFreezeStatus(id, freezeStatus, type) {
                 $.ajax({
-                    url: `/palashinv/update-freeze-status/${indentId}`,
+                    url: `/palashinv/update-freeze-status/${type}/${id}`,
                     type: 'POST',
                     data: JSON.stringify({ freeze: freezeStatus }),
                     contentType: 'application/json',
                     success: function(response) {
-                        alert('Indent Freezed and Updated Succesfully')
-                        console.log(`Freeze status of indent ${indentId} updated successfully`);
+                        alert(`${type.charAt(0).toUpperCase() + type.slice(1)} Freezed and Updated Successfully`);
+                        console.log(`Freeze status of ${type} ${id} updated successfully`);
                         fetchData(); // Refresh the data
-                        
                     },
                     error: function(xhr, status, error) {
-                        console.error('Error updating freeze status:', error);
+                        console.error(`Error updating freeze status of ${type}:`, error);
                     }
                 });
             }
@@ -471,7 +469,14 @@
             $('#rateContBody').on('change', '.freeze-checkbox', function(event) {
                 let indentId = $(this).data('id');
                 let freezeStatus = $(this).is(':checked');
-                updateFreezeStatus(indentId, freezeStatus);
+                updateFreezeStatus(indentId, freezeStatus, 'indent');
+    
+                // Disable the cancel button if freeze is checked
+                if (freezeStatus) {
+                    $(this).closest('tr').find('.cancel-btn').prop('disabled', true);
+                } else {
+                    $(this).closest('tr').find('.cancel-btn').prop('disabled', false);
+                }
             });
         });
     </script>

@@ -422,6 +422,7 @@ const getDocCat = async (req, res) => {
     }
   };
   const Sequelize = require('sequelize');
+const { SuperAdmin } = require('../models/Admin');
 
 
  // Adjust the path as needed
@@ -710,43 +711,72 @@ const apt4=async (req, res) => {
     return res.status(500).json({ msg: 'Internal server error' });
   }
 }
+const activeSessions = {};
 
-const login =async (req, res) => {
-  const {userEmail, userPassword } = req.body;
- console.log(req.body)
+// Login function with adjusted session data management
+const login = async (req, res) => {
+  const { userEmail, userPassword } = req.body;
+
   try {
-      const user = await Admin.findOne({ where: { userEmail } });
+      const user = await SuperAdmin.findOne({ where: { username: userEmail } });
       if (!user) {
           return res.status(404).json({ msg: 'Admin not found' });
       }
-console.log(user)
+
       const inputPasswordHash = md5(userPassword);
-      console.log(inputPasswordHash)
-      if (user.userPassword !== inputPasswordHash) {
-        
-        // console.log(inputPasswordHash)
+      if (user.Password !== inputPasswordHash) {
           return res.status(401).json({ msg: 'Invalid username or password' });
       }
 
+      // Check if user is already logged in somewhere else
+      if (activeSessions[user.username] && activeSessions[user.username] !== req.session.id) {
+        return res.status(409).json({ msg: 'User already logged in elsewhere.' });
+      }
+
+      // Update or set the session ID for the user
+      activeSessions[user.username] = req.session.id;
       req.session.user = {
-        id: user.userId,
-        userEmail: user.userEmail,
-        userPassword: user.userPassword,
-        clinicId:user.clinicId,
-        userName:user.userName
+        username: user.username, // Changed from id to username for clarity
+        clinicId: user.clinicId,
+        clinicName: user.clinicName
       };
-      const name = req.session.user.userName;
-      req.session.save()
-      // console.log(req.session.user)
-      res.status(200).json({ msg: 'Login successful',name:name });
-      // res.render('form-new')
-      
-      
+
+      req.session.save();
+      res.status(200).json({ msg: 'Login successful', name: user.userName });
   } catch (error) {
       console.error('Error authenticating user:', error);
       res.status(500).json({ msg: 'Error authenticating user' });
   }
-}
+};
+
+// Logout function with refined session clearing
+const logout = (req, res) => {
+  if (!req.session.user) {
+    return res.status(400).json({ msg: 'No active session' });
+  }
+
+  const username = req.session.user.username;
+  console.log(`Attempting to log out user: ${username}`);
+
+  console.log(`Before deleting, activeSessions:`, activeSessions);
+  delete activeSessions[username]; // Use username to reference the session
+  console.log(`After deleting, activeSessions:`, activeSessions);
+
+  req.session.destroy(err => {
+    if (err) {
+      console.log('Error during session destruction:', err);
+      return res.status(500).json({ msg: 'Error logging out' });
+    }
+
+    res.clearCookie('connect.sid');
+    console.log('Logout successful, session cookie cleared.');
+    res.status(200).json({ msg: 'Logout successful' });
+  });
+};
+
+
+
+
 
 const register = async (req, res) => {
   console.log(req.body)
@@ -768,16 +798,8 @@ const register = async (req, res) => {
   }
 }
 
-const logout= (req, res) => {
-  console.log('1')
-  req.session.destroy(err => {
-      if (err) {
-          return res.status(500).json({ msg: 'Error logging out' });
-      }
-      res.clearCookie('connect.sid'); // Clear the session cookie manually
-      res.status(200).json({ msg: 'Logout successful' });
-  });
-}
+
+
 
 module.exports = {
   bankBranchMasterCtrl,

@@ -264,12 +264,14 @@
                 function fetchData() {
                     fetchDataFromFirstRoute()
                         .done(function(data) {
+                            console.log(data);
                             let tableRows = '';
                             let fetchPromises = [];
-        
+                            
                             data.forEach(function(item) {
                                 fetchPromises.push(
-                                    fetchAdditionalData(item.id).then(function(additionalData) {
+                                    fetchAdditionalData(item.item_id).then(function(additionalData) {
+                                        console.log(additionalData);
                                         // Merge item data with additional data
                                         const combinedItem = {
                                             ...item,
@@ -360,6 +362,18 @@
                     printTable('opening-item');
                 });
             });
+
+            function exportTableToExcel(tableID, filename = '') {
+                    const table = document.getElementById(tableID);
+                    const workbook = XLSX.utils.table_to_book(table, { sheet: "Sheet1" });
+                    XLSX.writeFile(workbook, filename || 'OpeningBalance.xlsx');
+                }
+        
+                // Add event listener to export button
+                document.getElementById('exportBtn').addEventListener('click', function() {
+                    exportTableToExcel('opening-item');
+                });
+        
         </script>
         
         

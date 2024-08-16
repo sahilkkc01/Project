@@ -458,6 +458,9 @@
         batchesRequired: {
             type: DataTypes.STRING,
         },
+        suspend:{
+            type:DataTypes.BOOLEAN
+        }
 
     }, {
         alert: true,
@@ -659,42 +662,61 @@
         timestamps: true,
     });
     const ItemStoreMinMax = sequelize.define('ItemStoreMinMax', {
-        // Define your columns here
         itemCode: {
-        type: DataTypes.STRING,
-        
+          type: DataTypes.STRING,
+          allowNull: true
+        },
+        clinic: {
+          type: DataTypes.STRING,
+          allowNull: true
         },
         store_id: {
-        type: DataTypes.INTEGER,
-        
+          type: DataTypes.INTEGER,
+          allowNull: true
         },
         store_name: {
-        type: DataTypes.STRING,
-        
+          type: DataTypes.STRING,
+          allowNull: true
         },
         min: {
-        type: DataTypes.INTEGER,
-        
+          type: DataTypes.INTEGER,
+          allowNull: true
         },
         max: {
-        type: DataTypes.INTEGER,
-        
+          type: DataTypes.INTEGER,
+          allowNull: true
         },
         reorder: {
-        type: DataTypes.INTEGER,
-    
+          type: DataTypes.INTEGER,
+          allowNull: true
         },
         isSelected: {
-        type: DataTypes.BOOLEAN,
-        
+          type: DataTypes.BOOLEAN,
+          allowNull: true
         }
-    }, {
-        // Other model options go here
-        tableName: 'AdmInvItemStoreMinMax', // Make sure this matches your actual table name
-        timestamps: true // Disable createdAt and updatedAt if you don't use them
-    });
+      }, {
+        tableName: 'AdmInvItemStoreMinMax',
+        timestamps: true, // Set to true if you want createdAt and updatedAt
+        hooks: {
+          beforeCreate: (record) => {
+            if (record.min === '') record.min = null;
+            if (record.max === '') record.max = null;
+            if (record.reorder === '') record.reorder = null;
+          },
+          beforeUpdate: (record) => {
+            if (record.min === '') record.min = null;
+            if (record.max === '') record.max = null;
+            if (record.reorder === '') record.reorder = null;
+          }
+        }
+      });
+       
     const ItemStoreTax = sequelize.define('ItemStoreTax', {
         itemCode: {
+            type: DataTypes.STRING,
+
+        },
+        clinic: {
             type: DataTypes.STRING,
 
         },
@@ -702,9 +724,14 @@
             type: DataTypes.STRING,
 
         },
-        tax: {
-            type: DataTypes.STRING,
-
+        CGST: {
+            type: DataTypes.FLOAT,
+        },
+        SGST: {
+            type: DataTypes.FLOAT,
+        },
+        IGST: {
+            type: DataTypes.FLOAT,
         },
         applicable_for: {
             type: DataTypes.STRING,
@@ -714,10 +741,7 @@
             type: DataTypes.STRING,
 
         },
-        percentage: {
-            type: DataTypes.INTEGER,
-
-        },
+      
         taxType: {
             type: DataTypes.STRING,
 

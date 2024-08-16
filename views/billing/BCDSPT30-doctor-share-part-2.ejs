@@ -301,8 +301,7 @@
                                             <div class="form-group">
 
                                                 <input class="form-check-input" type="checkbox" id="searchDoctorCheckbox">
-                                                <label class="form-check-label mr-5" for="searchDoctorCheckbox">Search
-                                                    Doctors</label>
+                                                <label class="form-check-label mr-5" for="searchDoctorCheckbox">Apply to all Services</label>
 
                                             </div>
                                         </div>
@@ -479,7 +478,7 @@
 
                                     <div class="text-right col-lg-12">
                                         <button type="button" id="addButton" class="btn btn-primary btn-style mt-2 mr-2"><strong>Add</strong></button>
-                                        <button type="button" class="btn btn-primary btn-style mt-2 mr-2"><strong>Cancel</strong></button>
+                                        <button type="button" class="btn btn-primary btn-style mt-2 mr-2" data-bs-dismiss="modal"><strong>Cancel</strong></button>
                                         </div>
                                         </form>
                                         </div>
@@ -550,27 +549,6 @@ $('#addpending').click(function() {
         .catch(error => console.error('Error fetching specializations:', error));
 }
 
-document.getElementById('addButton').addEventListener('click', function() {
-        const selectedDoctors = document.querySelectorAll('.doctor-checkbox:checked');
-
-        selectedDoctors.forEach(doc => {
-            const doctorId = doc.value; // Assuming the checkbox value is the doctor ID
-            const doctorRow = document.querySelector(`#doctorRow${doctorId}`);
-
-            allSubSpecializations.forEach(subSpec => {
-    // Iterate over each description in the sub_spec_desc array
-    subSpec.sub_spec_desc.forEach(desc => {
-        const specInfo = `${desc} (${subSpec.sub_spec_code})`; // Create the display string
-        const cell = document.createElement('td');
-        cell.textContent = specInfo;
-        doctorRow.appendChild(cell); // Append each description as a separate cell
-    });
-});
-
-        });
-
-        $('#mdl2').modal('hide'); // Close the modal
-    });
 
     loadSpec('spec');  // Correct function call
 
@@ -608,6 +586,15 @@ function loadSubSpec(elementId, specCode) {
                     shareInput.placeholder = 'Share %';
                     shareInput.disabled = true;
 
+                    // Add validation to share input
+                    shareInput.addEventListener('input', function() {
+                        const value = parseFloat(shareInput.value);
+                        if (value < 0 || value > 100) {
+                            shareInput.value = ''; // Reset the field if value is out of range
+                            alert('Share percentage must be between 0 and 100');
+                        }
+                    });
+
                     // Configure the select checkbox
                     selectCheckbox.type = 'checkbox';
                     selectCheckbox.className = 'mr-2';
@@ -631,12 +618,29 @@ function loadSubSpec(elementId, specCode) {
 
 
 
+
 document.getElementById('allSpecWise').addEventListener('change', function() {
-    const shareValue = document.getElementById('shareInputAll').value; // Get the value from the input field
+    const shareInputAll = document.getElementById('shareInputAll');
+    const shareValue = shareInputAll.value; // Get the value from the input field
     const allCheckboxes = document.querySelectorAll('#subSpec input[type="checkbox"]'); // Select all checkboxes
     const allShareInputs = document.querySelectorAll('#subSpec input[type="number"]'); // Select all share % inputs
 
+    const validateShareValue = (value) => {
+        const parsedValue = parseFloat(value);
+        if (parsedValue < 0 || parsedValue > 100) {
+            shareInputAll.value = ''; // Reset the value of the share input field
+            alert('Share percentage must be between 0 and 100');
+            return false;
+        }
+        return true;
+    };
+
     if (this.checked) {
+        if (!validateShareValue(shareValue)) {
+            this.checked = false; // Uncheck the "select all" checkbox if the value is invalid
+            return;
+        }
+
         allCheckboxes.forEach(checkbox => {
             checkbox.checked = true;
             checkbox.onchange(); // Trigger onchange to enable the input
@@ -665,6 +669,7 @@ document.getElementById('allSpecWise').addEventListener('change', function() {
     const itemid = '<%= result.id %>';
     const query = $('#query').val();
     
+
     selectedDoctors[0] = { itemid: itemid, query: query };
 
     // Function to handle doctor deletion from the list
@@ -678,45 +683,44 @@ document.getElementById('allSpecWise').addEventListener('change', function() {
         console.log("After deletion:", selectedDoctors);
     }
     document.getElementById('addButton').addEventListener('click', function() {
-    document.querySelectorAll('#apnd tr').forEach(row => {
-        const doctorId = parseInt(row.getAttribute('data-id'));
-        const doctor = selectedDoctors.find(doc => doc.id === doctorId);
-
-        if (doctor) {
-            // Clear previous sub-spec entries to prevent duplication
-            $(row).find('.subSpecCell').remove();
-
-            document.querySelectorAll('#subSpec input[type="number"]:not(:disabled)').forEach(input => {
-                const index = Array.from(document.querySelectorAll('#subSpec input[type="number"]')).indexOf(input);
-                const subSpecInfo = allSubSpecializations[index];
-
-                // Handle each description within the subSpecInfo
-                subSpecInfo.sub_spec_desc.forEach(desc => {
-                    const specDesc = `${desc} (${input.value}%)`;
-
-                    // Create new cell for sub-spec description and percentage
-                    const newCell = document.createElement('td');
-                    newCell.classList.add('subSpecCell');
-                    newCell.textContent = specDesc;
-                     // Append the new cell to the existing row
-
-                    // Initialize subSpecs if not already initialized
-                    doctor.subSpecs = doctor.subSpecs || [];
-                    doctor.subSpecs.push({
-                        subSpecDesc: desc,
-                        share: input.value
-                    });
-                });
-            });
-        } else {
-            console.error("Doctor with ID " + doctorId + " not found in selectedDoctors array.");
-        }
-
-        console.log(doctor);
+    // Reset subSpecs for each doctor to ensure we're not duplicating entries, skipping the first element
+    selectedDoctors.slice(1).forEach(doctor => {
+        doctor.subSpecs = [];
     });
 
-    $('#mdl2').modal('hide'); // Hide the modal after updating
+    // Collect all sub-specialization inputs that are enabled (not disabled)
+    document.querySelectorAll('#subSpec input[type="number"]:not(:disabled)').forEach(input => {
+        const index = Array.from(document.querySelectorAll('#subSpec input[type="number"]')).indexOf(input);
+        const subSpecInfo = allSubSpecializations[index];
+
+        if (!subSpecInfo) {
+            console.error("Sub-specialization info not found at index " + index);
+            return; // If there's no sub-spec info at this index, skip this iteration
+        }
+
+        // Add sub-spec information to each doctor's subSpecs array, skipping the first element
+        subSpecInfo.sub_spec_desc.forEach(desc => {
+            const sharePercentage = input.value; // Get the share percentage input by the user
+
+            selectedDoctors.slice(1).forEach(doctor => {
+                doctor.subSpecs.push({
+                    subSpecCode: subSpecInfo.sub_spec_code,  // sub-spec code
+                    subSpecDesc: desc,  // sub-spec description
+                    share: sharePercentage  // share percentage
+                });
+            });
+        });
+    });
+
+    console.log('Updated Doctors:', selectedDoctors);
+    $('#mdl2').modal('hide'); // Hide the modal after all updates are done
 });
+
+
+
+// Additional functionalities (such as the initialization of selectedDoctors, etc.) should be maintained elsewhere in your code.
+
+
 
 
 
@@ -752,7 +756,11 @@ var modal1 = new bootstrap.Modal(document.getElementById('myModal'));
                         }
                         if('<%= result.status %>'!=='true'){
         document.getElementById('mod-btn').disabled = true;
-      } else {
+      }    if('<%= result.freeze %>'==1){
+        document.getElementById('mod-btn').disabled = true;
+        document.getElementById('submit').disabled = true;
+      } 
+else {
                             document.getElementById('submit').disabled = false;
                         
                         }
@@ -879,6 +887,58 @@ function getCheckedValues(docInfo, isChecked) {
     });
 }
 
+$('#allDoctorCheckbox').change(function() {
+    if ($(this).is(':checked')) {
+        // Ask user for confirmation
+        if (confirm('Are you sure you want to apply to all doctors?')) {
+            applyToAllDoctors();
+        } else {
+            // If user cancels, uncheck the checkbox
+            $(this).prop('checked', false);
+        }
+    } else {
+        removeApplicationToAllDoctors();
+    }
+});
+
+function applyToAllDoctors() {
+    fetch('/billing/get-Doctor')  // Adjust this URL to fetch all doctors
+        .then(response => response.json())
+        .then(doctors => {
+            selectedDoctors = doctors.map(doctor => ({
+                id: doctor.id,
+                name: doctor.doc_name,
+                spec: doctor.doc_spec,
+                subSpec: doctor.doc_sub_spec,
+                tariff: $('#tariffSelect option:selected').text(),
+                subSpecs: []  // Ensure this is an empty array for new entries
+            }));
+
+            // Ensure the first item has the special `itemid` and `query`
+            selectedDoctors.unshift({ itemid: itemid || '', query: query || '0' });
+
+            console.log('Applied to All Doctors:', selectedDoctors);
+            $('#apnd').html(selectedDoctors.slice(1).map(doc => `
+                <tr data-id="${doc.id}">
+                    <td><button type="button" onclick="handleDelete(${doc.id})" class="btn btn-link"><i class="fas fa-times"></i></button></td>
+                    <td>${doc.name}</td>
+                    <td>${doc.spec}</td>
+                    <td>${doc.subSpec}</td>
+                    <td>${doc.tariff}</td>
+                </tr>`).join(''));
+        })
+        .catch(error => {
+            console.error('Error fetching all doctors:', error);
+            alert('Failed to fetch doctors.');
+        });
+}
+
+// Function to remove the application to all doctors
+function removeApplicationToAllDoctors() {
+    selectedDoctors = [];  // Clear the selectedDoctors array
+    $('#apnd').empty();  // Clear the table
+}
+
 
                             function fetchData() {
                                 $.ajax({
@@ -900,88 +960,52 @@ function getCheckedValues(docInfo, isChecked) {
                             }
 
 
+                            function prepareDoctorData() {
+    const uniqueDoctors = new Map();
+
+    // Skip the first element which contains itemid and query
+    selectedDoctors.slice(1).forEach(doctor => {
+        if (uniqueDoctors.has(doctor.id)) {
+            // If the doctor already exists in the map, replace or merge the data
+            let existingDoctor = uniqueDoctors.get(doctor.id);
+            // Assuming you want to replace the existing subSpecs with new ones
+            existingDoctor.subSpecs = doctor.subSpecs;
+            uniqueDoctors.set(doctor.id, existingDoctor);
+        } else {
+            uniqueDoctors.set(doctor.id, doctor);
+        }
+    });
+
+    // Return the array with the control parameters as the first element
+    return [selectedDoctors[0], ...Array.from(uniqueDoctors.values())];
+}
+
+
+
                           
 
-                            $('#doctorSel').on('submit', function (event) {
-                                event.preventDefault();
-                                const formData= {doctors:selectedDoctors};
-console.log(selectedDoctors);
-                                const { isValid, errorMessage } = validateForm('#doctorSel');
-                                if (isValid) {
-                                  
-                                    
-                                    $(loadingDiv).show();
-                                    myAjax(formData, errorDivId, '/billing/doctorSelected', loadingDiv, function (response) {
-                                        alert("Form submitted successfully");
-                                        $(loadingDiv).hide();
-                                        $(errorDivId).removeClass('alert-danger').addClass('alert-success').text('Doctors submitted successfully!').show();
-                                    }, function (xhr, status, error) {
-                                        $(loadingDiv).hide();
-                                        $(errorDivId).removeClass('alert-success').addClass('alert-danger').text('Error submitting doctors: ' + xhr.responseText).show();
-                                    });
-                                } else {
-                                    alert(errorMessage);
-                                    $(errorDivId).removeClass('alert-success').addClass('alert-danger').text(errorMessage).show();
-                                }
-                            });
-
+$('#doctorSel').on('submit', function (event) {
+    event.preventDefault();
+    const formData = { doctors: prepareDoctorData().slice(1) };
+    console.log(formData);
+    const { isValid, errorMessage } = validateForm('#doctorSel');
+    if (isValid) {
+        $(loadingDiv).show();
+        myAjax(formData, errorDivId, '/billing/doctorSelected', loadingDiv, function (response) {
+            alert("Form submitted successfully");
+            $(loadingDiv).hide();
+            $(errorDivId).removeClass('alert-danger').addClass('alert-success').text('Doctors submitted successfully!').show();
+        }, function (xhr, status, error) {
+            $(loadingDiv).hide();
+            $(errorDivId).removeClass('alert-success').addClass('alert-danger').text('Error submitting doctors: ' + xhr.responseText).show();
+        });
+    } else {
+        alert(errorMessage);
+        $(errorDivId).removeClass('alert-success').addClass('alert-danger').text(errorMessage).show();
+    }
+});
                             fetchTariffs();
                             fetchData();
                         });
                     </script>
-                     <!-- <script >
-                        $(document).ready(function () {
-                            const doctorTable = $('#doctor-table');
-                
-                            $('#gridCheckPendingDoctors').click(function() {
-                                fetchDoctors('/billing/get-available-doctors');
-                            });
-                
-                            $('#gridCheckSearchDoctors').click(function() {
-                                fetchDoctors('/billing/get-Doctor');
-                            });
-                
-                            $('#modalCancelButton, .btn-close').click(function() {
-                                $('#myModal').modal('hide');
-                                $('#gridCheckPendingDoctors').prop('checked', false);
-                            });
-                
-                            function fetchDoctors(url) {
-                                $.ajax({
-                                    url: url,
-                                    type: 'GET',
-                                    success: function(data) {
-                                        let html = '<tr><th>Name</th><th>Specialization</th><th>Select</th></tr>';
-                                        data.forEach(doctor => {
-                                            html += `<tr><td>${doctor.name}</td><td>${doctor.spec}</td><td><button class="select-btn" data-id="${doctor.id}">Select</button></td></tr>`;
-                                        });
-                                        doctorTable.html(html);
-                                    },
-                                    error: function() {
-                                        alert('Error loading doctors.');
-                                    }
-                                });
-                            }
-                
-                            $(doctorTable).on('click', '.select-btn', function() {
-                                const id = $(this).data('id');
-                                addDoctorToSelected(id);
-                            });
-                
-                            function addDoctorToSelected(doctorId) {
-                                // Logic to add doctor to the selected table or list
-                                console.log('Selected Doctor ID:', doctorId);
-                                // This needs implementation based on your specific needs
-                            }
-                
-                            $('#submitDoctors').click(function() {
-                                submitSelectedDoctors();
-                            });
-                
-                            function submitSelectedDoctors() {
-                                // Logic to submit selected doctors
-                                console.log('Submitting selected doctors');
-                                // Implement submission logic as required
-                            }
-                        });
-                    </script> -->
+               
