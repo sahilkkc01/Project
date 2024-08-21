@@ -246,7 +246,9 @@
                   <div class="modal-body">
                     <div class="row">
                       <div class="col-lg-12 pl-lg-2 chart-grid">
-                        <form>
+                        <div id="errordiv1"></div>
+                        <form id="concent_form">
+                          <input type="text" name="package_code" id="package_code">
                           <div class="card card_border">
                             <div class="card">
                               <div class="col-xl-12 p-heading">
@@ -293,19 +295,8 @@
                                                 <th contenteditable="true">Consent</th>
                                               </tr>
                                             </thead>
-                                            <tbody>
-                                              <tr>
-                                                <td contenteditable="true">
-                                                  <input class="form-check-input mt-1" type="checkbox" id="gridCheck1">
-                                                </td>
-                                                <td contenteditable="true"></td>
-                                              </tr>
-                                              <tr>
-                                                <td contenteditable="true">
-                                                  <input class="form-check-input mt-1" type="checkbox" id="gridCheck2">
-                                                </td>
-                                                <td contenteditable="true"></td>
-                                              </tr>
+                                            <tbody id="concentBody">
+                                             
                                             </tbody>
                                           </table>
                                         </div>
@@ -321,7 +312,7 @@
                               <button type="button" class="btn btn-danger btn-style mt-3 me-2">
                                 <strong><i class="fas fa-times"></i> Cancel</strong>
                               </button>
-                              <button type="button" class="btn btn-primary btn-style mt-3">
+                              <button type="submit" class="btn btn-primary btn-style mt-3">
                                 <strong><i class="far fa-save"></i> Save</strong>
                               </button>
                             </div>
@@ -1285,6 +1276,7 @@
                                   <input type="hidden" name="PackageId" id="ServicePackageId">
                                   <thead>
                                     <tr>
+                                      <th></th>
                                       <th>Service Name</th>
                                     </tr>
                                   </thead>
@@ -1366,713 +1358,114 @@
       </div>
       <!--footer section start-->
       <%- include('../footer'); -%>
-        <script src="../javascripts/validation.js"></script>
-        <script src="../javascripts/myAjax.js"></script>
-        <script src="../javascripts/pagi_search.js"></script>
-        <script src="../javascripts/updateStatus.js"></script>
+    
 
-        <script>
-          document.addEventListener('DOMContentLoaded', () => {
-            const serviceList = document.getElementById('serviceList');
-            const selectedServicesTableBody = document.querySelector('.selected-services tbody');
+ <script>
+  function fetchData() {
+    axios.get('/package/getNewPackage')
+        .then(response => {
+            let data = response.data;
+            let tableRows = '';
 
-            serviceList.addEventListener('change', (event) => {
-              if (event.target.type === 'checkbox' && event.target.checked) {
-                const row = event.target.closest('tr');
-                const serviceName = row.cells[1].innerText;
-                const specialization = row.cells[2].innerText;
-                const rate = row.cells[3].innerText;
-
-                const newRow = document.createElement('tr');
-                newRow.innerHTML = `
-                    <td>${serviceName}</td>
+            data.forEach((item) => {
+                tableRows += `
+                <tr data-id="${item.id}" onclick="HandleSelectedRow(this)">
+                   <td>${item.packageCode}</td>
+                   <td>${item.packageName}</td>
+                   <td>${item.shortDescription}</td>
+                   <td>${item.longDescription}</td>
+                   <td>${item.specialization}</td>
+                   <td>${item.subSpecialization}</td>
+                   <td>${item.packageRate}</td>
+                   <td><input class="form-check-input mt-0 status-checkbox" type="checkbox" ${item.status ? 'checked' : ''}></td>
+                   <td><input class="form-check-input mt-0 status-checkbox" type="checkbox" ${item.packageFreezed ? 'checked' : ''}></td>
+                   <td><input class="form-check-input mt-0 status-checkbox" type="checkbox" ${item.packageApproved ? 'checked' : ''}></td>
+                </tr>
                 `;
-
-                selectedServicesTableBody.appendChild(newRow);
-
-                const removeButtons = document.querySelectorAll('.remove-service');
-                removeButtons.forEach(button => {
-                  button.addEventListener('click', (event) => {
-                    const rowToRemove = event.target.closest('tr');
-                    selectedServicesTableBody.removeChild(rowToRemove);
-                  });
-                });
-              }
-            });
-          });
-        </script>
-
-        <!-- Define Rule -->
-        <script>
-          document.addEventListener('DOMContentLoaded', () => {
-            const packageAmount = document.getElementById('packageAmount');
-            const serviceComponent = document.getElementById('serviceComponent');
-            const pharmacyComponent = document.getElementById('pharmacyComponent');
-
-            const validateComponents = () => {
-              const packageAmountValue = parseFloat(packageAmount.value) || 0;
-              const serviceComponentValue = parseFloat(serviceComponent.value) || 0;
-              const pharmacyComponentValue = parseFloat(pharmacyComponent.value) || 0;
-              const totalComponents = serviceComponentValue + pharmacyComponentValue;
-
-              if (totalComponents > packageAmountValue) {
-                alert('The sum of Service Component and Pharmacy Component cannot exceed the Package Amount.');
-                serviceComponent.value = Math.max(0, packageAmountValue - pharmacyComponentValue);
-              }
-
-              if (serviceComponentValue < pharmacyComponentValue) {
-                pharmacyComponent.value = packageAmountValue - serviceComponentValue;
-              }
-            };
-
-            serviceComponent.addEventListener('input', validateComponents);
-            pharmacyComponent.addEventListener('input', validateComponents);
-          });
-        </script>
-        <script>
-          document.addEventListener('DOMContentLoaded', function () {
-            const rateLimitInput = document.getElementById('rate-limit');
-            const adjustableHeadCheckbox = document.getElementById('adjustable-head-checkbox');
-            const adjustableHeadOptions = document.getElementById('adjustable-head-options');
-            const rateTypeRadios = document.querySelectorAll('input[name="rate_type"]');
-
-            rateTypeRadios.forEach(radio => {
-              radio.addEventListener('change', function () {
-                const value = this.value;
-                if (value === 'fixed') {
-                  rateLimitInput.value = 2000; // Set predefined value
-                  rateLimitInput.disabled = false;
-                } else if (value === 'percentage') {
-                  rateLimitInput.value = ''; // Clear the field
-                  rateLimitInput.disabled = false;
-                } else if (value === 'same-as-doctor-share') {
-                  rateLimitInput.value = ''; // Hide the field
-                  rateLimitInput.disabled = true;
-                }
-              });
-            });
-            const fields = document.querySelectorAll('.form-group input, .form-group select');
-            const checkboxes = document.querySelectorAll('.form-check-input[type="checkbox"]');
-            const tableInputs = document.querySelectorAll('.table2-container input');
-            const tableCells = document.querySelectorAll('.table2-container td[contenteditable="true"]');
-
-            // Fields to be excluded from disabling
-            const excludedFields = document.querySelectorAll('#procedure-field, #is-consumables-field');
-
-            function toggleFieldsState(disable) {
-              // Toggle all fields except the excluded ones
-              fields.forEach(field => {
-                if (![...excludedFields].includes(field)) {
-                  field.disabled = disable;
-                }
-              });
-
-              // Toggle all other checkboxes
-              checkboxes.forEach(field => {
-                if (![...excludedFields].includes(field) && field !== adjustableHeadCheckbox) {
-                  field.disabled = disable;
-                }
-              });
-
-              // Toggle all table inputs and cells
-              tableInputs.forEach(input => {
-                input.disabled = disable;
-              });
-              tableCells.forEach(cell => {
-                cell.setAttribute('contenteditable', disable ? 'false' : 'true');
-              });
-
-              // Show or hide adjustable head options
-              adjustableHeadOptions.style.display = disable ? 'block' : 'none';
-            }
-
-            adjustableHeadCheckbox.addEventListener('change', function () {
-              if (this.checked) {
-                toggleFieldsState(true);
-                adjustableHeadOptions.style.display = 'block';
-              } else {
-                toggleFieldsState(false);
-                adjustableHeadOptions.style.display = 'none';
-              }
-            });
-          });
-
-          //follow up table dynamically incremention
-          document.getElementById('quantity').addEventListener('change', function () {
-            const quantity = document.getElementById('quantity').value || 1;
-            const tableHeader = document.getElementById('tableHeader');
-            const tableBody = document.getElementById('tableBody');
-
-            tableHeader.innerHTML = '';
-            tableBody.innerHTML = '';
-
-            const headerRow = document.createElement('tr');
-            const bodyRow = document.createElement('tr');
-
-            for (let i = 1; i <= quantity; i++) {
-              const headerCell = document.createElement('th');
-              headerCell.contentEditable = true;
-              headerCell.textContent = i < 10 ? `0${i}` : i;
-              headerRow.appendChild(headerCell);
-
-              const bodyCell = document.createElement('td');
-              bodyCell.contentEditable = true;
-              const checkbox = document.createElement('input');
-              checkbox.type = 'checkbox';
-              checkbox.className = 'form-check-input mt-1';
-              bodyCell.appendChild(checkbox);
-              bodyRow.appendChild(bodyCell);
-            }
-
-            tableHeader.appendChild(headerRow);
-            tableBody.appendChild(bodyRow);
-          });
-        </script>
-
-        <!-- Assign Tarrif ApplyBaseRate -->
-        <script>
-          // document.getElementById('applyBaseRateCheckbox').addEventListener('change', function () {
-          //   const opdCheckbox = document.getElementById('gridCheckOPD');
-          //   const opdRate = document.getElementById('opdRate');
-
-          //   if (this.checked) {
-          //     opdCheckbox.checked = true;
-          //     opdCheckbox.disabled = true;
-          //     opdRate.textContent = '20000.00';
-          //   } else {
-          //     opdCheckbox.checked = false;
-          //     opdCheckbox.disabled = false;
-          //     opdRate.textContent = '1600.00';
-          //   }
-          // });
-          // document.getElementById('applyBaseRateCheckbox2').addEventListener('change', function () {
-          //   const opdCheckbox = document.getElementById('gridCheckOPD2');
-          //   const opdRate = document.getElementById('opdRate2');
-
-          //   if (this.checked) {
-          //     opdCheckbox.checked = true;
-          //     opdCheckbox.disabled = true;
-          //     opdRate.textContent = '20000.00';
-          //   } else {
-          //     opdCheckbox.checked = false;
-          //     opdCheckbox.disabled = false;
-          //     opdRate.textContent = '1600.00';
-          //   }
-          // });
-        </script>
-
-        <!-- Pharmacy Items -->
-        <script>
-          document.getElementById('setAllItems').addEventListener('change', function () {
-            const setItemsDiscount = document.getElementById('setItemsDiscount');
-            const addItemButton = document.getElementById('addItemButton');
-
-            if (this.checked) {
-              addItemButton.disabled = true;
-              const checkbox = document.createElement('div');
-              checkbox.className = 'col-lg-2 col-md-2 col-sm-12 mt-2';
-              checkbox.innerHTML = `
-        <div class="input-group mb-3">
-          <span class="mb-1">Discount %</span>
-          <input type="number" class="form-control" height='100px' value=0>
-        </div>
-      `;
-              setItemsDiscount.appendChild(checkbox);
-            } else {
-              setItemsDiscount.innerHTML = '';
-              addItemButton.disabled = false;
-            }
-          }); 
-        </script>
-        <!-- Assign tarrif SearchBox -->
-        <script>
-          document.getElementById('searchTariffCheckbox').addEventListener('change', function () {
-            const searchFieldContainer = document.getElementById('searchFieldContainer');
-            if (this.checked) {
-              const searchField = document.createElement('div');
-              searchField.className = 'col-lg-6 col-md-6 col-sm-12 mt-2';
-              searchField.innerHTML = `
-        <div class="input-group mb-3">
-          <span class="mt-1">Tariff Name:</span>
-          <input type="text" class="form-control" height='100px' placeholder="Search...">
-          <button class="btn btn-outline-secondary" type="button">Search</button>
-        </div>
-      `;
-              searchFieldContainer.appendChild(searchField);
-            } else {
-              searchFieldContainer.innerHTML = '';
-            }
-          });
-          document.getElementById('searchTariffCheckbox2').addEventListener('change', function () {
-            const searchFieldContainer = document.getElementById('searchFieldContainer2');
-            if (this.checked) {
-              const searchField = document.createElement('div');
-              searchField.className = 'col-lg-6 col-md-6 col-sm-12 mt-2';
-              searchField.innerHTML = `
-        <div class="input-group mb-3">
-          <span class="mt-1">Tariff Name:</span>
-          <input type="text" class="form-control" height='100px' placeholder="Search...">
-          <button class="btn btn-outline-secondary" type="button">Search</button>
-        </div>
-      `;
-              searchFieldContainer.appendChild(searchField);
-            } else {
-              searchFieldContainer.innerHTML = '';
-            }
-          });
-        </script>
-
-        <script>
-          document.getElementById('okButton').addEventListener('click', function () {
-            const selectedOperation = document.querySelector('input[name="operation"]:checked');
-            if (selectedOperation) {
-              const selectedValue = selectedOperation.value;
-              if (selectedValue === 'link') {
-                $('#linkModal').modal('show');
-              } else if (selectedValue === 'change') {
-                $('#changeModal').modal('show');
-              }
-            } else {
-              alert('Please select an operation.');
-            }
-          });
-        </script>
-        <script>
-          document.getElementById('items').addEventListener('click', function () {
-            showContent('items-content');
-          });
-
-          document.getElementById('items-category').addEventListener('click', function () {
-            showContent('items-category-content');
-          });
-
-          document.getElementById('items-group').addEventListener('click', function () {
-            showContent('items-group-content');
-          });
-
-          function showContent(contentId) {
-            // Hide all content divs
-            document.querySelectorAll('.content-div').forEach(function (div) {
-              div.style.display = 'none';
-            });
-            // Show the selected content div
-            document.getElementById(contentId).style.display = 'block';
-          }
-          showContent('items-content');
-        </script>
-        <script>
-          function updateQuery() {
-            console.log("Onclick");
-            $('#mod-btn').prop('disabled', true);
-            $('input[data-validation], select[data-validation]').prop('disabled', false);
-            $('#code').prop('disabled', true);
-            document.getElementById('sub-btn').disabled = false;
-          }
-        </script>
-        <script type="module">
-
-
-          $(document).ready(function () {
-            console.log("Document is ready");
-
-            function FetchingDataBackend(route, id) {
-              $.ajax({
-                url: `/package/${route}`,
-                type: 'GET',
-                data: { id },
-                dataType: 'json',
-                success: function (data) {
-                  console.log(data);
-                },
-                error: function (xhr, status, error) {
-                  console.error('Error fetching cities:', error);
-                }
-              });
-            }
-
-            function fetchData() {
-              axios.get('/package/getNewPackage')
-                .then(response => {
-                  console.log(response.data);
-                  let data = response.data;
-                  let tableRows = '';
-
-                  data.forEach((item, key) => {
-                    tableRows += `
-              <tr data-mod-id="${item.id}">
-                 <td contenteditable="true">${item.packageCode}</td>
-                 <td contenteditable="true">${item.packageName}</td>
-                 <td contenteditable="true">${item.shortDescription}</td>
-                 <td contenteditable="true">${item.longDescription}</td>
-                 <td contenteditable="true">${item.specialization}</td>
-                 <td contenteditable="true">${item.subSpecialization}</td>
-                 <td contenteditable="true">${item.packageRate}</td>
-                 <td>
-                     <input class="form-check-input mt-0 status-checkbox" id="status-checkbox" type="checkbox" data-id="${item.id}" ${item.status ? 'checked' : ''}>
-                </td>
-                 <td>
-                     <input class="form-check-input mt-0 status-checkbox" id="status-checkbox" type="checkbox" data-id="${item.id}" ${item.packageFreezed ? 'checked' : ''}>
-                </td>
-                 <td>
-                     <input class="form-check-input mt-0 status-checkbox" id="status-checkbox" type="checkbox" data-id="${item.id}" ${item.packageApproved ? 'checked' : ''}>
-                </td>
-             </tr>
-`;
-                  });
-
-                  $('#categtable').html(tableRows);
-
-                  pagi_search('#searchBox', '#data-table', '.paginationControls');
-                })
-                .catch(error => {
-                  console.error('Error fetching data:', error);
-                });
-            }
-
-            $('#categtable').on('click', '#status-checkbox', function () {
-              const itemId = $(this).data('id');
-              const isChecked = $(this).is(':checked');
-              const schema = '<%= a %>'
-              console.log(itemId, isChecked, schema);
-              updateStatus(itemId, isChecked, schema);
-            });
-            $('#categtable').on('click', 'tr', function () {
-              // Remove 'locked' class from all rows and enable buttons
-              $('#item-body tr').removeClass('locked');
-              ['#myButton1', '#myButton2', '#myButton3'].forEach(selector => $(selector).removeAttr('disabled'));
-              $(this).addClass('locked');
-              const selectedRowText1 = $(this).find('td').eq(1).text();
-              const selectedRowText2 = $(this).find('td').eq(6).text();
-              const selectedRowText3 = $(this).find('td').eq(0).text();
-              console.log(selectedRowText3);
-              [
-                { selector: '#packageName', value: selectedRowText1 },
-                { selector: '#packageAmount', value: selectedRowText2 },
-                { selector: '#PackageId', value: selectedRowText3 },
-              ].forEach(field => $(field.selector).val(field.value).text(field.value));
-              const itemId = $(this).data('mod-id');
-              FetchingDataBackend('schema', itemId);
             });
 
-            fetchData();
+            $('#categtable').html(tableRows);
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+        });
+}
+ fetchData()
+function HandleSelectedRow(selectedRow) {
+    $('tr').removeClass('locked');
+    $(selectedRow).addClass('locked');
+    $('#myButton1').removeAttr('disabled');
+    $('#myButton2').removeAttr('disabled');
+    $('#myButton3').removeAttr('disabled');
+    $('#errordiv1').text('');
+    
 
 
-            $("#addItem").on("submit", function (event) {
-              event.preventDefault();
-              addForms();
-            });
+    const code = $(selectedRow).find('td').eq(0).text();
+    const name = $(selectedRow).find('td').eq(1).text();
+    const rate = $(selectedRow).find('td').eq(6).text();
+    $('#package_code').val(code);
+    $('#packageName').val(name);
+    $('#packageAmount').val(rate);
+    
+    fetchConcent(code);
+}
 
-            // Function to submit forms
-            const addForms = () => {
-              event.preventDefault();
+function fetchConcent(packageCode) {
+    axios.get(`/package/getConcents/${packageCode}`)
+        .then(function (response) {
+            const allConcents = response.data.allConcents;
+            const selectedConcentCodes = new Set(response.data.packageConsents.map(pc => pc.concents).flat());
 
-              const pharmacyItemFormDetails = validateForm("#addItem");
-              const {
-                isValid: pharmacyItemFormValid,
-                errorMessage: pharmacyItemFormError,
-                formData: pharmacyItemFormData,
-              } = pharmacyItemFormDetails;
-
-              console.log(pharmacyItemFormData);
-              let tableRows = '';
-              tableRows += `
-                      <tr data-mod-id="${pharmacyItemFormData.PackageId}">
-                        <td><input type="hidden" name="oralMedicine" value="${pharmacyItemFormData.oralMedicine}">${pharmacyItemFormData.oralMedicine}</td>
-                        <td><input type="hidden" name="injunction" value="${pharmacyItemFormData.injunction}">${pharmacyItemFormData.injunction}</td>
-                        <td style="display:'none';"><input type="hidden" name="PackageId" value="${pharmacyItemFormData.PackageId}" ></td>
-                      </tr>
-                    `;
-              $('#itemBody').html(tableRows);
-              pagi_search('#searchBox', '#itemTable', '.paginationControls');
-              resetForm(addItem)
-            };
-
-            function resetForm(formId) {
-              $('#' + formId).reset();
-            }
-
-            $("#saveItem").on("submit", function (event) {
-              event.preventDefault();
-
-              submitForms();
-            });
-
-            // Function to submit forms
-            const submitForms = () => {
-
-              event.preventDefault();
-
-              const pharmacyItemFormDetails = validateForm("#saveItem");
-              const {
-                isValid: pharmacyItemFormValid,
-                errorMessage: pharmacyItemFormError,
-                formData
-
-                ,
-              } = pharmacyItemFormDetails;
-
-              console.log(formData);
-
-              if (pharmacyItemFormValid) {
-                const url = "/package/new-pharmacy-item";
-                const loadingDiv = "#loadingDiv";
-                const errorDiv1 = '#errorDiv1'
-                myAjax(formData, errorDiv1, url, loadingDiv);
-              } else {
-                alert(pharmacyItemFormError);
-              }
-            };
-
-            const loadDropdown = (url, elementId) => {
-              fetch(url)
-                .then(response => response.json())
-                .then(data => {
-                  const dropdown = document.getElementById(elementId);
-                  data.forEach(item => {
-                    console.log(item);
-                    const option = document.createElement('option');
-                    option.value = item.id
-                    option.text = item.ser_name
-                    option.onclick = () => handleOptionClick(item);
-                    dropdown.appendChild(option);
-
-                  });
-                  dropdown.addEventListener('change', (event) => {
-                    const selectedOption = event.target.options[event.target.selectedIndex];
-                    handleOptionClick(data.find(item => item.id == selectedOption.value));
-                  });
-                })
-                .catch(error => console.error(`Error fetching ${elementId} details:`, error));
-            };
-            // Load dropdowns
-
-            loadDropdown('/package/get-service', 'service_name');
-            let tableRows
-            const handleOptionClick = (item) => {
-              const b = item.id;
-              const a = $('#' + b).length;
-              if (a == 0) {
-              } else {
-                alert("already exists");
-                return false;
-              }
-              console.log('Option clicked:', item);
-              tableRows += `
-              <tr data-mod-id="${item.id}">
-                <td contenteditable="true" ><input type="hidden" name="Service_id" id="${item.id}" value="${item.id}" >${item.ser_name}</td>
-                </tr>`
-
-              $('#serviceList').html(tableRows);
-              pagi_search('#searchBox', '#serviceTable', '#paginationControls');
-            };
-
-          });
-        </script>
-        <script type="module">
-
-          $("#addServices").on("submit", function (event) {
-            event.preventDefault();
-            let PackageId = $('#PackageId').val();
-            $('#ServicePackageId').val(PackageId);
-            const formDataArray = $('#addServices').serializeArray();
-            // var json = JSON.stringify(formData);
-            const formData = {};
-            formDataArray.forEach(item => {
-              if (formData[item.name]) {
-                if (Array.isArray(formData[item.name])) {
-                  formData[item.name].push(item.value);
-                } else {
-                  formData[item.name] = [formData[item.name], item.value];
-                }
-              } else {
-                formData[item.name] = item.value;
-              }
-            });
-            console.log(formData);
-            submitForms(formData);
-          });
-
-          const submitForms = (formData) => {
-
-            event.preventDefault();
-
-            const servicesItemFormDetails = validateForm("#addServices");
-            const {
-              isValid: servicesItemFormValid,
-              errorMessage: servicesItemFormError
-
-            } = servicesItemFormDetails;
-
-            console.log(formData);
-
-            if (servicesItemFormValid) {
-              const url = "/package/new-services-item";
-              const loadingDiv = "#loadingDiv";
-              const errorDiv1 = '#errorDiv1'
-              myAjax(formData, errorDiv1, url, loadingDiv);
-            } else {
-              alert(servicesItemFormError);
-            }
-          };
-        </script>
-        <script>
-
-          function fetchAllTariff() {
-            // let PackageId = $('#PackageId').val();
-            axios.get('/package/get-tariff')
-              .then(response => {
-                console.log(response.data);
-                let data = response.data;
-                let tableRows = '';
-                data.forEach((item) => {
-                  tableRows += `
-                    <tr>
-                      <td contenteditable="true">${item.serviceName}</td>
+            let tableRows = '';
+            allConcents.forEach(function(item) {
+                const isChecked = selectedConcentCodes.has(item.concent_desc) ? 'checked' : '';
+                tableRows += `
+                    <tr concent-id="${item.concent_code}">
+                        <td><input class="form-check-input mt-0 consent-checkbox" type="checkbox" ${isChecked}></td>
+                        <td>${item.concent_desc}</td>
                     </tr>
-                    <tr>
-                      <td>
-                        <input class="form-check-input mt-0"  type="checkbox">
-                      </td>
-                      <td contenteditable="true">${item.className}</td>
-                      <td contenteditable="true">${item.serviceRate}</td>
-                      </tr>
-                    `;
-                });
-                addOtherTable(tableRows)
-                $('#tariffBody').html(tableRows);
-                pagi_search('#searchBox', '#tariffTable', '#paginationControls');
-              })
-              .catch(error => {
-                console.error('Error fetching data:', error);
-              });
-          }
-          function addOtherTable(tableRows) {
-            $('#serviceBody1').html(tableRows);
-            pagi_search('#searchBox', '#serviceTable1', '#paginationControls');
-          }
-        </script>
+                `;
+            });
 
-        <script>
+            $('#concentBody').html(tableRows);
+        })
+        .catch(function (error) {
+            console.error('Error fetching consent details:', error);
+        });
+}
 
-          function fetchServicesData() {
-            let PackageId = $('#PackageId').val();
-            let ser_name;
-            axios.post('/package/getallservices', { PackageId: PackageId })
-              .then(response => {
-                console.log(response.data.packageId);
-                let data = response.data;
-                ser_name = data.SerName
-                let tableRows = '';
-                ser_name.forEach((item) => {
-                  tableRows += `
-                    <tr>
-                      <td contenteditable="true">${item.ser_name}</td>
-                      <td contenteditable="true"
-                        class="o text-primary bg-light border-0 hover-bg-blue hover-underline"
-                        data-bs-toggle="modal" data-bs-target="#myModalDefineRule" onclick="setId('${item.ser_id}',' ${data.packageId}')">Define
-                        Rule</td>
-                      </tr>
-                    `;
-                });
-                $('#serviceBody').html(tableRows);
-                pagi_search('#searchBox', '#serviceTable', '.paginationControls');
-              })
-              .catch(error => {
-                console.error('Error fetching data:', error);
-              });
-          }
-          let defServicesId;
-          let PackageId;
-          function setId(Id, packageId) {
-            PackageId = packageId
-            defServicesId = Id
-          }
-          $("#defienRuleId").on("submit", function (event) {
-            event.preventDefault();
-            submitFormsRule();
-          });
-          const submitFormsRule = () => {
+$('#concent_form').submit(function(event) {
+    event.preventDefault();
+    var packageCode = $('#package_code').val();
+    var selectedData = $('#concentBody tr').toArray().filter(row => $(row).find('input[type="checkbox"]').is(':checked')).map(row => $(row).find('td').eq(1).text());
 
-            event.preventDefault();
+    if (selectedData.length > 0) {
+        axios.post('/package/saveConcent', {
+            package_code: packageCode,
+            concents: selectedData
+        })
+        .then(function(response) {
+            console.log('Save successful:', response);
+            $('#errordiv1').removeClass('alert-danger').addClass('alert-success').text(response.data.message).show();
+        })
+        .catch(function(error) {
+            console.error('Error saving data:', error);
+            $('#errordiv1').removeClass('alert-success').addClass('alert-danger').text(error.response.data.message).show();
+        });
+    } else {
+        console.log('No rows selected.');
+        $('#errordiv1').removeClass('alert-success').addClass('alert-danger').text('No rows selected').show();
+    }
+});
 
-            const defineRuleFormDetails = validateForm("#defienRuleId");
-            const {
-              isValid: defineRuleFormValid,
-              errorMessage: defineRuleFormError,
-              formData
-            } = defineRuleFormDetails;
-            setCheckedValue('is_consumables_field', 'is_consumables', formData)
-            setCheckedValue('discount_on_quantity', 'discount_on_quantity', formData)
-            setCheckedValue('unlimited_quantity', 'unlimited_quantity', formData)
-            setCheckedValue('include_in_adjustable_head', 'include_in_adjustable_head', formData)
+// Toggle 'selected' class on table rows when clicked
+$('#concentBody').on('click', 'tr', function(event) {
+    // Prevent row from being selected when clicking on the checkbox directly
+    if (!$(event.target).is('input[type="checkbox"]')) {
+        $(this).find('input[type="checkbox"]').trigger('click');
+    }
+    $(this).toggleClass('selected');
+});
 
-            formData.defServicesId = defServicesId
-            formData.PackageId = PackageId
-
-            console.log(formData);
-
-            function setCheckedValue(id, fiels, formData) {
-              const data = $('#' + id).is(':checked')
-              if (data) {
-                formData[fiels] = true
-              } else {
-                formData[fiels] = false
-              }
-            }
-            if (defineRuleFormValid) {
-              const url = "/package/new-rule-define";
-              const loadingDiv = "#loadingDiv";
-              const errorDiv1 = '#errorDiv1'
-              myAjax(formData, errorDiv1, url, loadingDiv);
-            } else {
-              alert(defineRuleFormError);
-            }
-          };
-          function getNewModule() {
-            // console.log("Id =>",id , "Rate =>" ,rate);
-            let BaseIdStatus = $('#applyBaseRateCheckbox').is(':checked')
-            console.log(BaseIdStatus);
-            if (!BaseIdStatus) {
-
-            } else {
-              $('#opdRate').val('20000.00');
-              let opdRate = $('#opdRate').val();
-              console.log(opdRate);
-              console.log("Satya");
-            }
-          }
-
-
-        </script>
-        <script>
-          function loadTariff() {
-            let isChecked = $('#applyRateToAllCheckbox').is(':checked');
-            if (isChecked) {
-              fetchServicesDataAllSer()
-            }
-          }
-          function fetchServicesDataAllSer() {
-            let PackageId = $('#PackageId').val();
-            let ser_name;
-            axios.post('/package/getallservices', { PackageId: PackageId })
-              .then(response => {
-                console.log(response.data.SerName);
-                let data = response.data.SerName;
-                let tableRows = '';
-                data.forEach((item) => {
-                  tableRows += `
-                    <tr>
-                      <td width="10%"><input class="form-check-input " type="checkbox" id="gridCheckOPD"></td>
-                      <td contenteditable="true">${item.ser_name}</td>
-                      <td width="15%"><input type="number" id="opdRate"+${item.id} value="${item.ser_base_rate}"></td>
-                      </tr>
-                    `;
-                });
-                $('#selectedServicesBody').html(tableRows);
-                pagi_search('#searchBox', '#selectedServicesTable', '#paginationControlsSer');
-              })
-              .catch(error => {
-                console.error('Error fetching data:', error);
-              });
-          }
-        </script>
+ </script>

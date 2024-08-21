@@ -1,4 +1,4 @@
-const { NewPackage, packageMedicine, ServiceMaster, PackageService, DefienRule, SelectedService } = require("../models/packageConfig");
+const { NewPackage, packageMedicine, ServiceMaster, PackageService, DefienRule, SelectedService, ConcentMaster, PackageConcents } = require("../models/packageConfig");
 const CryptoJS = require('crypto-js')
 
 //decryption and encryption fxn
@@ -228,6 +228,59 @@ const getAllTariff = async (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 }
+const getAllConcents = async (req, res) => {
+  
+  console.log(req.params); // Ensure this is for debugging purposes only.
+  console.log('Entered getAllConcents function'); // More descriptive log.
+  try {
+    const data = await ConcentMaster.findAll();
+
+    const packageCode = req.params.packageCode;
+    // Assuming PackageConcents is a model, we should use a query method like findAll or findOne.
+    const packageConsents = await PackageConcents.findAll({
+      where: { package_code: packageCode } // Assuming 'packageCode' is the field name in your model.
+    });
+
+    // Respond with both sets of data.
+    res.status(200).json({ allConcents: data, packageConsents: packageConsents });
+  } catch (error) {
+    console.error('Error fetching consents:', error.message); // Use console.error for errors.
+    res.status(500).send('Internal Server Error');
+  }
+}
 
 
-module.exports = { getNewPackage, newPackageSubmit, itemMasterData, SaveStatusData, newPharmacyItem, getServices, newServicesItem, getAllServices, newDefineRule,getAllTariff }
+const saveConcets = async (req, res) => {
+  const { package_code, concents } = req.body;
+  console.log(req.body)
+
+  try {
+    // Check if a package with the given package_code already exists
+    const existingPackage = await PackageConcents.findOne({
+      where: { package_code: package_code }
+    });
+
+    if (existingPackage) {
+      // Update the existing record
+      await existingPackage.update({
+        concents: concents
+      });
+      res.send({ message: 'Package and consents updated successfully!' });
+    } else {
+      // Create a new record if it does not exist
+      await PackageConcents.create(req.body);
+      res.send({ message: 'Package and consents created successfully!' });
+    }
+  } catch (error) {
+    console.error('Failed to save or update package and consents:', error);
+    res.status(500).send({
+      message: 'Error saving or updating package and consents',
+      error: error.message,
+    });
+  }
+};
+
+
+
+
+module.exports = { getNewPackage, newPackageSubmit, itemMasterData, SaveStatusData, newPharmacyItem, getServices, newServicesItem, getAllServices, newDefineRule,getAllTariff ,getAllConcents,saveConcets}

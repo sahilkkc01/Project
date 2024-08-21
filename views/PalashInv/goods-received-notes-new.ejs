@@ -457,357 +457,323 @@
 
                     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
                     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-                    <script>
-                        const loadDropdown = (url, elementId) => {
-                            fetch(url)
-                                .then(response => response.json())
-                                .then(data => {
-                                    const dropdown = document.getElementById(elementId);
-                                    data.forEach(item => {
-                                        const option = document.createElement('option');
-                                        option.value = item.description || item.rank_desc || item.shelf_desc || item.bin_desc || item.clinic_desc || item.tax_desc;
-                                        option.textContent = item.description || item.rank_desc || item.shelf_desc || item.bin_desc || item.clinic_desc || item.tax_desc;
-                                        dropdown.appendChild(option);
-                                    });
-                                })
-                                .catch(error => console.error(`Error fetching ${elementId} details:`, error));
-                        };
-                        loadDropdown('/adminInv/get-clinic-details', 'clinic');
-                        loadDropdown('/adminInv/get-store-details', 'store');
-                        loadDropdown('/adminInv/get-supplier-details', 'supplier');
-
-                        $(document).ready(function () {
-
-// Function to fetch data for the item modal
-function fetchData(from_store) {
-    $.ajax({
-        url: '/palashinv/get-current-item-counts',
-        type: 'GET',
-        data: { 
-            store: from_store,
-            clinic: '' // Set clinic to blank
-        },
-        success: function (data) {
-            console.log(data);
-            let tableRows = '';
-            data.data.forEach(function (item) {
-                tableRows += `
-                    <tr data-item-id="${item.id}">
-                        <td><input class="form-check-input mt-0 item-checkbox" type="checkbox"></td>
-                        <td>${item.item_code}</td>
-                        <td>${item.item_name}</td>
-                        <td>${item.brand_name}</td>
-                        <td>${item.CGST.toFixed(2)}%</td>
-                        <td>${item.SGST.toFixed(2)}%</td>
-                        <td>${item.IGST.toFixed(2)}%</td>
-                        <td><input class="form-check-input mt-0 suspend-checkbox" type="checkbox" ${item.suspend ? 'checked' : ''} disabled></td>
-                        <td>${item.availableStock}</td>
-                        <td>${item.stocking_uom}</td>
-                        <td style="display:none;"><input type="hidden" name="item_cgst" value="${item.CGST}"></td>
-                        <td style="display:none;"><input type="hidden" name="item_sgst" value="${item.SGST}"></td>
-                        <td style="display:none;"><input type="hidden" name="item_igst" value="${item.IGST}"></td>
-                        <td style="display:none;"><input type="hidden" name="purchase_uom" value="${item.purchase_uom}"></td>
-                        <td style="display:none;"><input type="hidden" name="stocking_uom" value="${item.stocking_uom}"></td>
-                        <td style="display:none;"><input type="hidden" name="base_unit_cost_price" value="${item.base_unit_cost_price}"></td>
-                        <td style="display:none;"><input type="hidden" name="base_unit_mrp" value="${item.base_unit_mrp}"></td>
-                        <td style="display:none;"><input type="hidden" name="conversion_factor" value="${item.conversions[0].conversion_factor}"></td>
-                    </tr>
-                `;
-            });
-            $('#tbodyid').html(tableRows);
-
-            // Add the select all checkbox functionality
-            $('#select-all-items').on('change', function () {
-                const isChecked = $(this).is(':checked');
-                $('#tbodyid input.item-checkbox').prop('checked', isChecked);
-            });
-        },
-        error: function (xhr, status, error) {
-            console.error('Error fetching item details:', error);
-        }
-    });
-}
-
-$('#addItems').click(function (e) {
-    let from_store = $('#store').val();
-
-    if (!from_store || from_store === 'Select') {
-        alert('Please select From store.');
-        e.preventDefault(); // Prevent the default action of opening the modal
-        e.stopPropagation(); // Stop the event from bubbling up
-        return;
-    }
-
-    fetchData(from_store);
-});
-
-// When items are selected from the modal
-$('#addSelectedItemsBtn').click(function () {
-    let selectedItems = [];
-    $('#tbodyid tr').each(function () {
-        if ($(this).find('input[type="checkbox"]').is(':checked')) {
-            let itemId = $(this).data('item-id');
-            let itemName = $(this).find('td').eq(2).text();
-            let purchaseUOM = $(this).find('input[name="purchase_uom"]').val() || '';
-            let stockingUOM = $(this).find('input[name="stocking_uom"]').val() || '';
-            let baseUnitCostPrice = $(this).find('input[name="base_unit_cost_price"]').val() || '';
-            let baseUnitMRP = $(this).find('input[name="base_unit_mrp"]').val() || '';
-            let cgst = $(this).find('input[name="item_cgst"]').val() || '';
-            let sgst = $(this).find('input[name="item_sgst"]').val() || '';
-            let igst = $(this).find('input[name="item_igst"]').val() || '';
-            let conversion_factor = $(this).find('input[name="conversion_factor"]').val();
-            let availableStock = $(this).find('td').eq(8).text();
-        
-
-            selectedItems.push({
-                item_id: itemId,
-                item_name: itemName,
-                purchase_uom: purchaseUOM,
-                stocking_uom: stockingUOM,
-                base_unit_cost_price: baseUnitCostPrice,
-                base_unit_mrp: baseUnitMRP,
-                cgst: cgst,
-                sgst: sgst,
-                igst: igst,
-                available_stock: availableStock,
-                conversion_factor:conversion_factor
-            });
-        }
-    });
-
-    let selectedTableRows = '';
-    selectedItems.forEach(function (item) {
-        selectedTableRows += `
-            <tr data-item-id="${item.item_id}">
-                <td>${item.item_name}</td>
-                <td><input name="batch_code" type="text" class="form-control input-style"></td>
-                <td><input name="expiry_date" type="date" class="form-control input-style"></td>
-                <td><input name="bar_code" type="text" class="form-control input-style"></td>
-                <td><input name="purchase_uom" type="text" class="form-control input-style" value="${item.purchase_uom || ''}"></td>
-                <td><input name="received_quantity" type="number" class="form-control input-style quantity-input"></td>
-                <td>
-  <select name="transaction_uom" class="form-control input-style">
-    <option value="${item.purchase_uom}" ${item.transaction_uom === item.purchase_uom ? 'selected' : ''}>${item.purchase_uom}</option>
-    <option value="${item.stocking_uom}" ${item.transaction_uom === item.stocking_uom ? 'selected' : ''}>${item.stocking_uom}</option>
-  </select>
-</td>
-                <td><input name="stocking_uom" type="text" class="form-control input-style" value="${item.stocking_uom || ''}"></td>
-                <td><input name="conversion_factor" type="number" class="form-control input-style " value="${item.conversion_factor}" readonly></td>
-                <td><input name="total_quantity" type="number" class="form-control input-style total-quantity" readonly></td>
-                <td><input name="available_stock" type="number" class="form-control input-style" value="${item.available_stock}" readonly></td>
-                <td><input name="base_unit_cost_price" type="number" class="form-control input-style" value="${item.base_unit_cost_price || ''}" readonly></td>
-                <td><input name="cost_amount" type="number" class="form-control input-style total-cp" readonly></td>
-                <td><input name="average_cost" type="number" class="form-control input-style" readonly></td>
-                <td><input name="average_cost_amount" type="number" class="form-control input-style" readonly></td>
-                <td><input name="base_unit_mrp" type="number" class="form-control input-style" value="${item.base_unit_mrp || ''}" readonly></td>
-                <td><input name="abated_mrp" type="number" class="form-control input-style" readonly></td>
-                <td><input name="amount" type="number" class="form-control input-style" readonly></td>
-                <td><input name="c_disc_percent" type="number" class="form-control input-style"></td>
-                <td><input name="c_disc_amount" type="number" class="form-control input-style" readonly></td>
-                <td><input name="sch_disc_percent" type="number" class="form-control input-style"></td>
-                <td><input name="sch_disc_amount" type="number" class="form-control input-style" readonly></td>
-                <td><input name="cgst" type="number" class="form-control input-style cgst" value="${item.cgst}" readonly></td>
-                <td><input name="cgst_amount" type="number" class="form-control input-style cgst-amount" readonly></td>
-                <td><input name="sgst" type="number" class="form-control input-style sgst" value="${item.sgst}" readonly></td>
-                <td><input name="sgst_amount" type="number" class="form-control input-style sgst-amount" readonly></td>
-                <td><input name="igst" type="number" class="form-control input-style igst" value="${item.igst}" readonly></td>
-                <td><input name="igst_amount" type="number" class="form-control input-style igst-amount" readonly></td>
-                <td><input name="net_amount" type="number" class="form-control input-style net-amount" readonly></td>
-                <td><input name="remarks" type="text" class="form-control input-style"></td>
-                <td><input name="rack" type="text" class="form-control input-style"></td>
-                <td><input name="shelf" type="text" class="form-control input-style"></td>
-                <td><input name="bin" type="text" class="form-control input-style"></td>
-            </tr>
-        `;
-    });
-
-    $('#selectedItemsTable tbody').append(selectedTableRows);
-    $('#itemSearchModal').modal('hide');
-
-    // Update calculations when inputs change
-    $('.quantity-input, .conversion-factor').on('input', function () {
-        let $row = $(this).closest('tr');
-        updateCalculations($row);
-    });
-});
-
-function updateCalculations($row) {
-    let quantity = parseFloat($row.find('.quantity-input').val()) || 0;
-    let transactionUOM = $row.find('select[name="transaction_uom"]').val();
-    let purchaseUOM = $row.find('input[name="purchase_uom"]').val();
-    let conversionFactor = parseFloat($row.find('input[name="conversion_factor"]').val()) || 1;
-
-    // Check if transaction UOM is the same as purchase UOM
-    if (transactionUOM === purchaseUOM) {
-        conversionFactor = 1; // If same, no conversion needed
-    }
-
-    let totalQuantity = quantity * conversionFactor;
-    let cp = parseFloat($row.find('input[name="base_unit_cost_price"]').val()) || 0;
-    let totalCP = totalQuantity * cp;
-
-    $row.find('.total-quantity').val(totalQuantity.toFixed(2));
-    $row.find('.total-cp').val(totalCP.toFixed(2));
-
-    updateNetCP($row);
-}
-
-
-function updateNetCP($row) {
-    let totalCP = parseFloat($row.find('.total-cp').val()) || 0;
-    let cgst = parseFloat($row.find('.cgst').val()) || 0;
-    let sgst = parseFloat($row.find('.sgst').val()) || 0;
-    let igst = parseFloat($row.find('.igst').val()) || 0;
-
-    let cgstAmount = (totalCP * cgst) / 100;
-    let sgstAmount = (totalCP * sgst) / 100;
-    let igstAmount = (totalCP * igst) / 100;
-    let netAmount = totalCP + cgstAmount + sgstAmount + igstAmount;
-
-    $row.find('.cgst-amount').val(cgstAmount.toFixed(2));
-    $row.find('.sgst-amount').val(sgstAmount.toFixed(2));
-    $row.find('.igst-amount').val(igstAmount.toFixed(2));
-    $row.find('.net-amount').val(netAmount.toFixed(2));
-
-    updateTotals();
-}
-
-function updateTotals() {
-    let totalCGST = 0;
-    let totalSGST = 0;
-    let totalIGST = 0;
-    let totalNet = 0;
-
-    $('#selectedItemsTable tbody tr').each(function () {
-        totalCGST += parseFloat($(this).find('.cgst-amount').val()) || 0;
-        totalSGST += parseFloat($(this).find('.sgst-amount').val()) || 0;
-        totalIGST += parseFloat($(this).find('.igst-amount').val()) || 0;
-        totalNet += parseFloat($(this).find('.net-amount').val()) || 0;
-    });
-
-    $('#total_cgst_amount').val(totalCGST.toFixed(2));
-    $('#total_sgst_amount').val(totalSGST.toFixed(2));
-    $('#total_igst_amount').val(totalIGST.toFixed(2));
-    $('#total_net_amount').val(totalNet.toFixed(2));
-    $('#total_amount').val((totalNet + totalCGST + totalSGST + totalIGST).toFixed(2));
-}
-
-// Handle form submission
-$('#saveGRNBtn').click(function () {
-    let formData = {
-        grn_no: $('#grn_no').val(),
-        date: $('#date').val(),
-        gate_entry_no: $('#gate_entry_no').val(),
-        store: $('#store').val(),
-        supplier: $('#supplier').val(),
-        pay_mode: $('input[name="pay_mode"]:checked').val(),
-        invoice_date: $('#invoice_date').val(),
-        invoice_no: $('#invoice_no').val(),
-        item_mode: $('input[name="item_mode"]:checked').val(),
-        total_cgst_amount: $('#total_cgst_amount').val(),
-        total_sgst_amount: $('#total_sgst_amount').val(),
-        total_igst_amount: $('#total_igst_amount').val(),
-        total_net_amount: $('#total_net_amount').val(),
-        total_amount: $('#total_amount').val(),
-        remark: $('#remark').val(),
-        is_finalize: $('#is_finalize').is(':checked'),
-        items: []
+                   
+                  <script>
+                    $(document).ready(function () {
+    const loadDropdown = (url, elementId) => {
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                const dropdown = document.getElementById(elementId);
+                data.forEach(item => {
+                    const option = document.createElement('option');
+                    option.value = item.description || item.rank_desc || item.shelf_desc || item.bin_desc || item.clinic_desc || item.tax_desc;
+                    option.textContent = item.description || item.rank_desc || item.shelf_desc || item.bin_desc || item.clinic_desc || item.tax_desc;
+                    dropdown.appendChild(option);
+                });
+            })
+            .catch(error => console.error(`Error fetching ${elementId} details:`, error));
     };
 
-    $('#selectedItemsTable tbody tr').each(function () {
-        let itemData = {
-            item_id: $(this).data('item-id'),
-            batch_code: $(this).find('[name="batch_code"]').val(),
-            expiry_date: $(this).find('[name="expiry_date"]').val(),
-            bar_code: $(this).find('[name="bar_code"]').val(),
-            purchase_uom: $(this).find('[name="purchase_uom"]').val(),
-            received_quantity: $(this).find('[name="received_quantity"]').val(),
-            total_quantity: $(this).find('[name="total_quantity"]').val(),
-            available_stock: $(this).find('[name="available_stock"]').val(),
-            base_unit_cost_price: $(this).find('[name="base_unit_cost_price"]').val(),
-            cost_amount: $(this).find('[name="cost_amount"]').val(),
-            average_cost: $(this).find('[name="average_cost"]').val(),
-            average_cost_amount: $(this).find('[name="average_cost_amount"]').val(),
-            mrp: $(this).find('[name="base_unit_mrp"]').val(),
-            abated_mrp: $(this).find('[name="abated_mrp"]').val(),
-            amount: $(this).find('[name="amount"]').val(),
-            c_disc_percent: $(this).find('[name="c_disc_percent"]').val(),
-            c_disc_amount: $(this).find('[name="c_disc_amount"]').val(),
-            sch_disc_percent: $(this).find('[name="sch_disc_percent"]').val(),
-            sch_disc_amount: $(this).find('[name="sch_disc_amount"]').val(),
-            cgst: $(this).find('[name="cgst"]').val(),
-            cgst_amount: $(this).find('[name="cgst_amount"]').val(),
-            sgst: $(this).find('[name="sgst"]').val(),
-            sgst_amount: $(this).find('[name="sgst_amount"]').val(),
-            igst: $(this).find('[name="igst"]').val(),
-            igst_amount: $(this).find('[name="igst_amount"]').val(),
-            net_amount: $(this).find('[name="net_amount"]').val(),
-            remarks: $(this).find('[name="remarks"]').val(),
-            rack: $(this).find('[name="rack"]').val(),
-            shelf: $(this).find('[name="shelf"]').val(),
-            bin: $(this).find('[name="bin"]').val()
-        };
-        formData.items.push(itemData);
-    });
+    loadDropdown('/adminInv/get-clinic-details', 'clinic');
+    loadDropdown('/adminInv/get-store-details', 'store');
+    loadDropdown('/adminInv/get-supplier-details', 'supplier');
 
-    $.ajax({
-        url: '/palashinv/save-grn',
-        type: 'POST',
-        contentType: 'application/json',
-        data: JSON.stringify(formData),
-        success: function (response) {
-            alert('Data saved successfully');
-            $('#errordiv1').addClass('alert-success').removeClass('alert-danger').text('Saved Successfully').show();
-        },
-        error: function (xhr, status, error) {
-            console.error('Error saving data:', error);
-            $('#errordiv1').removeClass('alert-success').addClass('alert-danger').text('Something went wrong').show();
-            alert('Failed to save data');
-        }
-    });
-});
-});
+    function fetchData(from_store) {
+        $.ajax({
+            url: '/palashinv/get-current-item-counts',
+            type: 'GET',
+            data: {
+                store: from_store,
+                clinic: '' // Set clinic to blank
+            },
+            success: function (data) {
+                console.log(data);
+                let tableRows = '';
+                data.data.forEach(function (item) {
+                    tableRows += `
+                        <tr data-item-id="${item.id}">
+                            <td><input class="form-check-input mt-0 item-checkbox" type="checkbox"></td>
+                            <td>${item.item_code}</td>
+                            <td>${item.item_name}</td>
+                            <td>${item.brand_name}</td>
+                            <td>${item.CGST.toFixed(2)}%</td>
+                            <td>${item.SGST.toFixed(2)}%</td>
+                            <td>${item.IGST.toFixed(2)}%</td>
+                            <td><input class="form-check-input mt-0 suspend-checkbox" type="checkbox" ${item.suspend ? 'checked' : ''} disabled></td>
+                            <td>${item.availableStock}</td>
+                            <td>${item.stocking_uom}</td>
+                            <td style="display:none;"><input type="hidden" name="item_cgst" value="${item.CGST}"></td>
+                            <td style="display:none;"><input type="hidden" name="item_sgst" value="${item.SGST}"></td>
+                            <td style="display:none;"><input type="hidden" name="item_igst" value="${item.IGST}"></td>
+                            <td style="display:none;"><input type="hidden" name="purchase_uom" value="${item.purchase_uom}"></td>
+                            <td style="display:none;"><input type="hidden" name="stocking_uom" value="${item.stocking_uom}"></td>
+                            <td style="display:none;"><input type="hidden" name="base_unit_cost_price" value="${item.base_unit_cost_price}"></td>
+                            <td style="display:none;"><input type="hidden" name="base_unit_mrp" value="${item.base_unit_mrp}"></td>
+                            <td style="display:none;"><input type="hidden" name="conversion_factor" value="${item.conversions[0].conversion_factor}"></td>
+                        </tr>
+                    `;
+                });
+                $('#tbodyid').html(tableRows);
 
-document.addEventListener('DOMContentLoaded', function() {
-// Get today's date in YYYY-MM-DD format
-const today = new Date().toISOString().split('T')[0];
-
-// Set the date input value to today's date and make it read-only
-const dateInput = document.getElementById('date');
-dateInput.value = today;
-dateInput.readOnly = true;
-});
-
-
-document.addEventListener('DOMContentLoaded', function() {
-// Get today's date in YYYY-MM-DD format
-const today = new Date().toISOString().split('T')[0];
-
-// Set the date input value to today's date and make it read-only
-const dateInput = document.getElementById('date');
-dateInput.value = today;
-dateInput.readOnly = true;
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-// Get today's date in YYYY-MM-DD format
-const today = new Date().toISOString().split('T')[0];
-
-// Set the date input value to today's date and make it read-only
-const dateInput = document.getElementById('date');
-dateInput.value = today;
-dateInput.readOnly = true;
-});
-
-                        document.addEventListener('DOMContentLoaded', function() {
-            // Get today's date in YYYY-MM-DD format
-            const today = new Date().toISOString().split('T')[0];
-            
-            // Set the date input value to today's date and make it read-only
-            const dateInput = document.getElementById('date');
-            dateInput.value = today;
-            dateInput.readOnly = true;
+                $('#select-all-items').on('change', function () {
+                    const isChecked = $(this).is(':checked');
+                    $('#tbodyid input.item-checkbox').prop('checked', isChecked);
+                });
+            },
+            error: function (xhr, status, error) {
+                console.error('Error fetching item details:', error);
+            }
         });
-                    </script>
+    }
+
+    $('#addItems').click(function (e) {
+        let from_store = $('#store').val();
+
+        if (!from_store || from_store === 'Select') {
+            alert('Please select From store.');
+            e.preventDefault();
+            e.stopPropagation();
+            return;
+        }
+
+        fetchData(from_store);
+    });
+
+    $('#addSelectedItemsBtn').click(function () {
+        let selectedItems = [];
+        $('#tbodyid tr').each(function () {
+            if ($(this).find('input[type="checkbox"]').is(':checked')) {
+                let itemId = $(this).data('item-id');
+                let itemName = $(this).find('td').eq(2).text();
+                let purchaseUOM = $(this).find('input[name="purchase_uom"]').val() || '';
+                let stockingUOM = $(this).find('input[name="stocking_uom"]').val() || '';
+                let baseUnitCostPrice = $(this).find('input[name="base_unit_cost_price"]').val() || '';
+                let baseUnitMRP = $(this).find('input[name="base_unit_mrp"]').val() || '';
+                let cgst = $(this).find('input[name="item_cgst"]').val() || '';
+                let sgst = $(this).find('input[name="item_sgst"]').val() || '';
+                let igst = $(this).find('input[name="item_igst"]').val() || '';
+                let conversion_factor = $(this).find('input[name="conversion_factor"]').val();
+                let availableStock = $(this).find('td').eq(8).text();
+
+                selectedItems.push({
+                    item_id: itemId,
+                    item_name: itemName,
+                    purchase_uom: purchaseUOM,
+                    stocking_uom: stockingUOM,
+                    base_unit_cost_price: baseUnitCostPrice,
+                    base_unit_mrp: baseUnitMRP,
+                    cgst: cgst,
+                    sgst: sgst,
+                    igst: igst,
+                    available_stock: availableStock,
+                    conversion_factor: conversion_factor
+                });
+            }
+        });
+
+        let selectedTableRows = '';
+        selectedItems.forEach(function (item) {
+            selectedTableRows += `
+                <tr data-item-id="${item.item_id}">
+                    <td>${item.item_name}</td>
+                    <td><input name="batch_code" type="text" class="form-control input-style"></td>
+                    <td><input name="expiry_date" type="date" class="form-control input-style"></td>
+                    <td><input name="bar_code" type="text" class="form-control input-style"></td>
+                    <td><input name="purchase_uom" type="text" class="form-control input-style" value="${item.purchase_uom || ''}"></td>
+                    <td><input name="received_quantity" type="number" class="form-control input-style quantity-input"></td>
+                    <td>
+                        <select name="transaction_uom" class="form-control input-style transaction-uom">
+                            <option value="${item.purchase_uom}" selected>${item.purchase_uom}</option>
+                            <option value="${item.stocking_uom}">${item.stocking_uom}</option>
+                        </select>
+                    </td>
+                    <td><input name="stocking_uom" type="text" class="form-control input-style" value="${item.stocking_uom || ''}"></td>
+                    <td><input name="conversion_factor" type="number" class="form-control input-style conversion-factor" value="${item.conversion_factor}" readonly></td>
+                    <td><input name="total_quantity" type="number" class="form-control input-style total-quantity" readonly></td>
+                    <td><input name="available_stock" type="number" class="form-control input-style" value="${item.available_stock}" readonly></td>
+                    <td><input name="base_unit_cost_price" type="number" class="form-control input-style" value="${item.base_unit_cost_price || ''}" readonly></td>
+                    <td><input name="cost_amount" type="number" class="form-control input-style total-cp" readonly></td>
+                    <td><input name="average_cost" type="number" class="form-control input-style" readonly></td>
+                    <td><input name="average_cost_amount" type="number" class="form-control input-style" readonly></td>
+                    <td><input name="base_unit_mrp" type="number" class="form-control input-style" value="${item.base_unit_mrp || ''}" readonly></td>
+                    <td><input name="abated_mrp" type="number" class="form-control input-style" readonly></td>
+                    <td><input name="amount" type="number" class="form-control input-style" readonly></td>
+                    <td><input name="c_disc_percent" type="number" class="form-control input-style"></td>
+                    <td><input name="c_disc_amount" type="number" class="form-control input-style" readonly></td>
+                    <td><input name="sch_disc_percent" type="number" class="form-control input-style"></td>
+                    <td><input name="sch_disc_amount" type="number" class="form-control input-style" readonly></td>
+                    <td><input name="cgst" type="number" class="form-control input-style cgst" value="${item.cgst}" readonly></td>
+                    <td><input name="cgst_amount" type="number" class="form-control input-style cgst-amount" readonly></td>
+                    <td><input name="sgst" type="number" class="form-control input-style sgst" value="${item.sgst}" readonly></td>
+                    <td><input name="sgst_amount" type="number" class="form-control input-style sgst-amount" readonly></td>
+                    <td><input name="igst" type="number" class="form-control input-style igst" value="${item.igst}" readonly></td>
+                    <td><input name="igst_amount" type="number" class="form-control input-style igst-amount" readonly></td>
+                    <td><input name="net_amount" type="number" class="form-control input-style net-amount" readonly></td>
+                    <td><input name="remarks" type="text" class="form-control input-style"></td>
+                    <td><input name="rack" type="text" class="form-control input-style"></td>
+                    <td><input name="shelf" type="text" class="form-control input-style"></td>
+                    <td><input name="bin" type="text" class="form-control input-style"></td>
+                </tr>
+            `;
+        });
+
+        $('#selectedItemsTable tbody').append(selectedTableRows);
+        $('#itemSearchModal').modal('hide');
+
+        // Update calculations when inputs change
+        $('.quantity-input, .transaction-uom').on('input change', function () {
+            let $row = $(this).closest('tr');
+            updateCalculations($row);
+        });
+    });
+
+    function updateCalculations($row) {
+        let quantity = parseFloat($row.find('.quantity-input').val()) || 0;
+        let transactionUOM = $row.find('select[name="transaction_uom"]').val();
+        let purchaseUOM = $row.find('input[name="purchase_uom"]').val();
+        let conversionFactor = parseFloat($row.find('input[name="conversion_factor"]').val()) || 1;
+
+        // Update conversion factor based on selected UOM
+        if (transactionUOM !== purchaseUOM) {
+            conversionFactor = parseFloat($row.find('input[name="conversion_factor"]').val()) || 1;
+        } else {
+            conversionFactor = 1; // No conversion needed if UOMs match
+        }
+
+        $row.find('.conversion-factor').val(conversionFactor);
+
+        let totalQuantity = quantity * conversionFactor;
+        let cp = parseFloat($row.find('input[name="base_unit_cost_price"]').val()) || 0;
+        let totalCP = totalQuantity * cp;
+
+        $row.find('.total-quantity').val(totalQuantity.toFixed(2));
+        $row.find('.total-cp').val(totalCP.toFixed(2));
+
+        updateNetCP($row);
+    }
+
+    function updateNetCP($row) {
+        let totalCP = parseFloat($row.find('.total-cp').val()) || 0;
+        let cgst = parseFloat($row.find('.cgst').val()) || 0;
+        let sgst = parseFloat($row.find('.sgst').val()) || 0;
+        let igst = parseFloat($row.find('.igst').val()) || 0;
+
+        let cgstAmount = (totalCP * cgst) / 100;
+        let sgstAmount = (totalCP * sgst) / 100;
+        let igstAmount = (totalCP * igst) / 100;
+        let netAmount = totalCP + cgstAmount + sgstAmount + igstAmount;
+
+        $row.find('.cgst-amount').val(cgstAmount.toFixed(2));
+        $row.find('.sgst-amount').val(sgstAmount.toFixed(2));
+        $row.find('.igst-amount').val(igstAmount.toFixed(2));
+        $row.find('.net-amount').val(netAmount.toFixed(2));
+
+        updateTotals();
+    }
+
+    function updateTotals() {
+        let totalCGST = 0;
+        let totalSGST = 0;
+        let totalIGST = 0;
+        let totalNet = 0;
+
+        $('#selectedItemsTable tbody tr').each(function () {
+            totalCGST += parseFloat($(this).find('.cgst-amount').val()) || 0;
+            totalSGST += parseFloat($(this).find('.sgst-amount').val()) || 0;
+            totalIGST += parseFloat($(this).find('.igst-amount').val()) || 0;
+            totalNet += parseFloat($(this).find('.net-amount').val()) || 0;
+        });
+
+        $('#total_cgst_amount').val(totalCGST.toFixed(2));
+        $('#total_sgst_amount').val(totalSGST.toFixed(2));
+        $('#total_igst_amount').val(totalIGST.toFixed(2));
+        $('#total_net_amount').val(totalNet.toFixed(2));
+        $('#total_amount').val((totalNet + totalCGST + totalSGST + totalIGST).toFixed(2));
+    }
+
+    $('#saveGRNBtn').click(function () {
+        let formData = {
+            grn_no: $('#grn_no').val(),
+            date: $('#date').val(),
+            gate_entry_no: $('#gate_entry_no').val(),
+            store: $('#store').val(),
+            supplier: $('#supplier').val(),
+            pay_mode: $('input[name="pay_mode"]:checked').val(),
+            invoice_date: $('#invoice_date').val(),
+            invoice_no: $('#invoice_no').val(),
+            item_mode: $('input[name="item_mode"]:checked').val(),
+            total_cgst_amount: $('#total_cgst_amount').val(),
+            total_sgst_amount: $('#total_sgst_amount').val(),
+            total_igst_amount: $('#total_igst_amount').val(),
+            total_net_amount: $('#total_net_amount').val(),
+            total_amount: $('#total_amount').val(),
+            remark: $('#remark').val(),
+            is_finalize: $('#is_finalize').is(':checked'),
+            items: []
+        };
+
+        $('#selectedItemsTable tbody tr').each(function () {
+            let itemData = {
+                item_id: $(this).data('item-id'),
+                batch_code: $(this).find('[name="batch_code"]').val(),
+                expiry_date: $(this).find('[name="expiry_date"]').val(),
+                bar_code: $(this).find('[name="bar_code"]').val(),
+                purchase_uom: $(this).find('[name="purchase_uom"]').val(),
+                received_quantity: $(this).find('[name="received_quantity"]').val(),
+                total_quantity: $(this).find('[name="total_quantity"]').val(),
+                available_stock: $(this).find('[name="available_stock"]').val(),
+                base_unit_cost_price: $(this).find('[name="base_unit_cost_price"]').val(),
+                cost_amount: $(this).find('[name="cost_amount"]').val(),
+                average_cost: $(this).find('[name="average_cost"]').val(),
+                average_cost_amount: $(this).find('[name="average_cost_amount"]').val(),
+                mrp: $(this).find('[name="base_unit_mrp"]').val(),
+                abated_mrp: $(this).find('[name="abated_mrp"]').val(),
+                amount: $(this).find('[name="amount"]').val(),
+                c_disc_percent: $(this).find('[name="c_disc_percent"]').val(),
+                c_disc_amount: $(this).find('[name="c_disc_amount"]').val(),
+                sch_disc_percent: $(this).find('[name="sch_disc_percent"]').val(),
+                sch_disc_amount: $(this).find('[name="sch_disc_amount"]').val(),
+                cgst: $(this).find('[name="cgst"]').val(),
+                cgst_amount: $(this).find('[name="cgst_amount"]').val(),
+                sgst: $(this).find('[name="sgst"]').val(),
+                sgst_amount: $(this).find('[name="sgst_amount"]').val(),
+                igst: $(this).find('[name="igst"]').val(),
+                igst_amount: $(this).find('[name="igst_amount"]').val(),
+                net_amount: $(this).find('[name="net_amount"]').val(),
+                remarks: $(this).find('[name="remarks"]').val(),
+                rack: $(this).find('[name="rack"]').val(),
+                shelf: $(this).find('[name="shelf"]').val(),
+                bin: $(this).find('[name="bin"]').val()
+            };
+            formData.items.push(itemData);
+        });
+
+        $.ajax({
+            url: '/palashinv/save-grn',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(formData),
+            success: function (response) {
+                alert('Data saved successfully');
+                $('#errordiv1').addClass('alert-success').removeClass('alert-danger').text('Saved Successfully').show();
+            },
+            error: function (xhr, status, error) {
+                console.error('Error saving data:', error);
+                $('#errordiv1').removeClass('alert-success').addClass('alert-danger').text('Something went wrong').show();
+                alert('Failed to save data');
+            }
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const today = new Date().toISOString().split('T')[0];
+        const dateInput = document.getElementById('date');
+        dateInput.value = today;
+        dateInput.readOnly = true;
+    });
+});
+
+                  </script>
 </body>
 </html>

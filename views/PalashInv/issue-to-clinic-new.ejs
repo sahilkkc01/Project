@@ -116,13 +116,13 @@
                                                 <div class="form-row">
                                                    
                                                     <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
-                                                        <div class="form-group"><label class="input__label">Issue Number</label><input name="description" type="text"
+                                                        <div class="form-group"><label class="input__label">Issue Number</label><input name="issue_number"  id="issue_number" type="text"
                                                                 class="form-control input-style" placeholder="">
                                                         </div>
                                                     </div>
 
                                                     <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
-                                                        <div class="form-group"><label class="input__label">Issue Date</label><input name="description" type="date"
+                                                        <div class="form-group"><label class="input__label">Issue Date</label><input name="issue_date" id="issue_date" type="date"
                                                                 class="form-control input-style" placeholder="">
                                                         </div>
                                                     </div>
@@ -143,7 +143,7 @@
                                                 <div class="form-row">
                                                     <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
                                                         <div class="form-group"><label class="input__label">From
-                                                                Store</label><select name="report_generated_by"
+                                                                Store</label><select name="from_store" id="from_store"
                                                                 class="form-control input-style">
                                                                 <option>Select</option>
                                                             </select></div>
@@ -151,7 +151,7 @@
 
                                                     <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
                                                         <div class="form-group"><label class="input__label">To
-                                                                Store</label><select name="report_generated_by"
+                                                                Store</label><select name="to_store" id="to_store"
                                                                 class="form-control input-style">
                                                                 <option>Select</option>
                                                             </select></div>
@@ -241,10 +241,10 @@
                                                     </div>
 
                                                     <div class="col-lg-3 col-md-4 col-sm-12 pl-4">
-                                                        <div class="form-group"><button type="button"
-                                                                class="btn btn-style mt-1 btn-secondary btn-style btn-change"><strong>
-                                                                    <i
-                                                                    class="fa-solid fa-plus"></i> Add Items</strong></button>
+                                                        <div class="form-group">
+                                                            <button type="button" id="addItems" class="btn-secondary btn-style btn btn-change"
+                                                            data-toggle="modal" data-target="#itemSearchModal"><strong><i
+                                                                class="fa-solid fa-plus"></i> Add Items</strong></button>
                                                                 </div>
                                                     </div>
 
@@ -300,7 +300,7 @@
                                             <div class="col-12  pl-lg-0 pr-lg-0">
                                                 <div class="form-group">
                                                     <div class="col col-12 mb-3 pr-lg-4 pl-lg-4">
-                                                        <div class="slidx">
+                                                        <div class="slidex">
 
                                                             <table class="table2">
                                                                 <thead>
@@ -324,46 +324,8 @@
 
                                                                     </tr>
                                                                 </thead>
-                                                                <tbody>
-                                                                    <tr>
-
-                                                                        <td contenteditable="true"> </td>
-                                                                        <td contenteditable="true"> </td>
-                                                                        <td contenteditable="true"> </td>
-                                                                        <td contenteditable="true"> </td>
-                                                                        <td contenteditable="true"> </td>
-                                                                        <td contenteditable="true"> </td>
-                                                                        <td contenteditable="true"> </td>
-                                                                        <td contenteditable="true"> </td>
-                                                                        <td contenteditable="true"> </td>
-                                                                        <td contenteditable="true"> </td>
-                                                                        <td contenteditable="true"> </td>
-                                                                        <td contenteditable="true"> </td>
-                                                                        <td contenteditable="true"> </td>
-                                                                        <td contenteditable="true"> </td>
-                                                                        <td contenteditable="true"> </td>
-                                                                        
-                                                                    </tr>
-
-                                                                    <tr>
-
-                                                                        <td contenteditable="true"> </td>
-                                                                        <td contenteditable="true"> </td>
-                                                                        <td contenteditable="true"> </td>
-                                                                        <td contenteditable="true"> </td>
-                                                                        <td contenteditable="true"> </td>
-                                                                        <td contenteditable="true"> </td>
-                                                                        <td contenteditable="true"> </td>
-                                                                        <td contenteditable="true"> </td>
-                                                                        <td contenteditable="true"> </td>
-                                                                        <td contenteditable="true"> </td>
-                                                                        <td contenteditable="true"> </td>
-                                                                        <td contenteditable="true"> </td>
-                                                                        <td contenteditable="true"> </td>
-                                                                        <td contenteditable="true"> </td>
-                                                                        <td contenteditable="true"> </td>
-                                                                        
-                                                                    </tr>
+                                                                <tbody id="mainTblBody">
+                                                                  
                                                                 </tbody>
                                                             </table>
                                                         </div>
@@ -401,13 +363,13 @@
                                         <div class="form-row card-body pt-0 pb-2">
                                                     
                                             <div class="col-lg-6 col-md-6 col-sm-12  mb-1">
-                                                <div class="form-group"><label class="input__label">Total Cost Amount</label><input name="description" type="text"
+                                                <div class="form-group"><label class="input__label">Total Cost Amount</label><input name="totalCostInput" id="totalCostInput" type="number"
                                                     class="form-control input-style" placeholder=""></div>
                                             </div>
 
                                             <div class="col-lg-6 col-md-6 col-sm-12 mb-2">
                                                 <div class="form-group"><label class="input__label">Remark</label><textarea
-                                                        name="" class="form-control input-style"
+                                                        name="remark" id="remark" class="form-control input-style"
                                                         placeholder=""></textarea></div>
                                             </div>
 
@@ -423,7 +385,7 @@
 
                                     
 
-                                    <button type="button" class="btn-danger btn-style btn mt-3 mr-2"><strong><i
+                                    <button type="button"  onclick="window.location.href = '/palashinv/20'"  class="btn-danger btn-style btn mt-3 mr-2"><strong><i
                                         class="fas fa-times"></i> Cancel</strong></button>
     
                             <button type="button" class="btn-primary btn-style btn mt-3"><strong><i class="far fa-save"></i>
@@ -442,5 +404,412 @@
                                 </div>
                             </form>
                         </div>
+
+
+                        <!-- Add Items Model -->
+                        <div class="modal fade" id="itemSearchModal">
+                            <div class="modal-dialog modal-xl">
+                                <div class="modal-content">
+    
+                                    <!-- Modal Header -->
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Item Search</h4>
+                                        <button type="button" class="close" data-dismiss="modal">&times;"></button>
+                                    </div>
+    
+                                    <!-- Modal body -->
+                                    <div class="modal-body">
+                                        <form>
+                                            <div class="card card_border mt-3">
+                                                <div class="card">
+                                                    <div class="col-xl-12 p-heading">
+                                                        <h6 class="p-text">ITEM SEARCH</h6>
+                                                    </div>
+                                                    <div class="form-row card-body pb-3 pt-2">
+                                                        <div class="col-lg-3 col-md-4 col-sm-12">
+                                                            <div class="form-group">
+                                                                <label class="input__label">Item Name</label>
+                                                                <input name="service name" type="text"
+                                                                    class="form-control input-style" placeholder="">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-3 col-md-4 col-sm-12">
+                                                            <div class="form-group">
+                                                                <label class="input__label">Brand Name</label>
+                                                                <input name="service name" type="text"
+                                                                    class="form-control input-style" placeholder="">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-3 col-md-4 col-sm-12">
+                                                            <div class="form-group">
+                                                                <label class="input__label">Item Code</label>
+                                                                <input name="service name" type="number"
+                                                                    class="form-control input-style" placeholder="">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-3 col-md-4 col-sm-12">
+                                                            <div class="form-group">
+                                                                <label class="input__label">Item Category</label>
+                                                                <select name="report_generated_by"
+                                                                        class="form-control input-style">
+                                                                    <option>Select</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-3 col-md-4 col-sm-12">
+                                                            <div class="form-group">
+                                                                <label class="input__label">Item Group</label>
+                                                                <select name="report_generated_by"
+                                                                        class="form-control input-style">
+                                                                    <option>Select</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-3 col-md-4 col-sm-12">
+                                                            <div class="form-group">
+                                                                <label class="input__label">Molecule</label>
+                                                                <select name="report_generated_by"
+                                                                        class="form-control input-style">
+                                                                    <option>Select</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-3 col-md-4 col-sm-12">
+                                                            <div class="form-group">
+                                                                <label class="input__label">Store</label>
+                                                                <select name="report_generated_by"
+                                                                        class="form-control input-style">
+                                                                    <option>Select</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-3 col-md-4 col-sm-12 text-left">
+                                                            <div class="form-group">
+                                                                <button type="button"
+                                                                        class="btn btn-style mt-4 btn-primary btn-style btn-change">
+                                                                    <strong><i class="fas fa-search"></i> Search</strong>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card card_border mt-3">
+                                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                                    <div class="form-check-label">
+                                                        <div class="radio mt-2 mb-2">
+                                                            <label class="form-check-label pt-1">
+                                                                <input class="form-check-input mt-1" type="checkbox" id="select-all-items">
+                                                                Select All Items
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-row card-body pt-1 pb-3">
+                                                    <div class="col-12 mb-0">
+                                                        <div class="form-group">
+                                                            <div class="col col-12 pr-xl-0 pl-xl-0">
+                                                                <div class="slidx">
+                                                                    <table class="table2">
+                                                                        <thead>
+                                                                        <tr>
+                                                                            <th contenteditable="true">Select</th>
+                                                                            <th contenteditable="true">Item Code</th>
+                                                                            <th contenteditable="true">Item Name</th>
+                                                                            <th contenteditable="true">Brand Name</th>
+                                                                            <th contenteditable="true">CGST</th>
+                                                                            <th contenteditable="true">SGST</th>
+                                                                            <th contenteditable="true">IGST</th>
+                                                                            <th contenteditable="true">Suspend</th>
+                                                                            <th contenteditable="true">Available Stock</th>
+                                                                            <th contenteditable="true">Stock UOM</th>
+                                                                        </tr>
+                                                                        </thead>
+                                                                        <tbody id="tbodyid">
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div                                                    </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group mt-1 mb-3 text-right">
+                                                <button type="button" class="btn-danger btn-style btn mt-3 mr-2"
+                                                        data-dismiss="modal">
+                                                    <strong><i class="fas fa-times"></i> Cancel</strong>
+                                                </button>
+                                                <button type="button" class="btn-primary btn-style btn mt-3"
+                                                        data-dismiss="modal" id="addSelectedItemsBtn">
+                                                    <strong><i class="fas fa-check"></i> OK</strong>
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <!--footer section start-->
                         <%-include('../footer');-%>
+
+                        <script>
+
+const loadDropdown = (url, elementId) => {
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    const dropdown = document.getElementById(elementId);
+                    data.forEach(item => {
+                        const option = document.createElement('option');
+                        option.value = item.description || item.rank_desc || item.shelf_desc || item.bin_desc || item.clinic_desc || item.tax_desc;
+                        option.textContent = item.description || item.rank_desc || item.shelf_desc || item.bin_desc || item.clinic_desc || item.tax_desc;
+                        dropdown.appendChild(option);
+                    });
+                })
+                .catch(error => console.error(`Error fetching ${elementId} details:`, error));
+        };
+
+        // Load dropdowns
+        loadDropdown('/adminInv/get-store-details', 'from_store');
+        loadDropdown('/adminInv/get-store-details', 'to_store');
+
+                               function fetchData(from_store) {
+            $.ajax({
+                url: '/palashinv/get-current-item-counts',
+                type: 'GET',
+                data: { 
+                    store: from_store,
+                    clinic: '' // Set clinic to blank
+                },
+                success: function (data) {
+                    console.log(data);
+                    let tableRows = '';
+                    data.data.forEach(function (item) {
+                        tableRows += `
+                            <tr data-item-id="${item.id}">
+                                <td><input class="form-check-input mt-0 item-checkbox" type="checkbox"></td>
+                                <td>${item.item_code}</td>
+                                <td>${item.item_name}</td>
+                                <td>${item.brand_name}</td>
+                                <td>${item.CGST.toFixed(2)}%</td>
+                                <td>${item.SGST.toFixed(2)}%</td>
+                                <td>${item.IGST.toFixed(2)}%</td>
+                                <td><input class="form-check-input mt-0 suspend-checkbox" type="checkbox" ${item.suspend ? 'checked' : ''} disabled></td>
+                                <td>${item.availableStock}</td>
+                                <td>${item.stocking_uom}</td>
+                                <td style="display:none;"><input type="hidden" value="${item.purchase_uom}">${item.purchase_uom}</td>
+                                <td style="display:none;"><input type="hidden" name="item_id" value="${item.id}"></td>
+                                <td style="display:none;"><input type="hidden" name="item_code" value="${item.item_code}"></td>
+                                <td style="display:none;"><input type="hidden" name="base_cost_price" value="${item.base_unit_cost_price}">${item.base_unit_cost_price}</td>
+                                <td style="display:none;"><input type="hidden" name="conversion_factor" value="${item.conversions[0].conversion_factor}">${item.conversions[0].conversion_factor}</td>
+                            </tr>
+                        `;
+                    });
+                    $('#tbodyid').html(tableRows);
+
+                    // Add the select all checkbox functionality
+                    $('#select-all-items').on('change', function () {
+                        const isChecked = $(this).is(':checked');
+                        $('#tbodyid input.item-checkbox').prop('checked', isChecked);
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error fetching item details:', error);
+                }
+            });
+        }
+
+        $('#addItems').click(function (e) {
+            let from_store = $('#from_store').val();
+
+            if (!from_store || from_store === 'Select') {
+                alert('Please select From store.');
+                e.preventDefault(); // Prevent the default action of opening the modal
+                e.stopPropagation(); // Stop the event from bubbling up
+                return;
+            }
+
+            fetchData(from_store);
+        });
+
+          const addSelectedItems = () => {
+            const selectedItems = [];
+            const tbody = document.getElementById('tbodyid');
+            const mainTblBody = document.getElementById('mainTblBody');
+
+            // Gather all selected items from the modal
+            tbody.querySelectorAll('tr').forEach(row => {
+                const checkbox = row.querySelector('input.item-checkbox');
+                if (checkbox && checkbox.checked) {
+                    const itemCode = row.cells[1].textContent;
+                    const itemName = row.cells[2].textContent;
+                    const batchCode = ''; // Assuming batch code needs to be entered or fetched separately
+                    const expiryDate = ''; // Assuming expiry date needs to be entered or fetched separately
+                    const quantity = '0'; // Assuming to be entered by the user later
+                    const stocking_uom = row.cells[9].textContent;
+                    const purchase_uom = row.cells[10].textContent;
+                    const pendingQuantity = quantity; // Assuming to be entered or calculated
+                    const availableStock = row.cells[8].textContent;
+                    const issuedQuantity = ''; // Assuming to be entered by the user
+                     // Assuming UOM remains the same, adjust as necessary
+                    const baseCostPrice = row.cells[13].textContent; // Assuming to be calculated or fetched
+                    const conversion_factor = row.cells[14].textContent; // Assuming to be calculated or fetched
+                    const totalCostAmount = ''; // Assuming to be calculated based on quantity and price
+
+                    // Create a new row for the main table
+                    const newRow = mainTblBody.insertRow();
+                    newRow.innerHTML = `
+                        <td>${itemCode}</td>
+                        <td>${itemName}</td>
+                        <td><input type="text" name="batch_code"></td>
+                        <td><input type="date" name="expiry_date"></td>
+                        <td><input type="number" name="quantity" id="quantity" value="${quantity}"></td>
+                        <td>${purchase_uom}</td>
+                        <td><input type="number" name="pending_quantity" id="pending_quantity" value="${pendingQuantity}"></td>
+                        <td>${stocking_uom}</td>
+                        <td>${availableStock}</td>
+                        <td>${stocking_uom}</td>
+                        <td><input type="number" name="issued_quantity" id="issued_quantity"></td>
+                        <td><select name="issued_uom">
+                            <option value="${purchase_uom}">${purchase_uom}</option>
+                            <option value="${stocking_uom}">${stocking_uom}</option>
+                            </select></td>
+                        <td>${baseCostPrice}</td>
+                        <td><input type="number" name="total_cost_amount" id="total_cost_amount" value="${totalCostAmount}"></td>
+                        <td><input style="display: none;" type="number" name="conversion_factor" id="conversion_factor" value="${conversion_factor}"></td>
+                        <td><button type="button" class="btn btn-danger" onclick="removeRow(this)">X</button></td>
+                    `;
+                }
+            });
+        };
+        
+
+      
+        // Attach event to the "OK" button in the modal
+        const addSelectedItemsBtn = document.getElementById('addSelectedItemsBtn');
+        addSelectedItemsBtn.addEventListener('click', addSelectedItems);
+
+        // Function to remove a row from the main table
+        window.removeRow = function(button) {
+            const row = button.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+        };
+
+        // Function to fetch and display items when the modal is triggered
+        const addItemsButton = document.getElementById('addItems');
+        addItemsButton.addEventListener('click', function() {
+            const fromStore = document.getElementById('from_store').value;
+            if (fromStore && fromStore !== 'Select') {
+                fetchData(fromStore);
+            } else {
+                alert('Please select a "From Store" before adding items.');
+            }
+        });
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+    const mainTblBody = document.getElementById('mainTblBody');
+
+    // Attach event listeners for input and change events
+    mainTblBody.addEventListener('input', function(event) {
+        if (event.target.name === 'issued_quantity' || event.target.name === 'total_cost_amount') {
+            updateTotalCost(event.target.closest('tr'));
+        }
+    });
+
+    mainTblBody.addEventListener('change', function(event) {
+        if (event.target.name === 'issued_uom') {
+            adjustConversionFactor(event.target.closest('tr'));
+            updateTotalCost(event.target.closest('tr'));
+        }
+    });
+
+    // Adjust the conversion factor based on the 'Issued UOM' selection
+    function adjustConversionFactor(row) {
+        const issuedUOMSelect = row.querySelector('select[name="issued_uom"]');
+        const purchaseUOMInput = row.querySelector('input[name="purchase_uom"]').value;
+        const conversionFactorInput = row.querySelector('input[name="conversion_factor"]');
+
+        // Set conversion factor to 1 if the issued UOM matches the purchase UOM, otherwise retrieve the correct factor
+        conversionFactorInput.value = (issuedUOMSelect.value === purchaseUOMInput) ? '1' : conversionFactorInput.getAttribute('data-default-value') || '1';
+        console.log(`Conversion factor set to ${conversionFactorInput.value} due to UOM change.`);
+    }
+
+    // Update the total cost calculation
+    function updateTotalCost(row) {
+        const issuedQuantityInput = row.querySelector('input[name="issued_quantity"]');
+        const baseCostPriceInput = row.querySelector('td:nth-child(13)'); // Assuming this is where the base cost is located
+        const totalCostAmountInput = row.querySelector('input[name="total_cost_amount"]');
+        const conversionFactorInput = row.querySelector('input[name="conversion_factor"]');
+
+        const issuedQuantity = parseFloat(issuedQuantityInput.value) || 0;
+        const baseCostPrice = parseFloat(baseCostPriceInput.textContent) || 0;
+        const conversionFactor = parseFloat(conversionFactorInput.value) || 1;
+
+        const totalCostAmount = issuedQuantity * baseCostPrice * conversionFactor;
+        totalCostAmountInput.value = totalCostAmount.toFixed(2);
+
+        console.log(`Updated total cost to ${totalCostAmount.toFixed(2)}`);
+    }
+});
+
+$(document).ready(function() {
+        const updateTotalCosts = () => {
+            alert('1')
+            let totalCost = 0;
+            $('#mainTblBody tr').each(function() {
+                const costAmount = parseFloat($(this).find('input[name="total_cost_amount"]').val()) || 0;
+                totalCost += costAmount;
+            });
+            $('#totalCostInput').val(totalCost.toFixed(2));
+        };
+    
+        const saveData = () => {
+            const issueDetails = {
+                issueNumber: $('input[name="issue_number"]').val(),
+                issueDate: $('input[name="issue_date"]').val(),
+                fromStore: $('#from_store').val(),
+                toStore: $('#to_store').val(),
+                totalCost: $('#totalCostInput').val(),
+                items: [],
+                remark: $('#remark').val()
+            };
+    
+            $('#mainTblBody tr').each(function() {
+                const item = {
+                    itemCode: $(this).find('td:first').text(),
+                    itemName: $(this).find('td').eq(1).text(),
+                    batchCode: $(this).find('input[name="batch_code"]').val(),
+                    expiryDate: $(this).find('input[name="expiry_date"]').val(),
+                    issuedQuantity: $(this).find('input[name="issued_quantity"]').val(),
+                    issuedUOM: $(this).find('select[name="issued_uom"]').val(),
+                    totalCostAmount: $(this).find('input[name="total_cost_amount"]').val(),
+                    pendingQuantity: $(this).find('input[name="pending_quantity"]').val()
+                };
+                issueDetails.items.push(item);
+            });
+    
+            console.log(issueDetails); // For debugging, shows data in console before sending
+    
+            // AJAX request to save data (adjust URL and settings as needed)
+            $.post('/saveIssueDetails', issueDetails, function(response) {
+                alert('Save Successful');
+            }).fail(function() {
+                alert('Error saving data');
+            });
+        };
+    
+        $('#saveButton').click(function() {
+            updateTotalCosts();
+            saveData();
+        });
+    
+        // Trigger total cost update on any input change in the cost columns
+        $('#mainTblBody').on('input', 'input[name="total_cost_amount"]', function() {
+            updateTotalCosts();
+        });
+    });        
+
+                        </script>
+
+    

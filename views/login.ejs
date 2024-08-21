@@ -67,54 +67,49 @@ body{display:flex;align-items:center;justify-content:center;height:100vh;margin:
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css" rel="stylesheet">
 </body>
 </html>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-      const loginForm = document.getElementById('loginForm');
-      const loadingIndicator = document.getElementById('loadingIndicator');
-      const errorDiv = document.getElementById('errorDiv');
-  
-      loginForm.addEventListener('submit', function(event) {
-          event.preventDefault();  // Prevent the default form submission
-  
-          const formData = {
-              userEmail: loginForm.userEmail.value,
-              userPassword: loginForm.userPassword.value
-          };
-  
-          loadingIndicator.textContent = 'Loading...';
-          loadingIndicator.style.display = 'block';
-  
-          fetch('/login', {
-              method: 'POST',
-              headers: {
-                  'Content-Type': 'application/json'
-              },
-              body: JSON.stringify(formData)
-          })
-          .then(response => {
-              if (response.status === 409) {
-                  alert("User is already logged in.");
-                  return;  // Prevent further execution
-              }
-              if (!response.ok) {
-                  throw new Error('Failed to log in');
-              }
-              return response.json();
-          })
-          .then(data => {
-              window.location.href = '/home';
-          })
-          .catch(error => {
-              console.error('Login Error:', error);
-              errorDiv.textContent = 'Failed to log in. Please try again.';
-              errorDiv.style.display = 'block';
-          })
-          .finally(() => {
-              loadingIndicator.style.display = 'none';
-          });
-      });
-  });
-  </script>
-  
+    document.addEventListener('DOMContentLoaded', function() {
+    const loginForm = document.getElementById('loginForm');
+    const loadingIndicator = document.getElementById('loadingIndicator');
+    const errorDiv = document.getElementById('errorDiv');
+
+    loginForm.addEventListener('submit', function(event) {
+        event.preventDefault();  // Prevent the default form submission
+
+        const formData = {
+            userEmail: loginForm.userEmail.value,
+            userPassword: loginForm.userPassword.value
+        };
+
+        loadingIndicator.textContent = 'Loading...';
+        loadingIndicator.style.display = 'block';
+
+        axios.post('/login', formData)
+            .then(response => {
+                if (response.status === 409) {
+                    alert("User is already logged in.");
+                    return;  // Prevent further execution
+                }
+                // No need to call response.json() as Axios automatically parses it.
+                alert('Login Succesfully')
+                window.location.href = '/home';
+            })
+            .catch(error => {
+                console.error('Login Error:', error);
+                if (error.response && error.response.data) {
+                    errorDiv.textContent = error.response.data.message || 'Failed to log in. Please try again.';
+                } else {
+                    errorDiv.textContent = 'Failed to log in. Please try again.';
+                }
+                errorDiv.style.display = 'block';
+            })
+            .finally(() => {
+                loadingIndicator.style.display = 'none';
+            });
+    });
+});
+
+</script>

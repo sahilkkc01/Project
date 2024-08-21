@@ -291,5 +291,33 @@ const SelectedService = sequelize.define('SelectedService', {
   timestamps: true,
   tableName: 'Selectedservices'
 });
+const ConcentMaster = sequelize.define('ConcentMaster', {
 
-module.exports = { NewPackage, packageMedicine, PackageService, ServiceMaster,DefienRule,SelectedService }
+  concent_code:{
+    type:DataTypes.STRING,
+
+  },
+  concent_desc: {
+      type: DataTypes.STRING,
+      
+  }
+}, {
+  timestamps: true,
+  tableName: 'pkgconcentmaster'
+});
+const PackageConcents = sequelize.define('PackageConcents', {
+
+  package_code:{
+    type:DataTypes.STRING,
+
+  }, 
+  concents: {
+      type: DataTypes.JSON,
+      
+  }
+}, {
+  timestamps: true,
+  tableName: 'pkgpackageconcents'
+});
+
+module.exports = { NewPackage, packageMedicine, PackageService, ServiceMaster,DefienRule,SelectedService ,ConcentMaster,PackageConcents}

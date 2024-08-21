@@ -9,6 +9,7 @@ const md5 = require('md5')
 const session = require('express-session');
 const compression = require('compression');
 const helmet = require('helmet');
+const concentRouter = require('./routes/concent');
 
 
 
@@ -76,6 +77,15 @@ app.use(compression({
  
 //  app.use(helmet());
 
+// const ensureAuthenticated = (req, res, next) => {
+//   if (!req.session.user) {
+//     // Redirect to login page if not authenticated
+//     res.redirect('/home');
+//   } else {
+//     next();
+//   }
+// };
+// app.use(ensureAuthenticated);
 
 app.get('/home', async(req, res) => {
   const admins = await Admin.findAll();
@@ -117,6 +127,7 @@ app.use('/billing', billing);
 app.use('/Admin', indexRouter);
 app.use('/findPatient', patRegRoute);
 app.use('/package',packageConfigRouter);
+app.use('/concent', concentRouter)
 
 
 

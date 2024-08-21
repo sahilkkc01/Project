@@ -26,7 +26,7 @@ router.use(session({
     },
 }));
 router.use(flash());
-const { newPackageSubmit, getNewPackage, itemMasterData, SaveStatusData, newPharmacyItem, getServices, newServicesItem, getAllServices, newDefineRule,getAllTariff } = require('../controllers/packageConfig');
+const { newPackageSubmit, getNewPackage, itemMasterData, SaveStatusData, newPharmacyItem, getServices, newServicesItem, getAllServices, newDefineRule,getAllTariff, getAllConcents, saveConcets } = require('../controllers/packageConfig');
 
 
 router.get('/1', (req, res) => {
@@ -76,5 +76,9 @@ router.post('/new-services-item', newServicesItem);
 router.post('/getallservices', getAllServices);
 router.post('/new-rule-define', newDefineRule)
 router.get('/get-tariff',getAllTariff)
+router.get('/getConcents/:packageCode',getAllConcents)
+
+router.post('/saveConcent',saveConcets)
+
 
 module.exports = router

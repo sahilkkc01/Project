@@ -716,12 +716,14 @@ const activeSessions = {};
 // Login function with adjusted session data management
 const login = async (req, res) => {
   const { userEmail, userPassword } = req.body;
+  console.log(req.body);
 
   try {
       const user = await SuperAdmin.findOne({ where: { username: userEmail } });
       if (!user) {
           return res.status(404).json({ msg: 'Admin not found' });
       }
+      console.log(user)
 
       const inputPasswordHash = md5(userPassword);
       if (user.Password !== inputPasswordHash) {
@@ -735,6 +737,8 @@ const login = async (req, res) => {
 
       // Update or set the session ID for the user
       activeSessions[user.username] = req.session.id;
+      console.log(activeSessions[user])
+
       req.session.user = {
         username: user.username, // Changed from id to username for clarity
         clinicId: user.clinicId,
