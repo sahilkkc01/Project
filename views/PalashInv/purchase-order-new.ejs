@@ -1003,7 +1003,7 @@ $('#addSelectedItemsBtn').on('click', function () {
                                     <td>${item.IGST.toFixed(2)}%</td>
                                     <td><input class="form-check-input mt-0 suspend-checkbox" type="checkbox" ${item.suspend ? 'checked' : ''} disabled></td>
                                     <td>${item.availableStock}</td>
-                                    <td>${item.stocking_uom}</td>
+                                    <td>${item.uom}</td>
                                     <td style="display:none;"><input type="hidden" value="${item.purchase_uom}"></td>
                                     <td style="display:none;"><input type="hidden" name="item_id" value="${item.id}"></td>
                                     <td style="display:none;"><input type="hidden" value="${item.base_unit_cost_price}"></td>

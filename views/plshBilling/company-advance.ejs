@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>LifeLinkr</title>
+    <%- include('../header') %>
+</head>
+
+<body>
+    <!-- main content start -->
+    <div class="main-content">
+        <div class="row content-top-gap2">
+            <div class="col-lg-12">
+                <nav class="navbar navbar-expand-lg navbar-light bg-white">
+                    <a class="navbar-brand text-center mr-5" href="#">
+                        <span class="dash-icon"><i class="fas fa-tachometer-alt"></i></span>
+                        Dashboard
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav">
+                            <li class="nav-item active text-center mr-5">
+                                <a class="nav-link" href="#">
+                                    <span class="dash-icon"><i class="far fa-user"></i></span>
+                                    Master
+                                </a>
+                            </li>
+                            <li class="nav-item text-center mr-5">
+                                <a class="nav-link" href="#">
+                                    <span class="dash-icon"><i class="fas fa-exchange-alt"></i></span>
+                                    Transaction
+                                </a>
+                            </li>
+                            <li class="nav-item text-center mr-5">
+                                <a class="nav-link" href="#">
+                                    <span class="dash-icon"><i class="fas fa-hand-holding-medical"></i></span>
+                                    Patient 360
+                                </a>
+                            </li>
+                            <li class="nav-item text-center mr-5">
+                                <a class="nav-link" href="#">
+                                    <span class="dash-icon"><i class="fas fa-receipt"></i></span>
+                                    Outside Receipt
+                                </a>
+                            </li>
+                            <li class="nav-item text-center mr-5">
+                                <a class="nav-link" href="#">
+                                    <span class="dash-icon"><i class="fas fa-file-invoice"></i></span>
+                                    Outpatient Department
+                                </a>
+                            </li>
+                            <li class="nav-item text-center mr-5">
+                                <a class="nav-link" href="#">
+                                    <span class="dash-icon"><i class="fas fa-chart-line"></i></span>
+                                    Analytics
+                                </a>
+                            </li>
+                            <li class="nav-item text-center mr-5">
+                                <a class="nav-link" href="#">
+                                    <span class="dash-icon"><i class="far fa-clock"></i></span>
+                                    Waiting List
+                                </a>
+                            </li>
+                            <li class="nav-item text-center mr-5">
+                                <a class="nav-link" href="#">
+                                    <span class="dash-icon"><i class="fas fa-wrench"></i></span>
+                                    Administration
+                                </a>
+                            </li>
+                            <li class="nav-item text-center">
+                                <a class="nav-link" href="#">
+                                    <span class="dash-icon"><i class="fas fa-spinner"></i></span>
+                                    Additional
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+
+        <!-- content -->
+        <div class="container-fluid">
+            <div class="chart">
+                <div class="row">
+                    <div class="col-lg-12 pl-lg-0 mt-2 ml-2">
+                        <h4 class="primary">Company Advance</h4>
+                    </div>
+
+                    <div class="col-lg-12 pl-lg-2 chart-grid">
+
+                        <div class="card card_border">
+                            <div class="">
+
+                                <!-- Your code here starts -->
+
+                                <div class="card">
+                                    <div class="mb-0">
+                                        <div class="form-group">
+                                            <div class="col-xl-12 p-heading">
+                                                <h6 class="p-text">LIST OF ADVANCES</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div  class="card-body pb-0 pt-0 pl-lg-0 pr-lg-0">
+                                        <div class="form-row">
+                                            <div class="col-12 pl-lg-0 pr-lg-0 pt-3">
+                                                <div class="form-group">
+                                                    <div class="col col-12 pb-3 pr-lg-4 pl-lg-4">
+                                                        <div class="slidx">
+                                                            <table  class="table2">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th contenteditable="true">Date </th>
+                                                                        <th contenteditable="true">Receipt No.</th>
+                                                                        <th contenteditable="true">Clinic</th>
+                                                                        <th contenteditable="true">Total Amt.</th>
+                                                                        <th contenteditable="true">Consume Amt.</th>
+                                                                        <th contenteditable="true">Bal. Amt.</th>
+                                                                        <th contenteditable="true">Mode</th>
+                                                                        <th contenteditable="true">Transaction No.</th>
+                                                                        <th contenteditable="true">Cheque No.</th>
+                                                                        <th contenteditable="true">Bank Name</th>
+                                                                        <th contenteditable="true">Expiry Date</th>
+                                                                        <th contenteditable="true">Payment App</th>
+                                                                        <th contenteditable="true">Card Last 4 Digit</th>
+                                                                        <th contenteditable="true">Finance Company</th>
+                                                                        <th contenteditable="true">Patient Name</th>
+                                                                        <th contenteditable="true">Remark</th>
+                                                                       
+                                                                       
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody id="ExpTbodyId">
+                                                                    <!-- Rows will be dynamically inserted here -->
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Your code here ends -->
+
+                            </div>
+                        </div>
+                        <form id="patientAdv">
+                            <div id="errordiv1"></div>
+
+                            <!-- remove this code  -->
+                            <div class="form-row card-body pt-0 pb-3">
+                                <div class="col-lg-12 col-md-12 col-sm-12 pr-0 text-right">
+                                    <div class="form-check-label">
+                                        <div class="radio">
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Payment div -->
+                            <div class="col-lg-12 pl-lg-2 pr-lg-3 mt-3" id="paymentMethod">
+                                <div class="card card_border">
+                                    <div>
+                                        <div class="form-group">
+                                            <div class="col-xl-12 p-heading">
+                                                <h6 class="p-text">PATIENT DETAILS</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                            
+                                    <div class="form-row card-body pt-1 pb-2">
+                                        <div class="col-lg-3 col-md-4 col-sm-12 mb-1">
+                                            <div class="form-group">
+                                                <label class="input__label">Amount</label>
+                                                <input id="amount" name="amount" type="number" class="form-control input-style" placeholder="0.00" value="<%= patient2.advancePayment || '' %>">
+                                            </div>
+                                        </div>
+                            
+                                      
+                            
+                                        <div class="col-lg-3 col-md-4 col-sm-12 mb-1">
+                                            <div class="form-group">
+                                                <label class="input__label">Select Payment Mode</label>
+                                                <select id="paymentMode" name="paymentMethod" class="form-control input-style">
+                                                    <option value="cash" <%= patient2.paymentMethod === 'cash' ? 'selected' : '' %>>Cash</option>
+                                                    <option value="cheque" <%= patient2.paymentMethod === 'cheque' ? 'selected' : '' %>>Cheque</option>
+                                                    <option value="card" <%= patient2.paymentMethod === 'card' ? 'selected' : '' %>>Card</option>
+                                                    <option value="tt" <%= patient2.paymentMethod === 'tt' ? 'selected' : '' %>>TT</option>
+                                                    <option value="ePayment" <%= patient2.paymentMethod === 'ePayment' ? 'selected' : '' %>>EPayment</option>
+                                                    <option value="neft" <%= patient2.paymentMethod === 'neft' ? 'selected' : '' %>>NEFT / RTGS</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        
+
+                                        <div class="col-lg-3 col-md-4 col-sm-12 mb-1">
+                                          <div class="form-group">
+                                              <label class="input__label">Company Name</label>
+                                              <input id="company_name" name="company_name" type="text" class="form-control input-style"  value="<%= patient2.advancePayment || '' %>">
+                                          </div>
+                                      </div>
+
+                                      <div class="col-lg-3 col-md-4 col-sm-12 mb-1">
+                                        <div class="form-group">
+                                            <label class="input__label">Patient Name</label>
+                                            <input id="patient_name" name="patient_name" type="text" class="form-control input-style"  value="<%= patient2.advancePayment || '' %>">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group ml-2">
+                                      <label class="input__label">Remarks</label>
+                                      <textarea id="cashRemarksInput" name="remarks" class="form-control input-style" placeholder="Max. 2000 letters"></textarea>
+                                  </div>
+                            
+                            
+                                      
+                                    </div>
+                            
+                                    <div class="form-row mt-0 mb-2">
+                                        <!-- NEFT / RTGS Payment Details -->
+                                        <div class="mt-1 col-lg-12 pl-xl-4 pr-xl-4 payment-div" id="neftDiv" >
+                                            <div class="card card_border">
+                                                <div class="form-row pl-lg-3 pr-lg-3 pb-2">
+                                                    <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                                        <div class="form-group">
+                                                            <label class="input__label">Reference No.</label>
+                                                            <input id="referenceNo" name="referenceNo1" type="number" class="form-control text-right input-style" placeholder="" value="<%= patient2.referenceNo || '' %>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                                        <div class="form-group">
+                                                            <label class="input__label">Reference Date</label>
+                                                            <input id="referenceDate" name="referenceDate1" type="date" class="form-control text-right input-style" placeholder="" value="<%= patient2.referenceDate || '' %>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                                        <div class="form-group">
+                                                            <label class="input__label">Bank Name</label>
+                                                            <input id="bankName5" name="bankName1" type="text" class="form-control text-right input-style" placeholder="" value="<%= patient2.bankName || '' %>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                                        <div class="form-group">
+                                                            <label class="input__label">Bank Details</label>
+                                                            <input id="bankDetails" name="bankDetails1" type="text" class="form-control text-right input-style" placeholder="" value="<%= patient2.bankDetails || '' %>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                                        <div class="form-group">
+                                                            <label class="input__label">Default Bank Account</label>
+                                                            <input id="defaultBankAccount6" name="defaultBankAccount1" type="text" class="form-control text-right input-style" placeholder="" value="<%= patient2.defaultBankAccount || '' %>">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                            
+                                        <!-- Cheque Payment Details -->
+                                        <div class="mt-1 col-lg-12 pl-xl-4 pr-xl-4 payment-div" id="chequeDiv" >
+                                            <div class="card card_border">
+                                                <div class="form-row pl-lg-3 pr-lg-3 pb-1">
+                                                    <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                                        <div class="form-group">
+                                                            <label class="input__label">Cheque No.</label>
+                                                            <input id="chequeNo" name="chequeNo" type="number" class="form-control text-right input-style" placeholder="" value="<%= patient2.chequeNo || '' %>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                                        <div class="form-group">
+                                                            <label class="input__label">Cheque Date</label>
+                                                            <input id="chequeDate" name="chequeDate" type="date" class="form-control text-right input-style" placeholder="" value="<%= patient2.chequeDate || '' %>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                                        <div class="form-group">
+                                                            <label class="input__label">Bank Name</label>
+                                                            <input id="bankNameCheque" name="bankName2" type="text" class="form-control text-right input-style" placeholder="" value="<%= patient2.bankName || '' %>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                                        <div class="form-group">
+                                                            <label class="input__label">Bank Details</label>
+                                                            <input id="bankDetailsCheque" name="bankDetails2" type="text" class="form-control text-right input-style" placeholder="" value="<%= patient2.bankDetails || '' %>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                                        <div class="form-group">
+                                                            <label class="input__label">Default Bank Account</label>
+                                                            <input id="defaultBankAccountCheque" name="defaultBankAccount2" type="text" class="form-control text-right input-style" placeholder="" value="<%= patient2.defaultBankAccount || '' %>">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                            
+                                        <!-- E-Payment Details -->
+                                        <div class="mt-1 col-lg-12 pl-xl-4 pr-xl-4 payment-div" id="ePaymentDiv">
+                                            <div class="card card_border">
+                                                <div class="form-row pl-lg-3 pr-lg-3 pb-2">
+                                                    <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                                        <div class="form-group">
+                                                            <label class="input__label">Reference No.</label>
+                                                            <input id="referenceNoEPayment" name="referenceNo2" type="number" class="form-control text-right input-style" placeholder="" value="<%= patient2.referenceNo || '' %>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                                        <div class="form-group">
+                                                            <label class="input__label">Reference Date</label>
+                                                            <input id="referenceDateEPayment" name="referenceDate2" type="date" class="form-control text-right input-style" placeholder="" value="<%= patient2.referenceDate || '' %>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                                        <div class="form-group">
+                                                            <label class="input__label">E-Payment Gateway Name</label>
+                                                            <input id="ePaymentGatewayName" name="ePaymentGatewayName" type="text" class="form-control text-right input-style" placeholder="" value="<%= patient2.ePaymentGatewayName || '' %>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                                        <div class="form-group">
+                                                            <label class="input__label">E-payment Details</label>
+                                                            <input id="ePaymentDetails" name="ePaymentDetails" type="text" class="form-control text-right input-style" placeholder="" value="<%= patient2.ePaymentDetails || '' %>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                                        <div class="form-group">
+                                                            <label class="input__label">Default Bank Account</label>
+                                                            <input id="defaultBankAccountEPayment" name="defaultBankAccount3" type="text" class="form-control text-right input-style" placeholder="" value="<%= patient2.defaultBankAccount || '' %>">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                            
+                                        <!-- TT Payment Details -->
+                                        <div class="mt-1 col-lg-12 pl-xl-4 pr-xl-4 payment-div" id="ttDiv" >
+                                            <div class="card card_border">
+                                                <div class="form-row pl-lg-3 pr-lg-3 pb-2">
+                                                    <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                                        <div class="form-group">
+                                                            <label class="input__label">Ref. No.</label>
+                                                            <input id="refNoTT" name="referenceNo3" type="number" class="form-control text-right input-style" placeholder="" value="<%= patient2.refNo || '' %>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                                        <div class="form-group">
+                                                            <label class="input__label">Transaction Date</label>
+                                                            <input id="transactionDateTT" name="transactionDate" type="date" class="form-control text-right input-style" placeholder="" value="<%= patient2.transactionDate || '' %>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                                        <div class="form-group">
+                                                            <label class="input__label">Bank Name</label>
+                                                            <input id="bankNameTT" name="bankName3" type="text" class="form-control text-right input-style" placeholder="" value="<%= patient2.bankName || '' %>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                                        <div class="form-group">
+                                                            <label class="input__label">Bank Details</label>
+                                                            <input id="bankDetailsTT" name="bankDetails3" type="text" class="form-control text-right input-style" placeholder="" value="<%= patient2.bankDetails || '' %>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                                        <div class="form-group">
+                                                            <label class="input__label">Default Bank Account</label>
+                                                            <input id="defaultBankAccountTT" name="defaultBankAccount4" type="text" class="form-control text-right input-style" placeholder="" value="<%= patient2.defaultBankAccount || '' %>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                                        <div class="form-group">
+                                                            <label class="input__label">Remarks</label>
+                                                            <textarea id="remarksTT" name="remarks" class="form-control input-style" placeholder=""><%= patient2.remarks || '' %></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                            
+                                        <!-- Card Payment Details -->
+                                        <div class="mt-1 col-lg-12 pl-xl-4 pr-xl-4 payment-div" id="cardDiv" >
+                                            <div class="card card_border">
+                                                <div class="form-row pl-lg-3 pr-lg-3 pb-2">
+                                                    <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                                        <div class="form-group">
+                                                            <label class="input__label">Card Type</label>
+                                                            <select id="cardType" name="cardType" class="form-control input-style">
+                                                                <option value="Master" <%= patient2.cardType === 'Master' ? 'selected' : '' %>>Master</option>
+                                                                <option value="Rupay" <%= patient2.cardType === 'Rupay' ? 'selected' : '' %>>Rupay</option>
+                                                                <option value="Visa" <%= patient2.cardType === 'Visa' ? 'selected' : '' %>>Visa</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                                        <div class="form-group">
+                                                            <label class="input__label">Card No.</label>
+                                                            <input id="cardNo" name="cardNo" type="number" class="form-control text-right input-style" placeholder="" value="<%= patient2.cardNo || '' %>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                                        <div class="form-group">
+                                                            <label class="input__label">Card Holder Name</label>
+                                                            <input id="cardHolderName" name="cardHolderName" type="text" class="form-control text-right input-style" placeholder="" value="<%= patient2.cardHolderName || '' %>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                                        <div class="form-group">
+                                                            <label class="input__label">Approval No.</label>
+                                                            <input id="approvalNo" name="approvalNo" type="number" class="form-control text-right input-style" placeholder="" value="<%= patient2.approvalNo || '' %>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                                        <div class="form-group">
+                                                            <label class="input__label">Bank Name</label>
+                                                            <input id="bankNameCard" name="bankName4" type="text" class="form-control text-right input-style" placeholder="" value="<%= patient2.bankName || '' %>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                                        <div class="form-group">
+                                                            <label class="input__label">Bank Details</label>
+                                                            <input id="bankDetailsCard" name="bankDetails4" type="text" class="form-control text-right input-style" placeholder="" value="<%= patient2.bankDetails || '' %>">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                                        <div class="form-group">
+                                                            <label class="input__label">Default Bank Account</label>
+                                                            <input id="defaultBankAccountCard" name="defaultBankAccount5" type="text" class="form-control text-right input-style" placeholder="" value="<%= patient2.defaultBankAccount || '' %>">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            
+                                    
+                            
+                                    <div class="form-row card-body pt-0 pb-3">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 pr-0 text-right">
+                                            <div class="form-check-label">
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            
+                            <div class="form-group mt-1 mb-3 text-right">
+                                <button type="button" class="btn-danger btn-style btn mt-3 mr-2">
+                                    <strong><i class="fas fa-times"></i> Cancel</strong>
+                                </button>
+                                <button type="submit" class="btn-primary btn-style btn mt-3">
+                                    <strong><i class="far fa-save"></i> Save</strong>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- footer section start -->
+        <%- include('../footer') %>
+
+        <script>
+
+
+            $(document).ready(function() {
+            
+                $('#adjustAdvancePayment').on('input', function() {
+                var advancePayment = parseFloat($('#advancePayment').val()) || 0;
+                var adjustAdvancePayment = parseFloat($(this).val()) || 0;
+                var totalNetBillAmount = parseFloat($('#totalNetBillAmount').val()) || 0;
+            
+                // Check if adjustAdvancePayment exceeds advancePayment or totalNetBillAmount
+                if (adjustAdvancePayment > advancePayment || adjustAdvancePayment > totalNetBillAmount) {
+                    alert('Adjust Advance Payment cannot be more than Advance Payment or Total Net Bill Amount.');
+                    
+                    // Set the adjustAdvancePayment value to the smaller of the two limits (advancePayment or totalNetBillAmount)
+                    $(this).val(Math.min(advancePayment, totalNetBillAmount));
+                }
+            });
+            
+            $(document).ready(function() {
+                $('#addPaidAmount').on('click',function() {
+                    // Get the values from the input fields
+                    var totalNetBillAmount = parseFloat($('#totalNetBillAmount').val()) || 0;
+                    var adjustAdvancePayment = parseFloat($('#adjustAdvancePayment').val()) || 0;
+            
+                    // Calculate the difference
+                    var paidAmount = totalNetBillAmount - adjustAdvancePayment;
+            
+                    // Set the calculated value to the Paid Amount input field
+                    $('#paidAmount').val(paidAmount.toFixed(2)); // Round to 2 decimal places
+                });
+            });
+            
+            
+            
+                // Handle payment method radio buttons
+                $('input[name="paymentMethod"]').change(function() {
+                    if ($(this).val() === 'credit') {
+                        $('#payerTypeContainer').show(); 
+                        $('#InsuranceDetails').hide();
+                        $('#corporateDetails').hide(); 
+                        $('#cashRemarks').hide(); 
+                        // Hide corporate details when credit is selected
+                    } else {
+                        
+                        $('#cashRemarks').show(); 
+                        $('#payerTypeContainer').hide();
+                        $('#InsuranceDetails').hide();
+                        $('#corporateDetails').hide(); // Hide corporate details if credit is not selected
+                    }
+                });
+                $('#payerTypeContainer').hide();
+                // Handle payer type dropdown
+                $('#payerTypeSelect').change(function() {
+                    if ($(this).val() === 'corporate') {
+                        $('#corporateDetails').show();
+                        $('#InsuranceDetails').hide(); // Hide credit details when corporate is selected
+                    } else {
+                        $('#InsuranceDetails').show();
+                        $('#corporateDetails').hide();
+                    }
+                });
+            });
+            
+            
+           
+            
+            
+                document.getElementById('paymentMode').addEventListener('change', function() {
+                // Get the selected payment mode
+                const selectedMode = this.value;
+            
+                // Hide all payment divs
+                const paymentDivs = document.querySelectorAll('.payment-div');  
+                paymentDivs.forEach(div => {
+                    div.style.display = 'none';
+                });
+            
+                // Show the corresponding div based on selected mode, except for "Cash"
+                if (selectedMode !== 'cash') {
+                    const selectedDiv = document.getElementById(selectedMode + 'Div');
+                    if (selectedDiv) {
+                        selectedDiv.style.display = 'block';
+                    }
+                }
+            });
+            
+            
+            // Hide Div
+            document.addEventListener("DOMContentLoaded", function() {
+    const paymentDivs = {
+        'neft': 'neftDiv',
+        'cheque': 'chequeDiv',
+        'ePayment': 'ePaymentDiv',
+        'tt': 'ttDiv',
+        'card': 'cardDiv'
+    };
+
+    // Function to clear all input and select fields within a div
+    function clearInputs(div) {
+        const inputs = div.querySelectorAll('input, select');
+        inputs.forEach(input => {
+            if (input.type === 'checkbox' || input.type === 'radio') {
+                input.checked = false;
+            } else {
+                input.value = '';  // Reset value for input and select elements
+            }
+        });
+    }
+
+    // Function to show or hide payment divs based on the selected payment method
+    function updatePaymentDisplay(selectedMethod) {
+        Object.keys(paymentDivs).forEach(method => {
+            const div = document.getElementById(paymentDivs[method]);
+            if (selectedMethod === method) {
+                div.style.display = 'block';  // Show the selected method div
+            } else {
+                div.style.display = 'none';   // Hide other method divs
+                clearInputs(div);  // Clear inputs when the method is not selected
+            }
+        });
+    }
+
+    // Set initial state based on the current selection
+    const paymentMethodSelect = document.getElementById('paymentMode');
+    updatePaymentDisplay(paymentMethodSelect.value);
+
+    // Event listener for changes on the payment method select
+    paymentMethodSelect.addEventListener('change', function() {
+        updatePaymentDisplay(this.value);
+    });
+});
+
+            </script>
+
+        <script type="module">
+            import { pagi_search } from '../javascripts/pagi_search.js';
+            import { validateForm } from '../javascripts/validation.js';
+            import { myAjax } from '../javascripts/myAjax.js';
+
+            $(document).ready(function () {
+                console.log("Document is ready");
+
+                // Function to fetch and display data
+                function fetchData() {
+                    $.ajax({
+                        url: '/plshBill/getCompanyAdvance',
+                        type: 'GET',
+                        success: function (data) {
+                            let tableRows = '';
+                            console.log(data)
+            data.Advances.reverse().forEach(function(item) {
+                console.log(item);
+                              
+                                tableRows += `
+                                    <tr data-store-id="${item.id}">
+                                        <td>${item.date}</td>
+                                        <td>${item.rec_no}</td>
+                                        <td>${item.clinic_name}</td>
+                                        <td>${item.amount || '0'}</td>
+                                        <td>${item.consumed_amount || '0'}</td>
+                                        <td>${item.balance_amount || '0'}</td>
+                                        <td>${item.paymentMethod}</td>
+                                        <td>TRANS NO X</td>
+                                        <td>${item.chequeNo || ''}</td>
+                                        <td>${item.bankName}</td>
+                                        <td>EXPIRY DATE X</td>
+                                        <td>PAYMENT APP X</td>
+                                        <td>${item.cardNo || ''}</td>
+                                        <td>${item.company_name || ''}</td>
+                                        <td>${item.patient_name || ''}</td>
+                                        <td>${item.remarks}</td>
+                                        
+                                        
+                                    </tr>`;
+                            });
+
+                            $('#ExpTbodyId').html(tableRows);
+                            pagi_search('#searchBox', '#ExpTableId', '#paginationControls');
+                        },
+                        error: function (xhr, status, error) {
+                            console.error('Error fetching classification details:', error);
+                        }
+                    });
+                }
+                fetchData();
+
+                $('#patientAdv').on('submit', function (event) {
+                    event.preventDefault();
+                    submitForms();
+                });
+
+                // Function to submit forms
+                const submitForms = () => {
+                    const patientFormDetails = validateForm('#patientAdv');
+                    const { isValid: patientFormValid, errorMessage: patientFormError, formData: patientFormData } = patientFormDetails;
+                    
+                    console.log(patientFormData);
+
+                    const errorDivId = '#errordiv1';
+                    if (patientFormValid) {
+                        const url = '/plshBill/company-advance-form-submit';
+                        const loadingDiv = '#loadingDiv';
+                        
+
+                        $.ajax({
+    url: url,
+    type: 'POST',
+    contentType: 'application/json',
+    data: JSON.stringify(patientFormData),
+    beforeSend: function() {
+        // Show loading spinner or text
+        $(loadingDiv).text('Loading...').show();
+    },
+    success: function(response) {
+        // Hide loading indicator on success
+        $(loadingDiv).hide();
+        fetchData()
+
+        alert('Form submitted successfully!');
+        $(errorDivId).removeClass('alert-danger').addClass('alert-success').text('Form submitted successfully!').show();
+        console.log('abc:', response);
+        return response;
+        
+    },
+    error: function(xhr, status, error) {
+        // Hide loading indicator on error
+        $(loadingDiv).hide();
+        alert('Error in saving form');
+        const response = JSON.parse(xhr.responseText);
+        $(errorDivId).removeClass('alert-success').addClass('alert-danger').text(response.msg).show();
+        console.error('Error:', error);
+    }
+});
+                       
+
+                    } else {
+                        alert(patientFormError);
+                        $(errorDivId).removeClass('alert-success').addClass('alert-danger').text(patientFormError).show();
+                    }
+                
+
+
+                    
+
+                }; 
+            });
+
+        </script>
+    

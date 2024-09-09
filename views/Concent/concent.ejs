@@ -217,7 +217,7 @@
                                                     `;
                                             });
                                             $('#concentBodyId').html(tableRows);
-                                            pagi_search('#searchBox', '#concentTableId', '#paginationControls');
+                                            // pagi_search('#searchBox', '#concentTableId', '#paginationControls');
                                         },
                                         error: function (xhr, status, error) {
                                             console.error('Error fetching classification details:', error);
@@ -238,6 +238,7 @@
                             $(document).ready(function () {
                                 console.log("Document is ready");
                                 $('#formId').on('submit', function (event) {
+                                    alert('1x')
                                     event.preventDefault();
                                     submitForms();
                                 });

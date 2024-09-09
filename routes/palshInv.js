@@ -18,7 +18,19 @@ const {
   getUniqueItemsWithStock,
   savePurchaseOrder,
   approvePR,
-  fetchRequisitionItemsWithDetails
+  fetchRequisitionItemsWithDetails,
+  saveIssueToClinic,
+  getIssueToclinic,
+  getAllPO,
+  getPOItems,
+  deleteRecord,
+  getItemsOnSearch,
+  getItemBatches,
+  saveGRNData,
+  approveIndent,
+  approvePO,
+  getItemsFromIndents,
+  getItemsFromPR
 } = require('../controllers/palashInvCtrls');
 const router = require('express').Router();
 
@@ -344,14 +356,42 @@ router.get('/42',(req,res)=>{
 
   router.get('/get-requisition-details/:id', getRequisitionDetails);
   router.get('/get-requisition/:id', getRequisition);
-  router.delete('/delete-requisition/:id', deleteRequisition); // Add this route
+  router.delete('/delete-record/:type/:id', deleteRecord); // Add this route
   router.post('/approve-requisition/:id', approvePR); // Add this route
+  router.post('/approve-indent/:id', approveIndent); // Add this route
+  router.post('/approve-po/:id', approvePO); // Add this route
 
   router.get('/get-current-item-counts',getUniqueItemsWithStock)
 
   router.post('/save-purchase-order',savePurchaseOrder)
 
   router.get('/getprdata',fetchRequisitionItemsWithDetails)
+  router.get('/get-issue-to-clinic',getIssueToclinic)
+  router.post('/saveIssueToClinic',saveIssueToClinic)
+
+  router.get('/getItemsOnSearch',getItemsOnSearch)
+  router.get('/getIndentOnSearch',getItemsFromIndents)
+  router.get('/getPROnSearch',getItemsFromPR)
+
+
+  router.get('/getAllPO',getAllPO)
+  router.get('/getPOItems/:id', getPOItems);
+  router.get('/getIssueItems/:id', getIssueItems);
+
+  router.get('/getItemBatches/:id', getItemBatches);
+
+
+  router.post('/saveGRNData', saveGRNData);
+
+
+  // router.get('/100',(req,res)=>{
+  //   res.render('PalashInv/42-PIM-physical-item-stock-new[12-30]');
+  // })
+
+  // router.post('/1001',(req,res)=>{
+  //   console.log(req.body);
+  // })
+
 
   
   

@@ -105,7 +105,7 @@
             <!-- content -->
             <div class="container-fluid">
                 <div id="errordiv1"></div>
-                <form id="patientReg">
+                <form id="patientReg" method="post">
                     <div class="chart">
                         <div class="row">
                             <div class="col-lg-12 pl-lg-0 mt-2 ml-2">
@@ -424,6 +424,7 @@
                                                                         height="200" />
                                                                     <canvas id="canvas" width="300" height="400"
                                                                         style="display: none"></canvas>
+                                                                    <img src="" alt="qrCode" id="qr" style="display: none;">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-6 col-md-6 col-sm-12 mb-2">
@@ -441,6 +442,13 @@
                                                                 <div class="form-group text-left pl-4">
                                                                     <button type="button" id="capture">
                                                                         <i class="fa-solid fa-camera"></i>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6 col-md-6 col-sm-12 mb-2">
+                                                                <div class="form-group text-left pl-4">
+                                                                    <button type="button" id="qrCode">
+                                                                        <i class="fa-solid fa-qrcode"></i>
                                                                     </button>
                                                                 </div>
                                                             </div>
@@ -2480,6 +2488,19 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="form-group mt-1 mb-3 text-right">
+                            <button type="button" id="checkInButton" class="btn-primary btn-style btn mt-3 mr-2">
+                                <strong>CheckIn</strong>
+                            </button>
+                
+                            <button type="submit" class="btn-secondary btn-style btn mt-3 mr-2">
+                                <strong> Register</strong>
+                            </button>
+                
+                            <button type="button" class="btn-danger btn-style btn mt-3">
+                                <strong><i class="fas fa-times"></i> Close</strong>
+                            </button>
+                        </div>
                     </div>
 
                     <div class="modal" id="myModal2">
@@ -2769,24 +2790,13 @@
                         </div>
                           
                     </div>
+                    
+                    </form>
+                    <div id="loadingIndicator"></div>
+                    </div>
             </div>
         </div>
-        <div class="form-group mt-1 mb-3 text-right">
-            <button type="button" id="checkInButton" class="btn-primary btn-style btn mt-3 mr-2">
-                <strong>CheckIn</strong>
-            </button>
-
-            <button type="submit" class="btn-secondary btn-style btn mt-3 mr-2">
-                <strong> Register</strong>
-            </button>
-
-            <button type="button" class="btn-danger btn-style btn mt-3">
-                <strong><i class="fas fa-times"></i> Close</strong>
-            </button>
-        </div>
-        </form>
-        <div id="loadingIndicator"></div>
-        </div>
+       
 
         <%- include('../footer') %>
         <script>
@@ -3198,7 +3208,7 @@
 
                                 // Use bracket notation to dynamically access the correct field in patient
                                 const fieldName2 = selectElementId.replace(/[#.]/g, ''); // Replace both # and .
-                                console.log(fieldName2 + " klk");
+                                
 
                                 if (patient[fieldName2] && item.value === patient[fieldName2]) {
                                     option.selected = true; // Set this option as selected
@@ -3215,7 +3225,7 @@
                 // Pass the patient object as JSON
             </script>
 
-
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
             <script>
                 document.addEventListener("DOMContentLoaded", function () {
@@ -3223,6 +3233,7 @@
                     const canvas = document.getElementById("canvas");
                     const captureButton = document.getElementById("capture");
                     const capturedImage = document.getElementById("captured-image");
+                    const qrCode = document.getElementById("qrCode");
                     const patientImgInput = document.getElementById("patientImg");
                     let stream = null;
 
@@ -3238,7 +3249,23 @@
                                 console.error("Error accessing camera: ", err);
                             });
                     }
-
+                    qrCode.addEventListener('click',()=>{
+                        let para = `<%=currentTime%><%=currentDate%>`;
+                        function sanitizeFileName(fileName) {
+                            return fileName.replace(/:/g, '-');
+                        }
+                        para = sanitizeFileName(para);
+                        axios.get(`/findPatient/generate-qr/${para}`).then(data=>{
+                            document.getElementById('qr').style.display = 'block';
+                            document.getElementById("captured-image").style.display = 'none';
+                            document.getElementById('qr').src = `/temp/${para}.png`;
+                        }).catch((err)=>{
+                            console.log('error',err);
+                            document.getElementById('qr').style.display = 'block';
+                            document.getElementById("captured-image").style.display = 'none';
+                            document.getElementById('qr').src = `/temp/${para}.png`;
+                        });
+                    })
                     captureButton.addEventListener("click", function () {
                         if (stream && video.srcObject.active) {
                             const context = canvas.getContext("2d");
@@ -3246,6 +3273,7 @@
                             canvas.toBlob(function (blob) {
                                 capturedImage.src = URL.createObjectURL(blob);
                                 capturedImage.style.display = "block";
+                                document.getElementById('qr').style.display = 'none';
                                 video.style.display = "none"; // Hide video after capturing image
                                 saveBlobToFileInput(blob);
                             }, "image/png");
@@ -3321,6 +3349,7 @@
                     startVideoStreamSpouse();
 
                     $("#patientReg").on("submit", function (event) {
+                        alert(2)
                         event.preventDefault();
 
                         const phone1 = formatAndValidatePhoneNumber("phone1");
@@ -3566,41 +3595,39 @@
                     console.log(selectedStateCode + selectedCityName + "jj");
 
                     loadState("state1", selectedStateCode);
-                    loadState("state2", selectedStateCode);
-                    loadState("spouse_state", selectedStateCode);
+                   
 
                     $("#state1").on("change", function () {
                         loadCity(this, selectedCityName); // Pass selectedCityName for initial load
                     });
 
-                    $("#state2").on("change", function () {
-                        loadCity(this, selectedCityName); // Pass selectedCityName for initial load
-                    });
-
-                    $("#spouse_state").on("change", function () {
-                        loadCity(this, selectedCityName); // Pass selectedCityName for initial load
-                    });
+                   
 
                     function loadState(elementId, selectedStateCode) {
-                        fetch("/findpatient/reloadState")
-                            .then((response) => response.json())
-                            .then((data) => {
-                                const dropdown = document.getElementById(elementId);
-                                data.sort((a, b) => a.stateName.localeCompare(b.stateName));
-                                data.forEach((state) => {
-                                    const option = document.createElement("option");
-                                    option.value = state.stateCode;
-                                    option.textContent = state.stateName;
-                                    option.selected = state.stateCode === selectedStateCode; // Set selected based on fetched value
-                                    dropdown.appendChild(option);
-                                });
-                                if (selectedStateCode) {
-                                    // Automatically trigger city loading on initial setup
-                                    loadCity(dropdown, selectedCityName);
-                                }
-                            })
-                            .catch((error) => console.error("Error fetching states:", error));
-                    }
+    fetch("/findpatient/reloadState")
+        .then(response => response.json())
+        .then(data => {
+            const dropdown = document.getElementById(elementId);
+            console.log("Dropdown element:", dropdown); // Check if element is null
+            if (!dropdown) {
+                console.error("Dropdown element not found:", elementId);
+                return; // Exit if no element found
+            }
+            data.sort((a, b) => a.stateName.localeCompare(b.stateName));
+            data.forEach(state => {
+                const option = document.createElement("option");
+                option.value = state.stateCode;
+                option.textContent = state.stateName;
+                option.selected = state.stateCode === selectedStateCode; // Set selected based on fetched value
+                dropdown.appendChild(option);
+            });
+            if (selectedStateCode) {
+                // Automatically trigger city loading on initial setup
+                loadCity(dropdown, selectedCityName); // Ensure selectedCityName is defined
+            }
+        })
+        .catch(error => console.error("Error fetching states:", error));
+}
 
                     function loadCity(selectElement, selectedCityName) {
                         const stateCode = selectElement.value;

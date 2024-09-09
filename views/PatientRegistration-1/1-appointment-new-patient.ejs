@@ -1,0 +1,1092 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>LifeLinker</title>
+
+    <%- include('../header') %>
+        <!-- main content start -->
+        <div class="main-content">
+
+            <div class="row content-top-gap2">
+                <div class="col-lg-12">
+                    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+                        <a class="navbar-brand text-center mr-5" href="#">
+                            <span class="dash-icon"><i class="fas fa-tachometer-alt"></i></span>
+                            Dashboard
+                        </a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav">
+                                <li class="nav-item active text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="far fa-user"></i></span>
+                                        Master
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-exchange-alt"></i></span>
+                                        Transaction
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-hand-holding-medical"></i></span>
+                                        Patient 360
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-receipt"></i></span>
+                                        Outside Reciept
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-file-invoice"></i></span>
+                                        Outpatient Department
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-chart-line"></i></span>
+                                        Analytics
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="far fa-clock"></i></span>
+                                        Waiting List
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-wrench"></i></span>
+                                        Adminstration
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-spinner"></i></span>
+                                        Additional
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+            <!-- content -->
+            <div class="container-fluid">
+
+                <div class="chart">
+                    <div class="row">
+
+                        <!-- <div class="col-lg-12 pl-lg-0 mt-2 ml-2">
+                            <h4 class="primary">Company</h4>
+                        </div> -->
+                        <div class="col-lg-12 pl-lg-2 mt-3 chart-grid">
+                            <div id="errorDiv1"></div>
+                            <form id="patAppointment">
+                                <div class="card card_border">
+                                    <div>
+                                        <!--Past your code here starts-->
+                                
+                                        <div class="card">
+                                            <div class="col-xl-12 p-heading">
+                                                <h6 class="p-text">APPOINTMENT - NEW PATIENT</h6>
+                                            </div>
+                                
+                                            <div class="card-body pt-2 pb-2 pl-lg-3 pr-lg-3">
+                                                <div class="form-row">
+                                                    <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                                        <div class="form-group">
+                                                            <label class="input__label">MR No.</label>
+                                                            <input 
+                                                                id="mrNo"
+                                                                name="mrNo"
+                                                                type="text"
+                                                                class="form-control input-style" 
+                                                                placeholder=""
+                                                                value="<%= patient.mr_no %>"
+                                                                data-validation="required"
+                                                                data-error-message="MR No. is required">
+                                                        </div>
+                                                    </div>
+                                
+                                                    <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                                        <div class="form-group">
+                                                            <button onclick="SearchMrNo()" type="button"
+                                                                class="btn btn-style mt-4 btn-primary btn-style btn-change"><strong><i
+                                                                        class="fas fa-search"></i>
+                                                                    Search</strong></button>
+                                                        </div>
+                                                    </div>
+                                
+                                                    <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                                        <div class="form-group">
+                                                            <button type="button" data-bs-toggle="modal" data-bs-target="#myModal" id="visitlist"
+                                                                class="btn btn-style mt-4  btn-secondary btn-style btn-change"><strong>
+                                                                    Patient Visits And Appointments</strong></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                
+                                                <div class="form-row">
+                                                    <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                                        <div class="form-group">
+                                                            <label class="input__label" for="first-name">First Name</label>
+                                                            <input id="firstName" name="firstName" type="text" class="form-control input-style" placeholder="" value="<%= patient.firstName %>"
+                                                                data-validation="required"
+                                                                data-error-message="First Name is required">
+                                                        </div>
+                                                    </div>
+                                
+                                                    <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                                        <div class="form-group">
+                                                            <label class="input__label" for="last-name">Last Name</label>
+                                                            <input id="lastName" name="lastName" type="text" class="form-control input-style" placeholder="" value="<%= patient.lastName %>"
+                                                                data-validation="required"
+                                                                data-error-message="Last Name is required">
+                                                        </div>
+                                                    </div>
+                                
+                                                    <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                                        <div class="form-group">
+                                                            <label class="input__label" for="gender">Gender</label>
+                                                            <select id="gender" name="gender" class="form-control input-style"
+                                                                data-validation="required"
+                                                                data-error-message="Gender is required">
+                                                                <option value="">Select</option>
+                                                                <option value="Male">Male</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                
+                                                    <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                                        <div class="form-group">
+                                                            <label class="input__label" for="dob">D.O.B.</label>
+                                                            <input id="dob" name="dob" type="date" class="form-control input-style" placeholder=""
+                                                                data-validation="required" value="<%= patient.dob %>"
+                                                                data-error-message="D.O.B. is required">
+                                                        </div>
+                                                    </div>
+                                
+                                                    <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                                        <label class="input__label">Age</label>
+                                                        <div class="form-row">
+                                                            <div class="col-4 form-group">
+                                                                <input id="age-years" name="age_years" type="number" class="form-control input-style" placeholder=""
+                                                                    data-validation="required"
+                                                                    value="<%= patient.age_years %>"
+                                                                    data-error-message="Age in years is required">
+                                                            </div>
+                                                            <div class="col-4 form-group">
+                                                                <input id="age-months" name="age_months" type="number" class="form-control input-style" placeholder=""
+                                                                    data-validation="required"
+                                                                    value="<%= patient.age_months %>"
+                                                                    data-error-message="Age in months is required">
+                                                            </div>
+                                                            <div class="col-4 form-group">
+                                                                <input id="age-days" name="age_days" type="number" class="form-control input-style" placeholder=""
+                                                                    data-validation="required"
+                                                                    value="<%= patient.age_days %>"
+                                                                    data-error-message="Age in days is required">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                
+                                                    <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                                        <label class="input__label">Address</label>
+                                                        <div class="form-row">
+                                                            <div class="col-3 form-group">
+                                                                <input id="residence-block" name="address" type="text" class="form-control input-style" placeholder=""
+                                                                    data-validation="required"
+                                                                    value="<%= patient.address %>"
+                                                                    data-error-message="Residence block is required">
+                                                            </div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                
+                                                    <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                                        <label class="input__label">Mobile No.</label>
+                                                        <div class="form-row">
+                                                            <div class="col-3 form-group">
+                                                                <input id="mobile-code" name="mobile_code" type="text" class="form-control input-style" placeholder=""
+                                                                    data-validation="required"
+                                                                    value="<%= patient.mobile_1 %>"
+                                                                    data-error-message="Mobile code is required">
+                                                            </div>
+                                                            <div class="col-9 form-group">
+                                                                <input id="mobile-number" name="mobile_number" type="text" class="form-control input-style" placeholder=""
+                                                                    data-validation="required"
+                                                                    value="<%= patient.mobile_2 %>"
+                                                                    data-error-message="Mobile number is required">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                
+                                                    <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                                        <div class="form-group">
+                                                            <label class="input__label" for="appointment-date">Appointment Date</label>
+                                                            <input id="appointment-date" name="appointment_date" type="date" class="form-control input-style" placeholder=""
+                                                                data-validation="required"
+                                                                data-error-message="Appointment date is required">
+                                                        </div>
+                                                    </div>
+                                
+                                                    <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                                        <div class="form-group">
+                                                            <label class="input__label" for="clinic">Clinic</label>
+                                                            <select id="clinic" name="clinic" class="form-control input-style"
+                                                                data-validation="required"
+                                                                data-error-message="Clinic is required">
+                                                                <option value="">Select</option>
+                                                                <option value="karamNagar">karamNagar</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                
+                                                    <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                                        <div class="form-group">
+                                                            <label class="input__label" for="department">Department</label>
+                                                            <select id="department" name="department" class="form-control input-style"
+                                                                data-validation="required"
+                                                                data-error-message="Department is required">
+                                                                <option value="">Select</option>
+                                                                <option value="hh">jkj</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                
+                                                    <div class="col-lg-3 col-md-4 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label class="input__label" for="doctor">Doctor</label>
+                                                            <select id="doctor" name="doctor" class="form-control input-style"
+                                                                data-validation="required"
+                                                                data-error-message="Doctor is required">
+                                                                <option value="">Select</option>
+                                                                <option value="me">Kinshuk</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                
+                                                    <div class="col-lg-3 col-md-4 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label class="input__label" for="appointment-reason">Appointment Reason</label>
+                                                            <select id="appointment-reason" name="appointment_reason" class="form-control input-style"
+                                                                data-validation="required"
+                                                                data-error-message="Appointment reason is required">
+                                                                <option value="Select">Select</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                
+                                                    <div class="col-lg-3 col-md-4 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label class="input__label" for="from-time">From Time</label>
+                                                            <input id="from-time" name="from_time" type="time" class="form-control input-style" placeholder=""
+                                                                data-validation="required"
+                                                                data-error-message="From time is required">
+                                                        </div>
+                                                    </div>
+                                
+                                                    <div class="col-lg-3 col-md-4 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label class="input__label" for="to-time">To Time</label>
+                                                            <input id="to-time" name="to_time" type="time" class="form-control input-style" placeholder=""
+                                                                data-validation="required"
+                                                                data-error-message="To time is required">
+                                                        </div>
+                                                    </div>
+                                
+                                                    <div class="col-lg-3 col-md-4 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label class="input__label" for="special-registration">Special Registration</label>
+                                                            <select id="special-registration" name="special_registration" class="form-control input-style"
+                                                                data-validation="required"
+                                                                data-error-message="Special registration is required">
+                                                                <option value="">Select</option>
+                                                                <option value="jj">dd</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                
+                                                    <div class="col-lg-3 col-md-4 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label class="input__label" for="remark">Remark</label>
+                                                            <textarea id="remark" name="remark" class="form-control input-style" placeholder=""
+                                                                data-validation="required"
+                                                                data-error-message="Remark is required"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--Past your code here ends-->
+                                    </div>
+                                </div>
+                                
+                        </div>
+                        <!--section2-->
+
+                        <div class="mt-1 col-lg-12 pl-lg-2 pr-lg-3">
+                            <div class="card card_border">
+                                <div class="mb-3">
+                                    <div class="form-group">
+                                        <div class="col-xl-12 p-heading">
+                                            <h6 class="p-text">GET SCHEDULE</h6>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card-body pt-0 pb-1 pl-lg-0 pr-lg-0">
+                                    <div class="form-row">
+                                        <div class="col-12">
+                                            <div class="form-group">
+
+
+                                                <div class="col col-12 mb-3">
+                                                    <div class="slidx">
+                                                        <table class="table2">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th contenteditable="true">From Time</th>
+                                                                    <th contenteditable="true">To Time</th>
+                                                                    
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td contenteditable="true">
+                                                                    </td>
+                                                                    <td contenteditable="true">
+                                                                    </td>
+                                                                    
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td contenteditable="true">
+                                                                    </td>
+                                                                    <td contenteditable="true">
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group mt-1 mb-3 text-right">
+                        <a href="/patientRegis/1"><button type="button" class="btn-danger btn-style btn mt-3 mr-2"><strong><i
+                                    class="fas fa-times"></i> Cancel</strong></button></a>
+
+                        <button type="submit" class="btn-primary btn-style btn mt-3"><strong><i class="far fa-save"></i>
+                                Save</strong></button>
+                    </div>
+
+                    </form>
+                    <div id="loadingIndicator"></div>
+                </div>
+<%- include('../footer') %>
+
+<div class="modal" id="myModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <a href="#" class="btn-close" data-bs-dismiss="modal"><i
+                        class="fa-solid fa-circle-xmark"></i></a>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="form-row">
+                    <div class="card-body pt-2 pb-2 pl-lg-3 pr-lg-3">
+                        <!-- <div class="form-row">
+
+                            <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                <div class="form-group">
+                                    <label class="input__label" for="firstName">First
+                                        Name</label>
+                                    <input id="RD_firstName" name="RD_firstName" type="text"
+                                        class="form-control input-style" placeholder="" />
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                <div class="form-group">
+                                    <label class="input__label" for="middleName">Middle
+                                        Name</label>
+                                    <input id="RD_middleName" name="RD_middleName"
+                                        type="text" class="form-control input-style"
+                                        placeholder="" />
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                <div class="form-group">
+                                    <label class="input__label" for="lastName">Last
+                                        Name</label>
+                                    <input id="RD_lastName" name="RD_lastName" type="text"
+                                        class="form-control input-style" placeholder="" />
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                <div class="form-group">
+                                    <label class="input__label"
+                                        for="specialization">Specialization</label>
+                                    <select id="RD_specialization" name="RD_specialization"
+                                        class="form-control input-style">
+                                        <option value="Select">Select</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                <div class="form-group">
+                                    <label class="input__label" for="doctorType">Doctor
+                                        Type</label>
+                                    <select id="RD_doctorType" name="RD_doctorType"
+                                        class="form-control input-style">
+                                        <option value="Select">Select</option>
+                                        <option value="gynocologist">
+                                            Gynocologist
+                                        </option>
+                                        <option value="pediatretion">
+                                            Pediatretion
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                <div class="form-group">
+                                    <label class="input__label" for="gender">Gender</label>
+                                    <select id="RD_gender" name="RD_gender"
+                                        class="form-control input-style">
+                                        <option value="Select">Select</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                <div class="form-group">
+                                    <label class="input__label" for="contactNumber">Contact
+                                        Number</label>
+                                    <input id="RD_contactNumber" name="RD_contactNumber"
+                                        type="number" class="form-control input-style"
+                                        placeholder="" />
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                <div class="form-group">
+                                    <label class="input__label" for="emailId">Email
+                                        ID</label>
+                                    <input id="RD_emailId" name="RD_emailId" type="text"
+                                        class="form-control input-style" placeholder="" />
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                <div class="form-group">
+                                    <label class="input__label"
+                                        for="address">Address</label>
+                                    <textarea id="RD_address" name="RD_address"
+                                        class="form-control input-style"
+                                        placeholder=""></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" id="addReferalDoc"
+                            class="btn-secondary btn-style btn mt-3 mr-2">
+                            <strong> Add</strong>
+                        </button>
+
+                        <button type="button" class="btn-danger btn-style btn mt-3"
+                            data-bs-dismiss="modal">
+                            <strong><i class="fas fa-times"></i> Close</strong>
+                        </button> -->
+                        <nav>
+                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                <button class="nav-link active" id="nav-followup-tab" data-bs-toggle="tab"
+                                    data-bs-target="#nav-followup" type="button" role="tab"
+                                    aria-controls="nav-followup" aria-selected="true">
+                                    <i class="fas fa-exchange-alt"></i> Past Appointments
+                                </button>
+                                <button class="nav-link" id="nav-appointment-tab" data-bs-toggle="tab"
+                                    data-bs-target="#nav-appointment" type="button" role="tab"
+                                    aria-controls="nav-appointment" aria-selected="false">
+                                    <i class="fas fa-calendar-alt"></i> Past Visits
+                                </button>
+                                <button class="nav-link" id="nav-visited-tab" data-bs-toggle="tab"
+                                    data-bs-target="#nav-visited" type="button" role="tab"
+                                    aria-controls="nav-visited" aria-selected="false">
+                                    <i class="fas fa-map-marker-alt"></i> Future Appointments
+                                </button>
+                            </div>
+                        </nav>
+                        <div class="col-md-12 tab-content" id="nav-tabContent">
+                            <div class="tab-pane fade show active" id="nav-followup" role="tabpanel"
+                                aria-labelledby="nav-followup-tab">
+                                <div>            
+                                    <div class="col-lg-12 pl-lg-2 chart-grid">
+                                        <form>
+                                            <div class="card card_border">
+                                                <div class="">
+                                                    <!--Past your code here starts-->
+            
+                                                    <div class="card">
+            
+                                                        <div>
+                                                            <div class="form-group">
+                                                                <div class="col-xl-12 p-heading">
+            
+                                                                    <!-- Nav Tabs are here once have a look--->
+                                                                    <h6 class="p-text">PAST APPOINTMENTS</h6>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+            
+                                                        <div class="card-body pb-2">
+            
+                                                            <div class="form-row">
+                                                                <div class="col-12">
+                                                                    <div class="form-group">
+                                                                        <div class="col col-12 mb-3  pr-lg-0 pl-lg-0 ">
+                                                                            <div class="slidx">
+                    
+                                                                                <table class="table2">
+                    
+                                                                                    <thead>
+                    
+                                                                                        <tr>
+                    
+                                                                                            <th contenteditable="true">Appointment Date</th>
+                                                                                            <th contenteditable="true">Appointment Time</th>
+                                                                                            <th contenteditable="true">Reason Of Appointments</th>
+                                                                                            <th contenteditable="true">Doctor Name</th>
+                                                                                            <th contenteditable="true">Department</th>
+                                                                                            <th contenteditable="true">Clinic</th>
+                                                                                            
+                                                                                            
+                                                                                        </tr>
+                    
+                                                                                    </thead>
+                    
+                                                                                    <tbody>
+                    
+                                                                                        <tr>
+                    
+                                                                                            <td contenteditable="true"> </td>
+                                                                                            <td contenteditable="true"> </td>
+                                                                                            <td contenteditable="true"> </td>
+                                                                                            <td contenteditable="true"> </td>
+                                                                                            <td contenteditable="true"> </td>
+                                                                                            <td contenteditable="true"> </td>
+                                                                                            
+                                                                                            
+                                                                                        </tr>
+                    
+                                                                                        <tr>
+            
+                                                                                            <td contenteditable="true"> </td>
+                                                                                            <td contenteditable="true"> </td>
+                                                                                            <td contenteditable="true"> </td>
+                                                                                            <td contenteditable="true"> </td>
+                                                                                            <td contenteditable="true"> </td>
+                                                                                            <td contenteditable="true"> </td>
+                                                                                            
+            
+                                                                                        </tr>
+                    
+                                                                                    </tbody>
+                    
+                                                                                </table>
+                                                                            </div>
+                    
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+            
+            
+                                                        </div>
+                                                    </div>
+                                                    <!--Past your code here ends-->
+                                                </div>
+            
+                                            </div>
+                                            <div class="form-group mb-3 text-right">
+                                            </div>
+            
+                                            
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade show active" id="nav-appointment" role="tabpanel"
+                                aria-labelledby="nav-appointment-tab">
+                                <div>    
+                                    <div class="col-lg-12 pl-lg-2 chart-grid">
+                                        <form>
+                                            <div class="card card_border">
+                                                <div class="">
+                                                    <!--Past your code here starts-->
+            
+                                                    <div class="card">
+            
+                                                        <div>
+                                                            <div class="form-group">
+                                                                <div class="col-xl-12 p-heading">
+            
+                                                                    <!-- Nav Tabs are here once have a look--->
+                                                                    <h6 class="p-text">PAST VISITS</h6>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+            
+                                                        <div class="card-body pb-2">
+            
+                                                            <div class="form-row">
+                                                                <div class="col-12">
+                                                                    <div class="form-group">
+                                                                        <div class="col col-12 mb-3  pr-lg-0 pl-lg-0 ">
+                                                                            <div class="slidx">
+                    
+                                                                                <table class="table2">
+                    
+                                                                                    <thead>
+                    
+                                                                                        <tr>
+                    
+                                                                                            <th contenteditable="true">Visit Date</th>
+                                                                                            <th contenteditable="true">Visit Time</th>
+                                                                                            <th contenteditable="true">Visit Type</th>
+                                                                                            <th contenteditable="true">Doctor Name</th>
+                                                                                            <th contenteditable="true">Department</th>
+                                                                                            <th contenteditable="true">Clinic</th>
+                                                                                            
+                                                                                            
+                                                                                        </tr>
+                    
+                                                                                    </thead>
+                    
+                                                                                    <tbody>
+                    
+                                                                                        <tr>
+                    
+                                                                                            <td contenteditable="true"> </td>
+                                                                                            <td contenteditable="true"> </td>
+                                                                                            <td contenteditable="true"> </td>
+                                                                                            <td contenteditable="true"> </td>
+                                                                                            <td contenteditable="true"> </td>
+                                                                                            <td contenteditable="true"> </td>
+                                                                                            
+                                                                                            
+                                                                                        </tr>
+                    
+                                                                                        <tr>
+            
+                                                                                            <td contenteditable="true"> </td>
+                                                                                            <td contenteditable="true"> </td>
+                                                                                            <td contenteditable="true"> </td>
+                                                                                            <td contenteditable="true"> </td>
+                                                                                            <td contenteditable="true"> </td>
+                                                                                            <td contenteditable="true"> </td>
+                                                                                            
+            
+                                                                                        </tr>
+                    
+                                                                                    </tbody>
+                    
+                                                                                </table>
+                                                                            </div>
+                    
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+            
+            
+                                                        </div>
+                                                    </div>
+                                                    <!--Past your code here ends-->
+                                                </div>
+            
+                                            </div>
+            
+            
+                                            
+            
+            
+                                            
+            
+                                            <div class="form-group mb-3 text-right">
+            
+            
+                                                
+                
+                                        
+                                        
+                                            </div>
+            
+                                            
+                                        </form>
+                                    </div>
+                               </div>
+                            </div>
+                            <div class="tab-pane fade show active" id="nav-visited" role="tabpanel"
+                                aria-labelledby="nav-visited-tab">
+                                <div>    
+                                    <div class="col-lg-12 pl-lg-2 chart-grid">
+                                        <form>
+                                            <div class="card card_border">
+                                                <div class="">
+                                                    <!--Past your code here starts-->
+            
+                                                    <div class="card">
+            
+                                                        <div>
+                                                            <div class="form-group">
+                                                                <div class="col-xl-12 p-heading">
+            
+                                                                    <!-- Nav Tabs are here once have a look--->
+                                                                    <h6 class="p-text">FUTURE APPOINTMENTS</h6>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+            
+                                                        <div class="card-body pb-2">
+            
+                                                            <div class="form-row">
+                                                                <div class="col-12">
+                                                                    <div class="form-group">
+                                                                        <div class="col col-12 mb-3  pr-lg-0 pl-lg-0 ">
+                                                                            <div class="slidx">
+                    
+                                                                                <table class="table2">
+                    
+                                                                                    <thead>
+                    
+                                                                                        <tr>
+                    
+                                                                                            <th contenteditable="true">Appointment Date</th>
+                                                                                            <th contenteditable="true">Appointment Time</th>
+                                                                                            <th contenteditable="true">Reason Of Appointments</th>
+                                                                                            <th contenteditable="true">Doctor Name</th>
+                                                                                            <th contenteditable="true">Department</th>
+                                                                                            <th contenteditable="true">Clinic</th>
+                                                                                            
+                                                                                            
+                                                                                        </tr>
+                    
+                                                                                    </thead>
+                    
+                                                                                    <tbody>
+                    
+                                                                                        <tr>
+                    
+                                                                                            <td contenteditable="true"> </td>
+                                                                                            <td contenteditable="true"> </td>
+                                                                                            <td contenteditable="true"> </td>
+                                                                                            <td contenteditable="true"> </td>
+                                                                                            <td contenteditable="true"> </td>
+                                                                                            <td contenteditable="true"> </td>
+                                                                                            
+                                                                                            
+                                                                                        </tr>
+                    
+                                                                                        <tr>
+            
+                                                                                            <td contenteditable="true"> </td>
+                                                                                            <td contenteditable="true"> </td>
+                                                                                            <td contenteditable="true"> </td>
+                                                                                            <td contenteditable="true"> </td>
+                                                                                            <td contenteditable="true"> </td>
+                                                                                            <td contenteditable="true"> </td>
+                                                                                            
+            
+                                                                                        </tr>
+                    
+                                                                                    </tbody>
+                    
+                                                                                </table>
+                                                                            </div>
+                    
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+            
+            
+                                                        </div>
+                                                    </div>
+                                                    <!--Past your code here ends-->
+                                                </div>
+            
+                                            </div>
+            
+            
+                                            
+            
+            
+                                            
+            
+                                            <div class="form-group mb-3 text-right">
+            
+            
+                                                
+                
+                
+                                        
+                                            </div>
+            
+                                            
+                                        </form>
+                                    </div>
+                               </div>
+                            </div>
+
+                            <button type="button" class="btn-danger btn-style btn mt-3" data-bs-dismiss="modal"><strong><i
+                                class="fas fa-times"></i> Cancel</strong></button>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+      
+</div>
+<script type="module">
+    $(document).ready(function() {
+    // Fetch clinics on page load
+    $.getJSON('/findpatient/clinics', function(data) {
+    console.log(JSON.stringify(data) + " data");
+    $('#clinic').empty();
+    $('#clinic').append('<option value="">Select Clinic</option>');
+
+    // Normalize data into an array if it isn't one
+    data = Array.isArray(data) ? data : [data];
+
+    if (data.length > 0) {
+        data.forEach(function(clinic) {
+            $('#clinic').append(`<option value="${clinic.clinic_id}">${clinic.clinic_desc}</option>`);
+        });
+    } else {
+        console.log('No clinics found');
+        $('#clinic').append('<option value="">No clinics available</option>');
+    }
+});
+
+
+    // Handle clinic change
+   $('#clinic').change(function() {
+    const clinicId = $(this).val();
+    $('#department').empty().append('<option value="">Select</option>');  // Reset the department dropdown
+    $('#doctor').empty().append('<option value="">Select</option>');  // Reset the doctor dropdown as well
+
+    if (clinicId) {
+        $.getJSON(`/findpatient/departments?clinicId=${clinicId}`, function(data) {
+            // Ensure data is available and it's an array
+            if (data && data.length > 0) {
+                data.forEach(function(dept) {
+                    // Append each department as an option with a data-spec attribute
+                    $('#department').append(`<option value="${dept.dept_code}" data-spec="${dept.dept_sub_spec}">${dept.dept_desc}</option>`);
+                });
+            } else {
+                console.log('No departments found');  // Log or handle cases where no departments are returned
+                $('#department').append('<option value="">No departments available</option>');  // Show a default option indicating no departments
+            }
+        }).fail(function(jqXHR, textStatus, errorThrown) {
+            console.error('Error fetching departments:', textStatus, errorThrown);  // Log any errors that occur during the request
+        });
+    }
+});
+
+
+    // Handle department change
+    $('#department').change(function() {
+    const departmentSubSpec = $(this).find('option:selected').data('spec');
+    const clinicId = $('#clinic').val();
+    $('#doctor').empty().append('<option value="">Select</option>');
+
+    if (departmentSubSpec && clinicId) {
+        $.getJSON(`/findpatient/doctors?clinicId=${clinicId}&departmentSubSpec=${departmentSubSpec}`, function(data) {
+            console.log(JSON.stringify(data) + " data received");  // Check the structure of received data
+            // Directly use 'data' since it is an array of doctor objects
+            if (data.length > 0) {
+                data.forEach(function(doc) {
+                    $('#doctor').append(`<option value="${doc.id}">${doc.doc_name}</option>`);
+                });
+            } else {
+                console.log('No doctors found');
+                $('#doctor').append('<option value="">No doctors available</option>');
+            }
+        }).fail(function(jqXHR, textStatus, errorThrown) {
+            console.error('Error fetching doctors:', textStatus, errorThrown);
+        });
+    }
+});
+
+
+
+});
+
+
+</script>
+<script>
+    function fetchAppointments(mrNo) {
+    $.ajax({
+        url: '/findpatient/getAppointments',
+        type: 'GET',
+        data: { mrNo: mrNo },
+        dataType: 'json',
+        success: function (data) {
+          
+            displayAppointments(data.pastAppointments, '#nav-followup table tbody');
+            displayAppointments(data.futureAppointments, '#nav-visited table tbody');
+        },
+        error: function (xhr, status, error) {
+            console.error('Error fetching appointment data:', error);
+        }
+    });
+}
+
+function displayAppointments(appointments, selector) {
+    const tableBody = $(selector);
+    tableBody.empty(); // Clear existing entries
+
+    appointments.forEach(app => {
+        const row = `<tr>
+            <td>${app.appointment_date}</td>
+            <td>${app.from_time}</td>
+            <td>${app.appointment_reason}</td>
+            <td>${app.doctor}</td>
+            <td>${app.department}</td>
+            <td>${app.clinic}</td>
+        </tr>`;
+        tableBody.append(row);
+    });
+}
+
+</script>
+<script>
+    $('#visitlist').on('click',async()=>{
+      
+        const mrNo = $('#mrNo').val();
+     
+        fetchAppointments(mrNo);
+    })
+ function SearchMrNo() {
+    const mrNo = $('#mrNo').val(); // Get the MR No from input
+    console.log('Submitting MR No:', mrNo);
+
+    // Validate MR No input before sending the request
+    if (!mrNo) {
+        console.error('Please enter a valid MR No.');
+        alert('Please enter a valid MR No.'); // Alert the user to enter a valid MR No
+        return; // Stop the function if no MR No is entered
+    }
+
+    // Optionally, show a loading indicator or disable the search button
+    $('#searchButton').prop('disabled', true);
+
+    $.ajax({
+        url: '/findpatient/getAppointmentData',
+        type: 'GET',
+        data: { mrNo },
+        dataType: 'json',
+        success: function (data) {
+            console.log('Received data:', data);
+            clearForm(); // Clear the form before setting new values
+
+            // Set form fields with the new data
+            $('#firstName').val(data.firstName);
+            $('#lastName').val(data.lastName || '');
+            $('#gender').val(data.gender || '');
+            $('#dob').val(data.dob || '');
+            $('#age-years').val(data.age_years || '');
+            $('#age-months').val(data.age_months || '');
+            $('#age-days').val(data.age_days || '');
+            $('#address').val(data.address || '');
+            $('#mobile-code').val(data.mobile_1 || '');
+            $('#mobile-number').val(data.mobile_2 || '');
+            $('#special-registration').val(data.special_registration || '');
+        },
+        error: function (xhr, status, error) {
+            if (xhr.status === 404) {
+                console.error('No patient found with the given MR No.');
+                alert('No patient found. Please check the MR No and try again.');
+            } else {
+                console.error('Error fetching appointment data:', error);
+                alert('Error fetching data. Please try again later.');
+            }
+        },
+        complete: function () {
+            $('#searchButton').prop('disabled', false); // Re-enable the search button
+        }
+    });
+}
+
+function clearForm() {
+    // Clear all relevant input fields
+    $('#firstName, #lastName, #gender, #dob, #age-years, #age-months, #age-days, ' +
+      '#residence-block, #residence-street, #residence-city, #mobile-code, ' +
+      '#mobile-number, #appointment-date, #clinic, #department, #doctor, ' +
+      '#appointment-reason, #special-registration').val('');
+}
+
+</script>
+<script type="module">
+    import { validateForm } from '../javascripts/validation.js';
+    import { myAjax } from '../javascripts/myAjax.js';
+
+    $(document).ready(function () {
+        console.log("Document is ready");
+
+        $('#patAppointment').on('submit', function (event) {
+
+            event.preventDefault()
+            const { isValid, errorMessage, formData } = validateForm('#patAppointment')
+
+            console.log(formData);
+            const errorDivId = '#errordiv1'
+
+            if (isValid) {
+                const url = '/findpatient/newAppointment';
+                const loadingDiv = '#loadingIndicator'
+                myAjax(formData, errorDivId, url, loadingDiv)
+
+            } else {
+                alert(errorMessage);
+                $(errorDivId).removeClass('alert-success').addClass('alert-danger').text(errorMessage).show();
+                // $(errorDivId).text(errorMessage).show();
+            }
+        })
+    });
+</script>
+               

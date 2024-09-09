@@ -155,7 +155,7 @@
                   <div class="row">
                     <div class="col-xl-6 pr-xl-2">
                       <div class="form-group">
-                        <label for="lead_no" class="input__label">Patient Id</label>
+                        <label for="lead_no" class="input__label">Patient ID</label>
                         <input type="text" class="form-control input-style" id="lead_no" name="lead_no"
                           data-validation="" disabled data-error-message="Lead no is required." placeholder="">
                       </div>
@@ -252,7 +252,7 @@
                         <select id="country" name="country" class="form-control input-style" data-validation="required"
                           data-error-message="Country is required.">
                           <option value="">Select Country</option>
-                          <option value="INDIA">INDIA</option>
+                          <option value="INDIA">India</option>
                           <!-- Options will be populated via AJAX -->
                         </select>
 
@@ -975,7 +975,7 @@
 
           <script src="../javascripts/multiplePhotos.js"></script>
           <script>
-
+            console.log('<%= loginName %>')
 
 
             function modifyQuery() {
@@ -1180,31 +1180,7 @@
               marriageYearVal('.wife-age', '.hus-age', '.marriage-year');
 
               //alert('11')
-              document.getElementById('logoutButton').addEventListener('click', function (event) {
-    event.preventDefault(); // Prevent the default action of following the link
-
-    fetch('/logout', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Logout failed');
-      }
-      return response.json();
-    })
-    .then(data => {
-      console.log(data.msg); // Log the logout message
-      window.location.href = '/1'; // Redirect to login page after successful logout
-    })
-    .catch(error => {
-      console.error('Error logging out:', error);
-      alert('Failed to log out. Please try again.'); // Provide user feedback
-    });
-});
-
+           
 
               console.log("Document is ready");
 
@@ -1487,7 +1463,7 @@
                         }
                         const newRow = `
         <tr id=${item.id} >
-              <td>${formatDate(item.apt_date)}</td>
+          <td>${formatDate(item.apt_date)}</td>
           <td>${item.apt_time}</td>
           <td>${item.doctor}</td>
           <td>${item.clinic}</td>

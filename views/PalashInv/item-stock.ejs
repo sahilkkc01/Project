@@ -255,6 +255,7 @@
                 function fetchData() {
                     fetchDataFromFirstRoute()
                         .done(function(data) {
+                            
                             console.log('Data from first route:', data);
         
                             let tableRows = '';
@@ -286,7 +287,7 @@
                                             <td>${combinedItem.store}</td>
                                             <td>${combinedItem.batchCode}</td>
                                             <td>${combinedItem.availableStock}</td>
-                                            <td>${combinedItem.stocking_uom}</td>
+                                            <td>${combinedItem.uom}</td>
                                             <td>${formatDate(combinedItem.expiryDate)}</td>
                                             <td>${combinedItem.availableStock * combinedItem.base_mrp}</td>
                                             <td>${combinedItem.availableStock * combinedItem.base_cp}</td>

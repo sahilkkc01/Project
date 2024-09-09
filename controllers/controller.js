@@ -8,6 +8,7 @@ const { Department } = require('../models/clinicConfig');
 const { DocCatMaster } = require('../models/clinicConfig');
 const { Doctor } = require('../models/clinicConfig');
 const {PrimarySymptoms} = require('../models/clinicConfig');
+const jwt = require('jsonwebtoken');
 var path = require('path');
 const md5 = require('md5')
 
@@ -713,70 +714,85 @@ const apt4=async (req, res) => {
 }
 const activeSessions = {};
 
+const JWT_SECRET='ll'
+
 // Login function with adjusted session data management
 const login = async (req, res) => {
   const { userEmail, userPassword } = req.body;
-  console.log(req.body);
+  console.log(userEmail, userPassword);
 
   try {
-      const user = await SuperAdmin.findOne({ where: { username: userEmail } });
-      if (!user) {
-          return res.status(404).json({ msg: 'Admin not found' });
-      }
-      console.log(user)
+    const user = await SuperAdmin.findOne({ where: { username: userEmail } });
+    if (!user) {
+      return res.status(404).json({ msg: 'Admin not found' });
+    }
 
-      const inputPasswordHash = md5(userPassword);
-      if (user.Password !== inputPasswordHash) {
-          return res.status(401).json({ msg: 'Invalid username or password' });
-      }
+    const inputPasswordHash = md5(userPassword);
+    if (user.Password !== inputPasswordHash) {
+      return res.status(401).json({ msg: 'Invalid username or password' });
+    }
 
-      // Check if user is already logged in somewhere else
-      if (activeSessions[user.username] && activeSessions[user.username] !== req.session.id) {
-        return res.status(409).json({ msg: 'User already logged in elsewhere.' });
-      }
+    // Create a JWT token
+    const token = jwt.sign(
+      {
+        id: user.id, // Include user's id
+        username: user.username,
+        clinicId: user.clinicId // Additional payload can be added as needed
+      },
+      JWT_SECRET, // Secret key stored in environment variable
+      // { expiresIn: '3h' } // Token expires in 1 hour
+    );
+                                            
+    // Store token in HttpOnly cookie
+    // Set the token in the cookie with no expiration time
+    res.cookie('token', token, { httpOnly: true, secure: true });
+    // res.cookie('token', token, { httpOnly: true, secure: true, maxAge: 10800000 }); // Secure for HTTPS
 
-      // Update or set the session ID for the user
-      activeSessions[user.username] = req.session.id;
-      console.log(activeSessions[user])
-
-      req.session.user = {
-        username: user.username, // Changed from id to username for clarity
+    // Send the user information in response
+    res.status(200).json({
+      msg: 'Login successful',
+      user: {
+        id: user.id,
+        username: user.username,
         clinicId: user.clinicId,
         clinicName: user.clinicName
-      };
-
-      req.session.save();
-      res.status(200).json({ msg: 'Login successful', name: user.userName });
+      }
+    });
   } catch (error) {
-      console.error('Error authenticating user:', error);
-      res.status(500).json({ msg: 'Error authenticating user' });
+    console.error('Error authenticating user:', error);
+    res.status(500).json({ msg: 'Error during login' });
   }
 };
 
-// Logout function with refined session clearing
+
+
+// Assuming you have a mechanism to store invalidated tokens
+const invalidatedTokens = [];
+
 const logout = (req, res) => {
-  if (!req.session.user) {
-    return res.status(400).json({ msg: 'No active session' });
+  const token = req.cookies.token; // Get token from HttpOnly cookie
+
+  if (!token) {
+    return res.status(400).json({ msg: 'No token provided' });
   }
 
-  const username = req.session.user.username;
-  console.log(`Attempting to log out user: ${username}`);
-
-  console.log(`Before deleting, activeSessions:`, activeSessions);
-  delete activeSessions[username]; // Use username to reference the session
-  console.log(`After deleting, activeSessions:`, activeSessions);
-
-  req.session.destroy(err => {
+  jwt.verify(token, JWT_SECRET, (err, decoded) => {
     if (err) {
-      console.log('Error during session destruction:', err);
-      return res.status(500).json({ msg: 'Error logging out' });
+      return res.status(401).json({ msg: 'Failed to authenticate token' });
     }
 
-    res.clearCookie('connect.sid');
-    console.log('Logout successful, session cookie cleared.');
+    // Invalidate the token by adding it to the invalidated list
+    invalidatedTokens.push(token);
+
+    // Clear the token cookie
+    res.clearCookie('token'); // Clear the cookie containing the JWT token
+
+    console.log(`Token invalidated for user: ${decoded.username}`);
     res.status(200).json({ msg: 'Logout successful' });
   });
 };
+
+
 
 
 

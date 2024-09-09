@@ -24,7 +24,7 @@ router.post('/print-concent', async (req, res) => {
         console.log(req.body);
         const findPatient = await PR_patientReg.findOne({ where: { mr_no: patientReg } })
 
-        if (req.body.fileName == 'form-6') {
+        if (req.body.fileName == 'file1') {
             const pdfPath = path.join(__dirname, '../concent/pdf', 'form-6.pdf');
             let firstPage = await getPath(pdfPath)
 

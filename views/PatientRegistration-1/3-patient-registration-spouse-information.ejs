@@ -1,0 +1,684 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>LifeLinker</title>
+
+    <!-- Template CSS -->
+    <%- include('../header') %>
+        <!-- //header-ends -->
+        <!-- main content start -->
+        <div class="main-content">
+
+            <div class="row content-top-gap2">
+                <div class="col-lg-12">
+                    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+                        <a class="navbar-brand text-center mr-5" href="#">
+                            <span class="dash-icon"><i class="fas fa-tachometer-alt"></i></span>
+                            Dashboard
+                        </a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav">
+                                <li class="nav-item active text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="far fa-user"></i></span>
+                                        Master
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-exchange-alt"></i></span>
+                                        Transaction
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-hand-holding-medical"></i></span>
+                                        Patient 360
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-receipt"></i></span>
+                                        Outside Reciept
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-file-invoice"></i></span>
+                                        Outpatient Department
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-chart-line"></i></span>
+                                        Analytics
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="far fa-clock"></i></span>
+                                        Waiting List
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-wrench"></i></span>
+                                        Adminstration
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-spinner"></i></span>
+                                        Additional
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+            <!-- content -->
+            <div class="container-fluid">
+
+                <div class="chart">
+                    <div class="row">
+
+                        <div class="col-lg-12 pl-lg-0 mt-2 ml-2">
+                            <h4 class="primary">Patient Registration</h4>
+                        </div>
+                        <div class="col-lg-12 pl-lg-2 chart-grid">
+                            <form>
+                                <div class="card card_border">
+                                    <div class="">
+                                        <!--Past your code here starts-->
+
+                                        <div class="card">
+
+
+
+
+
+                                            <div class="card-body pb-1 pt-2">
+
+                                                <div class="form-row">
+
+                                                    <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                                        <div class="form-group"><label
+                                                                class="input__label">Date</label><input
+                                                                name="investigation_no*" type="date"
+                                                                class="form-control input-style" placeholder=""></div>
+                                                    </div>
+
+                                                    <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                                        <div class="form-group"><label class="input__label">Registration
+                                                                Type</label>
+                                                            <select name="clinic_status"
+                                                                class="form-control input-style">
+                                                                <option></option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                                        <div class="form-group"><label class="input__label">MR
+                                                                No.</label><input name="investigation_no*" type="number"
+                                                                class="form-control input-style" placeholder=""></div>
+                                                    </div>
+
+                                                    <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                                        <div class="form-group"><label class="input__label">Agency
+                                                                Name</label>
+                                                            <select name="clinic_status"
+                                                                class="form-control input-style">
+                                                                <option></option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                                        <div class="form-group"><label
+                                                                class="input__label">Agent</label>
+                                                            <select name="clinic_status"
+                                                                class="form-control input-style">
+                                                                <option></option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                                        <div class="form-group"><label class="input__label">Source Of
+                                                                Reference</label>
+                                                            <select name="clinic_status"
+                                                                class="form-control input-style">
+                                                                <option></option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                                        <div class="form-group"><label class="input__label">Camp</label>
+                                                            <select name="clinic_status"
+                                                                class="form-control input-style">
+                                                                <option></option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                                        <div class="form-group"><label class="input__label">Referral
+                                                                Details</label><input name="investigation_no*"
+                                                                type="text" class="form-control input-style"
+                                                                placeholder=""></div>
+                                                    </div>
+
+
+                                                    <div class="col-lg-3 col-md-4 col-sm-12 mt-3">
+                                                        <div class="form-check-label form-row">
+                                                            <div class="radio pt-2">
+
+                                                                <label class="form-check-label pt-1 pr-4"><input
+                                                                        class="form-check-input mt-1"
+                                                                        type="radio">External Doctor</label>
+
+                                                                <label class="form-check-label pt-1 pl-4"><input
+                                                                        class="form-check-input mt-1"
+                                                                        type="radio">Inhouse Doctor</label>
+
+
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="col-lg-3 col-md-4 col-sm-12 mb-2 mt-4">
+                                                        <div class="form-group">
+                                                            <select name="clinic_status"
+                                                                class="form-control input-style">
+                                                                <option>Select</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-3 col-md-4 col-sm-12">
+                                                        <div class="form-group"><button type="button"
+                                                                class="btn btn-style mt-4 btn-secondary btn-style btn-change"><strong>
+                                                                    <i class="fa-solid fa-stethoscope"></i> Referral
+                                                                    Doctor</strong></button></div>
+                                                    </div>
+
+                                                </div>
+
+
+
+
+
+
+
+
+
+                                            </div>
+
+
+
+
+
+
+
+
+
+                                            <!--Past your code here ends-->
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                        </div>
+
+                        <!-- section2 -->
+
+
+
+
+
+
+
+                        <div class="col-lg-12 pl-lg-2 pr-lg-3">
+                            <div class="card card_border">
+
+                                <div class="col-xl-12 p-heading">
+
+                                    <!-- Nav Tabs are here once have a look--->
+                                    <h6 class="p-text">SPOUSE INFORMATION</h6>
+                                </div>
+
+                                <div class="row pl-3 pr-3">
+
+                                    <div class="card-body col-3 pr-0">
+
+                                        <div class="form-row">
+
+                                            <div class="col-lg-12 col-md-12 col-sm-12 mb-2 height-50%">
+                                                <div class="form-group"><textarea name=""
+                                                        class="form-control input-style" placeholder=""></textarea>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-6 col-md-6 col-sm-12 mb-2">
+                                                <div class="form-group text-right pr-4">
+
+                                                    <i class="fa-solid fa-arrow-up-from-bracket"></i>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-6 col-md-6 col-sm-12 mb-2">
+                                                <div class="form-group text-left pl-4">
+
+                                                    <i class="fa-solid fa-camera"></i>
+
+                                                </div>
+                                            </div>
+
+
+
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="card-body col-9 pt-2">
+
+                                        <div class="form-row">
+
+                                            <div class="col-lg-4 col-md-4 col-sm-12 mb-2">
+                                                <div class="form-group"><label class="input__label">Prefix</label>
+                                                    <select name="clinic_status" class="form-control input-style">
+                                                        <option>Select</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-4 col-md-4 col-sm-12 mb-2">
+                                                <div class="form-group"><label class="input__label">First
+                                                        Name</label><input name="investigation_no*" type="text"
+                                                        class="form-control input-style" placeholder=""></div>
+                                            </div>
+
+
+                                            <div class="col-lg-4 col-md-4 col-sm-12 mb-2">
+                                                <div class="form-group"><label class="input__label">Middle
+                                                        Name</label><input name="investigation_no*" type="text"
+                                                        class="form-control input-style" placeholder=""></div>
+                                            </div>
+
+                                            <div class="col-lg-4 col-md-4 col-sm-12 mb-2">
+                                                <div class="form-group"><label class="input__label">Last
+                                                        Name</label><input name="investigation_no*" type="text"
+                                                        class="form-control input-style" placeholder=""></div>
+                                            </div>
+
+                                            <div class="col-lg-4 col-md-4 col-sm-12 mb-2">
+                                                <div class="form-group"><label class="input__label">Family
+                                                        Name</label><input name="investigation_no*" type="text"
+                                                        class="form-control input-style" placeholder=""></div>
+                                            </div>
+
+                                            <div class="col-lg-4 col-md-4 col-sm-12 mb-2">
+                                                <div class="form-group"><label class="input__label">Mother's
+                                                        Name</label><input name="investigation_no*" type="text"
+                                                        class="form-control input-style" placeholder=""></div>
+                                            </div>
+
+                                            <div class="col-lg-4 col-md-4 col-sm-12 mb-2">
+                                                <div class="form-group"><label class="input__label">Blood Group</label>
+                                                    <select name="clinic_status" class="form-control input-style">
+                                                        <option>Select</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-4 col-md-4 col-sm-12 mb-2">
+                                                <div class="form-group"><label class="input__label">D.O.B.</label><input
+                                                        name="investigation_no*" type="date"
+                                                        class="form-control input-style" placeholder=""></div>
+                                            </div>
+
+                                            <div class="col-lg-4 col-md-4 col-sm-12 mb-2">
+                                                <label class="input__label">Age</label>
+                                                <div class="form-row">
+                                                    <div class=" col-4 form-group">
+                                                        <input name="description" type="text"
+                                                            class="form-control input-style" placeholder="">
+                                                    </div>
+                                                    <div class="col-4 form-group">
+                                                        <input name="description" type="text"
+                                                            class="form-control input-style" placeholder="">
+                                                    </div>
+                                                    <div class="col-4 form-group">
+                                                        <input name="description" type="text"
+                                                            class="form-control input-style" placeholder="">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+
+
+                                            <div class="col-lg-4 col-md-4 col-sm-12 mb-2">
+                                                <div class="form-group"><label class="input__label">Education</label>
+                                                    <select name="clinic_status" class="form-control input-style">
+                                                        <option>Select</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 col-md-4 col-sm-12 mb-2">
+                                                <div class="form-group"><label class="input__label">Marital
+                                                        Status</label>
+                                                    <select name="clinic_status" class="form-control input-style">
+                                                        <option>Select</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 col-md-4 col-sm-12 mb-2">
+                                                <div class="form-group"><label class="input__label">Marriage
+                                                        Anniversary</label>
+                                                    <select name="clinic_status" class="form-control input-style">
+                                                        <option>Select</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 col-md-4 col-sm-12 mb-2">
+                                                <div class="form-group"><label class="input__label">Occupation</label>
+                                                    <select name="clinic_status" class="form-control input-style">
+                                                        <option>Select</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 col-md-4 col-sm-12 mb-2">
+                                                <div class="form-group"><label class="input__label">Company Name</label>
+                                                    <select name="clinic_status" class="form-control input-style">
+                                                        <option>Select</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-lg-4 col-md-4 col-sm-12 mb-2">
+                                                <label class="input__label">ID Proof </label>
+                                                <div class="form-row">
+                                                    <div class=" col-6 form-group">
+                                                        <select name="clinic_status" class="form-control input-style">
+                                                            <option>Select</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-6 form-group">
+                                                        <input name="description" type="text"
+                                                            class="form-control input-style" placeholder="">
+                                                    </div>
+
+                                                </div>
+
+
+                                            </div>
+                                            <div class="col-lg-4 col-md-4 col-sm-12 mb-2">
+                                                <div class="form-group"><label class="input__label">Special
+                                                        Registration</label>
+                                                    <select name="clinic_status" class="form-control input-style">
+                                                        <option>Select</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-4 col-md-4 col-sm-12 mb-2">
+                                                <div class="form-group"><label class="input__label">Religion</label>
+                                                    <select name="clinic_status" class="form-control input-style">
+                                                        <option>Select</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-lg-4 col-md-4 col-sm-12 mt-3">
+                                                <div class="form-check-label form-row">
+                                                    <div class="radio pt-2">
+
+                                                        <label class="form-check-label pt-1 pr-4"><input
+                                                                class="form-check-input pt-0" type="checkbox">Is
+                                                            International</label>
+
+
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="col-lg-4 col-md-4 col-sm-12 mb-2">
+                                                <div class="form-group"><label class="input__label">Gender</label>
+                                                    <select name="clinic_status" class="form-control input-style">
+                                                        <option>Select</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-lg-4 col-md-4 col-sm-12 mb-2">
+                                                <div class="form-group"><label class="input__label">Preferred
+                                                        Language</label>
+                                                    <select name="clinic_status" class="form-control input-style">
+                                                        <option>Select</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-lg-4 col-md-4 col-sm-12 mb-2">
+                                                <div class="form-group"><label class="input__label">Nationality</label>
+                                                    <select name="clinic_status" class="form-control input-style">
+                                                        <option>Select</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+
+                                           
+
+
+
+
+
+                                           
+
+
+
+                                          
+
+                                            
+
+
+
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- SECTION 3 -->
+
+
+
+                        <div class="col-lg-12 pl-lg-2 mt-4 pr-lg-3">
+                            <div class="card card_border">
+
+                                <div class="col-xl-12 p-heading">
+
+                                  
+                                    <h6 class="p-text">SPOUSE CONTACT DETAILS</h6>
+                                </div>
+
+
+
+                                <div class="card-body pb-1 pt-2">
+
+                                    <div class="form-row">
+
+                                        
+
+                                        <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                            <label class="input__label">Residence Phone</label>
+                                            <div class="form-row">
+                                               
+                                                <div class="col-3 form-group">
+                                                    <input name="description" type="text"
+                                                        class="form-control input-style" placeholder="">
+                                                </div>
+                                                <div class="col-3 form-group">
+                                                    <input name="description" type="text"
+                                                        class="form-control input-style" placeholder="">
+                                                </div>
+                                                <div class="col-6 form-group">
+                                                    <input name="description" type="text"
+                                                        class="form-control input-style" placeholder="">
+                                                </div>
+
+                                            </div>
+
+
+                                        </div>
+
+
+                                        <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                            <label class="input__label">Mobile</label>
+                                            <div class="form-row">
+                                               
+                                                <div class="col-3 form-group">
+                                                    <input name="description" type="text"
+                                                        class="form-control input-style" placeholder="">
+                                                </div>
+                                                <div class="col-9 form-group">
+                                                    <input name="description" type="text"
+                                                        class="form-control input-style" placeholder="">
+                                                </div>
+                                                
+
+                                            </div>
+
+
+                                        </div>
+
+                                        <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                            <div class="form-group"><label class="input__label">Email
+                                                </label><input name="investigation_no*" type="email"
+                                                    class="form-control input-style" placeholder=""></div>
+                                        </div>
+
+
+                                        <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                            <div class="form-group"><label class="input__label">Address
+                                                </label><textarea
+                                                name="" class="form-control input-style"
+                                                placeholder=""></textarea></div>
+                                        </div>
+
+
+                                        <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                            <div class="form-group"><label class="input__label">Country</label>
+                                                <select name="clinic_status" class="form-control input-style">
+                                                    <option>Select</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                            <div class="form-group"><label class="input__label">State</label>
+                                                <select name="clinic_status" class="form-control input-style">
+                                                    <option>Select</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                            <div class="form-group"><label class="input__label">City</label>
+                                                <select name="clinic_status" class="form-control input-style">
+                                                    <option>Select</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                            <div class="form-group"><label class="input__label">Area</label>
+                                                <select name="clinic_status" class="form-control input-style">
+                                                    <option>Select</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+
+
+
+
+
+
+                                        <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
+                                            <div class="form-group"><label class="input__label">Pin Code
+                                                </label><input name="investigation_no*" type="number"
+                                                    class="form-control input-style" placeholder=""></div>
+                                        </div>
+
+
+
+                                    </div>
+
+                                </div>
+
+
+
+
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+                </div>
+                <div class="form-group mt-1 mb-3 text-right">
+
+                    <button type="button" class="btn-secondary btn-style btn mt-3 mr-2"><strong>
+                        Register & Add Visit</strong></button>
+
+                <button type="button" class="btn-secondary btn-style btn mt-3 mr-2"><strong>
+                        Register</strong></button>
+
+                <button type="button" class="btn-danger btn-style btn mt-3"><strong><i
+                            class="fas fa-times"></i> Close</strong></button>
+
+                            
+
+
+                </div>
+                </form>
+            </div>
+            <!--footer section start-->
+           <%- include('../footer') %>

@@ -250,16 +250,15 @@
                         </form>
                     </div>
                   
-                     <div class="modal fade" id="itemSearchModal">
+                    <div class="modal fade" id="itemSearchModal">
                         <div class="modal-dialog modal-xl">
                             <div class="modal-content">
-
                                 <!-- Modal Header -->
                                 <div class="modal-header">
                                     <h4 class="modal-title">Item Search</h4>
-                                    <button type="button" class="close" data-dismiss="modal">&times;"></button>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
-
+                    
                                 <!-- Modal body -->
                                 <div class="modal-body">
                                     <form>
@@ -272,64 +271,56 @@
                                                     <div class="col-lg-3 col-md-4 col-sm-12">
                                                         <div class="form-group">
                                                             <label class="input__label">Item Name</label>
-                                                            <input name="service name" type="text"
-                                                                class="form-control input-style" placeholder="">
+                                                            <input name="item_name" id="item_name" type="text" class="form-control input-style" placeholder="">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-3 col-md-4 col-sm-12">
                                                         <div class="form-group">
                                                             <label class="input__label">Brand Name</label>
-                                                            <input name="service name" type="text"
-                                                                class="form-control input-style" placeholder="">
+                                                            <input name="brand_name" id="brand_name" type="text" class="form-control input-style" placeholder="">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-3 col-md-4 col-sm-12">
                                                         <div class="form-group">
                                                             <label class="input__label">Item Code</label>
-                                                            <input name="service name" type="number"
-                                                                class="form-control input-style" placeholder="">
+                                                            <input name="item_code" id="item_code" type="number" class="form-control input-style" placeholder="">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-3 col-md-4 col-sm-12">
                                                         <div class="form-group">
                                                             <label class="input__label">Item Category</label>
-                                                            <select name="report_generated_by"
-                                                                    class="form-control input-style">
-                                                                <option>Select</option>
+                                                            <select name="item_category" id="item_category" class="form-control input-style">
+                                                                <option value="">Select</option>
                                                             </select>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-3 col-md-4 col-sm-12">
                                                         <div class="form-group">
                                                             <label class="input__label">Item Group</label>
-                                                            <select name="report_generated_by"
-                                                                    class="form-control input-style">
-                                                                <option>Select</option>
+                                                            <select name="item_group" id="item_group" class="form-control input-style">
+                                                                <option value="">Select</option>
                                                             </select>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-3 col-md-4 col-sm-12">
                                                         <div class="form-group">
                                                             <label class="input__label">Molecule</label>
-                                                            <select name="report_generated_by"
-                                                                    class="form-control input-style">
-                                                                <option>Select</option>
+                                                            <select name="molecule" id="molecule" class="form-control input-style">
+                                                                <option value="">Select</option>
                                                             </select>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-3 col-md-4 col-sm-12">
                                                         <div class="form-group">
                                                             <label class="input__label">Store</label>
-                                                            <select name="report_generated_by"
-                                                                    class="form-control input-style">
-                                                                <option>Select</option>
+                                                            <select name="store_search" id="store_search" class="form-control input-style">
+                                                                <option value="">Select</option>
                                                             </select>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-3 col-md-4 col-sm-12 text-left">
                                                         <div class="form-group">
-                                                            <button type="button"
-                                                                    class="btn btn-style mt-4 btn-primary btn-style btn-change">
+                                                            <button type="button" id="searchItemsBtn" class="btn btn-style mt-4 btn-primary btn-style btn-change">
                                                                 <strong><i class="fas fa-search"></i> Search</strong>
                                                             </button>
                                                         </div>
@@ -342,7 +333,7 @@
                                                 <div class="form-check-label">
                                                     <div class="radio mt-2 mb-2">
                                                         <label class="form-check-label pt-1">
-                                                            <input class="form-check-input mt-1" type="checkbox" id="select-all-items">
+                                                            <input class="form-check-input mt-1" type="checkbox" id="selectAllItemsCheckbox">
                                                             Select All Items
                                                         </label>
                                                     </div>
@@ -355,34 +346,33 @@
                                                             <div class="slidx">
                                                                 <table class="table2">
                                                                     <thead>
-                                                                    <tr>
-                                                                        <th contenteditable="true">Select</th>
-                                                                        <th contenteditable="true">Item Code</th>
-                                                                        <th contenteditable="true">Item Name</th>
-                                                                        <th contenteditable="true">Brand Name</th>
-                                                                        <th contenteditable="true">CGST</th>
-                                                                        <th contenteditable="true">SGST</th>
-                                                                        <th contenteditable="true">IGST</th>
-                                                                        <th contenteditable="true">Suspend</th>
-                                                                        <th contenteditable="true">Available Stock</th>
-                                                                        <th contenteditable="true">Stock UOM</th>
-                                                                    </tr>
+                                                                        <tr>
+                                                                            <th contenteditable="true">Select</th>
+                                                                            <th contenteditable="true">Item Code</th>
+                                                                            <th contenteditable="true">Item Name</th>
+                                                                            <th contenteditable="true">Brand Name</th>
+                                                                            <th contenteditable="true">CGST</th>
+                                                                            <th contenteditable="true">SGST</th>
+                                                                            <th contenteditable="true">IGST</th>
+                                                                            <th contenteditable="true">Suspend</th>
+                                                                            <th contenteditable="true">Available Stock</th>
+                                                                            <th contenteditable="true">Stock UOM</th>
+                                                                        </tr>
                                                                     </thead>
                                                                     <tbody id="tbodyid">
                                                                     </tbody>
                                                                 </table>
                                                             </div>
-                                                        </div                                                    </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-group mt-1 mb-3 text-right">
-                                            <button type="button" class="btn-danger btn-style btn mt-3 mr-2"
-                                                    data-dismiss="modal">
+                                            <button type="button" class="btn-danger btn-style btn mt-3 mr-2" data-dismiss="modal">
                                                 <strong><i class="fas fa-times"></i> Cancel</strong>
                                             </button>
-                                            <button type="button" class="btn-primary btn-style btn mt-3"
-                                                    data-dismiss="modal" id="addSelectedItemsBtn">
+                                            <button type="button" class="btn-primary btn-style btn mt-3" data-dismiss="modal" id="addSelectedItemsBtn">
                                                 <strong><i class="fas fa-check"></i> OK</strong>
                                             </button>
                                         </div>
@@ -436,13 +426,14 @@
         function populateIndentItems(items) {
             let tableRows = '';
             items.forEach(function (item) {
+                console.log('asd',items)
                 tableRows += `
                     <tr>
                         <td>${item.itemDetails.item_name}</td>
                         <td><input type="number" class="form-control input-style" name="indent_quantity" value="${item.indent_quantity}"></td>
-                        <td>${item.itemDetails.purchase_uom}</td>
+                        <td><input style="display:none" type="text" class="form-control input-style" name="uom" value="${item.uom}">${item.uom}</td>
                         <td><input type="number" class="form-control input-style" name="available_stock" value="${item.available_stock}"></td>
-                        <td>${item.itemDetails.stocking_uom}</td>
+                        <td>${item.uom}</td>
                         <td style="display:none;"><input type="hidden" name="item_id" value="${item.item_id}"></td>
                         <td><button type="button" class="btn btn-danger btn-sm remove-item"><i class="fa-solid fa-trash-can"></i></button></td>
                     </tr>
@@ -453,24 +444,38 @@
 
         // Load dropdowns
         const loadDropdown = (url, elementId) => {
-            fetch(url)
-                .then(response => response.json())
-                .then(data => {
-                    const dropdown = document.getElementById(elementId);
-                    data.forEach(item => {
-                        const option = document.createElement('option');
-                        option.value = item.description || item.rank_desc || item.shelf_desc || item.bin_desc || item.clinic_desc || item.tax_desc;
-                        option.textContent = item.description || item.rank_desc || item.shelf_desc || item.bin_desc || item.clinic_desc || item.tax_desc;
-                        dropdown.appendChild(option);
-                    });
-                })
-                .catch(error => console.error(`Error fetching ${elementId} details:`, error));
-        };
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            const dropdown = document.getElementById(elementId);
+            let items = data;
+            if (elementId === 'item_category') {
+                items = data.ItemCatData;
+            }
+            if (elementId === 'item_group'  || elementId === 'molecule') {
+
+                items = data.result;
+            }
+            
+            items.forEach(item => {
+                const option = document.createElement('option');
+                option.value = item.description || item.rank_desc || item.shelf_desc || item.bin_desc || item.clinic_desc || item.tax_desc || item.Item_description;
+                option.textContent = item.description || item.rank_desc || item.shelf_desc || item.bin_desc || item.clinic_desc || item.tax_desc || item.Item_description;
+                dropdown.appendChild(option);
+            });
+        })
+        .catch(error => console.error(`Error fetching ${elementId} details:`, error));
+};
 
         // Load dropdowns
         loadDropdown('/adminInv/get-store-details', 'from_store');
         loadDropdown('/adminInv/get-store-details', 'to_store');
         loadDropdown('/adminInv/get-clinic-details', 'clinic');
+        loadDropdown('/adminInv/get-supplier-details', 'supplier');
+    loadDropdown('/adminInv/getAll-itemCat-list', 'item_category');
+    loadDropdown('/adminInv/getAll-itemGroup-list', 'item_group');
+    loadDropdown('/adminInv/getAll-molecule-list', 'molecule');
+    loadDropdown('/adminInv/get-store-details', 'store_search'); 
 
         // Set current date for Indent Date and set it as readonly
         const today = new Date().toISOString().split('T')[0];
@@ -480,60 +485,89 @@
         document.getElementById('exp_del_date').setAttribute('min', today);
 
         // Fetch data in the popup table
-        function fetchData(from_store) {
-            $.ajax({
-                url: '/palashinv/get-current-item-counts',
-                type: 'GET',
-                data: { 
-                    store: from_store,
-                    clinic: '' // Set clinic to blank
-                },
-                success: function (data) {
-                    console.log(data);
-                    let tableRows = '';
-                    data.data.forEach(function (item) {
-                        tableRows += `
-                            <tr data-item-id="${item.id}">
-                                <td><input class="form-check-input mt-0 item-checkbox" type="checkbox"></td>
-                                <td>${item.item_code}</td>
-                                <td>${item.item_name}</td>
-                                <td>${item.brand_name}</td>
-                                <td>${item.CGST.toFixed(2)}%</td>
-                                <td>${item.SGST.toFixed(2)}%</td>
-                                <td>${item.IGST.toFixed(2)}%</td>
-                                <td><input class="form-check-input mt-0 suspend-checkbox" type="checkbox" ${item.suspend ? 'checked' : ''} disabled></td>
-                                <td>${item.availableStock}</td>
-                                <td>${item.stocking_uom}</td>
-                                <td style="display:none;"><input type="hidden" value="${item.purchase_uom}"></td>
-                                <td style="display:none;"><input type="hidden" name="item_id" value="${item.id}"></td>
-                                <td style="display:none;"><input type="hidden" name="item_code" value="${item.item_code}"></td>
-                            </tr>
-                        `;
-                    });
-                    $('#tbodyid').html(tableRows);
+        document.getElementById('searchItemsBtn').addEventListener('click', function() {
+    // Collect search parameters
+    const searchParams = {
+        item_name: document.getElementById('item_name').value || null,
+        brand_name: document.getElementById('brand_name').value || null,
+        item_code: document.getElementById('item_code').value || null,
+        item_category: document.getElementById('item_category').value || null,
+        item_group: document.getElementById('item_group').value || null,
+        molecule_name: document.getElementById('molecule').value || null,
+        store_search: document.getElementById('store_search').value || null,
+        store: document.getElementById('from_store').value || null,
+    };
 
-                    // Add the select all checkbox functionality
-                    $('#select-all-items').on('change', function () {
-                        const isChecked = $(this).is(':checked');
-                        $('#tbodyid input.item-checkbox').prop('checked', isChecked);
-                    });
-                },
-                error: function (xhr, status, error) {
-                    console.error('Error fetching item details:', error);
-                }
-            });
+    // Filter out null values
+    const filteredParams = {};
+    for (const key in searchParams) {
+        if (searchParams[key] !== null && searchParams[key] !== "") {
+            filteredParams[key] = searchParams[key];
         }
+    }
+
+    // Make the search request using Axios
+    axios.get('/palashinv/getItemsOnSearch', { params: filteredParams })
+    .then(function(response) {
+        console.log(response);
+        const data = response.data;
+        
+        document.getElementById('tbodyid').innerHTML = '';
+        let tableRows = '';
+
+
+        // Populate the search results table
+        data.forEach(item => {
+            const storeTax = item.storeTaxes && item.storeTaxes.length > 0 ? item.storeTaxes[0] : {};
+            const totalAvailableStock = item.currentStock.reduce((total, stock) => total + stock.availableStock, 0);
+            tableRows += `
+                <tr data-item-id="${item.id}">
+                    <td><input class="form-check-input mt-0 item-checkbox" type="checkbox"></td>
+                    <td>${item.item_code}</td>
+                    <td>${item.item_name}</td>
+                    <td>${item.brand_name}</td>
+                    <td>${storeTax.CGST !== undefined && storeTax.CGST !== null ? storeTax.CGST : 'N/A'}</td>
+                    <td>${storeTax.SGST !== undefined && storeTax.SGST !== null ? storeTax.SGST : 'N/A'}</td>
+                    <td>${storeTax.IGST !== undefined && storeTax.IGST !== null ? storeTax.IGST : 'N/A'}</td>
+                    <td><input type="checkbox"  data-id='${item.id}' ${item.suspend ? 'checked disabled' : ''}></td>
+                    <td>${totalAvailableStock}</td>
+                    <td>${item.currentStock[0]?.uom || 'N/A'}</td>
+                    <td style="display:none;" >${item.conversionFactors[0].from_uom}</td>
+                    <td style="display:none;" >${item.conversionFactors[0].to_uom}</td>
+                    <td style="display:none;" >${item.conversionFactors[0].conversion_factor}</td>
+                    <td style="display:none;" >${item.base_unit_cost_price}</td>
+                    <td style="display:none;" >${item.base_unit_mrp}</td>
+                    <td style="display:none;" >${item.conversionFactors[0].conversion_factor}</td>
+                    <td style="display:none;" >${item.discount_on_sale}</td>
+                    <td style="display:none;" >${item.stocking_uom}</td>
+                </tr>
+            `;
+        });
+
+        document.getElementById('tbodyid').innerHTML = tableRows;
+    })
+    .catch(function(error) {
+        console.error('Error fetching search results:', error);
+    });
+
+});
 
         // Add selected items to the main table
         function addSelectedItems() {
+          
             $('#tbodyid input.item-checkbox:checked').each(function () {
-                const row = $(this).closest('tr');
-                const itemName = row.find('td:eq(2)').text();
-                const availableStock = row.find('td:eq(8)').text().trim();
-                const stockingUOM = row.find('td:eq(9)').text().trim();
-                const purchaseUOM = row.find('td:eq(10) input').val().trim();
-                const itemId = row.find('td:eq(11) input[name="item_id"]').val();
-                const item_code = row.find('td:eq(12) input[name="item_code"]').val();
+    const row = $(this).closest('tr');
+    const itemId = row.data('item-id'); // Access using data attribute
+    const itemCode = row.find('td:eq(1)').text(); // Second column for item code
+    const itemName = row.find('td:eq(2)').text(); // Third column for item name
+    const brandName = row.find('td:eq(3)').text(); // Fourth column for brand name
+    const availableStock = row.find('td:eq(8)').text().trim(); // Ninth column for available stock
+    const stockingUOM = row.find('td:eq(9)').text().trim(); // Tenth column for stocking UOM
+    const purchaseUOM = row.find('td:eq(10)').text().trim(); // Temporarily assuming it's visible for matching context, else adjust if it's in an input
+
+    alert(itemCode)
+    // Assuming 'conversion factor' might need to be fetched from a hidden input if applicable
+    const conversionFactor = row.find('td:eq(12)').text().trim(); 
 
                 // Ensure that availableStock is correctly displayed in the input field
                 const newRow = `
@@ -541,12 +575,12 @@
                         <td>${itemName}</td>
                         <td><input type="number" data-validation="required"
                                 data-error-message="Quantity is required." class="form-control input-style" name="indent_quantity" min="1"></td>
-                        <td>${purchaseUOM}</td>
+                        <td><input style="display:none" type="text" class="form-control input-style" name="uom" value="${stockingUOM}">${stockingUOM}</td>
                         <td><input type="number" data-validation="required" readonly
                                 data-error-message="Available Stock is required." class="form-control input-style" name="available_stock" value="${availableStock}"></td>
                         <td>${stockingUOM}</td>
                         <td style="display:none;"><input type="hidden" name="item_id" value="${itemId}"></td>
-                        <td style="display:none;"><input type="hidden" name="item_code" value="${item_code}"></td>
+                        <td style="display:none;"><input type="hidden" name="item_code" value="${itemCode}"></td>
                         <td><button type="button" class="btn btn-danger btn-sm remove-item"><i class="fa-solid fa-trash-can"></i></button></td>
                     </tr>
                 `;
@@ -581,7 +615,7 @@
                 return;
             }
 
-            fetchData(from_store);
+         
         });
 
         // Add event listener to add selected items button
@@ -636,6 +670,7 @@
                 const item = {
                     item_code: $(this).find('input[name="item_code"]').val(),
                     indent_quantity: $(this).find('input[name="indent_quantity"]').val(),
+                    uom: $(this).find('input[name="uom"]').val(),
                     available_stock: $(this).find('input[name="available_stock"]').val()
                 };
                 indentData.items.push(item);

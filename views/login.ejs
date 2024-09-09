@@ -100,7 +100,9 @@ body{display:flex;align-items:center;justify-content:center;height:100vh;margin:
             .catch(error => {
                 console.error('Login Error:', error);
                 if (error.response && error.response.data) {
-                    errorDiv.textContent = error.response.data.message || 'Failed to log in. Please try again.';
+                    
+                    errorDiv.textContent = error.response.data.msg;
+                    alert(error.response.data.msg)
                 } else {
                     errorDiv.textContent = 'Failed to log in. Please try again.';
                 }

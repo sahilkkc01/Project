@@ -1062,10 +1062,28 @@
         tableName: 'AdmInvHSN_Code_Master',
         timestamps: true,
     });
+    const aaaaaa = sequelize.define('AAAAAA', {
+        code: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        description: {
+            type: DataTypes.STRING, 
+            allowNull: false,
+        },
+        status: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false,
+        }
+    }, {
+        alert: true,
+        tableName: 'AAAAAAA',
+        timestamps: true,
+    });
 
     sequelize.sync();
 
-    module.exports = {
+    module.exports = {aaaaaa,
         SupplierCategory, Supplier, StoreDetails, TaxCategory, ItemMove, CurrencyMaster, RackMaster, BinMaster, ShelfMaster, PackageMembership, ItemMasterNew, ItemGroupNew, StorageTypeNew, DispensingTypeNew, MoleculeNew, PregnancyClassNew,
         ItemCompanyNew, TherapeuticClassNew, UnitOfMeasurementNew, TearmAndConditionNew, ItemLocation, ItemConv,
         ItemStoreMinMax,

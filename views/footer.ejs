@@ -41,13 +41,13 @@
 <script src="../javascripts/jquery-1.10.2.min.js"></script>
 
 <!-- chart js -->
-<script src="../javascripts/Chart.min.js"></script>
-<script src="../javascripts/utils.js"></script>
+<!-- <script src="../javascripts/Chart.min.js"></script>
+<script src="../javascripts/utils.js"></script> -->
 <!-- //chart js -->
 
 <!-- Different scripts of charts.  Ex.Barchart, Linechart -->
-<script src="../javascripts/bar.js"></script>
-<script src="../javascripts/linechart.js"></script>
+<!-- <script src="../javascripts/bar.js"></script>
+<script src="../javascripts/linechart.js"></script> -->
  <!-- <script> 
         const languagesData = { 
             labels: ['Rajori Garden', 'Patel Nagar', 'Vasant Kunj', 'Tilak Nagar', 'Dwarka', 'Saket'], 
@@ -78,6 +78,34 @@
 
 <script src="../javascripts/jquery.nicescroll.js"></script>
 <script src="../javascripts/scripts.js"></script>
+
+<script>
+     document.getElementById('logoutButton').addEventListener('click', function (event) {
+    event.preventDefault(); // Prevent the default action of following the link
+
+    fetch('/logout', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Logout failed');
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log(data.msg); // Log the logout message
+      window.location.href = '/1'; // Redirect to login page after successful logout
+    })
+    .catch(error => {
+      console.error('Error logging out:', error);
+      alert('Failed to log out. Please try again.'); // Provide user feedback
+    });
+});
+
+</script>
 
 <!-- close script -->
 <script>

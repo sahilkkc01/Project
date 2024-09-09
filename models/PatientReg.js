@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize');
-const{ sequelize }= require('../sequelize');
+const {sequelize} = require('../sequelize');
 
 const PR_patientReg = sequelize.define('PR_patientReg', {
   id: {
@@ -652,6 +652,10 @@ const PR_BillFindPatient = sequelize.define('PR_BillFindPatient', {
     type: DataTypes.INTEGER,
     defaultValue: 0
   },
+  bill_no: {
+    type: DataTypes.STRING,
+    allowNull:true
+  },
   mrNo: {
     type: DataTypes.STRING,
   },
@@ -792,7 +796,7 @@ const PR_BillFindPatient = sequelize.define('PR_BillFindPatient', {
     type: DataTypes.TEXT,
   },
   cashRemarks:{
-    type: DataTypes.TEXT,
+    type: DataTypes.TEXT, 
   },
 }, {
   tableName: 'pr_billfindpatient',
@@ -800,6 +804,27 @@ const PR_BillFindPatient = sequelize.define('PR_BillFindPatient', {
   timestamps: true // Enable this if you want createdAt and updatedAt timestamps
 });
 
+const QRCodeModel = sequelize.define('QRCode', {
+  qrid: {
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    primaryKey: true
+  },
+  qrimg: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  qrsecid: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  qrstatus: {
+    type: DataTypes.STRING,
+    defaultValue: 'I' // Inactive
+  }
+}, {
+  tableName: 'qrCode'
+});
 
 
 
@@ -809,5 +834,6 @@ module.exports = {
     PR_Appointment,
     PR_PatientVisit,
     PR_formNewCouple,
-    PR_BillFindPatient
+    PR_BillFindPatient,
+    QRCodeModel
 }

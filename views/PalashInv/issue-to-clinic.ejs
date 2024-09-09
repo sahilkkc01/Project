@@ -274,7 +274,7 @@
                                                                         
                                                                     </tr>
                                                                 </thead>
-                                                                <tbody>
+                                                                <tbody id="maintblbody">
                                                                   
                                                                 </tbody>
                                                             </table>
@@ -337,44 +337,8 @@
                                                                         <th contenteditable="true">Bin</th>
                                                                     </tr>
                                                                 </thead>
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <td contenteditable="true"></td>
-                                                                        <td contenteditable="true"></td>
-                                                                        <td contenteditable="true"></td>
-                                                                        <td contenteditable="true"></td>
-                                                                        <td contenteditable="true"></td>
-                                                                        <td contenteditable="true"></td>
-                                                                        <td contenteditable="true"></td>
-                                                                        <td contenteditable="true"></td>
-                                                                        <td contenteditable="true"></td>
-                                                                        <td contenteditable="true"></td>
-                                                                        <td contenteditable="true"></td>
-                                                                        <td contenteditable="true"></td>
-                                                                        <td contenteditable="true"></td>
-                                                                        <td contenteditable="true"></td>
-                                                                        <td contenteditable="true"></td>
-                                                                        
-
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td contenteditable="true"></td>
-                                                                        <td contenteditable="true"></td>
-                                                                        <td contenteditable="true"></td>
-                                                                        <td contenteditable="true"></td>
-                                                                        <td contenteditable="true"></td>
-                                                                        <td contenteditable="true"></td>
-                                                                        <td contenteditable="true"></td>
-                                                                        <td contenteditable="true"></td>
-                                                                        <td contenteditable="true"></td>
-                                                                        <td contenteditable="true"></td>
-                                                                        <td contenteditable="true"></td>
-                                                                        <td contenteditable="true"></td>
-                                                                        <td contenteditable="true"></td>
-                                                                        <td contenteditable="true"></td>
-                                                                        <td contenteditable="true"></td>
-
-                                                                    </tr>
+                                                                <tbody id="issueDetails">
+                                                                  
                                                                 </tbody>
                                                             </table>
                                                         </div>
@@ -388,7 +352,7 @@
                                                             </div>
                                         
                                                             <div class="form-group">
-                                                                <input name="description" type="text" class="form-control input-style" placeholder="0">
+                                                                <input name="total_issues" id="total_issues" type="text" class="form-control input-style" placeholder="0">
                                         
                                                             </div>
                                         
@@ -422,3 +386,102 @@
                         </div>
                         <!--footer section start-->
                         <%-include('../footer');-%>
+
+                        <script>
+
+function fetchData() {
+                                $.ajax({
+                                    url: '/palashinv/get-issue-to-clinic',
+                                    type: 'GET',
+                                    success: function(data) {
+                                        let tableRows = '';
+                                        var count=0;
+                                        data.forEach(function(item) {
+                                            count=count+1;
+                                            console.log(item)
+                                            tableRows += `
+                                                <tr data-item-id="${item.id}" onclick="fetchItems(this)">
+                                                  <td>${item.issue_number}</td>
+                                                    <td>${formatDate(item.issue_date)}</td>
+                                                    <td>${item.from_store}</td>
+                                                    <td>${item.to_store}</td>
+                                                    <td>${item.total_cost_amount}</td>
+                                                    <td></td>
+                                                    <td>${item.mr_no}</td>
+                                                    <td>${item.patient_name}</td>
+                                                     </tr>
+                                            `;
+                                        });
+                                        $('#maintblbody').html(tableRows);
+                                        document.getElementById('total_issues').value=count;
+                        
+                                    },
+                                    error: function(xhr, status, error) {
+                                        console.error('Error fetching item details:', error);
+                                    }
+                                });
+                            }
+                            fetchData()
+                            function formatDate(dateTimeString) {
+    return dateTimeString.split("T")[0];
+}
+
+                            function fetchItems(e) {
+                             
+
+// Remove 'locked' class from any previously selected row
+const previouslySelected = document.querySelector('.locked');
+if (previouslySelected) {
+    previouslySelected.classList.remove('locked');
+}
+
+// Add 'locked' class to the currently selected row
+e.classList.add('locked');
+
+// Get the id of the selected row
+const itemId = e.getAttribute('data-item-id');
+console.log('Selected Item ID:', itemId);
+
+// Make an Axios GET request to fetch data based on the item ID
+axios.get(`/palashinv/getIssueItems/${itemId}`)
+    .then(function(response) {
+        const data = response.data;
+        console.log('Fetched Item Data:', data);
+
+        // Clear any previous data in the table body
+        const tableBody = document.getElementById('issueDetails');
+        tableBody.innerHTML = '';
+
+        // Iterate over the fetched data and create rows for the table
+        data.forEach(item => {
+            const row = `
+                <tr>
+                    <td>${item.item_code}</td>
+                    <td>${item.item_name}</td>
+                    <td>${item.batch_code}</td>
+                    <td>${item.expiry_date}</td>
+                    <td>${item.quantity}</td>
+                    <td>${item.uom}</td>
+                    <td>${item.issued_quantity}</td>
+                    <td>${item.issued_uom}</td>
+                    <td>${item.amount}</td>
+                    <td>${item.total_cost_amount}</td>
+                    <td</td>
+                    <td</td>
+                    <td</td>
+                    <td</td>
+                    <td</td>
+                </tr>
+            `;
+
+            // Append the row to the table body
+            tableBody.insertAdjacentHTML('beforeend', row);
+        });
+    })
+    .catch(function(error) {
+        console.error('Error fetching item data:', error);
+    });
+}
+
+                        
+                        </script>

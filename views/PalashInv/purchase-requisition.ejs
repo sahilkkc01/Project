@@ -297,7 +297,7 @@
                     url: '/palashinv/getAll-requisitions',
                     type: 'GET',
                     success: function(data) {
-                        console.log(data);
+                        console.log('s',data);
                         dataList = data;
                         dataList.reverse();
                         let tableRows = '';
@@ -346,7 +346,7 @@
                     url: `/palashinv/get-requisition-details/${requisitionCode}`,
                     type: 'GET',
                     success: function(data) {
-                        console.log(data);
+                        console.log('sd',data);
                         let details = data.items;
                         let fetchDetailsPromises = details.map(detail => {
                             return new Promise((resolve, reject) => {
@@ -355,7 +355,7 @@
                                     type: 'GET',
                                     success: function(itemData) {
                                         // Assuming itemData contains both uom and item_name
-                                        detail.uom = itemData.stocking_uom;
+                                       
                                         detail.item_name = itemData.item_name;
                                         resolve(detail);
                                     },
@@ -389,8 +389,9 @@
             }
     
             function cancelRequisition(requisitionId) {
+                const type='requisition'
                 $.ajax({
-                    url: `/palashinv/delete-requisition/${requisitionId}`,
+                    url: `/palashinv/delete-record/${type}/${requisitionId}/`,
                     type: 'DELETE',
                     success: function(response) {
                         console.log(`Requisition ${requisitionId} deleted successfully`);

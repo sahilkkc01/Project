@@ -94,6 +94,8 @@
                         </div>
 
                         <div class="col-lg-12 pl-lg-2 chart-grid">
+
+                            <div id="errordiv1"></div>
                             <form>
                                 <div class="card card_border">
                                     <div class="">
@@ -116,7 +118,7 @@
                                                 <div class="form-row">
                                                    
                                                     <div class="col-lg-3 col-md-4 col-sm-12 mb-2">
-                                                        <div class="form-group"><label class="input__label">Issue Number</label><input name="issue_number"  id="issue_number" type="text"
+                                                        <div class="form-group"><label class="input__label">Issue Number</label><input name="issue_number"  id="issue_number" readonly type="text"
                                                                 class="form-control input-style" placeholder="">
                                                         </div>
                                                     </div>
@@ -227,15 +229,17 @@
                                                 <div class="form-row">
                                                     
                                                     <div class="col-lg-3 col-md-4 col-sm-12 pl-4">
-                                                        <div class="form-group"><button type="button"
-                                                                class="btn btn-style mt-1 btn-secondary btn-style btn-change"><strong>
+                                                        <div class="form-group"><button type="button" id="addIndent"
+                                                            class="btn-secondary btn-style btn btn-change"
+                                                            data-toggle="modal" data-target="#itemSearchModal2"><strong>
                                                                     Get Indent</strong></button>
                                                                 </div>
                                                     </div>
 
                                                     <div class="col-lg-3 col-md-4 col-sm-12 pl-4">
-                                                        <div class="form-group"><button type="button"
-                                                                class="btn btn-style mt-1 btn-secondary btn-style btn-change"><strong>
+                                                        <div class="form-group"><button type="button" id="addPR"
+                                                                class="btn btn-style mt-1 btn-secondary btn-style btn-change"
+                                                                data-toggle="modal" data-target="#itemSearchModal3"><strong>
                                                                     Get Purchase Requisition</strong></button>
                                                                 </div>
                                                     </div>
@@ -259,12 +263,12 @@
 
                                                     <div class="col-lg-3 col-md-4 col-sm-12">
                                                         <div class="form-group"><label class="input__label">MR
-                                                                No.</label><input name="description" type="text"
+                                                                No.</label><input name="mr_no" type="text" id="mr_no"
                                                                 class="form-control input-style" placeholder=""></div>
                                                     </div>
 
                                                     <div class="col-lg-3 col-md-4 col-sm-12">
-                                                        <div class="form-group"><label class="input__label">Patient Name</label><input name="description" type="text"
+                                                        <div class="form-group"><label class="input__label">Patient Name</label><input name="patient_name" id="patient_name" type="text"
                                                                 class="form-control input-style" placeholder=""></div>
                                                     </div>
 
@@ -324,7 +328,7 @@
 
                                                                     </tr>
                                                                 </thead>
-                                                                <tbody id="mainTblBody">
+                                                                <tbody id="maintable">
                                                                   
                                                                 </tbody>
                                                             </table>
@@ -363,8 +367,11 @@
                                         <div class="form-row card-body pt-0 pb-2">
                                                     
                                             <div class="col-lg-6 col-md-6 col-sm-12  mb-1">
-                                                <div class="form-group"><label class="input__label">Total Cost Amount</label><input name="totalCostInput" id="totalCostInput" type="number"
-                                                    class="form-control input-style" placeholder=""></div>
+                                                <div class="form-group">
+                                                    <label class="input__label">Total Cost Amount</label>
+                                                    <input name="total_cost_amount" id="total_cost_amount" type="number" class="form-control input-style" placeholder="">
+                                                </div>
+                                                
                                             </div>
 
                                             <div class="col-lg-6 col-md-6 col-sm-12 mb-2">
@@ -388,7 +395,7 @@
                                     <button type="button"  onclick="window.location.href = '/palashinv/20'"  class="btn-danger btn-style btn mt-3 mr-2"><strong><i
                                         class="fas fa-times"></i> Cancel</strong></button>
     
-                            <button type="button" class="btn-primary btn-style btn mt-3"><strong><i class="far fa-save"></i>
+                            <button type="button" id="saveButton" class="btn-primary btn-style btn mt-3"><strong><i class="far fa-save"></i>
                                     Save</strong></button>
 
                                     
@@ -406,106 +413,173 @@
                         </div>
 
 
-                        <!-- Add Items Model -->
-                        <div class="modal fade" id="itemSearchModal">
-                            <div class="modal-dialog modal-xl">
-                                <div class="modal-content">
-    
-                                    <!-- Modal Header -->
-                                    <div class="modal-header">
-                                        <h4 class="modal-title">Item Search</h4>
-                                        <button type="button" class="close" data-dismiss="modal">&times;"></button>
-                                    </div>
-    
-                                    <!-- Modal body -->
-                                    <div class="modal-body">
-                                        <form>
-                                            <div class="card card_border mt-3">
-                                                <div class="card">
-                                                    <div class="col-xl-12 p-heading">
-                                                        <h6 class="p-text">ITEM SEARCH</h6>
+                        <!-- The Modal -->
+                    <div class="modal fade" id="itemSearchModal">
+                        <div class="modal-dialog modal-xl">
+                            <div class="modal-content">
+            
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Item Search</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;"></button>
+                                </div>
+            
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    <form>
+                                        <div class="card card_border mt-3">
+                                            <div class="card">
+                                                <div class="col-xl-12 p-heading">
+                                                    <h6 class="p-text">ITEM SEARCH</h6>
+                                                </div>
+                                                <div class="form-row card-body pb-3 pt-2">
+                                                    <!-- First Row -->
+                                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label class="input__label">Item Name</label>
+                                                            <input name="item_name" id="item_name" type="text" class="form-control input-style" placeholder="">
+                                                        </div>
                                                     </div>
-                                                    <div class="form-row card-body pb-3 pt-2">
-                                                        <div class="col-lg-3 col-md-4 col-sm-12">
-                                                            <div class="form-group">
-                                                                <label class="input__label">Item Name</label>
-                                                                <input name="service name" type="text"
-                                                                    class="form-control input-style" placeholder="">
-                                                            </div>
+                                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label class="input__label">Brand Name</label>
+                                                            <input name="brand_name" id="brand_name" type="text" class="form-control input-style" placeholder="">
                                                         </div>
-                                                        <div class="col-lg-3 col-md-4 col-sm-12">
-                                                            <div class="form-group">
-                                                                <label class="input__label">Brand Name</label>
-                                                                <input name="service name" type="text"
-                                                                    class="form-control input-style" placeholder="">
-                                                            </div>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label class="input__label">Item Code</label>
+                                                            <input name="item_code" id="item_code" type="text" class="form-control input-style" placeholder="">
                                                         </div>
-                                                        <div class="col-lg-3 col-md-4 col-sm-12">
-                                                            <div class="form-group">
-                                                                <label class="input__label">Item Code</label>
-                                                                <input name="service name" type="number"
-                                                                    class="form-control input-style" placeholder="">
-                                                            </div>
+                                                    </div>
+                                                
+                                                    <!-- Second Row -->
+                                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label class="input__label">Item Category</label>
+                                                            <select name="item_category" id="item_category" class="form-control input-style">
+                                                                <option value="">Select</option>
+                                                                <!-- Add category options here -->
+                                                            </select>
                                                         </div>
-                                                        <div class="col-lg-3 col-md-4 col-sm-12">
-                                                            <div class="form-group">
-                                                                <label class="input__label">Item Category</label>
-                                                                <select name="report_generated_by"
-                                                                        class="form-control input-style">
-                                                                    <option>Select</option>
-                                                                </select>
-                                                            </div>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label class="input__label">Item Group</label>
+                                                            <select name="item_group" id="item_group" class="form-control input-style">
+                                                                <option value="">Select</option>
+                                                                <!-- Add group options here -->
+                                                            </select>
                                                         </div>
-                                                        <div class="col-lg-3 col-md-4 col-sm-12">
-                                                            <div class="form-group">
-                                                                <label class="input__label">Item Group</label>
-                                                                <select name="report_generated_by"
-                                                                        class="form-control input-style">
-                                                                    <option>Select</option>
-                                                                </select>
-                                                            </div>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label class="input__label">Molecule</label>
+                                                            <select name="molecule" id="molecule" class="form-control input-style">
+                                                                <option value="">Select</option>
+                                                                <!-- Add molecule options here -->
+                                                            </select>
                                                         </div>
-                                                        <div class="col-lg-3 col-md-4 col-sm-12">
-                                                            <div class="form-group">
-                                                                <label class="input__label">Molecule</label>
-                                                                <select name="report_generated_by"
-                                                                        class="form-control input-style">
-                                                                    <option>Select</option>
-                                                                </select>
-                                                            </div>
+                                                    </div>
+                                                
+                                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label class="input__label">Store</label>
+                                                            <select name="store_search" id="store_search" class="form-control input-style">
+                                                                <option value="">Select</option>
+                                                                <!-- Add molecule options here -->
+                                                            </select>
                                                         </div>
-                                                        <div class="col-lg-3 col-md-4 col-sm-12">
-                                                            <div class="form-group">
-                                                                <label class="input__label">Store</label>
-                                                                <select name="report_generated_by"
-                                                                        class="form-control input-style">
-                                                                    <option>Select</option>
-                                                                </select>
-                                                            </div>
+                                                    </div>
+                                                
+                                                    <!-- Search Button -->
+                                                    <div class="col-lg-12 text-left">
+                                                        <div class="form-group">
+                                                            <button type="button" id="searchItemsBtn" class="btn btn-style mt-4 btn-primary btn-change">
+                                                                <strong><i class="fas fa-search"></i> Search</strong>
+                                                            </button>
                                                         </div>
-                                                        <div class="col-lg-3 col-md-4 col-sm-12 text-left">
-                                                            <div class="form-group">
-                                                                <button type="button"
-                                                                        class="btn btn-style mt-4 btn-primary btn-style btn-change">
-                                                                    <strong><i class="fas fa-search"></i> Search</strong>
-                                                                </button>
-                                                            </div>
-                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="card card_border mt-3">
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                <div class="form-check-label">
+                                                    <div class="radio mt-2 mb-2">
+                                                       
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="card card_border mt-3">
-                                                <div class="col-lg-12 col-md-12 col-sm-12">
-                                                    <div class="form-check-label">
-                                                        <div class="radio mt-2 mb-2">
-                                                            <label class="form-check-label pt-1">
-                                                                <input class="form-check-input mt-1" type="checkbox" id="select-all-items">
-                                                                Select All Items
-                                                            </label>
+                                            <div class="container">
+                                                <div class="row">
+                                                    <!-- First Div (Existing) -->
+                                                    <div class="col-md-6">
+                                                        <div class="form-row card-body pt-1 pb-3">
+                                                            <div class="col-12 mb-0">
+                                                                <div class="form-group">
+                                                                    <div class="col col-12 pr-xl-0 pl-xl-0">
+                                                                        <div class="slidex">
+                                                                            <table class="table2">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <th contenteditable="true">Select</th>
+                                                                                        <th contenteditable="true">Item Code</th>
+                                                                                        <th contenteditable="true">Item Name</th>
+                                                                                        <th contenteditable="true">Brand Name</th>
+                                                                                        <th contenteditable="true">CGST</th>
+                                                                                        <th contenteditable="true">SGST</th>
+                                                                                        <th contenteditable="true">IGST</th>
+                                                                                    
+                                                                                        
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody id="tbodyid">
+                                                                                    <!-- Table rows will be inserted here -->
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                            
+                                                    <!-- Second Div (New) -->
+                                                    <div class="col-md-6">
+                                                        <div class="form-row card-body pt-1 pb-3">
+                                                            <div class="col-12 mb-0">
+                                                                <div class="form-group">
+                                                                    <div class="col col-12 pr-xl-0 pl-xl-0">
+                                                                        <div class="slidex">
+                                                                            <table class="table2">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <th contenteditable="true">Select</th>
+                                                                                        <!-- <th contenteditable="true">Date</th> -->
+                                                                                        <th contenteditable="true">Batch Code</th>
+                                                                                        <th contenteditable="true">is Free</th>
+                                                                                        <th contenteditable="true">Available Quantity</th>
+                                                                                        <th contenteditable="true">UOM</th>
+                                                                                        <th contenteditable="true">Purchase Rate</th>
+                                                                                        <th contenteditable="true">MRP</th>
+                                                                                        <th contenteditable="true">Expiry Date</th>
+                                                                                      
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody id="tbodyid2">
+                                                                                    <!-- Table rows will be inserted here -->
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-row card-body pt-1 pb-3">
+                                                <div class="row">
                                                     <div class="col-12 mb-0">
                                                         <div class="form-group">
                                                             <div class="col col-12 pr-xl-0 pl-xl-0">
@@ -513,19 +587,21 @@
                                                                     <table class="table2">
                                                                         <thead>
                                                                         <tr>
-                                                                            <th contenteditable="true">Select</th>
+                                                                            <th contenteditable="true"></th>
                                                                             <th contenteditable="true">Item Code</th>
                                                                             <th contenteditable="true">Item Name</th>
-                                                                            <th contenteditable="true">Brand Name</th>
+                                                                            <th contenteditable="true">Batch Code</th>
+                                                                            <th contenteditable="true">Expiry Date</th>
+                                                                            <th contenteditable="true">Available Stock</th>
+                                                                            <th contenteditable="true">MRP</th>
+                                                                            <th contenteditable="true">Cost Price</th>
                                                                             <th contenteditable="true">CGST</th>
                                                                             <th contenteditable="true">SGST</th>
                                                                             <th contenteditable="true">IGST</th>
-                                                                            <th contenteditable="true">Suspend</th>
-                                                                            <th contenteditable="true">Available Stock</th>
-                                                                            <th contenteditable="true">Stock UOM</th>
+                                                                           
                                                                         </tr>
                                                                         </thead>
-                                                                        <tbody id="tbodyid">
+                                                                        <tbody id="tbodyid3">
                                                                         </tbody>
                                                                     </table>
                                                                 </div>
@@ -533,283 +609,986 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="form-group mt-1 mb-3 text-right">
-                                                <button type="button" class="btn-danger btn-style btn mt-3 mr-2"
-                                                        data-dismiss="modal">
-                                                    <strong><i class="fas fa-times"></i> Cancel</strong>
-                                                </button>
-                                                <button type="button" class="btn-primary btn-style btn mt-3"
-                                                        data-dismiss="modal" id="addSelectedItemsBtn">
-                                                    <strong><i class="fas fa-check"></i> OK</strong>
-                                                </button>
+                                                </div>
                                             </div>
-                                        </form>
-                                    </div>
+                                            
+                                        <div class="form-group mt-1 mb-3 text-right">
+                                            <button type="button" class="btn-danger btn-style btn mt-3 mr-2"
+                                                    data-dismiss="modal">
+                                                <strong><i class="fas fa-times"></i> Cancel</strong>
+                                            </button>
+                                            <button type="button" class="btn-primary btn-style btn mt-3"
+                                                    data-dismiss="modal" id="addSelectedItemsBtn">
+                                                <strong><i class="fas fa-check"></i> OK</strong>
+                                            </button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
+                    </div>
+
+                    <!-- Indent -->
+                    <div class="modal fade" id="itemSearchModal2">
+                        <div class="modal-dialog modal-xl">
+                            <div class="modal-content">
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Indent Search</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                    
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    <form>
+                                        <div class="card card_border mt-3">
+                                            <div class="card">
+                                                <div class="col-xl-12 p-heading">
+                                                    <h6 class="p-text">INDENT SEARCH</h6>
+                                                </div>
+                                                <div class="form-row card-body pb-3 pt-2">
+                                                    <div class="col-lg-3 col-md-4 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label class="input__label">Indent No</label>
+                                                            <input name="Indent_no" id="Indent_no" type="text" class="form-control input-style" placeholder="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-4 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label class="input__label">Item Name</label>
+                                                            <input name="item_name" id="item_name2" type="text" class="form-control input-style" placeholder="">
+                                                        </div>
+                                                    </div>
+                                                   
+                                                    <div class="col-lg-3 col-md-4 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label class="input__label">Item Code</label>
+                                                            <input name="item_code" id="item_code2" type="number" class="form-control input-style" placeholder="">
+                                                        </div>
+                                                    </div>
+                                                    <!-- <div class="col-lg-3 col-md-4 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label class="input__label">Item Category</label>
+                                                            <select name="item_category" id="item_category" class="form-control input-style">
+                                                                <option value="">Select</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-4 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label class="input__label">Item Group</label>
+                                                            <select name="item_group" id="item_group" class="form-control input-style">
+                                                                <option value="">Select</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-4 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label class="input__label">Molecule</label>
+                                                            <select name="molecule" id="molecule" class="form-control input-style">
+                                                                <option value="">Select</option>
+                                                            </select>
+                                                        </div>
+                                                    </div> -->
+                                                    <div class="col-lg-3 col-md-4 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label class="input__label">Store</label>
+                                                            <select name="store_search" id="store_search" class="form-control input-style">
+                                                                <option value="">Select</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-4 col-sm-12 text-left">
+                                                        <div class="form-group">
+                                                            <button type="button" id="searchItemsBtn2" class="btn btn-style mt-4 btn-primary btn-style btn-change">
+                                                                <strong><i class="fas fa-search"></i> Search</strong>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card card_border mt-3">
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                <div class="form-check-label">
+                                                    <div class="radio mt-2 mb-2">
+                                                        <label class="form-check-label pt-1">
+                                                            <input class="form-check-input mt-1" type="checkbox" id="selectAllItemsCheckbox">
+                                                            Select All Items
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-row card-body pt-1 pb-3">
+                                                <div class="col-12 mb-0">
+                                                    <div class="form-group">
+                                                        <div class="col col-12 pr-xl-0 pl-xl-0">
+                                                            <div class="slidx">
+                                                                <table class="table2">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th contenteditable="true">Select</th>
+                                                                            <th contenteditable="true">Indent No</th>
+                                                                            <th contenteditable="true">Item Code</th>
+                                                                            <th contenteditable="true">Item Name</th>
+                                                                            
+                                                                            <th contenteditable="true">CGST</th>
+                                                                            <th contenteditable="true">SGST</th>
+                                                                            <th contenteditable="true">IGST</th>
+                                                                            <th contenteditable="true">Suspend</th>
+                                                                            <th contenteditable="true">Quantity</th>
+                                                                            <th contenteditable="true">UOM</th>
+                                                                            <th contenteditable="true">Available Stock</th>
+                                                                            <th contenteditable="true">Stock UOM</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody id="tbodyIndent">
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mt-1 mb-3 text-right">
+                                            <button type="button" class="btn-danger btn-style btn mt-3 mr-2" data-dismiss="modal">
+                                                <strong><i class="fas fa-times"></i> Cancel</strong>
+                                            </button>
+                                            <button type="button" class="btn-primary btn-style btn mt-3" data-dismiss="modal" id="addSelectedItemsBtn2">
+                                                <strong><i class="fas fa-check"></i> OK</strong>
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PR -->
+                    <div class="modal fade" id="itemSearchModal3">
+                        <div class="modal-dialog modal-xl">
+                            <div class="modal-content">
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Purchase Requisition Search</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                    
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    <form>
+                                        <div class="card card_border mt-3">
+                                            <div class="card">
+                                                <div class="col-xl-12 p-heading">
+                                                    <h6 class="p-text">PR SEARCH</h6>
+                                                </div>
+                                                <div class="form-row card-body pb-3 pt-2">
+                                                    <div class="col-lg-3 col-md-4 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label class="input__label">PR No</label>
+                                                            <input name="requisition_no" id="requisition_no" type="text" class="form-control input-style" placeholder="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-4 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label class="input__label">Item Name</label>
+                                                            <input name="item_name" id="item_name3" type="text" class="form-control input-style" placeholder="">
+                                                        </div>
+                                                    </div>
+                                                   
+                                                    <div class="col-lg-3 col-md-4 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label class="input__label">Item Code</label>
+                                                            <input name="item_code" id="item_code3" type="number" class="form-control input-style" placeholder="">
+                                                        </div>
+                                                    </div>
+                                                    <!-- <div class="col-lg-3 col-md-4 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label class="input__label">Item Category</label>
+                                                            <select name="item_category" id="item_category" class="form-control input-style">
+                                                                <option value="">Select</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-4 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label class="input__label">Item Group</label>
+                                                            <select name="item_group" id="item_group" class="form-control input-style">
+                                                                <option value="">Select</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-4 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label class="input__label">Molecule</label>
+                                                            <select name="molecule" id="molecule" class="form-control input-style">
+                                                                <option value="">Select</option>
+                                                            </select>
+                                                        </div>
+                                                    </div> -->
+                                                    <div class="col-lg-3 col-md-4 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label class="input__label">Store</label>
+                                                            <select name="store_search" id="store_search" class="form-control input-style">
+                                                                <option value="">Select</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-4 col-sm-12 text-left">
+                                                        <div class="form-group">
+                                                            <button type="button" id="searchItemsBtn3" class="btn btn-style mt-4 btn-primary btn-style btn-change">
+                                                                <strong><i class="fas fa-search"></i> Search</strong>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card card_border mt-3">
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                <div class="form-check-label">
+                                                    <div class="radio mt-2 mb-2">
+                                                        <label class="form-check-label pt-1">
+                                                            <input class="form-check-input mt-1" type="checkbox" id="selectAllItemsCheckbox">
+                                                            Select All Items
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-row card-body pt-1 pb-3">
+                                                <div class="col-12 mb-0">
+                                                    <div class="form-group">
+                                                        <div class="col col-12 pr-xl-0 pl-xl-0">
+                                                            <div class="slidx">
+                                                                <table class="table2">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th contenteditable="true">Select</th>
+                                                                            <th contenteditable="true">PR No</th>
+                                                                            <th contenteditable="true">Item Code</th>
+                                                                            <th contenteditable="true">Item Name</th>
+                                                                            
+                                                                            <th contenteditable="true">CGST</th>
+                                                                            <th contenteditable="true">SGST</th>
+                                                                            <th contenteditable="true">IGST</th>
+                                                                            <th contenteditable="true">Suspend</th>
+                                                                            <th contenteditable="true">Quantity</th>
+                                                                            <th contenteditable="true">UOM</th>
+                                                                            <th contenteditable="true">Available Stock</th>
+                                                                            <th contenteditable="true">Stock UOM</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody id="tbodyPR">
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mt-1 mb-3 text-right">
+                                            <button type="button" class="btn-danger btn-style btn mt-3 mr-2" data-dismiss="modal">
+                                                <strong><i class="fas fa-times"></i> Cancel</strong>
+                                            </button>
+                                            <button type="button" class="btn-primary btn-style btn mt-3" data-dismiss="modal" id="addSelectedItemsBtn3">
+                                                <strong><i class="fas fa-check"></i> OK</strong>
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                         <!--footer section start-->
                         <%-include('../footer');-%>
 
                         <script>
-
-const loadDropdown = (url, elementId) => {
-            fetch(url)
-                .then(response => response.json())
-                .then(data => {
-                    const dropdown = document.getElementById(elementId);
-                    data.forEach(item => {
-                        const option = document.createElement('option');
-                        option.value = item.description || item.rank_desc || item.shelf_desc || item.bin_desc || item.clinic_desc || item.tax_desc;
-                        option.textContent = item.description || item.rank_desc || item.shelf_desc || item.bin_desc || item.clinic_desc || item.tax_desc;
-                        dropdown.appendChild(option);
-                    });
-                })
-                .catch(error => console.error(`Error fetching ${elementId} details:`, error));
-        };
-
-        // Load dropdowns
-        loadDropdown('/adminInv/get-store-details', 'from_store');
-        loadDropdown('/adminInv/get-store-details', 'to_store');
-
-                               function fetchData(from_store) {
-            $.ajax({
-                url: '/palashinv/get-current-item-counts',
-                type: 'GET',
-                data: { 
-                    store: from_store,
-                    clinic: '' // Set clinic to blank
-                },
-                success: function (data) {
-                    console.log(data);
-                    let tableRows = '';
-                    data.data.forEach(function (item) {
-                        tableRows += `
-                            <tr data-item-id="${item.id}">
-                                <td><input class="form-check-input mt-0 item-checkbox" type="checkbox"></td>
-                                <td>${item.item_code}</td>
-                                <td>${item.item_name}</td>
-                                <td>${item.brand_name}</td>
-                                <td>${item.CGST.toFixed(2)}%</td>
-                                <td>${item.SGST.toFixed(2)}%</td>
-                                <td>${item.IGST.toFixed(2)}%</td>
-                                <td><input class="form-check-input mt-0 suspend-checkbox" type="checkbox" ${item.suspend ? 'checked' : ''} disabled></td>
-                                <td>${item.availableStock}</td>
-                                <td>${item.stocking_uom}</td>
-                                <td style="display:none;"><input type="hidden" value="${item.purchase_uom}">${item.purchase_uom}</td>
-                                <td style="display:none;"><input type="hidden" name="item_id" value="${item.id}"></td>
-                                <td style="display:none;"><input type="hidden" name="item_code" value="${item.item_code}"></td>
-                                <td style="display:none;"><input type="hidden" name="base_cost_price" value="${item.base_unit_cost_price}">${item.base_unit_cost_price}</td>
-                                <td style="display:none;"><input type="hidden" name="conversion_factor" value="${item.conversions[0].conversion_factor}">${item.conversions[0].conversion_factor}</td>
-                            </tr>
-                        `;
-                    });
-                    $('#tbodyid').html(tableRows);
-
-                    // Add the select all checkbox functionality
-                    $('#select-all-items').on('change', function () {
-                        const isChecked = $(this).is(':checked');
-                        $('#tbodyid input.item-checkbox').prop('checked', isChecked);
-                    });
-                },
-                error: function (xhr, status, error) {
-                    console.error('Error fetching item details:', error);
-                }
-            });
-        }
-
-        $('#addItems').click(function (e) {
-            let from_store = $('#from_store').val();
-
-            if (!from_store || from_store === 'Select') {
-                alert('Please select From store.');
-                e.preventDefault(); // Prevent the default action of opening the modal
-                e.stopPropagation(); // Stop the event from bubbling up
-                return;
+                            $('#issue_date').val(new Date().toISOString().slice(0, 10));
+                            const loadDropdown = (url, elementId) => {
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data)
+            const dropdown = document.getElementById(elementId);
+            let items = data;
+            if (elementId === 'item_category') {
+                items = data.ItemCatData;
             }
+            if (elementId === 'item_group'  || elementId === 'molecule') {
 
-            fetchData(from_store);
-        });
-
-          const addSelectedItems = () => {
-            const selectedItems = [];
-            const tbody = document.getElementById('tbodyid');
-            const mainTblBody = document.getElementById('mainTblBody');
-
-            // Gather all selected items from the modal
-            tbody.querySelectorAll('tr').forEach(row => {
-                const checkbox = row.querySelector('input.item-checkbox');
-                if (checkbox && checkbox.checked) {
-                    const itemCode = row.cells[1].textContent;
-                    const itemName = row.cells[2].textContent;
-                    const batchCode = ''; // Assuming batch code needs to be entered or fetched separately
-                    const expiryDate = ''; // Assuming expiry date needs to be entered or fetched separately
-                    const quantity = '0'; // Assuming to be entered by the user later
-                    const stocking_uom = row.cells[9].textContent;
-                    const purchase_uom = row.cells[10].textContent;
-                    const pendingQuantity = quantity; // Assuming to be entered or calculated
-                    const availableStock = row.cells[8].textContent;
-                    const issuedQuantity = ''; // Assuming to be entered by the user
-                     // Assuming UOM remains the same, adjust as necessary
-                    const baseCostPrice = row.cells[13].textContent; // Assuming to be calculated or fetched
-                    const conversion_factor = row.cells[14].textContent; // Assuming to be calculated or fetched
-                    const totalCostAmount = ''; // Assuming to be calculated based on quantity and price
-
-                    // Create a new row for the main table
-                    const newRow = mainTblBody.insertRow();
-                    newRow.innerHTML = `
-                        <td>${itemCode}</td>
-                        <td>${itemName}</td>
-                        <td><input type="text" name="batch_code"></td>
-                        <td><input type="date" name="expiry_date"></td>
-                        <td><input type="number" name="quantity" id="quantity" value="${quantity}"></td>
-                        <td>${purchase_uom}</td>
-                        <td><input type="number" name="pending_quantity" id="pending_quantity" value="${pendingQuantity}"></td>
-                        <td>${stocking_uom}</td>
-                        <td>${availableStock}</td>
-                        <td>${stocking_uom}</td>
-                        <td><input type="number" name="issued_quantity" id="issued_quantity"></td>
-                        <td><select name="issued_uom">
-                            <option value="${purchase_uom}">${purchase_uom}</option>
-                            <option value="${stocking_uom}">${stocking_uom}</option>
-                            </select></td>
-                        <td>${baseCostPrice}</td>
-                        <td><input type="number" name="total_cost_amount" id="total_cost_amount" value="${totalCostAmount}"></td>
-                        <td><input style="display: none;" type="number" name="conversion_factor" id="conversion_factor" value="${conversion_factor}"></td>
-                        <td><button type="button" class="btn btn-danger" onclick="removeRow(this)">X</button></td>
-                    `;
-                }
-            });
-        };
-        
-
-      
-        // Attach event to the "OK" button in the modal
-        const addSelectedItemsBtn = document.getElementById('addSelectedItemsBtn');
-        addSelectedItemsBtn.addEventListener('click', addSelectedItems);
-
-        // Function to remove a row from the main table
-        window.removeRow = function(button) {
-            const row = button.parentNode.parentNode;
-            row.parentNode.removeChild(row);
-        };
-
-        // Function to fetch and display items when the modal is triggered
-        const addItemsButton = document.getElementById('addItems');
-        addItemsButton.addEventListener('click', function() {
-            const fromStore = document.getElementById('from_store').value;
-            if (fromStore && fromStore !== 'Select') {
-                fetchData(fromStore);
-            } else {
-                alert('Please select a "From Store" before adding items.');
+                items = data.result;
             }
-        });
+            
+            items.forEach(item => {
+                const option = document.createElement('option');
+                option.value = item.description || item.rank_desc || item.shelf_desc || item.bin_desc || item.clinic_desc || item.tax_desc || item.Item_description;
+                option.textContent = item.description || item.rank_desc || item.shelf_desc || item.bin_desc || item.clinic_desc || item.tax_desc || item.Item_description;
+                dropdown.appendChild(option);
+            });
+        })
+        .catch(error => console.error(`Error fetching ${elementId} details:`, error));
+};
 
+   
+                            // Load dropdowns
+                            loadDropdown('/adminInv/get-store-details', 'from_store');
+                        //     loadDropdown('/adminInv/get-store-details', 'to_store');
+                        //     loadDropdown('/adminInv/get-store-details', 'store_search');
+                        //     loadDropdown('/adminInv/getAll-itemCat-list', 'item_category');
+                        //   loadDropdown('/adminInv/getAll-itemGroup-list', 'item_group');
+                        //   loadDropdown('/adminInv/getAll-molecule-list', 'molecule');
+                        
+   
+                            document.getElementById('searchItemsBtn').addEventListener('click', function() {
+    // Collect search parameters
+    const searchParams = {
+        item_name: document.getElementById('item_name').value || null,
+        brand_name: document.getElementById('brand_name').value || null,
+        item_code: document.getElementById('item_code').value || null,
+        item_category: document.getElementById('item_category').value || null,
+        item_group: document.getElementById('item_group').value || null,
+        molecule_name: document.getElementById('molecule').value || null,
+        store: document.getElementById('store_search').value || null,
+        store: document.getElementById('store_search').value || null,
+    };
 
-        document.addEventListener('DOMContentLoaded', function () {
-    const mainTblBody = document.getElementById('mainTblBody');
-
-    // Attach event listeners for input and change events
-    mainTblBody.addEventListener('input', function(event) {
-        if (event.target.name === 'issued_quantity' || event.target.name === 'total_cost_amount') {
-            updateTotalCost(event.target.closest('tr'));
+    // Filter out null values
+    const filteredParams = {};
+    for (const key in searchParams) {
+        if (searchParams[key] !== null && searchParams[key] !== "") {
+            filteredParams[key] = searchParams[key];
         }
-    });
-
-    mainTblBody.addEventListener('change', function(event) {
-        if (event.target.name === 'issued_uom') {
-            adjustConversionFactor(event.target.closest('tr'));
-            updateTotalCost(event.target.closest('tr'));
-        }
-    });
-
-    // Adjust the conversion factor based on the 'Issued UOM' selection
-    function adjustConversionFactor(row) {
-        const issuedUOMSelect = row.querySelector('select[name="issued_uom"]');
-        const purchaseUOMInput = row.querySelector('input[name="purchase_uom"]').value;
-        const conversionFactorInput = row.querySelector('input[name="conversion_factor"]');
-
-        // Set conversion factor to 1 if the issued UOM matches the purchase UOM, otherwise retrieve the correct factor
-        conversionFactorInput.value = (issuedUOMSelect.value === purchaseUOMInput) ? '1' : conversionFactorInput.getAttribute('data-default-value') || '1';
-        console.log(`Conversion factor set to ${conversionFactorInput.value} due to UOM change.`);
     }
 
-    // Update the total cost calculation
-    function updateTotalCost(row) {
-        const issuedQuantityInput = row.querySelector('input[name="issued_quantity"]');
-        const baseCostPriceInput = row.querySelector('td:nth-child(13)'); // Assuming this is where the base cost is located
-        const totalCostAmountInput = row.querySelector('input[name="total_cost_amount"]');
-        const conversionFactorInput = row.querySelector('input[name="conversion_factor"]');
+    // Make the search request using Axios
+    axios.get('/palashinv/getItemsOnSearch', { params: filteredParams })
+    .then(function(response) {
+        console.log(response);
+        const data = response.data;
+        
+        document.getElementById('tbodyid').innerHTML = '';
+        let tableRows = '';
 
-        const issuedQuantity = parseFloat(issuedQuantityInput.value) || 0;
-        const baseCostPrice = parseFloat(baseCostPriceInput.textContent) || 0;
-        const conversionFactor = parseFloat(conversionFactorInput.value) || 1;
+        // Populate the search results table
+        data.forEach(item => {
+            const storeTax = item.storeTaxes && item.storeTaxes.length > 0 ? item.storeTaxes[0] : {};
+            
+            tableRows += `
+                <tr data-item-id="${item.id}" data-purchase-rate="${item.base_unit_cost_price}" data-mrp="${item.base_unit_mrp}" onclick="fetchBatches(this)">
+                    <td><input type="checkbox"></td>
+                    <td>${item.item_code}</td>
+                    <td>${item.item_name}</td>
+                    <td>${item.brand_name}</td>
+                    <td>${storeTax.CGST !== undefined && storeTax.CGST !== null ? storeTax.CGST : 'N/A'}</td>
+                    <td>${storeTax.SGST !== undefined && storeTax.SGST !== null ? storeTax.SGST : 'N/A'}</td>
+                    <td>${storeTax.IGST !== undefined && storeTax.IGST !== null ? storeTax.IGST : 'N/A'}</td>
+                    <td style="display:none;" mrp>${item.conversionFactors[0].from_uom}</td>
+                    <td style="display:none;" mrp>${item.conversionFactors[0].to_uom}</td>
+                    <td style="display:none;" mrp>${item.conversionFactors[0].conversion_factor}</td>
+                </tr>
+            `;
+        });
 
-        const totalCostAmount = issuedQuantity * baseCostPrice * conversionFactor;
-        totalCostAmountInput.value = totalCostAmount.toFixed(2);
+        document.getElementById('tbodyid').innerHTML = tableRows;
+    })
+    .catch(function(error) {
+        console.error('Error fetching search results:', error);
+    });
 
-        console.log(`Updated total cost to ${totalCostAmount.toFixed(2)}`);
+});
+
+//Load Indents
+                            document.getElementById('searchItemsBtn2').addEventListener('click', function() {
+    // Collect search parameters
+    const searchParams = {
+        item_name: document.getElementById('item_name2').value || null,
+        indent_no: document.getElementById('Indent_no').value || null,
+        item_code: document.getElementById('item_code2').value || null,
+        store: document.getElementById('from_store').value || null,
+      
+        store_search: document.getElementById('store_search').value || null,
+    };
+
+    // Filter out null values
+    const filteredParams = {};
+    for (const key in searchParams) {
+        if (searchParams[key] !== null && searchParams[key] !== "") {
+            filteredParams[key] = searchParams[key];
+        }
+    }
+
+    // Make the search request using Axios
+    axios.get('/palashinv/getIndentOnSearch', { params: filteredParams })
+    .then(function(response) {
+        console.log(response);
+        const data = response.data;
+        
+        document.getElementById('tbodyid').innerHTML = '';
+        let tableRows = '';
+
+        // Populate the search results table
+        data.forEach(item => {
+    const storeTax = item.storeTaxes && item.storeTaxes.length > 0 ? item.storeTaxes[0] : {};
+    const itemDetails = item.itemDetails || {};
+
+    const cgst = storeTax.CGST !== undefined && storeTax.CGST !== null ? storeTax.CGST : 'N/A';
+    const sgst = storeTax.SGST !== undefined && storeTax.SGST !== null ? storeTax.SGST : 'N/A';
+    const igst = storeTax.IGST !== undefined && storeTax.IGST !== null ? storeTax.IGST : 'N/A';
+    const availableStock = item.currentStock && item.currentStock.length > 0 ? item.currentStock[0]?.availableStock : 'N/A';
+    const stockUOM = item.currentStock && item.currentStock.length > 0 ? item.currentStock[0]?.uom : 'N/A';
+
+    tableRows += `
+        <tr data-item-id="${item.id}" data-purchase-rate="${item.base_unit_cost_price}" data-mrp="${item.base_unit_mrp}" >
+            <td><input type="checkbox"></td>
+            <td>${item.indent_no}</td>
+            <td>${item.item_code}</td>
+            <td>${itemDetails.item_name || 'N/A'}</td>
+            <td>${cgst}</td>
+            <td>${sgst}</td>
+            <td>${igst}</td>
+            <td><input type="checkbox"  data-id='${item.id}' ${item.itemDetails.suspend ? 'checked disabled' : ''}></td>
+            <td>${item.indent_quantity}</td>
+            <td>${item.uom}</td>
+            <td>${availableStock}</td>
+            <td>${stockUOM}</td>
+            <td style="display:none;">${item.conversionFactors[0]?.from_uom}</td>
+            <td style="display:none;">${item.conversionFactors[0]?.to_uom}</td>
+            <td style="display:none;">${item.conversionFactors[0]?.conversion_factor}</td>
+            <td style="display:none;">${item.itemDetails.base_unit_cost_price}</td>
+            <td style="display:none;">${item.itemDetails.base_unit_mrp}</td>
+           
+           
+        </tr>
+    `;
+});
+
+        document.getElementById('tbodyIndent').innerHTML = tableRows;
+    })
+    .catch(function(error) {
+        console.error('Error fetching search results:', error);
+    });
+
+});
+// Load PR
+                            document.getElementById('searchItemsBtn3').addEventListener('click', function() {
+    // Collect search parameters
+    const searchParams = {
+        item_name: document.getElementById('item_name3').value || null,
+        requisition_no: document.getElementById('requisition_no').value || null,
+        item_code: document.getElementById('item_code3').value || null,
+        from_store: document.getElementById('from_store').value || null,
+      
+        store_search: document.getElementById('store_search').value || null,
+    };
+
+    // Filter out null values
+    const filteredParams = {};
+    for (const key in searchParams) {
+        if (searchParams[key] !== null && searchParams[key] !== "") {
+            filteredParams[key] = searchParams[key];
+        }
+    }
+
+    // Make the search request using Axios
+    axios.get('/palashinv/getPROnSearch', { params: filteredParams })
+    .then(function(response) {
+        console.log(response);
+        const data = response.data;
+        
+        document.getElementById('tbodyPR').innerHTML = '';
+        let tableRows = '';
+
+        // Populate the search results table
+        data.forEach(item => {
+    const storeTax = item.storeTaxes && item.storeTaxes.length > 0 ? item.storeTaxes[0] : {};
+    const itemDetails = item.itemDetails || {};
+
+    const cgst = storeTax.CGST !== undefined && storeTax.CGST !== null ? storeTax.CGST : 'N/A';
+    const sgst = storeTax.SGST !== undefined && storeTax.SGST !== null ? storeTax.SGST : 'N/A';
+    const igst = storeTax.IGST !== undefined && storeTax.IGST !== null ? storeTax.IGST : 'N/A';
+    const availableStock = item.currentStock && item.currentStock.length > 0 ? item.currentStock[0]?.availableStock : 'N/A';
+    const stockUOM = item.currentStock && item.currentStock.length > 0 ? item.currentStock[0]?.uom : 'N/A';
+
+    tableRows += `
+        <tr data-item-id="${item.id}" data-purchase-rate="${item.base_unit_cost_price}" data-mrp="${item.base_unit_mrp}" >
+            <td><input type="checkbox"></td>
+            <td>${item.requisition_no}</td>
+            <td>${item.item_code}</td>
+            <td>${itemDetails.item_name || 'N/A'}</td>
+            <td>${cgst}</td>
+            <td>${sgst}</td>
+            <td>${igst}</td>
+            <td><input type="checkbox"  data-id='${item.id}' ${item.itemDetails.suspend ? 'checked disabled' : ''}></td>
+            <td>${item.requisition_quantity}</td>
+            <td>${item.uom}</td>
+            <td>${availableStock}</td>
+            <td>${stockUOM}</td>
+            <td style="display:none;">${item.conversionFactors[0]?.from_uom}</td>
+            <td style="display:none;">${item.conversionFactors[0]?.to_uom}</td>
+            <td style="display:none;">${item.conversionFactors[0]?.conversion_factor}</td>
+            <td style="display:none;">${item.itemDetails.base_unit_cost_price}</td>
+            <td style="display:none;">${item.itemDetails.base_unit_mrp}</td>
+           
+           
+        </tr>
+    `;
+});
+
+        document.getElementById('tbodyPR').innerHTML = tableRows;
+    })
+    .catch(function(error) {
+        console.error('Error fetching search results:', error);
+    });
+
+});
+
+function fetchBatches(e){
+
+    const previouslySelected = document.querySelector('.locked');
+if (previouslySelected) {
+    previouslySelected.classList.remove('locked');
+}
+
+// Add 'locked' class to the currently selected row
+e.classList.add('locked');
+
+    const itemId = e.getAttribute('data-item-id');
+    const purchase_rate = e.getAttribute('data-purchase-rate');
+    const mrp = e.getAttribute('data-mrp');
+    console.log(purchase_rate)
+    console.log(mrp)
+     axios.get(`/palashinv/getItemBatches/${itemId}`)
+    .then(function(response) {
+        console.log(response);
+        const data = response.data;
+        
+        document.getElementById('tbodyid2').innerHTML = '';
+        let tableRows = '';
+
+        // Populate the search results table
+        data.forEach(item => {
+            const storeTax = item.storeTaxes && item.storeTaxes.length > 0 ? item.storeTaxes[0] : {};
+            
+            tableRows += `
+                <tr data-item-id="${item.id}">
+                    <td><input type="checkbox"></td>
+                    <td>${item.batchCode}</td>
+                    <td><input type="checkbox"  data-id='${item.id}' ${item.isFree ? 'checked disabled' : ''}></td>
+                    <td>${item.availableStock}</td>
+                    <td>${item.uom}</td>
+                    <td>${purchase_rate}</td>
+                    <td>${mrp}</td>
+                    <td>${formatDate(item.expiryDate)}</td>
+                    </tr>
+            `;
+        });
+
+        document.getElementById('tbodyid2').innerHTML = tableRows;
+    })
+    .catch(function(error) {
+        console.error('Error fetching search results:', error);
+    });
+
+
+}
+
+
+document.addEventListener('click', function(e) {
+    if (e.target.matches('#tbodyid2 input[type="checkbox"]')) {
+        const checkbox = e.target;
+        const selectedBatchRow = checkbox.closest('tr');
+
+        if (checkbox.checked) {
+            const selectedItemRow = document.querySelector('#tbodyid .locked');
+
+            if (selectedItemRow) {
+                // Get values from tbodyid (selected item row)
+                const itemCode = selectedItemRow.children[1].textContent.trim();
+                const itemName = selectedItemRow.children[2].textContent.trim();
+                const brandName = selectedItemRow.children[3].textContent.trim();
+                const cgst = selectedItemRow.children[4].textContent.trim();
+                const sgst = selectedItemRow.children[5].textContent.trim();
+                const igst = selectedItemRow.children[6].textContent.trim();
+                const from_uom = selectedItemRow.children[7].textContent.trim();
+                const to_uom = selectedItemRow.children[8].textContent.trim();
+                const conv_fact = selectedItemRow.children[9].textContent.trim();
+                const purchaseRate = selectedItemRow.getAttribute('data-purchase-rate');
+                const mrp = selectedItemRow.getAttribute('data-mrp');
+
+                // Get values from tbodyid2 (selected batch row)
+                const batchCode = selectedBatchRow.children[1].textContent.trim();
+                const isFree = checkbox.checked;
+                const availableStock = selectedBatchRow.children[3].textContent.trim();
+                const uom = selectedBatchRow.children[4].textContent.trim();
+                const expiryDate = selectedBatchRow.children[7].textContent.trim();
+
+                // Create a new row for tbodyid3
+                const newRow = `
+                    <tr>
+                        <td><input type="checkbox" checked ></td>
+                        <td>${itemCode}</td>
+                        <td>${itemName}</td>
+                        <td>${batchCode}</td>
+                        <td>${expiryDate}</td>
+                        <td>${availableStock}</td>
+                        <td>${mrp}</td>
+                        <td>${purchaseRate}</td>
+                        <td>${cgst}</td>
+                        <td>${sgst}</td>
+                        <td>${igst}</td>
+                        <td style="display:none;">${uom}</td>
+                        <td style="display:none;">${from_uom}</td>
+                        <td style="display:none;">${to_uom}</td>
+                        <td style="display:none;">${conv_fact}</td>
+                    </tr>
+                `;
+
+                // Append the new row to tbodyid3
+                document.getElementById('tbodyid3').insertAdjacentHTML('beforeend', newRow);
+            } else {
+                alert("Please select an item first.");
+                checkbox.checked = false; // Uncheck the checkbox if no item is selected
+            }
+        } else {
+            // If the checkbox is unchecked, remove the corresponding row from tbodyid3
+            const batchCode = selectedBatchRow.children[1].textContent.trim();
+            const rows = document.querySelectorAll('#tbodyid3 tr');
+            rows.forEach(row => {
+                if (row.children[3].textContent.trim() === batchCode) {
+                    row.remove();
+                }
+            });
+        }
     }
 });
 
-$(document).ready(function() {
-        const updateTotalCosts = () => {
-            alert('1')
-            let totalCost = 0;
-            $('#mainTblBody tr').each(function() {
-                const costAmount = parseFloat($(this).find('input[name="total_cost_amount"]').val()) || 0;
-                totalCost += costAmount;
-            });
-            $('#totalCostInput').val(totalCost.toFixed(2));
-        };
-    
-        const saveData = () => {
-            const issueDetails = {
-                issueNumber: $('input[name="issue_number"]').val(),
-                issueDate: $('input[name="issue_date"]').val(),
-                fromStore: $('#from_store').val(),
-                toStore: $('#to_store').val(),
-                totalCost: $('#totalCostInput').val(),
-                items: [],
-                remark: $('#remark').val()
-            };
-    
-            $('#mainTblBody tr').each(function() {
-                const item = {
-                    itemCode: $(this).find('td:first').text(),
-                    itemName: $(this).find('td').eq(1).text(),
-                    batchCode: $(this).find('input[name="batch_code"]').val(),
-                    expiryDate: $(this).find('input[name="expiry_date"]').val(),
-                    issuedQuantity: $(this).find('input[name="issued_quantity"]').val(),
-                    issuedUOM: $(this).find('select[name="issued_uom"]').val(),
-                    totalCostAmount: $(this).find('input[name="total_cost_amount"]').val(),
-                    pendingQuantity: $(this).find('input[name="pending_quantity"]').val()
-                };
-                issueDetails.items.push(item);
-            });
-    
-            console.log(issueDetails); // For debugging, shows data in console before sending
-    
-            // AJAX request to save data (adjust URL and settings as needed)
-            $.post('/saveIssueDetails', issueDetails, function(response) {
-                alert('Save Successful');
-            }).fail(function() {
-                alert('Error saving data');
-            });
-        };
-    
-        $('#saveButton').click(function() {
-            updateTotalCosts();
-            saveData();
-        });
-    
-        // Trigger total cost update on any input change in the cost columns
-        $('#mainTblBody').on('input', 'input[name="total_cost_amount"]', function() {
-            updateTotalCosts();
-        });
-    });        
+// Add Item in main table
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('addSelectedItemsBtn').addEventListener('click', function() {
+        const selectedRows = document.querySelectorAll('#tbodyid3 input[type="checkbox"]:checked');
 
+        selectedRows.forEach(checkbox => {
+            const row = checkbox.closest('tr');
+            const itemCode = row.cells[1].textContent.trim();
+            const itemName = row.cells[2].textContent.trim();
+            const batchCode = row.cells[3].textContent.trim();
+            const expiryDate = row.cells[4].textContent.trim();
+            const availableStock = row.cells[5].textContent.trim();
+            const mrp = row.cells[6].textContent.trim();
+            const costPrice = row.cells[7].textContent.trim();
+            const cgstPercent = row.cells[8].textContent.trim();
+            const sgstPercent = row.cells[9].textContent.trim();
+            const igstPercent = row.cells[10].textContent.trim();
+            const uom = row.cells[11].textContent.trim();
+            const from_uom = row.cells[12].textContent.trim();
+            const to_uom = row.cells[13].textContent.trim();
+            const conv_fact = row.cells[14].textContent.trim();
+
+            const newRow = `
+                <tr  data-original-conversion-factor="${conv_fact}">
+        <td><input type="text" class="form-control" name="item_code" value="${itemCode}" style="display:none;">${itemCode}</td>
+            <td><input type="text" class="form-control" name="item_name" value="${itemName}" style="display:none;">${itemName}</td>
+        <td><input type="text" class="form-control" name="batch_code" value="${batchCode}"></td>
+        <td><input type="date" class="form-control" name="expiry_date" value="${expiryDate}"></td>
+        <td><input type="text" class="form-control" name="quantity" readonly></td>
+      <td><input type="text" class="form-control" name="uom_selected" readonly></td>
+        <td><input type="number" class="form-control" name="pending_quantity"></td>
+        <td><input type="text" class="form-control" name="uom" value="${uom}" style="display:none;">${uom}</td>
+        <td><input type="number" class="form-control" name="available_stock" value="${availableStock}"></td>    
+        <td><input type="text" class="form-control" name="s_uom" value="${to_uom}" style="display:none;">${to_uom}</td>
+        <td><input type="number" class="form-control" name="issued_quantity" ></td>
+        <td>
+            <select name="issued_uom_select" class="form-control input-style">
+                            <option value="${from_uom}">${from_uom}</option>
+                            <option value="${to_uom}">${to_uom}</option>
+            </select>
+        </td>
+        <td><input type="number" class="form-control" name="cost_price" value="${costPrice}"></td>
+        <td><input type="number" class="form-control" name="total_cost_price" readonly></td>
+        <td><button type="button" class="btn btn-danger btn-sm remove-item"><i class="fa-solid fa-trash-can"></i></button></td>
+    
+    </tr>
+
+            `;
+
+            document.getElementById('maintable').insertAdjacentHTML('beforeend', newRow);
+            checkbox.checked = false; // Optionally uncheck after adding
+            // updateCalculation(); // Call a function to update calculations if necessary
+        });
+    });
+});  
+
+//Add Indent in main table
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('addSelectedItemsBtn2').addEventListener('click', function() {
+        const selectedRows = document.querySelectorAll('#tbodyIndent input[type="checkbox"]:checked');
+
+        selectedRows.forEach(checkbox => {
+            const row = checkbox.closest('tr');
+            const itemCode = row.cells[2].textContent.trim();
+            const itemName = row.cells[3].textContent.trim();
+            const batchCode = ''; // Assuming batch code is not available in this table
+            const expiryDate = ''; // Assuming expiry date is not available in this table
+            const availableStock = row.cells[10].textContent.trim();
+            const quantity= row.cells[8].textContent.trim();
+            const indent_uom = row.cells[9].textContent.trim();
+            const mrp = row.cells[16].textContent.trim(); // Assuming MRP is not available in this table
+            const costPrice =row.cells[15].textContent.trim(); // Assuming cost price is not available in this table
+            const cgstPercent = row.cells[4].textContent.trim();
+            const sgstPercent = row.cells[5].textContent.trim();
+            const igstPercent = row.cells[6].textContent.trim();
+            const uom = row.cells[9].textContent.trim();
+            const from_uom = row.cells[12].textContent.trim(); // Hidden column
+            const to_uom = row.cells[13].textContent.trim(); // Hidden column
+            const conv_fact = row.cells[14].textContent.trim(); // Hidden column
+
+            const newRow = `
+                <tr  data-original-conversion-factor="${conv_fact}">
+                    <td><input type="text" class="form-control" name="item_code" value="${itemCode}" style="display:none;">${itemCode}</td>
+                    <td><input type="text" class="form-control" name="item_name" value="${itemName}" style="display:none;">${itemName}</td>
+                    <td><input type="text" class="form-control" name="batch_code" value="${batchCode}"></td>
+                    <td><input type="date" class="form-control" name="expiry_date" value="${expiryDate}"></td>
+                    <td><input type="text" class="form-control" name="quantity" value="${quantity}" readonly></td>
+                    <td><input type="text" class="form-control" name="uom_selected" value="${indent_uom}" readonly></td>
+                    <td><input type="number" class="form-control" name="pending_quantity"></td>
+                    <td><input type="text" class="form-control" name="uom" value="${uom}" style="display:none;">${uom}</td>
+                    <td><input type="number" class="form-control" name="available_stock" value="${availableStock}"></td>
+                    <td><input type="text" class="form-control" name="s_uom" value="${to_uom}" style="display:none;">${to_uom}</td>
+                    <td><input type="number" class="form-control" name="issued_quantity"></td>
+                    <td>
+                        <select name="issued_uom_select" class="form-control input-style">
+                            <option value="${from_uom}">${from_uom}</option>
+                            <option value="${to_uom}">${to_uom}</option>
+                        </select>
+                    </td>
+                    <td><input type="number" class="form-control" name="cost_price" value="${costPrice}"></td>
+                    <td><input type="number" class="form-control" name="total_cost_price" readonly></td>
+                    <td><button type="button" class="btn btn-danger btn-sm remove-item"><i class="fa-solid fa-trash-can"></i></button></td>
+                </tr>
+            `;
+
+            document.getElementById('maintable').insertAdjacentHTML('beforeend', newRow);
+            checkbox.checked = false; // Optionally uncheck after adding
+            // updateCalculation(); // Call a function to update calculations if necessary
+        });
+    });
+
+    // Optional: Add event listener for removing rows
+    document.getElementById('maintable').addEventListener('click', function(e) {
+        if (e.target.classList.contains('remove-item')) {
+            const row = e.target.closest('tr');
+            row.remove();
+        }
+    });
+});
+
+// Add PR in Main table
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('addSelectedItemsBtn3').addEventListener('click', function() {
+        const selectedRows = document.querySelectorAll('#tbodyPR input[type="checkbox"]:checked');
+
+        selectedRows.forEach(checkbox => {
+            const row = checkbox.closest('tr');
+            const itemCode = row.cells[2].textContent.trim();
+            const itemName = row.cells[3].textContent.trim();
+            const batchCode = ''; // Assuming batch code is not available in this table
+            const expiryDate = ''; // Assuming expiry date is not available in this table
+            const availableStock = row.cells[10].textContent.trim();
+            const quantity= row.cells[8].textContent.trim();
+            const indent_uom = row.cells[9].textContent.trim();
+            const mrp = row.cells[16].textContent.trim(); // Assuming MRP is not available in this table
+            const costPrice =row.cells[15].textContent.trim(); // Assuming cost price is not available in this table
+            const cgstPercent = row.cells[4].textContent.trim();
+            const sgstPercent = row.cells[5].textContent.trim();
+            const igstPercent = row.cells[6].textContent.trim();
+            const uom = row.cells[9].textContent.trim();
+            const from_uom = row.cells[12].textContent.trim(); // Hidden column
+            const to_uom = row.cells[13].textContent.trim(); // Hidden column
+            const conv_fact = row.cells[14].textContent.trim(); // Hidden column
+
+            const newRow = `
+                <tr  data-original-conversion-factor="${conv_fact}">
+                    <td><input type="text" class="form-control" name="item_code" value="${itemCode}" style="display:none;">${itemCode}</td>
+                    <td><input type="text" class="form-control" name="item_name" value="${itemName}" style="display:none;">${itemName}</td>
+                    <td><input type="text" class="form-control" name="batch_code" value="${batchCode}"></td>
+                    <td><input type="date" class="form-control" name="expiry_date" value="${expiryDate}"></td>
+                    <td><input type="text" class="form-control" name="quantity" value="${quantity}" readonly></td>
+                    <td><input type="text" class="form-control" name="uom_selected" value="${indent_uom}" readonly></td>
+                    <td><input type="number" class="form-control" name="pending_quantity"></td>
+                    <td><input type="text" class="form-control" name="uom" value="${uom}" style="display:none;">${uom}</td>
+                    <td><input type="number" class="form-control" name="available_stock" value="${availableStock}"></td>
+                    <td><input type="text" class="form-control" name="s_uom" value="${to_uom}" style="display:none;">${to_uom}</td>
+                    <td><input type="number" class="form-control" name="issued_quantity"></td>
+                    <td>
+                        <select name="issued_uom_select" class="form-control input-style">
+                            <option value="${from_uom}">${from_uom}</option>
+                            <option value="${to_uom}">${to_uom}</option>
+                        </select>
+                    </td>
+                    <td><input type="number" class="form-control" name="cost_price" value="${costPrice}"></td>
+                    <td><input type="number" class="form-control" name="total_cost_price" readonly></td>
+                    <td><button type="button" class="btn btn-danger btn-sm remove-item"><i class="fa-solid fa-trash-can"></i></button></td>
+                </tr>
+            `;
+
+            document.getElementById('maintable').insertAdjacentHTML('beforeend', newRow);
+            checkbox.checked = false; // Optionally uncheck after adding
+            // updateCalculation(); // Call a function to update calculations if necessary
+        });
+    });
+
+    // Optional: Add event listener for removing rows
+    document.getElementById('maintable').addEventListener('click', function(e) {
+        if (e.target.classList.contains('remove-item')) {
+            const row = e.target.closest('tr');
+            row.remove();
+        }
+    });
+});
+
+// Function to calculate the total cost amount for each row and the total cost for all rows
+function updateCalculation() {
+    let totalCostAmount = 0;
+
+    // Iterate over each row in the table
+    const rows = document.querySelectorAll('#maintable tr');
+    rows.forEach(row => {
+        const issuedQuantity = parseFloat(row.querySelector('[name="issued_quantity"]').value) || 0;
+        const Quantity = parseFloat(row.querySelector('[name="quantity"]').value) || 0;
+        const pendingQuantity = parseFloat(row.querySelector('[name="pending_quantity"]').value) || 0;
+        const costPrice = parseFloat(row.querySelector('[name="cost_price"]').value) || 0;
+        const issuedUom = row.querySelector('[name="issued_uom_select"]').value;
+        const stockUom = row.querySelector('[name="s_uom"]').value;
+        let conversionFactor = parseFloat(row.dataset.originalConversionFactor) || 1;
+
+        // Check if issued UOM and stock UOM are the same, adjust conversion factor
+        if (issuedUom === stockUom) {
+            conversionFactor = 1;
+        } else {
+            conversionFactor = parseFloat(row.dataset.originalConversionFactor) || 1;
+        }
+
+        // Calculate total cost amount for the row
+        const totalCostPrice = issuedQuantity * costPrice * conversionFactor;
+        row.querySelector('[name="total_cost_price"]').value = totalCostPrice.toFixed(2);
+
+        if( Quantity!==0){
+        const pending=Quantity-issuedQuantity;
+        row.querySelector('[name="pending_quantity"]').value = pending;
+        }
+        if(issuedQuantity>Quantity && Quantity!==0){
+            alert('Issue Quantity is More then Quantity')
+            row.querySelector('[name="issued_quantity"]').value=''
+        }
+
+        // Accumulate the total cost amount for all rows
+        totalCostAmount += totalCostPrice;
+    });
+
+    // Update the overall total cost amount
+    const totalCostAmountInput = document.getElementById('total_cost_amount');
+    if (totalCostAmountInput) {
+        totalCostAmountInput.value = totalCostAmount.toFixed(2);
+    }
+}
+
+// Attach event listeners to handle changes in issued_quantity, issued_uom_select, and s_uom
+document.getElementById('maintable').addEventListener('input', function(e) {
+    if (e.target.name === 'issued_quantity' || e.target.name === 'issued_uom_select' || e.target.name === 's_uom') {
+        updateCalculation();
+    }
+});
+
+// Optionally, ensure calculations are correct on page load
+document.addEventListener('DOMContentLoaded', updateCalculation);
+
+function validateStores(e) {
+    let from_store = $('#from_store').val();
+    let to_store = $('#to_store').val();
+
+    if (!from_store || from_store === 'Select' || !to_store || to_store === 'Select') {
+        alert('Please select From store and To store.');
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+    }
+    return true;
+}
+
+$('#addItems, #addIndent,#addPR').click(function(e) {
+    validateStores(e)
+});
+
+                            $('#from_store, #to_store').on('change', function () {
+            const fromStore = $('#from_store').val();
+            const toStore = $('#to_store').val();
+            if (fromStore === toStore && fromStore !== 'Select') {
+                alert('From Store and To Store cannot be the same.');
+                $(this).val('Select');
+            }
+        });
+
+                        
+$('#saveButton').click(function () {
+    let formData = {
+        issue_number: $('#issue_number').val(),
+        issue_date: $('#issue_date').val(),
+        from_store: $('#from_store').val(),
+        to_store: $('#to_store').val(),
+        is_quarantine: $('#is_quarantine').is(':checked'),
+        remark: $('#remark').val(),
+        total_cost_amount: $('#total_cost_amount').val(),
+        mr_no: $('#mr_no').val(),
+        patient_name: $('#patient_name').val(), // Include total cost amount here
+        items: []
+    };
+
+    // Collecting each item row data from the main table
+    $('#maintable tr').each(function () {
+        var row = $(this);
+        formData.items.push({
+            item_code: row.find('[name="item_code"]').val(),
+            item_name: row.find('[name="item_name"]').val(),
+            batch_code: row.find('[name="batch_code"]').val(),
+            expiry_date: row.find('[name="expiry_date"]').val(),
+            quantity: row.find('[name="quantity"]').val() || 0,
+            uom: row.find('[name="uom"]').val(),
+            pending_quantity: row.find('[name="pending_quantity"]').val()  || 0,
+            available_stock: row.find('[name="available_stock"]').val(),
+            issued_quantity: row.find('[name="issued_quantity"]').val(),
+            issued_uom: row.find('[name="issued_uom_select"]').val(),
+            cost_price: row.find('[name="cost_price"]').val(),
+            total_cost_amount: row.find('[name="total_cost_price"]').val()
+        });
+    });
+
+    console.log('Issue to Clinic Data:', formData);
+    
+    // Perform AJAX request to save data
+    axios.post('/palashinv/saveIssueToClinic', formData, {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(function (response) {
+        console.log('Success:', response.data);
+        alert('Issue to Clinic saved successfully')
+        $('#issue_number').val(response.data.issueNumber);
+        $('#errordiv1').addClass('alert-success').removeClass('alert-danger').text('Issue to Clinic saved successfully').show();
+    }).catch(function (error) {
+        console.error('Error:', error);
+        $('#errordiv1').removeClass('alert-success').addClass('alert-danger').text(error.response.data.message || 'Failed to save!').show();
+        alert('Failed to save Issue to Clinic details!');
+    });
+});
+
+                            
+                        
+                            function formatDate(dateString) {
+                                   return dateString.split('T')[0];
+                                }
                         </script>
-
+                        
     

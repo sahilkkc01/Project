@@ -370,11 +370,12 @@
             fetchData();
     
             function fetchIndentDetails(indentCode) {
+                // alert(indentCode)
                 $.ajax({
                     url: `/palashinv/get-indent-details/${indentCode}`,
                     type: 'GET',
                     success: function(data) {
-                        console.log(data);
+                        console.log('sd',data);
                         let details = data.details;
                         let fetchDetailsPromises = details.map(detail => {
                             return new Promise((resolve, reject) => {
@@ -382,7 +383,8 @@
                                     url: `/palashinv/get-items/${detail.item_code}`,
                                     type: 'GET',
                                     success: function(itemData) {
-                                        detail.uom = itemData.stocking_uom;
+                                        // console.log(data)
+                                       
                                         detail.item_name = itemData.item_name;
                                         resolve(detail);
                                     },

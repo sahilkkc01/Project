@@ -7,6 +7,7 @@ const sequelize = new Sequelize('mydb','root','Lifelinkr@123',{
   dialect: 'mysql'
 })
 
+
 const con = async()=>{
   try{
     await sequelize.authenticate();

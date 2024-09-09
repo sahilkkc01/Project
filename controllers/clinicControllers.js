@@ -1227,7 +1227,7 @@ const getSpec = (req, res) => {
 
 
 const getSubSpec = (req, res) => {
-  console.log('Fetching sub-specializations');
+  console.log('Fetching specializations');
   fs.readFile(path.join(__dirname, '../myjson', 'subSpec.json'), 'utf8', (err, data) => {
     if (err) {
       console.error('Error reading the file:', err);
@@ -1236,10 +1236,15 @@ const getSubSpec = (req, res) => {
     }
     
     try {
-      const subSpecs = JSON.parse(data);
-      const selectedSpec = req.query.spec;
-      const filteredSubSpecs = subSpecs.find(spec => spec.spec_desc === selectedSpec);
-      res.status(200).json(filteredSubSpecs ? filteredSubSpecs.sub_spec_desc : []);
+      const spec = JSON.parse(data);
+      const encryptedSpec = spec.map(spec => {
+        const encryptedId = encryptDataForUrl(spec.id.toString());
+        return {
+          ...spec,
+          id: encryptedId,
+        };
+      });
+      res.status(200).json(encryptedSpec);
     } catch (parseError) {
       console.error('Error parsing JSON:', parseError);
       res.status(500).json({ msg: 'Error parsing JSON data.' });
@@ -1370,10 +1375,11 @@ const subSpecCtrl = async (req, res) => {
         id: item.id,
         clinic_id: item.clinic_id,
         sub_spec_code: item.sub_spec_code,
-        sub_spec_desc: item.sub_spec_desc
+        sub_spec_desc: item.sub_spec_desc,
+        status: item.status
       }));
       const jsonString = JSON.stringify(filteredData, null, 2);
-      const filePath = path.join(__dirname, '..', 'subSpec.json');
+      const filePath = path.join(__dirname, '../myjson', 'subSpec.json');
 
       fs.writeFile(filePath, jsonString, 'utf8', (err) => {
         if (err) {
@@ -1409,10 +1415,11 @@ const subSpecCtrl = async (req, res) => {
         id: item.id,
         clinic_id: item.clinic_id,
         sub_spec_code: item.sub_spec_code,
-        sub_spec_desc: item.sub_spec_desc
+        sub_spec_desc: item.sub_spec_desc,
+        status: item.status
       }));
       const jsonString = JSON.stringify(filteredData, null, 2);
-      const filePath = path.join(__dirname, '..', 'subSpec.json');
+      const filePath = path.join(__dirname, '../myjson', 'subSpec.json');
 
       fs.writeFile(filePath, jsonString, 'utf8', (err) => {
         if (err) {

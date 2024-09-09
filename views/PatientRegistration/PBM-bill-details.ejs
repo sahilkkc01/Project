@@ -218,10 +218,17 @@
                                                                 <div class="col-lg-4 col-md-2 col-sm-12">
                                                                     <div class="form-group">
 
-                                                                        <button type="button" disabled
+                                                                        <button type="button" 
                                                                             class="btn btn-style mt-4 btn-secondary btn-style btn-change ml-1 mr-2"><strong><i
                                                                                     class="fas fa-plus"></i>
                                                                                 Add Prescribed Items</strong></button>
+
+
+                                                                                <button type="button" data-bs-toggle="modal"
+                                                                                data-bs-target="#myModal5" id="addOtherItem"
+                                                                                    class="btn btn-style mt-4 btn-secondary btn-style btn-change"><strong><i
+                                                                                            class="fas fa-plus"></i>
+                                                                                        Add Package</strong></button>
 
 
                                                                         <button type="button" data-bs-toggle="modal"
@@ -1008,6 +1015,39 @@
                             </div>
                               
                         </div>
+
+
+                        <div class="modal" id="myModal5">
+                            <div class="modal-dialog modal-lg">
+                              <div class="modal-content">
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                Priscripotion
+                                    <a href="#" class="btn-close" data-bs-dismiss="modal"><i class="fa-solid fa-circle-xmark"></i></a>
+                                </div>
+                          
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <table id="prescriptionTable" class="table2">
+                                            <thead>
+                                                <tr>
+                                                    <th>Id</th>
+                                                    <th>Items</th>
+                                                    <th>Date</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="prescriptionBody">
+                                                <!-- Data will be appended here by Axios and jQuery -->
+                                            </tbody>
+                                        </table>
+                                      </div>
+                                </div>
+                          
+                              </div>
+                            </div>
+                        </div>
+                        
 <script>
 
 
@@ -1102,6 +1142,32 @@ document.getElementById('receivePaymentCheckbox').addEventListener('change', fun
     }
 });
 
+
+
+// $(document).ready(function() {
+//             axios.get('/embrology/prescriptions')
+//                 .then(function(response) {
+//                     const prescriptions = response.data;
+//                     prescriptions.forEach(function(prescription) {
+//                         const items = prescription.prescribedMedicine.map(function(med) {
+//                             return `Drug: ${med.Drug}, Dose: ${med.Dose}, Frequency: ${med.Frequency}, Days: ${med.Days}`;
+//                         }).join('<br>');
+
+//                         $('#prescriptionBody').append(`
+//                             <tr>
+//                                 <td>${prescription.id}</td>
+//                                 <td>${items}</td>
+//                                 <td>${prescription.Date}</td>
+//                             </tr>
+//                         `);
+//                     });
+//                 })
+//                 .catch(function(error) {
+//                     console.error('Error fetching prescriptions:', error);
+//                 });
+//         });
+
+
 </script>
                         <script>
                             function updateQuery() {
@@ -1194,6 +1260,7 @@ document.getElementById('receivePaymentCheckbox').addEventListener('change', fun
             url: '/findpatient/get-service',
             method: 'GET',
             success: function (data) {
+               
                 populateServicesTable(data);
                 markSelectedServices();
             },
@@ -1332,6 +1399,7 @@ console.log("se"+JSON.stringify(selectedBillServices))
     let totalNetAmount = 0;
 
     selectedBillServices.forEach(function (service, index) {
+        console.log(service)
         var totalAmount = parseFloat(service.serviceRate) + parseFloat(service.service_amount || 0);
         var netAmount = parseFloat(totalAmount) - parseFloat(service.concession_amount || 0);
 

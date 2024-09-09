@@ -1,0 +1,16 @@
+[
+  {
+    "Drug": "ibuprofen",
+    "Dose": "2",
+    "Frequency": "2",
+    "Days": "5",
+    "isFavourite": "true"
+  },
+  {
+    "Drug": "paracetamol",
+    "Dose": "1",
+    "Frequency": "3",
+    "Days": "7",
+    "isFavourite": "false"
+  }
+]

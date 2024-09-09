@@ -339,7 +339,7 @@
        <script>
         
         function loadCity(a) {
-
+       
 $.ajax({
   url: '/clinic/cities', // Endpoint to fetch all cities
   type: 'GET',
@@ -357,7 +357,9 @@ $.ajax({
       `;
     });
     
-    $('#clinic_city').html(selectOptions); // Populate select options
+    $('#clinic_city').html(selectOptions);
+    const clinicCityValue = '<%= a.clinic_city %>'; // Server-side value
+    $('#clinic_city').val(clinicCityValue); // Populate select options
   },
   error: function(xhr, status, error) {
     console.error('Error fetching cities:', error);
@@ -376,6 +378,9 @@ document.getElementById('sub-btn').disabled = false;
 if('<%= a.id %>'!==''){
   $('#clinic_city').hide();
   $('#hid_div').show();
+  loadCity({value:'<%= a.clinic_state %>'})
+
+  
 $('input[data-validation],select[data-validation]').prop('disabled', true);
 document.getElementById('sub-btn').disabled = true;
 document.getElementById('mod-btn').disabled = false;
@@ -398,7 +403,7 @@ document.getElementById('mod-btn').disabled = true;
         document.getElementById('clinic_add_line_3').value = '<%= a.clinic_add_line_3 %>';
         document.getElementById('clinic_country').value = '<%= a.clinic_country %>';
         document.getElementById('clinic_state').value = '<%= a.clinic_state %>';
-        document.getElementById('clinic_city').value = '<%= a.clinic_city %>';
+
         document.getElementById('clinic_pincode').value = '<%= a.clinic_pincode %>';
         document.getElementById('clinic_area').value = '<%= a.clinic_area %>';
         document.getElementById('clinic_estb_no').value = '<%= a.clinic_estb_no %>';

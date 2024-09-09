@@ -48,6 +48,9 @@ const OpeningBalanceItem = sequelize.define('OpeningBalanceItem', {
     item_id: {
         type: DataTypes.INTEGER,
     },
+    item_code: {
+      type: DataTypes.STRING,
+  },
     batch_code: {
         type: DataTypes.STRING,
     },
@@ -203,6 +206,10 @@ const Indent = sequelize.define('Indent', {
       type: DataTypes.INTEGER,
      
     },
+    uom: {
+      type: DataTypes.STRING,
+     
+    },
     pending_quantity: {
       type: DataTypes.INTEGER,
      
@@ -297,7 +304,9 @@ const Indent = sequelize.define('Indent', {
     requisition_quantity: {
       type: DataTypes.INTEGER,
     },
-    
+    uom: {
+      type: DataTypes.STRING,
+    },
     pending_quantity: {
       type: DataTypes.INTEGER,
     },
@@ -347,6 +356,9 @@ const Indent = sequelize.define('Indent', {
     item_id: {
       type: DataTypes.INTEGER,
     },
+    item_code: {
+      type: DataTypes.STRING,
+    },
     isFree: {
       type: DataTypes.BOOLEAN,
     },
@@ -357,7 +369,9 @@ const Indent = sequelize.define('Indent', {
     availableStock: {
       type: DataTypes.INTEGER,
     },
-  
+    uom: {
+      type: DataTypes.STRING,
+    },
     expiryDate: {
       type: DataTypes.DATE,
     },
@@ -368,6 +382,9 @@ const Indent = sequelize.define('Indent', {
   });
   
   const PurchaseOrder = sequelize.define('PurchaseOrder', {
+    po_no: {
+      type: DataTypes.STRING,
+  },
     date: {
         type: DataTypes.DATEONLY,
     },
@@ -425,6 +442,14 @@ const Indent = sequelize.define('Indent', {
     remarks: {
         type: DataTypes.TEXT,
     },
+    freeze: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    },
+    approved: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    },
 }, {
     timestamps: true,
     tableName: 'invpurchase_orders'
@@ -437,6 +462,9 @@ const POItemDetails = sequelize.define('ItemDetails', {
         model: PurchaseOrder,
         key: 'id'
     }
+},
+po_no: {
+  type: DataTypes.STRING,
 },
   item_code: {
       type: DataTypes.STRING,
@@ -520,6 +548,239 @@ const POItemDetails = sequelize.define('ItemDetails', {
 PurchaseOrder.hasMany(POItemDetails, { foreignKey: 'purchase_order_id' });
 POItemDetails.belongsTo(PurchaseOrder, { foreignKey: 'purchase_order_id' });
 
-  
+const IssueToClinic = sequelize.define('IssueToClinic', {
+  issue_number: DataTypes.STRING,
+  issue_date: DataTypes.DATE,
+  from_store: DataTypes.STRING,
+  to_store: DataTypes.STRING,
+  is_quarantine: DataTypes.BOOLEAN,
+  remark: DataTypes.TEXT,
+  total_cost_amount: DataTypes.DECIMAL(10, 2),
+  mr_no: DataTypes.STRING,
+  patient_name: DataTypes.STRING
+}, {
+  tableName: 'inv_issue_to_clinic'
+});
 
-module.exports = {OpeningBalanceItem,OpeningBalance,IndentItem,Indent,Requisition,RequisitionItem,Prefix,CurrentItemStock,PurchaseOrder,POItemDetails};
+const IssueItems = sequelize.define('IssueItems', {
+  IssueToClinicId: {
+    type: DataTypes.INTEGER,
+    references: {
+      model: 'inv_issue_to_clinic',
+      key: 'id'
+    }
+  },
+  issue_number: DataTypes.STRING,
+  item_code: DataTypes.STRING,
+  item_name: DataTypes.STRING,
+  batch_code: DataTypes.STRING,
+  expiry_date: DataTypes.DATE,
+  quantity: DataTypes.INTEGER,
+  uom: DataTypes.STRING,
+  pending_quantity: DataTypes.INTEGER,
+  available_stock: DataTypes.INTEGER,
+  issued_quantity: DataTypes.INTEGER,
+  issued_uom: DataTypes.STRING,
+  cost_price: DataTypes.DECIMAL(10, 2),
+  total_cost_amount: DataTypes.DECIMAL(10, 2),
+  
+}, {
+  tableName: 'inv_issue_items'
+});
+
+
+
+
+const GRN = sequelize.define('GRN', {
+  grn_no: {
+      type: DataTypes.STRING,
+     
+  },
+  date: {
+      type: DataTypes.DATEONLY,
+     
+  },
+  gate_entry_no: {
+      type: DataTypes.STRING
+  },
+  store: {
+      type: DataTypes.INTEGER,
+     
+  },
+  supplier: {
+      type: DataTypes.INTEGER,
+     
+  },
+  pay_mode: {
+      type: DataTypes.STRING
+  },
+  invoice_date: {
+      type: DataTypes.DATEONLY
+  },
+  invoice_no: {
+      type: DataTypes.STRING
+  },
+  total_amount: {
+      type: DataTypes.DECIMAL(10, 2)
+  },
+  sgst_amount: {
+      type: DataTypes.DECIMAL(10, 2)
+  },
+  cgst_amount: {
+      type: DataTypes.DECIMAL(10, 2)
+  },
+  igst_amount: {
+      type: DataTypes.DECIMAL(10, 2)
+  },
+  other_charges: {
+      type: DataTypes.DECIMAL(10, 2)
+  },
+  c_disc_amount: {
+      type: DataTypes.DECIMAL(10, 2)
+  },
+  sch_disc_amount: {
+      type: DataTypes.DECIMAL(10, 2)
+  },
+  grn_discount: {
+      type: DataTypes.DECIMAL(10, 2)
+  },
+  net_amount: {
+      type: DataTypes.DECIMAL(10, 2)
+  },
+  received_by: {
+      type: DataTypes.STRING
+  },
+  remark: {
+      type: DataTypes.TEXT
+  },
+  is_finalize: {
+      type: DataTypes.BOOLEAN
+  }
+}, {
+  timestamps: true,
+  tableName: 'invgrns' // Ensure unique table name
+});
+
+const GRNItem = sequelize.define('GRNItem', {
+  grn_id: {
+      type: DataTypes.INTEGER,
+      references: {
+          model: 'invgrns', // Reference to GRN model
+          key: 'id'
+      }
+  },
+  grn_no: {
+      type: DataTypes.STRING,
+  },
+  item_name: {
+      type: DataTypes.STRING,
+  },
+  item_code: {
+      type: DataTypes.STRING,
+  },
+  batch_code: {
+      type: DataTypes.STRING,
+  },
+  expiry_date: {
+      type: DataTypes.DATE,
+  },
+  bar_code: {
+      type: DataTypes.STRING,
+  },
+  uom: {
+      type: DataTypes.STRING,
+  },
+  received_quantity: {
+      type: DataTypes.INTEGER,
+  },
+  uom_select: {
+      type: DataTypes.STRING,
+  },
+  s_uom: {
+      type: DataTypes.STRING,
+  },
+  conversion_factor: {
+      type: DataTypes.FLOAT,
+  },
+  total_quantity: {
+      type: DataTypes.INTEGER,
+  },
+  available_stock: {
+      type: DataTypes.INTEGER,
+  },
+  cost_price: {
+      type: DataTypes.DECIMAL(10, 2),
+  },
+  cost_amount: {
+      type: DataTypes.DECIMAL(10, 2),
+  },
+  avg_cost: {
+      type: DataTypes.DECIMAL(10, 2),
+  },
+  avg_cost_amount: {
+      type: DataTypes.DECIMAL(10, 2),
+  },
+  mrp: {
+      type: DataTypes.DECIMAL(10, 2),
+  },
+  abated_mrp: {
+      type: DataTypes.DECIMAL(10, 2),
+  },
+  amount: {
+      type: DataTypes.DECIMAL(10, 2),
+  },
+  c_disc_percent: {
+      type: DataTypes.FLOAT,
+  },
+  c_disc_amount: {
+      type: DataTypes.DECIMAL(10, 2),
+  },
+  sch_disc_percent: {
+      type: DataTypes.FLOAT,
+  },
+  sch_disc_amount: {
+      type: DataTypes.DECIMAL(10, 2),
+  },
+  cgst_percent: {
+      type: DataTypes.FLOAT,
+  },
+  cgst_amount: {
+      type: DataTypes.DECIMAL(10, 2),
+  },
+  sgst_percent: {
+      type: DataTypes.FLOAT,
+  },
+  sgst_amount: {
+      type: DataTypes.DECIMAL(10, 2),
+  },
+  igst_percent: {
+      type: DataTypes.FLOAT,
+  },
+  igst_amount: {
+      type: DataTypes.DECIMAL(10, 2),
+  },
+  net_amount: {
+      type: DataTypes.DECIMAL(10, 2),
+  },
+  remarks: {
+      type: DataTypes.STRING,
+  },
+  rack: {
+      type: DataTypes.STRING,
+  },
+  shelf: {
+      type: DataTypes.STRING,
+  },
+  bin: {
+      type: DataTypes.STRING,
+  }
+}, {
+  timestamps: true,
+  tableName: 'invgrn_items' // Unique table name for GRN items
+});
+
+
+// Define relationships
+GRN.hasMany(GRNItem, { foreignKey: 'grn_id' });
+GRNItem.belongsTo(GRN, { foreignKey: 'grn_id' });
+module.exports = {GRN,GRNItem,IssueToClinic,IssueItems,OpeningBalanceItem,OpeningBalance,IndentItem,Indent,Requisition,RequisitionItem,Prefix,CurrentItemStock,PurchaseOrder,POItemDetails};

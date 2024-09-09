@@ -183,6 +183,7 @@ const ClinicConfiguration = sequelize.define('ClinicConfiguration', {
     type: DataTypes.BOOLEAN
   }
 }, {
+  alter:true,
   tableName: 'clinicconfigurations'
 });
 
@@ -280,9 +281,6 @@ const Department = sequelize.define('Department', {
   },
   dept_sub_spec: {
     type: DataTypes.STRING
-  },
-  status:{
-    type: DataTypes.BOOLEAN
   },
   status:{
     type: DataTypes.BOOLEAN
@@ -629,27 +627,27 @@ const Employee = sequelize.define('Employee', {
   emp_number: {
     type: DataTypes.STRING,
  
-    unique: true
+   
   },
   emp_pf_number: {
     type: DataTypes.STRING,
  
-    unique: true
+   
   },
   emp_pan_number: {
     type: DataTypes.STRING,
  
-    unique: true
+   
   },
   emp_email_id: {
     type: DataTypes.STRING,
  
-    unique: true
+   
   },
   emp_access_card_number: {
     type: DataTypes.STRING,
  
-    unique: true
+   
   },
   emp_exp: {
     type: DataTypes.STRING,
@@ -668,6 +666,7 @@ const Employee = sequelize.define('Employee', {
   }
 }, { 
   tableName: 'employees',
+  alter:true,
   timestamps: true // Automatically adds createdAt and updatedAt fields
 });
 

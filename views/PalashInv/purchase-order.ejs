@@ -229,8 +229,8 @@
                                                                     <tr>
 
                                                                         <th contenteditable="true"></th>
-                                                                        <th contenteditable="true">PO Number</th>
-                                                                        <th contenteditable="true">PO Date</th>
+                                                                        <th contenteditable="true" style="min-width: 100px;">PO Number</th>
+                                                                        <th contenteditable="true" style="min-width: 100px;">PO Date</th>
                                                                         <th contenteditable="true">Supplier Name</th>
                                                                         <th contenteditable="true">GRN No. Date</th>
                                                                         <th contenteditable="true">Purchase Requisition No. - Date</th>
@@ -239,14 +239,14 @@
                                                                         <th contenteditable="true">PO Net Amount</th>
                                                                         <th contenteditable="true">Freeze PO</th>
                                                                         <th contenteditable="true">Approved</th>
-                                                                        <th contenteditable="true">Approve Level 1 Details</th>
+                                                                        <th contenteditable="true" >Approve Level 1 Details</th>
                                                                         <th contenteditable="true">Approve Level 1 Details</th>
                                                                         <th contenteditable="true">Cancel PO</th>
                                                                         
                                                                     </tr>
                                                                 </thead>
 
-                                                                <tbody>
+                                                                <tbody id="tbodyid">
                                                                    
                                                                 </tbody>
                                                                 
@@ -312,7 +312,7 @@
                                                                        
                                                                     </tr>
                                                                 </thead>
-                                                                <tbody>
+                                                                <tbody id="poDetails">
                                                                   
                                                                 </tbody>
                                                             </table>
@@ -326,7 +326,7 @@
                                                             </div>
                                         
                                                             <div class="form-group">
-                                                                <input name="description" type="text" class="form-control input-style text-right" placeholder="0">
+                                                                <input name="totalPO" id="totalPO" type="text" class="form-control input-style text-right" placeholder="0">
                                         
                                                             </div>
                                         
@@ -367,3 +367,161 @@
                         </div>
                         <!--footer section start-->
                         <%-include('../footer');-%>
+
+                        <script>
+                        function fetchPo(){
+                                    // Example Axios request to replace the jQuery $.ajax
+axios.get('/palashinv/getAllPO')
+.then(function(response) {
+    console.log(response)
+    var count=0;
+    const data = response.data;
+    // console.log(data)
+    let tableRows = '';
+    data.forEach(function(item) {
+        count=count+1;
+        tableRows += `
+            <tr data-item-id="${item.id}" onclick="fetchItems(this)"> 
+                <td><button type="button" id="view_btn" class="btn btn-primary btn-style btn-change view-btn">View</button></td>
+                <td>${item.po_no}</td>
+                <td>${item.date}</td>
+                <td>${item.supplier}</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>${item.total_net_amount}</td>
+                <td><input type="checkbox" class="freeze-checkbox" data-id='${item.id}' ${item.freeze ? 'checked disabled' : ''}></td>
+                <td><input type="checkbox" class="approved-checkbox" disabled data-id='${item.id}' ${item.approved ? 'checked' : ''}></td>
+                <td><input  type="text"></td>
+                <td><input type="text"></td>
+                <td>
+              <button type="button" class="btn btn-danger btn-style btn-change cancel-btn" data-id="${item.id}">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                 </td>
+               
+            </tr>
+        `;
+    });
+
+    // Insert rows into the table body
+    document.getElementById('tbodyid').innerHTML = tableRows;
+    document.getElementById('totalPO').value = count;
+ 
+})
+.catch(function(error) {
+    console.error('Error fetching data:', error);
+});
+
+                            }
+
+                            fetchPo()
+//freeze PO
+$('#tbodyid').on('change', '.freeze-checkbox', function(event) {
+                let requisitionId = $(this).data('id');
+                let freezeStatus = $(this).is(':checked');
+                updateFreezeStatus('po', requisitionId, freezeStatus);
+            });
+            $('#tbodyid').on('click', '.cancel-btn', function(event) {
+               
+                event.stopPropagation(); // Prevent the row click event
+                let requisitionId = $(this).data('id');
+                cancelPO(requisitionId);
+            });
+    
+            function updateFreezeStatus(type, id, freezeStatus) {
+               
+                $.ajax({
+                    url: `/palashinv/update-freeze-status/${type}/${id}`,
+                    type: 'POST',
+                    data: JSON.stringify({ freeze: freezeStatus }),
+                    contentType: 'application/json',
+                    success: function(response) {
+                        alert(`${type.charAt(0).toUpperCase() + type.slice(1)} Freezed and Updated Successfully`);
+                        console.log(`Freeze status of ${type} ${id} updated successfully`);
+                        fetchData(); // Refresh the data
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(`Error updating freeze status for ${type}:`, error);
+                    }
+                });
+            }
+    
+            function cancelPO(requisitionId) {
+                const type='po'
+                $.ajax({
+                    url: `/palashinv/delete-record/${type}/${requisitionId}/`,
+                    type: 'DELETE',
+                    success: function(response) {
+                        alert('Purchase Order Deleted')
+                        fetchData(); 
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error deleting requisition:', error);
+                    }
+                });
+            }
+    
+
+                            function fetchItems(e) {
+
+// Remove 'locked' class from any previously selected row
+const previouslySelected = document.querySelector('.locked');
+if (previouslySelected) {
+    previouslySelected.classList.remove('locked');
+}
+
+// Add 'locked' class to the currently selected row
+e.classList.add('locked');
+
+// Get the id of the selected row
+const itemId = e.getAttribute('data-item-id');
+console.log('Selected Item ID:', itemId);
+
+// Make an Axios GET request to fetch data based on the item ID
+axios.get(`/palashinv/getPOItems/${itemId}`)
+    .then(function(response) {
+        const data = response.data;
+        console.log('Fetched Item Data:', data);
+
+        // Clear any previous data in the table body
+        const tableBody = document.getElementById('poDetails');
+        tableBody.innerHTML = '';
+
+        // Iterate over the fetched data and create rows for the table
+        data.forEach(item => {
+            const row = `
+                <tr>
+                    <td>${item.item_code}</td>
+                    <td>${item.item_name}</td>
+                    <td>${item.hsn_code}</td>
+                    <td>${item.purchase_quantity}</td>
+                    <td>${item.purchase_uom}</td>
+                    <td>${item.purchase_cost_price}</td>
+                    <td>${item.cost_amount}</td>
+                    <td>${item.mrp}</td>
+                    <td>${item.amount}</td>
+                    <td>${item.discount_on_sale}%</td>
+                    <td>${item.discount_amount}</td>
+                    <td>${item.cgst_percent}%</td>
+                    <td>${item.cgst_amount}</td>
+                    <td>${item.sgst_percent}%</td>
+                    <td>${item.sgst_amount}</td>
+                    <td>${item.igst_percent}%</td>
+                    <td>${item.igst_amount}</td>
+                    <td>${item.net_amount}</td>
+                    <td>${item.specification || ''}</td>
+                </tr>
+            `;
+
+            // Append the row to the table body
+            tableBody.insertAdjacentHTML('beforeend', row);
+        });
+    })
+    .catch(function(error) {
+        console.error('Error fetching item data:', error);
+    });
+}
+
+                        </script>

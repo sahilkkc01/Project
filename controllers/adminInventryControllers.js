@@ -2620,6 +2620,8 @@ const getOpeningBalanceItems = async (req, res) => {
     }
 };
 
+
+
   
 
 
@@ -2730,6 +2732,6 @@ module.exports = {
   getItemCatList,
   getSupplierListItem,
   SaveRateContract,
-  getOpeningBalanceItems
+  getOpeningBalanceItems,
 
 };

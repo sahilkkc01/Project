@@ -12735,4 +12735,6 @@ img {
     font-size: 25px;
     line-height: 30px; } }
 
+    .slidex{display:block;overflow-x:auto;}
+.slidey{display:block;overflow-y:auto;max-height: 200px;}
 /*# sourceMappingURL=style-starter.css.map */

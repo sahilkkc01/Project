@@ -517,9 +517,9 @@ if('<%= a.status %>'==='false'){
                             img.src = e.target.result;
                             img.style.maxWidth = '100%';
                             img.style.maxHeight = '100px'; // Limit the preview size
-                            const previewDiv = document.getElementById('image-preview');
-                            previewDiv.innerHTML = '';
-                            previewDiv.appendChild(img);
+                            // const previewDiv = document.getElementById('image-preview');
+                            // previewDiv.innerHTML = '';
+                            // previewDiv.appendChild(img);
                         }
                         reader.readAsDataURL(file);
                     }
@@ -593,8 +593,8 @@ if('<%= a.status %>'==='false'){
                             console.log('Response:', response);
                           },
                           error: function(xhr, status, error) {
-                            response=xhr.responseText();
-                            $(errorDivId).removeClass('alert-success').addClass('alert-danger').text(response.msg).show();
+                            console.log(xhr)
+                            $(errorDivId).removeClass('alert-success').addClass('alert-danger').text(xhr.responseJSON.msg).show();
                             console.error('Error:', error);
                           }
                         });
