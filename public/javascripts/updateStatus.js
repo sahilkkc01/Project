@@ -1,5 +1,5 @@
  function updateStatus(itemId, isChecked,Schema,module) {
-   
+   console.log(Schema)
     axios.post(`/${module}/save-status-data`, {
     id: itemId, 
     status: isChecked, 

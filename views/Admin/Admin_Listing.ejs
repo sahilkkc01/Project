@@ -146,8 +146,7 @@
                                                                                 </th>
                                                                                 <th contenteditable="true">Rights Issued
                                                                                 </th>
-                                                                                <th contenteditable="true">Freeze
-                                                                                </th>
+                                                                              
 
                                                                                 <th contenteditable="true" width="15%">
                                                                                     Status</th>
@@ -257,7 +256,7 @@
                     <td>${item.clinicName}</td>
                     <td>${item.createdBy}</td>
                     <td><ul>${rightsDisplay}</ul></td> <!-- Embed the rightsDisplay within an <ul> tag -->
-                    <td>${item.Freeze ? 'Yes' : 'No'}</td>
+                    
                     <td><input class="form-check-input mt-0 status-checkbox" type="checkbox" data-id="${item.id}" ${item.status ? 'checked' : ''}></td>
                 </tr>
                 `;

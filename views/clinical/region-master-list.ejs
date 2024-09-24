@@ -109,23 +109,10 @@
                             <input type="text" id="searchBox"
                               class="form-control input-style" placeholder=""></div>
                         </div>
-						<div class="col-3 mb-3 mb-3">
-                          <div class="form-group">
-                            <label class="input__label">Country </label><input type="text"
-                              class="form-control input-style" placeholder=""></div>
-                        </div>
-						<div class="col-2 mb-3 mb-3">
-                          <div class="form-group"><label class="input__label">State </label><input type="text"
-                              class="form-control input-style" placeholder=""></div>
-                        </div>
+
 						<div class="col-4 mb-3 mb-3">
 						<div class="row">
-						<div class="col-9 pr-lg-0">
-                          <div class="form-group">
-						  <label class="input__label">Emirate/City </label><input type="text"
-                              class="form-control input-style" placeholder="">
-						  </div>
-						</div>
+						
 						<div class="col-3 pr-lg-0">
                           <div class="form-group">
 						<button type="submit"
@@ -244,7 +231,7 @@ function paginateTable() {
                 type: 'GET',
                 success: function(data) {
                   let tableRows = '';
-                  data.forEach(function(item) {
+                  data.reverse().forEach(function(item) {
                     tableRows += `
                       <tr data-rm-id="${item.id}">
                         <td><button type="button" id="view_btn" class="btn btn-primary btn-style btn-change">View</button></td>

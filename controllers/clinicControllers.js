@@ -1199,57 +1199,46 @@ const getCountMas = async (req, res) => {
   }
 };
 
-const getSpec = (req, res) => {
-  console.log('Fetching specializations');
-  fs.readFile(path.join(__dirname, '../myjson', 'spec.json'), 'utf8', (err, data) => {
-    if (err) {
-      console.error('Error reading the file:', err);
-      res.status(500).send('Error reading the file');
-      return;
-    }
-    
-    try {
-      const spec = JSON.parse(data);
-      const encryptedSpec = spec.map(spec => {
-        const encryptedId = encryptDataForUrl(spec.id.toString());
-        return {
-          ...spec,
-          id: encryptedId,
-        };
-      });
-      res.status(200).json(encryptedSpec);
-    } catch (parseError) {
-      console.error('Error parsing JSON:', parseError);
-      res.status(500).json({ msg: 'Error parsing JSON data.' });
-    }
-  });
-};
+const getSpec = async(req, res) => {
+  try {
+    const spec = await Specialization.findAll();
+
+    // Encrypt the ID for each cluster
+    const encryptedClus = spec.map(cluster => {
+      const encryptedId = encryptDataForUrl(cluster.id.toString());
+      return {
+        ...cluster.toJSON(),
+        id: encryptedId,
+      };
+    });
+
+    res.status(200).json(encryptedClus);
+  } catch (error) {
+    console.error('Error fetching cluster details:', error);
+    res.status(500).json({ msg: 'An error occurred while fetching cluster details.' });
+  }
+  
+  };
 
 
-const getSubSpec = (req, res) => {
-  console.log('Fetching specializations');
-  fs.readFile(path.join(__dirname, '../myjson', 'subSpec.json'), 'utf8', (err, data) => {
-    if (err) {
-      console.error('Error reading the file:', err);
-      res.status(500).send('Error reading the file');
-      return;
-    }
-    
-    try {
-      const spec = JSON.parse(data);
-      const encryptedSpec = spec.map(spec => {
-        const encryptedId = encryptDataForUrl(spec.id.toString());
-        return {
-          ...spec,
-          id: encryptedId,
-        };
-      });
-      res.status(200).json(encryptedSpec);
-    } catch (parseError) {
-      console.error('Error parsing JSON:', parseError);
-      res.status(500).json({ msg: 'Error parsing JSON data.' });
-    }
-  });
+const getSubSpec = async(req, res) => {
+  try {
+    const clus = await SubSpecialization.findAll();
+
+    // Encrypt the ID for each cluster
+    const encryptedClus = clus.map(cluster => {
+      const encryptedId = encryptDataForUrl(cluster.id.toString());
+      return {
+        ...cluster.toJSON(),
+        id: encryptedId,
+      };
+    });
+
+    res.status(200).json(encryptedClus);
+  } catch (error) {
+    console.error('Error fetching cluster details:', error);
+    res.status(500).json({ msg: 'An error occurred while fetching cluster details.' });
+  }
 };
 
 // Get all State Master records
@@ -1370,24 +1359,24 @@ const subSpecCtrl = async (req, res) => {
       res.status(200).json({ msg: 'Sub Specialization saved successfully!', data: subSpec });
 
       // Save data to JSON file
-      const data = await SubSpecialization.findAll();
-      const filteredData = data.map(item => ({
-        id: item.id,
-        clinic_id: item.clinic_id,
-        sub_spec_code: item.sub_spec_code,
-        sub_spec_desc: item.sub_spec_desc,
-        status: item.status
-      }));
-      const jsonString = JSON.stringify(filteredData, null, 2);
-      const filePath = path.join(__dirname, '../myjson', 'subSpec.json');
+      // const data = await SubSpecialization.findAll();
+      // const filteredData = data.map(item => ({
+      //   id: item.id,
+      //   clinic_id: item.clinic_id,
+      //   sub_spec_code: item.sub_spec_code,
+      //   sub_spec_desc: item.sub_spec_desc,
+      //   status: item.status
+      // }));
+      // const jsonString = JSON.stringify(filteredData, null, 2);
+      // const filePath = path.join(__dirname, '../myjson', 'subSpec.json');
 
-      fs.writeFile(filePath, jsonString, 'utf8', (err) => {
-        if (err) {
-          console.error(`Error writing file: ${err}`);
-        } else {
-          console.log('File has been created successfully');
-        }
-      });
+      // fs.writeFile(filePath, jsonString, 'utf8', (err) => {
+      //   if (err) {
+      //     console.error(`Error writing file: ${err}`);
+      //   } else {
+      //     console.log('File has been created successfully');
+      //   }
+      // });
 
     // Check if query parameter is '1' (update existing data)
     } else if (req.body.query === '1') {
@@ -1410,24 +1399,24 @@ const subSpecCtrl = async (req, res) => {
       res.status(200).json({ msg: 'Sub Specialization details updated successfully!', data: existing });
 
       // Save data to JSON file
-      const data = await SubSpecialization.findAll();
-      const filteredData = data.map(item => ({
-        id: item.id,
-        clinic_id: item.clinic_id,
-        sub_spec_code: item.sub_spec_code,
-        sub_spec_desc: item.sub_spec_desc,
-        status: item.status
-      }));
-      const jsonString = JSON.stringify(filteredData, null, 2);
-      const filePath = path.join(__dirname, '../myjson', 'subSpec.json');
+      // const data = await SubSpecialization.findAll();
+      // const filteredData = data.map(item => ({
+      //   id: item.id,
+      //   clinic_id: item.clinic_id,
+      //   sub_spec_code: item.sub_spec_code,
+      //   sub_spec_desc: item.sub_spec_desc,
+      //   status: item.status
+      // }));
+      // const jsonString = JSON.stringify(filteredData, null, 2);
+      // const filePath = path.join(__dirname, '../myjson', 'subSpec.json');
 
-      fs.writeFile(filePath, jsonString, 'utf8', (err) => {
-        if (err) {
-          console.error(`Error writing file: ${err}`);
-        } else {
-          console.log('File has been updated successfully');
-        }
-      });
+      // fs.writeFile(filePath, jsonString, 'utf8', (err) => {
+      //   if (err) {
+      //     console.error(`Error writing file: ${err}`);
+      //   } else {
+      //     console.log('File has been updated successfully');
+      //   }
+      // });
 
     // If query parameter is neither '0' nor '1'
     } else {
@@ -1453,24 +1442,25 @@ const SpecCtrl = async (req, res) => {
       const subSpec = await Specialization.create(req.body);
       res.status(200).json({ msg: 'Specialization saved successfully!', data: subSpec });
 
-      // Save data to JSON file
-      const data = await Specialization.findAll();
-      const filteredData = data.map(item => ({
-        id: item.id,
-        clinic_id: item.clinic_id,
-        spec_code: item.spec_code,
-        spec_desc: item.spec_desc
-      }));
-      const jsonString = JSON.stringify(filteredData, null, 2);
-      const filePath = path.join(__dirname, '..', 'Spec.json');
+      // // Save data to JSON file
+      // const data = await Specialization.findAll();
+      // const filteredData = data.map(item => ({
+      //   id: item.id,
+      //   clinic_id: item.clinic_id,
+      //   spec_code: item.spec_code,
+      //   spec_desc: item.spec_desc,
+      //   status:item.status
+      // }));
+      // const jsonString = JSON.stringify(filteredData, null, 2);
+      // const filePath = path.join(__dirname, '../myjson', 'spec.json');
 
-      fs.writeFile(filePath, jsonString, 'utf8', (err) => {
-        if (err) {
-          console.error(`Error writing file: ${err}`);
-        } else {
-          console.log('File has been created successfully');
-        }
-      });
+      // fs.writeFile(filePath, jsonString, 'utf8', (err) => {
+      //   if (err) {
+      //     console.error(`Error writing file: ${err}`);
+      //   } else {
+      //     console.log('File has been created successfully');
+      //   }
+      // });
 
     // Check if query parameter is '1' (update existing data)
     } else if (req.body.query === '1') {
@@ -1492,24 +1482,25 @@ const SpecCtrl = async (req, res) => {
       await existing.update(req.body);
       res.status(200).json({ msg: 'Specialization details updated successfully!', data: existing });
 
-      // Save data to JSON file
-      const data = await Specialization.findAll();
-      const filteredData = data.map(item => ({
-        id: item.id,
-        clinic_id: item.clinic_id,
-        spec_code: item.spec_code,
-        spec_desc: item.spec_desc
-      }));
-      const jsonString = JSON.stringify(filteredData, null, 2);
-      const filePath = path.join(__dirname, '..', 'Spec.json');
+      // // Save data to JSON file
+      // const data = await Specialization.findAll();
+      // const filteredData = data.map(item => ({
+      //   id: item.id,
+      //   clinic_id: item.clinic_id,
+      //   spec_code: item.spec_code,
+      //   spec_desc: item.spec_desc,
+      //   status: item.status
+      // }));
+      // const jsonString = JSON.stringify(filteredData, null, 2);
+      // const filePath = path.join(__dirname, '../myjson', 'spec.json');
 
-      fs.writeFile(filePath, jsonString, 'utf8', (err) => {
-        if (err) {
-          console.error(`Error writing file: ${err}`);
-        } else {
-          console.log('File has been updated successfully');
-        }
-      });
+      // fs.writeFile(filePath, jsonString, 'utf8', (err) => {
+      //   if (err) {
+      //     console.error(`Error writing file: ${err}`);
+      //   } else {
+      //     console.log('File has been updated successfully');
+      //   }
+      // });
 
     // If query parameter is neither '0' nor '1'
     } else {

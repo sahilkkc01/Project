@@ -16,11 +16,13 @@ const md5 = require('md5')
 
 
 const kycCtrl = async (req, res) => {
+  console.log(req.body)
   try {
     // Check if it's a modification query
     if (req.body.modQuery === '1') {
+      console.log('11111')
       const { lead_no, contact_no_husband, email_id, whatsapp_no, lead_owner, address } = req.body;
-
+      
       // Update existing KYC entry
       const result = await KYC.update({
         contact_no_husband,
@@ -33,6 +35,7 @@ const kycCtrl = async (req, res) => {
           lead_no: lead_no
         }
       });
+      console.log(result)
 
       // Check if any rows were updated
       if (result[0] === 0) {
@@ -604,6 +607,74 @@ const apt1=  async (req, res) => {
     return res.status(500).json({ msg: 'Internal server error' });
   }
 }
+const fetchFU=  async (req, res) => {
+  console.log(req.body);
+  console.log(req.params)
+  const { kyc_id } = req.params;
+
+
+  try {
+   
+      const records = await CrmFu_record.findAll({ where: { kyc_id } });
+      console.log(records)
+      return res.status(200).json({data:records}); // Return the newly created KYC record
+   
+  } catch (error) {
+    console.error('Error occurred:', error);
+    return res.status(500).json({ msg: 'Internal server error' });
+  }
+}
+const fetchApt=  async (req, res) => {
+  console.log(req.body);
+  console.log(req.params)
+  const { kyc_id } = req.params;
+
+
+  try {
+   
+      const records = await CrmApt_record.findAll({ where: { kyc_id } });
+      console.log(records)
+      return res.status(200).json({data:records}); // Return the newly created KYC record
+   
+  } catch (error) {
+    console.error('Error occurred:', error);
+    return res.status(500).json({ msg: 'Internal server error' });
+  }
+}
+const fetchVisits=  async (req, res) => {
+  console.log(req.body);
+  console.log(req.params)
+  const { kyc_id } = req.params;
+
+
+  try {
+   
+      const records = await CrmVis_record.findAll({ where: { kyc_id } });
+      console.log(records)
+      return res.status(200).json({data:records}); // Return the newly created KYC record
+   
+  } catch (error) {
+    console.error('Error occurred:', error);
+    return res.status(500).json({ msg: 'Internal server error' });
+  }
+}
+const fetchConv=  async (req, res) => {
+  console.log(req.body);
+  console.log(req.params)
+  const { kyc_id } = req.params;
+
+
+  try {
+   
+      const records = await CrmConv_record.findAll({ where: { kyc_id } });
+      console.log(records)
+      return res.status(200).json({data:records}); // Return the newly created KYC record
+   
+  } catch (error) {
+    console.error('Error occurred:', error);
+    return res.status(500).json({ msg: 'Internal server error' });
+  }
+}
 
 const apt2= async (req, res) => {
   console.log('req body',req.body);
@@ -722,10 +793,20 @@ const login = async (req, res) => {
   console.log(userEmail, userPassword);
 
   try {
-    const user = await SuperAdmin.findOne({ where: { username: userEmail } });
+    const user = await SuperAdmin.findOne({
+      where: {
+        username: userEmail,
+        status: true  
+      }
+    });
     if (!user) {
       return res.status(404).json({ msg: 'Admin not found' });
     }
+
+      // // Check if user is already logged in somewhere else
+      // if (activeSessions[user.username] && activeSessions[user.username] !== req.session.id) {
+      //   return res.status(409).json({ msg: 'User already logged in elsewhere.' });
+      // }
 
     const inputPasswordHash = md5(userPassword);
     if (user.Password !== inputPasswordHash) {
@@ -737,7 +818,8 @@ const login = async (req, res) => {
       {
         id: user.id, // Include user's id
         username: user.username,
-        clinicId: user.clinicId // Additional payload can be added as needed
+        clinicId: user.clinicId,
+        rights:user.rights // Additional payload can be added as needed
       },
       JWT_SECRET, // Secret key stored in environment variable
       // { expiresIn: '3h' } // Token expires in 1 hour
@@ -755,7 +837,8 @@ const login = async (req, res) => {
         id: user.id,
         username: user.username,
         clinicId: user.clinicId,
-        clinicName: user.clinicName
+        clinicName: user.clinicName,
+        rights:user.rights
       }
     });
   } catch (error) {
@@ -818,7 +901,74 @@ const register = async (req, res) => {
   }
 }
 
+const getAllKYCDetails = async (req, res) => {
+  try {
+    // Fetch all KYC records
+    const kycRecords = await KYC.findAll();
 
+    // Create an array to hold the combined KYC and CRMvis_record data
+    const combinedData = [];
+
+    // Loop through each KYC record
+    for (const kyc of kycRecords) {
+      // Fetch related record from CRMvis_record by kyc_id
+      const crmVisRecord = await CrmVis_record.findOne({ where: { kyc_id: kyc.id } });
+
+      // If a corresponding CRMvis_record is found, combine it with the KYC data
+      const kycData = kyc.toJSON(); // Convert the Sequelize instance to plain JSON
+      const crmData = crmVisRecord ? crmVisRecord.toJSON() : {}; // Convert to JSON if exists
+
+      // Combine KYC data with the CRMvis_record data
+      combinedData.push({
+        ...kycData,
+        crmVisRecord: crmData, // Map the CRMvis_record data with the KYC data
+      });
+    }
+
+    // Send a successful response with the combined data
+    return res.status(200).json({
+      success: true,
+      data: combinedData,
+    });
+  } catch (error) {
+    console.error('Error fetching KYC details:', error);
+
+    // Send an error response if something goes wrong
+    return res.status(500).json({
+      success: false,
+      message: 'Failed to fetch KYC details',
+      error: error.message,
+    });
+  }
+};
+
+
+
+
+// const getKyc =async (req, res) => {
+//   console.log(req.query)
+//   const { kyc_id } = req.query;
+// console.log(kyc_id)
+//   try {
+//     if (kyc_id) {
+//       const kycData = await KYC.findByPk(kyc_id);
+
+//       if (!kycData) {
+//         console.error('record not found:', kyc_id);
+//         return res.status(404).render('error', { message: 'record not found' });
+//       }
+
+//       const kycValues = kycData.get({ plain: true });
+//       console.log('Department values:', kycValues);
+//       return res.render('form-new', { a: kycValues });
+//     } else {
+//       return res.render('form-new', { a: '' });
+//     }
+//   } catch (error) {
+//     console.error('Error fetching  data:', error);
+//     return res.status(500).render('error', { message: 'Internal Server Error' });
+//   }
+// }
 
 
 module.exports = {
@@ -855,6 +1005,10 @@ module.exports = {
   apt4,
   login,
   register,
-  logout
-
+  logout,
+  getAllKYCDetails,
+  fetchFU,
+  fetchApt,
+  fetchVisits,
+  fetchConv
 };

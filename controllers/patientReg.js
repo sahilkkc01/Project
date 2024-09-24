@@ -5,6 +5,7 @@ const {
   PR_PatientVisit,
   PR_formNewCouple,
   PR_BillFindPatient,
+  BillServices,
 } = require("../models/PatientReg");
 const session = require("express-session");
 
@@ -178,29 +179,33 @@ const newCouple = async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 };
+
 const billPatientSubmit = async (req, res) => {
   try {
-    // Destructure query and other data from req.body
-    console.log(req.body);
-    const { query, ...updateData } = req.body;
-    console.log(query);
+    // Destructure query, selectedBillServices, and other data from req.body
+    const { query, selectedBillServices, ...updateData } = req.body;
 
     if (query == 1) {
-      // Assuming itemid is a unique identifier to find the record
+      // If query is 1, update an existing record
       const { itemid } = req.body;
 
-      // Find the record and update it
-      const result = await PR_BillFindPatient.update(updateData, {
-        where: { id: itemid },
-      });
+      // Find and update the main bill record in PR_BillFindPatient
+      const result = await PR_BillFindPatient.update(
+       req.body,
+        {
+          where: { id: itemid },
+        }
+      );
 
       if (result[0] === 0) {
         res.status(404).send("Patient record not found");
       } else {
+        // If the patient record is updated, also update the selected services in BillServices
+        await handleBillServices(itemid, selectedBillServices);
         res.status(200).send("Data updated successfully");
       }
     } else {
-      // If query is not 1, create a new entry
+      // If query is not 1, create a new entry in PR_BillFindPatient
       const newBill = await PR_BillFindPatient.create(req.body);
 
       // Generate bill_no with prefix and the ID of the created bill
@@ -209,6 +214,9 @@ const billPatientSubmit = async (req, res) => {
       // Update the new bill entry with the generated bill_no
       await newBill.update({ bill_no: billNo });
 
+      // Save the selected services in BillServices
+      await handleBillServices(newBill.id, selectedBillServices);
+
       res.status(200).send("Data saved successfully with Bill No: " + billNo);
     }
   } catch (error) {
@@ -216,6 +224,39 @@ const billPatientSubmit = async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 };
+
+// Helper function to save or update the selectedBillServices in BillServices
+const handleBillServices = async (billId, selectedBillServices) => {
+  try {
+    // Remove any existing services for this bill ID before inserting new ones
+    await BillServices.destroy({
+      where: { billId }
+    });
+
+    // Add the new selected services
+    const servicesToInsert = selectedBillServices.map((service) => ({
+      billId, // Associate the services with the bill ID
+      serviceCode: service.serviceCode,
+      serviceName: service.serviceName,
+      serviceRate: service.serviceRate,
+      concession_per: service.concession_per,
+      concession_amount: service.concession_amount,
+      service_amount: service.service_amount,
+      totalAmount: service.totalAmount,
+      netAmount: service.netAmount,
+      doctor: service.doctor || null,
+    }));
+
+    // Bulk insert the new services
+    await BillServices.bulkCreate(servicesToInsert);
+  } catch (error) {
+    console.error("Failed to handle bill services:", error);
+    throw new Error("Error saving services");
+  }
+};
+
+
+
 
 
 const SaveStatusData = async (req, res) => {

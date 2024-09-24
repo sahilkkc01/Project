@@ -208,23 +208,23 @@
               </div>
               <div class="form-group mt-1 mb-3 text-right">
 
-                <button id="myButton1" data-bs-toggle="modal" data-bs-target="#myModal1" type="button"
+                <!-- <button id="myButton1" data-bs-toggle="modal" data-bs-target="#myModal1" type="button"
                   class="btn-secondary btn-style btn mt-3 mr-2" disabled><strong> Assign Consent</strong></button>
                 <button id="myButton2" type="button" class="btn-secondary btn-style btn mt-3 mr-2"
                   data-bs-toggle="modal" data-bs-target="#myModal2" disabled onclick="fetchAllTariff()"><strong>Assign
-                    Tariff</strong></button>
+                    Tariff</strong></button> -->
                 <button id="myButton3" type="button" class="btn-primary btn-style btn mt-3 mr-2" data-bs-toggle="modal"
                   data-bs-target="#myModal3" disabled onclick="fetchServicesData()"><strong>
                     Package Defination</strong></button>
-                <button type="button" class="btn-success btn-style btn mt-3 mr-2" disabled><strong><i
-                      class="fa-regular fa-pen-to-square"></i> Modify</strong></button>
+                <!-- <button type="button" class="btn-success btn-style btn mt-3 mr-2" disabled><strong><i
+                      class="fa-regular fa-pen-to-square"></i> Modify</strong></button> -->
                 <a href="/package/2"><button type="button" class="btn-secondary btn-style btn mt-3 mr-2"><strong><i
                         class="fa-solid fa-plus"></i> New</strong></button></a>
-                <button type="button" class="btn-danger btn-style btn mt-3 mr-2" disabled><strong><i
+                <!-- <button type="button" class="btn-danger btn-style btn mt-3 mr-2" disabled><strong><i
                       class="fas fa-times"></i> Cancel</strong></button>
                 <button type="button" class="btn-primary btn-style btn mt-3" disabled><strong><i
                       class="far fa-save"></i>
-                    Save</strong></button>
+                    Save</strong></button> -->
               </div>
               </form>
             </div>
@@ -725,7 +725,7 @@
 
             <!-- Package Defination -->
             <div class="modal" id="myModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog modal-xl">
+              <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                   <!-- Modal Header -->
                   <div class="modal-header">
@@ -798,12 +798,12 @@
                                         </div>
                                         <div class="col-lg-3 col-md-6 col-sm-12">
                                           <div class="form-check-label">
-                                            <div class="radio my-4">
-                                              <label class="form-check-label pt-1"><input class="form-check-input mt-1"
+                                            <div class="radio my-4" id="my-radio-button">
+                                              <label class="form-check-label pt-1"><input name="checkAmountType" id="fixed" class="form-check-input mt-1"
                                                   type="radio"> Fixed</label>
+                                              <label class="form-check-label pl-4 pt-1"><input
+                                                  class="form-check-input mt-1" id="percentage" name="checkAmountType" type="radio"> Percentage</label>
                                             </div>
-                                            <label class="form-check-label pl-4 pt-1"><input
-                                                class="form-check-input mt-1" type="radio"> Percentage</label>
                                           </div>
                                         </div>
                                         <div class="col-lg-3 col-md-6 col-sm-12">
@@ -863,7 +863,8 @@
                                       <thead>
                                         <tr>
                                           <th contenteditable="true">Oral Medicine</th>
-                                          <th contenteditable="true">Injunction</th>
+                                          <th>Quantity</th>
+                                          <!-- <th contenteditable="true">Injunction</th> -->
                                         </tr>
                                       </thead>
                                       <tbody id="itemBody">
@@ -881,9 +882,6 @@
                             <button id="addItemButton" data-bs-toggle="modal" data-bs-target="#myModal4" type="button"
                               class="btn-secondary btn-style btn mt-3 mr-2"><strong><i class="fa-solid fa-plus"></i>
                                 Add Items</strong></button>
-                            <button type="submit" class="btn-primary btn-style btn mt-3"
-                              onclick="resetForm(saveItem)"><strong><i class="far fa-save"></i> Save
-                                Items</strong></button>
                           </div>
                         </form>
                       </div>
@@ -912,7 +910,7 @@
                         </div>
 
                         <div class="card-body pt-1 pb-3">
-                          <form>
+                          <form id="serviceDataList">
                             <div class="col-12 mb-0">
                               <div class="">
                                 <div class="col col-12 pr-xl-0 pl-xl-0">
@@ -920,8 +918,13 @@
                                     <table class="table2" id="serviceTable">
                                       <thead>
                                         <tr>
-                                          <th> SERVICES</th>
-                                          <th> Define Rule</th>
+                                          <th>S.No</th>
+                                          <th>Description</th>
+                                          <th>Quantity</th>
+                                          <th>Rate</th>
+                                          <th>Amount</th>
+                                          <th>Discount &nbsp;&nbsp;<span><input type="checkbox" id="percentageDiscount">%</span></th>
+                                          <th>Net Amount</th>
                                         </tr>
                                       </thead>
                                       <tbody id="serviceBody">
@@ -963,6 +966,35 @@
 
                                         </tr> -->
                                       </tbody>
+                                      <tfoot id="MyTableFoot" style="display: none;">
+                                        <tr>
+                                          <td></td>
+                                          <td>Miscellenious</td>
+                                          <td></td>
+                                          <td></td>
+                                          <td></td>
+                                          <td></td>
+                                          <td id="miscelleniousid">Null</td>
+                                        </tr>
+                                        <tr>
+                                          <td></td>
+                                          <td>Total Discount</td>
+                                          <td></td>
+                                          <td></td>
+                                          <td></td>
+                                          <td></td>
+                                          <td id="totalDiscountid">Null</td>
+                                        </tr>
+                                        <tr>
+                                          <td></td>
+                                          <td>Total Amount</td>
+                                          <td></td>
+                                          <td></td>
+                                          <td></td>
+                                          <td></td>
+                                          <td id="totalAmountid">Null</td>
+                                        </tr>
+                                      </tfoot>
                                     </table>
                                   </div>
                                 </div>
@@ -970,12 +1002,23 @@
                             </div>
 
                         </div>
+                        <!-- <div style="display: flex;padding: 24px;justify-content: space-between;">
+                          <div>
+                            <p style="font-size: medium;">Miscellenious: <span id="miscelleniousid">Null</span></p>
+                            <p style="font-size: medium;">Total Discount: <span id="totalDiscountid">Null</span></p>
+                          </div>
+                          <div>
+                            <p style="font-size: medium;">Total Amount: <span id="totalAmountid">Null</span></p>
+                          </div>
+                        </div> -->
                       </div>
                     </div>
                     <div class="form-group mt-1 mb-3 text-right">
                       <button data-bs-toggle="modal" data-bs-target="#myModal5" type="button"
                         class="btn-secondary btn-style btn mt-3"><strong><i class="fa-solid fa-plus"></i> Add
                           Services / Groups</strong></button>
+                      <button class="btn-primary btn-style btn mt-3" id="savePackagebutton"><strong><i class="far fa-save"></i> Save
+                          Items</strong></button>
                     </div>
                     </form>
                     <!-- Pop Up for Define Rule -->
@@ -1278,6 +1321,7 @@
                                     <tr>
                                       <th></th>
                                       <th>Service Name</th>
+                                      <th>Rate</th>
                                     </tr>
                                   </thead>
                                   <tbody id="serviceList">
@@ -1293,7 +1337,7 @@
                 </div>
               </div>
               <div class="form-group mt-1 mb-3 text-right">
-                <button type="submit" class="btn-secondary btn-style btn mt-3 mr-2" data-bs-dismiss="modal"><strong><i
+                <button id="packageAddButton" class="btn-secondary btn-style btn mt-3 mr-2" ><strong><i
                       class="fa-solid fa-plus"></i> Add</strong></button>
                 <button type="button" class="btn-danger btn-style btn mt-3" data-bs-dismiss="modal"><strong><i
                       class="fas fa-times"></i>
@@ -1321,22 +1365,19 @@
                 <div class="row">
                   <div class="col-lg-12 pl-lg-2 chart-grid">
                     <div class=" mt-3">
-                      <div class="form-row">
-                        <div class="col-md-6 mb-3">
-                          <div class="form-group">
-                            <label class="input__label">Oral Medicine</label>
-                            <input name="oralMedicine" id="oralMedicine" type="number" class="form-control input-style"
-                              placeholder="" data-validation="required" data-error-message="Service Code is required">
-                          </div>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                          <div class="form-group">
-                            <label class="input__label">Injunction</label>
-                            <input name="injunction" id="injunction" type="number" class="form-control input-style"
-                              placeholder="" data-validation="required" data-error-message="Service Code is required">
-                            <input name="PackageId" id="PackageId" type="hidden">
-                          </div>
-                        </div>
+                      <div class="slidx">
+                        <table class="table2" id="medicineListTable">
+                          <input type="hidden" name="PackageId" id="medicineListPackageId">
+                          <thead>
+                            <tr>
+                              <th></th>
+                              <th>Oral Medicine</th>
+                              <th>Injunction</th>
+                            </tr>
+                          </thead>
+                          <tbody id="medicineList">
+                          </tbody>
+                        </table>
                       </div>
                     </div>
                   </div>
@@ -1346,7 +1387,7 @@
                         class="fas fa-times"></i>
                       Cancel</strong></button>
 
-                  <button type="submit" class="btn-primary btn-style btn mt-3 btn-close"
+                  <button type="submit" id="addMedicineButton" class="btn-primary btn-style btn mt-3 btn-close"
                     data-bs-dismiss="modal"><strong><i class="fas fa-check"></i>
                       OK</strong></button>
                 </div>
@@ -1361,10 +1402,13 @@
     
 
  <script>
+  let totalRate = 0;
+  let packageData = [];
   function fetchData() {
     axios.get('/package/getNewPackage')
         .then(response => {
             let data = response.data;
+            packageData = data;
             let tableRows = '';
 
             data.forEach((item) => {
@@ -1391,7 +1435,12 @@
         });
 }
  fetchData()
+
+setPackageId = "";
 function HandleSelectedRow(selectedRow) {
+  // console.log();
+  setPackageId = selectedRow.getAttribute("data-id");
+  
     $('tr').removeClass('locked');
     $(selectedRow).addClass('locked');
     $('#myButton1').removeAttr('disabled');
@@ -1407,7 +1456,9 @@ function HandleSelectedRow(selectedRow) {
     $('#package_code').val(code);
     $('#packageName').val(name);
     $('#packageAmount').val(rate);
+    console.log(rate);
     
+    totalRate = rate;
     fetchConcent(code);
 }
 
@@ -1467,73 +1518,457 @@ $('#concentBody').on('click', 'tr', function(event) {
     }
     $(this).toggleClass('selected');
 });
+let data = null
 
-function fetchServicesData() {
+async function fetchServicesData() {
+
     axios.get('/billing/get-service')
         .then(response => {
           console.log(response);
-            let data = response.data;
+            data = response.data;
             let tableRows = '';
 
-            data.forEach((item) => {
+            data.forEach((item,i) => {
+              console.log(i);
+              
                 tableRows += `
-                <tr data-id="${item.id}" >
-                    <td><input type="checkbox"></td>
-                   <td>${item.serviceName}</td>
+                <tr>
+                  <td><input id="${i}" type="checkbox"></td>
+                  <td>${item.serviceName}</td>
+                  <td>${item.baseServiceRate}</td>
+                  <td style="display:none">${item.serviceCode}</td>
                 </tr>
                 `;
             });
 
             $('#serviceList').html(tableRows);
+            
         })
         .catch(error => {
             console.error('Error fetching data:', error);
         });
+        await fetchCityData();
 }
+
+// Package array to store new rows
+let packageArray = [];
+let quantityArray = [];
+let inputArray = [];
+let serviceIdsArray = [];
+// let totalServices = 0;
+let totalDiscount = 0;
+let totalAmount = 0;
+let service_amount = 0;
+let package_amount = 0;
 
 document.addEventListener('click', function(e) {
     if (e.target.matches('#serviceList input[type="checkbox"]')) {
+        console.log("Checkbox clicked");
+
         const checkbox = e.target;
         const selectedBatchRow = checkbox.closest('tr');
-
-        if (checkbox.checked) {
-            const selectedItemRow = document.querySelector('#serviceBody .locked');
-
-            if (selectedItemRow) {
-                // Get values from tbodyid (selected item row)
-                const service_name = selectedItemRow.children[1].textContent.trim();
-              
-                // Create a new row for tbodyid3
+        
+        // Use setTimeout to delay our logic until after the browser updates the checkbox state
+        setTimeout(() => {
+          if (checkbox.checked) {
+                const id = parseInt(checkbox.getAttribute('id'));
+                console.log("Service ID:", id);
+                
                 const newRow = `
-                    <tr>
-                   
-                        <td>${service_name}</td>
-                        <td>${service_name}</td>
-                        
+                    <tr name="services" id="row-${id}">
+                        <td>${id+1}</td>
+                        <td name="serviceName">${data[id].serviceName}</td>
+                        <td name="quantity"><input type="number" id="quantity-${data[id].id}" value="1" data-rate="${data[id].baseServiceRate}" data-id="${data[id].id}" /></td>
+                        <td name="baseServiceRate">${data[id].baseServiceRate}</td>
+                        <td id="total-${data[id].id}">${data[id].baseServiceRate}</td>
+                        <td name="netServiceDiscount"><input type="number" id="discount-${data[id].id}" data-rate="${0}" data-id="${data[id].id}" /></td>
+                        <td name="netServiceAmount" id="net_amount-${data[id].id}">${data[id].baseServiceRate}</td>
+                        <td style="display:none" name="serviceCode" id="serviceCode-${data[id].id}">${data[id].serviceCode}</td>
                     </tr>
                 `;
-
-                // Append the new row to tbodyid3
-                document.getElementById('serviceBody').insertAdjacentHTML('beforeend', newRow);
+                totalAmount += parseFloat(data[id].baseServiceRate)
+                serviceIdsArray.push(id);
+                // document.getElementById('totalAmountid').innerText = totalAmount;
+                
+                // Add to packageArray
+                packageArray.push(newRow);
+                const quantityId = `quantity-${data[id].id}`;
+                const discountId = `discount-${data[id].id}`;
+                quantityArray.push(quantityId);
+                inputArray.push({
+                  quantityId: quantityId,
+                  dicountId: discountId
+                })
+                
             } else {
-                alert("Please select an item first.");
-                checkbox.checked = false; // Uncheck the checkbox if no item is selected
+              const id = parseInt(checkbox.getAttribute('id'));
+              serviceIdsArray = serviceIdsArray.filter(sid => sid!== id);
+              totalAmount -= parseFloat(data[id].baseServiceRate);
+              totalServices--;
+
+              
+                // If the checkbox is unchecked, remove the corresponding row from serviceBody
+              const serviceId = checkbox.getAttribute('id');
+              document.getElementById(`row-${serviceId}`).remove();
             }
-        } else {
-            // If the checkbox is unchecked, remove the corresponding row from tbodyid3
-            const batchCode = selectedBatchRow.children[1].textContent.trim();
-            const rows = document.querySelectorAll('#serviceBody tr');
-            rows.forEach(row => {
-                if (row.children[3].textContent.trim() === batchCode) {
-                    row.remove();
-                }
-            });
-        }
+        }, 0);
     }
 });
 
+// Function to handle input and calculate the total
+function handleQuantityInput(e) {
+    const quantity = parseFloat(e.target.value) || 0; // Get the input value or default to 0
+    const rate = parseFloat(e.target.getAttribute('data-rate')); // Get the rate from the data attribute
+    const id = e.target.getAttribute('data-id'); // Get the id to update the correct total
+
+    // Calculate the total
+    const total = quantity * rate;
+    const previousTotal = document.getElementById(`total-${id}`).textContent;
+    if(previousTotal) totalAmount -= parseFloat(previousTotal);
+    if(totalAmount < 0) totalAmount = 0;
+    totalAmount += total;
+    document.getElementById(`total-${id}`).textContent = total;
+    adjustPrice();
+
+    // document.getElementById('totalAmountid').innerText = totalAmount;
+    // // Update the total in the table
+    // document.getElementById(`total-${id}`).textContent = total;
+    // document.getElementById(`net_amount-${id}`).textContent = total;
+    return total;
+}
+
+const handleDiscount = (e,rate)=>{ 
+  let discount = parseFloat(e.target.value) || 0;
+  const id = e.target.getAttribute('data-id');
+  let netTotal = parseInt(document.getElementById(`total-${id}`).textContent);
+  const val = document.getElementById("percentageDiscount");
+  if(val.checked){
+    discount = (discount * netTotal)/100;
+  }
+  let givenDiscount = totalDiscount - discount;
+  
+  // console.log(id);
+  
+  let mtotal = netTotal;
+  console.log(netTotal);
+  netTotal -= discount;
+  console.log(netTotal);
+  if(netTotal<0) netTotal = 0;
+
+  document.getElementById(`net_amount-${id}`).textContent = netTotal;
+  if(givenDiscount>0){
+    for(let i=0;i<serviceIdsArray.length;i++){
+      if(data[serviceIdsArray[i]].id == id)continue;
+      let baseprice = parseInt(document.getElementById(`total-${data[serviceIdsArray[i]].id}`).textContent);
+      let discount = (baseprice/(totalAmount-mtotal)) * givenDiscount;
+      const val = document.getElementById(`discount-${data[serviceIdsArray[i]].id}`);
+      val.value = discount.toFixed(2);
+      const total = parseInt(document.getElementById(`total-${data[serviceIdsArray[i]].id}`).textContent);
+      document.getElementById(`net_amount-${data[serviceIdsArray[i]].id}`).textContent = total - discount.toFixed(2);
+      netTotal += total - discount.toFixed(2);
+      console.log(val.value);    
+    }      
+  }
+  
+  if(val.checked){
+    for(let i=0;i<serviceIdsArray.length;i++){
+      if(data[serviceIdsArray[i]].id == id)continue;
+      const netval = parseInt(document.getElementById(`total-${data[serviceIdsArray[i]].id}`).textContent);
+      const discountVal = parseFloat(document.getElementById(`discount-${data[serviceIdsArray[i]].id}`).value);
+      let newPercentageVal = (discountVal/netval)*100;
+      document.getElementById(`discount-${data[serviceIdsArray[i]].id}`).value = newPercentageVal.toFixed(2);
+  }
+    // console.log("checked");
+  }
+
+  document.getElementById('totalAmountid').innerText = netTotal;
+}
+
+let rightNowId = "fixed";
+
+$(document).ready(function(){
+    $('#packageAddButton').click((e) => {
+      e.preventDefault();
+        // Append all rows at once
+        $('#serviceBody').append(packageArray.join(''));
+        // document.getElementById('totalAmountid').innerText = totalAmount;
+        adjustPrice();
+        console.log(inputArray);
+        $('#MyTableFoot').css("display","");
+        
+        // Add event listeners to all quantity inputs
+        inputArray.forEach(input => {
+            const quantityInput = document.getElementById(input.quantityId);
+            const discountInput = document.getElementById(input.dicountId);
+            let baseValue = 0;
+            if (quantityInput) {
+              quantityInput.addEventListener('input',handleQuantityInput);
+            }
+            if(discountInput) {
+              discountInput.addEventListener('input', (e)=>handleDiscount(e, baseValue))
+            }
+
+        });
+        
+        // Clear the arrays after adding
+        packageArray = [];
+        inputArray = [];
+    });
+    $('#serviceComponent').change(()=>{
+      service_amount = parseInt($('#serviceComponent').val());
+      if(rightNowId == "percentage"){
+        package_amount = 100 - service_amount;
+        $('#pharmacyComponent').val(package_amount.toFixed(2));
+        package_amount = (totalRate * package_amount)/100;
+        service_amount = (totalRate * service_amount)/100;
+        adjustPrice();
+        return;
+      }
+      package_amount = totalRate - service_amount;
+      $('#pharmacyComponent').val(package_amount);
+      console.log(service_amount);
+      adjustPrice();
+    // fetchServicesData(componentId);
+  })
+  $('#pharmacyComponent').change(()=>{
+    package_amount = parseInt($('#pharmacyComponent').val());
+    if(rightNowId == "percentage"){
+      service_amount = 100 - package_amount;
+      $('#serviceComponent').val(service_amount.toFixed(2));
+      service_amount = (totalRate * service_amount)/100;
+      package_amount = (totalRate * package_amount)/100;
+      adjustPrice();
+      return;
+    }
+    service_amount = totalRate - package_amount
+    $('#serviceComponent').val(service_amount);
+    adjustPrice();
+  });
+  $('#my-radio-button input[type="radio"]').on('change', function(e) {
+        const id = e.target.id;
+        rightNowId = id;
+        if(id == "percentage"){
+          service_amount = (service_amount/totalRate)*100;
+          package_amount = (package_amount/totalRate)*100;
+          $('#serviceComponent').val(service_amount.toFixed(2));
+          $('#pharmacyComponent').val(package_amount.toFixed(2));
+        }else {
+          service_amount = (totalRate * service_amount)/100;
+          package_amount = (totalRate * package_amount)/100;
+          $('#serviceComponent').val(service_amount.toFixed(2));
+          $('#pharmacyComponent').val(package_amount.toFixed(2));
+        }
+        const selectedName = $(this).attr('name');
+        console.log('Selected radio button name:', selectedName);
+    });
+
+});
+let cityData = null;
+
+function adjustPrice(){
+  if(totalAmount > service_amount) {
+          totalDiscount = totalAmount - service_amount;
+          let netTotal = 0;
+          for(let i=0;i<serviceIdsArray.length;i++){
+              let baseprice = parseInt(document.getElementById(`total-${data[serviceIdsArray[i]].id}`).textContent);
+              let discount = (baseprice/totalAmount) * totalDiscount;
+              const val = document.getElementById(`discount-${data[serviceIdsArray[i]].id}`);
+              val.value = discount.toFixed(2);
+              const total = parseInt(document.getElementById(`total-${data[serviceIdsArray[i]].id}`).textContent);
+              let nval = total - discount.toFixed(2);
+              document.getElementById(`net_amount-${data[serviceIdsArray[i]].id}`).textContent = nval.toFixed(2);
+              netTotal += total - discount.toFixed(2);
+              // console.log(val.value);    
+            }
+          document.getElementById('totalAmountid').innerText = netTotal.toFixed(2);
+          document.getElementById('totalDiscountid').innerText = totalDiscount.toFixed(2);
+          document.getElementById('miscelleniousid').innerText = 0;    
+  }else{
+    document.getElementById('miscelleniousid').innerText = service_amount - totalAmount;
+    document.getElementById('totalDiscountid').innerText = 0;
+  }
+}
+
+function fixedToPercentage(){
+  for(let i=0;i<serviceIdsArray.length;i++){
+    const netval = parseInt(document.getElementById(`total-${data[serviceIdsArray[i]].id}`).textContent);
+    const discountVal = parseFloat(document.getElementById(`discount-${data[serviceIdsArray[i]].id}`).value);
+    let newPercentageVal = (discountVal/netval)*100;
+    document.getElementById(`discount-${data[serviceIdsArray[i]].id}`).value = newPercentageVal.toFixed(2);
+  }
+}
+
+function percentageToFixed(){
+  for(let i=0;i<serviceIdsArray.length;i++){
+    const netval = parseInt(document.getElementById(`total-${data[serviceIdsArray[i]].id}`).textContent);
+    const discountVal = parseFloat(document.getElementById(`discount-${data[serviceIdsArray[i]].id}`).value);
+    let newFixedVal = (netval * discountVal)/100;
+    document.getElementById(`discount-${data[serviceIdsArray[i]].id}`).value = newFixedVal.toFixed(2);
+  }
+}
+
+document.getElementById("percentageDiscount").addEventListener("change",()=>{
+  // console.log("hello");
+  const val = document.getElementById("percentageDiscount");
+  if(val.checked){
+    console.log("checked");
+    fixedToPercentage();
+  }else{
+    percentageToFixed();
+  }
+})
+
+function fetchCityData() {
+  axios.get('/package/drugs').then(response => {
+    cityData = response.data;
+    console.log(cityData);
+    console.log(packageData);
+    
+    let tableRows = '';
+
+    cityData.forEach((item,i) => {
+    console.log(i);
+              
+    tableRows +=`
+                <tr>
+                  <td><input id="${i}" type="checkbox"></td>
+                  <td>${item.item_name}</td>
+                  <td>${item.availableStock}</td>
+                </tr>
+                `;
+            });
+
+    $('#medicineList').html(tableRows);
+    
+    // Bind the event handlers to the newly added row
+    // bindSearchEvents(rowCount, cityData);
+    })
+    .catch(error => {
+      console.error('Error loading city data:', error);
+    });
+    // fetchCityData();
+}
+
+medicinePackageArray = [];
+
+document.addEventListener('click', function(e) {
+    if (e.target.matches('#medicineList input[type="checkbox"]')) {
+        console.log("Checkbox clicked");
+
+        const checkbox = e.target;
+        const selectedBatchRow = checkbox.closest('tr');
+        
+        // Use setTimeout to delay our logic until after the browser updates the checkbox state
+        setTimeout(() => {
+          if (checkbox.checked) {
+                const id = parseInt(checkbox.getAttribute('id'));
+                console.log("Service ID:", id);
+                
+                const newRow = `
+                    <tr name="myMedicines" id="medrow-${id}">
+                        <td>${cityData[id].item_name}</td>
+                        <td><input type="number" id="quantity-${cityData[id].id}"/></td>
+                    </tr>
+                `;
+                // totalAmount += parseFloat(data[id].baseServiceRate)
+
+                // document.getElementById('totalAmountid').innerText = totalAmount;
+                
+                // Add to packageArray
+                medicinePackageArray.push(newRow);
+                
+                
+            } else {
+                // If the checkbox is unchecked, remove the corresponding row from serviceBody
+              const serviceId = checkbox.getAttribute('id');
+              document.getElementById(`medrow-${serviceId}`).remove();
+            }
+        }, 0);
+    }
+});
+
+$(document).ready(()=>{
+  $('#addMedicineButton').click(()=>{
+    $('#itemBody').append(medicinePackageArray.join(''));
+    medicinePackageArray = [];
+  })
+})
+
+
+const savebutton = document.getElementById('savePackagebutton');
+  savebutton.addEventListener('click',(e)=>{
+    e.preventDefault();
+    const services = document.getElementsByName("services");
+    const medicines = document.getElementsByName("myMedicines");
+    console.log(services);
+    const serviceComponent = document.getElementById("serviceComponent").value;
+    const pharmacyComponent = document.getElementById("pharmacyComponent").value;
+    const serviceArray = [];
+    const medicineArray = [];
+    
+    for(let i=0;i<services.length;i++){
+      // console.log(services[i].id);
+      const service = services[i].id;
+      const id = parseInt(service.split("-")[1]);
+      const serviceId = data[id].id;
+      const serviceName = data[id].serviceName;
+      const quantity = document.getElementById(`quantity-${data[id].id}`).value;
+      const discount = document.getElementById(`discount-${data[id].id}`).value;
+      const netAmount = document.getElementById(`net_amount-${data[id].id}`).innerText;
+      const serviceCode = document.getElementById(`serviceCode-${data[id].id}`).innerText;
+      serviceArray.push({serviceId,serviceName, quantity, discount, netAmount,serviceCode});
+    }
+
+    for(let i=0;i<medicines.length;i++){
+      const medicine = medicines[i].id;
+      const id = parseInt(medicine.split("-")[1]);
+      const medicineId = cityData[id].id;
+      const medicineName = cityData[id].item_name;
+      const quantity = document.getElementById(`quantity-${cityData[id].id}`).value || 0;
+      medicineArray.push({medicineId, medicineName, quantity});
+    }
+    // console.log();
+    
+    // const selecetedPackege = packageArray.filter((pack)=> pack.id.toString() == setPackageId);
+    // console.log(selecetedPackege);
+    
+    // const {packageCode,packageName} = selecetedPackege[0];
+
+    const mydata = {
+      packageId:setPackageId,
+      serviceComponent,
+      pharmacyComponent,
+      serviceArray,
+      medicineArray,
+      totalAmount,
+      totalDiscount,
+      totalRate,
+      // packageCode,
+      // packageName,
+    }
+    console.log(mydata)
+    const fetchData = () => {
+  axios.post("/package/addpackageitems", mydata)
+    .then(response => {
+      console.log(response);
+      alert('Saved Succesfully')
+      // You can save or process the response here as needed
+    })
+    .catch(error => {
+      console.error("Error fetching data:", error);
+    });
+};
+
+    fetchData();
+
+    console.log(serviceArray);
+    
+    
+    console.log("hello");
+    
+  })
+
+</script>
 
 
 
-
- </script>

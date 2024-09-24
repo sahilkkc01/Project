@@ -118,24 +118,28 @@
                                                 </div>
 
                                                 <div class="form-row">
-                                                    <div class="col-6 mb-3">
-                                                        <div class="form-group">
-
-                                                            <label class="input__label">Header text</label>
-                                                            <textarea name="header_text"
-                                                                class="form-control input-style" placeholder="" id="compHeader"
-                                                                data-validation="required"
-                                                                data-error-message="Header Text is required."></textarea>
+                                                    <div class="form-row">
+                                                        <div class="col-6 mb-3">
+                                                            <div class="form-group">
+                                                                <label class="input__label">Header text</label>
+                                                                <div id="compHeader" class="form-control input-style" data-validation="required"
+                                                                    data-error-message="Header Text is required.">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6 mb-3">
+                                                            <div class="form-group">
+                                                                <label class="input__label">Footer text</label>
+                                                                <div id="compFooter" class="form-control input-style" data-validation="required"
+                                                                    data-error-message="Footer Text is required.">
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-6 mb-3">
-                                                        <div class="form-group"><label class="input__label">footer
-                                                                text</label><textarea name="footer_text"
-                                                                class="form-control input-style" placeholder=""
-                                                                data-validation="required" id="compFooter"
-                                                                data-error-message="Footer text  is required."></textarea>
-                                                        </div>
-                                                    </div>
+    
+                                                    <textarea name="compHeaderContent" style="display: none"></textarea>
+                                                    <textarea name="compFooterContent" style="display: none;"></textarea>
+                                                    
                                                 </div>
 
 
@@ -252,45 +256,62 @@
                   <%- include('../footer'); -%>
                     <!--footer section end-->
                     <script src="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.js"></script>
+                    <link href="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.snow.css" rel="stylesheet">
+                    
+                    <!-- Initialize Quill Editors -->
                     <script>
-                        const quill = new Quill("#compHeader", {
-                          theme: "snow",
-                        });
-                        const quill1 = new Quill("#compFooter", {
-                          theme: "snow",
-                        });
-                      </script>  
+                      const quill = new Quill("#compHeader", {
+                        theme: "snow",
+                      });
                       
-                        <script type="module">
-                            import { uploadImg } from '../javascripts/uploadImg.js';
-                            uploadImg('#comp_logo', '#comp_logo_img', '#comp_logo_btn', '#cancel1')
-                            uploadImg('#head_image', '#head_image_img', '#head_image_btn', '#cancel2')
-                            uploadImg('#comp_footer_image', '#comp_footer_image_img', '#comp_footer_image_btn', '#cancel3')
-                        </script>
-
-                        <script type="module">
-                            import { validateForm } from '../javascripts/validation.js';
-                            import { myAjax } from '../javascripts/myAjax.js';
-                            $(document).ready(function () {
-                                console.log("Document is ready");
-
-                                $('#bc-c-n-o-t').on('submit', function (event) {
-                                    event.preventDefault()
-                                    const { isValid, errorMessage, formData } = validateForm('#bc-c-n-o-t')
-
-                                    console.log(formData)
-                                    const errorDivId = '#errordiv1'
-
-                                    if (isValid) {
-                                        const url = '/billing/bc_c_n_o_d';
-                                        const loadingDiv = '#loadingIndicator'
-                                        myAjax(formData, errorDivId, url, loadingDiv)
-
-                                    } else {
-                                        alert(errorMessage);
-                                        $(errorDivId).removeClass('alert-success').addClass('alert-danger').text(errorMessage).show();
-                                        // $(errorDivId).text(errorMessage).show();
-                                    }
-                                })
-                            });
-                        </script>
+                      const quill1 = new Quill("#compFooter", {
+                        theme: "snow",
+                      });
+                    </script>
+                    
+                    <!-- Image Upload Scripts -->
+                    <script type="module">
+                      import { uploadImg } from '../javascripts/uploadImg.js';
+                      uploadImg('#comp_logo', '#comp_logo_img', '#comp_logo_btn', '#cancel1');
+                      uploadImg('#head_image', '#head_image_img', '#head_image_btn', '#cancel2');
+                      uploadImg('#comp_footer_image', '#comp_footer_image_img', '#comp_footer_image_btn', '#cancel3');
+                    </script>
+                    
+                    <!-- Form Validation and Submission -->
+                    <script type="module">
+                        import { validateForm } from '../javascripts/validation.js';
+                        import { myAjax } from '../javascripts/myAjax.js';
+                      
+                        $(document).ready(function () {
+                          console.log("Document is ready");
+                      
+                          // Handle form submission
+                          $('#bc-c-n-o-t').on('submit', function (event) {
+                            event.preventDefault();
+                      
+                            // Extract content from Quill editors and set it in hidden textarea fields
+                            const compHeaderContent = quill.root.innerHTML;
+                            const compFooterContent = quill1.root.innerHTML;
+                      
+                            // Add the extracted content to hidden textarea fields in the form
+                            $('textarea[name="compHeaderContent"]').val(compHeaderContent);
+                            $('textarea[name="compFooterContent"]').val(compFooterContent);
+                      
+                            // Validate the form
+                            const { isValid, errorMessage, formData } = validateForm('#bc-c-n-o-t');
+                      
+                            console.log(formData);
+                            const errorDivId = '#errordiv1';
+                      
+                            if (isValid) {
+                              const url = '/billing/bc_c_n_o_d';
+                              const loadingDiv = '#loadingIndicator';
+                              myAjax(formData, errorDivId, url, loadingDiv);
+                            } else {
+                              alert(errorMessage);
+                              $(errorDivId).removeClass('alert-success').addClass('alert-danger').text(errorMessage).show();
+                            }
+                          });
+                        });
+                      </script>
+                      

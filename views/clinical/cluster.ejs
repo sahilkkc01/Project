@@ -121,7 +121,7 @@
                                                    
                                                 </div>
                                                 <div class="col-6">
-                                                    <div class="form-group"><label class="input__label">Description</label><input name="clus_desc" id="clus_desc" type="text"
+                                                    <div class="form-group"><label class="input__label">Description/Name</label><input name="clus_desc" id="clus_desc" type="text"
                                                             class="form-control input-style" placeholder="" data-validation="required" data-error-message="Description is required.">
                                                     </div>
                                                 </div>
@@ -177,7 +177,6 @@
       }
                 </script>
                
-   <%- include('../footer'); -%>
 
 
 
@@ -243,6 +242,7 @@
                         data: JSON.stringify(formData),
                         success: function(response) {
                             alert(response.msg);
+                            window.location.href = '/clinic/25';
                             $(errorDivId).removeClass('alert-danger').addClass('alert-success').text(response.msg).show();
                             console.log('Response:', response);
                         },

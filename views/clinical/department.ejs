@@ -114,7 +114,7 @@
                         </div>
                         <div class="col-5 mb-3">
                           <div class="form-group">
-                            <label class="input__label" for="dept_desc">Description</label>
+                            <label class="input__label" for="dept_desc">Description/Name</label>
                             <input type="text" id="dept_desc" name="dept_desc" class="form-control input-style"
                                data-validation="required" data-error-message="Description is required.">
                           </div>
@@ -277,6 +277,7 @@
 
                     });
                     formData = $( "#Department-list-add" ).serialize();
+                    // console.log('sd',formData)
                     var formDataJSON = {};
 formData.split('&').forEach(function(keyValue) {
     var pair = keyValue.split('=');
@@ -301,6 +302,7 @@ console.log('raaax',formDataJSON);
                         data: JSON.stringify(formDataJSON),
                         success: function(response) {
                           alert(response.msg);
+                          window.location.href = '/clinic/7';
                           $(errorDivId).removeClass('alert-danger').addClass('alert-success').text(response.msg).show();
                           console.log('Response:', response);
                         },

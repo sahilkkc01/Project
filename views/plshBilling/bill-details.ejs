@@ -1017,38 +1017,124 @@
                         </div>
 
 
+                        
+
                         <div class="modal" id="myModal5">
-                            <div class="modal-dialog modal-lg">
-                              <div class="modal-content">
-                                <!-- Modal Header -->
-                                <div class="modal-header">
-                                Priscripotion
-                                    <a href="#" class="btn-close" data-bs-dismiss="modal"><i class="fa-solid fa-circle-xmark"></i></a>
+                            <div class="modal-dialog modal-xl">
+                                <div class="modal-content">
+                                    <!-- Modal Header -->
+                                    <div class="modal-header">
+                                        <a href="#" class="btn-close" data-bs-dismiss="modal">
+                                            <i class="fa-solid fa-circle-xmark"></i>
+                                        </a>
+                                    </div>
+                        
+                                    <!-- Modal Body -->
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="col-lg-12 pl-lg-2 chart-grid">
+                                                <form>
+                                                    <div class="card card_border">
+                                                        <div class="card-body">
+                                                            <!-- Past your code here starts -->
+                                                            <div class="card">
+                                                                <div class="col-xl-12 p-heading">
+                                                                    <h6 class="p-text">Package Details: <span id="package-name">Package Name Here</span></h6>
+                                                                </div>
+                                                                <div class="card-body pt-2 mb-0">
+                                                                    <div class="form-row">
+                                                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                                                            <div class="row" id="toggle-row" style="cursor: pointer;">
+                                                                                <div style="font-weight: bold; font-size: 20px;" class="col-md-1 toggle-button" id="toggle-button">+</div>
+                                                                                <div class="col-md-4"><strong>Package Cost: <span id="package-cost"></span></strong></div>
+                                                                                <div class="col-md-4">Advance: <span id="package-advance"></span></div>
+                                                                                <div class="col-md-3">Consumed: <span id="package-consumed"></span></div>
+                                                                            </div>
+                        
+                                                                            <table class="table2" id="service-table" style="display: none;">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <th></th>
+                                                                                        <th>Services</th>
+                                                                                        <th>Qty</th>
+                                                                                        <th>Consumed</th>
+                                                                                        <th>Remaining</th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody id="sample-table-body">
+                                                                                    <!-- <tr>
+                                                                                        <td><input type="checkbox" id="gridCheck1"></td>
+                                                                                        <td>Consultation</td>
+                                                                                        <td>10</td>
+                                                                                        <td>4</td>
+                                                                                        <td>6</td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td><input type="checkbox" id="gridCheck2"></td>
+                                                                                        <td>Blood Test</td>
+                                                                                        <td>2</td>
+                                                                                        <td>2</td>
+                                                                                        <td>0</td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td><input type="checkbox" id="gridCheck3"></td>
+                                                                                        <td>OPU</td>
+                                                                                        <td>4</td>
+                                                                                        <td>3</td>
+                                                                                        <td>1</td>
+                                                                                    </tr> -->
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!-- Past your code here ends -->
+                                                        </div>
+                                                    </div>
+                        
+                                                    <!-- Form buttons -->
+                                                    <div class="form-group mt-1 mb-3 text-right">
+                                                        <button type="button" class="btn-danger btn-style btn mt-3 mr-2" data-bs-dismiss="modal">
+                                                            <strong><i class="fas fa-times"></i> Cancel</strong>
+                                                        </button>
+                                                        <button type="button" class="btn-primary btn-style btn mt-3" id="addpackagebtn">
+                                                            <strong><i class="far fa-add"></i> Add</strong>
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                          
-                                <!-- Modal body -->
-                                <div class="modal-body">
-                                    <div class="row">
-                                        <table id="prescriptionTable" class="table2">
-                                            <thead>
-                                                <tr>
-                                                    <th>Id</th>
-                                                    <th>Items</th>
-                                                    <th>Date</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="prescriptionBody">
-                                                <!-- Data will be appended here by Axios and jQuery -->
-                                            </tbody>
-                                        </table>
-                                      </div>
-                                </div>
-                          
-                              </div>
                             </div>
                         </div>
+                        
+                        
+                        
                         <%- include('../footer') %>
+
                         <script>
+                            
+                            document.getElementById('toggle-row').addEventListener('click', function() {
+                                var table = document.getElementById('service-table');
+                                var toggleButton = document.getElementById('toggle-button');
+                                
+                                if (table.style.display === "none") {
+                                    table.style.display = "table";
+                                    toggleButton.textContent = "-"; // Change to minus when shown
+                                } else {
+                                    table.style.display = "none";
+                                    toggleButton.textContent = "+"; // Change back to plus when hidden
+                                }
+                            });
+
+
+
+
+                        </script>
+                        <script>
+                            
                             document.addEventListener('DOMContentLoaded', function() {
     // Function to set display style based on condition
     function setDisplayStyle(selector, condition) {
@@ -1269,8 +1355,10 @@ document.getElementById('receivePaymentCheckbox').addEventListener('change', fun
         if (!response.ok) {
             throw new Error("Network response was not ok");
         }
-
+        
         const data = await response.json();
+        
+        
 
         const selectElement = document.querySelector(selectElementId);
 
@@ -1339,6 +1427,7 @@ document.getElementById('receivePaymentCheckbox').addEventListener('change', fun
     }
 
     function attachCheckboxEventListeners() {
+        
         $('#tblbody').on('change', 'input[type="checkbox"]', function () {
             var $row = $(this).closest('tr');
             var serviceName = $row.find('td:nth-child(2)').text().trim();
@@ -1534,12 +1623,18 @@ function updateTotals() {
     let totalConcessionAmount = 0;
     let totalNetAmount = 0;
 
-    selectedBillServices.forEach(function (service, index) {
-        totalBillAmount += parseFloat($(`#totalAmount_${index}`).text()) || 0;
-        totalConcessionAmount += parseFloat($(`#concessionAmount_${index}`).val()) || 0;
-        totalNetAmount += parseFloat($(`#netAmount_${index}`).text()) || 0;
+    // Loop through each service row in the table and calculate the totals
+    $('#serviceshow tr').each(function (index, row) {
+        const totalAmount = parseFloat($(row).find(`#totalAmount_${index}`).text()) || 0;
+        const concessionAmount = parseFloat($(row).find(`#concessionAmount_${index}`).val()) || 0;
+        const netAmount = parseFloat($(row).find(`#netAmount_${index}`).text()) || 0;
+
+        totalBillAmount += totalAmount;
+        totalConcessionAmount += concessionAmount;
+        totalNetAmount += netAmount;
     });
 
+    // Update the total fields in the DOM
     $('#totalBillAmount').val(totalBillAmount.toFixed(2));
     $('#clinicBillAmount').val(totalBillAmount.toFixed(2));
     $('#totalNetBillAmount').val(totalNetAmount.toFixed(2));
@@ -1581,18 +1676,158 @@ $('#addReferalDoc').on('click', function () {
     $('#myModal').modal('hide');
 });
 
+                            
+function fetchPackages() {
+        $.ajax({
+            url: '/plshBill/get-Patient-package-services',
+            method: 'GET',
+            success: function (data) {
+               
+                console.log(data);
+                document.getElementById("package-name").innerHTML = data.packageName;
+                document.getElementById("package-cost").innerHTML = data.packageCost;
+                document.getElementById("package-advance").innerHTML = data.advanceAmt;
+                document.getElementById("package-consumed").innerHTML = data.consumedAmt;
+
+                const tableBody = document.getElementById("sample-table-body");
+
+// Loop through the serviceComponent array and create table rows dynamically
+data.serviceComponent.forEach((service, index) => {
+    const row = `
+        <tr>
+            <td><input type="checkbox" id="gridCheck${index + 1}"></td>
+            <td>${service.serviceName}</td>
+            <td>${service.quantity}</td>
+            <td>${service.consumed}</td>
+            <td>${service.remaining}</td>
+            <td style="display:none;">${service.netAmount}</td>
+            <td style="display:none;">${service.serviceCode}</td>
+           
+        </tr>
+    `;
+    tableBody.insertAdjacentHTML('beforeend', row);
+});
+
+            },
+            error: function (xhr, status, error) {
+                console.error('Error fetching services:', xhr.responseText);
+            }
+        });
+    }
+
+    fetchPackages();
+
+    function handleAddPackage() {
+    // alert('1');
+    $('#serviceshow').empty();
+    let totalBillAmount = 0;
+    let totalConcessionAmount = 0;
+    let totalNetAmount = 0;
+
+    // Gather selected services from the table
+    $('#sample-table-body input[type="checkbox"]:checked').each(function () {
+        try {
+            const row = $(this).closest('tr'); // Get the closest row (service row)
+            const serviceName = row.find('td:eq(1)').text();
+            const quantity = parseFloat(row.find('td:eq(2)').text()) || 1;
+            const serviceRate = parseFloat(row.find('td:eq(5)').text()) || 0;
+            const serviceCode = parseFloat(row.find('td:eq(6)').text()) || 0;
+            const concessionPer = 0;
+            const concessionAmount = 0;
+            const serviceAmount = 0;
+
+            var totalAmount = serviceRate * quantity;
+            var netAmount = totalAmount - concessionAmount;
+
+            totalBillAmount += totalAmount;
+            totalConcessionAmount += concessionAmount;
+            totalNetAmount += netAmount;
+
+            // Extract the index as a number without "doctorSelect_"
+            const index = $(this).attr('id').replace('gridCheck', '') - 1;
+
+            var newRow = `<tr>
+                <td>${serviceCode}</td>
+                <td>${serviceName}</td>
+                <td>${serviceRate}</td>
+                <td><input type="number" id="quantity_${index}" class="form-control quantity-input" value="1" min="1"></td>
+                <td><input type="number" id="concessionPer_${index}" class="form-control concession-per-input" value="${concessionPer}" min="0" max="100" step="0.01"></td>
+                <td><input type="number" id="concessionAmount_${index}" class="form-control concession-amount-input" value="${concessionAmount}" step="0.01"></td>
+                <td><input type="number" id="serviceAmount_${index}" class="form-control service-amount-input" value="${serviceAmount}" step="0.01" readonly></td>
+                <td id="totalAmount_${index}">${totalAmount.toFixed(2)}</td>
+                <td id="netAmount_${index}">${netAmount.toFixed(2)}</td>
+                <td>
+                     <select id="doc_${index}" class="form-control doctor-select" data-validation>
+                    <option value="">Select Doctor</option>
+                </select>
+                </td>
+            </tr>`;
+
+            $('#serviceshow').append(newRow);
+
+            populateSelectElement("doctor", "doc_name", `#doc_${index}`, patient);
+
+            // Attach event listeners for calculation adjustments
+            $(`#concessionPer_${index}`).on('input', function () {
+                // alert(index);
+                calculateConcession(index, serviceRate); // Calls the original calculateConcession()
+            });
+
+            $(`#concessionAmount_${index}`).on('input', function () {
+                calculateConcession(index, serviceRate, true); // Calls the original calculateConcession()
+            });
+
+            $(`#quantity_${index}`).on('input', function () {
+                calculateConcession(index, serviceRate); // Calls the original calculateConcession()
+            });
+
+            // Doctor selection handling
+            $(`#doctorSelect_${index}`).on('change', function () {
+                var selectedDoctor = $(this).val();
+                // Handle doctor selection
+            });
+        } catch (error) {
+            console.error("Error processing the selected package: ", error);
+        }
+    });
+
+    // Update totals
+    $('#totalBillAmount').val(totalBillAmount.toFixed(2));
+    $('#totalConcessionAmount').val(totalConcessionAmount.toFixed(2));
+    $('#totalNetAmount').val(totalNetAmount.toFixed(2));
+}
+
+// Attach the click event handler to the button
+$('#addpackagebtn').on('click', handleAddPackage);
 
 
 $('#patientBill').on('submit', function (e) {
     e.preventDefault();
 
+    // Helper function to get the first non-empty bank name
+    function getBankName() {
+        return $('#bankName').val().trim() || 
+               $('#bankNameCheque').val().trim() || 
+             
+               $('#bankNameCard').val().trim() || 
+               $('#bankNameTT').val().trim() || '';
+    }
 
-    var advancePayment = parseFloat($('#advancePayment').val()) || 0;
-    var adjustAdvancePayment = parseFloat($('#adjustAdvancePayment').val()) || 0;
+    // Helper function to get the first non-empty bank details
+    function getBankDetails() {
+        return $('#bankDetails').val().trim() || 
+               $('#bankDetailsCheque').val().trim() || 
+               $('#bankDetailsCard').val().trim() || 
+               $('#bankDetailsTT').val().trim() || '';
+    }
 
-    if (adjustAdvancePayment > advancePayment) {
-        alert('Adjust Advance Payment cannot be more than Advance Payment.');
-        return false; // Prevent form submission
+    // Helper function to get the first non-empty bank account
+    function getBankAccount() {
+        return $('#defaultBankAccount').val().trim() || 
+               $('#defaultBankAccountCheque').val().trim() || 
+               $('#defaultBankAccountCard').val().trim() || 
+               $('#defaultBankAccountTT').val().trim() || 
+               $('#defaultBankAccountEPayment').val().trim() || '';
     }
 
     var formData = {
@@ -1605,27 +1840,27 @@ $('#patientBill').on('submit', function (e) {
         clinicBillAmount: $('#clinicBillAmount').val(),
         totalPayAmount: $('#totalPayAmount').val(),
         remarks: $('#remarks').val(),
-        Advance: $('#advancePayment').val(), // advancePayment field
+        Advance: $('#advancePayment').val(),
         adjustAdvancePayment: $('#adjustAdvancePayment').val(),
         paymentMethod: $('#paymentMode').val(),
         paidAmount: $('#paidAmount').val(),
-        referenceNo: $('#referenceNo').val(), // general reference number
-        referenceDate: $('#referenceDate').val(), // general reference date
-        bankName: $('#bankName').val(), // general bank name
-        bankDetails: $('#bankDetails').val(), // general bank details
-        defaultBankAccount: $('#defaultBankAccount').val(), // general bank account
-        chequeNo: $('#chequeNo').val(), // cheque number
-        chequeDate: $('#chequeDate').val(), // cheque date
-        ePaymentGatewayName: $('#ePaymentGatewayName').val(), // e-payment gateway name
-        ePaymentDetails: $('#ePaymentDetails').val(), // e-payment details
-        transactionDate: $('#transactionDateTT').val(), // TT transaction date
-        cardType: $('#cardType').val(), // card type
-        cardNo: $('#cardNo').val(), // card number
-        cardHolderName: $('#cardHolderName').val(), // card holder name
-        approvalNo: $('#approvalNo').val(), // approval number
+        referenceNo: $('#referenceNo').val(),
+        referenceDate: $('#referenceDate').val(),
+        bankName: getBankName(), // Use the helper function to get the first available bank name
+        bankDetails: getBankDetails(), // Use the helper function to get the first available bank details
+        defaultBankAccount: getBankAccount(), // Use the helper function to get the first available bank account
+        chequeNo: $('#chequeNo').val(),
+        chequeDate: $('#chequeDate').val(),
+        ePaymentGatewayName: $('#ePaymentGatewayName').val(),
+        ePaymentDetails: $('#ePaymentDetails').val(),
+        transactionDate: $('#transactionDateTT').val(),
+        cardType: $('#cardType').val(),
+        cardNo: $('#cardNo').val(),
+        cardHolderName: $('#cardHolderName').val(),
+        approvalNo: $('#approvalNo').val(),
         discountRemarks: $('#discountRemarks').val(),
         billRemarks: $('#billRemarks').val(),
-        printBillOnConfirm: $('#printBillOnConfirm').is(':checked'), // boolean value if checkbox is checked
+        printBillOnConfirm: $('#printBillOnConfirm').is(':checked'),
         payerType: $('#payerTypeSelect').val(),
         payer: $('#payer').val(),
         refNo: $('#refNo').val(),
@@ -1639,13 +1874,13 @@ $('#patientBill').on('submit', function (e) {
         validToCorporate: $('#validToCorporate').val(),
         corporateRemarks: $('#corporateRemarks').val(),
         cashRemarks: $('#cashRemarksInput').val(),
-        mrNo: '<%= patient.mr_no %>', // assuming this is a server-side template value
-        selectedBillServices: selectedBillServices, // assuming this is a variable from your script
-        date: new Date().toISOString() // current date and time
+        mrNo: '<%= patient.mr_no %>',
+        selectedBillServices: selectedBillServices,
+        date: new Date().toISOString()
     };
 
     $.ajax({
-        url: '/findpatient/billPatientSubmit', 
+        url: '/findpatient/billPatientSubmit',
         method: 'POST',
         contentType: 'application/json',
         data: JSON.stringify(formData),

@@ -12735,6 +12735,18 @@ img {
     font-size: 25px;
     line-height: 30px; } }
 
-    .slidex{display:block;overflow-x:auto;}
-.slidey{display:block;overflow-y:auto;max-height: 200px;}
+.slidex{display:block;overflow-x:auto;}
+/* .slidey{display:block;overflow-y:auto;max-height: 200px;} */
 /*# sourceMappingURL=style-starter.css.map */
+
+/*? Menu Reverse :--  */
+
+.submenu-up {
+    top: auto !important;
+    bottom: 38px !important; /* Adjust this based on your design */
+    left: 50px !important;
+    z-index: 100;
+}
+
+
+

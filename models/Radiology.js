@@ -1,105 +1,121 @@
-const { DataTypes } = require('sequelize');
-const {sequelize} = require('../sequelize');
+const { DataTypes } = require("sequelize");
+const { sequelize } = require("../sequelize");
 
-const Rad_ModalityDetails = sequelize.define('Rad_ModalityDetails', {
-    UserId:{
-        type:DataTypes.STRING,
-        defaultValue:0
+const Rad_ModalityDetails = sequelize.define(
+  "Rad_ModalityDetails",
+  {
+    UserId: {
+      type: DataTypes.STRING,
+      defaultValue: 0,
     },
     md_code: {
       type: DataTypes.STRING,
     },
-    description:{
-        type: DataTypes.STRING,
+    description: {
+      type: DataTypes.STRING,
     },
-    status:{
-        type:DataTypes.BOOLEAN,
-        defaultValue:false
-    }
-  }, {
+    status: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
+  },
+  {
     timestamps: true,
-    tableName: 'Rad_ModalityDetails'
-  });
+    tableName: "rad_modalitydetails",
+  }
+);
 
-const Rad_TempResDet = sequelize.define('Rad_TempResDet',{
-    UserId:{
-        type:DataTypes.STRING,
-        defaultValue:0
+const Rad_TempResDet = sequelize.define(
+  "Rad_TempResDet",
+  {
+    UserId: {
+      type: DataTypes.STRING,
+      defaultValue: 0,
     },
     trd_code: {
       type: DataTypes.STRING,
     },
-    description:{
-        type: DataTypes.STRING,
+    description: {
+      type: DataTypes.STRING,
     },
-    status:{
-        type:DataTypes.BOOLEAN,
-        defaultValue:false
-    }
-  }, {
+    status: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
+  },
+  {
     timestamps: true,
-    tableName: 'Rad_TempResDet'
-  })
+    tableName: "rad_tempresdet",
+  }
+);
 
-const Rad_TempMaDet = sequelize.define('Rad_TempMasDet',{
-    UserId:{
-        type:DataTypes.STRING,
-        defaultValue:0
+const Rad_TempMaDet = sequelize.define(
+  "Rad_TempMasDet",
+  {
+    UserId: {
+      type: DataTypes.STRING,
+      defaultValue: 0,
     },
     tmd_code: {
       type: DataTypes.STRING,
     },
-    description:{
-        type: DataTypes.STRING,
+    description: {
+      type: DataTypes.STRING,
     },
-    gender:{
-        type:DataTypes.STRING
+    gender: {
+      type: DataTypes.STRING,
     },
-    templateResult:{
-        type:DataTypes.STRING
+    templateResult: {
+      type: DataTypes.STRING,
     },
-    designTemplate:{
-        type:DataTypes.TEXT
-    }
-}, {
+    designTemplate: {
+      type: DataTypes.TEXT,
+    },
+  },
+  {
     timestamps: true,
-    tableName: 'Rad_TempMasDet'
-  })
+    tableName: "rad_tempmasdet",
+  }
+);
 
-const Rad_AnomalyScan = sequelize.define('Rad_AnomalyScan',{
+const Rad_AnomalyScan = sequelize.define(
+  "Rad_AnomalyScan",
+  {
     UserId: {
-        type: DataTypes.STRING,
-        defaultValue: '0', // Updated to be a string default value; defaultValue should match the type
+      type: DataTypes.STRING,
+      defaultValue: "0", // Updated to be a string default value; defaultValue should match the type
     },
     as_code: {
-        type: DataTypes.STRING,
+      type: DataTypes.STRING,
     },
     description: {
-        type: DataTypes.STRING,
+      type: DataTypes.STRING,
     },
     TAT: {
-        type: DataTypes.STRING,
+      type: DataTypes.STRING,
     },
     printTN: {
-        type: DataTypes.STRING,
+      type: DataTypes.STRING,
     },
     modality: {
-        type: DataTypes.STRING,
+      type: DataTypes.STRING,
     },
     services: {
-        type: DataTypes.STRING,
+      type: DataTypes.STRING,
     },
     templateId: {
-        type: DataTypes.STRING, // Changed to store an array of integers
-    }
-},{
+      type: DataTypes.STRING, // Changed to store an array of integers
+    },
+  },
+  {
     timestamps: true,
-    tableName: 'Rad_AnomalyScan'
-  })
+    tableName: "rad_anomalyscan",
+  }
+);
 
 module.exports = {
-    Rad_ModalityDetails,
-    Rad_TempResDet,
-    Rad_TempMaDet,
-    Rad_AnomalyScan
-}
+  Rad_ModalityDetails,
+  Rad_TempResDet,
+  Rad_TempMaDet,
+  Rad_AnomalyScan,
+};

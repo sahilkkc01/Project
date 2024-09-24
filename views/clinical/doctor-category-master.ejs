@@ -118,7 +118,7 @@
                           </div>
                           <div class="col-6 mb-3">
                             <div class="form-group">
-                              <label class="input__label" for="description">Description</label>
+                              <label class="input__label" for="description">Description/Name</label>
                               <input  id="doc_cat_master_desc" name="doc_cat_master_desc" type="text" class="form-control input-style"
                                 data-validation="required" data-error-message="Description is required." placeholder="">
                             </div>
@@ -227,6 +227,7 @@
                     data: JSON.stringify(formData),
                     success: function(response) {
                       alert(response.msg);
+                      window.location.href = '/clinic/10';
                       $(errorDivId).removeClass('alert-danger').addClass('alert-success').text(response.msg).show();
                       console.log('Response:', response);
                     },

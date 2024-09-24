@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const session = require("express-session");
+const { KYC } = require('../models/Kyc');
 const fs = require("fs");
 const path = require("path");
 const {
@@ -98,20 +99,47 @@ router.get("/1a", function (req, res) {
   res.render("PatientRegistration/1a-appointment-new-patient-search");
 });
 
-router.get("/2", function (req, res) {
-  const now = new Date();
-  const currentDate = now.toISOString().split("T")[0]; // YYYY-MM-DD
-  const currentTime = now.toTimeString().split(" ")[0]; // HH:MM:SS
-  res.render("PatientRegistration/2-patient-registration-patient-information", {
-    patient: "",
-    a: {
-      state: "MP",
-      city: "Chhatarpur",
-    },
-    currentDate: currentDate,
-    currentTime: currentTime,
-  });
+router.get("/2", async function(req, res) {
+  try {
+    let data = null;
+
+    console.log(req.query.patId)
+    // Check if the patId query parameter is provided
+    if (req.query.patId) {
+      // Fetch data if patId is present
+      data = await KYC.findOne({
+        where: {
+          lead_no: req.query.patId,
+        },
+      });
+    }
+  
+
+    // Log the query parameter for debugging
+    console.log(req.query);
+
+    const now = new Date();
+    const currentDate = now.toISOString().split("T")[0]; // Format the date as YYYY-MM-DD
+    const currentTime = now.toTimeString().split(" ")[0]; // Format the time as HH:MM:SS
+
+    // Render the page with or without the data
+    res.render("PatientRegistration/2-patient-registration-patient-information", {
+      patient:  "", // Send first data record if exists, otherwise empty
+      a: {
+        state: "MP",
+        city: "Chhatarpur",
+      },
+      currentDate: currentDate,
+      currentTime: currentTime,
+      data: data || [], // Send data if exists, otherwise an empty array
+    });
+  } catch (error) {
+    // Handle any errors that occur
+    console.error('Error fetching patient data:', error);
+    res.status(500).send('Internal Server Error');
+  }
 });
+
 
 router.get("/23", function (req, res) {
   const now = new Date();
@@ -246,6 +274,12 @@ router.get("/21", function (req, res) {
     "PatientRegistration/21-FB-item-sales-return-new-sales-item-search"
   );
 });
+router.get("/27", function (req, res) {
+  res.render(
+    "PatientRegistration/newpatientlist"
+  );
+});
+
 router.get("/22", function (req, res) {
   const now = new Date();
   const currentDate = now.toISOString().split("T")[0]; // YYYY-MM-DD
@@ -276,6 +310,10 @@ router.get("/22", function (req, res) {
     res.redirect("/findpatient/6");
   }
 });
+
+
+
+
 router.get("/24", function (req, res) {
   if (req.session.rowId) {
     PR_patientReg.findByPk(req.session.rowId)
@@ -426,7 +464,7 @@ router.get("/filter-data", async (req, res) => {
     if (!Model) {
       return res.status(400).json({ message: "Invalid table name" });
     }
-    console.log("bharat Singnpx");
+   
     console.log(sortby);
     // Construct Sequelize filters
     let sequelizeFilters = {};
@@ -438,13 +476,15 @@ router.get("/filter-data", async (req, res) => {
 
     const options = {
       where: sequelizeFilters,
-      limit: limit ? parseInt(limit) : 10,
+      limit: limit ? parseInt(15) : 10,
       offset: offset ? parseInt(offset) : 0,
       order: sortby ? [[sortby, "ASC"]] : [], // Default ordering
     };
 
     // Fetch data from the specified table
+
     const data = await Model.findAndCountAll(options);
+    console.log(data)
     res.json(data);
   } catch (error) {
     console.error(error);

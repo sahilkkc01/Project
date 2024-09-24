@@ -26,7 +26,7 @@ router.use(session({
     },
 }));
 router.use(flash());
-const { newPackageSubmit, getNewPackage, itemMasterData, SaveStatusData, newPharmacyItem, getServices, newServicesItem, getAllServices, newDefineRule,getAllTariff, getAllConcents, saveConcets } = require('../controllers/packageConfig');
+const { newPackageSubmit, getNewPackage, itemMasterData, SaveStatusData, newPharmacyItem, getServices, newServicesItem, getAllServices, newDefineRule,getAllTariff, getAllConcents, saveConcets, drugsData, addpackage } = require('../controllers/packageConfig');
 
 
 router.get('/1', (req, res) => {
@@ -65,7 +65,8 @@ router.get('/8', (req, res) => {
 router.get('/9', (req, res) => {
     res.render('PackageConfig/hello')
 })
-
+router.get("/drugs", drugsData);
+router.post("/addpackageitems", addpackage);
 router.get('/getNewPackage', getNewPackage);
 router.post('/newPackage', newPackageSubmit);
 router.get('/itemMasterData', itemMasterData);

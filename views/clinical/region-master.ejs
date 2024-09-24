@@ -142,7 +142,7 @@
                         </div>
 						<div class="col-3 mb-3 mb-3">
                           <div class="form-group"><label class="input__label">Pin Code </label><input type="number"
-                              class="form-control input-style" id="region_m_pincode" name="region_m_pincode" class="form-control input-style" data-validation="required" data-error-message="Pincode is required." placeholder=""></div>
+                              class="form-control input-style only-6" id="region_m_pincode" name="region_m_pincode"  data-validation="required" data-error-message="Pincode is required." placeholder=""></div>
                         </div>
                       </div>
                     </div>
@@ -226,6 +226,9 @@
 <script type="module">
  
   import { validateForm } from '../javascripts/validation.js';
+  import { numVal} from '../javascripts/lengthVal.js';
+        numVal('.only-6',6);
+  
   $(document).ready(function() {
 
     
@@ -269,6 +272,7 @@
                       data: JSON.stringify(formData),
                       success: function(response) {
                           alert(response.msg);
+                          window.location.href = '/clinic/21';
                           $(errorDivId).removeClass('alert-danger').addClass('alert-success').text(response.msg).show();
                           console.log('Response:', response);
                       },

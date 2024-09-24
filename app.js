@@ -11,8 +11,9 @@ const jwt = require('jsonwebtoken');
 const compression = require('compression');
 const helmet = require('helmet');
 const concentRouter = require('./routes/concent');
+const appRouter = require('./routes/AppConfig');
 
-const { Admin } = require('./models/Kyc');
+const { Admin, KYC } = require('./models/Kyc');
 const clinicRoutes = require('./routes/clinicalRoute');
 var adminInventory = require('./routes/adminInventory');
 var usersRouter = require('./routes/users');
@@ -27,8 +28,9 @@ var pathologyRouter = require('./routes/pathology');
 var dashboard = require('./routes/360');
 const plshBilling = require("./routes/palashBilling");
 const findpatient = require("./routes/PatientRegistration");
+var embRouter = require('./routes/embrology');
 
-const { kycCtrl, dashboardCtrl, modifyApt, modifyVisit, apt1, apt2, apt3, apt4, login, register, logout } = require('./controllers/controller');
+const { kycCtrl, dashboardCtrl, modifyApt, modifyVisit, apt1, apt2, apt3, apt4, login, register, logout, getAllKYCDetails, fetchFU, fetchApt, fetchVisits, fetchConv } = require('./controllers/controller');
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -95,7 +97,7 @@ app.use(compression({
 // // // Apply ensureAuthenticated globally
 // app.use(ensureAuthenticated);
 
-const JWT_SECRET='ll'
+const JWT_SECRET = 'll';
 const verifyToken = (req, res, next) => {
   const token = req.cookies.token; // Read token from HttpOnly cookie
   console.log(req.cookies);
@@ -107,11 +109,41 @@ const verifyToken = (req, res, next) => {
   try {
     const decoded = jwt.verify(token, JWT_SECRET);
     req.user = decoded; // Attach user details to req.user
+    res.locals.user = req.user; // Make user available in templates
     next();
   } catch (err) {
     return res.status(401).json({ message: "Invalid Token" });
   }
 };
+function checkRights(requiredRight) {
+  return function (req, res, next) {
+    // console.log(req.user)
+    if (req.user && req.user.rights && req.user.rights[requiredRight]) {
+      // User has the required right
+      next();
+    } else {
+     
+      return res.redirect('/1');}
+  };
+}
+
+
+app.use((req, res, next) => {
+  const token = req.cookies.token;
+  
+  if (token) {
+    try {
+      const decoded = jwt.verify(token, JWT_SECRET);
+      req.user = decoded;
+      res.locals.user = req.user;
+    } catch (err) {
+      
+      console.error('Invalid token', err);
+    }
+  }
+  next();
+});
+
 
 
 
@@ -128,29 +160,67 @@ app.use(todayDateMiddleware);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+
+
 // Routes setup
-app.use('/adminInv',verifyToken, adminInventory);
-app.use('/clinic', verifyToken,clinicRoutes);
+app.use('/adminInv',verifyToken, checkRights('InventoryRightsAdmin'), adminInventory);
+app.use('/clinic', verifyToken, checkRights('ClinicalRights'), clinicRoutes);
 app.use('/users',verifyToken, usersRouter);
-app.use('/radiology',verifyToken, radioRouter);
-app.use('/patient',verifyToken, patientconfigRouter);
-app.use('/palashinv',verifyToken, palashInv);
-app.use('/billing',verifyToken, billing);
+app.use('/radiology',verifyToken, checkRights('radiology'),radioRouter);
+app.use('/patient',verifyToken,checkRights('ClinicalRightsAdmin'), patientconfigRouter);
+app.use('/palashinv',verifyToken,checkRights('InventoryRights'), palashInv);
+app.use('/billing',verifyToken,checkRights('BillingRightsAdmin'),  billing);
 app.use('/Admin',verifyToken, indexRouter);
-app.use('/findPatient',verifyToken, patRegRoute);
-app.use('/package',verifyToken, packageConfigRouter);
-app.use('/concent', concentRouter);
-app.use('/pathology',verifyToken, pathologyRouter);
+app.use('/findPatient',verifyToken,checkRights('ClinicalRights'), patRegRoute);
+app.use('/package',verifyToken,checkRights('ClinicalRights'), packageConfigRouter);
+app.use('/concent',checkRights('ClinicalRights'), concentRouter);
+app.use('/pathology',verifyToken,checkRights('pathology'), pathologyRouter);
 app.use('/main',verifyToken, dashboard);
-app.use("/findpatient",verifyToken, findpatient);
-app.use("/plshBill",verifyToken, plshBilling);
+app.use("/findpatient",verifyToken,checkRights('ClinicalRights'), findpatient);
+app.use("/plshBill",verifyToken,checkRights('BillingRights'), plshBilling);
+app.use('/embrology',verifyToken,checkRights('embrology'), embRouter);
+app.use('/appConfig',verifyToken, appRouter);
 
 
 // Routes
 app.get('/home', verifyToken, async (req, res) => {
-  const admins = await Admin.findAll();
-  console.log(req.user); // Now using JWT to fetch user info
-  res.render('form-new', { loginName: req.user.username, admins });
+
+ 
+  console.log(req.query)
+  const { kyc_id } = req.query;
+console.log(kyc_id)
+const admins = await Admin.findAll();
+  try {
+    if (kyc_id) {
+      const kycData = await KYC.findByPk(kyc_id);
+
+      if (!kycData) {
+        console.error('record not found:', kyc_id);
+        return res.status(404).render('error', { message: 'record not found' });
+      }
+
+      const kycValues = kycData.get({ plain: true });
+      console.log(' values:', kycValues);
+      return res.render('form-new', { a: kycValues,loginName: req.user.username, admins });
+    } else {
+      
+      console.log(req.user); // Now using JWT to fetch user info
+      res.render('form-new', { a:'',loginName: req.user.username, admins });
+    }
+  } catch (error) {
+    console.error('Error fetching  data:', error);
+    return res.status(500).render('error', { message: 'Internal Server Error' });
+  }
+
+
+
+});
+
+app.get('/patientlist', verifyToken, async (req, res) => {
+  console.log('23')
+  console.log(req.user)
+
+  res.render('form-new-list',{user:req.user});
 });
 
 app.get('/', (req, res) => {
@@ -167,7 +237,7 @@ app.get('/1', (req, res) => {
       const decoded = jwt.verify(token, JWT_SECRET);
 
       // If the token is valid, redirect to home
-      return res.redirect('/home');
+      return res.redirect('/patientlist');
     } catch (err) {
       console.error('Invalid token', err);
       // If token verification fails, continue to render login
@@ -183,7 +253,21 @@ app.get('/2', (req, res) => {
   res.redirect(301, '/1');
 });
 
+app.get('/auditDash', (req, res) => {
+  res.render('1-audit-trial-dashboard')
+});
+app.get('/corfin', (req, res) => {
+  res.render('2-corporate-financial-dashboard')
+});
+app.get('/dailykpidash', (req, res) => {
+  res.render('3-daily-kpi-dashboard')
+});
+app.get('/hosfindash', (req, res) => {
+  res.render('4-hospital-financial-dashboard')
+});
+
 app.get('/dashboard', dashboardCtrl);
+app.get('/get-pat-dtl', getAllKYCDetails);
 
 app.post('/register', register);
 app.post('/login', login);
@@ -192,6 +276,10 @@ app.post('/kycreg', upload.any(), kycCtrl);
 app.post('/modify-apt', modifyApt);
 app.post('/modify-vis', modifyVisit);
 app.post('/appointment_1', apt1);
+app.get('/followUp-data/:kyc_id', fetchFU);
+app.get('/appointment-data/:kyc_id', fetchApt);
+app.get('/visited-appointment-data/:kyc_id', fetchVisits);
+app.get('/converted-appointment-data/:kyc_id', fetchConv);
 app.post('/appointment_2', apt2);
 app.post('/appointment_3', apt3);
 app.post('/appointment_4', apt4);

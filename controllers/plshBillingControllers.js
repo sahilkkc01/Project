@@ -1,4 +1,5 @@
 const CryptoJS = require("crypto-js");
+const {Op,Sequelize, DATE}= require('sequelize');
 
 const {
   expensedetails,
@@ -10,7 +11,10 @@ const {
   PatientRefund,
   PR_BillFindPatient,
   CompanyAdvance,
+  BillServiceApproval,
+  PatientAssignPackage,
 } = require("../models/plshBill");
+const { BillServices } = require("../models/PatientReg");
 
 let dataId = {};
 const setId = async (req, res) => {
@@ -1081,6 +1085,111 @@ const approvePatientRefundByRecNo = async (req, res) => {
       });
   }
 };
+
+const approveSeriveRefund = async (req, res) => {
+  const { approvalId, remark, freeze } = req.body;
+  console.log(req.body);
+
+  try {
+      // Fetch the refund entry from the database based on billNo and make sure to include the primary key
+      const refund = await BillServiceApproval.findOne({
+          where: { id: approvalId },
+          attributes: ['id', 'serviceId', 'Approve', 'freeze','billNo'] // Ensure the primary key ('id') is included
+      });
+
+      console.log(refund);
+
+      if (!refund) {
+          return res.status(404).json({
+              success: false,
+              message: 'Refund not found'
+          });
+      }
+
+      // Check if the request is for freezing the refund
+      if (freeze === '1') {
+          refund.freeze = true;
+          await refund.save(); // Now that the primary key is included, this should work
+
+          // Fetch all the services associated with the refund using the serviceId array
+          const serviceIds = refund.serviceId; // Assuming this is an array
+          
+          if (!serviceIds || serviceIds.length === 0) {
+              return res.status(404).json({
+                  success: false,
+                  message: 'No services found for this refund'
+              });
+          }
+
+          // Fetch all services using the serviceIds
+          const services = await BillServices.findAll({
+              where: {
+                  id: {
+                      [Op.in]: serviceIds // Use the array of serviceIds
+                  }
+              }
+          });
+
+          if (!services || services.length === 0) {
+              return res.status(404).json({
+                  success: false,
+                  message: 'No services found for this refund'
+              });
+          }
+
+          // Calculate the total net amount for the services
+          const totalNetAmount = services.reduce((total, service) => total + (service.netAmount || 0), 0);
+          const totalConcessionAmount = services.reduce((total, service) => total + (service.concession_amount || 0), 0);
+          // Create a new bill for the frozen services
+          const existingBill = await PR_BillFindPatient.findOne({
+            where: { bill_no: refund.billNo }
+        });
+          const newBill = await PR_BillFindPatient.create({
+            bill_no: `${refund.billNo}REF`,
+            date:new DATE(),// Use the same billNo as the refund
+            totalBillAmount: totalNetAmount, 
+            totalNetBillAmount:totalNetAmount ,
+            totalConcessionAmount:totalConcessionAmount,
+            mrNo:existingBill.mrNo
+        
+          });
+
+          return res.status(200).json({
+              success: true,
+              message: 'Refund frozen successfully, and a new bill created.',
+              newBill
+          });
+      }
+
+      // Check if the refund is already approved
+      if (refund.Approve) {
+          return res.status(400).json({
+              success: false,
+              message: 'Refund is already approved'
+          });
+      }
+
+      // Approve the refund and save the remark
+      refund.Approve = true;
+      refund.approveRemark = remark;
+      await refund.save(); // This will work since the primary key is now included
+
+      res.status(200).json({
+          success: true,
+          message: 'Refund approved successfully'
+      });
+
+  } catch (error) {
+      console.error('Error processing the refund:', error);
+      res.status(500).json({
+          success: false,
+          message: 'Error processing the refund: ' + error.message
+      });
+  }
+};
+
+
+
 const approveCompanyRefundByRecNo = async (req, res) => {
   const { rec_no } = req.body;  // Assuming the rec_no is passed in the request body
   console.log(req.body)
@@ -1126,6 +1235,188 @@ const approveCompanyRefundByRecNo = async (req, res) => {
   }
 };
 
+getServiceDataById = async (req, res) => {
+  try {
+    const { id } = req.params; // Extract the ID from the request params
+
+    // Find the data based on the ID from the 'ServiceModel' table
+    const serviceData = await BillServices.findAll({
+      where: {
+        billId: id, // Ensure the 'id' matches the ID in the request
+      },
+    });
+
+    // If no data found, return 404
+    if (!serviceData) {
+      return res.status(404).json({ message: 'Service not found' });
+    }
+
+    // Return the found data as a JSON response
+    return res.status(200).json(serviceData);
+  } catch (error) {
+    console.error('Error fetching service data:', error);
+    return res.status(500).json({ message: 'Internal Server Error' });
+  }
+};
+
+const sendForServiceApproval = async (req, res) => {
+  try {
+    const { billId, billNo, selectedServices, remark, currentDate } = req.body;
+
+    // Extract service IDs and codes into arrays
+    const serviceIds = selectedServices.map(service => service.serviceId);
+    const serviceCodes = selectedServices.map(service => service.serviceCode);
+
+    // Save one entry with serviceId and serviceCode as arrays
+    await BillServiceApproval.create({
+      billId,
+      billNo,
+      serviceId: serviceIds,
+      serviceCode: serviceCodes,
+      remark: remark || null,
+      approvalDate: currentDate
+    });
+
+    res.status(200).send("Data sent for approval successfully.");
+  } catch (error) {
+    console.error("Failed to send data for approval:", error);
+    res.status(500).send("Internal Server Error");
+  }
+};
+
+const getRefundServices = async (req, res) => {
+  try {
+    // Define the search criteria for BillServiceApproval
+    const approvalCriteria = {};
+
+    // Build the search criteria from query parameters for BillServiceApproval
+    if (req.query.from_date && req.query.to_date) {
+      approvalCriteria.approvalDate = {
+        [Op.between]: [req.query.from_date, req.query.to_date]
+      };
+    }
+    if (req.query.bill_no) approvalCriteria.billNo = req.query.bill_no;
+    if (req.query.mrNo) approvalCriteria.mrNo = req.query.mrNo;
+    if (req.query.clinic) approvalCriteria.clinic = req.query.clinic;
+
+    // Fetch all BillServiceApproval records matching the criteria
+    const approvedBills = await BillServiceApproval.findAll({
+      where: approvalCriteria,
+      attributes: ['id', 'billId', 'freeze', 'Approve', 'approvalDate'] // Include 'id' in the result
+    });
+
+    // Extract all billIds (allowing duplicates)
+    const billIds = approvedBills.map(approval => approval.billId);
+    
+    if (billIds.length === 0) {
+      return res.status(404).json({ message: "No approved bills found for the given criteria." });
+    }
+
+    // Fetch all relevant PR_BillFindPatient based on the billIds
+    const billDetails = await PR_BillFindPatient.findAll({
+      where: {
+        id: { [Op.in]: billIds }
+      }
+    });
+
+    // Create a map of billId to billDetails for faster lookup
+    const billDetailsMap = new Map(billDetails.map(bill => [bill.id, bill]));
+
+    // Format the result with both BillDetails and attach freeze, approve, and approvalDate from BillServiceApproval
+    const results = approvedBills.map(approval => {
+      // Find the matching bill from PR_BillFindPatient for each approval
+      const bill = billDetailsMap.get(approval.billId);
+
+      if (bill) {
+        // Map the approval data with the bill data
+        return {
+          ...bill.toJSON(),
+          approvalId: approval.id, // Add the id from BillServiceApproval
+          freezeRefund: approval.freeze,
+          approveRefund: approval.Approve,
+          approvalDate: approval.approvalDate
+        };
+      }
+      return null;
+    }).filter(result => result !== null); // Filter out any null values if no bill found
+
+    // Send the response with the fetched BillServices data along with freeze and approve
+    res.status(200).json(results);
+  } catch (error) {
+    console.error('Error during search:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+};
+
+
+const getServiceDataByBillId = async (req, res) => {
+  try {
+    // Get the billId from request parameters
+    console.log(req.params)
+    const approvalId = req.params.approvalId;
+    console.log('1')
+    
+
+    // Fetch all serviceIds associated with the billId from BillServiceApproval
+    const billApproval = await BillServiceApproval.findOne({
+      where: { id: approvalId }, // Use an object for the where clause
+      attributes: ['serviceId']  // Fetch only the serviceId attribute
+    });
+    
+    if (!billApproval || !billApproval.serviceId || billApproval.serviceId.length === 0) {
+      return res.status(404).json({ message: 'No services found for the given bill.' });
+    }
+
+    // Assuming serviceId is an array, we will use the array of service IDs to fetch data from BillServices
+    const serviceIds = billApproval.serviceId;
+
+    // Fetch data from BillServices based on the serviceIds
+    const services = await BillServices.findAll({
+      where: {
+        id: {
+          [Op.in]: serviceIds, // Using the array of serviceIds to match multiple services
+        },
+      },
+    });
+
+    // Send the fetched services as response
+    res.status(200).json(services);
+  } catch (error) {
+    console.error('Error fetching services:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+};
+
+
+getPatientPackages = async (req, res) => {
+  try {
+    console.log(req.session);
+    const Id = req.session.rowId;
+    const patient = await PR_patientReg.findOne({
+      where: {
+        id: Id,
+      },
+    });
+    const mrNo= patient.mr_no;
+
+    const data = await PatientAssignPackage.findOne({
+      where: {
+        id: Id,
+      },
+    });
+
+    res.status(200).send(data);
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+
+
 
 module.exports = {
   getPrescriptions,
@@ -1155,5 +1446,11 @@ module.exports = {
   getPatientRefund ,
   approvePatientRefundByRecNo,
   getCompanyAdvance,
-  approveCompanyRefundByRecNo
+  approveCompanyRefundByRecNo,
+  getServiceDataById,
+  sendForServiceApproval,
+  getRefundServices,
+  getServiceDataByBillId,
+  approveSeriveRefund,
+  getPatientPackages
 };

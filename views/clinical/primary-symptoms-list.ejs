@@ -212,7 +212,7 @@ function paginateTable() {
                 type: 'GET',
                 success: function(data) {
                   let tableRows = '';
-                  data.forEach(function(item) {
+                  data.reverse().forEach(function(item) {
                     tableRows += `
                       <tr data-ps-id="${item.id}">
                         <td><button type="button" id="view_btn" class="btn btn-primary btn-style btn-change">View</button></td>

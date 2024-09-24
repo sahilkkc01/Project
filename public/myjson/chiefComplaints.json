@@ -1,0 +1,37 @@
+{
+    "conditions": [
+      {"name": "Delayed Ejaculation"},
+      {"name": "Inability To Ejaculate"},
+      {"name": "Decreased Erection"},
+      {"name": "Early Ejaculation"},
+      {"name": "Anejaculation"},
+      {"name": "Inability To Conceive"},
+      {"name": "Decreased Size Of Penis"},
+      {"name": "Anxious To Conceive"},
+      {"name": "Primary Infertility"},
+      {"name": "Secondary Infertility"},
+      {"name": "Non-consumation Of Marriage"},
+      {"name": "Dyspareunia"},
+      {"name": "Menstrual Irregularities"},
+      {"name": "Galactorrhea"},
+      {"name": "Primary Amenorrhea"},
+      {"name": "Secondary Amenorrhea"},
+      {"name": "Fertility Evaluation"},
+      {"name": "Dysmenorrheal"},
+      {"name": "Hirsuitism/acne"},
+      {"name": "Dysuria"},
+      {"name": "Lower Abdominal Pain"},
+      {"name": "Lump In Breast"},
+      {"name": "White Discharge Pv"},
+      {"name": "Post Menopausal Symptoms"},
+      {"name": "Premarital Evaluation"},
+      {"name": "Spermatorrhoea"},
+      {"name": "Reduced Interest In Sexual Activity"},
+      {"name": "Homosexual Thoughts"},
+      {"name": "Premarital Sexual Health Check Up"},
+      {"name": "Premarital Fertility Health Check Up"},
+      {"name": "Pain In The Testis"},
+      {"name": "Pain In The Penis"}
+    ]
+  }
+  

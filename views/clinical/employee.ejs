@@ -18,95 +18,11 @@
 
     <%- include('../header') -%>
 
-            <!-- notification menu start -->
-            <div class="menu-right">
-                <div class="navbar user-panel-top">
-                    <div class="search-box">
-                        <form action="#search-results.html" method="get">
-                            <input class="search-input" placeholder="Search Here..." type="search" id="search">
-                            <button class="search-submit" value=""><span class="fa fa-search"></span></button>
-                        </form>
-                    </div>
-                    <div class="user-dropdown-details d-flex">
-                        <div class="profile_details_left">
-                            <ul class="nofitications-dropdown">
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i
-                                            class="fa fa-bell-o"></i><span class="badge blue">3</span></a>
-                                    <ul class="dropdown-menu">
-                                        <li>
-                                            <div class="notification_header">
-                                                <h3>You have 3 new notifications</h3>
-                                            </div>
-                                        </li>
-                                        <li><a href="#" class="grid">
-                                                <div class="user_img"></div>
-                                                <div class="notification_desc">
-                                                    <p>Johnson purchased template</p>
-                                                    <span>Just Now</span>
-                                                </div>
-                                            </a></li>
-                                        <li class="odd"><a href="#" class="grid">
-                                                <div class="user_img"></div>
-                                                <div class="notification_desc">
-                                                    <p>New customer registered </p>
-                                                    <span>1 hour ago</span>
-                                                </div>
-                                            </a></li>
-                                        <li><a href="#" class="grid">
-                                                <div class="user_img"></div>
-                                                <div class="notification_desc">
-                                                    <p>Lorem ipsum dolor sit amet </p>
-                                                    <span>2 hours ago</span>
-                                                </div>
-                                            </a></li>
-                                        <li>
-                                            <div class="notification_bottom">
-                                                <a href="#all" class="bg-primary">See all notifications</a>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="profile_details">
-                            <ul>
-                                <li class="dropdown profile_details_drop">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="dropdownMenu3"
-                                        aria-haspopup="true" aria-expanded="false">
-                                        <div class="profile_img">
-                                            <img src="assets/images/profileimg.jpg" class="rounded-circle" alt="" />
-                                            <div class="user-active">
-                                                <span></span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <ul class="dropdown-menu drp-mnu" aria-labelledby="dropdownMenu3">
-                                        <li class="user-info">
-                                            <h5 class="user-name">John Deo</h5>
-                                            <span class="status ml-2">Available</span>
-                                        </li>
-                                        <li> <a href="#"><i class="lnr lnr-user"></i>My Profile</a> </li>
-                                        <li> <a href="#"><i class="lnr lnr-users"></i>1k Followers</a> </li>
-                                        <li> <a href="#"><i class="lnr lnr-cog"></i>Setting</a> </li>
-                                        <li> <a href="#"><i class="lnr lnr-heart"></i>100 Likes</a> </li>
-                                        <li class="logout"> <a href="#sign-up.html"><i class="fa fa-power-off"></i>
-                                                Logout</a> </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--notification menu end -->
-
-        </div>
-        <!-- //header-ends -->
+     
         <!-- main content start -->
         <div class="main-content">
 
-            <div class="row content-top-gap2">
+            <div class="row ">
                 <div class="col-lg-12">
                     <nav class="navbar navbar-expand-lg navbar-light bg-white">
                         <a class="navbar-brand text-center mr-5" href="#">
@@ -301,6 +217,7 @@
                 <option value="">Select</option>
                 <option value="Married">Married</option>
                 <option value="Unmarried">Unmarried</option>
+                <option value="Divorced">Divorced</option>
                 <!-- Add options here -->
             </select>
         </div>
@@ -452,6 +369,39 @@
                 });
             </script> -->
                <script>
+                
+               
+
+                
+const loadDropdown = (url, elementId, key, selectedValue = null) => {
+    fetch(url)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Error fetching data from ${url}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            const dropdown = document.getElementById(elementId);
+            dropdown.innerHTML = '<option value="">Select</option>'; // Clear existing options and add a default one
+            data.forEach(item => {
+                const option = document.createElement('option');
+                option.value = item[key];
+                option.textContent = item[key];
+                dropdown.appendChild(option);
+            });
+
+            // Set the value after the dropdown has been populated
+            if (selectedValue) {
+                dropdown.value = selectedValue;
+            }
+        })
+        .catch(error => console.error(`Error fetching ${elementId} details:`, error));
+};
+
+// Call the function for both dropdowns with the selected value
+loadDropdown('/clinic/get-desg-details', 'emp_desig', 'desg_desc', '<%= a.emp_desig %>');
+loadDropdown('/clinic/get-clinic-details', 'emp_clinic', 'clinic_desc', '<%= a.emp_clinic %>');
 
 document.getElementById('emp_image').addEventListener('change', function(event) {
                   const file = event.target.files[0];
@@ -491,9 +441,9 @@ if('<%= a.status %>'==='false'){
                  document.getElementById('itemid').value = '<%= a.id %>';
   document.getElementById('emp_middle_name').value = '<%= a.emp_middle_name %>';
   document.getElementById('emp_last_name').value = '<%= a.emp_last_name %>';
-  document.getElementById('emp_dob').value = new Date('<%= a.emp_dob %>').toISOString().split('T')[0];
+ document.getElementById('emp_dob').value = new Date('<%= a.emp_dob %>').toISOString().split('T')[0];
   document.getElementById('emp_gender').value = '<%= a.emp_gender %>';
-  document.getElementById('emp_desig').value = '<%= a.emp_desig %>';
+//   document.getElementById('emp_desig').value = '<%= a.emp_desig %>';
   document.getElementById('emp_clinic').value = '<%= a.emp_clinic %>';
   document.getElementById('emp_date_of_join').value = new Date('<%= a.emp_date_of_join %>').toISOString().split('T')[0];
   document.getElementById('emp_marital_status').value = '<%= a.emp_marital_status %>';
@@ -524,9 +474,12 @@ if('<%= a.status %>'==='false'){
                         reader.readAsDataURL(file);
                     }
                 });
+
+                
             </script>
                <script>
                 $(document).ready(function() {
+                    
   
                   console.log("Document is ready");
               
@@ -589,6 +542,7 @@ if('<%= a.status %>'==='false'){
                           success: function(response) {
                             
                             alert(response.msg);
+                            window.location.href = '/clinic/41';
                             $(errorDivId).removeClass('alert-danger').addClass('alert-success').text(response.msg).show();
                             console.log('Response:', response);
                           },
@@ -607,6 +561,8 @@ if('<%= a.status %>'==='false'){
               
                   validateForm('#emp-form', '#errordiv1');
                 });
+
+                validatePANField('emp_pan_number')
               </script>
                     
               <!--footer section start-->

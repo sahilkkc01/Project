@@ -565,7 +565,7 @@
     const stockingUOM = row.find('td:eq(9)').text().trim(); // Tenth column for stocking UOM
     const purchaseUOM = row.find('td:eq(10)').text().trim(); // Temporarily assuming it's visible for matching context, else adjust if it's in an input
 
-    alert(itemCode)
+    // alert(itemCode)
     // Assuming 'conversion factor' might need to be fetched from a hidden input if applicable
     const conversionFactor = row.find('td:eq(12)').text().trim(); 
 

@@ -284,6 +284,10 @@ router.get('/100', function (req, res, next) {
   res.render('adminInventry/41-IC-item-store', { currentDate })
 })
 
+router.get('/rack',(req,res)=>{
+  res.render('adminInventry/rack')
+})
+
 router.get('/get-rack-details',async (req, res) => {
   console.log('11')
   try {

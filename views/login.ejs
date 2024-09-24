@@ -7,7 +7,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="../stylesheets/style.css">
 <style>
-body{display:flex;align-items:center;justify-content:center;height:100vh;margin:0;background-image:url('../images/bg.jpeg')}
+body{display:flex;align-items:center;justify-content:center;margin:0;background-image:url('../images/bg.jpeg')}
 .login-container{background:#fff;border-radius:10px;box-shadow:0 4px 8px rgba(0,0,0,0.1);display:flex;overflow:hidden;max-width:900px;width:100%}
 .login-form{flex:1}
 .login-image{display:flex;align-items:center;justify-content:center}
@@ -94,8 +94,8 @@ body{display:flex;align-items:center;justify-content:center;height:100vh;margin:
                     return;  // Prevent further execution
                 }
                 // No need to call response.json() as Axios automatically parses it.
-                alert('Login Succesfully')
-                window.location.href = '/home';
+                // alert('Login Succesfully')
+                window.location.href = '/patientlist';
             })
             .catch(error => {
                 console.error('Login Error:', error);

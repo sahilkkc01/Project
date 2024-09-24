@@ -113,50 +113,52 @@
                                                         <div class="form-group"><label
                                                                 class="input__label">Clinic</label><select name="report_generated_by"
                                                                 class="form-control input-style">
-                                                                <option>Select</option>
+                                                                <option value="">Select</option>
+                                                                <option value="A">A</option>
+                                                                <option value="B">B</option>
                                                             </select></div>
                                                     </div>
                                                     <div class="col-3 mb-1 ">
                                                         <div class="form-group"><label
                                                                 class="input__label">From Date</label><input
-                                                                name="description" type="date"
+                                                                name="from_Date" id="from_date" type="date"
                                                                 class="form-control input-style" placeholder=""></div>
                                                     </div>
                                                     <div class="col-3 mb-1 ">
                                                         <div class="form-group"><label
                                                                 class="input__label">To Date</label><input
-                                                                name="description" type="date"
+                                                                name="to_date" id="to_date" type="date"
                                                                 class="form-control input-style" placeholder=""></div>
                                                     </div>
                                                     <div class="col-3 mb-1 ">
                                                         <div class="form-group"><label
                                                                 class="input__label">First Name</label><input
-                                                                name="description" type="text"
+                                                                name="first_name" id="first_name" type="text"
                                                                 class="form-control input-style" placeholder=""></div>
                                                     </div>
                                                     
                                                     <div class="col-3 mb-1 mt-0 ">
                                                         <div class="form-group"><label
                                                                 class="input__label">Last Name</label><input
-                                                                name="description" type="text"
+                                                                name="last_name" id="last_name" type="text"
                                                                 class="form-control input-style" placeholder=""></div>
                                                     </div>
                                                    
                                                     <div class="col-3 mb-1 mt-0 ">
                                                         <div class="form-group"><label
                                                                 class="input__label">Bills No.</label><input
-                                                                name="description" type="text"
+                                                                name="bill_no" id="bill_no" type="text"
                                                                 class="form-control input-style" placeholder=""></div>
                                                     </div>
                                                     <div class="col-3 mb-3 mt-0 ">
                                                         <div class="form-group"><label
                                                                 class="input__label">OPD No.</label><input
-                                                                name="description" type="text"
+                                                                name="opd_no" id="opd_no" type="text"
                                                                 class="form-control input-style" placeholder=""></div>
                                                     </div>
                                                     
                                                     <div class="col-lg-3 col-md-4 col-sm-12 mt-2">
-														<div class="form-group"><button type="submit"
+														<div class="form-group"><button type="button" onclick="loadData()"
 																class="btn btn-primary btn-style btn-change mt-3"><strong><i
 																	class="fas fa-search"></i> Search</strong> </button></div>
 													</div>
@@ -172,24 +174,77 @@
 
                                                                     <table class="table2" id="billRefundSerTable">
                                                                         <thead>
+                                                                         
                                                                             <tr>
-                                                                                <th contenteditable="true" width="3%"></th>
-                                                                                <th contenteditable="true" width=>Date</th>
-                                                                                <th contenteditable="true">Bill No.</th>
-                                                                                <th contenteditable="true">OPD No.</th>
-                                                                                <th contenteditable="true">Name</th>
-                                                                                <th contenteditable="true">Total Amount</th>
-                                                                                <th contenteditable="true">Total Concession</th>
-                                                                                <th contenteditable="true">Net Amount</th>
-                                                                                <th contenteditable="true">Freezed</th>
-                                                                                <th contenteditable="true">Total Paid Amount</th>
-                                                                                <th contenteditable="true">Total Refund Amount</th>
-                                                                                <th contenteditable="true">Bill Payment Type</th>
-                                                                                <th contenteditable="true">Authorised Person</th>
+                                                                                
+																				
+																				<th>Date</th>
+                                                                                <th>Bill No</th>
+                                                                                <th>Mr No
+                                                                                </th>
+																				<th>Total Amount
+                                                                                </th>
+																				<th>Total Concession Amount
+                                                                                </th>
+																				<th>Net Amount
+                                                                                </th>
+																				<th>Balance Amount
+                                                                                </th>
+																				
+                                                                                <th>Freeze</th>
+
                                                                                 
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody id="billRefundSer">
+                                                                        
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                
+                                                <div class="form-row">
+                                                    <div class="col-12 " >
+                                                        <div class="form-group">
+                                                            <div class="col col-12 pr-xl-0 pl-xl-0">
+                                                                <div class="slidx">
+
+                                                                    <table class="table2" id="billRefundSerTable">
+                                                                        <thead>
+                                                                            <input type="checkbox" class="ml-1" id="selectAll">
+                                                                            <label for="" class="form-check-label pt-1 ml-2"> Select All</label>
+                                                                          
+                                                                            <tr>
+                                                                                <th>&nbsp;</th>
+                                                                                <th>Service Code
+                                                                                </th>
+                                                                                <th>Service Name
+                                                                                </th>
+                                                                                <th>Rate</th>
+                                                                                <th>Quantity</th>
+                                                                                <th>Concession %
+                                                                                </th>
+                                                                                <th>Concession
+                                                                                    Amt.</th>
+                                                                                <th>Tax Amount
+                                                                                </th>
+                                                                                <th>Total Amount
+                                                                                </th>
+                                                                                <th>Net Amount
+                                                                                </th>
+                                                                                <th>Doctor</th>
+
+
+
+
+
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody id="serviceshow">
                                                                         
                                                                         </tbody>
                                                                     </table>
@@ -209,6 +264,12 @@
                                                 </div> -->
                                             </div>
                                         </div>
+                                        <div class="col-3 mb-1 ">
+                                            <div class="form-group"><label
+                                                    class="input__label">Remark</label><input
+                                                    name="reamrk" id="remark" type="text"
+                                                    class="form-control input-style" placeholder=""></div>
+                                        </div>
                                         
                                         <!--Past your code here ends-->
                                     </div>
@@ -217,101 +278,199 @@
 
                                     
 
-                                    <button type="button" class="btn-secondary btn-style btn mt-3 mr-2"><strong><i
-                                        class="fa-solid fa-check"></i> Approve</strong></button>
+                                    <!-- <button type="button" class="btn-secondary btn-style btn mt-3 mr-2"><strong><i
+                                        class="fa-solid fa-check"></i> Approve</strong></button> -->
 
 										<button type="button" class="btn-secondary btn-style btn mt-3 mr-2" id="myButton1" onclick="SetId()">  <strong><i
 											class="fa-solid fa-check" ></i> Send For Approval</strong></button>
     
-                            <button type="button" class="btn-danger btn-style btn mt-3 mr-2"><strong><i
+                            <!-- <button type="button" class="btn-danger btn-style btn mt-3 mr-2"><strong><i
                                         class="fas fa-times"></i> Cancel</strong></button>
     
                             <button type="button" class="btn-primary btn-style btn mt-3"><strong><i class="far fa-save"></i>
-                                    Save</strong></button>
+                                    Save</strong></button> -->
 
                                 </div>
                     </form>
                 </div>
                 <!--footer section start-->
                 <%-include('../footer')-%>
-                <script src="../javascripts/updateStatus.js"></script>
-                        <!-- <script src="../javascripts/ViewBtn.js"></script> -->
-                        <script type="module">
-                            import { pagi_search } from '../javascripts/pagi_search.js';
-                            $(document).ready(function () {
-                                console.log("Document is ready");
-                                // Function to fetch and display data
-                                let dataList
-                                function fetchData() {
-                                    $.ajax({
-                                        url: '/plshBill/get-patient-daitle',
-                                        type: 'GET',
-                                        success: function (data) {
-                                            console.log(data);
-                                            data.reverse();
-                                            let tableRows = '';
-                                            data.forEach(function (item) {
-                                                console.log(item);
-                                                tableRows += `
-                                                    <tr data-store-id="${item.id}">
-                                                        <td><a type="button" class="btn btn-primary btn-style btn-change" id="view_btn"></a></td>
-                                                        <td>${item.date}</td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td>${item.totalPayAmount}</td>
-                                                        <td>${item.totalConcessionAmount}</td>
-                                                        <td>${item.totalNetAmount}</td>
-                                                        <td><input class="form-check-input mt-0" type="checkbox" id='${item.id}' onClick=ChangeStatus('${item.id}','${data.isFreeze}',${item.id},'status') ${item.freeze ? 'checked' : ''}></td>
-                                                        <td>${item.paidAmount}</td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td><a type="button" class="btn btn-primary btn-style btn-change" id="view_btn">Auth</a></td>
-                                                    `;
-                                            });
-    
-                                            $('#ExpTbodyId').on('click', '#view_btn', function() {
-                                                        const id=$(this).closest('tr').data('store-id')
-                                                        const route='11'
-                                                        const module='plshBill'
-                                                        console.log("id", id);
-                                                        ViewBtn(route,id,module) 
-                                                        });
-    
-                                            $('#billRefundSer').html(tableRows);
-                                            pagi_search('#searchBox', '#billRefundSerTable', '#paginationControls');
-                                        },
-                                        error: function (xhr, status, error) {
-                                            console.error('Error fetching classification details:', error);
-                                        }
-                                    });
-                                }
-                                fetchData();
-                            });
-                        </script>
-
                 <script>
-                    
-                $('#billRefundSerTable').on('click', 'tr', function () {
-              // Remove 'locked' class from all rows and enable buttons
-                $('#billRefundSer tr').removeClass('locked');
-                ['#myButton1'].forEach(selector => $(selector).removeAttr('disabled'));
-                $(this).addClass('locked');
-                const itemId = $(this).data('store-id');
-                });
-                function SetId(){
-                    let Id =$('#billRefundSer tr.locked').data('store-id')
-                    alert('1')
-                    console.log(Id);
-                axios.post('/plshBill/setAproveId', {
-                    id: Id,
-                    })
-                    .then(response => {
-                        console.log('Response from server:', response.data);
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
+                       async function fetchFilteredData(table, filters = {}, limit =100, offset = 0, sortby = 'id') {
+                        try {
+                          const response = await axios.get('/plshBill/filter-data', {
+                            params: {
+                              table,
+                              ...filters,
+                              limit,
+                              offset,
+                              sortby
+                            }
+                          });
+                          console.log(response.data);
+                          
+                          return response.data;
+                        } catch (error) {
+                            console.error(error);
+                          console.error('Error fetching filtered data:', error);
+                          throw error;
+                        }
+                      }
+                          
+                      
+                          async function loadData() {
+                            const table = 'PR_BillFindPatient'
+                            const filterElements = document.querySelectorAll('.filter-input');
+                            let filters = {};
+                            
+                            filterElements.forEach(element => {
+                              filters[element.name] = element.value;
+                            });
+                      
+                            try {
+                              const data = await fetchFilteredData(table, filters);
+                              renderTableData(data.rows);
+                            } catch (error) {
+                              console.error('An error occurred while fetching data:', error);
+                            }
+                          }
+                      
+                          function renderTableData(data) {
+  const tableBody = document.getElementById('billRefundSer');
+  tableBody.innerHTML = ''; // Clear existing data
 
-                    });
-                }            
-            </script>
+  data.forEach(item => {
+    const row = document.createElement('tr');
+    row.dataset.id = item.id;
+    row.setAttribute('onclick', `fetchdata(event, ${item.id})`);
+    row.innerHTML = `
+      <tr data-mod-id="${item.id}" >
+                                                           
+                                                            
+                                                            <td>${item.date}</td>
+                                                            <td>${item.bill_no}</td>
+															<td>${item.mrNo}</td>
+															<td>${item.totalBillAmount}</td>
+															<td>${item.totalConcessionAmount}</td>
+															<td>${item.totalNetBillAmount}</td>
+															<td></td>
+															
+                                                            <td><input class="form-check-input mt-0" type="checkbox" id='status-checkbox' data-id="${item.id}"  ${item.freeze ? 'checked disabled' : ''}></td>
+                                                        </tr>
+    `;
+    tableBody.appendChild(row);
+  });
+ 
+}
+
+function fetchdata(event, id) {
+    if (event.target.type === 'checkbox') {
+    return; // Exit the function if a checkbox was clicked
+  }
+
+  // Remove 'locked' class from all rows
+  const allRows = document.querySelectorAll('tr.locked');
+  allRows.forEach(row => row.classList.remove('locked'));
+
+  // Add 'locked' class to the clicked row
+  const row = event.target.closest('tr');
+  row.classList.add('locked');
+  
+  // Making Axios GET request to fetch data
+  axios.get(`/plshBill/getServiceData/${id}`)
+    .then(response => {
+        console.log(response)
+      const data = response.data;
+      const tbody = document.getElementById('serviceshow'); // Assuming you have tbody with id 'tableBody'
+      tbody.innerHTML = ''; // Clear previous data
+
+      data.forEach(service => {
+        const newRow = document.createElement('tr');
+        newRow.setAttribute('data-it', service.id);
+
+        newRow.innerHTML = `
+        <td><input type="checkbox" name="select"></td>
+         <td>${service.serviceCode}</td>
+    <td>${service.serviceName}</td>
+    <td>${service.serviceRate}</td>
+    <td>${service.quantity || '1'}</td> 
+    <td>${service.concession_per}</td>
+    <td>${service.concession_amount}</td>
+    <td>${service.taxAmount || '0'}</td> 
+    <td>${service.totalAmount}</td>
+    <td>${service.netAmount}</td>
+    <td>${service.doctor || 'N/A'}</td>
+        `;
+
+        tbody.appendChild(newRow);
+      });
+    })
+    .catch(error => {
+      console.error('Error fetching data:', error);
+    });
+}
+
+
+document.getElementById('selectAll').addEventListener('change', function() {
+  const isChecked = this.checked;
+  const checkboxes = document.querySelectorAll('#serviceshow input[type="checkbox"][name="select"]');
+  
+  checkboxes.forEach(checkbox => {
+    checkbox.checked = isChecked;
+  });
+});
+
+
+async function SetId() {
+        try {
+            // Get current date
+            const currentDate = new Date().toISOString();
+
+            // Get the selected bill details (replace these IDs with the actual form inputs)
+            const billId = document.querySelector('.locked')?.dataset.id;
+            const billNo = document.querySelector('.locked')?.querySelector('td:nth-child(2)')?.innerText;
+            const remark = document.getElementById('remark').value;
+
+            // Collect selected services (checked checkboxes)
+            const selectedServices = [];
+            document.querySelectorAll('#serviceshow input[type="checkbox"][name="select"]:checked').forEach(checkbox => {
+                const row = checkbox.closest('tr');
+                selectedServices.push({
+                    serviceId: row.getAttribute('data-it'), // Assuming service ID is stored in 'data-it' attribute
+                    serviceCode: row.children[1].innerText, // Get service code from the second cell
+                });
+            });
+
+            if (!billId || selectedServices.length === 0) {
+                alert('Please select a bill and at least one service.');
+                return;
+            }
+            
+
+            // Prepare the data to send
+            const postData = {
+                billId,
+                billNo,
+                currentDate,
+                selectedServices, // Array of selected service details
+                remark
+            };
+
+            console.log(postData)
+            // Make Axios POST request to send the data
+            const response = await axios.post('/plshBill/sendForServiceApproval', postData);
+            if (response.status === 200) {
+                alert('Data sent for approval successfully!');
+            } else {
+                alert('Failed to send data for approval.');
+            }
+        } catch (error) {
+            console.error('Error sending data:', error);
+            alert('An error occurred while sending the data for approval.');
+        }
+    }
+
+
+
+                </script>
+                    

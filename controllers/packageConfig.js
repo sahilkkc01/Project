@@ -1,5 +1,7 @@
-const { NewPackage, packageMedicine, ServiceMaster, PackageService, DefienRule, SelectedService, ConcentMaster, PackageConcents } = require("../models/packageConfig");
-const CryptoJS = require('crypto-js')
+const { ItemMasterNew } = require("../models/adminInventorySchema");
+const { NewPackage, packageMedicine, ServiceMaster, PackageService, DefienRule, SelectedService, ConcentMaster, PackageConcents, Package } = require("../models/packageConfig");
+const CryptoJS = require('crypto-js');
+const { CurrentItemStock } = require("../models/palashInvSchmea");
 
 //decryption and encryption fxn
 function decryptData(encryptedData, secretKey) {
@@ -24,15 +26,15 @@ const getNewPackage = async (req, res) => {
   try {
     const details = await NewPackage.findAll();
 
-    const encModData = details.map(data => {
-      const encryptedId = encryptDataForUrl(data.id.toString());
-      return {
-        ...data.toJSON(),
-        id: encryptedId,
-      };
-    });
+    // const encModData = details.map(data => {
+    //   const encryptedId = encryptDataForUrl(data.id.toString());
+    //   return {
+    //     ...data.toJSON(),
+    //     id: encryptedId,
+    //   };
+    // });
 
-    res.status(200).json(encModData);
+    res.status(200).json(details);
   } catch (error) {
     console.error('Error fetching classification details:', error);
     res.status(500).json({ error: 'An error occurred while fetching classification details.' });
@@ -280,7 +282,60 @@ const saveConcets = async (req, res) => {
   }
 };
 
+const addpackage = async (req, res) => {
+  try {
+    const body = req.body;
+    console.log(body)
+    const packageData = await Package.create(body);
+    console.log(packageData);
+
+    res.status(200).json({ success: true, package: packageData });
+    return;
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
+const drugsData = async (req, res) => {
+  try {
+    // Fetch all items from ItemMasterNew
+    const items = await ItemMasterNew.findAll({
+      attributes: ["id", "item_name", "brand_name", "molecule_name"],
+    });
+
+    // Fetch all stock data for these items
+    const itemIds = items.map((item) => item.id);
+    const stockData = await CurrentItemStock.findAll({
+      where: {
+        item_id: itemIds,
+      },
+      attributes: ["availableStock", "item_id"], // Only select the availableStock field
+    });
+
+    // Convert stockData into a map for quick lookup
+    const stockMap = stockData.reduce((acc, stock) => {
+      acc[stock.item_id] = stock.availableStock;
+      return acc;
+    }, {});
+
+    // Combine the item data with available stock
+    const itemData = items.map((item) => ({
+      id: item.id,
+      item_name: item.item_name,
+      brand_name: item.brand_name,
+      molecule_name: item.molecule_name,
+      availableStock: stockMap[item.id] || 0, // Default to 0 if no stock data is available
+    }));
+
+    console.log(itemData);
+    res.status(200).send(itemData);
+  } catch (error) {
+    console.log("error", error);
+  }
+};
 
 
 
-module.exports = { getNewPackage, newPackageSubmit, itemMasterData, SaveStatusData, newPharmacyItem, getServices, newServicesItem, getAllServices, newDefineRule,getAllTariff ,getAllConcents,saveConcets}
+
+module.exports = {drugsData,addpackage, getNewPackage, newPackageSubmit, itemMasterData, SaveStatusData, newPharmacyItem, getServices, newServicesItem, getAllServices, newDefineRule,getAllTariff ,getAllConcents,saveConcets}

@@ -130,36 +130,61 @@ router.get('/1',async(req,res)=>{
 
   router.post('/save-status-data', async (req, res) => {
     try {
-        console.log(req.body);
-        const { id: encryptedId, status, schema: encryptedSchema } = req.body;
-        const secretKey = 'll'; // Replace with your actual secret key
-
-        // Decrypt id and schema
-        const id = decryptData(decodeURIComponent(encryptedId), secretKey); // URL decode
-        const schema = decryptData(decodeURIComponent(encryptedSchema), secretKey); // URL decode
-
-        console.log('Decrypted id:', id);
-        console.log('Decrypted schema:', schema);
-
-        // Use decrypted id and schema to fetch data from the model
-        const Model = require('../models/clinicConfig')[schema]; 
-        const data = await Model.findByPk(id);
-
-        if (data) {
-            // Update status and save
-            data.status = status;
-           
-            await data.save();
-            console.log(data)
-            res.sendStatus(200);
-        } else {
-            res.status(404).send('Data not found');
+      console.log(req.body);
+      const { id: encryptedId, status, schema: encryptedSchema } = req.body;
+      const secretKey = 'll'; // Replace with your actual secret key
+  
+      // Decrypt id and schema
+      const id = decryptData(decodeURIComponent(encryptedId), secretKey); // URL decode
+      const schema = decryptData(decodeURIComponent(encryptedSchema), secretKey); // URL decode
+  
+      console.log('Decrypted id:', id);
+      console.log('Decrypted schema:', schema);
+  
+      // Use decrypted id and schema to fetch data from the model
+      const Model = require('../models/clinicConfig')[schema];
+      const data = await Model.findByPk(id);
+  
+      if (data) {
+        // Update status and save
+        data.status = status;
+        await data.save();
+        console.log('Updated data:', data);
+  
+        // If schema is 'Specialisation', update the JSON file
+        if (schema === 'Specialisation') {
+          const specialisationData = await Model.findAll();
+          const filteredData = specialisationData.map(item => ({
+            id: item.id,
+            clinic_id: item.clinic_id,
+            spec_code: item.spec_code,
+            spec_desc: item.spec_desc,
+            status: item.status
+          }));
+  
+          const jsonString = JSON.stringify(filteredData, null, 2);
+          const filePath = path.join(__dirname, '../myjson', 'spec.json');
+  
+          // Write the JSON data to the file
+          fs.writeFile(filePath, jsonString, err => {
+            if (err) {
+              console.error('Error writing JSON file:', err);
+              return res.status(500).send('Error writing JSON file');
+            }
+            console.log('Specialisation JSON file updated');
+          });
         }
+  
+        // Send success response
+        res.sendStatus(200);
+      } else {
+        res.status(404).send('Data not found');
+      }
     } catch (error) {
-        console.error('Error updating status:', error);
-        res.status(500).send('Internal Server Error');
+      console.error('Error updating status:', error);
+      res.status(500).send('Internal Server Error');
     }
-});
+  });
 
  
   router.get('/24',async(req,res)=>{
@@ -777,18 +802,27 @@ router.post('/upload', upload.single('image'), async (req, res) => {
   
   router.get('/loadSubSpec',getSubSpec); 
   
-  router.get('/loadDept', (req, res) => {
-    console.log('111')
-    fs.readFile(path.join(__dirname,'../myjson/Dept.json'), 'utf8', (err, data) => {
-      if (err) {
-        res.status(500).send('Error reading the file');
-        return;
-      }
-      // console.log(data)
-      
-      res.json(JSON.parse(data));
-    });
+  router.get('/loadDept', async(req, res) => {
+    try {
+      const dept = await Department.findAll();
+  
+      // Encrypt the ID for each cluster
+      const encryptedClus = dept.map(dept => {
+        const encryptedId = encryptDataForUrl(dept.id.toString());
+        return {
+          ...dept.toJSON(),
+          id: encryptedId,
+        };
+      });
+  
+      res.status(200).json(encryptedClus);
+    } catch (error) {
+      console.error('Error fetching cluster details:', error);
+      res.status(500).json({ msg: 'An error occurred while fetching cluster details.' });
+    }
+   
   }); 
+ 
   
 
 

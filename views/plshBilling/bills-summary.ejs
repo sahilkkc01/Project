@@ -144,6 +144,7 @@
 																				<th contenteditable="true">Freezed
                                                                                 </th>
                                                                                 <th contenteditable="true">Status</th>
+                                                                                <th contenteditable="true">Print</th>
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody id="exp-table"></tbody>
@@ -185,6 +186,7 @@
 							
                            
                             <script type="module">
+                                
                                 import { pagi_search } from '../javascripts/pagi_search.js';
 								
 
@@ -213,6 +215,7 @@
 															<td><input class="form-check-input mt-0" type="checkbox" id='status-checkbox' data-id="${item.id}"  ${item.freeze ? 'checked' : ''}></td>
                                                    
                                                             <td><input class="form-check-input mt-0" type="checkbox" id='status-checkbox' data-id="${item.id}"  ${item.status ? 'checked' : ''}></td>
+                                                            <td><button id="print-btn" type="button" class="btn btn-primary btn-style btn-change"  >Print</button></td>
                                                         </tr>
                                                         `;
                                                 });
@@ -224,6 +227,25 @@
                                             }
                                         });
                                     }
+
+                                    $('#exp-table').on('click','#print-btn',  function() {
+                                        alert('1')
+                                        const id = $(this).closest('tr').data('mod-id');    
+                                axios.get('/plshbill/35', {
+  params: {
+    id: id 
+  }
+})
+.then(response => {
+  // console.log('Success:', response.data);
+  window.location.href = `/plshbill/35?id=${id}`; 
+ 
+})
+.catch(error => {
+  console.error('Error:', error);
+});
+                               })
+                          
                                     $('#exp-table').on('click', '#view-btn',function(){
                                        const id=$(this).closest('tr').data('mod-id')
                                        console.log(id)
@@ -239,7 +261,8 @@
                                     });
                                     fetchData();
                                 });
-                            </script>
+
+                               </script>
                           
 </body>
 

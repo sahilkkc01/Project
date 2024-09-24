@@ -187,7 +187,7 @@
                         success: function(data) {
                           let tableRows = '';
                           
-                          data.forEach(function(item) {
+                          data.reverse().forEach(function(item) {
                               
                             tableRows += `
                               <tr data-bm-id="${item.id}">

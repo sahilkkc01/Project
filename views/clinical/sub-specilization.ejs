@@ -112,7 +112,7 @@
                               data-validation="required" data-error-message="Code is required." placeholder=""></div>
                         </div>
 						<div class="col-4 mb-3 mb-3">
-                          <div class="form-group"><label class="input__label">Description </label><input type="text"
+                          <div class="form-group"><label class="input__label">Description/Name </label><input type="text"
                               class="form-control input-style" id="sub_spec_desc" 
                               data-validation="required" data-error-message="Code is required."name="sub_spec_desc" placeholder=""></div>
                         </div>
@@ -225,17 +225,19 @@
                           });
             
                           if (isValid) {
-                              $.ajax({
-                                  url: '/clinic/sub-spec-detail',
-                                  type: 'POST',
-                                  contentType: 'application/json',
-                                  data: JSON.stringify(formData),
-                                  success: function(response) {
-                                      alert(response.msg);
-                                      $(errorDivId).removeClass('alert-danger').addClass('alert-success').text(response.msg).show();
-                                      // console.log('Response:', response);
-                                  },
-                                  error: function(xhr, status, error) {
+                                $.ajax({
+                                    url: '/clinic/sub-spec-detail',
+                                    type: 'POST',
+                                    contentType: 'application/json',
+                                    data: JSON.stringify(formData),
+                                    success: function(response) {
+                                        alert(response.msg);
+                                        window.location.href = '/clinic/29';
+                                        $(errorDivId).removeClass('alert-danger').addClass('alert-success').text(response.msg).show();
+                                       
+                                        // console.log('Response:', response);
+                                    },
+                                    error: function(xhr, status, error) {
                                     const response = JSON.parse(xhr.responseText);
                                     $(errorDivId).removeClass('alert-success').addClass('alert-danger').text(response.msg).show();
                                       console.error('Error:', error);

@@ -174,12 +174,15 @@
                   <button type="button" disabled data-bs-toggle="modal" id="conversion"
                     data-bs-target="#uomConversionModal"
                     class="btn-primary btn-style btn mt-3 mr-2"><strong>Conversion</strong></button>
+
+                    <button type="button" disabled data-bs-toggle="modal" id="storeAndTax"
+                    data-bs-target="#itemStoreModal" class="btn-secondary btn-style btn mt-3 mr-2"><strong>Apply
+                      Store and Tax</strong></button>
+                    
                   <button type="button" disabled data-bs-toggle="modal" id="applySupplier"
                     data-bs-target="#itemSupplierModal" class="btn-secondary btn-style btn mt-3 mr-2"><strong>Apply
                       Supplier</strong></button>
-                  <button type="button" disabled data-bs-toggle="modal" id="storeAndTax"
-                    data-bs-target="#itemStoreModal" class="btn-secondary btn-style btn mt-3 mr-2"><strong>Apply
-                      Store and Tax</strong></button>
+                  
 
                   <button type="button" disabled id="otherDetails" data-bs-toggle="modal"
                     data-bs-target="#itemDetailsModalOtherDetails"
@@ -868,6 +871,7 @@
             <%- include('../footer'); -%>
 
             <script>
+              
               // Clear error div content and classes
               function clearErrorDiv5() {
                 $('#errordiv5').removeClass('alert-success alert-danger').text('');
@@ -1269,12 +1273,12 @@
                   const percentage = parseFloat(data.percentage);
                   const taxType = data.tax;
                   
-                  if (taxType === 'InterState') {
+                  if (taxType === 'IntraState') {
                     // If InterState, divide percentage equally between CGST and SGST, IGST is 0
                     data.CGST = (percentage / 2).toFixed(2);
                     data.SGST = (percentage / 2).toFixed(2);
                     data.IGST = '0';
-                  } else if (taxType === 'IntraState') {
+                  } else if (taxType === 'InterState') {
                     // If IntraState, set IGST to percentage and CGST/SGST to 0
                     data.CGST = '0';
                     data.SGST = '0';
@@ -1398,6 +1402,51 @@
               
                 // Handle itemOtherDetails form submission
                 handleFormSubmit('#itemOtherDetails', '/adminInv/itemOtherDtlsSave', '#errordiv3', openItemDetailsModal);
+                
+
+    //             function validateMinMaxAndReorder(row) {
+    //     const min = parseFloat(row.find('input[name="min"]').val());
+    //     const max = parseFloat(row.find('input[name="max"]').val());
+    //     const reorder = parseFloat(row.find('input[name="reorder"]').val());
+
+    //     let isValid = true;
+
+    //     // Validation: Maximum should be greater than Minimum
+    //     if (max <= min) {
+    //         isValid = false;
+    //         row.find('input[name="max"]').addClass('is-invalid');
+    //         row.find('input[name="max"]').next('.error-message').text('Max should be greater than Min');
+    //     } else {
+    //         row.find('input[name="max"]').removeClass('is-invalid');
+    //         row.find('input[name="max"]').next('.error-message').text('');
+    //     }
+
+    //     // Validation: Reorder should be greater than Minimum
+    //     if (reorder <= min) {
+    //         isValid = false;
+    //         row.find('input[name="reorder"]').addClass('is-invalid');
+    //         row.find('input[name="reorder"]').next('.error-message').text('Reorder should be greater than Min');
+    //     } else {
+    //         row.find('input[name="reorder"]').removeClass('is-invalid');
+    //         row.find('input[name="reorder"]').next('.error-message').text('');
+    //     }
+
+    //     return isValid;
+    // }
+
+    // // Attach real-time validation to the Maximum and Reorder fields
+    // $('#StoreTaxTblBody').on('input', 'input[name="max"], input[name="reorder"]', function () {
+    //     const row = $(this).closest('tr');
+    //     validateMinMaxAndReorder(row);
+    // });
+
+    // // Initial validation on load or row change
+    // $('#StoreTaxTblBody').on('input', 'input[name="min"]', function () {
+    //     const row = $(this).closest('tr');
+    //     validateMinMaxAndReorder(row);
+    // });
+
+
               });
               </script>
               

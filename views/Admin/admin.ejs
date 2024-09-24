@@ -152,11 +152,15 @@
                                                             <input name="rights" id='rights' type="checkbox" <%= result.rights ? 'checked' : '' %> <%= result.id ? 'disabled' : '' %>>
                                                             </div>
 
-                                                            <div id="additionalRights" style="display: <%= result.rights ? 'block' : 'none' %>;">
+                                                            <div id="additionalRights" >
                                                                 <div class="form-group">
                                                                     <label>
                                                                         <input type="checkbox" name="BillingRights" class="form-checkbox" 
                                                                                <%= (result.rights && result.rights.BillingRights) ? 'checked' : '' %> > Billing Rights
+                                                                    </label>
+                                                                    <label>
+                                                                        <input type="checkbox" name="BillingRightsAdmin" class="form-checkbox" 
+                                                                               <%= (result.rights && result.rights.BillingRightsAdmin) ? 'checked' : '' %> > Billing Admin Rights
                                                                     </label>
                                                                 </div>
                                                                 <div class="form-group">
@@ -164,11 +168,38 @@
                                                                         <input type="checkbox" name="InventoryRights" class="form-checkbox" 
                                                                                <%= (result.rights && result.rights.InventoryRights) ? 'checked' : '' %> > Inventory Rights
                                                                     </label>
+                                                                    <label>
+                                                                        <input type="checkbox" name="InventoryRightsAdmin" class="form-checkbox" 
+                                                                               <%= (result.rights && result.rights.InventoryRightsAdmin) ? 'checked' : '' %> > Inventory Admin Rights
+                                                                    </label>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label>
                                                                         <input type="checkbox" name="ClinicalRights" class="form-checkbox" 
                                                                                <%= (result.rights && result.rights.ClinicalRights) ? 'checked' : '' %> > Clinical Rights
+                                                                    </label>
+                                                                    <label>
+                                                                        <input type="checkbox" name="ClinicalRightsAdmin" class="form-checkbox" 
+                                                                               <%= (result.rights && result.rights.ClinicalRightsAdmin) ? 'checked' : '' %> > Clinical Admin Rights
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label>
+                                                                        <input type="checkbox" name="radiology" class="form-checkbox" 
+                                                                               <%= (result.rights && result.rights.radiology) ? 'checked' : '' %> > Radiology Rights
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label>
+                                                                        <input type="checkbox" name="pathology" class="form-checkbox" 
+                                                                               <%= (result.rights && result.rights.pathology) ? 'checked' : '' %> > Pathology Rights
+                                                                    </label>
+                                                                </div>
+                                                                
+                                                                <div class="form-group">
+                                                                    <label>
+                                                                        <input type="checkbox" name="embrology" class="form-checkbox" 
+                                                                               <%= (result.rights && result.rights.embrology) ? 'checked' : '' %> > Embrology Rights
                                                                     </label>
                                                                 </div>
                                                             </div>

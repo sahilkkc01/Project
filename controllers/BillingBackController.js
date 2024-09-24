@@ -66,14 +66,14 @@ const bcHFCtrl = async (req, res) => {
   console.log('1')
   try {
     console.log(req.body)
-    var { header_text, footer_text, comp_logo, head_image, comp_footer_image } = req.body;
+    var { compHeaderContent, compFooterContent, comp_logo, head_image, comp_footer_image } = req.body;
     comp_logo = 'BC_' + new Date().getTime() + '_' + comp_logo.substring(comp_logo.lastIndexOf('\\') + 1);
     head_image = 'BC_' + new Date().getTime() + '_' + head_image.substring(head_image.lastIndexOf('\\') + 1);
     comp_footer_image = 'BC_' + new Date().getTime() + '_' + comp_footer_image.substring(comp_footer_image.lastIndexOf('\\') + 1);
 
     await CompanyHF.create({
-      header_text,
-      footer_text,
+      compHeaderContent,
+      compFooterContent,
       comp_logo,
       head_image,
       comp_footer_image,
@@ -1317,15 +1317,15 @@ const getServices = async (req, res) => {
     console.log(1);
     const result = await ServiceMasterSchema.findAll();
 
-    const getAllSerMstList = result.map(data => {
-      const encryptedId = encryptDataForUrl(data.id.toString());
-      return {
-        ...data.toJSON(), 
-        id: encryptedId,
-      };
-    });
+    // const getAllSerMstList = result.map(data => {
+    //   const encryptedId = encryptDataForUrl(data.id.toString());
+    //   return {
+    //     ...data.toJSON(), 
+    //     id: encryptedId,
+    //   };
+    // });
 
-    res.status(200).json(getAllSerMstList);
+    res.status(200).json(result);
   } catch (error) {
     console.error('Error occurred:', error);
     res.status(500).json({ error: 'An error occurred while fetching classification details.', details: error.message });

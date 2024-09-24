@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Bills History</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .table-container {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        .table-container th, .table-container td {
+            border: 1px solid #000;
+            padding: 8px;
+            text-align: left;
+        }
+        .table-container th {
+            background-color: #f2f2f2;
+        }
+        .no-border {
+            border: none;
+        }
+        .header-section {
+            margin-bottom: 10px;
+        }
+        .header-section td {
+            padding: 5px;
+        }
+        .final-amount {
+            text-align: right;
+            font-weight: bold;
+            padding-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2 style="text-align: center;">Patient Bill</h2>
+
+    <table class="header-section" width="100%">
+        <tr>
+            <td id="patientName"><strong>Patient Name:</strong> </td>
+            <td id="billNo"><strong>Bill No.:</strong> </td>
+        </tr>
+        <tr>
+            <td id="mrNO"><strong>MR No.:</strong> </td>
+            <td id="billDate"><strong>Bill Date.:</strong> </td>
+        </tr>
+        <tr>
+            <td id="regDate"><strong>Registration Date:</strong> </td>
+           
+        </tr>
+        <tr>
+            <td id="conNo"><strong>Contact No.:</strong> </td>
+        </tr>
+    </table>
+
+    <table class="table-container">
+        <thead>
+            <tr>
+                <th>Sr No</th>
+                <th>Item/Service</th>
+                <th>Qty</th>
+                <th>Batch</th>
+                <th>Discount</th>
+                <th>Net Amt</th>
+                <th>Bill Type</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>CONSULTATION FEE</td>
+                <td>1.00</td>
+                <td></td>
+                <td>0.00</td>
+                <td>200.00</td>
+                <td>Service</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>3-WAY STOP COCK</td>
+                <td>2.00</td>
+                <td>122313</td>
+                <td>0.00</td>
+                <td>67.74</td>
+                <td>Pharmacy</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>2D Echo - Single</td>
+                <td>1.00</td>
+                <td></td>
+                <td>0.00</td>
+                <td>5,000.00</td>
+                <td>Service</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>24-HOUR URINARY PROTEIN</td>
+                <td>1.00</td>
+                <td></td>
+                <td>0.00</td>
+                <td>500.00</td>
+                <td>Service</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>LEUTINIZING HORMONE (L.H)</td>
+                <td>1.00</td>
+                <td></td>
+                <td>0.00</td>
+                <td>1,200.00</td>
+                <td>Package Service</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>COMPLETE URINE EXAMINATION (CUE)</td>
+                <td>1.00</td>
+                <td>676765646</td>
+                <td>0.00</td>
+                <td>90.00</td>
+                <td>Service</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>3-WAY STOP COCK</td>
+                <td>2.00</td>
+                <td>81142005</td>
+                <td>0.00</td>
+                <td>67.74</td>
+                <td>Pharmacy</td>
+            </tr>
+        </tbody>
+    </table>
+    
+
+    <div class="final-amount">
+        Final Net Amount: <strong>32,834.48</strong>
+    </div>
+
+
+</body>
+<script>
+    console.log('<%=a.date%>')
+   document.getElementById("patientName").innerHTML="<strong>Patient Name:</strong> <%=patient.firstName%>";
+  document.getElementById("billNo").innerHTML="<strong>Bill No:</strong> <%=a.bill_no%>";
+  document.getElementById("mrNO").innerHTML="<strong>Mr No:</strong> <%=a.mrNo%>";
+  document.getElementById("billDate").innerHTML="<strong>Bill Date :</strong> <%=a.date%>";
+  document.getElementById("regDate").innerHTML="<strong>Registration Date :</strong> <%=patient.date%>";
+  document.getElementById("conNo").innerHTML="<strong>Contact No :</strong> <%=patient.mobileNo%>";
+
+</script>
+</html>

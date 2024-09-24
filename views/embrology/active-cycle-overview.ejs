@@ -1,0 +1,822 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>LifeLinkr</title>
+    <%- include('../header'); -%>
+        <!-- main content start -->
+        <div class="main-content">
+
+            <div class="row content-top-gap2">
+                <div class="col-lg-12">
+                    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+                        <a class="navbar-brand text-center mr-5" href="#">
+                            <span class="dash-icon"><i class="fas fa-tachometer-alt"></i></span>
+                            Dashboard
+                        </a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav">
+                                <li class="nav-item active text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="far fa-user"></i></span>
+                                        Master
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-exchange-alt"></i></span>
+                                        Transaction
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-hand-holding-medical"></i></span>
+                                        Patient 360
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-receipt"></i></span>
+                                        Outside Reciept
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-file-invoice"></i></span>
+                                        Outpatient Department
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-chart-line"></i></span>
+                                        Analytics
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="far fa-clock"></i></span>
+                                        Waiting List
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center mr-5">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-wrench"></i></span>
+                                        Adminstration
+                                    </a>
+                                </li>
+                                <li class="nav-item text-center">
+                                    <a class="nav-link" href="#">
+                                        <span class="dash-icon"><i class="fas fa-spinner"></i></span>
+                                        Additional
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+            <!-- content -->
+            <div class="container-fluid">
+
+                <div class="chart">
+                    <div class="row">
+
+                        <div class="col-lg-12 pl-lg-0 mt-2 ml-2">
+                            <h4 class="primary"></h4>
+                        </div>
+                        <div class="col-lg-12 pl-lg-2 chart-grid">
+                            <form>
+                                <div class="card card_border">
+                                    <div class="">
+                                        <!--Past your code here starts-->
+
+                                        <div class="card">
+
+                                            <div class="card-body">
+
+                                                <div class="form-row pt-1 pb-0">
+
+                                                    <div class="col-lg-2 col-md-4 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label id="couple_ivf" class="input__label">Couple No.: IVF/00003/24
+                                                                <br>
+
+                                                                Referred By: Self
+                                                            </label>
+
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-4 col-md-4 col-sm-12">
+                                                        <div class="form-row">
+                                                            <div class="col-2">
+                                                                <i class="fa-solid fa-user-large"
+                                                                    style="font-size:42px;color:#11cdf0;"></i>
+                                                            </div>
+
+                                                            <div class="col-10">
+                                                                <label id="women_id" class="input__label">Geeta Pandey, MRN:
+                                                                    OHPL/R/24/1588
+                                                                    <br>
+                                                                    Age 76 Y, BM 24 D, Female, Ph 9867806857
+                                                                    <br>
+                                                                    Ht 167:00 rom, WI 65:00 kg. TIMI 73.31, A+
+                                                                </label>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="col-lg-4 col-md-4 col-sm-12">
+                                                        <div class="form-row">
+                                                            <div class="col-2">
+                                                                <i class="fa-solid fa-user-large"
+                                                                    style="font-size:42px;color:#11cdf0;"></i>
+                                                            </div>
+
+                                                            <div class="col-9">
+                                                                <label id="man_id" class="input__label">Akash Pandey, MRN
+                                                                    OHIL/R/24/1589
+                                                                    <br>
+                                                                    Age: 29 Y, 8 M, 24 D, Male, Ith: 9879869/86
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="col-lg-2 col-md-4 col-sm-12">
+                                                        <div class="form-check-label text-right">
+
+                                                            <div class="radio mr-0">
+                                                                <label class="form-check-label pt-1"><input
+                                                                        class="form-check-input mt-1" type="checkbox">
+                                                                    Do not share</label>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                        <!--Past your code here ends-->
+
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group mt-1 mb-3 text-right">
+
+                                    <button type="button"
+                                        class="btn-primary btn-style btn-change btn mt-2 mr-2"><strong><i
+                                                class="fas fa-search"></i>
+                                            Search</strong>
+                                    </button>
+                                    <button type="button"
+                                        class="btn-secondary btn-style btn-change btn mt-2 mr-2"><strong><i
+                                                class="fas fa-arrows-rotate"></i>
+                                            Reset</strong>
+                                    </button>
+                                    <button type="button" class="btn-secondary btn-style btn-change btn mt-2"><strong><i
+                                                class="fa-solid fa-expand"></i>
+
+                                            Enlarge</strong>
+                                    </button>
+                                </div>
+                                <!-- second section -->
+
+
+                                <div class="col-lg-12 pl-lg-0 pt-lg-0 mt-2 ">
+                                    <!-- Nav Tabs are here once have a look--->
+                                    <h4 class="primary">Active Cycle </h4>
+                                </div>
+
+                                <div class="card">
+
+                                    <div class="card-body ">
+
+                                        <div class="form-row ">
+
+                                            <div class="col-lg-3 col-md-4 col-sm-12">
+                                                <div class="form-group">
+                                                    <label class="input__label">Treatment: IVF (ICSI), Self Ovum
+                                                        (Fresh), Partner Sperm
+                                                    </label>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-4 col-sm-12">
+                                                <div class="form-group">
+                                                    <label class="input__label">Antagonist Daily Dose - 1
+                                                    </label>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-4 col-sm-12">
+                                                <div class="form-group">
+                                                    <label class="input__label">Status: ET Completed
+                                                    </label>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-md-4 col-sm-12">
+                                                <div class="form-group">
+                                                    <label class="input__label">Day 67 of Cycle
+                                                    </label>
+
+                                                </div>
+                                            </div>
+
+
+
+
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="col-lg-12 pl-lg-0 pt-lg-2 mt-2 ">
+                                    <!-- Nav Tabs are here once have a look--->
+                                    <h4 class="primary">Overview </h4>
+                                </div>
+
+
+                                <div class="card">
+                                    <div class="col-xl-12 p-heading">
+                                        <h6 class="p-text">CURRENT STATUS</h6>
+                                    </div>
+                                    <div class="card">
+
+                                        <div class="card-body pt-0 pb-2">
+
+                                            <div class="form-row pt-1 pb-0">
+
+                                                <div class="col-lg-3 col-md-4 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label class="input__label">ET Completed
+
+                                                        </label>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="form-group mt-1 mb-3 text-right">
+
+                                    <button type="button"
+                                        class="btn-secondary btn-style btn-change btn mt-2 mr-2"><strong><i
+                                                class="fas fa-plus"></i>
+                                            Add Comments</strong>
+                                    </button>
+                                    <button type="button"
+                                        class="btn-secondary btn-style btn-change btn mt-2 mr-2"><strong><i
+                                                class="fas fa-print"></i>
+                                            Print Summary</strong>
+                                    </button>
+
+                                </div>
+
+
+
+                                <div class="card">
+
+
+                                    <div class="col-xl-12 p-heading">
+                                        <h6 class="p-text">CYCLE CHARACTERISTICS</h6>
+                                    </div>
+                                    <div class="card">
+
+                                        <div class="card-body pt-0 pb-2">
+
+                                            <div class="form-row pt-1 pb-0 ">
+
+                                                <div class="col-lg-3 col-md-4 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label class="input__label">
+                                                            Treatment:
+                                                            <% if (emb_treatmentadvice && emb_treatmentadvice.treatment
+                                                                && emb_treatmentadvice.treatment[0]) { %>
+                                                                <%= emb_treatmentadvice.treatment[0].treatmentType %>
+                                                                    <% } else { %>
+                                                                        <span>-</span>
+                                                                        <!-- Display a dash or blank if no data -->
+                                                                        <% } %>
+                                                                            <br>
+
+                                                                            Ovum:
+                                                                            <% if (emb_treatmentadvice &&
+                                                                                emb_treatmentadvice.treatment &&
+                                                                                emb_treatmentadvice.treatment[0]) { %>
+                                                                                <%= emb_treatmentadvice.treatment[0].semenSource
+                                                                                    %>
+                                                                                    <% } else { %>
+                                                                                        <span>-</span>
+                                                                                        <!-- Display a dash or blank if no data -->
+                                                                                        <% } %>
+                                                                                            <br>
+
+                                                                                            Sperm:
+                                                                                            <% if (emb_treatmentadvice
+                                                                                                &&
+                                                                                                emb_treatmentadvice.treatment
+                                                                                                &&
+                                                                                                emb_treatmentadvice.treatment[0])
+                                                                                                { %>
+                                                                                                <%= emb_treatmentadvice.treatment[0].oocyteSource
+                                                                                                    %>
+                                                                                                    <% } else { %>
+                                                                                                        <span>-</span>
+                                                                                                        <!-- Display a dash or blank if no data -->
+                                                                                                        <% } %>
+                                                                                                            <br>
+
+                                                                                                            Treatment
+                                                                                                            Protocol:
+                                                                                                            <% if
+                                                                                                                (emb_treatmentadvice
+                                                                                                                &&
+                                                                                                                emb_treatmentadvice.treatment_protocol)
+                                                                                                                { %>
+                                                                                                                <%= emb_treatmentadvice.treatment_protocol
+                                                                                                                    %>
+                                                                                                                    <% } else
+                                                                                                                        {
+                                                                                                                        %>
+                                                                                                                        <span>-</span>
+                                                                                                                        <!-- Display a dash or blank if no data -->
+                                                                                                                        <% }
+                                                                                                                            %>
+                                                        </label>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-12 pl-lg-0 pt-lg-2 mt-2 ">
+                                    <h4 class="primary"> </h4>
+                                </div>
+                                <div class="card">
+                                    <div class="col-xl-12 p-heading">
+                                        <h6 class="p-text">OVUM PICKUP</h6>
+                                    </div>
+                                    <div class="card">
+
+                                        <div class="card-body pt-0 pb-2">
+
+                                            <div class="form-row pt-1 pb-0">
+
+                                                <div class="col-lg-3 col-md-4 col-sm-12">
+                                                    <% if (ovumSchedules ) { %>
+                                                        <div class="form-group">
+                                                            <label class="input__label">
+                                                                Ovum type: FRESH
+                                                                <br>
+                                                                OPU done on <%= new
+                                                                    Date(ovumSchedules.DenudationDate).toDateString() %>
+                                                                    <br>
+                                                                    No. of oocyte picked up: <%=
+                                                                        ovumSchedules.NoOfOocytes %>
+                                                                        <br>
+                                                                        No. of oocyte vitrified: <%=
+                                                                            ovumSchedules.Vitrify %>
+                                                                            <br>
+                                                                            Denudation Date: <%= new
+                                                                                Date(ovumSchedules.DenudationDate).toDateString()
+                                                                                %>
+                                                            </label>
+                                                        </div>
+                                                        <% } else { %>
+                                                            <p> </p>
+                                                            <% } %>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+
+
+
+                                <div class="col-lg-12 pl-lg-0 pt-lg-2 mt-2 ">
+                                    <h4 class="primary"> </h4>
+                                </div>
+                                <div class="card">
+                                    <div class="col-xl-12 p-heading">
+                                        <h6 class="p-text">FERTILISATION</h6>
+                                    </div>
+                                    <div class="card">
+
+                                        <div class="card-body pt-0 pb-2">
+
+                                            <div class="form-row pt-1 pb-0">
+
+                                                <div class="col-lg-3 col-md-4 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label class="input__label">No. of Embryos Obtained: 3
+
+                                                        </label>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-row">
+                                            <div class="col-12  mt-0">
+                                                <div class="form-group">
+                                                    <div class="col col-12 pr-xl-3 pl-xl-3 pb-3">
+
+                                                        <div class="slidx">
+                                                            <table class="table2">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th contenteditable="true" colspan="2">
+                                                                            Mature Oocytes</th>
+                                                                        <th contenteditable="true" colspan="2">Immature
+                                                                            Oocytes
+                                                                        </th>
+                                                                        <th contenteditable="true" colspan="2">
+                                                                            Fertilisation
+                                                                        </th>
+
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td contenteditable="true">Metaphase II</td>
+                                                                        <td contenteditable="true">3</td>
+                                                                        <td contenteditable="true">Metaphase</td>
+                                                                        <td contenteditable="true">0</td>
+                                                                        <td contenteditable="true">Normal Fertilisation
+                                                                            (2 PN)</td>
+                                                                        <td contenteditable="true">0</td>
+
+
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td contenteditable="true">Microinjected</td>
+                                                                        <td contenteditable="true" width="10%">3</td>
+                                                                        <td contenteditable="true">Others</td>
+                                                                        <td contenteditable="true" width="15%">0</td>
+                                                                        <td contenteditable="true">Abnormal
+                                                                            Fertilisation (1 PN)</td>
+                                                                        <td contenteditable="true" width="20%">0</td>
+
+                                                                    </tr>
+
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+
+
+                                <div class="col-lg-12 pl-lg-0 pt-lg-2 mt-2 ">
+                                    <h4 class="primary">Sperm </h4>
+                                </div>
+                                <div class="card">
+                                    <div class="col-xl-12 p-heading">
+                                        <h6 class="p-text">SEMEN SAMPLE: SEM/0007/25</h6>
+                                    </div>
+                                    <div class="card">
+
+                                        <div class="card-body pt-0 pb-2">
+
+                                            <div class="form-row pt-1 pb-0">
+
+                                                <div class="col-lg-3 col-md-4 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label class="input__label">Source Partner
+                                                            <br>
+                                                            State:
+                                                            <% if (embro_wash_semen_sample &&
+                                                                embro_wash_semen_sample.fresh) { %>
+                                                                <%= embro_wash_semen_sample.fresh %>
+                                                                    <% } else { %>
+                                                                        <span>-</span>
+                                                                        <!-- Display a dash or blank if no data -->
+                                                                        <% } %>
+                                                                            <br>
+                                                                            Collection technique: Ejaculation at Center
+                                                        </label>
+                                                    </div>
+
+
+
+                                                </div>
+
+                                                <div class="col-lg-12 col-md-12 col-sm-12 pl-lg-0 pb-1">
+                                                    <h6 class="primary">Capacitation details of Semen sample SEM/0007/25
+                                                    </h6>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-row">
+                                            <div class="col-12  mt-0">
+                                                <div class="form-group">
+                                                    <div class="col col-12 pr-xl-3 pl-xl-3 pb-3">
+
+                                                        <div class="slidx">
+                                                            <table class="table2">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th colspan="2">Fresh</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td contenteditable="true">Volume</td>
+                                                                        <td contenteditable="true">
+                                                                            <%= embro_wash_semen_sample &&
+                                                                                embro_wash_semen_sample.volume ?
+                                                                                embro_wash_semen_sample.volume : '-' %>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td contenteditable="true">Concentration
+                                                                            (mill/ml)</td>
+                                                                        <td contenteditable="true">
+                                                                            <%= embro_wash_semen_sample &&
+                                                                                embro_wash_semen_sample.concentration ?
+                                                                                embro_wash_semen_sample.concentration
+                                                                                : '-' %>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td contenteditable="true">Total</td>
+                                                                        <td contenteditable="true">
+                                                                            <%= embro_wash_semen_sample &&
+                                                                                embro_wash_semen_sample.total_sperm ?
+                                                                                embro_wash_semen_sample.total_sperm
+                                                                                : '-' %>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td contenteditable="true">Progressive (%)</td>
+                                                                        <td contenteditable="true">
+                                                                            <%= embro_wash_semen_sample &&
+                                                                                embro_wash_semen_sample.rapid_progressive
+                                                                                ?
+                                                                                embro_wash_semen_sample.rapid_progressive
+                                                                                : '-' %>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td contenteditable="true">Non-Progressive (%)
+                                                                        </td>
+                                                                        <td contenteditable="true">
+                                                                            <%= embro_wash_semen_sample &&
+                                                                                embro_wash_semen_sample.non_progressive
+                                                                                ?
+                                                                                embro_wash_semen_sample.non_progressive
+                                                                                : '-' %>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td contenteditable="true">Immobile (%)</td>
+                                                                        <td contenteditable="true">
+                                                                            <%= embro_wash_semen_sample &&
+                                                                                embro_wash_semen_sample.immobile ?
+                                                                                embro_wash_semen_sample.immobile : '-'
+                                                                                %>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td contenteditable="true">Total motile prog
+                                                                        </td>
+                                                                        <td contenteditable="true">
+                                                                            <%= embro_wash_semen_sample &&
+                                                                                embro_wash_semen_sample.total_motile_prog
+                                                                                ?
+                                                                                embro_wash_semen_sample.total_motile_prog
+                                                                                : '-' %>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+
+                                                            </table>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+
+
+
+
+                                <div class="col-lg-12 pl-lg-0 pt-lg-2 mt-2 ">
+
+                                    <h4 class="primary"> </h4>
+                                </div>
+                                <div class="card">
+                                    <div class="col-xl-12 p-heading">
+                                        <h6 class="p-text">EMBRYO TRANSFER</h6>
+                                    </div>
+                                    <div class="card">
+
+                                        <div class="card-body pt-0 pb-2">
+
+                                            <div class="form-row pt-2 pb-0">
+
+                                                <div class="col-lg-3 col-md-4 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label class="input__label">Date of ET: 05/06/2024
+                                                            <br>
+                                                            Embryos transferred. 1
+                                                            <br>
+                                                            Cryopreserved embryos: 2
+
+                                                        </label>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+
+                                <div class="col-lg-12 pl-lg-0 pt-lg-2 mt-2 ">
+                                    <h4 class="primary"> </h4>
+                                </div>
+                                <div class="card">
+                                    <div class="col-xl-12 p-heading">
+                                        <h6 class="p-text">EMBRYO STATUS</h6>
+                                    </div>
+                                    <div class="card">
+
+                                        <div class="card-body pt-0 pb-2">
+
+                                            <div class="form-row pt-1 pb-0">
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-row">
+                                            <div class="col-12  mt-0">
+                                                <div class="form-group">
+                                                    <div class="col col-12 pr-xl-3 pl-xl-3 pb-3">
+
+                                                        <div class="slidx">
+                                                            <table class="table2">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th contenteditable="true">Embryo No.</th>
+                                                                        <th contenteditable="true">Age</th>
+                                                                        <th contenteditable="true">Grade</th>
+                                                                        <th contenteditable="true">Computed Grade</th>
+                                                                        <th contenteditable="true">Stage</th>
+                                                                        <th contenteditable="true">ICM</th>
+                                                                        <th contenteditable="true">Trofect</th>
+                                                                        <th contenteditable="true">No. of Cells</th>
+                                                                        <th contenteditable="true">% Frag</th>
+                                                                        <th contenteditable="true">Final Embryo State
+                                                                        </th>
+                                                                        <th contenteditable="true">Add On</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <% reportData.forEach(function(record) { %>
+                                                                        <tr>
+                                                                            <td contenteditable="true">
+                                                                                <%= record.embryoNo ? record.embryoNo
+                                                                                    : '-' %>
+                                                                            </td>
+                                                                            <td contenteditable="true">
+                                                                                <%= record.expansionGrade ?
+                                                                                    record.expansionGrade : '-' %>
+                                                                            </td>
+                                                                            <td contenteditable="true">
+                                                                                <%= record.grade ? record.grade : '-' %>
+                                                                            </td>
+                                                                            <td contenteditable="true">
+                                                                                <%= record.computedGrade ?
+                                                                                    record.computedGrade : '-' %>
+                                                                            </td>
+                                                                            <td contenteditable="true">
+                                                                                <%= record.stage ? record.stage : '-' %>
+                                                                            </td>
+                                                                            <td contenteditable="true">
+                                                                                <%= record.icm ? record.icm : '-' %>
+                                                                            </td>
+                                                                            <td contenteditable="true">
+                                                                                <%= record.trofect ? record.trofect
+                                                                                    : '-' %>
+                                                                            </td>
+                                                                            <td contenteditable="true">
+                                                                                <%= record.oocyteNo ? record.oocyteNo
+                                                                                    : '-' %>
+                                                                            </td>
+                                                                            <td contenteditable="true">
+                                                                                <%= record.pgdStatus ? record.pgdStatus
+                                                                                    : '-' %>
+                                                                            </td>
+                                                                            <td contenteditable="true">
+                                                                                <%= record.status ? record.status : '-'
+                                                                                    %>
+                                                                            </td>
+                                                                            <td contenteditable="true">
+                                                                                <%= record.addOn ? record.addOn : '-' %>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <% }) %>
+                                                                </tbody>
+
+                                                            </table>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </form>
+                        </div>
+
+                        <script>
+
+
+                            function formatDate(date) {
+                                return new Date(date).toISOString().split("T")[0];
+                            }
+                        </script>
+                        
+
+                        <!--footer section start-->
+                        <%- include('../footer'); -%>
+                        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+                        <script>
+                            axios
+                                .get("/embrology/patientAllDetails")
+                                .then((res) => {
+                                console.log(res.data);
+                                $("#couple_ivf").html(`Couple No. ${res.data.coupleId}<br>
+                                        Referred By: ${res.data.ReferralDetails}`);
+                                $("#women_id")
+              .html(`${res.data.firstName} ${res.data.lastName}, MRN: ${res.data.mr_no}<br>
+                                                                Age: ${res.data.age_years} Y, ${res.data.age_months} M, ${res.data.age_days} D, ${res.data.Gender}, Ph: ${res.data.mobileNo}<br>
+                                                                Ht: ${res.data.height}cm, Wt: ${res.data.weight} kg, BMI: ${res.data.bmi}, ${res.data.bloodGroup}`);
+                                                                $("#man_id")
+              .html(`${res.data.spouse_firstName}, MRN: ${res.data.mr_no}<br>
+                                                                Age: ${res.data.spouse_age_year} Y, ${res.data.spouse_age_month} M, ${res.data.spouse_age_day} D, ${res.data.spouse_gender}, Ph: ${res.data.spouse_mobile_1}`);
+          })
+                            
+                            .catch((err) => {
+                                console.log(err);
+                            });
+                            
+                        </script>

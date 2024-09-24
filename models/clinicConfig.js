@@ -27,9 +27,10 @@ const BankBranchMaster = sequelize.define('BankBranchMaster', {
     type: DataTypes.STRING
   },
   status:{
-    type: DataTypes.BOOLEAN
+    type: DataTypes.BOOLEAN,
+    defaultValue: true
   }
-},{
+},{ alter:true,
   tableName: 'bankbranchmasters'
 });
 
@@ -48,9 +49,10 @@ const CashCounterMaster = sequelize.define('CashCounterMaster', {
     type: DataTypes.STRING
   },
   status:{
-    type: DataTypes.BOOLEAN
+    type: DataTypes.BOOLEAN,
+    defaultValue: true
   }
-}, {
+}, { alter:true,
   tableName: 'cashcountermasters'
 });
 
@@ -76,9 +78,10 @@ const CityMaster = sequelize.define('CityMaster', {
     allowNull: false 
   },
   status:{
-    type: DataTypes.BOOLEAN
+    type: DataTypes.BOOLEAN,
+    defaultValue: true
   }
-}, {
+}, { alter:true,
   tableName: 'citymasters'
 });
 
@@ -96,9 +99,10 @@ const Classification = sequelize.define('Classification', {
     allowNull: false
   },
   status:{
-    type: DataTypes.BOOLEAN
+    type: DataTypes.BOOLEAN,
+    defaultValue: true
   }
-}, {
+}, { alter:true,
   tableName: 'classifications'
 });
 
@@ -180,7 +184,8 @@ const ClinicConfiguration = sequelize.define('ClinicConfiguration', {
     type: DataTypes.STRING
   },
   status:{
-    type: DataTypes.BOOLEAN
+    type: DataTypes.BOOLEAN,
+    defaultValue: true
   }
 }, {
   alter:true,
@@ -199,9 +204,10 @@ const Cluster = sequelize.define('Cluster', {
     type: DataTypes.STRING
   },
   status:{
-    type: DataTypes.BOOLEAN
+    type: DataTypes.BOOLEAN,
+    defaultValue: true
   }
-}, {
+}, { alter:true,
   tableName: 'clusters'
 });
 const BankMaster = sequelize.define('BankMaster', {
@@ -216,9 +222,10 @@ const BankMaster = sequelize.define('BankMaster', {
     type: DataTypes.STRING
   },
   status:{
-    type: DataTypes.BOOLEAN
+    type: DataTypes.BOOLEAN,
+    defaultValue: true
   }
-}, {
+}, { alter:true,
   tableName: 'bankmasters'
 });
 
@@ -237,9 +244,10 @@ const CountryMaster = sequelize.define('CountryMaster', {
     type: DataTypes.STRING
   },
   status:{
-    type: DataTypes.BOOLEAN
+    type: DataTypes.BOOLEAN,
+    defaultValue: true
   }
-}, {
+}, { alter:true,
   tableName: 'countrymasters'
 });
 
@@ -258,9 +266,10 @@ const StateMaster = sequelize.define('StateMaster', {
     type: DataTypes.STRING
   },
   status:{
-    type: DataTypes.BOOLEAN
+    type: DataTypes.BOOLEAN,
+    defaultValue: true
   }
-}, {
+}, { alter:true,
   tableName: 'statemasters'
 });
 
@@ -283,9 +292,10 @@ const Department = sequelize.define('Department', {
     type: DataTypes.STRING
   },
   status:{
-    type: DataTypes.BOOLEAN
+    type: DataTypes.BOOLEAN,
+    defaultValue: true
   }
-}, {
+}, { alter:true,
   tableName: 'departments',
   timestamps: true
 });
@@ -302,9 +312,10 @@ const Designation = sequelize.define('Designation', {
     type: DataTypes.STRING
   },
   status:{
-    type: DataTypes.BOOLEAN
+    type: DataTypes.BOOLEAN,
+    defaultValue: true
   }
-}, {
+}, { alter:true,
   tableName: 'designations'
 });
 
@@ -376,9 +387,16 @@ const Doctor = sequelize.define('Doctor', {
     type: DataTypes.STRING
   },
   status:{
-    type: DataTypes.BOOLEAN
-  }
-}, {
+    type: DataTypes.BOOLEAN,
+    defaultValue: true
+  },
+  doc_dept: {
+    type: DataTypes.JSON
+  },
+  doc_class: {
+    type: DataTypes.JSON
+  },
+}, { alter:true,
   tableName: 'doctors'
 });
 
@@ -394,9 +412,10 @@ const DocCatMaster = sequelize.define('DocCatMaster', {
     type: DataTypes.STRING
   },
   status:{
-    type: DataTypes.BOOLEAN
+    type: DataTypes.BOOLEAN,
+    defaultValue: true
   }
-}, {
+}, { alter:true,
   tableName: 'doccatmasters'
 });
 const UploadedFile = sequelize.define('UploadedFile', {
@@ -413,7 +432,7 @@ const UploadedFile = sequelize.define('UploadedFile', {
       type: DataTypes.STRING,
       allowNull: false
   }
-}, {
+}, { alter:true,
   tableName: 'uploadedfiles'
 });
 
@@ -429,9 +448,10 @@ const EmrCC = sequelize.define('EmrCC', {
     type: DataTypes.STRING
   },
   status:{
-    type: DataTypes.BOOLEAN
+    type: DataTypes.BOOLEAN,
+    defaultValue: true
   }
-}, {
+}, { alter:true,
   tableName: 'emrccs'
 });
 
@@ -450,9 +470,10 @@ const EmrFieldvalue = sequelize.define('EmrFieldvalue', {
     type: DataTypes.STRING
   },
   status:{
-    type: DataTypes.BOOLEAN
+    type: DataTypes.BOOLEAN,
+    defaultValue: true
   }
-}, {
+}, { alter:true,
   tableName: 'emrfieldvalues'
 });
 
@@ -468,9 +489,10 @@ const PrimarySymptoms = sequelize.define('PrimarySymptoms', {
     type: DataTypes.STRING
   },
   status:{
-    type: DataTypes.BOOLEAN
+    type: DataTypes.BOOLEAN,
+    defaultValue: true
   }
-}, {
+}, { alter:true,
   tableName: 'primarysymptoms'
 });
 
@@ -498,9 +520,10 @@ const RegionMaster = sequelize.define('RegionMaster', {
     type: DataTypes.STRING
   },
   status:{
-    type: DataTypes.BOOLEAN
+    type: DataTypes.BOOLEAN,
+    defaultValue: true
   }
-}, {
+}, { alter:true,
   tableName: 'regionmasters'
 });
 
@@ -516,9 +539,10 @@ const Specialization = sequelize.define('Specialization', {
     type: DataTypes.STRING
   },
   status:{
-    type: DataTypes.BOOLEAN
+    type: DataTypes.BOOLEAN,
+    defaultValue: true
   }
-}, {
+}, { alter:true,
   tableName: 'specializations'
 });
 
@@ -537,9 +561,10 @@ const SubSpecialization = sequelize.define('SubSpecialization', {
     type: DataTypes.STRING
   },
   status:{
-    type: DataTypes.BOOLEAN
+    type: DataTypes.BOOLEAN,
+    defaultValue: true
   }
-}, {
+}, { alter:true,
   tableName: 'subspecializations'
 });
 
@@ -551,7 +576,7 @@ const Country = sequelize.define('Country', {
   nationality_id: {
     type: DataTypes.STRING
   }
-}, {
+}, { alter:true,
   tableName: 'countries'
 });
 
@@ -563,7 +588,7 @@ const State = sequelize.define('State', {
   state_name: {
     type: DataTypes.STRING
   }
-}, {
+}, { alter:true,
   tableName: 'states'
 });
 
@@ -571,14 +596,14 @@ const Clinic_name = sequelize.define('Clinic_name', {
   clinic: {
     type: DataTypes.STRING
   }
-}, {
+}, { alter:true,
   tableName: 'clinic_names'
 });
 const Source = sequelize.define('Source', {
   source: {
     type: DataTypes.STRING
   }
-}, {
+}, { alter:true,
   tableName: 'sources'
 });
 
@@ -662,7 +687,8 @@ const Employee = sequelize.define('Employee', {
     
   },
   status:{
-    type: DataTypes.BOOLEAN
+    type: DataTypes.BOOLEAN,
+    defaultValue: true
   }
 }, { 
   tableName: 'employees',
@@ -674,11 +700,11 @@ module.exports = Employee;
 
 // Define associations if any (for example, between CityMaster, State, and Country)
 
-CityMaster.belongsTo(State, { foreignKey: 'state_id' });
-CityMaster.belongsTo(Country, { foreignKey: '_country_id' });
+// CityMaster.belongsTo(State, { foreignKey: 'state_id' });
+// CityMaster.belongsTo(Country, { foreignKey: '_country_id' });
 
 // Export models
-sequelize.sync();
+// sequelize.sync();
 
 module.exports = {
   BankBranchMaster,

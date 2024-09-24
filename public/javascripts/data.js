@@ -43,12 +43,13 @@ export function loadSpec(a){
         fetch(`/clinic/loadSubSpec?spec=${encodeURIComponent(selectedSpec)}`)
             .then(response => response.json())
             .then(data => {
+                console.log(data)
                 const dropdown = document.getElementById(a);
                 dropdown.innerHTML = ''; // Clear previous options
                 data.forEach(doc => {
                     const option = document.createElement('option');
-                    option.value = doc;
-                    option.textContent = doc;
+                    option.value = doc.sub_spec_desc;
+                    option.textContent = doc.sub_spec_desc;
                     dropdown.appendChild(option);
                 });
             })
@@ -98,9 +99,27 @@ export function loadRack(a){
             .catch(error => console.error('Error fetching states:', error));
         }       
   
+
+        export function loadEmp(a){
+    
+            fetch('/clinic/get-empt-details')
+                .then(response => response.json())
+                .then(data => {
+                    const dropdown = document.getElementById(a);
+                    data.forEach(doc => {
+                        const option = document.createElement('option');
+                        option.value = doc.emp_first_name;
+                        option.textContent = doc.emp_first_name;
+                        dropdown.appendChild(option);
+                        
+                    });
+                })
+                .catch(error => console.error('Error fetching states:', error));
+            }  
      
         // tble sub spec
         export function loadSubSpectbl(a,b){
+    
             const checkedOptions = b.split(',');
           
         fetch('/clinic/loadSubSpec')

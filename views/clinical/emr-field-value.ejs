@@ -112,7 +112,7 @@
                               class="form-control input-style" id="emr_fv_code" name="emr_fv_code" data-validation="required" data-error-message="Code is required." placeholder=""></div>
                         </div>
 						<div class="col-4 mb-3 mb-3">
-                          <div class="form-group"><label class="input__label">Description </label><input type="text"
+                          <div class="form-group"><label class="input__label">Description/Name </label><input type="text"
                               class="form-control input-style" id="emr_fv_desc" name="emr_fv_desc" data-validation="required" data-error-message="Description is required." placeholder=""></div>
                         </div>
 						<div class="col-4 mb-3 mb-3">
@@ -225,6 +225,7 @@
                                 data: JSON.stringify(formData),
                                 success: function(response) {
                                     alert(response.msg);
+                                    window.location.href = '/clinic/17';
                                     $(errorDivId).removeClass('alert-danger').addClass('alert-success').text(response.msg).show();
                                     console.log('Response:', response);
                                 },

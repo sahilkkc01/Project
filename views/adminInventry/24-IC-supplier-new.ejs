@@ -112,7 +112,7 @@
                                                 </div>
                                                 <div class="col-3 mb-3">
                                                     <div class="form-group">
-                                                        <label class="input__label" for="description">Description</label>
+                                                        <label class="input__label" for="description">Description/Name</label>
                                                         <input id="description" name="description" value="<%= result.description %>" type="text" class="form-control input-style"
                                                             placeholder="" data-validation="required"
                                                             data-error-message="Description is required.">
@@ -212,10 +212,7 @@
                                                 </div>
                                                 <div class="col-3 mb-3">
                                                     <div class="form-group">
-                                                        <label class="input__label" for="depreciation">Depreciation</label>
-                                                        <input id="depreciation" name="depreciation" type="number" value="<%= result.depreciation %>"
-                                                            class="form-control input-style" placeholder="" data-validation="required"
-                                                            data-error-message="Depreciation is required.">
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -297,11 +294,8 @@
                                                                 </div>
                                                             </div>
                                                             <div class="col-3 mb-3">
-                                                                <div class="form-group"><label class="input__label">Fax</label><input id="contact_person_1_fax" value="<%= result.contact_person_1_fax %>"
-                                                                        name="contact_person_1_fax" type="text" class="form-control input-style"
-                                                                        placeholder=""
-                                                                        data-validation=""
-                                                                        data-error-message="Phone No is required."></div>
+                                                                <div class="form-group">
+                                                                  </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -309,7 +303,15 @@
                         
                     
 
-            <!-- Contact Person 2 -->
+                                                <div class="form-row pl-lg-3 pr-lg-3">
+                                                    <div class="col-12 mb-1">
+                                                        <div class="form-group">
+                                                            <div class="pl-xl-0">
+                                                                <h6 class="primary">Contact Person 2</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
             <div class="form-row pl-lg-3 pr-lg-3">
                 <div class="col-12 mb-3">
                     <div class="form-row">
@@ -338,10 +340,9 @@
                                     data-error-message="Phone No is required."></div>
                         </div>
                         <div class="col-3 mb-3">
-                            <div class="form-group"><label class="input__label">Fax</label><input id="contact_person_2_fax" value="<%= result.contact_person_2_fax %>"
-                                    name="contact_person_2_fax" type="text" class="form-control input-style"
-                                    placeholder="" data-validation=""
-                                    data-error-message="Fax is required."></div>
+                            <div class="form-group">
+                                
+                                </div>
                         </div>
                     </div>
                 </div>
@@ -441,10 +442,10 @@
                         </div>
                         <div class="col-3 mb-3">
                             <div class="form-group">
-                                <label class="input__label" for="mst_number">MST Number</label>
-                                <input id="mst_number" name="mst_number" type="text" value="<%= result.mst_number %>"
+                                <label class="input__label" for="msme_number">MSME Number</label>
+                                <input id="msme_number" name="msme_number" type="text" value="<%= result.msme_number %>"
                                     class="form-control input-style" placeholder=""
-                                    data-validation="required" data-error-message="MST Number is required.">
+                                    data-validation="required" data-error-message="MSME Number is required.">
                             </div>
                         </div>
                         <!--     <div class="col-3 mb-3">
@@ -467,17 +468,25 @@
 
                         <div class="col-3 mb-3">
                             <div class="form-group">
-                                <label class="input__label" for="drug_licence_number">Drug Licence Number</label>
-                                <input id="drug_licence_number" name="drug_licence_number" type="text"
-                                    class="form-control input-style" placeholder="" value="<%= result.drug_licence_number %>"
+                                <label class="input__label" for="drug_licence_form_20">Drug Licence Form 20</label>
+                                <input id="drug_licence_form_20" name="drug_licence_form_20" type="text"
+                                    class="form-control input-style" placeholder="" value="<%= result.drug_licence_form_20 %>"
                                     data-validation="required" data-error-message="Drug Licence Number is required.">
                             </div>
                         </div>
                         <div class="col-3 mb-3">
                             <div class="form-group">
-                                <label class="input__label" for="service_tax_number">Service Tax Number</label>
-                                <input id="service_tax_number" name="service_tax_number" type="text"
-                                    class="form-control input-style" placeholder="" value="<%= result.service_tax_number %>"
+                                <label class="input__label" for="drug_licence_form_21">Drug  Licence Form 21</label>
+                                <input id="drug_licence_form_21" name="drug_licence_form_21" type="text"
+                                    class="form-control input-style" placeholder="" value="<%= result.drug_licence_form_21 %>"
+                                    data-validation="required" data-error-message="Service Tax Number is required.">
+                            </div>
+                        </div>
+                        <div class="col-3 mb-3">
+                            <div class="form-group">
+                                <label class="input__label" for="service_tax_number">Drug Licence Validity</label>
+                                <input id="drug_licence_validity" name="drug_licence_validity" type="date"
+                                    class="form-control input-style" placeholder="" value="<%= result.drug_licence_validity %>"
                                     data-validation="required" data-error-message="Service Tax Number is required.">
                             </div>
                         </div>
@@ -523,6 +532,9 @@
                 
                 <%-include('../footer');-%>
                 <script >
+
+                    validatePANField('pan_number');
+                    validateGSTINField('gstin_number')
                         
                         function loadCity(a) {
     $.ajax({

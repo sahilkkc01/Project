@@ -109,14 +109,18 @@
                         </div>
                         <div class="col-3 mb-3">
                             <div class="form-group">
-                                <label class="input__label">Description</label>
+                                <label class="input__label">Description/Name</label>
                                 <input data-validation="required" data-error-message="Description is required." name="bank_branch_m_desc" id="bank_branch_m_desc" type="text" class="form-control input-style" placeholder="">
                             </div>
                         </div>
                         <div class="col-3 mb-3">
                             <div class="form-group">
                                 <label class="input__label">Bank</label>
-                                <input data-validation="required" data-error-message="Bank is required." name="bank_branch_m_bank" id="bank_branch_m_bank" type="text" class="form-control input-style" placeholder="">
+                                <select id="bank_branch_m_bank" name="bank_branch_m_bank" class="form-control input-style" data-validation="required" data-error-message="Select Bank">
+                                  <option value="">Select</option>                                                      
+                                                                                    
+                              </select>
+                                
                             </div>
                         </div>
                         <div class="col-3 mb-3">
@@ -149,6 +153,36 @@
   <!--footer section start-->
 <%- include('../footer'); -%>
 <script>
+
+const loadDropdown = (url, elementId, key, selectedValue = null) => {
+    fetch(url)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Error fetching data from ${url}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            const dropdown = document.getElementById(elementId);
+            dropdown.innerHTML = '<option value="">Select</option>'; // Clear existing options and add a default one
+            data.forEach(item => {
+                const option = document.createElement('option');
+                option.value = item[key];
+                option.textContent = item[key];
+                dropdown.appendChild(option);
+            });
+
+            // Set the value after the dropdown has been populated
+            if (selectedValue) {
+                dropdown.value = selectedValue;
+            }
+        })
+        .catch(error => console.error(`Error fetching ${elementId} details:`, error));
+};
+
+// Call the function for both dropdowns with the selected value
+loadDropdown('/clinic/getBankMaster', 'bank_branch_m_bank', 'bank_m_desc', '<%= a.bank_branch_m_bank %>');
+
      function updateQuery(){
         document.getElementById('query').value=1;
         $('#mod-btn').prop('disabled', true);   
@@ -236,6 +270,7 @@
                       data: JSON.stringify(formData),
                       success: function(response) {
                           alert(response.msg);
+                          window.location.href = '/clinic/32';
                           $(errorDivId).removeClass('alert-danger').addClass('alert-success').text(response.msg).show();
                           console.log('Response:', response);
                       },

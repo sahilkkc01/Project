@@ -9,13 +9,13 @@
 
   <%- include('header'); -%>
     <!-- main content start -->
-    <style>
+    <!-- <style>
       #dv_appointment,
       #dv_visited,
       #dv_converted {
         display: none;
       }
-    </style>
+    </style> -->
     <div class="main-content">
 
       <div class="row content-top-gap2">
@@ -172,33 +172,47 @@
                       <div class="form-group">
 
 
-                        <label for="wife_name" class="input__label">Wife Name</label>
+                        <label for="wife_name" class="input__label">Patient Name</label>
                         <input type="text" class="form-control input-style only-characters" id="wife_name"
-                          name="wife_name" data-validation=" onlyChar required "
+                          name="patient_name" data-validation=" onlyChar required "
                           data-error-message="Wife name is required." placeholder="">
 
                       </div>
                     </div>
                     <div class="col-xl-6 pr-xl-2">
                       <div class="form-group">
-                        <label for="wife_age" class="input__label">Wife Age</label>
-                        <input type="number" class="form-control input-style wife-age" id="wife_age" name="wife_age"
+                        <label for="wife_age" class="input__label">Patient Age</label>
+                        <input type="number" class="form-control input-style wife-age" id="wife_age" name="patient_age"
                           data-validation="required onlyNum" data-error-message="Wife age is required." placeholder="">
                       </div>
                     </div>
                     <div class="col-xl-6 pr-xl-2">
                       <div class="form-group">
-                        <label for="husband_name" class="input__label">Husband Name</label>
+                        <label for="country" class="input__label">Patient Gender</label>
+                        <select id="patient_gender" name="patient_gender" class="form-control input-style" data-validation="required"
+                          data-error-message="Country is required.">
+                          <option value="">Select</option>
+                          <option value="Male">Male</option>
+                          <option value="Female">Female</option>
+                          <option value="Other">Other</option>
+                          <!-- Options will be populated via AJAX -->
+                        </select>
+
+                      </div>
+                    </div>
+                    <div class="col-xl-6 pr-xl-2">
+                      <div class="form-group">
+                        <label for="husband_name" class="input__label">Spouse Name</label>
                         <input type="text" class="form-control input-style only-characters" id="husband_name"
-                          name="husband_name" data-validation="onlyChar required "
+                          name="spouce_name" data-validation="onlyChar required "
                           data-error-message="Husband name is required." placeholder="">
                       </div>
                     </div>
                     <div class="col-xl-6 pr-xl-2">
                       <div class="form-group">
-                        <label for="husband_age" class="input__label">Husband Age</label>
+                        <label for="husband_age" class="input__label">Spouse Age</label>
                         <input type="number" class="form-control input-style hus-age" id="husband_age"
-                          name="husband_age" data-validation="onlyNum required "
+                          name="spouce_age" data-validation="onlyNum required "
                           data-error-message="Husband age is required." placeholder="">
                       </div>
                     </div>
@@ -973,9 +987,10 @@
         <!--footer section start-->
         <%- include ('footer'); -%>
 
+        
           <script src="../javascripts/multiplePhotos.js"></script>
           <script>
-            console.log('<%= loginName %>')
+            // console.log('<%= loginName %>')
 
 
             function modifyQuery() {
@@ -1028,31 +1043,50 @@
               $("#myModal").modal('toggle');
             }
 
-            function loadCity(a) {
-              $.ajax({
-                url: '/clinic/cities', // Endpoint to fetch all cities
-                type: 'GET',
-                success: function (data) {
-                  console.log(data);
+            function loadCity(stateCode) {
+  $.ajax({
+    url: '/clinic/cities', // Endpoint to fetch all cities
+    type: 'GET',
+    success: function (data) {
+      // console.log(data);
 
-                  let selectOptions = '<option value="">Select city</option>'; // Initial select option
+      let selectOptions = '<option value="">Select city</option>'; // Initial select option
 
-                  // Filter cities based on selected stateCode
-                  const filteredCities = data.filter(city => city.stateCode === a.value);
+      // Filter cities based on selected stateCode
+      var filteredCities={}
+      if ('<%= a.id %>' !== '') {
+        
+         filteredCities = data.filter(city => city.stateCode === stateCode);
+      }else{
+         filteredCities = data.filter(city => city.stateCode === stateCode.value);
+      }
+      
 
-                  filteredCities.forEach(function (city) {
-                    selectOptions += `
+      filteredCities.forEach(function (city) {
+        selectOptions += `
           <option value="${city.cityName}">${city.cityName}</option>
         `;
-                  });
+      });
 
-                  $('#city').html(selectOptions); // Populate select options
-                },
-                error: function (xhr, status, error) {
-                  console.error('Error fetching cities:', error);
-                }
-              });
-            }
+      $('#city').html(selectOptions); // Populate select options
+
+      // Set the city value after options are populated
+      if ('<%= a.id %>' !== '') {
+        $('#city').val('<%= a.city %>');
+      }
+    },
+    error: function (xhr, status, error) {
+      console.error('Error fetching cities:', error);
+    }
+  });
+}
+
+// Assuming 'a' is the KYC data passed from the server-side, and it is available in the view
+if ('<%= a.id %>' !== '') {
+  // Call loadCity to load the cities based on the selected state and set the city value
+  loadCity('<%= a.state %>');
+}
+
 
           </script>
 
@@ -1104,6 +1138,10 @@
                       dropdown.appendChild(option);
 
                     });
+                    const stateValue = '<%= a.state %>'; // This will be injected by the server-side
+      if (stateValue) {
+        document.getElementById('state').value = stateValue;
+      }
                   })
                   .catch(error => console.error('Error fetching states:', error));
               }
@@ -1113,7 +1151,7 @@
                 fetch('/clinic/get-clinic-name')
                   .then(response => response.json())
                   .then(data => {
-                    console.log(data)
+                    // console.log(data)
                     const dropdown = document.getElementById(a);
                     data.forEach(item => {
                       const option = document.createElement('option');
@@ -1136,7 +1174,7 @@
                   .then(response => response.json())
                   .then(data => {
 
-                    console.log(data)
+                    // console.log(data)
                     const dropdown = document.getElementById(a);
                     data.forEach(item => {
                       const option = document.createElement('option');
@@ -1157,7 +1195,7 @@
                   .then(response => response.json())
                   .then(data => {
 
-                    console.log(data)
+                    // console.log(data)
                     const dropdown = document.getElementById(a);
                     data.forEach(item => {
                       const option = document.createElement('option');
@@ -1166,6 +1204,7 @@
                       dropdown.appendChild(option);
 
                     });
+                    $('#source').val('<%= a.source %>');
                   })
                   .catch(error => console.error('Error fetching states:', error));
               }
@@ -1194,10 +1233,19 @@
                 var wife_name = $('#wife_name').val();
                 var contact_no_wife = $('#contact_no_wife').val();
 
-                var lead_no = `${wife_name.substring(0, 4)}${contact_no_wife.slice(-4)}${new Date().toISOString().split('T')[0].replace(/-/g, '')}`;
+
+                var lead_no='';
+                if('<%= a.id %>'!==''){
+                  alert('<%= a.lead_no %>')
+                  lead_no = '<%= a.lead_no %>';
+                }else{
+                alert('2')
+                lead_no = `${wife_name.substring(0, 4)}${contact_no_wife.slice(-4)}${new Date().toISOString().split('T')[0].replace(/-/g, '')}`;
                 lead_no = lead_no.toUpperCase();
                 console.log('Generated lead_no:', lead_no);
                 document.getElementById('lead_no').value = lead_no;
+                }
+              
                 const data = new FormData(this);
 
                 data.append('lead_no', lead_no);
@@ -1222,6 +1270,7 @@
 
 
                   function myAjax1(formData, errorDivId, url, loadingDiv) {
+
 
 
                     $(loadingDiv).show();
@@ -1409,6 +1458,7 @@
 
                 if (isValid) {
                   console.log(formData)
+                  
                   const uhid = generateUHID(formData.clinic, formData.v_city)
 
 
@@ -1511,6 +1561,10 @@
 
                         // Correct the event listener target and event type
                         btn.addEventListener('click', function () {
+                          if(status.value===''){
+                            alert('Please select status');
+                            return;
+                          }
                           if (status.value === 'Visited') { 
                             // Compare the value of the select element
                             $('#nav-visited-tab').removeClass("disabled");
@@ -1909,4 +1963,298 @@
 
             });
 
+          </script>
+          <script>
+            
+            if('<%= a.id %>'!==''){
+              console.log('Sahil')
+          $('input[data-validation], select[data-validation]').prop('disabled', true);
+          document.getElementById('kyc-btn').disabled = true;
+          document.getElementById('mod-btn').disabled = false;
+  
+          // Assuming 'a' is the KYC data passed from the server-side, and it is available in the view
+  
+          document.getElementById('modQuery').value = 1;
+  document.getElementById('lead_no').value = '<%= a.lead_no %>';
+  document.getElementById('lead_date').value = new Date('<%= a.lead_date %>').toISOString().split('T')[0];
+  document.getElementById('wife_name').value = '<%= a.patient_name%>';
+  document.getElementById('wife_age').value = '<%= a.patient_age%>';
+  document.getElementById('patient_gender').value = '<%= a.patient_gender%>';
+  document.getElementById('husband_name').value = '<%= a.spouce_name%>';
+  document.getElementById('husband_age').value = '<%= a.spouce_age %>';
+  document.getElementById('married_life').value = '<%= a.married_life %>';
+  document.getElementById('contact_no_wife').value = '<%= a.contact_no_wife %>';
+  document.getElementById('contact_no_husband').value = '<%= a.contact_no_husband %>';
+  document.getElementById('whatsapp_no').value = '<%= a.whatsapp_no %>';
+  document.getElementById('email_id').value = '<%= a.email_id %>';
+  document.getElementById('country').value = '<%= a.country %>';
+  document.getElementById('state').value = '<%= a.state %>';
+  document.getElementById('city').value = '<%= a.city %>';
+  document.getElementById('area').value = '<%= a.area %>';
+  document.getElementById('pincode').value = '<%= a.pincode %>';
+  document.getElementById('adress').value = '<%= a.address %>';
+  
+  document.getElementById('campaign').value = '<%= a.campaign %>';
+  document.getElementById('lead_owner').value = '<%= a.lead_owner %>';
+  document.getElementById('reference').value = '<%= a.reference %>';
+  document.getElementById('remark').value = '<%= a.remark %>';
+
+  const kyc_id='<%= a.id %>'
+  fetchFU(kyc_id)
+  fetchAppointments(kyc_id)
+  fetchVisitedAppointments(kyc_id)
+  fetchConvertedAppointments(kyc_id)
+
+  function fetchFU(kyc_id) {
+    
+        const url = `/followUp-data/${kyc_id}`; // Your backend endpoint to fetch appointment data based on lead_no
+        const loadingDiv = '#loadingIndicator2';
+
+        $(loadingDiv).show();
+
+        $.ajax({
+            url: url,
+            type: 'GET',
+            contentType: 'application/json',
+            success: function (response) {
+              console.log(response)
+                // Hide loading indicator
+                $(loadingDiv).hide();
+
+                // Clear any existing rows in the table
+                $('#appointment_table_1').empty();
+
+                // Loop through the response data and append rows to the table
+                response.data.forEach(record => {
+                    if (!record.remark || record.remark.trim() === '') {
+                        return; // Skip this iteration if remark is empty
+                    }
+
+                    const newRow = `
+                        <tr>
+                          <td>${record.remark}</td>
+                          <td>${record.fu_next_call}</td>
+                          <td>${record.fu_next_call_time}</td>
+                          <td>${record.fu_status}</td>
+                          <td>
+                            <button type="submit" class="btn btn-primary btn-style mt-2 mr-2">
+                              <i class="fas fa-phone"></i> Call
+                            </button>
+                          </td>
+                          <td>
+                            <button type="submit" class="btn btn-primary btn-style mt-2 mr-2"><i class="fa-solid fa-microphone"></i></button>
+                          </td>
+                        </tr>
+                    `;
+
+                    // Append each row to the #appointment_table_1
+                    $('#appointment_table_1').append(newRow);
+                });
+            },
+            error: function (xhr, status, error) {
+                // Hide loading indicator on error
+                $(loadingDiv).hide();
+                console.error('Error fetching appointments:', error);
+            }
+        });
+  }  
+  
+
+  function fetchAppointments(kyc_id) {
+    const url = `/appointment-data/${kyc_id}`; // Your backend endpoint to fetch appointment data based on lead_no
+    const loadingDiv = '#loadingIndicator3';
+
+    $(loadingDiv).show();
+
+    $.ajax({
+        url: url,
+        type: 'GET',
+        contentType: 'application/json',
+        success: function (response) {
+            // Hide loading indicator
+            $(loadingDiv).hide();
+
+            // Clear any existing rows in the table
+            $('#appointment_table_2').empty();
+
+            // Loop through the response data and append rows to the table
+            response.data.forEach(item => {
+                if (!item.apt_date || item.apt_date.trim() === '') {
+                    return; // Skip this iteration if apt_date is empty
+                }
+
+                const newRow = `
+                    <tr id=${item.id}>
+                      <td>${formatDate(item.apt_date)}</td>
+                      <td>${item.apt_time}</td>
+                      <td>${item.doctor}</td>
+                      <td>${item.clinic}</td>
+                      <td>
+                        <select class="form-control input-style" id="apt_status${item.id}" name="apt_status" data-validation="required" data-error-message="Select Status.">
+                          <option value="" ${item.apt_status === '' ? 'selected' : ''}>Select</option>
+                          <option value="Visited" ${item.apt_status === 'Visited' ? 'selected' : ''}>Visited</option>
+                          <option value="Cancelled" ${item.apt_status === 'Cancelled' ? 'selected' : ''}>Cancelled</option>
+                          <option value="Reschedule" ${item.apt_status === 'Reschedule' ? 'selected' : ''}>Reschedule</option>
+                        </select>
+                      </td>
+                      <td>
+                        <button type="submit" class="btn btn-primary btn-style mt-2 mr-2">
+                          <i class="fas fa-phone"></i> Call
+                        </button>
+                      </td>
+                      <td>
+                        <button type="submit" class="btn btn-primary btn-style mt-2 mr-2">
+                          <i class="fa-solid fa-microphone"></i>
+                        </button>
+                      </td>
+                      <td>
+                        <button type="submit" id="apt_m_btn${item.id}" class="btn btn-primary btn-style mt-2 mr-2">
+                          <i class="fa-solid fa-pen-to-square"></i>
+                        </button>
+                      </td>
+                    </tr>
+                `;
+
+                // Append each row to the #appointment_table_2
+                $('#appointment_table_2').append(newRow);
+
+       
+            });
+        },
+        error: function (xhr, status, error) {
+            // Hide loading indicator on error
+            $(loadingDiv).hide();
+            console.error('Error fetching appointments:', error);
+        }
+    });
+}
+
+
+function fetchVisitedAppointments(kyc_id) {
+    const url = `/visited-appointment-data/${kyc_id}`; // Your backend endpoint to fetch visited appointment data
+    const loadingDiv = '#loadingIndicator4';
+
+    $(loadingDiv).show();
+
+    $.ajax({
+        url: url,
+        type: 'GET',
+        contentType: 'application/json',
+        success: function (response) {
+            // Hide loading indicator
+            $(loadingDiv).hide();
+
+            // Clear any existing rows in the table
+            $('#appointment_table_3').empty();
+
+            // Loop through the response data and append rows to the table
+            response.data.forEach(item => {
+                if (!item.uhid_no || item.uhid_no.trim() === '') return; // Skip empty records
+
+                let newRow = `
+                    <tr id="${item.id}">
+                        <td>${item.uhid_no}</td>
+                        <td>${formatDate(item.apt_date)}</td>
+                        <td>${item.doctor}</td>
+                        <td>${item.clinic}</td>
+                        <td>${item.treatment}</td>
+                        <td>
+                            <select class="form-control input-style visited_status" data-id="${item.id}" id="visited_status${item.id}" name="visited_status" 
+                                data-validation="required" data-error-message="Select Status.">
+                                <option value="">Select</option>
+                                <option value="Booked" ${item.visited_status === 'Booked' ? 'selected' : ''}>Booked</option>
+                                <option value="Not Booked" ${item.visited_status === 'Not Booked' ? 'selected' : ''}>Not Booked</option>
+                            </select>
+                        </td>
+                        <td><input type="text" style="display:none;" class="form-control input-style remark" data-id="${item.id}" id="remark${item.id}" name="remark" data-validation=""></td>
+                        <td><input type="date" style="display:none;" class="form-control input-style next_call date-fieldMax" data-id="${item.id}" id="next_call${item.id}" name="next_call" data-validation=""></td>
+                        <td><button type="button" class="btn btn-primary btn-style mt-2 mr-2 modify-btn" data-id="${item.id}"><i class="fas fa-phone"></i></button></td>
+                        <td><button type="button" class="btn btn-primary btn-style mt-2 mr-2"><i class="fa-solid fa-microphone"></i></button></td>
+                        <td><button type="button" class="btn btn-primary btn-style mt-2 mr-2 vis_m_btn" data-id="${item.id}"><i class="fa-solid fa-pen-to-square"></i></button></td>
+                    </tr>
+                `;
+
+                // Append each row to the #appointment_table_3
+                $('#appointment_table_3').append(newRow);
+
+                // Event listener for modifying the visited appointment
+               });
+        },
+        error: function (xhr, status, error) {
+            // Hide loading indicator on error
+            $(loadingDiv).hide();
+            console.error('Error fetching visited appointments:', error);
+        }
+    });
+}
+
+function fetchConvertedAppointments(kyc_id) {
+    const url = `/converted-appointment-data/${kyc_id}`; // Adjust URL as per your endpoint for fetching converted appointments
+    const loadingDiv = '#loadingIndicator5';
+
+    $(loadingDiv).show();
+
+    $.ajax({
+        url: url,
+        type: 'GET',
+        contentType: 'application/json',
+        success: function (response) {
+            // Hide loading indicator
+            $(loadingDiv).hide();
+
+            // Clear any existing rows in the table
+            $('#apt_table_4').empty();
+
+            // Loop through the response data and append rows to the table
+            response.data.forEach(item => {
+                if (!item.uhid_no || item.uhid_no.trim() === '') return; // Skip empty records
+
+                const newRow = `
+                    <tr>
+                        <td>${item.uhid_no}</td>
+                        <td>${item.doctor}</td>
+                        <td>${item.clinic}</td>
+                        <td>${item.treatment}</td>
+                        <td>${item.package}</td>
+                        <td>${formatDate(item.con_date)}</td>
+                    </tr>
+                `;
+
+                // Append each row to #apt_table_4
+                $('#apt_table_4').append(newRow);
+            });
+        },
+        error: function (xhr, status, error) {
+            // Hide loading indicator on error
+            $(loadingDiv).hide();
+            console.error('Error fetching converted appointments:', error);
+        }
+    });
+}
+
+
+
+function formatDate(dateString) {
+    if (!dateString) return '';
+    const dateObj = new Date(dateString);
+    return dateObj.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+    });
+}
+
+document.getElementById('dv_appointment').style.display = 'block';
+document.getElementById('dv_visited').style.display = 'block';
+document.getElementById('dv_converted').style.display = 'block';
+document.getElementById('nav-appointment-tab').classList.remove('disabled');
+document.getElementById('nav-visited-tab').classList.remove('disabled');
+document.getElementById('nav-converted-tab').classList.remove('disabled');
+
+
+
+        }else{
+        
+          document.getElementById('mod-btn').disabled = true;
+        }
           </script>

@@ -91,6 +91,7 @@ router.get("/5", (req, res) => {
     res.redirect("/plshBill/1");
   }
 });
+
 router.get("/6", async function (req, res) {
   const id = req.query.id;
   const now = new Date();
@@ -165,15 +166,28 @@ router.get("/25", (req, res) => {
 });
 
 router.get("/7", (req, res) => {
-  res.render("plshBilling/bills-summary");
+  let Id;
+  if (req.session.rowId) {
+    Id = req.session.rowId;
+    console.log("Row Data", Id);
+    res.render("plshBilling/bills-summary");
+  } else {
+    console.log("Hello");
+    res.redirect("/plshBill/1");
+  }
+  
+ 
 });
 
 router.get("/8", (req, res) => {
   res.render("plshBilling/refund-services");
 });
+router.get("/34", (req, res) => {
+  res.render("plshBilling/bills-for-approval");
+});
 
 router.get("/9", (req, res) => {
-  res.render("plshBilling/approval-request");
+  res.render("plshBilling/approval-refund-service");
 });
 
 router.get("/10", (req, res) => {
@@ -244,6 +258,40 @@ router.get("/32", (req, res) => {
   res.render("plshBilling/concent");
 });
 
+router.get("/35", async(req, res) => {
+  console.log(req.query)
+  const { id } = req.query;
+  const decryptedDeptId =decryptData(decodeURIComponent(id), 'll'); // Extract dept_id from query parameters
+    console.log('aa',decryptedDeptId)
+
+  try {
+    if (id) {
+      const bill = await PR_BillFindPatient.findByPk(decryptedDeptId);
+    
+      const patientData = await PR_patientReg.findOne({
+        where: {
+          mr_no: bill.mrNo,  // Assuming bill has a field named 'mrNo'
+        }
+      });
+      const patientDataPlain = patientData.get({ plain: true });
+      if (!bill) {
+        console.error('not found:', dept_id);
+        return res.status(404).render('error', { message: 'not found' });
+      }
+      // const services= await BillServices.findAll({billId:bill.id})
+      const data = bill.get({ plain: true });
+      console.log('values:', data);
+      return res.render("plshBilling/PrintBill", { a: data,patient: patientDataPlain });
+    } else {
+      return res.render("plshBilling/PrintBill", { a: '' });
+    }
+  } catch (error) {
+    console.error('Error fetching  data:', error);
+    return res.status(500).render('error', { message: 'Internal Server Error' });
+  }
+
+});
+
 router.get("/concent", (req, res) => {
 
   res.render("plshBilling/concent");
@@ -289,17 +337,25 @@ const {
   approvePatientRefundByRecNo,
   getCompanyAdvance,
   approveCompanyRefundByRecNo,
+  getServiceDataById,
+  sendForServiceApproval,
+  getRefundServices,
+  getServiceDataByBillId,
+  approveSeriveRefund,
+  getPatientPackages,
  
 } = require("../controllers/plshBillingControllers");
 const path = require("path");
 const { error, PDFDocument } = require("pdf-lib");
 const { billPatientSubmit } = require("../controllers/patientReg");
+const { BillServices } = require("../models/PatientReg");
 
 router.post("/setAproveId", setId);
 
 router.post("/save-status-data", saveStatusData);
 
 router.get("/00", storeDataInDb);
+router.get("/get-Patient-package-services", getPatientPackages);
 
 router.post("/expenses-form-submit", newExpenses);
 router.post("/company-advance-form-submit", newCompanyAdvance);
@@ -475,6 +531,7 @@ router.get("/getPatientRefunds", getPatientRefund);
 router.get("/getCompanyRefund", getCompanyRefund);
 router.get("/get-approve-request", getAllApproveReq);
 router.get("/get-patient-daitle", getPatientServicesDaitle);
+router.get("/getServiceData/:id", getServiceDataById);
 router.get("/get-payment-change", getPaymentModeChange);
 
 router.post("/billPatientSubmit", billPatientSubmit);
@@ -490,7 +547,7 @@ router.get("/filter-data", async (req, res) => {
     if (!Model) {
       return res.status(400).json({ message: "Invalid table name" });
     }
-    console.log("bharat Singnpx");
+
     console.log(sortby);
     // Construct Sequelize filters
     let sequelizeFilters = {};
@@ -638,10 +695,17 @@ router.get('/filter-data', async (req, res) => {
   }
 });
 
+router.post('/sendForServiceApproval', sendForServiceApproval);
+
+
+
 
 
 router.get("/prescriptions", getPrescriptions);
+router.get("/getBillRefundData", getRefundServices);
+router.get("/getApprServiceData/:approvalId", getServiceDataByBillId);
 
 router.post('/approvePatRefund',approvePatientRefundByRecNo)
+router.post('/approveServiceRefund',approveSeriveRefund)
 router.post('/approveCompanyRefund',approveCompanyRefundByRecNo)
 module.exports = router;

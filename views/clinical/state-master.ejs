@@ -276,6 +276,7 @@
                                      data: JSON.stringify(formData),
                                      success: function(response) {
                                          alert(response.msg);
+                                         window.location.href = '/clinic/36';
                                          $(errorDivId).removeClass('alert-danger').addClass('alert-success').text(response.msg).show();
                                          console.log('Response:', response);
                                      },

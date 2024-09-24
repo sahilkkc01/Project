@@ -104,7 +104,7 @@
 			<div class="card-body">
 			<div class="form-row">
 			<div class="col-6 mb-3 mb-3"><div class="form-group"><label class="input__label">Code</label><input name="bank_m_code" id="bank_m_code" type="text" class="form-control input-style" placeholder=""data-validation="required" data-error-message="Code is required."></div></div>
-			<div class="col-6 mb-3 mb-3"><div class="form-group"><label class="input__label">Description</label><input name="bank_m_desc" id="bank_m_desc" type="text" class="form-control input-style" placeholder=""data-validation="required" data-error-message="Code is required." type="text" class="form-control input-style" placeholder=""></div></div>
+			<div class="col-6 mb-3 mb-3"><div class="form-group"><label class="input__label">Description/Name</label><input name="bank_m_desc" id="bank_m_desc" type="text" class="form-control input-style" placeholder=""data-validation="required" data-error-message="Code is required." type="text" class="form-control input-style" placeholder=""></div></div>
 			</div>
 			</div></div>			
 			
@@ -213,6 +213,7 @@
 						data: JSON.stringify(formData),
 						success: function(response) {
 							alert(response.msg);
+							window.location.href = '/clinic/30';
 							$(errorDivId).removeClass('alert-danger').addClass('alert-success').text(response.msg).show();
 							console.log('Response:', response);
 						},

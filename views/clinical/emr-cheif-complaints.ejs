@@ -110,7 +110,7 @@
                              name="emrCC_code" id="emrCC_code" data-validation="required" data-error-message="Code is required."class="form-control input-style" placeholder=""></div>
                         </div>
                         <div class="col-6 mb-3 mb-3">
-                          <div class="form-group"><label class="input__label">Description</label><input type="text"
+                          <div class="form-group"><label class="input__label">Description/Name</label><input type="text"
                              name="emrCC_desc" id="emrCC_desc" data-validation="required" data-error-message="Description is required." class="form-control input-style" placeholder=""></div>
                         </div>
                       </div>
@@ -219,6 +219,7 @@
                                 data: JSON.stringify(formData),
                                 success: function(response) {
                                     alert(response.msg);
+                                    window.location.href = '/clinic/15';
                                     $(errorDivId).removeClass('alert-danger').addClass('alert-success').text(response.msg).show();
                                     console.log('Response:', response);
                                 },

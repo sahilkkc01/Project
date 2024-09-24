@@ -157,9 +157,11 @@
                                             <div class="col-md-3 mb-3">
                                                 <div class="form-group">
                                                     <label class="input__label" for="doctor_type">Doctor Type</label>
-                                                    <select id="doc_type" name="doc_type" class="form-control input-style" data-validation="required" data-error-message="Select Doctor Category">
+                                                    <select id="doc_type" name="doc_type" class="form-control input-style" data-validation="required" data-error-message="Select Doctor Type">
                                                       <option value="">Select</option>                                                      
-                                                      <option value="ABC">ABC</option>                                                      
+                                                      <option value="FULL TIME">FULL TIME</option>                                                      
+                                                      <option value="VISITING">VISITING</option>                                                      
+                                                      <option value="REFERRAL">REFERRAL</option>                                                      
                                                   </select>
                                                     
                                                 </div>
@@ -176,9 +178,12 @@
                                             <div class="col-md-3 mb-3">
                                                 <div class="form-group">
                                                     <label class="input__label" for="marketing_executives">Marketing Executives</label>
-                                                    <input id="doc_mark_exec" name="doc_mark_exec" type="text"
-                                                        class="form-control input-style" placeholder=""
-                                                        data-validation="required" data-error-message="Marketing Executives is required.">
+                                                    <select id="doc_mark_exec" name="doc_mark_exec" class="form-control input-style" data-validation="required" data-error-message="Marketing Executives is required">
+                                                      <option value="">Select</option>                                                      
+                                                     
+                                                      
+                                                  </select>
+                                                   
                                                 </div>
                                             </div>
                                             <div class="col-md-3 mb-3">
@@ -214,111 +219,180 @@
                         <div class="card">
                           <div class="card-body">
                               <div class="form-row">
-                                  <div class="col-12 mb-3">
-                                      <div class="form-group">
-                                          <div class="col-xl-12 p-heading">
-                                              <h6 class="p-text">Personal Information / Clinic - Department / Allocate Classification</h6>
-                                          </div>
-                                      </div>
-                                  </div>
+                                  
                               </div>
                       
+
+
+                              <nav>
+                                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                    <button class="nav-link active" id="nav-followup-tab" data-bs-toggle="tab"
+                                        data-bs-target="#nav-followup" type="button" role="tab"
+                                        aria-controls="nav-followup" aria-selected="true">
+                                        <i class="fas fa-exchange-alt"></i> Personal Information
+                                    </button>
+                                    <button class="nav-link" id="nav-appointment-tab" data-bs-toggle="tab"
+                                        data-bs-target="#nav-appointment" type="button" role="tab"
+                                        aria-controls="nav-appointment" aria-selected="false">
+                                        <i class="fas fa-calendar-alt"></i>Clinic - Department 
+                                    </button>
+                                    <button class="nav-link" id="nav-visited-tab" data-bs-toggle="tab"
+                                        data-bs-target="#nav-visited" type="button" role="tab"
+                                        aria-controls="nav-visited" aria-selected="false">
+                                        <i class="fas fa-map-marker-alt"></i>Allocate Classification
+                                    </button>
+                                </div>
+                            </nav>
+
+                            <!-- MODEL -->
+                            <div class="col-md-12 tab-content" id="nav-tabContent">
+
+                              <div class="tab-pane fade show active" id="nav-followup" role="tabpanel"
+                                  aria-labelledby="nav-followup-tab">
+                                  
                               <div class="form-row">
-                                  <div class="col-3 mb-3">
-                                      <div class="form-group">
-                                          <label class="input__label" for="martial_status">Martial Status</label>
-                                          <select id="doc_marital_status" name="doc_marital_status" class="form-control input-style" 
-                                              data-validation="required" data-error-message="Martial Status is required.">
-                                              <option value="">Select</option>
-                                              <option value="Married">Married</option>
-                                              <option value="Unmarried">Unmarried</option>
-                                              <option value="other">Other</option> 
-                                              
-                                          </select>
-                                      </div>
-                                  </div>
-                                  <div class="col-3 mb-3">
-                                      <div class="form-group">
-                                          <label class="input__label" for="employee_number">Employee Number</label>
-                                          <input id="doc_emp_no" name="doc_emp_no" type="text" class="form-control input-style"
-                                              placeholder=""  data-validation="required"
-                                              data-error-message="Employee Number is required.">
-                                      </div>
-                                  </div>
-                                  <div class="col-3 mb-3">
-                                      <div class="form-group">
-                                          <label class="input__label" for="pf_number">PF Number</label>
-                                          <input id="doc_pf_no" name="doc_pf_no" type="text" class="form-control input-style"
-                                              placeholder="" data-validation="required"
-                                              data-error-message="PF Number is required.">
-                                      </div>
-                                  </div>
-                                  <div class="col-3 mb-3">
-                                      <div class="form-group">
-                                          <label class="input__label" for="pan_number">Pan Number</label>
-                                          <input id="doc_pan_no" name="doc_pan_no" type="text" class="form-control input-style"
-                                              placeholder="" data-validation="required"
-                                              data-error-message="Pan Number is required.">
-                                      </div>
-                                  </div>
-                              </div>
-                      
-                              <div class="form-row">
-                                  <div class="col-3 mb-3">
-                                      <div class="form-group">
-                                          <label class="input__label" for="date_of_joining">Date of Joining</label>
-                                          <input id="doc_doj" name="doc_doj" type="date" class="form-control input-style"
-                                              placeholder="" data-validation="required"
-                                              data-error-message="Date of Joining is required.">
-                                      </div>
-                                  </div>
-                                  <div class="col-3 mb-3">
-                                      <div class="form-group">
-                                          <label class="input__label" for="access_card_no">Access Card Number</label>
-                                          <input id="doc_access_card_no" name="doc_access_card_no" type="text" class="form-control input-style"
-                                              placeholder=""  data-validation="required"
-                                              data-error-message="Access Card Number is required.">
-                                      </div>
-                                  </div>
-                                  <div class="col-3 mb-3">
-                                      <div class="form-group">
-                                          <label class="input__label" for="registration_number">Registration Number</label>
-                                          <input id="doc_reg_no" name="doc_reg_no" type="text" class="form-control input-style"
-                                              placeholder=""  placeholder=""  data-validation="required"
-                                              data-error-message="Registration Number  is required.">
-                                      </div>
-                                  </div>
-                                  <div class="col-3 mb-3">
-                                      <div class="form-group">
-                                        <label class="input__label" for="email_id">Email ID</label>
-                                        <input id="email_id" name="doc_email" type="email" class="form-control input-style"
-                                            placeholder=""  placeholder=""  data-validation="required"
-                                            data-error-message="Email id is required.">
+                                <div class="col-3 mb-3">
+                                  
+                                    <div class="form-group">
+                                        <label class="input__label" for="martial_status">Martial Status</label>
+                                        <select id="doc_marital_status" name="doc_marital_status" class="form-control input-style" 
+                                            data-validation="required" data-error-message="Martial Status is required.">
+                                            <option value="">Select</option>
+                                            <option value="Married">Married</option>
+                                            <option value="Unmarried">Unmarried</option>
+                                            <option value="other">Other</option> 
+                                            
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-3 mb-3">
+                                    <div class="form-group">
+                                        <label class="input__label" for="employee_number">Employee Number</label>
+                                        <input id="doc_emp_no" name="doc_emp_no" type="text" class="form-control input-style"
+                                            placeholder=""  data-validation="required"
+                                            data-error-message="Employee Number is required.">
+                                    </div>
+                                </div>
+                                <div class="col-3 mb-3">
+                                    <div class="form-group">
+                                        <label class="input__label" for="pf_number">PF Number</label>
+                                        <input id="doc_pf_no" name="doc_pf_no" type="text" class="form-control input-style"
+                                            placeholder="" data-validation="required"
+                                            data-error-message="PF Number is required.">
+                                    </div>
+                                </div>
+                                <div class="col-3 mb-3">
+                                    <div class="form-group">
+                                        <label class="input__label" for="pan_number">Pan Number</label>
+                                        <input id="doc_pan_no" name="doc_pan_no" type="text" class="form-control input-style"
+                                            placeholder="" data-validation="required"
+                                            data-error-message="Pan Number is required.">
                                     </div>
                                 </div>
                             </div>
                     
                             <div class="form-row">
-                                <div class="col-12 mb-3">
+                                <div class="col-3 mb-3">
                                     <div class="form-group">
-                                        <label class="input__label" for="experience">Experience</label>
-                                        <input id="experience" name="doc_experience" type="text" class="form-control input-style"
-                                            placeholder=""  placeholder=""  data-validation="required"
-                                            data-error-message="Experience is required.">
+                                        <label class="input__label" for="date_of_joining">Date of Joining</label>
+                                        <input id="doc_doj" name="doc_doj" type="date" class="form-control input-style"
+                                            placeholder="" data-validation="required"
+                                            data-error-message="Date of Joining is required.">
                                     </div>
                                 </div>
-                            </div>
-                    
-                            <div class="form-row">
-                                <div class="col-12 mb-3">
+                                <div class="col-3 mb-3">
                                     <div class="form-group">
-                                        <label class="input__label" for="education">Education</label>
-                                        <input id="education" name="doc_education" type="text" class="form-control input-style"
-                                            placeholder=""  placeholder=""  data-validation="required"
-                                            data-error-message="Education is required.">
+                                        <label class="input__label" for="access_card_no">Access Card Number</label>
+                                        <input id="doc_access_card_no" name="doc_access_card_no" type="text" class="form-control input-style"
+                                            placeholder=""  data-validation="required"
+                                            data-error-message="Access Card Number is required.">
                                     </div>
                                 </div>
+                                <div class="col-3 mb-3">
+                                    <div class="form-group">
+                                        <label class="input__label" for="registration_number">Registration Number</label>
+                                        <input id="doc_reg_no" name="doc_reg_no" type="text" class="form-control input-style"
+                                            placeholder=""  placeholder=""  data-validation="required"
+                                            data-error-message="Registration Number  is required.">
+                                    </div>
+                                </div>
+                                <div class="col-3 mb-3">
+                                    <div class="form-group">
+                                      <label class="input__label" for="email_id">Email ID</label>
+                                      <input id="email_id" name="doc_email" type="email" class="form-control input-style"
+                                          placeholder=""  placeholder=""  data-validation="required"
+                                          data-error-message="Email id is required.">
+                                  </div>
+                              </div>
+                          </div>
+                  
+                          <div class="form-row">
+                              <div class="col-12 mb-3">
+                                  <div class="form-group">
+                                      <label class="input__label" for="experience">Experience</label>
+                                      <input id="experience" name="doc_experience" type="text" class="form-control input-style"
+                                          placeholder=""  placeholder=""  data-validation="required"
+                                          data-error-message="Experience is required.">
+                                  </div>
+                              </div>
+                          </div>
+                  
+                          <div class="form-row">
+                              <div class="col-12 mb-3">
+                                  <div class="form-group">
+                                      <label class="input__label" for="education">Education</label>
+                                      <input id="education" name="doc_education" type="text" class="form-control input-style"
+                                          placeholder=""  placeholder=""  data-validation="required"
+                                          data-error-message="Education is required.">
+                                  </div>
+                              </div>
+                          </div>
+                              </div>
+
+
+                              <div class="tab-pane fade show "  id="nav-appointment" role="tabpanel"
+                                  aria-labelledby="nav-appointment-tab">
+                                  <label class="input__label"  for="">Department</label>
+                                  <input id="searchBox" type="text">
+                                  <table class="table2" id="tableid">
+                                    <thead>
+                                      <tr>
+                                        <th >&nbsp;</th>
+                                        <th >Department</th>
+                                        
+                                      </tr>
+                                    </thead>
+                                    <tbody id="depts"></tbody>
+                                  </table>
+                                  <div id="paginationControls"></div>
+
+
+                              </div>
+
+                              <div class="tab-pane fade show " id="nav-visited" role="tabpanel"
+                              aria-labelledby="nav-visited-tab">
+
+                              <label class="input__label"  for="">Classification</label>
+                              <input id="searchBox2" type="text">
+                              <table class="table2" id="tableid2">
+                                <thead>
+                                  <tr>
+                                    <th >&nbsp;</th>
+                                    <th >Classification</th>
+                                    
+                                  </tr>
+                                </thead>
+                                <tbody id="classifications"></tbody>
+                              </table>
+                              <div id="paginationControls2"></div>
+
                             </div>
+  
+                            
+  
+                          </div>
+
+
                     
                             <div class="form-row">
                                 <div class="col-12 mb-3">
@@ -357,6 +431,84 @@
             </div>
                 <!--footer section start-->
            <%-include('../footer');  -%>
+                 
+           <script type="module">
+            console.log('<%= a.doc_dept %>')
+              
+
+            import {pagi_search} from '../javascripts/pagi_search.js'
+
+            const x=''
+             function fetchData() {
+                $.ajax({
+                  url: '/clinic/get-dept-details',
+                  type: 'GET',
+                  success: function(data) {
+                    let tableRows = '';
+                    data.reverse();
+                    data.forEach(function(item) {
+                    
+                      // alert(id)
+                      // console.log(item)
+                      tableRows += `
+                        <tr data-dept-id="${item.id}">
+      <td><input type="checkbox"  name="doc_dept" value="${item.dept_code} ${x.includes(`${item.dept_code}`) ? 'checked' : '' }"></td>
+    
+      <td style="display:none;">${item.dept_code}</td>
+      <td>${item.dept_desc}</td>
+     
+       
+    </tr>
+                      `;
+                    });
+
+
+                   
+                    $('#depts').html(tableRows);
+                    pagi_search('#searchBox','#tableid','#paginationControls')
+                  },
+                  error: function(xhr, status, error) {
+                    console.error('Error fetching classification details:', error);
+                  }
+                });
+              }
+            
+              // Fetch data on page load
+              fetchData()
+
+              function fetchDataClass() {
+    $.ajax({
+      url: '/clinic/get-classification-details',
+      type: 'GET',
+      success: function(data) {
+        let tableRows = '';
+        data.reverse();
+        data.forEach(function(item) {
+          tableRows += `
+            <tr data-clas-id="${item.id}">
+               <td><input type="checkbox" name="doc_class" value="${item.classification_code}" ${'<%= a.doc_class %>'.includes(`${item.classification_code}`) ? 'checked' : '' }></td>
+    
+            <td style="display:none;">${item.classification_code}</td>
+            <td>${item.classification_desc}</td>
+             </tr>
+          `;
+        });
+
+      
+        $('#classifications').html(tableRows);
+        pagi_search('#searchBox2','#tableid2','#paginationControls2')
+      
+      },
+      error: function(xhr, status, error) {
+        console.error('Error fetching classification details:', error);
+      }
+    });
+  }
+
+  fetchDataClass()
+
+
+           </script>
 
             <script>
              
@@ -410,10 +562,13 @@ if('<%= a.status %>'!=='true'){
              import { loadDocCat } from '../javascripts/data.js';
              import { loadSpec } from '../javascripts/data.js';
              import { loadSubSpec } from '../javascripts/data.js';
+             import { loadEmp } from '../javascripts/data.js';
 
              loadDocCat('doc_catg');
+             loadEmp('doc_mark_exec')
 
              document.getElementById('doc_spec').addEventListener('change', function() {
+              
     const selectedSpec = this.value;
     loadSubSpec('doc_sub_spec', selectedSpec);
 });
@@ -437,7 +592,7 @@ if (initialSelectedSpec) {
               const maxDate = new Date(today.getFullYear() - 100, today.getMonth(), today.getDate());
               return maxDate.toISOString().split('T')[0];
 }
-              document.getElementById('').addEventListener('change', function(event) {
+              document.getElementById('doc_photo').addEventListener('change', function(event) {
                   const file = event.target.files[0];
                   if (file) {
                       const reader = new FileReader();
@@ -462,6 +617,8 @@ if (initialSelectedSpec) {
 
             <script>
               $(document).ready(function() {
+
+
 
                 console.log("Document is ready");
             
@@ -508,12 +665,18 @@ if (initialSelectedSpec) {
                           }
                         });
                       }
-            
+
+
                       formData[$input.attr('name')] = $input.val();
                     });
+
+                    
+                   
+            
                     const data =new FormData(this);
                     console.log(data)
-            
+                 
+
                     if (isValid) {
                       $.ajax({
                         url: '/clinic/doctor-info',
@@ -524,6 +687,7 @@ if (initialSelectedSpec) {
                         success: function(response) {
                           
                           alert(response.msg);
+                          window.location.href = '/clinic/10';
                           $(errorDivId).removeClass('alert-danger').addClass('alert-success').text(response.msg).show();
                           console.log('Response:', response);
                         },

@@ -51,7 +51,7 @@ const saveStatusData = async (req, res) => {
         console.log('Decrypted schema:', Schema);
 
         // Use decrypted id and schema to fetch data from the model
-        const Model = require('../model/adminInventorySchema')[Schema];
+        const Model = require('../models/adminInventorySchema')[Schema];
         const data = await Model.findByPk(id);
         if (data) {
             // Update status and save
@@ -94,6 +94,7 @@ const newSupplierCategory = async (req, res) => {
 
 }
 const newSupplier = async (req, res) => {
+    console.log(req.body)
     try {
         if (req.body.id) {
             console.log(req.body.id);

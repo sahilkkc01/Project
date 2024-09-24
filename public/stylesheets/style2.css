@@ -1,0 +1,346 @@
+
+
+
+:root {
+    --heading: #1eafeb;
+
+}
+
+.main-container {
+    background: rgb(148, 202, 244);
+    padding: 0px 30px;
+    background: inherit;
+    border: 1px solid #e5e5e5;
+    border-radius: 7px;
+    margin: 0;
+}
+
+
+.gtc-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin: 10px;
+}
+
+.fa-trash-can{
+    color: var(--red);
+}
+
+.fa-lock{
+    color: var(--blue);
+}
+
+.bold-text{
+    font-weight: 600;
+}
+
+#comments{
+    width: 100%;
+}
+
+.below-text{
+    font-size: 10px;
+    margin-top: 2px;
+}
+
+.grid-5{
+    display: grid;
+    grid-template-columns: repeat(6,1fr);
+    margin: 10px 0;
+}
+
+
+#Pallor,
+#Icterus,
+#Edema,
+#Obesity,
+#Acne,
+#Thyroid{
+    max-width: 7rem;
+}
+
+
+.size_cm {
+    margin-right: 10px;
+}
+.size_cm input{
+    max-width: 7rem;
+
+}
+
+.Uterus-div{
+    justify-content: space-between;
+}
+/*?  */
+
+
+
+.add-new-advice-container{
+    border: 1px solid #e2e2e2;
+    padding: 8px 8px;
+    border-radius: 7px;
+
+}
+
+
+.MH,.MH-Details-1,.MH-Details-2,.MH-Details-3{
+    margin-right: 20px;
+}
+
+
+table{
+    width: 100%;
+}
+
+
+.Radio-Btn{
+    display: flex;
+    gap: 20px;
+}
+
+
+.General-History,
+.Menstrual-History,
+.Family-History,
+.Medical-History,
+.Obstetric-History,
+.Past-Infertility-Investigations-Div,
+.Partner-History,
+.Partner-Past-Infertility-Investigations,
+.Other-Relevent-History,
+.General-Examination,
+.USG-Examination,
+.Diagnosis-content,
+.Doctor-Notes-Content,
+.Service-Advice-Content,
+.Prescription-Content,
+.Attachments-Content {
+    padding: 0 20px;
+}
+
+.Service-Advice-Content,
+.Prescription-Content,
+.Procedure-Advice-Content,
+.Follow-Up{
+    padding: 10px 20px;
+}
+
+
+
+.Examination .comments-inp-div .input-comment{
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-bottom: 11px;
+}
+/*
+============================
+? => Contanier Css :---
+============================
+ */
+
+
+.container {
+    background: inherit;
+}
+
+.container-div {
+    /* background: rgb(216, 216, 216); */
+    border: 1px solid rgb(216, 216, 216);
+    border-radius: 7px;
+    margin: 1rem 0;
+
+}
+
+
+
+/*
+============================
+? => Content Css :---
+============================
+ */
+
+.Content {
+    padding: 0 20px;
+}
+
+.Content-Div {
+    padding: 10px 20px;
+
+}
+
+
+/*
+============================
+? => Heading Css :---
+============================
+ */
+
+.Head {
+    background: var(--heading);
+    /* margin: 5px 0; */
+    padding: 10px 10px;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    color: white;
+    margin-bottom: 5px;
+}
+
+.Head2 {
+    display: flex;
+    justify-content: space-between;
+    background: var(--heading);
+    /* margin: 5px 0; */
+    padding: 10px 10px;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    color: white;
+    margin-bottom: 5px;
+}
+
+
+/*
+============================
+? => Buttons Css :---
+============================
+ */
+
+.Top-btns {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.add-new-advice-btn-container,
+.add-new-btn-container {
+    display: flex;
+    justify-content: flex-end;
+    margin: 10px 10px;
+}
+
+.add-new-advice-btn-container button,
+.date-and-btns .btns button{
+    margin-top: 0 !important;
+}
+
+
+/*
+============================
+? => Treatment Div Css :---
+============================
+ */
+
+.Treatment-div,
+.Top-Header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.add-new-advice-container{
+    margin: 10px 0;
+}
+
+
+.Treatment-div{
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+
+.Treatment-Info-Divs {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 18px;
+}
+
+
+/*
+===============================
+? =>  Chief Complaints :---
+===============================
+ */
+
+.Chief-Complaints-Container .Content-Div .search-bar {
+    padding: 0 10px;
+}
+
+
+/*
+===============================
+? => Pre Existing Conditions :---
+===============================
+ */
+
+
+
+.Pre-Existing-Conditions-Container .Content-Div .search-bar {
+    padding: 0 10px;
+}
+
+
+
+/*
+===============================
+? => Allergies Css :---
+===============================
+ */
+
+
+.Allergies-Container .Content-Div .search-bar {
+    padding: 0 10px;
+}
+
+
+/*
+===============================
+? => Infertility Info Div Css :---
+===============================
+ */
+
+.infertility-info-div,
+.PEC-info-div {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 10px;
+}
+
+
+/*
+===============================
+? => Radio Allergies Div Css :---
+===============================
+ */
+
+.radio-allergies-div {
+    display: flex;
+    padding: 10px 0px;
+}
+
+.allergies-radio-btn {
+    margin: 0 10px;
+}
+
+
+/*
+===============================
+? => History Css :---
+===============================
+ */
+
+
+ .history-heading,
+ .examination-heading{
+    color: var(--teal);
+    font-weight: 600;
+ }
+
+.History-Container {
+    padding-bottom: 10px;
+    padding-top: 0;
+}
+
+.Vitals {
+    flex-direction: column;
+}
+
+
