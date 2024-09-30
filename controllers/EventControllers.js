@@ -411,12 +411,36 @@
                 comment
             });
     
-            res.redirect(`/events/${eventId}/feedback-submitted`);
+            // Fetch updated events with feedback after submission
+            const events = await Event.findAll({
+                where: { date: { [Op.gte]: new Date() } }, // Fetch only upcoming events
+                include: [{ model: Feedback, include: [User] }]  // Include feedback with user details
+            });
+    
+            // Add registration info and feedback to the event data
+            const registrations = await Registration.findAll({ where: { userId } });
+            const eventsWithRegistration = events.map(event => {
+                const registration = registrations.find(r => r.eventId === event.id);
+                const userFeedback = event.Feedbacks.find(fb => fb.userId === userId);
+    
+                return {
+                    ...event.get(),
+                    isRegistered: !!registration,  // Check if user is registered
+                    dietaryPreferences: registration ? registration.dietaryPreferences : '',
+                    numberOfAttendees: registration ? registration.numberOfAttendees : 1,
+                    feedback: userFeedback ? { rating: userFeedback.rating, comment: userFeedback.comment } : null,  // Include feedback if exists
+                    registrationId: registration ? registration.id : null
+                };
+            });
+    
+            // Redirect to attendee page with updated data
+            res.render('attendee-page', { user: req.session.user, events: eventsWithRegistration });
         } catch (error) {
             console.error('Error submitting feedback:', error);
             res.status(500).json({ msg: 'Error submitting feedback' });
         }
     };
+    
     
     // Controller to view feedback for an event (FR15) (organizer only)
     const viewEventFeedback = async (req, res) => {
