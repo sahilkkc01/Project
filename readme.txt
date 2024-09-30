@@ -50,5 +50,5 @@ This is a web-based event management system that allows organizers to create, ma
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/ysahilkkc01/Project
+   git clone https://github.com/sahilkkc01/Project
    cd event-management-system
