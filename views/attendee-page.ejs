@@ -7,15 +7,20 @@
     <link rel="stylesheet" href="/stylesheets/style.css">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-image: url('../images/bg.jpeg'); /* Add this line for the background image */
+    background-size: cover; /* Ensures the image covers the entire screen */
+    background-position: center; /* Centers the background image */
+    background-repeat: no-repeat; /* Prevents the background from repeating */
+}
+
 
         .dashboard-container {
             background-color: #fff;
@@ -160,21 +165,32 @@
                             <button type="submit" class="cancel-btn">Cancel RSVP</button>
                         </form>
                 
-                        <!-- Feedback Form: Only Show After the Event Date -->
-                        <% if (new Date(event.date) <= new Date()) { %>
-                            <h4>Submit Your Feedback</h4>
-                            <form action="/events/feedback/<%= event.id %>" method="POST">
-                                <div>
-                                    <label for="rating">Rating (1-5):</label>
-                                    <input type="number" name="rating" min="1" max="5" required>
-                                </div>
-                                <div>
-                                    <label for="comment">Comment:</label>
-                                    <textarea name="comment" rows="3" placeholder="Enter your feedback"></textarea>
-                                </div>
-                                <button type="submit">Submit Feedback</button>
-                            </form>
-                        <% } %>
+                 <!-- Feedback Form and Display: Only Show After the Event Date -->
+<% if (new Date(event.date) <= new Date()) { %>
+    <h4>Submit Your Feedback</h4>
+    <form onsubmit="submitFeedback(event, '<%= event.id %>')">
+        <div>
+            <label for="rating">Rating (1-5):</label>
+            <input type="number" name="rating" id="rating-<%= event.id %>" min="1" max="5" value="<%= event.feedback ? event.feedback.rating : '' %>" required>
+        </div>
+        <div>
+            <label for="comment">Comment:</label>
+            <textarea name="comment" id="comment-<%= event.id %>" rows="3" placeholder="Enter your feedback"><%= event.feedback ? event.feedback.comment : '' %></textarea>
+        </div>
+        <button type="submit">Submit Feedback</button>
+    </form>
+
+    <!-- Display feedback if exists -->
+    <div id="feedback-result-<%= event.id %>">
+        <% if (event.feedback) { %>
+            <p><strong>Your Feedback:</strong></p>
+            <p>Rating: <%= event.feedback.rating %>/5</p>
+            <p>Comment: <%= event.feedback.comment %></p>
+        <% } %>
+    </div>
+<% } %>
+
+
                     <% } %>
                 </li>
                 
@@ -190,4 +206,52 @@
         <a href="/logout"><button>Logout</button></a>
     </div>
 </body>
+
+<script>
+    async function submitFeedback(event, eventId) {
+        event.preventDefault(); // Prevent the form from submitting the traditional way
+
+        // Get the form values
+        const rating = document.getElementById(`rating-${eventId}`).value;
+        const comment = document.getElementById(`comment-${eventId}`).value;
+
+        try {
+            // Send the feedback via fetch
+            const response = await fetch(`/events/feedback/${eventId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    rating: rating,
+                    comment: comment
+                })
+            });
+
+            const result = await response.json();
+
+            // Handle success or error message
+            const feedbackResult = document.getElementById(`feedback-result-${eventId}`);
+
+            if (response.ok) {
+                // Update the feedback display
+                feedbackResult.innerHTML = `
+                    <p><strong>Your Feedback:</strong></p>
+                    <p>Rating: ${rating}/5</p>
+                    <p>Comment: ${comment}</p>
+                    <p style="color: green;">Feedback submitted successfully!</p>
+                `;
+            } else {
+                // Display error message
+                feedbackResult.innerHTML = `<p style="color: red;">${result.msg}</p>`;
+            }
+
+        } catch (error) {
+            console.error('Error submitting feedback:', error);
+            const feedbackResult = document.getElementById(`feedback-result-${eventId}`);
+            feedbackResult.innerHTML = `<p style="color: red;">Error submitting feedback. Please try again later.</p>`;
+        }
+    }
+</script>
+
 </html>

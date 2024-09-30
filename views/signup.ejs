@@ -17,6 +17,20 @@
         .input-style {margin-top:10px;background:#f0f0f0;font-size:16px;height:43px}
         .wd100 {width:100%;background:#57cdff;color:#fff;height:50px}
         .error-message { color: red; font-size: 0.9em; margin-top: 10px; }
+        .login-link {margin-top: 15px; text-align: center;}
+        .login-link a {color: #57cdff; text-decoration: none;}
+        body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    height: 100vh; /* Ensures the body takes up the full viewport height */
+    background-image: url('../images/bg.jpeg');
+    background-size: cover; /* Makes sure the background covers the entire viewport */
+    background-position: center; /* Centers the background image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+}
+
     </style>
 </head>
 <body>
@@ -68,6 +82,11 @@
                                 </div>
                                 <div id="loadingIndicator"></div>
                             </form>
+                            
+                            <!-- Add this block for the login link -->
+                            <div class="login-link">
+                                <p>Already have an account? <a href="/login">Log in here</a>.</p>
+                            </div>
                         </div>
                     </div>
                     <div class="col-xl-6 pr-xl-2">
@@ -97,9 +116,11 @@
 
         // Helper function to validate password
         function validatePassword(password) {
-            const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$/; // Ensures at least one letter, one number, and at least 5 characters long
-            return passwordRegex.test(password);
-        }
+    // Updated regex to allow special characters, while requiring at least one letter, one number, and a minimum length of 5 characters
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{5,}$/;
+    return passwordRegex.test(password);
+}
+
 
         signupForm.addEventListener('submit', function(event) {
             event.preventDefault();  // Prevent the default form submission

@@ -9,17 +9,7 @@ const { signUp ,login, createEvent, getEditEvent, postEditEvent, deleteEvent, ge
 
 var app = express();
 
-// File upload setup
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'public/images/myuploads');
-  },
-  filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-    cb(null, 'clinical-' + file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname));
-  }
-});
-const upload = multer({ storage: storage });
+
 
 // Session setup
 app.use(cookieParser());
@@ -44,25 +34,33 @@ app.use(express.urlencoded({ extended: true }));
 // Authentication middleware using session
 const checkAuth = (req, res, next) => {
   if (req.session.user) {
-    next();
-  } else {
-    return res.redirect('/login');
+    return next();
   }
+  res.redirect('/login');  // Only redirect to login if the user is not authenticated
 };
+
 
 // Routes
 app.get('/login', (req, res) => {
   if (req.session.user) {
-    return res.redirect('/login');
+    // Check the role of the logged-in user and redirect accordingly
+    if (req.session.user.role === 'organizer') {
+      return res.redirect('/organizer-dashboard'); // Redirect to organizer dashboard
+    } else if (req.session.user.role === 'attendee') {
+      return res.redirect('/attendee-page'); // Redirect to attendee page
+    }
   }
+
+  // If no user is logged in, render the login page
   res.render('login');
 });
+
 
 app.post('/login', login);  // Define login logic in EventControllers
 
 app.get('/signup', (req, res) => {
   if (req.session.user) {
-    return res.redirect('/patientlist');
+    return res.redirect('/login');
   }
   res.render('signup');
 });
@@ -78,7 +76,7 @@ app.get('/organizer-dashboard', checkAuth, async (req, res) => {
       return res.status(403).send('Access denied');
     }
 
-    // Fetch all events created by the organizer, including registrations and users
+    // Fetch all events created by the organizer, including registrations, users, and feedbacks
     const events = await Event.findAll({
       where: { organizerId: req.session.user.id },
       include: [
@@ -86,27 +84,32 @@ app.get('/organizer-dashboard', checkAuth, async (req, res) => {
           model: Registration,
           include: [User],  // Include registered users with their details
         },
+        {
+          model: Feedback,  // Include feedbacks for each event
+          include: [User],  // Include user details for feedbacks
+        },
       ],
     });
 
     // Prepare the event data for rendering
-    const eventsWithAttendees = events.map(event => ({
+    const eventsWithAttendeesAndFeedback = events.map(event => ({
       ...event.get(), // Convert Sequelize instance to plain object
       Registrations: event.Registrations.map(registration => ({
         ...registration.get(),
-        User: registration.User.get(), // Include user details
+        User: registration.User.get(), // Include user details for registration
+      })),
+      Feedbacks: event.Feedbacks.map(feedback => ({
+        ...feedback.get(),
+        User: feedback.User.get(), // Include user details for feedback
       })),
     }));
 
-    // Render the dashboard with user info and events
-    res.render('organizer-dashboard', { user: req.session.user, events: eventsWithAttendees });
-
-    // Optional: Send reminder emails (FR13) - This should be handled by a background task
-    // Reminder logic goes here, e.g., using node-cron for sending reminders a week and a day before the event
+    // Render the dashboard with user info, events, registrations, and feedbacks
+    res.render('organizer-dashboard', { user: req.session.user, events: eventsWithAttendeesAndFeedback });
 
   } catch (error) {
-    console.error('Error fetching events:', error);
-    res.status(500).send('Error fetching events');
+    console.error('Error fetching events and feedbacks:', error);
+    res.status(500).send('Error fetching events and feedbacks');
   }
 });
 
@@ -117,15 +120,25 @@ app.get('/attendee-page', checkAuth, async (req, res) => {
   }
 
   try {
-    // Fetch all available events
-    const events = await Event.findAll();
+    // Fetch all available events, including feedback
+    const events = await Event.findAll({
+      include: [
+        {
+          model: Feedback, // Include feedbacks associated with each event
+          include: [User]  // Optionally include user details in feedback
+        }
+      ]
+    });
 
     // Fetch the registrations for the current user
     const registrations = await Registration.findAll({ where: { userId: req.session.user.id } });
 
-    // Add `isRegistered` and other registration details to the event data
+    // Add `isRegistered`, feedback, and other registration details to the event data
     const eventsWithRegistration = events.map(event => {
       const registration = registrations.find(r => r.eventId === event.id);
+
+      // Find feedback by the current user (if any)
+      const userFeedback = event.Feedbacks ? event.Feedbacks.find(fb => fb.userId === req.session.user.id) : null;
 
       return {
         ...event.get(), // Convert Sequelize model to plain object
@@ -133,23 +146,25 @@ app.get('/attendee-page', checkAuth, async (req, res) => {
         dietaryPreferences: registration ? registration.dietaryPreferences : '',
         numberOfAttendees: registration ? registration.numberOfAttendees : 1,
         registrationId: registration ? registration.id : null, // Include registrationId for form updates
+        feedback: userFeedback ? { rating: userFeedback.rating, comment: userFeedback.comment } : null, // Include feedback if it exists
       };
     });
 
-    // Render the attendee page with the updated event data
+    // Render the attendee page with the updated event data and feedbacks
     res.render('attendee-page', { user: req.session.user, events: eventsWithRegistration });
   } catch (error) {
-    console.error('Error fetching events:', error);
-    res.status(500).send('Error fetching events');
+    console.error('Error fetching events and feedbacks:', error);
+    res.status(500).send('Error fetching events and feedbacks');
   }
 });
 
 
+
 // Route to submit feedback
-app.post('/events/:eventId/feedback', checkAuth, submitFeedback);
+app.post('/events/feedback/:eventId', checkAuth, submitFeedback);
 
 // Route to view feedback for a specific event (organizer only)
-app.get('/events/:eventId/feedback', checkAuth, viewEventFeedback);
+app.get('/events/feedback/:eventId', checkAuth, viewEventFeedback);
 
 
 
@@ -198,7 +213,7 @@ app.use(function (err, req, res, next) {
 
 // Start the server
 const { con } = require('./sequelize');
-const { Event, Registration, User } = require('./models/EventModels');
+const { Event, Registration, User, Feedback } = require('./models/EventModels');
 const PORT = 5001;
 app.listen(PORT, async () => {
   console.log(`Server started at PORT ${PORT}`);

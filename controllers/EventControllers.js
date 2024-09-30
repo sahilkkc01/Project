@@ -394,53 +394,55 @@
         const { eventId } = req.params;
         const { rating, comment } = req.body;
         const userId = req.session.user.id;
-    
+      
         try {
-            // Check if the user attended the event
-            const registration = await Registration.findOne({ where: { userId, eventId } });
-    
-            if (!registration) {
-                return res.status(403).json({ msg: 'You cannot provide feedback for an event you did not attend.' });
-            }
-    
-            // Create feedback
-            await Feedback.create({
-                userId,
-                eventId,
-                rating,
-                comment
-            });
-    
-            // Fetch updated events with feedback after submission
-            const events = await Event.findAll({
-                where: { date: { [Op.gte]: new Date() } }, // Fetch only upcoming events
-                include: [{ model: Feedback, include: [User] }]  // Include feedback with user details
-            });
-    
-            // Add registration info and feedback to the event data
-            const registrations = await Registration.findAll({ where: { userId } });
-            const eventsWithRegistration = events.map(event => {
-                const registration = registrations.find(r => r.eventId === event.id);
-                const userFeedback = event.Feedbacks.find(fb => fb.userId === userId);
-    
-                return {
-                    ...event.get(),
-                    isRegistered: !!registration,  // Check if user is registered
-                    dietaryPreferences: registration ? registration.dietaryPreferences : '',
-                    numberOfAttendees: registration ? registration.numberOfAttendees : 1,
-                    feedback: userFeedback ? { rating: userFeedback.rating, comment: userFeedback.comment } : null,  // Include feedback if exists
-                    registrationId: registration ? registration.id : null
-                };
-            });
-    
-            // Redirect to attendee page with updated data
-            res.render('attendee-page', { user: req.session.user, events: eventsWithRegistration });
+          // Check if the user attended the event
+          const registration = await Registration.findOne({ where: { userId, eventId } });
+      
+          if (!registration) {
+            return res.status(403).json({ msg: 'You cannot provide feedback for an event you did not attend.' });
+          }
+      
+          // Create feedback
+          await Feedback.create({
+            userId,
+            eventId,
+            rating,
+            comment,
+          });
+      
+          // After feedback submission, fetch all events and registrations
+          const events = await Event.findAll({
+            include: [{ model: Feedback, include: [User] }]  // Include feedback with user details
+          });
+      
+          const registrations = await Registration.findAll({ where: { userId } });
+      
+          // Add registration info and feedback to the event data
+          const eventsWithRegistration = events.map(event => {
+            const registration = registrations.find(r => r.eventId === event.id);
+            const userFeedback = event.Feedbacks.find(fb => fb.userId === userId);
+      
+            return {
+              ...event.get(), // Convert Sequelize instance to plain object
+              isRegistered: !!registration,  // Check if the user is registered
+              dietaryPreferences: registration ? registration.dietaryPreferences : '',
+              numberOfAttendees: registration ? registration.numberOfAttendees : 1,
+              feedback: userFeedback ? { rating: userFeedback.rating, comment: userFeedback.comment } : null,  // Include feedback if exists
+              registrationId: registration ? registration.id : null
+            };
+          });
+      
+          // Send success response with updated event data including feedback
+          res.status(200).json({ msg: 'Feedback submitted successfully', events: eventsWithRegistration });
+          
         } catch (error) {
-            console.error('Error submitting feedback:', error);
-            res.status(500).json({ msg: 'Error submitting feedback' });
+          console.error('Error submitting feedback:', error);
+          res.status(500).json({ msg: 'Error submitting feedback' });
         }
-    };
-    
+      };
+      
+      
     
     // Controller to view feedback for an event (FR15) (organizer only)
     const viewEventFeedback = async (req, res) => {

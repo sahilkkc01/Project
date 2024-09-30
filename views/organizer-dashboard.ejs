@@ -17,7 +17,12 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    background-image: url('../images/bg.jpeg'); /* Add this line for the background image */
+    background-size: cover; /* Ensures the image covers the entire screen */
+    background-position: center; /* Centers the background image */
+    background-repeat: no-repeat; /* Prevents the background from repeating */
 }
+
 
 /* Container for the Dashboard */
 .dashboard-container {
@@ -160,175 +165,229 @@ a button:hover {
     <div class="dashboard-container">
         <h1>Welcome, <%= user.name %></h1>
 
-      
-     
-<div class="category-section">
-    <h2>Workshops</h2>
-    <ul>
-        <% events.filter(event => event.category === 'workshop').forEach(event => { %>
-            <li>
-                <strong>Title:</strong> <%= event.title %> 
-                <br><strong>Date:</strong> <%= event.date %>
-                <br><strong>Location:</strong> <%= event.location %>
-                <br><strong>Description:</strong> <%= event.description %>
+        <!-- Section for Workshops -->
+        <div class="category-section">
+            <h2>Workshops</h2>
+            <ul>
+                <% events.filter(event => event.category === 'workshop').forEach(event => { %>
+                    <li>
+                        <strong>Title:</strong> <%= event.title %> 
+                        <br><strong>Date:</strong> <%= event.date %>
+                        <br><strong>Location:</strong> <%= event.location %>
+                        <br><strong>Description:</strong> <%= event.description %>
 
-                <!-- Registered Attendees -->
-                <h3>Registered Attendees:</h3>
-                <% if (event.Registrations && event.Registrations.length > 0) { %>
-                    <ul>
-                        <% event.Registrations.forEach(registration => { %>
-                            <li>
-                                <strong>Name:</strong> <%= registration.User.name %> <br>
-                                <strong>Email:</strong> <%= registration.User.email %> <br>
-                                <strong>Dietary Preferences:</strong> <%= registration.dietaryPreferences %> <br>
-                                <strong>Number of Attendees:</strong> <%= registration.numberOfAttendees %>
-                            </li>
-                        <% }) %>
-                    </ul>
-                <% } else { %>
-                    <p>No attendees have registered yet.</p>
+                        <!-- Registered Attendees -->
+                        <h3>Registered Attendees:</h3>
+                        <% if (event.Registrations && event.Registrations.length > 0) { %>
+                            <ul>
+                                <% event.Registrations.forEach(registration => { %>
+                                    <li>
+                                        <strong>Name:</strong> <%= registration.User.name %> <br>
+                                        <strong>Email:</strong> <%= registration.User.email %> <br>
+                                        <strong>Dietary Preferences:</strong> <%= registration.dietaryPreferences %> <br>
+                                        <strong>Number of Attendees:</strong> <%= registration.numberOfAttendees %>
+                                    </li>
+                                <% }) %>
+                            </ul>
+                        <% } else { %>
+                            <p>No attendees have registered yet.</p>
+                        <% } %>
+
+                        <!-- Feedback Section -->
+                        <h3>Feedback:</h3>
+                        <% if (event.Feedbacks && event.Feedbacks.length > 0) { %>
+                            <ul>
+                                <% event.Feedbacks.forEach(feedback => { %>
+                                    <li>
+                                        <strong>From:</strong> <%= feedback.User.name %> <br>
+                                        <strong>Rating:</strong> <%= feedback.rating %> / 5 <br>
+                                        <strong>Comment:</strong> <%= feedback.comment %>
+                                    </li>
+                                <% }) %>
+                            </ul>
+                        <% } else { %>
+                            <p>No feedback has been submitted yet.</p>
+                        <% } %>
+
+                        <!-- Event Controls -->
+                        <br>
+                        <a href="/events/edit/<%= event.id %>">Edit</a>
+                        <a href="/events/delete/<%= event.id %>">Delete</a>
+                    </li>
+                <% }) %>
+                <% if (events.filter(event => event.category === 'workshop').length === 0) { %>
+                    <li>No workshops available.</li>
                 <% } %>
+            </ul>
+        </div>
 
-                <!-- Event Controls -->
-                <br>
-                <a href="/events/edit/<%= event.id %>">Edit</a>
-                <a href="/events/delete/<%= event.id %>">Delete</a>
-            </li>
-        <% }) %>
-        <% if (events.filter(event => event.category === 'workshop').length === 0) { %>
-            <li>No workshops available.</li>
-        <% } %>
-    </ul>
-</div>
-
-
-      
         <!-- Section for Seminars -->
-<div class="category-section">
-    <h2>Seminars</h2>
-    <ul>
-        <% events.filter(event => event.category === 'seminar').forEach(event => { %>
-            <li>
-                <strong>Title:</strong> <%= event.title %> 
-                <br><strong>Date:</strong> <%= event.date %>
-                <br><strong>Location:</strong> <%= event.location %>
-                <br><strong>Description:</strong> <%= event.description %>
+        <div class="category-section">
+            <h2>Seminars</h2>
+            <ul>
+                <% events.filter(event => event.category === 'seminar').forEach(event => { %>
+                    <li>
+                        <strong>Title:</strong> <%= event.title %> 
+                        <br><strong>Date:</strong> <%= event.date %>
+                        <br><strong>Location:</strong> <%= event.location %>
+                        <br><strong>Description:</strong> <%= event.description %>
 
-                <!-- Registered Attendees -->
-                <h3>Registered Attendees:</h3>
-                <% if (event.Registrations && event.Registrations.length > 0) { %>
-                    <ul>
-                        <% event.Registrations.forEach(registration => { %>
-                            <li>
-                                <strong>Name:</strong> <%= registration.User.name %> <br>
-                                <strong>Email:</strong> <%= registration.User.email %> <br>
-                                <strong>Dietary Preferences:</strong> <%= registration.dietaryPreferences %> <br>
-                                <strong>Number of Attendees:</strong> <%= registration.numberOfAttendees %>
-                            </li>
-                        <% }) %>
-                    </ul>
-                <% } else { %>
-                    <p>No attendees have registered yet.</p>
+                        <!-- Registered Attendees -->
+                        <h3>Registered Attendees:</h3>
+                        <% if (event.Registrations && event.Registrations.length > 0) { %>
+                            <ul>
+                                <% event.Registrations.forEach(registration => { %>
+                                    <li>
+                                        <strong>Name:</strong> <%= registration.User.name %> <br>
+                                        <strong>Email:</strong> <%= registration.User.email %> <br>
+                                        <strong>Dietary Preferences:</strong> <%= registration.dietaryPreferences %> <br>
+                                        <strong>Number of Attendees:</strong> <%= registration.numberOfAttendees %>
+                                    </li>
+                                <% }) %>
+                            </ul>
+                        <% } else { %>
+                            <p>No attendees have registered yet.</p>
+                        <% } %>
+
+                        <!-- Feedback Section -->
+                        <h3>Feedback:</h3>
+                        <% if (event.Feedbacks && event.Feedbacks.length > 0) { %>
+                            <ul>
+                                <% event.Feedbacks.forEach(feedback => { %>
+                                    <li>
+                                        <strong>From:</strong> <%= feedback.User.name %> <br>
+                                        <strong>Rating:</strong> <%= feedback.rating %> / 5 <br>
+                                        <strong>Comment:</strong> <%= feedback.comment %>
+                                    </li>
+                                <% }) %>
+                            </ul>
+                        <% } else { %>
+                            <p>No feedback has been submitted yet.</p>
+                        <% } %>
+
+                        <!-- Event Controls -->
+                        <br>
+                        <a href="/events/edit/<%= event.id %>">Edit</a>
+                        <a href="/events/delete/<%= event.id %>">Delete</a>
+                    </li>
+                <% }) %>
+                <% if (events.filter(event => event.category === 'seminar').length === 0) { %>
+                    <li>No seminars available.</li>
                 <% } %>
+            </ul>
+        </div>
 
-                <!-- Event Controls -->
-                <br>
-                <a href="/events/edit/<%= event.id %>">Edit</a>
-                <a href="/events/delete/<%= event.id %>">Delete</a>
-            </li>
-        <% }) %>
-        <% if (events.filter(event => event.category === 'seminar').length === 0) { %>
-            <li>No seminars available.</li>
-        <% } %>
-    </ul>
-</div>
+        <!-- Section for Social Gatherings -->
+        <div class="category-section">
+            <h2>Social Gatherings</h2>
+            <ul>
+                <% events.filter(event => event.category === 'social').forEach(event => { %>
+                    <li>
+                        <strong>Title:</strong> <%= event.title %> 
+                        <br><strong>Date:</strong> <%= event.date %>
+                        <br><strong>Location:</strong> <%= event.location %>
+                        <br><strong>Description:</strong> <%= event.description %>
 
+                        <!-- Registered Attendees -->
+                        <h3>Registered Attendees:</h3>
+                        <% if (event.Registrations && event.Registrations.length > 0) { %>
+                            <ul>
+                                <% event.Registrations.forEach(registration => { %>
+                                    <li>
+                                        <strong>Name:</strong> <%= registration.User.name %> <br>
+                                        <strong>Email:</strong> <%= registration.User.email %> <br>
+                                        <strong>Dietary Preferences:</strong> <%= registration.dietaryPreferences %> <br>
+                                        <strong>Number of Attendees:</strong> <%= registration.numberOfAttendees %>
+                                    </li>
+                                <% }) %>
+                            </ul>
+                        <% } else { %>
+                            <p>No attendees have registered yet.</p>
+                        <% } %>
 
-       <!-- Section for Social Gatherings -->
-<div class="category-section">
-    <h2>Social Gatherings</h2>
-    <ul>
-        <% events.filter(event => event.category === 'social').forEach(event => { %>
-            <li>
-                <strong>Title:</strong> <%= event.title %> 
-                <br><strong>Date:</strong> <%= event.date %>
-                <br><strong>Location:</strong> <%= event.location %>
-                <br><strong>Description:</strong> <%= event.description %>
-                <br>
+                        <!-- Feedback Section -->
+                        <h3>Feedback:</h3>
+                        <% if (event.Feedbacks && event.Feedbacks.length > 0) { %>
+                            <ul>
+                                <% event.Feedbacks.forEach(feedback => { %>
+                                    <li>
+                                        <strong>From:</strong> <%= feedback.User.name %> <br>
+                                        <strong>Rating:</strong> <%= feedback.rating %> / 5 <br>
+                                        <strong>Comment:</strong> <%= feedback.comment %>
+                                    </li>
+                                <% }) %>
+                            </ul>
+                        <% } else { %>
+                            <p>No feedback has been submitted yet.</p>
+                        <% } %>
 
-                <!-- Registered Attendees -->
-                <h3>Registered Attendees:</h3>
-                <% if (event.Registrations.length > 0) { %>
-                    <ul>
-                        <% event.Registrations.forEach(registration => { %>
-                            <li>
-                                <strong>Name:</strong> <%= registration.User.name %> <br>
-                                <strong>Email:</strong> <%= registration.User.email %> <br>
-                                <strong>Dietary Preferences:</strong> <%= registration.dietaryPreferences %> <br>
-                                <strong>Number of Attendees:</strong> <%= registration.numberOfAttendees %>
-                            </li>
-                        <% }) %>
-                    </ul>
-                <% } else { %>
-                    <p>No attendees have registered yet.</p>
+                        <!-- Event Controls -->
+                        <br>
+                        <a href="/events/edit/<%= event.id %>">Edit</a>
+                        <a href="/events/delete/<%= event.id %>">Delete</a>
+                    </li>
+                <% }) %>
+                <% if (events.filter(event => event.category === 'social').length === 0) { %>
+                    <li>No social gatherings available.</li>
                 <% } %>
+            </ul>
+        </div>
 
-                <!-- Edit and Delete Links -->
-                <a href="/events/edit/<%= event.id %>">Edit</a>
-                <a href="/events/delete/<%= event.id %>">Delete</a>
-            </li>
-        <% }) %>
+        <!-- Section for Other Events -->
+        <div class="category-section">
+            <h2>Other Events</h2>
+            <ul>
+                <% events.filter(event => event.category === 'other').forEach(event => { %>
+                    <li>
+                        <strong>Title:</strong> <%= event.title %> 
+                        <br><strong>Date:</strong> <%= event.date %>
+                        <br><strong>Location:</strong> <%= event.location %>
+                        <br><strong>Description:</strong> <%= event.description %>
 
-        <% if (events.filter(event => event.category === 'social').length === 0) { %>
-            <li>No social gatherings available.</li>
-        <% } %>
-    </ul>
-</div>
+                        <!-- Registered Attendees -->
+                        <h3>Registered Attendees:</h3>
+                        <% if (event.Registrations && event.Registrations.length > 0) { %>
+                            <ul>
+                                <% event.Registrations.forEach(registration => { %>
+                                    <li>
+                                        <strong>Name:</strong> <%= registration.User.name %> <br>
+                                        <strong>Email:</strong> <%= registration.User.email %> <br>
+                                        <strong>Dietary Preferences:</strong> <%= registration.dietaryPreferences %> <br>
+                                        <strong>Number of Attendees:</strong> <%= registration.numberOfAttendees %>
+                                    </li>
+                                <% }) %>
+                            </ul>
+                        <% } else { %>
+                            <p>No attendees have registered yet.</p>
+                        <% } %>
 
+                        <!-- Feedback Section -->
+                        <h3>Feedback:</h3>
+                        <% if (event.Feedbacks && event.Feedbacks.length > 0) { %>
+                            <ul>
+                                <% event.Feedbacks.forEach(feedback => { %>
+                                    <li>
+                                        <strong>From:</strong> <%= feedback.User.name %> <br>
+                                        <strong>Rating:</strong> <%= feedback.rating %> / 5 <br>
+                                        <strong>Comment:</strong> <%= feedback.comment %>
+                                    </li>
+                                <% }) %>
+                            </ul>
+                        <% } else { %>
+                            <p>No feedback has been submitted yet.</p>
+                        <% } %>
 
-       <!-- Section for Other Events -->
-<div class="category-section">
-    <h2>Other Events</h2>
-    <ul>
-        <% events.filter(event => event.category === 'other').forEach(event => { %>
-            <li>
-                <strong>Title:</strong> <%= event.title %> 
-                <br><strong>Date:</strong> <%= event.date %>
-                <br><strong>Location:</strong> <%= event.location %>
-                <br><strong>Description:</strong> <%= event.description %>
-                <br>
-
-                <!-- Registered Attendees -->
-                <h3>Registered Attendees:</h3>
-                <% if (event.Registrations.length > 0) { %>
-                    <ul>
-                        <% event.Registrations.forEach(registration => { %>
-                            <li>
-                                <strong>Name:</strong> <%= registration.User.name %> <br>
-                                <strong>Email:</strong> <%= registration.User.email %> <br>
-                                <strong>Dietary Preferences:</strong> <%= registration.dietaryPreferences %> <br>
-                                <strong>Number of Attendees:</strong> <%= registration.numberOfAttendees %>
-                            </li>
-                        <% }) %>
-                    </ul>
-                <% } else { %>
-                    <p>No attendees have registered yet.</p>
+                        <!-- Event Controls -->
+                        <br>
+                        <a href="/events/edit/<%= event.id %>">Edit</a>
+                        <a href="/events/delete/<%= event.id %>">Delete</a>
+                    </li>
+                <% }) %>
+                <% if (events.filter(event => event.category === 'other').length === 0) { %>
+                    <li>No other events available.</li>
                 <% } %>
-
-                <!-- Edit and Delete Links -->
-                <a href="/events/edit/<%= event.id %>">Edit</a>
-                <a href="/events/delete/<%= event.id %>">Delete</a>
-            </li>
-        <% }) %>
-
-        <% if (events.filter(event => event.category === 'other').length === 0) { %>
-            <li>No other events available.</li>
-        <% } %>
-    </ul>
-
-    
-</div>
-
+            </ul>
+        </div>
 
         <hr>
 
@@ -374,6 +433,7 @@ a button:hover {
     </div>
 
 </body>
+
 <script>
    function validateEventDate() {
     const dateInput = document.getElementById('date');
