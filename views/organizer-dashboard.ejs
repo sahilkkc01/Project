@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Organizer Dashboard</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<style>
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Container for the Dashboard */
+.dashboard-container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-width: 1000px;
+    width: 100%;
+}
+
+/* Welcome Message */
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Event List Styles */
+h2 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: #333;
+    border-bottom: 2px solid #57cdff;
+    padding-bottom: 10px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    background-color: #fafafa;
+    margin-bottom: 15px;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+li strong {
+    color: #57cdff;
+}
+
+a {
+    color: #57cdff;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Category Sections */
+.category-section {
+    margin-bottom: 40px;
+}
+
+/* Form Styling */
+form {
+    margin-top: 30px;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+form div {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="time"],
+textarea,
+select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    color: #333;
+    box-sizing: border-box;
+}
+
+textarea {
+    resize: vertical;
+}
+
+/* Button Styles */
+button {
+    background-color: #57cdff;
+    color: white;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+button:hover {
+    background-color: #45b4e0;
+}
+
+/* Logout Button */
+a button {
+    background-color: #e74c3c;
+    margin-top: 20px;
+}
+
+a button:hover {
+    background-color: #c0392b;
+}
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+    .dashboard-container {
+        padding: 15px;
+    }
+
+    form {
+        padding: 15px;
+    }
+
+    button {
+        width: 100%;
+    }
+}
+</style>
+<body>
+    <div class="dashboard-container">
+        <h1>Welcome, <%= user.name %></h1>
+
+      
+     
+<div class="category-section">
+    <h2>Workshops</h2>
+    <ul>
+        <% events.filter(event => event.category === 'workshop').forEach(event => { %>
+            <li>
+                <strong>Title:</strong> <%= event.title %> 
+                <br><strong>Date:</strong> <%= event.date %>
+                <br><strong>Location:</strong> <%= event.location %>
+                <br><strong>Description:</strong> <%= event.description %>
+
+                <!-- Registered Attendees -->
+                <h3>Registered Attendees:</h3>
+                <% if (event.Registrations && event.Registrations.length > 0) { %>
+                    <ul>
+                        <% event.Registrations.forEach(registration => { %>
+                            <li>
+                                <strong>Name:</strong> <%= registration.User.name %> <br>
+                                <strong>Email:</strong> <%= registration.User.email %> <br>
+                                <strong>Dietary Preferences:</strong> <%= registration.dietaryPreferences %> <br>
+                                <strong>Number of Attendees:</strong> <%= registration.numberOfAttendees %>
+                            </li>
+                        <% }) %>
+                    </ul>
+                <% } else { %>
+                    <p>No attendees have registered yet.</p>
+                <% } %>
+
+                <!-- Event Controls -->
+                <br>
+                <a href="/events/edit/<%= event.id %>">Edit</a>
+                <a href="/events/delete/<%= event.id %>">Delete</a>
+            </li>
+        <% }) %>
+        <% if (events.filter(event => event.category === 'workshop').length === 0) { %>
+            <li>No workshops available.</li>
+        <% } %>
+    </ul>
+</div>
+
+
+      
+        <!-- Section for Seminars -->
+<div class="category-section">
+    <h2>Seminars</h2>
+    <ul>
+        <% events.filter(event => event.category === 'seminar').forEach(event => { %>
+            <li>
+                <strong>Title:</strong> <%= event.title %> 
+                <br><strong>Date:</strong> <%= event.date %>
+                <br><strong>Location:</strong> <%= event.location %>
+                <br><strong>Description:</strong> <%= event.description %>
+
+                <!-- Registered Attendees -->
+                <h3>Registered Attendees:</h3>
+                <% if (event.Registrations && event.Registrations.length > 0) { %>
+                    <ul>
+                        <% event.Registrations.forEach(registration => { %>
+                            <li>
+                                <strong>Name:</strong> <%= registration.User.name %> <br>
+                                <strong>Email:</strong> <%= registration.User.email %> <br>
+                                <strong>Dietary Preferences:</strong> <%= registration.dietaryPreferences %> <br>
+                                <strong>Number of Attendees:</strong> <%= registration.numberOfAttendees %>
+                            </li>
+                        <% }) %>
+                    </ul>
+                <% } else { %>
+                    <p>No attendees have registered yet.</p>
+                <% } %>
+
+                <!-- Event Controls -->
+                <br>
+                <a href="/events/edit/<%= event.id %>">Edit</a>
+                <a href="/events/delete/<%= event.id %>">Delete</a>
+            </li>
+        <% }) %>
+        <% if (events.filter(event => event.category === 'seminar').length === 0) { %>
+            <li>No seminars available.</li>
+        <% } %>
+    </ul>
+</div>
+
+
+       <!-- Section for Social Gatherings -->
+<div class="category-section">
+    <h2>Social Gatherings</h2>
+    <ul>
+        <% events.filter(event => event.category === 'social').forEach(event => { %>
+            <li>
+                <strong>Title:</strong> <%= event.title %> 
+                <br><strong>Date:</strong> <%= event.date %>
+                <br><strong>Location:</strong> <%= event.location %>
+                <br><strong>Description:</strong> <%= event.description %>
+                <br>
+
+                <!-- Registered Attendees -->
+                <h3>Registered Attendees:</h3>
+                <% if (event.Registrations.length > 0) { %>
+                    <ul>
+                        <% event.Registrations.forEach(registration => { %>
+                            <li>
+                                <strong>Name:</strong> <%= registration.User.name %> <br>
+                                <strong>Email:</strong> <%= registration.User.email %> <br>
+                                <strong>Dietary Preferences:</strong> <%= registration.dietaryPreferences %> <br>
+                                <strong>Number of Attendees:</strong> <%= registration.numberOfAttendees %>
+                            </li>
+                        <% }) %>
+                    </ul>
+                <% } else { %>
+                    <p>No attendees have registered yet.</p>
+                <% } %>
+
+                <!-- Edit and Delete Links -->
+                <a href="/events/edit/<%= event.id %>">Edit</a>
+                <a href="/events/delete/<%= event.id %>">Delete</a>
+            </li>
+        <% }) %>
+
+        <% if (events.filter(event => event.category === 'social').length === 0) { %>
+            <li>No social gatherings available.</li>
+        <% } %>
+    </ul>
+</div>
+
+
+       <!-- Section for Other Events -->
+<div class="category-section">
+    <h2>Other Events</h2>
+    <ul>
+        <% events.filter(event => event.category === 'other').forEach(event => { %>
+            <li>
+                <strong>Title:</strong> <%= event.title %> 
+                <br><strong>Date:</strong> <%= event.date %>
+                <br><strong>Location:</strong> <%= event.location %>
+                <br><strong>Description:</strong> <%= event.description %>
+                <br>
+
+                <!-- Registered Attendees -->
+                <h3>Registered Attendees:</h3>
+                <% if (event.Registrations.length > 0) { %>
+                    <ul>
+                        <% event.Registrations.forEach(registration => { %>
+                            <li>
+                                <strong>Name:</strong> <%= registration.User.name %> <br>
+                                <strong>Email:</strong> <%= registration.User.email %> <br>
+                                <strong>Dietary Preferences:</strong> <%= registration.dietaryPreferences %> <br>
+                                <strong>Number of Attendees:</strong> <%= registration.numberOfAttendees %>
+                            </li>
+                        <% }) %>
+                    </ul>
+                <% } else { %>
+                    <p>No attendees have registered yet.</p>
+                <% } %>
+
+                <!-- Edit and Delete Links -->
+                <a href="/events/edit/<%= event.id %>">Edit</a>
+                <a href="/events/delete/<%= event.id %>">Delete</a>
+            </li>
+        <% }) %>
+
+        <% if (events.filter(event => event.category === 'other').length === 0) { %>
+            <li>No other events available.</li>
+        <% } %>
+    </ul>
+
+    
+</div>
+
+
+        <hr>
+
+        <!-- Form to Create New Event -->
+        <h3>Create New Event</h3>
+        <form action="/events/new" method="POST">
+            <div>
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title" required>
+            </div>
+            <div>
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="date" required>
+            </div>
+            <div>
+                <label for="time">Time:</label>
+                <input type="time" id="time" name="time" required>
+            </div>
+            <div>
+                <label for="location">Location:</label>
+                <input type="text" id="location" name="location" required>
+            </div>
+            <div>
+                <label for="description">Description:</label>
+                <textarea id="description" name="description" rows="4" required></textarea>
+            </div>
+            <div>
+                <label for="category">Category:</label>
+                <select id="category" name="category" required>
+                    <option value="workshop">Workshop</option>
+                    <option value="seminar">Seminar</option>
+                    <option value="social">Social Gathering</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            <button type="submit">Create Event</button>
+        </form>
+
+        <hr>
+
+        <!-- Logout Button -->
+        <a href="/logout"><button>Logout</button></a>
+    </div>
+
+</body>
+<script>
+   function validateEventDate() {
+    const dateInput = document.getElementById('date');
+    const selectedDate = new Date(dateInput.value);
+    const today = new Date();
+    
+    // Reset time for comparison purposes
+    today.setHours(0, 0, 0, 0);
+
+    if (selectedDate < today) {
+        alert('The event date must be today or a future date.');
+        dateInput.value = ''; // Clear the invalid date
+    }
+}
+
+// Attach this function to the date input field onchange event
+document.getElementById('date').addEventListener('change', validateEventDate);
+
+</script>
+</html>

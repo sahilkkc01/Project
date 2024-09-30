@@ -1,7 +1,26 @@
 <!--footer section start-->
 </div>
 </div>
-<footer class="dashboard footer footer-section bg-white py-4">
+</div>
+
+<div class="modal fade" id="sucs1" tabindex="-1" aria-labelledby="sucs1" aria-hidden="true">
+  <div class="modal-dialog">
+   <div class="modal-content">
+    <div class="modal-body">
+     <div class="row text-center">
+      <div class="col-12"><img src="../images/ckh1.gif" ></div>
+      <h5 class="text-center col-12">Form Successfully Submitted</h5>     
+      <div class="form-group col-12 mt-1 mb-2 text-center">
+          <a href="Javascript:history.go ( -1)" class="btn-secondary btn-style btn mt-3 mr-2"><strong>Go Back</strong></a>
+          <button type="button" data-bs-dismiss="modal" aria-label="Close" class="btn-primary btn-style btn mt-3"><strong>OK</strong></button>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+
+<footer class="dashboard footer footer-section bg-white py-4 mt-10">
 	<div class="container">
 		<div class="row text-center text-md-start d-flex flex-column align-items-center">
 			<!-- Logo Section -->
@@ -43,6 +62,7 @@
 	<span class="fa fa-angle-up"></span>
 </button>
 <script>
+  
   // When the user scrolls down 20px from the top of the document, show the button
   window.onscroll = function () {
     scrollFunction()
@@ -200,6 +220,47 @@ $('.check').show();
 <script src="../javascripts/bootstrap.min.js"></script>
 <!-- <script src="../javascripts/main.js"></script> -->
 <script src="../javascripts/upwardJquery.js"></script> 
+<p id="pgload"></p> <!-- This is the paragraph where we will display the values -->
 
+<script>
+    window.onload = function() {
+        // Use setTimeout to ensure that loadEventEnd has time to register
+        setTimeout(function() {
+            // Performance timings
+            const performanceTiming = window.performance.timing;
+
+            // Ensure loadEventEnd is not 0 before calculating load time
+            if (performanceTiming.loadEventEnd > 0) {
+                // Calculate loading time
+                const pageLoadTime = performanceTiming.loadEventEnd - performanceTiming.navigationStart;
+                const pageRenderTime = performanceTiming.domComplete - performanceTiming.domLoading;
+
+                // Calculate total page size
+                let pageSize = 0;
+                window.performance.getEntriesByType('resource').forEach(resource => {
+                    if (resource.transferSize) {
+                        pageSize += resource.transferSize; // transferSize gives the size of resource in bytes
+                    }
+                });
+
+                // Convert page size to KB/MB
+                let pageSizeInKB = (pageSize / 1024).toFixed(2); // KB
+                let pageSizeInMB = (pageSize / (1024 * 1024)).toFixed(2); // MB if needed
+
+                // Prepare the text content
+                let displayText = `
+                    Page Load Time: ${pageLoadTime} ms<br>
+                    Page Render Time: ${pageRenderTime} ms<br>
+                    Total Page Size: ${pageSizeInKB} KB (${pageSizeInMB} MB)
+                `;
+
+                // Output the results into the <p> tag with id "pgload"
+                document.getElementById('pgload').innerHTML = displayText;
+            } else {
+                document.getElementById('pgload').innerHTML = "Page Load Time data is not available.";
+            }
+        }, 0); // Delay execution to ensure all resources are fully loaded
+    };
+</script>
 </body>
 </html>

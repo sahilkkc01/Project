@@ -6,18 +6,26 @@ const flash = require('connect-flash')
 const multer= require('multer')
 const CryptoJS = require('crypto-js');
 
+// Encrypt the data for URL usage
 function encryptDataForUrl(data) {
   const secretKey = 'll'; // Replace with your actual secret key
+  // Encrypt the data
   const encrypted = CryptoJS.AES.encrypt(data, secretKey).toString();
+  // Encode the encrypted data for URL
   const encodedEncrypted = encodeURIComponent(encrypted);
   return encodedEncrypted;
 }
 
-
-function decryptData(encryptedData, secretKey) {
-  const bytes = CryptoJS.AES.decrypt(encryptedData, secretKey);
+// Decrypt the data
+function decryptData(encodedEncryptedData, secretKey) {
+  // First decode the encrypted data from the URL-safe format
+  const decryptedData = decodeURIComponent(encodedEncryptedData);
+  // Decrypt the data
+  const bytes = CryptoJS.AES.decrypt(decryptedData, secretKey);
+  // Convert bytes to string
   return bytes.toString(CryptoJS.enc.Utf8);
 }
+
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, 'public/images/myuploads')

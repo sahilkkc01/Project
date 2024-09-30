@@ -16,7 +16,8 @@ $.ajax({
         $(loadingDiv).hide();
 
         
-        alert('Form submitted successfully!');
+        //alert('Form submitted successfully!');
+        $('#sucs1').modal('show');
         $(errorDivId).removeClass('alert-danger').addClass('alert-success').text('Form submitted successfully!').show();
         console.log('abc:', response);
         return response;
